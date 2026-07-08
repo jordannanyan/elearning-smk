@@ -85,12 +85,30 @@ async function seed() {
         'Kerjakan soal nomor 1-10 pada buku paket halaman 25.',
         '2026-12-31 23:59:00']
     );
-    await conn.query(
+    const [kuis] = await conn.query(
       "INSERT INTO tugas (id_mapel, judul, deskripsi, deadline, tipe) VALUES (?,?,?,?, 'kuis')",
       [bind.insertId, 'Kuis Teks Deskripsi',
-        'Kuis singkat mengenai struktur teks deskripsi.',
+        'Kuis singkat mengenai struktur teks deskripsi. Terdiri dari pilihan ganda dan esai.',
         '2026-12-31 23:59:00']
     );
+
+    // --- Contoh butir soal untuk kuis (2 pilihan ganda + 1 esai) ---
+    const soal = [
+      ['pilihan_ganda', 'Teks yang menggambarkan suatu objek secara rinci disebut teks...',
+        'Narasi', 'Deskripsi', 'Eksposisi', 'Persuasi', 'B', 30, 1],
+      ['pilihan_ganda', 'Struktur teks deskripsi yang benar adalah...',
+        'Identifikasi - Deskripsi bagian - Penutup', 'Orientasi - Komplikasi - Resolusi',
+        'Tesis - Argumen - Penegasan', 'Pembuka - Isi - Salam', 'A', 30, 2],
+      ['esai', 'Buatlah satu paragraf teks deskripsi singkat tentang sekolahmu!',
+        null, null, null, null, null, 40, 3],
+    ];
+    for (const [tipe, q, a, b, c, d, benar, bobot, urut] of soal) {
+      await conn.query(
+        `INSERT INTO soal (id_tugas, pertanyaan, tipe, pilihan_a, pilihan_b, pilihan_c, pilihan_d, jawaban_benar, bobot, urutan)
+         VALUES (?,?,?,?,?,?,?,?,?,?)`,
+        [kuis.insertId, q, tipe, a, b, c, d, benar, bobot, urut]
+      );
+    }
 
     console.log('[OK] Data contoh berhasil dibuat.');
     console.log('\nAkun untuk login:');

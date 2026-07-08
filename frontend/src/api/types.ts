@@ -59,7 +59,51 @@ export interface Tugas {
   tipe: 'tugas' | 'kuis';
   nama_mapel?: string;
   jumlah_kumpul?: number;
+  jumlah_soal?: number;
   pengumpulan?: Pengumpulan | null;
+}
+
+export type TipeSoal = 'pilihan_ganda' | 'esai';
+
+export interface Soal {
+  id: number;
+  id_tugas?: number;
+  pertanyaan: string;
+  tipe: TipeSoal;
+  pilihan_a?: string | null;
+  pilihan_b?: string | null;
+  pilihan_c?: string | null;
+  pilihan_d?: string | null;
+  jawaban_benar?: string | null;
+  bobot: number;
+  urutan?: number;
+}
+
+// Soal + jawaban siswa (untuk halaman kerjakan/review siswa)
+export interface SoalKerjakan extends Soal {
+  jawaban?: {
+    pilihan?: string | null;
+    jawaban_teks?: string | null;
+    benar?: number | null;
+    skor?: number | null;
+  } | null;
+}
+
+export interface KerjakanResponse {
+  tugas: { id: number; judul: string; deskripsi?: string; deadline?: string | null; tipe: string };
+  berbasis_soal: boolean;
+  sudah_kumpul: boolean;
+  graded: boolean;
+  total_skor: number | null;
+  soal: SoalKerjakan[];
+}
+
+// Detail pengumpulan untuk penilaian guru
+export interface SoalPenilaian extends Soal {
+  pilihan?: string | null;
+  jawaban_teks?: string | null;
+  benar?: number | null;
+  skor_didapat?: number | null;
 }
 
 export interface PengumpulanRow {
@@ -74,6 +118,7 @@ export interface PengumpulanRow {
   id_nilai?: number | null;
   skor?: number | null;
   catatan?: string;
+  esai_belum_dinilai?: number;
 }
 
 export interface NilaiRow {

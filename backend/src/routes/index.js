@@ -8,6 +8,7 @@ const kelas = require('../controllers/kelasController');
 const mapel = require('../controllers/mapelController');
 const materi = require('../controllers/materiController');
 const tugas = require('../controllers/tugasController');
+const soal = require('../controllers/soalController');
 const nilai = require('../controllers/nilaiController');
 const forum = require('../controllers/forumController');
 const dashboard = require('../controllers/dashboardController');
@@ -51,7 +52,16 @@ router.post('/tugas', authenticate, authorize('guru'), tugas.create);
 router.put('/tugas/:id', authenticate, authorize('guru'), tugas.update);
 router.delete('/tugas/:id', authenticate, authorize('guru'), tugas.remove);
 router.post('/tugas/:id/submit', authenticate, authorize('siswa'), upload.single('file'), tugas.submit);
+router.get('/tugas/:id/kerjakan', authenticate, authorize('siswa'), tugas.kerjakan);
 router.get('/tugas/:id/pengumpulan', authenticate, authorize('guru'), tugas.listPengumpulan);
+router.get('/pengumpulan/:id', authenticate, authorize('guru'), tugas.detailPengumpulan);
+router.post('/pengumpulan/:id/nilai', authenticate, authorize('guru'), tugas.nilaiEsai);
+
+// ---------- Soal (butir kuis, milik guru) ----------
+router.get('/tugas/:id/soal', authenticate, authorize('guru'), soal.list);
+router.post('/tugas/:id/soal', authenticate, authorize('guru'), soal.create);
+router.put('/soal/:id', authenticate, authorize('guru'), soal.update);
+router.delete('/soal/:id', authenticate, authorize('guru'), soal.remove);
 
 // ---------- Nilai ----------
 router.post('/nilai', authenticate, authorize('guru'), nilai.beriNilai);

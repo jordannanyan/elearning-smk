@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react';
 import api, { API_BASE } from '../../api/client';
 import Modal from '../../components/Modal';
+import SoalManager from '../../components/SoalManager';
+import PenilaianModal from '../../components/PenilaianModal';
 import type { Tugas, Mapel, PengumpulanRow } from '../../api/types';
 
 function fmt(dt?: string | null) {
@@ -17,9 +19,10 @@ export default function GuruTugas() {
   const [form, setForm] = useState<any>({ id_mapel: '', judul: '', deskripsi: '', deadline: '', tipe: 'tugas' });
   const [err, setErr] = useState('');
 
-  // Panel pengumpulan
-  const [detail, setDetail] = useState<Tugas | null>(null);
+  const [soalFor, setSoalFor] = useState<Tugas | null>(null);   // kelola soal
+  const [detail, setDetail] = useState<Tugas | null>(null);     // panel pengumpulan
   const [subs, setSubs] = useState<PengumpulanRow[]>([]);
+  const [nilaiFor, setNilaiFor] = useState<PengumpulanRow | null>(null); // penilaian berbasis soal
 
   async function load() {
     setLoading(true);
@@ -30,7 +33,7 @@ export default function GuruTugas() {
 
   function openAdd() {
     setEdit(null);
-    setForm({ id_mapel: mapel[0]?.id || '', judul: '', deskripsi: '', deadline: '', tipe: 'tugas' });
+    setForm({ id_mapel: mapel[0]?.id || '', judul: '', deskripsi: '', deadline: '', tipe: 'kuis' });
     setErr(''); setShow(true);
   }
   function openEdit(r: Tugas) {
@@ -62,7 +65,8 @@ export default function GuruTugas() {
     setSubs(data);
   }
 
-  async function beriNilai(sub: PengumpulanRow) {
+  // Penilaian untuk tugas tanpa soal (kumpul teks/file) -> skor langsung
+  async function nilaiManual(sub: PengumpulanRow) {
     const skor = prompt(`Nilai untuk ${sub.nama_siswa} (0-100):`, sub.skor?.toString() || '');
     if (skor === null) return;
     const catatan = prompt('Catatan (opsional):', sub.catatan || '') || '';
@@ -80,18 +84,20 @@ export default function GuruTugas() {
 
       <div className="table-wrap">
         <table>
-          <thead><tr><th>Judul</th><th>Mapel</th><th>Tipe</th><th>Deadline</th><th>Terkumpul</th><th>Aksi</th></tr></thead>
+          <thead><tr><th>Judul</th><th>Mapel</th><th>Tipe</th><th>Soal</th><th>Deadline</th><th>Terkumpul</th><th>Aksi</th></tr></thead>
           <tbody>
-            {loading ? <tr><td colSpan={6} className="center-msg">Memuat...</td></tr>
-              : rows.length === 0 ? <tr><td colSpan={6} className="center-msg">Belum ada tugas</td></tr>
+            {loading ? <tr><td colSpan={7} className="center-msg">Memuat...</td></tr>
+              : rows.length === 0 ? <tr><td colSpan={7} className="center-msg">Belum ada tugas</td></tr>
                 : rows.map((r) => (
                   <tr key={r.id}>
                     <td>{r.judul}</td>
                     <td>{r.nama_mapel}</td>
                     <td><span className={`badge ${r.tipe === 'kuis' ? 'orange' : 'green'}`}>{r.tipe}</span></td>
+                    <td>{r.jumlah_soal ? <span className="badge gray">{r.jumlah_soal} soal</span> : <span className="muted">—</span>}</td>
                     <td className="muted">{fmt(r.deadline)}</td>
                     <td>{r.jumlah_kumpul ?? 0}</td>
                     <td><div className="row-actions">
+                      <button className="btn secondary small" onClick={() => setSoalFor(r)}>Soal</button>
                       <button className="btn small" onClick={() => openDetail(r)}>Pengumpulan</button>
                       <button className="btn secondary small" onClick={() => openEdit(r)}>Edit</button>
                       <button className="btn danger small" onClick={() => del(r)}>Hapus</button>
@@ -112,7 +118,8 @@ export default function GuruTugas() {
               </select></div>
             <div className="field"><label>Tipe</label>
               <select value={form.tipe} onChange={(e) => setForm({ ...form, tipe: e.target.value })}>
-                <option value="tugas">Tugas</option><option value="kuis">Kuis</option>
+                <option value="tugas">Tugas (kumpul file/teks)</option>
+                <option value="kuis">Kuis (soal PG / esai)</option>
               </select></div>
             <div className="field"><label>Judul</label>
               <input value={form.judul} onChange={(e) => setForm({ ...form, judul: e.target.value })} required /></div>
@@ -120,6 +127,7 @@ export default function GuruTugas() {
               <textarea value={form.deskripsi} onChange={(e) => setForm({ ...form, deskripsi: e.target.value })} /></div>
             <div className="field"><label>Deadline</label>
               <input type="datetime-local" value={form.deadline} onChange={(e) => setForm({ ...form, deadline: e.target.value })} /></div>
+            {!edit && <p className="muted" style={{ fontSize: 12 }}>Setelah dibuat, klik tombol <strong>Soal</strong> untuk menambah butir soal pada kuis.</p>}
             <div className="modal-actions">
               <button type="button" className="btn secondary" onClick={() => setShow(false)}>Batal</button>
               <button className="btn">Simpan</button>
@@ -128,20 +136,41 @@ export default function GuruTugas() {
         </Modal>
       )}
 
+      {soalFor && <SoalManager tugas={soalFor} onClose={() => { setSoalFor(null); load(); }} />}
+
+      {nilaiFor && (
+        <PenilaianModal
+          pengumpulanId={nilaiFor.id}
+          namaSiswa={nilaiFor.nama_siswa}
+          onClose={() => setNilaiFor(null)}
+          onSaved={() => { if (detail) openDetail(detail); load(); }}
+        />
+      )}
+
       {detail && (
         <Modal title={`Pengumpulan: ${detail.judul}`} onClose={() => setDetail(null)}>
           {subs.length === 0 ? <p className="muted">Belum ada siswa yang mengumpulkan.</p> : (
             <div className="table-wrap" style={{ border: 'none' }}>
               <table>
-                <thead><tr><th>Siswa</th><th>Waktu</th><th>File</th><th>Nilai</th><th></th></tr></thead>
+                <thead><tr><th>Siswa</th><th>Waktu</th><th>{detail.jumlah_soal ? 'Status' : 'File'}</th><th>Nilai</th><th></th></tr></thead>
                 <tbody>
                   {subs.map((s) => (
                     <tr key={s.id}>
                       <td>{s.nama_siswa}{s.terlambat ? <span className="badge red" style={{ marginLeft: 6 }}>Telat</span> : null}</td>
                       <td className="muted">{fmt(s.tgl_kumpul)}</td>
-                      <td>{s.file ? <a href={`${API_BASE}/uploads/${s.file}`} target="_blank">Lihat</a> : <span className="muted">-</span>}</td>
+                      <td>
+                        {detail.jumlah_soal ? (
+                          s.esai_belum_dinilai ? <span className="badge orange">Perlu nilai esai</span>
+                            : s.skor != null ? <span className="badge green">Selesai</span>
+                              : <span className="badge gray">Terkumpul</span>
+                        ) : (s.file ? <a href={`${API_BASE}/uploads/${s.file}`} target="_blank">Lihat</a> : <span className="muted">-</span>)}
+                      </td>
                       <td>{s.skor != null ? <strong>{s.skor}</strong> : <span className="muted">Belum</span>}</td>
-                      <td><button className="btn small" onClick={() => beriNilai(s)}>Nilai</button></td>
+                      <td>
+                        {detail.jumlah_soal
+                          ? <button className="btn small" onClick={() => setNilaiFor(s)}>Periksa & Nilai</button>
+                          : <button className="btn small" onClick={() => nilaiManual(s)}>Nilai</button>}
+                      </td>
                     </tr>
                   ))}
                 </tbody>

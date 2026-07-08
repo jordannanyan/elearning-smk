@@ -8,6 +8,8 @@ CREATE DATABASE IF NOT EXISTS elearning_smakk
 USE elearning_smakk;
 
 -- Urutan drop diperhatikan karena foreign key
+DROP TABLE IF EXISTS jawaban_siswa;
+DROP TABLE IF EXISTS soal;
 DROP TABLE IF EXISTS nilai;
 DROP TABLE IF EXISTS pengumpulan_tugas;
 DROP TABLE IF EXISTS forum_diskusi;
@@ -110,6 +112,26 @@ CREATE TABLE tugas (
 ) ENGINE=InnoDB;
 
 -- ------------------------------------------------------------------
+-- soal : butir soal milik sebuah tugas/kuis
+--   tipe 'pilihan_ganda' -> dinilai otomatis (jawaban_benar A/B/C/D)
+--   tipe 'esai'          -> dinilai manual oleh guru
+-- ------------------------------------------------------------------
+CREATE TABLE soal (
+  id            INT AUTO_INCREMENT PRIMARY KEY,
+  id_tugas      INT NOT NULL,
+  pertanyaan    TEXT NOT NULL,
+  tipe          ENUM('pilihan_ganda','esai') NOT NULL DEFAULT 'pilihan_ganda',
+  pilihan_a     VARCHAR(500) DEFAULT NULL,
+  pilihan_b     VARCHAR(500) DEFAULT NULL,
+  pilihan_c     VARCHAR(500) DEFAULT NULL,
+  pilihan_d     VARCHAR(500) DEFAULT NULL,
+  jawaban_benar CHAR(1) DEFAULT NULL,          -- 'A'..'D' untuk pilihan ganda
+  bobot         INT NOT NULL DEFAULT 10,        -- poin maksimum butir ini
+  urutan        INT NOT NULL DEFAULT 0,
+  CONSTRAINT fk_soal_tugas FOREIGN KEY (id_tugas) REFERENCES tugas(id) ON DELETE CASCADE
+) ENGINE=InnoDB;
+
+-- ------------------------------------------------------------------
 -- pengumpulan_tugas : jawaban siswa atas sebuah tugas
 -- ------------------------------------------------------------------
 CREATE TABLE pengumpulan_tugas (
@@ -138,6 +160,26 @@ CREATE TABLE nilai (
   UNIQUE KEY uq_nilai_kumpul (id_kumpul),
   CONSTRAINT fk_nilai_kumpul FOREIGN KEY (id_kumpul) REFERENCES pengumpulan_tugas(id) ON DELETE CASCADE,
   CONSTRAINT fk_nilai_guru   FOREIGN KEY (id_guru)   REFERENCES guru(id) ON DELETE SET NULL
+) ENGINE=InnoDB;
+
+-- ------------------------------------------------------------------
+-- jawaban_siswa : jawaban per butir soal dalam satu pengumpulan
+--   pilihan     -> jawaban PG yang dipilih siswa (A/B/C/D)
+--   jawaban_teks-> jawaban esai
+--   benar       -> hasil koreksi PG (1/0), NULL untuk esai
+--   skor        -> poin yang diperoleh butir ini
+-- ------------------------------------------------------------------
+CREATE TABLE jawaban_siswa (
+  id             INT AUTO_INCREMENT PRIMARY KEY,
+  id_pengumpulan INT NOT NULL,
+  id_soal        INT NOT NULL,
+  pilihan        CHAR(1) DEFAULT NULL,
+  jawaban_teks   TEXT DEFAULT NULL,
+  benar          TINYINT DEFAULT NULL,
+  skor           DECIMAL(6,2) DEFAULT NULL,
+  UNIQUE KEY uq_pengumpulan_soal (id_pengumpulan, id_soal),
+  CONSTRAINT fk_jwb_pengumpulan FOREIGN KEY (id_pengumpulan) REFERENCES pengumpulan_tugas(id) ON DELETE CASCADE,
+  CONSTRAINT fk_jwb_soal        FOREIGN KEY (id_soal)        REFERENCES soal(id) ON DELETE CASCADE
 ) ENGINE=InnoDB;
 
 -- ------------------------------------------------------------------
