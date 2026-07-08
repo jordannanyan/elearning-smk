@@ -42,6 +42,7 @@ export default function SiswaMateri() {
                 <div>
                   <div style={{ fontWeight: 700, fontSize: 15 }}>{r.judul}</div>
                   <span className="badge green" style={{ marginTop: 6, display: 'inline-block' }}>{r.nama_mapel}</span>
+                  {r.nama_guru && <span className="badge gray" style={{ marginTop: 6, marginLeft: 6, display: 'inline-block' }}>👨‍🏫 {r.nama_guru}</span>}
                   {r.konten && <p style={{ marginTop: 10 }} className="muted">{r.konten}</p>}
                   <div className="muted" style={{ fontSize: 12, marginTop: 8 }}>Diunggah: {r.tgl_upload?.slice(0, 10)}</div>
                 </div>

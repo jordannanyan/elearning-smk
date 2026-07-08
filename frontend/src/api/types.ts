@@ -41,6 +41,7 @@ export interface Materi {
   file?: string;
   tgl_upload: string;
   nama_mapel?: string;
+  nama_guru?: string;
 }
 
 export interface Pengumpulan {
@@ -58,6 +59,7 @@ export interface Tugas {
   deadline?: string | null;
   tipe: 'tugas' | 'kuis';
   nama_mapel?: string;
+  nama_guru?: string;
   jumlah_kumpul?: number;
   jumlah_soal?: number;
   pengumpulan?: Pengumpulan | null;

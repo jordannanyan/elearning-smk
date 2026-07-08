@@ -14,8 +14,11 @@ async function assertMapelMilikGuru(userId, id_mapel) {
 exports.list = asyncHandler(async (req, res) => {
   const { id_mapel } = req.query;
   let sql = `
-    SELECT m.*, mp.nama AS nama_mapel
-    FROM materi m JOIN mata_pelajaran mp ON mp.id = m.id_mapel
+    SELECT m.*, mp.nama AS nama_mapel, u.nama AS nama_guru
+    FROM materi m
+    JOIN mata_pelajaran mp ON mp.id = m.id_mapel
+    LEFT JOIN guru g  ON g.id = mp.id_guru
+    LEFT JOIN users u ON u.id = g.id_user
   `;
   const params = [];
   const where = [];

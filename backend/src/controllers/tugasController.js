@@ -24,10 +24,13 @@ exports.list = asyncHandler(async (req, res) => {
     where.push('mp.id_guru = ?'); params.push(gid);
   }
   let sql = `
-    SELECT t.*, mp.nama AS nama_mapel,
+    SELECT t.*, mp.nama AS nama_mapel, u.nama AS nama_guru,
            (SELECT COUNT(*) FROM pengumpulan_tugas p WHERE p.id_tugas = t.id) AS jumlah_kumpul,
            (SELECT COUNT(*) FROM soal s WHERE s.id_tugas = t.id) AS jumlah_soal
-    FROM tugas t JOIN mata_pelajaran mp ON mp.id = t.id_mapel
+    FROM tugas t
+    JOIN mata_pelajaran mp ON mp.id = t.id_mapel
+    LEFT JOIN guru g  ON g.id = mp.id_guru
+    LEFT JOIN users u ON u.id = g.id_user
   `;
   if (where.length) sql += ' WHERE ' + where.join(' AND ');
   sql += ' ORDER BY t.deadline IS NULL, t.deadline ASC';

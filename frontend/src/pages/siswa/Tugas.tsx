@@ -77,14 +77,15 @@ export default function SiswaTugas() {
 
       <div className="table-wrap">
         <table>
-          <thead><tr><th>Judul</th><th>Mapel</th><th>Tipe</th><th>Deadline</th><th>Status</th><th>Aksi</th></tr></thead>
+          <thead><tr><th>Judul</th><th>Mapel</th><th>Guru</th><th>Tipe</th><th>Deadline</th><th>Status</th><th>Aksi</th></tr></thead>
           <tbody>
-            {loading ? <tr><td colSpan={6} className="center-msg">Memuat...</td></tr>
-              : rows.length === 0 ? <tr><td colSpan={6} className="center-msg">Belum ada tugas</td></tr>
+            {loading ? <tr><td colSpan={7} className="center-msg">Memuat...</td></tr>
+              : rows.length === 0 ? <tr><td colSpan={7} className="center-msg">Belum ada tugas</td></tr>
                 : rows.map((t) => (
                   <tr key={t.id}>
                     <td>{t.judul}{t.jumlah_soal ? <span className="badge gray" style={{ marginLeft: 6 }}>{t.jumlah_soal} soal</span> : null}</td>
                     <td>{t.nama_mapel}</td>
+                    <td className="muted">{t.nama_guru || '-'}</td>
                     <td><span className={`badge ${t.tipe === 'kuis' ? 'orange' : 'green'}`}>{t.tipe}</span></td>
                     <td className="muted">{fmt(t.deadline)}</td>
                     <td>{statusBadge(t)}</td>
@@ -101,6 +102,10 @@ export default function SiswaTugas() {
         <Modal title={open.judul} onClose={() => setOpen(null)}>
           {!data ? <p className="muted">Memuat...</p> : (
             <>
+              <p style={{ marginBottom: 6, fontSize: 13 }}>
+                <span className="badge green">{open.nama_mapel}</span>
+                {open.nama_guru && <span className="badge gray" style={{ marginLeft: 6 }}>👨‍🏫 {open.nama_guru}</span>}
+              </p>
               <p className="muted" style={{ marginBottom: 6 }}>{data.tugas.deskripsi || 'Tidak ada instruksi.'}</p>
               <p className="muted" style={{ fontSize: 12 }}>Deadline: {fmt(data.tugas.deadline)}</p>
               {graded && <div className="hint" style={{ marginTop: 10 }}>Nilai akhir Anda: <strong style={{ fontSize: 16 }}>{data.total_skor}</strong></div>}
