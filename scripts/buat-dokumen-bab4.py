@@ -261,10 +261,11 @@ def main():
              "kode program. Pengujian dilakukan dengan memberikan sejumlah skenario masukan "
              "kepada sistem, kemudian memeriksa apakah keluaran yang dihasilkan telah sesuai "
              "dengan yang diharapkan. Skenario pengujian mencakup seluruh fitur sistem, meliputi "
-             "proses autentikasi, pengelolaan data pengguna, kelas, dan mata pelajaran, "
-             "pengelolaan materi pembelajaran, pembuatan tugas dan kuis, pengerjaan tugas dan "
-             "kuis oleh siswa, penilaian, rekapitulasi nilai, forum diskusi, serta dashboard "
-             "masing-masing pengguna.")
+             "proses autentikasi dan hak akses, pengelolaan periode pembelajaran beserta "
+             "penguncian periode, pengelolaan data pengguna, kelas, katalog mata pelajaran, dan "
+             "pengampuan kelas, penyusunan pertemuan beserta materinya, pembuatan tugas dan kuis, "
+             "pengerjaan tugas dan kuis oleh siswa, penilaian, rekapitulasi nilai per mata "
+             "pelajaran, forum diskusi, serta dashboard masing-masing pengguna.")
     paragraf(dok,
              f"Pengujian dilaksanakan terhadap {uji['total']} skenario yang mencakup pengujian "
              "kasus normal (data valid) maupun kasus tidak normal (data tidak valid dan "
@@ -318,16 +319,36 @@ def main():
              "disajikan pada tabel berikut.")
 
     nomor_tabel += 1
+    label_tabel(dok, f"Tabel {nomor_tabel}  Periode Pembelajaran pada Sistem")
+    buat_tabel(dok,
+               ["No", "Kode", "Tahun Ajaran", "Semester", "Mulai", "Selesai",
+                "Kelas", "Status", "Dikunci Oleh"],
+               [[i + 1, r["kode"], r["tahun_ajaran"],
+                 "Ganjil" if r["semester"] == 1 else "Genap",
+                 r["tgl_mulai"] or "-", r["tgl_selesai"] or "-", r["jumlah_kelas"],
+                 r["status"].capitalize(),
+                 f'{r["dikunci_oleh"]} ({r["tgl_dikunci"]})' if r["dikunci_oleh"] else "-"]
+                for i, r in enumerate(statistik["periode"])],
+               lebar=[0.45, 0.9, 1.3, 1.0, 1.2, 1.2, 0.7, 1.0, 2.35], ukuran=9)
+
+    paragraf(dok,
+             "Periode 2025/2 pada tabel di atas telah dikunci oleh administrator sehingga seluruh "
+             "data pembelajaran pada periode tersebut bersifat hanya-baca. Guru tidak dapat lagi "
+             "mengubah materi, tugas, maupun nilai, dan siswa tidak dapat mengumpulkan tugas, "
+             "namun seluruh data tetap dapat dilihat sebagai arsip riwayat belajar.")
+
+    nomor_tabel += 1
     label_tabel(dok, f"Tabel {nomor_tabel}  Rekapitulasi Pengerjaan Tugas dan Kuis")
     buat_tabel(dok,
-               ["No", "Tugas / Kuis", "Mata Pelajaran", "Tipe", "Terkumpul",
-                "Dinilai", "Rata-rata", "Terendah", "Tertinggi"],
-               [[i + 1, r["tugas"], r["mapel"], r["tipe"], r["jumlah_kumpul"],
-                 r["sudah_dinilai"], r["rata_rata"] if r["rata_rata"] is not None else "-",
+               ["No", "Periode", "Mata Pelajaran", "Kelas", "Pert.", "Tugas / Kuis", "Tipe",
+                "Terkumpul", "Dinilai", "Rata-rata", "Terendah", "Tertinggi"],
+               [[i + 1, r["periode"], r["mapel"], r["kelas"], r["pertemuan"], r["tugas"], r["tipe"],
+                 r["jumlah_kumpul"], r["sudah_dinilai"],
+                 r["rata_rata"] if r["rata_rata"] is not None else "-",
                  r["nilai_terendah"] if r["nilai_terendah"] is not None else "-",
                  r["nilai_tertinggi"] if r["nilai_tertinggi"] is not None else "-"]
                 for i, r in enumerate(statistik["ringkasan_tugas"])],
-               lebar=[0.45, 2.4, 1.7, 0.7, 1.0, 0.85, 1.0, 0.95, 1.0], ukuran=9)
+               lebar=[0.4, 0.75, 1.5, 0.9, 0.5, 2.0, 0.6, 0.85, 0.7, 0.85, 0.85, 0.85], ukuran=8)
 
     paragraf(dok,
              "Rincian nilai yang diperoleh setiap siswa pada masing-masing tugas dan kuis "
@@ -338,13 +359,14 @@ def main():
     nomor_tabel += 1
     label_tabel(dok, f"Tabel {nomor_tabel}  Rincian Nilai Siswa")
     buat_tabel(dok,
-               ["No", "Nama Siswa", "Kelas", "Tugas / Kuis", "Mata Pelajaran", "Tipe",
-                "Nilai", "Keterangan"],
-               [[i + 1, r["siswa"], r["kelas"], r["tugas"], r["mapel"], r["tipe"],
+               ["No", "Periode", "Nama Siswa", "Kelas", "Mata Pelajaran", "Pert.",
+                "Tugas / Kuis", "Tipe", "Nilai", "Keterangan"],
+               [[i + 1, r["periode"], r["siswa"], r["kelas"], r["mapel"], r["pertemuan"],
+                 r["tugas"], r["tipe"],
                  r["skor"] if r["skor"] is not None else "Belum dinilai",
                  "Terlambat" if r["terlambat"] else "Tepat waktu"]
                 for i, r in enumerate(statistik["rekap_nilai"])],
-               lebar=[0.45, 1.9, 0.9, 2.3, 1.7, 0.75, 0.9, 1.15], ukuran=9)
+               lebar=[0.4, 0.75, 1.5, 0.85, 1.4, 0.5, 1.85, 0.6, 0.85, 1.0], ukuran=8)
 
     dok.save(KELUARAN)
     print(f"[OK] Dokumen tersimpan: {KELUARAN}")

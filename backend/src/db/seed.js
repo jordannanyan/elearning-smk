@@ -457,6 +457,36 @@ async function seed() {
       'Teks Negosiasi', 'Struktur dan kaidah teks negosiasi.', -238);
     await buatMateri(lb1, 'Struktur Teks Negosiasi',
       'Teks negosiasi terdiri atas orientasi, pengajuan, penawaran, dan persetujuan.', 'teks');
+    const lbTugas = await buatTugas(lb1, 'Tugas Menyusun Teks Negosiasi',
+      'Susunlah sebuah teks negosiasi jual beli sesuai struktur yang telah dipelajari.',
+      hari(-205), 'tugas');
+
+    // --- Riwayat pengumpulan & nilai pada periode yang telah dikunci ---
+    //   Data ini disisipkan langsung karena periodenya sudah ditutup sehingga
+    //   tidak lagi dapat diisi melalui alur pengumpulan biasa. Riwayat ini
+    //   dibutuhkan agar siswa tetap dapat menelusuri nilainya pada semester lalu.
+    const lmTugas = (await conn.query(
+      "SELECT id FROM tugas WHERE judul = 'Latihan Barisan Aritmetika'"))[0][0].id;
+    const arsipNilai = [
+      [lmTugas, 'maya', 88, 'Pengerjaan runtut dan rumus digunakan dengan tepat.', -206],
+      [lmTugas, 'rizky', 76, 'Sudah benar, namun beberapa langkah masih dipersingkat.', -206],
+      [lmTugas, 'intan', 92, 'Sangat baik, seluruh nomor dikerjakan dengan lengkap.', -207],
+      [lbTugas, 'maya', 85, 'Struktur teks negosiasi sudah lengkap.', -204],
+      [lbTugas, 'rizky', 80, 'Bagian penawaran dapat dikembangkan lagi.', -204],
+      [lbTugas, 'intan', 90, 'Dialog negosiasi tersusun sangat runtut.', -203],
+    ];
+    for (const [idTugasArsip, akun, skor, catatan, geser] of arsipNilai) {
+      const [pg] = await conn.query(
+        `INSERT INTO pengumpulan_tugas (id_tugas, id_siswa, jawaban, tgl_kumpul, terlambat)
+         VALUES (?,?,?,?,0)`,
+        [idTugasArsip, siswaIds[akun],
+          'Pekerjaan dikumpulkan pada semester genap tahun ajaran 2024/2025.',
+          hari(geser, '10:00:00')]);
+      await conn.query(
+        'INSERT INTO nilai (id_kumpul, id_guru, skor, catatan, tgl_penilaian) VALUES (?,?,?,?,?)',
+        [pg.insertId, idTugasArsip === lmTugas ? G_BUDI : G_SITI, skor, catatan,
+          hari(geser + 3, '09:00:00')]);
+    }
 
     // =============================================================
     // Butir soal untuk kuis

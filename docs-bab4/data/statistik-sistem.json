@@ -3,37 +3,57 @@
     {
       "tabel": "users",
       "deskripsi": "Menyimpan data akun seluruh pengguna sistem (administrator, guru, dan siswa)",
-      "jumlah_record": 18
+      "jumlah_record": 23
+    },
+    {
+      "tabel": "periode",
+      "deskripsi": "Menyimpan periode pembelajaran (tahun ajaran dan semester) beserta status penguncian",
+      "jumlah_record": 2
     },
     {
       "tabel": "kelas",
-      "deskripsi": "Menyimpan data rombongan belajar (kelas) yang ada di sekolah",
-      "jumlah_record": 3
+      "deskripsi": "Menyimpan data rombongan belajar pada sebuah periode pembelajaran",
+      "jumlah_record": 7
     },
     {
       "tabel": "guru",
       "deskripsi": "Menyimpan data detail profil guru yang berelasi dengan tabel users",
-      "jumlah_record": 4
+      "jumlah_record": 6
     },
     {
       "tabel": "siswa",
-      "deskripsi": "Menyimpan data detail profil siswa beserta kelasnya",
-      "jumlah_record": 13
+      "deskripsi": "Menyimpan data detail profil siswa yang berelasi dengan tabel users",
+      "jumlah_record": 16
+    },
+    {
+      "tabel": "siswa_kelas",
+      "deskripsi": "Menyimpan keanggotaan siswa pada sebuah kelas di setiap periode",
+      "jumlah_record": 19
     },
     {
       "tabel": "mata_pelajaran",
-      "deskripsi": "Menyimpan data mata pelajaran beserta guru pengampunya",
-      "jumlah_record": 5
+      "deskripsi": "Menyimpan katalog mata pelajaran sekolah",
+      "jumlah_record": 27
+    },
+    {
+      "tabel": "kelas_mapel",
+      "deskripsi": "Menyimpan pengampuan, yaitu mata pelajaran pada sebuah kelas beserta guru pengampunya",
+      "jumlah_record": 17
+    },
+    {
+      "tabel": "pertemuan",
+      "deskripsi": "Menyimpan urutan pertemuan pembelajaran pada sebuah kelas mata pelajaran",
+      "jumlah_record": 15
     },
     {
       "tabel": "materi",
-      "deskripsi": "Menyimpan data materi pembelajaran yang diunggah oleh guru",
-      "jumlah_record": 8
+      "deskripsi": "Menyimpan materi pembelajaran (teks, berkas, video, atau tautan) pada sebuah pertemuan",
+      "jumlah_record": 21
     },
     {
       "tabel": "tugas",
       "deskripsi": "Menyimpan data tugas dan kuis beserta tipe dan batas waktunya",
-      "jumlah_record": 6
+      "jumlah_record": 11
     },
     {
       "tabel": "soal",
@@ -43,401 +63,545 @@
     {
       "tabel": "pengumpulan_tugas",
       "deskripsi": "Menyimpan data pengumpulan jawaban tugas oleh siswa",
-      "jumlah_record": 35
+      "jumlah_record": 32
     },
     {
       "tabel": "jawaban_siswa",
       "deskripsi": "Menyimpan jawaban siswa pada setiap butir soal kuis",
-      "jumlah_record": 95
+      "jumlah_record": 62
     },
     {
       "tabel": "nilai",
       "deskripsi": "Menyimpan data nilai siswa hasil penilaian guru maupun koreksi otomatis",
-      "jumlah_record": 28
+      "jumlah_record": 26
     },
     {
       "tabel": "forum_diskusi",
-      "deskripsi": "Menyimpan data topik dan balasan pada forum diskusi",
-      "jumlah_record": 14
+      "deskripsi": "Menyimpan topik dan balasan forum diskusi pada sebuah pertemuan",
+      "jumlah_record": 8
+    }
+  ],
+  "periode": [
+    {
+      "kode": "2026/1",
+      "tahun_ajaran": "2025/2026",
+      "semester": 1,
+      "status": "aktif",
+      "tgl_mulai": "2025-07-13T17:00:00.000Z",
+      "tgl_selesai": "2025-12-18T17:00:00.000Z",
+      "dikunci_oleh": null,
+      "tgl_dikunci": null,
+      "jumlah_kelas": 5
+    },
+    {
+      "kode": "2025/2",
+      "tahun_ajaran": "2024/2025",
+      "semester": 2,
+      "status": "terkunci",
+      "tgl_mulai": "2025-01-05T17:00:00.000Z",
+      "tgl_selesai": "2025-06-19T17:00:00.000Z",
+      "dikunci_oleh": "Administrator",
+      "tgl_dikunci": "2025-06-25T03:00:00.000Z",
+      "jumlah_kelas": 2
     }
   ],
   "rekap_nilai": [
     {
       "siswa": "Ahmad Fauzi",
-      "kelas": "X IPA 1",
+      "kelas": "X MIPA 1",
+      "periode": "2026/1",
+      "mapel": "Bahasa Indonesia",
+      "pertemuan": 1,
+      "tugas": "Tugas Menulis Teks Deskripsi",
+      "tipe": "tugas",
+      "skor": null,
+      "terlambat": 0
+    },
+    {
+      "siswa": "Ahmad Fauzi",
+      "kelas": "X MIPA 1",
+      "periode": "2026/1",
+      "mapel": "Bahasa Indonesia",
+      "pertemuan": 2,
+      "tugas": "Kuis Teks Deskripsi",
+      "tipe": "kuis",
+      "skor": "100.00",
+      "terlambat": 0
+    },
+    {
+      "siswa": "Ahmad Fauzi",
+      "kelas": "X MIPA 1",
+      "periode": "2026/1",
+      "mapel": "Bahasa Inggris",
+      "pertemuan": 1,
       "tugas": "Kuis Descriptive Text",
       "tipe": "kuis",
-      "mapel": "Bahasa Inggris",
       "skor": "98.00",
       "terlambat": 0
     },
     {
       "siswa": "Ahmad Fauzi",
-      "kelas": "X IPA 1",
-      "tugas": "Kuis Persamaan dan Pertidaksamaan Linear",
-      "tipe": "kuis",
+      "kelas": "X MIPA 1",
+      "periode": "2026/1",
       "mapel": "Matematika Wajib",
-      "skor": "80.00",
-      "terlambat": 0
-    },
-    {
-      "siswa": "Ahmad Fauzi",
-      "kelas": "X IPA 1",
-      "tugas": "Kuis Teks Deskripsi",
-      "tipe": "kuis",
-      "mapel": "Bahasa Indonesia",
-      "skor": "100.00",
-      "terlambat": 0
-    },
-    {
-      "siswa": "Ahmad Fauzi",
-      "kelas": "X IPA 1",
+      "pertemuan": 1,
       "tugas": "Latihan Persamaan Linear",
       "tipe": "tugas",
-      "mapel": "Matematika Wajib",
       "skor": "90.00",
       "terlambat": 0
     },
     {
-      "siswa": "Andi Setiawan",
-      "kelas": "X IPA 2",
+      "siswa": "Ahmad Fauzi",
+      "kelas": "X MIPA 1",
+      "periode": "2026/1",
+      "mapel": "Matematika Wajib",
+      "pertemuan": 2,
       "tugas": "Kuis Persamaan dan Pertidaksamaan Linear",
       "tipe": "kuis",
-      "mapel": "Matematika Wajib",
-      "skor": "20.00",
-      "terlambat": 0
-    },
-    {
-      "siswa": "Andi Setiawan",
-      "kelas": "X IPA 2",
-      "tugas": "Latihan Persamaan Linear",
-      "tipe": "tugas",
-      "mapel": "Matematika Wajib",
       "skor": "80.00",
       "terlambat": 0
     },
     {
-      "siswa": "Andi Setiawan",
-      "kelas": "X IPA 2",
-      "tugas": "Tugas Menulis Teks Deskripsi",
-      "tipe": "tugas",
+      "siswa": "Bayu Saputra",
+      "kelas": "X MIPA 1",
+      "periode": "2026/1",
       "mapel": "Bahasa Indonesia",
-      "skor": null,
-      "terlambat": 0
-    },
-    {
-      "siswa": "Bayu Saputra",
-      "kelas": "X IPA 1",
-      "tugas": "Kuis Descriptive Text",
+      "pertemuan": 2,
+      "tugas": "Kuis Teks Deskripsi",
       "tipe": "kuis",
-      "mapel": "Bahasa Inggris",
       "skor": null,
       "terlambat": 0
     },
     {
       "siswa": "Bayu Saputra",
-      "kelas": "X IPA 1",
+      "kelas": "X MIPA 1",
+      "periode": "2026/1",
+      "mapel": "Fisika",
+      "pertemuan": 1,
+      "tugas": "Latihan Soal Besaran dan Satuan",
+      "tipe": "tugas",
+      "skor": "78.00",
+      "terlambat": 1
+    },
+    {
+      "siswa": "Bayu Saputra",
+      "kelas": "X MIPA 1",
+      "periode": "2026/1",
+      "mapel": "Matematika Wajib",
+      "pertemuan": 2,
       "tugas": "Kuis Persamaan dan Pertidaksamaan Linear",
       "tipe": "kuis",
-      "mapel": "Matematika Wajib",
       "skor": "40.00",
       "terlambat": 0
     },
     {
-      "siswa": "Bayu Saputra",
-      "kelas": "X IPA 1",
-      "tugas": "Latihan Persamaan Linear",
+      "siswa": "Dewi Lestari",
+      "kelas": "X MIPA 1",
+      "periode": "2026/1",
+      "mapel": "Bahasa Indonesia",
+      "pertemuan": 1,
+      "tugas": "Tugas Menulis Teks Deskripsi",
       "tipe": "tugas",
-      "mapel": "Matematika Wajib",
-      "skor": null,
+      "skor": "92.00",
       "terlambat": 0
     },
     {
       "siswa": "Dewi Lestari",
-      "kelas": "X IPA 1",
-      "tugas": "Kuis Descriptive Text",
-      "tipe": "kuis",
-      "mapel": "Bahasa Inggris",
-      "skor": "72.00",
-      "terlambat": 0
-    },
-    {
-      "siswa": "Dewi Lestari",
-      "kelas": "X IPA 1",
-      "tugas": "Kuis Persamaan dan Pertidaksamaan Linear",
-      "tipe": "kuis",
-      "mapel": "Matematika Wajib",
-      "skor": "100.00",
-      "terlambat": 0
-    },
-    {
-      "siswa": "Dewi Lestari",
-      "kelas": "X IPA 1",
+      "kelas": "X MIPA 1",
+      "periode": "2026/1",
+      "mapel": "Bahasa Indonesia",
+      "pertemuan": 2,
       "tugas": "Kuis Teks Deskripsi",
       "tipe": "kuis",
-      "mapel": "Bahasa Indonesia",
       "skor": "73.00",
       "terlambat": 0
     },
     {
       "siswa": "Dewi Lestari",
-      "kelas": "X IPA 1",
+      "kelas": "X MIPA 1",
+      "periode": "2026/1",
+      "mapel": "Bahasa Inggris",
+      "pertemuan": 1,
+      "tugas": "Kuis Descriptive Text",
+      "tipe": "kuis",
+      "skor": "72.00",
+      "terlambat": 0
+    },
+    {
+      "siswa": "Dewi Lestari",
+      "kelas": "X MIPA 1",
+      "periode": "2026/1",
+      "mapel": "Matematika Wajib",
+      "pertemuan": 1,
       "tugas": "Latihan Persamaan Linear",
       "tipe": "tugas",
-      "mapel": "Matematika Wajib",
       "skor": "85.00",
       "terlambat": 0
     },
     {
       "siswa": "Dewi Lestari",
-      "kelas": "X IPA 1",
-      "tugas": "Tugas Menulis Teks Deskripsi",
-      "tipe": "tugas",
-      "mapel": "Bahasa Indonesia",
-      "skor": "92.00",
-      "terlambat": 0
-    },
-    {
-      "siswa": "Fajar Ramadhan",
-      "kelas": "X IPA 2",
+      "kelas": "X MIPA 1",
+      "periode": "2026/1",
+      "mapel": "Matematika Wajib",
+      "pertemuan": 2,
       "tugas": "Kuis Persamaan dan Pertidaksamaan Linear",
       "tipe": "kuis",
-      "mapel": "Matematika Wajib",
-      "skor": "80.00",
+      "skor": "100.00",
       "terlambat": 0
     },
     {
-      "siswa": "Fajar Ramadhan",
-      "kelas": "X IPA 2",
-      "tugas": "Kuis Teks Deskripsi",
-      "tipe": "kuis",
-      "mapel": "Bahasa Indonesia",
+      "siswa": "Dewi Lestari",
+      "kelas": "X MIPA 1",
+      "periode": "2026/1",
+      "mapel": "Matematika Wajib",
+      "pertemuan": 3,
+      "tugas": "Tugas Proyek SPLDV",
+      "tipe": "tugas",
       "skor": null,
       "terlambat": 0
-    },
-    {
-      "siswa": "Fajar Ramadhan",
-      "kelas": "X IPA 2",
-      "tugas": "Tugas Menulis Teks Deskripsi",
-      "tipe": "tugas",
-      "mapel": "Bahasa Indonesia",
-      "skor": null,
-      "terlambat": 0
-    },
-    {
-      "siswa": "Intan Permata",
-      "kelas": "XI IPS 1",
-      "tugas": "Kuis Descriptive Text",
-      "tipe": "kuis",
-      "mapel": "Bahasa Inggris",
-      "skor": "99.00",
-      "terlambat": 0
-    },
-    {
-      "siswa": "Intan Permata",
-      "kelas": "XI IPS 1",
-      "tugas": "Kuis Persamaan dan Pertidaksamaan Linear",
-      "tipe": "kuis",
-      "mapel": "Matematika Wajib",
-      "skor": "60.00",
-      "terlambat": 0
-    },
-    {
-      "siswa": "Maya Anggraini",
-      "kelas": "XI IPS 1",
-      "tugas": "Kuis Persamaan dan Pertidaksamaan Linear",
-      "tipe": "kuis",
-      "mapel": "Matematika Wajib",
-      "skor": "80.00",
-      "terlambat": 0
-    },
-    {
-      "siswa": "Maya Anggraini",
-      "kelas": "XI IPS 1",
-      "tugas": "Latihan Soal Besaran dan Satuan",
-      "tipe": "tugas",
-      "mapel": "Fisika",
-      "skor": "78.00",
-      "terlambat": 1
     },
     {
       "siswa": "Nur Aisyah",
-      "kelas": "X IPA 1",
+      "kelas": "X MIPA 1",
+      "periode": "2026/1",
+      "mapel": "Bahasa Indonesia",
+      "pertemuan": 1,
+      "tugas": "Tugas Menulis Teks Deskripsi",
+      "tipe": "tugas",
+      "skor": "90.00",
+      "terlambat": 0
+    },
+    {
+      "siswa": "Nur Aisyah",
+      "kelas": "X MIPA 1",
+      "periode": "2026/1",
+      "mapel": "Bahasa Indonesia",
+      "pertemuan": 2,
+      "tugas": "Kuis Teks Deskripsi",
+      "tipe": "kuis",
+      "skor": null,
+      "terlambat": 0
+    },
+    {
+      "siswa": "Nur Aisyah",
+      "kelas": "X MIPA 1",
+      "periode": "2026/1",
+      "mapel": "Matematika Wajib",
+      "pertemuan": 1,
+      "tugas": "Latihan Persamaan Linear",
+      "tipe": "tugas",
+      "skor": "95.00",
+      "terlambat": 0
+    },
+    {
+      "siswa": "Nur Aisyah",
+      "kelas": "X MIPA 1",
+      "periode": "2026/1",
+      "mapel": "Matematika Wajib",
+      "pertemuan": 2,
       "tugas": "Kuis Persamaan dan Pertidaksamaan Linear",
       "tipe": "kuis",
-      "mapel": "Matematika Wajib",
       "skor": "100.00",
       "terlambat": 0
     },
     {
       "siswa": "Nur Aisyah",
-      "kelas": "X IPA 1",
-      "tugas": "Kuis Teks Deskripsi",
-      "tipe": "kuis",
-      "mapel": "Bahasa Indonesia",
+      "kelas": "X MIPA 1",
+      "periode": "2026/1",
+      "mapel": "Matematika Wajib",
+      "pertemuan": 3,
+      "tugas": "Tugas Proyek SPLDV",
+      "tipe": "tugas",
       "skor": null,
       "terlambat": 0
     },
     {
-      "siswa": "Nur Aisyah",
-      "kelas": "X IPA 1",
-      "tugas": "Latihan Persamaan Linear",
+      "siswa": "Putri Rahmawati",
+      "kelas": "X MIPA 1",
+      "periode": "2026/1",
+      "mapel": "Bahasa Indonesia",
+      "pertemuan": 1,
+      "tugas": "Tugas Menulis Teks Deskripsi",
       "tipe": "tugas",
-      "mapel": "Matematika Wajib",
-      "skor": "95.00",
+      "skor": "87.00",
       "terlambat": 0
     },
     {
       "siswa": "Putri Rahmawati",
-      "kelas": "X IPA 2",
-      "tugas": "Kuis Persamaan dan Pertidaksamaan Linear",
-      "tipe": "kuis",
-      "mapel": "Matematika Wajib",
-      "skor": "80.00",
-      "terlambat": 0
-    },
-    {
-      "siswa": "Putri Rahmawati",
-      "kelas": "X IPA 2",
+      "kelas": "X MIPA 1",
+      "periode": "2026/1",
+      "mapel": "Bahasa Indonesia",
+      "pertemuan": 2,
       "tugas": "Kuis Teks Deskripsi",
       "tipe": "kuis",
-      "mapel": "Bahasa Indonesia",
       "skor": "96.00",
       "terlambat": 0
     },
     {
       "siswa": "Putri Rahmawati",
-      "kelas": "X IPA 2",
+      "kelas": "X MIPA 1",
+      "periode": "2026/1",
+      "mapel": "Matematika Wajib",
+      "pertemuan": 1,
       "tugas": "Latihan Persamaan Linear",
       "tipe": "tugas",
-      "mapel": "Matematika Wajib",
       "skor": "88.00",
       "terlambat": 0
     },
     {
       "siswa": "Putri Rahmawati",
-      "kelas": "X IPA 2",
-      "tugas": "Tugas Menulis Teks Deskripsi",
-      "tipe": "tugas",
-      "mapel": "Bahasa Indonesia",
-      "skor": "87.00",
-      "terlambat": 0
-    },
-    {
-      "siswa": "Rian Pratama",
-      "kelas": "X IPA 1",
+      "kelas": "X MIPA 1",
+      "periode": "2026/1",
+      "mapel": "Matematika Wajib",
+      "pertemuan": 2,
       "tugas": "Kuis Persamaan dan Pertidaksamaan Linear",
       "tipe": "kuis",
-      "mapel": "Matematika Wajib",
-      "skor": "60.00",
+      "skor": "80.00",
       "terlambat": 0
     },
     {
       "siswa": "Rian Pratama",
-      "kelas": "X IPA 1",
+      "kelas": "X MIPA 1",
+      "periode": "2026/1",
+      "mapel": "Bahasa Inggris",
+      "pertemuan": 1,
+      "tugas": "Kuis Descriptive Text",
+      "tipe": "kuis",
+      "skor": null,
+      "terlambat": 0
+    },
+    {
+      "siswa": "Rian Pratama",
+      "kelas": "X MIPA 1",
+      "periode": "2026/1",
+      "mapel": "Matematika Wajib",
+      "pertemuan": 1,
       "tugas": "Latihan Persamaan Linear",
       "tipe": "tugas",
-      "mapel": "Matematika Wajib",
       "skor": "75.00",
       "terlambat": 0
     },
     {
-      "siswa": "Rizky Alamsyah",
-      "kelas": "XI IPS 1",
-      "tugas": "Latihan Soal Besaran dan Satuan",
-      "tipe": "tugas",
-      "mapel": "Fisika",
-      "skor": null,
-      "terlambat": 1
-    },
-    {
-      "siswa": "Salsabila Azzahra",
-      "kelas": "X IPA 2",
+      "siswa": "Rian Pratama",
+      "kelas": "X MIPA 1",
+      "periode": "2026/1",
+      "mapel": "Matematika Wajib",
+      "pertemuan": 2,
       "tugas": "Kuis Persamaan dan Pertidaksamaan Linear",
       "tipe": "kuis",
-      "mapel": "Matematika Wajib",
-      "skor": "100.00",
+      "skor": "60.00",
       "terlambat": 0
     },
     {
-      "siswa": "Salsabila Azzahra",
-      "kelas": "X IPA 2",
-      "tugas": "Kuis Teks Deskripsi",
-      "tipe": "kuis",
+      "siswa": "Intan Permata",
+      "kelas": "X MIPA 1",
+      "periode": "2025/2",
       "mapel": "Bahasa Indonesia",
-      "skor": "79.00",
-      "terlambat": 0
-    },
-    {
-      "siswa": "Salsabila Azzahra",
-      "kelas": "X IPA 2",
-      "tugas": "Tugas Menulis Teks Deskripsi",
+      "pertemuan": 1,
+      "tugas": "Tugas Menyusun Teks Negosiasi",
       "tipe": "tugas",
-      "mapel": "Bahasa Indonesia",
       "skor": "90.00",
+      "terlambat": 0
+    },
+    {
+      "siswa": "Intan Permata",
+      "kelas": "X MIPA 1",
+      "periode": "2025/2",
+      "mapel": "Matematika Wajib",
+      "pertemuan": 1,
+      "tugas": "Latihan Barisan Aritmetika",
+      "tipe": "tugas",
+      "skor": "92.00",
+      "terlambat": 0
+    },
+    {
+      "siswa": "Maya Anggraini",
+      "kelas": "X MIPA 1",
+      "periode": "2025/2",
+      "mapel": "Bahasa Indonesia",
+      "pertemuan": 1,
+      "tugas": "Tugas Menyusun Teks Negosiasi",
+      "tipe": "tugas",
+      "skor": "85.00",
+      "terlambat": 0
+    },
+    {
+      "siswa": "Maya Anggraini",
+      "kelas": "X MIPA 1",
+      "periode": "2025/2",
+      "mapel": "Matematika Wajib",
+      "pertemuan": 1,
+      "tugas": "Latihan Barisan Aritmetika",
+      "tipe": "tugas",
+      "skor": "88.00",
+      "terlambat": 0
+    },
+    {
+      "siswa": "Rizky Alamsyah",
+      "kelas": "X MIPA 1",
+      "periode": "2025/2",
+      "mapel": "Bahasa Indonesia",
+      "pertemuan": 1,
+      "tugas": "Tugas Menyusun Teks Negosiasi",
+      "tipe": "tugas",
+      "skor": "80.00",
+      "terlambat": 0
+    },
+    {
+      "siswa": "Rizky Alamsyah",
+      "kelas": "X MIPA 1",
+      "periode": "2025/2",
+      "mapel": "Matematika Wajib",
+      "pertemuan": 1,
+      "tugas": "Latihan Barisan Aritmetika",
+      "tipe": "tugas",
+      "skor": "76.00",
       "terlambat": 0
     }
   ],
   "ringkasan_tugas": [
     {
-      "tugas": "Kuis Teks Deskripsi",
-      "tipe": "kuis",
+      "periode": "2026/1",
       "mapel": "Bahasa Indonesia",
-      "jumlah_kumpul": 6,
-      "sudah_dinilai": "4",
-      "rata_rata": "87.00",
-      "nilai_terendah": "73.00",
-      "nilai_tertinggi": "100.00"
-    },
-    {
+      "kelas": "X MIPA 1",
+      "pertemuan": 1,
       "tugas": "Tugas Menulis Teks Deskripsi",
       "tipe": "tugas",
-      "mapel": "Bahasa Indonesia",
-      "jumlah_kumpul": 5,
+      "jumlah_kumpul": 4,
       "sudah_dinilai": "3",
       "rata_rata": "89.67",
       "nilai_terendah": "87.00",
       "nilai_tertinggi": "92.00"
     },
     {
-      "tugas": "Kuis Descriptive Text",
+      "periode": "2026/1",
+      "mapel": "Bahasa Indonesia",
+      "kelas": "X MIPA 1",
+      "pertemuan": 2,
+      "tugas": "Kuis Teks Deskripsi",
       "tipe": "kuis",
-      "mapel": "Bahasa Inggris",
-      "jumlah_kumpul": 4,
+      "jumlah_kumpul": 5,
       "sudah_dinilai": "3",
       "rata_rata": "89.67",
-      "nilai_terendah": "72.00",
-      "nilai_tertinggi": "99.00"
+      "nilai_terendah": "73.00",
+      "nilai_tertinggi": "100.00"
     },
     {
+      "periode": "2026/1",
+      "mapel": "Bahasa Indonesia",
+      "kelas": "XI MIPA 1",
+      "pertemuan": 1,
+      "tugas": "Tugas Menyusun Teks Prosedur",
+      "tipe": "tugas",
+      "jumlah_kumpul": 0,
+      "sudah_dinilai": "0",
+      "rata_rata": null,
+      "nilai_terendah": null,
+      "nilai_tertinggi": null
+    },
+    {
+      "periode": "2026/1",
+      "mapel": "Bahasa Inggris",
+      "kelas": "X MIPA 1",
+      "pertemuan": 1,
+      "tugas": "Kuis Descriptive Text",
+      "tipe": "kuis",
+      "jumlah_kumpul": 3,
+      "sudah_dinilai": "2",
+      "rata_rata": "85.00",
+      "nilai_terendah": "72.00",
+      "nilai_tertinggi": "98.00"
+    },
+    {
+      "periode": "2026/1",
+      "mapel": "Fisika",
+      "kelas": "X MIPA 1",
+      "pertemuan": 1,
       "tugas": "Latihan Soal Besaran dan Satuan",
       "tipe": "tugas",
-      "mapel": "Fisika",
-      "jumlah_kumpul": 2,
+      "jumlah_kumpul": 1,
       "sudah_dinilai": "1",
       "rata_rata": "78.00",
       "nilai_terendah": "78.00",
       "nilai_tertinggi": "78.00"
     },
     {
+      "periode": "2026/1",
+      "mapel": "Matematika Wajib",
+      "kelas": "X MIPA 1",
+      "pertemuan": 1,
+      "tugas": "Latihan Persamaan Linear",
+      "tipe": "tugas",
+      "jumlah_kumpul": 5,
+      "sudah_dinilai": "5",
+      "rata_rata": "86.60",
+      "nilai_terendah": "75.00",
+      "nilai_tertinggi": "95.00"
+    },
+    {
+      "periode": "2026/1",
+      "mapel": "Matematika Wajib",
+      "kelas": "X MIPA 1",
+      "pertemuan": 2,
       "tugas": "Kuis Persamaan dan Pertidaksamaan Linear",
       "tipe": "kuis",
-      "mapel": "Matematika Wajib",
-      "jumlah_kumpul": 11,
-      "sudah_dinilai": "11",
-      "rata_rata": "72.73",
-      "nilai_terendah": "20.00",
+      "jumlah_kumpul": 6,
+      "sudah_dinilai": "6",
+      "rata_rata": "76.67",
+      "nilai_terendah": "40.00",
       "nilai_tertinggi": "100.00"
     },
     {
-      "tugas": "Latihan Persamaan Linear",
-      "tipe": "tugas",
+      "periode": "2026/1",
       "mapel": "Matematika Wajib",
-      "jumlah_kumpul": 7,
-      "sudah_dinilai": "6",
-      "rata_rata": "85.50",
-      "nilai_terendah": "75.00",
-      "nilai_tertinggi": "95.00"
+      "kelas": "X MIPA 1",
+      "pertemuan": 3,
+      "tugas": "Tugas Proyek SPLDV",
+      "tipe": "tugas",
+      "jumlah_kumpul": 2,
+      "sudah_dinilai": "0",
+      "rata_rata": null,
+      "nilai_terendah": null,
+      "nilai_tertinggi": null
+    },
+    {
+      "periode": "2026/1",
+      "mapel": "Matematika Wajib",
+      "kelas": "X MIPA 2",
+      "pertemuan": 1,
+      "tugas": "Latihan Persamaan Linear (X MIPA 2)",
+      "tipe": "tugas",
+      "jumlah_kumpul": 0,
+      "sudah_dinilai": "0",
+      "rata_rata": null,
+      "nilai_terendah": null,
+      "nilai_tertinggi": null
+    },
+    {
+      "periode": "2025/2",
+      "mapel": "Bahasa Indonesia",
+      "kelas": "X MIPA 1",
+      "pertemuan": 1,
+      "tugas": "Tugas Menyusun Teks Negosiasi",
+      "tipe": "tugas",
+      "jumlah_kumpul": 3,
+      "sudah_dinilai": "3",
+      "rata_rata": "85.00",
+      "nilai_terendah": "80.00",
+      "nilai_tertinggi": "90.00"
+    },
+    {
+      "periode": "2025/2",
+      "mapel": "Matematika Wajib",
+      "kelas": "X MIPA 1",
+      "pertemuan": 1,
+      "tugas": "Latihan Barisan Aritmetika",
+      "tipe": "tugas",
+      "jumlah_kumpul": 3,
+      "sudah_dinilai": "3",
+      "rata_rata": "85.33",
+      "nilai_terendah": "76.00",
+      "nilai_tertinggi": "92.00"
     }
   ]
 }

@@ -4,6 +4,7 @@ const {
   kelasMapelMilikGuru, kelasMapelDiikutiSiswa, berhakAtasPertemuan,
   siswaIdOf, sisaHari,
 } = require('../utils/akses');
+const { lengkapiMateri } = require('./materiController');
 
 // ---------------------------------------------------------------------
 // Pertemuan menjadi satuan alur pembelajaran. Di dalam satu pertemuan
@@ -55,8 +56,11 @@ exports.detail = asyncHandler(async (req, res) => {
     WHERE pt.id = ?`, [id]);
   if (!pt) return res.status(404).json({ message: 'Pertemuan tidak ditemukan' });
 
-  const [materi] = await pool.query(
+  const [materiRaw] = await pool.query(
     'SELECT * FROM materi WHERE id_pertemuan = ? ORDER BY id', [id]);
+  // Tautan YouTube diubah menjadi tautan sematan agar video dapat
+  // langsung ditonton pada halaman pertemuan.
+  const materi = materiRaw.map(lengkapiMateri);
 
   const [tugas] = await pool.query(`
     SELECT t.*,

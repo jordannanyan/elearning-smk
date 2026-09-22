@@ -19,17 +19,21 @@ const OUT = path.join(__dirname, '..', 'docs-bab4', 'data');
 
 const DESKRIPSI_TABEL = {
   users: 'Menyimpan data akun seluruh pengguna sistem (administrator, guru, dan siswa)',
-  kelas: 'Menyimpan data rombongan belajar (kelas) yang ada di sekolah',
+  periode: 'Menyimpan periode pembelajaran (tahun ajaran dan semester) beserta status penguncian',
+  kelas: 'Menyimpan data rombongan belajar pada sebuah periode pembelajaran',
   guru: 'Menyimpan data detail profil guru yang berelasi dengan tabel users',
-  siswa: 'Menyimpan data detail profil siswa beserta kelasnya',
-  mata_pelajaran: 'Menyimpan data mata pelajaran beserta guru pengampunya',
-  materi: 'Menyimpan data materi pembelajaran yang diunggah oleh guru',
+  siswa: 'Menyimpan data detail profil siswa yang berelasi dengan tabel users',
+  siswa_kelas: 'Menyimpan keanggotaan siswa pada sebuah kelas di setiap periode',
+  mata_pelajaran: 'Menyimpan katalog mata pelajaran sekolah',
+  kelas_mapel: 'Menyimpan pengampuan, yaitu mata pelajaran pada sebuah kelas beserta guru pengampunya',
+  pertemuan: 'Menyimpan urutan pertemuan pembelajaran pada sebuah kelas mata pelajaran',
+  materi: 'Menyimpan materi pembelajaran (teks, berkas, video, atau tautan) pada sebuah pertemuan',
   tugas: 'Menyimpan data tugas dan kuis beserta tipe dan batas waktunya',
   soal: 'Menyimpan butir soal pilihan ganda maupun esai pada sebuah kuis',
   pengumpulan_tugas: 'Menyimpan data pengumpulan jawaban tugas oleh siswa',
   jawaban_siswa: 'Menyimpan jawaban siswa pada setiap butir soal kuis',
   nilai: 'Menyimpan data nilai siswa hasil penilaian guru maupun koreksi otomatis',
-  forum_diskusi: 'Menyimpan data topik dan balasan pada forum diskusi',
+  forum_diskusi: 'Menyimpan topik dan balasan forum diskusi pada sebuah pertemuan',
 };
 
 const KETERANGAN_KOLOM = {
@@ -51,6 +55,21 @@ const KETERANGAN_KOLOM = {
   id_kumpul: 'Kunci tamu ke tabel pengumpulan_tugas',
   id_pengumpulan: 'Kunci tamu ke tabel pengumpulan_tugas',
   id_parent: 'Kunci tamu ke pesan induk pada forum diskusi',
+  id_periode: 'Kunci tamu ke tabel periode',
+  id_kelas_mapel: 'Kunci tamu ke tabel kelas_mapel',
+  id_pertemuan: 'Kunci tamu ke tabel pertemuan',
+  kode: 'Kode periode (contoh 2026/1) atau kode mata pelajaran',
+  semester: 'Semester pembelajaran (1 = ganjil, 2 = genap)',
+  status: 'Status periode: draft, aktif, atau terkunci',
+  dikunci_oleh: 'Administrator yang mengunci periode pembelajaran',
+  tgl_dikunci: 'Waktu periode dikunci oleh administrator',
+  tgl_mulai: 'Tanggal mulai periode pembelajaran',
+  tgl_selesai: 'Tanggal berakhir periode pembelajaran',
+  wali_kelas: 'Nama wali kelas',
+  kelompok: 'Kelompok mata pelajaran (wajib, peminatan, muatan lokal)',
+  nomor: 'Nomor urut pertemuan',
+  tanggal: 'Tanggal pelaksanaan pertemuan',
+  url: 'Tautan video atau sumber belajar daring',
   nip: 'Nomor Induk Pegawai guru',
   nis: 'Nomor Induk Siswa',
   mapel: 'Mata pelajaran yang diampu guru',
@@ -123,36 +142,54 @@ async function main() {
 
   // Rekapitulasi nilai seluruh siswa sebagai bukti keberjalanan modul penilaian
   const [rekap] = await conn.query(`
-    SELECT u.nama AS siswa, k.nama_kelas AS kelas, t.judul AS tugas, t.tipe,
-           mp.nama AS mapel, n.skor, p.terlambat
+    SELECT u.nama AS siswa, k.nama_kelas AS kelas, per.kode AS periode,
+           mp.nama AS mapel, pt.nomor AS pertemuan, t.judul AS tugas, t.tipe,
+           n.skor, p.terlambat
     FROM pengumpulan_tugas p
     JOIN siswa s ON s.id = p.id_siswa
     JOIN users u ON u.id = s.id_user
-    LEFT JOIN kelas k ON k.id = s.id_kelas
     JOIN tugas t ON t.id = p.id_tugas
-    JOIN mata_pelajaran mp ON mp.id = t.id_mapel
+    JOIN pertemuan pt ON pt.id = t.id_pertemuan
+    JOIN kelas_mapel km ON km.id = pt.id_kelas_mapel
+    JOIN mata_pelajaran mp ON mp.id = km.id_mapel
+    JOIN kelas k ON k.id = km.id_kelas
+    JOIN periode per ON per.id = k.id_periode
     LEFT JOIN nilai n ON n.id_kumpul = p.id
-    ORDER BY u.nama, t.judul
+    ORDER BY per.kode DESC, u.nama, mp.nama, pt.nomor
   `);
 
   const [ringkas] = await conn.query(`
-    SELECT t.judul AS tugas, t.tipe, mp.nama AS mapel,
+    SELECT per.kode AS periode, mp.nama AS mapel, k.nama_kelas AS kelas,
+           pt.nomor AS pertemuan, t.judul AS tugas, t.tipe,
            COUNT(p.id) AS jumlah_kumpul,
            SUM(CASE WHEN n.skor IS NOT NULL THEN 1 ELSE 0 END) AS sudah_dinilai,
            ROUND(AVG(n.skor), 2) AS rata_rata,
            MIN(n.skor) AS nilai_terendah, MAX(n.skor) AS nilai_tertinggi
     FROM tugas t
-    JOIN mata_pelajaran mp ON mp.id = t.id_mapel
+    JOIN pertemuan pt ON pt.id = t.id_pertemuan
+    JOIN kelas_mapel km ON km.id = pt.id_kelas_mapel
+    JOIN mata_pelajaran mp ON mp.id = km.id_mapel
+    JOIN kelas k ON k.id = km.id_kelas
+    JOIN periode per ON per.id = k.id_periode
     LEFT JOIN pengumpulan_tugas p ON p.id_tugas = t.id
     LEFT JOIN nilai n ON n.id_kumpul = p.id
-    GROUP BY t.id ORDER BY mp.nama, t.judul
+    GROUP BY t.id ORDER BY per.kode DESC, mp.nama, k.nama_kelas, pt.nomor
   `);
+
+  // Daftar periode pembelajaran beserta status penguncian
+  const [periode] = await conn.query(`
+    SELECT p.kode, p.tahun_ajaran, p.semester, p.status, p.tgl_mulai, p.tgl_selesai,
+           u.nama AS dikunci_oleh, p.tgl_dikunci,
+           (SELECT COUNT(*) FROM kelas k WHERE k.id_periode = p.id) AS jumlah_kelas
+    FROM periode p LEFT JOIN users u ON u.id = p.dikunci_oleh
+    ORDER BY p.kode DESC`);
 
   fs.mkdirSync(OUT, { recursive: true });
   fs.writeFileSync(path.join(OUT, 'struktur-basisdata.json'),
     JSON.stringify(struktur, null, 2), 'utf8');
   fs.writeFileSync(path.join(OUT, 'statistik-sistem.json'),
-    JSON.stringify({ statistik, rekap_nilai: rekap, ringkasan_tugas: ringkas }, null, 2), 'utf8');
+    JSON.stringify({ statistik, periode, rekap_nilai: rekap, ringkasan_tugas: ringkas },
+      null, 2), 'utf8');
 
   console.log(`[OK] ${struktur.length} tabel didokumentasikan`);
   console.log(`[OK] ${rekap.length} baris rekap nilai, ${ringkas.length} baris ringkasan tugas`);

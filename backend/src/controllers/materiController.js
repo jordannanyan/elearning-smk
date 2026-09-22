@@ -134,3 +134,5 @@ exports.remove = asyncHandler(async (req, res) => {
 });
 
 exports.berhakAtasPertemuan = berhakAtasPertemuan;
+exports.embedYoutube = embedYoutube;
+exports.lengkapiMateri = lengkapi;

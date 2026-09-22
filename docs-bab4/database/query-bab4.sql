@@ -13,13 +13,16 @@ USE `elearning_smakk`;
 -- ---------------------------------------------------------------------------
 -- QUERY 1
 -- Daftar tabel basis data beserta jumlah datanya
--- (dasar penyusunan tabel "Daftar Tabel pada Basis Data Sistem E-Learning")
 -- ---------------------------------------------------------------------------
 SELECT 'users'             AS nama_tabel, COUNT(*) AS jumlah_data FROM users
+UNION ALL SELECT 'periode',           COUNT(*) FROM periode
 UNION ALL SELECT 'kelas',             COUNT(*) FROM kelas
 UNION ALL SELECT 'guru',              COUNT(*) FROM guru
 UNION ALL SELECT 'siswa',             COUNT(*) FROM siswa
+UNION ALL SELECT 'siswa_kelas',       COUNT(*) FROM siswa_kelas
 UNION ALL SELECT 'mata_pelajaran',    COUNT(*) FROM mata_pelajaran
+UNION ALL SELECT 'kelas_mapel',       COUNT(*) FROM kelas_mapel
+UNION ALL SELECT 'pertemuan',         COUNT(*) FROM pertemuan
 UNION ALL SELECT 'materi',            COUNT(*) FROM materi
 UNION ALL SELECT 'tugas',             COUNT(*) FROM tugas
 UNION ALL SELECT 'soal',              COUNT(*) FROM soal
@@ -31,231 +34,255 @@ UNION ALL SELECT 'forum_diskusi',     COUNT(*) FROM forum_diskusi;
 
 -- ---------------------------------------------------------------------------
 -- QUERY 2
--- Struktur kolom sebuah tabel
--- (dasar penyusunan tabel "Struktur Tabel ...", ganti nama tabelnya)
+-- Struktur kolom sebuah tabel (ganti nama tabelnya sesuai kebutuhan)
 -- ---------------------------------------------------------------------------
-SHOW FULL COLUMNS FROM `users`;
+SHOW FULL COLUMNS FROM `periode`;
 
 
 -- ---------------------------------------------------------------------------
 -- QUERY 3
--- Data guru beserta mata pelajaran yang diampu
+-- Periode pembelajaran beserta status penguncian
 -- ---------------------------------------------------------------------------
-SELECT g.id       AS id_guru,
-       u.nama     AS nama_guru,
-       g.nip      AS nip,
-       u.email    AS email,
-       g.mapel    AS mata_pelajaran,
-       CASE WHEN u.aktif = 1 THEN 'Aktif' ELSE 'Nonaktif' END AS status
-FROM guru g
-JOIN users u ON u.id = g.id_user
-ORDER BY u.nama;
+SELECT p.kode, p.tahun_ajaran,
+       CASE p.semester WHEN 1 THEN 'Ganjil' ELSE 'Genap' END AS semester,
+       p.tgl_mulai, p.tgl_selesai, p.status,
+       IFNULL(u.nama, '-')                     AS dikunci_oleh,
+       IFNULL(CAST(p.tgl_dikunci AS CHAR), '-') AS waktu_dikunci,
+       (SELECT COUNT(*) FROM kelas k WHERE k.id_periode = p.id) AS jumlah_kelas
+FROM periode p
+LEFT JOIN users u ON u.id = p.dikunci_oleh
+ORDER BY p.kode DESC;
 
 
 -- ---------------------------------------------------------------------------
 -- QUERY 4
--- Data siswa beserta kelasnya
+-- Data guru beserta jumlah kelas mata pelajaran yang diampu
 -- ---------------------------------------------------------------------------
-SELECT s.id        AS id_siswa,
-       u.nama      AS nama_siswa,
-       s.nis       AS nis,
-       u.email     AS email,
-       k.nama_kelas AS kelas,
-       k.tahun_ajaran
-FROM siswa s
-JOIN users u ON u.id = s.id_user
-LEFT JOIN kelas k ON k.id = s.id_kelas
-ORDER BY k.nama_kelas, u.nama;
+SELECT g.id AS id_guru, u.nama AS nama_guru, g.nip, u.email,
+       CASE WHEN u.aktif = 1 THEN 'Aktif' ELSE 'Nonaktif' END AS status_akun,
+       (SELECT COUNT(*) FROM kelas_mapel km WHERE km.id_guru = g.id) AS jumlah_pengampuan
+FROM guru g JOIN users u ON u.id = g.id_user
+ORDER BY u.nama;
 
 
 -- ---------------------------------------------------------------------------
 -- QUERY 5
--- Data kelas beserta jumlah siswanya
+-- Data siswa beserta kelasnya pada periode aktif
 -- ---------------------------------------------------------------------------
-SELECT k.nama_kelas, k.tingkat, k.tahun_ajaran,
-       COUNT(s.id) AS jumlah_siswa
-FROM kelas k
-LEFT JOIN siswa s ON s.id_kelas = k.id
-GROUP BY k.id
-ORDER BY k.tingkat, k.nama_kelas;
+SELECT s.id AS id_siswa, u.nama AS nama_siswa, s.nis, u.email,
+       IFNULL(k.nama_kelas, 'Belum ditempatkan') AS kelas,
+       IFNULL(p.kode, '-') AS periode,
+       CASE WHEN u.aktif = 1 THEN 'Aktif' ELSE 'Nonaktif' END AS status_akun
+FROM siswa s
+JOIN users u ON u.id = s.id_user
+LEFT JOIN siswa_kelas sk ON sk.id_siswa = s.id
+LEFT JOIN kelas k  ON k.id = sk.id_kelas
+LEFT JOIN periode p ON p.id = k.id_periode AND p.status = 'aktif'
+WHERE p.id IS NOT NULL OR sk.id IS NULL
+ORDER BY k.nama_kelas, u.nama;
 
 
 -- ---------------------------------------------------------------------------
 -- QUERY 6
--- Data mata pelajaran beserta guru pengampu dan jumlah materi/tugasnya
+-- Riwayat kelas siswa lintas periode pembelajaran
 -- ---------------------------------------------------------------------------
-SELECT mp.nama  AS mata_pelajaran,
-       mp.kode  AS kode,
-       u.nama   AS guru_pengampu,
-       (SELECT COUNT(*) FROM materi m WHERE m.id_mapel = mp.id) AS jumlah_materi,
-       (SELECT COUNT(*) FROM tugas t WHERE t.id_mapel = mp.id)  AS jumlah_tugas
-FROM mata_pelajaran mp
-LEFT JOIN guru g  ON g.id = mp.id_guru
-LEFT JOIN users u ON u.id = g.id_user
-ORDER BY mp.nama;
+SELECT u.nama AS nama_siswa, p.kode AS periode, p.tahun_ajaran,
+       CASE p.semester WHEN 1 THEN 'Ganjil' ELSE 'Genap' END AS semester,
+       k.nama_kelas, k.tingkat, p.status AS status_periode
+FROM siswa_kelas sk
+JOIN siswa s ON s.id = sk.id_siswa
+JOIN users u ON u.id = s.id_user
+JOIN kelas k ON k.id = sk.id_kelas
+JOIN periode p ON p.id = k.id_periode
+ORDER BY u.nama, p.kode;
 
 
 -- ---------------------------------------------------------------------------
 -- QUERY 7
--- Data materi pembelajaran
+-- Katalog mata pelajaran beserta jumlah kelas dan guru yang mengampunya
 -- ---------------------------------------------------------------------------
-SELECT m.judul       AS judul_materi,
-       mp.nama       AS mata_pelajaran,
-       u.nama        AS guru_pengampu,
-       IFNULL(m.file, '-') AS file_lampiran,
-       DATE(m.tgl_upload)  AS tanggal_unggah
-FROM materi m
-JOIN mata_pelajaran mp ON mp.id = m.id_mapel
-LEFT JOIN guru g  ON g.id = mp.id_guru
-LEFT JOIN users u ON u.id = g.id_user
-ORDER BY mp.nama, m.id;
+SELECT mp.nama AS mata_pelajaran, mp.kode, mp.kelompok,
+       (SELECT COUNT(*) FROM kelas_mapel km WHERE km.id_mapel = mp.id) AS diampu_di_kelas,
+       (SELECT COUNT(DISTINCT km.id_guru) FROM kelas_mapel km WHERE km.id_mapel = mp.id) AS jumlah_guru,
+       CASE WHEN mp.aktif = 1 THEN 'Aktif' ELSE 'Nonaktif' END AS status
+FROM mata_pelajaran mp
+ORDER BY mp.kelompok, mp.nama;
 
 
 -- ---------------------------------------------------------------------------
 -- QUERY 8
--- Data tugas dan kuis beserta jumlah soal dan jumlah pengumpulannya
+-- Pembuktian satu mata pelajaran diampu guru berbeda pada kelas berbeda
 -- ---------------------------------------------------------------------------
-SELECT t.judul   AS judul_tugas,
-       mp.nama   AS mata_pelajaran,
-       t.tipe    AS tipe,
-       t.deadline,
-       (SELECT COUNT(*) FROM soal s WHERE s.id_tugas = t.id) AS jumlah_soal,
-       (SELECT COUNT(*) FROM pengumpulan_tugas p WHERE p.id_tugas = t.id) AS jumlah_kumpul
-FROM tugas t
-JOIN mata_pelajaran mp ON mp.id = t.id_mapel
-ORDER BY mp.nama, t.judul;
+SELECT mp.nama AS mata_pelajaran, k.tingkat, k.nama_kelas,
+       IFNULL(u.nama, 'Belum ditentukan') AS guru_pengampu, p.kode AS periode
+FROM kelas_mapel km
+JOIN mata_pelajaran mp ON mp.id = km.id_mapel
+JOIN kelas k  ON k.id = km.id_kelas
+JOIN periode p ON p.id = k.id_periode
+LEFT JOIN guru g  ON g.id = km.id_guru
+LEFT JOIN users u ON u.id = g.id_user
+WHERE mp.kode = 'BIND'
+ORDER BY p.kode DESC, k.tingkat, k.nama_kelas;
 
 
 -- ---------------------------------------------------------------------------
 -- QUERY 9
--- Butir soal beserta kunci jawaban dan bobotnya
+-- Susunan pertemuan beserta isinya pada setiap kelas mata pelajaran
 -- ---------------------------------------------------------------------------
-SELECT t.judul        AS kuis,
-       s.urutan       AS no_soal,
-       s.tipe         AS tipe_soal,
-       s.pertanyaan,
-       IFNULL(s.jawaban_benar, '-') AS kunci_jawaban,
-       s.bobot
-FROM soal s
-JOIN tugas t ON t.id = s.id_tugas
-ORDER BY t.judul, s.urutan;
+SELECT p.kode AS periode, mp.nama AS mata_pelajaran, k.nama_kelas,
+       IFNULL(u.nama, '-') AS guru_pengampu,
+       pt.nomor AS pertemuan, pt.judul AS judul_pertemuan, pt.tanggal,
+       (SELECT COUNT(*) FROM materi m WHERE m.id_pertemuan = pt.id)        AS jumlah_materi,
+       (SELECT COUNT(*) FROM tugas t WHERE t.id_pertemuan = pt.id)         AS jumlah_tugas,
+       (SELECT COUNT(*) FROM forum_diskusi f WHERE f.id_pertemuan = pt.id) AS jumlah_diskusi
+FROM pertemuan pt
+JOIN kelas_mapel km ON km.id = pt.id_kelas_mapel
+JOIN mata_pelajaran mp ON mp.id = km.id_mapel
+JOIN kelas k  ON k.id = km.id_kelas
+JOIN periode p ON p.id = k.id_periode
+LEFT JOIN guru g  ON g.id = km.id_guru
+LEFT JOIN users u ON u.id = g.id_user
+ORDER BY p.kode DESC, mp.nama, k.nama_kelas, pt.nomor;
 
 
 -- ---------------------------------------------------------------------------
 -- QUERY 10
--- Rekapitulasi pengerjaan tugas dan kuis
--- (dasar penyusunan tabel "Rekapitulasi Pengerjaan Tugas dan Kuis")
+-- Jenis materi pembelajaran yang digunakan (teks, berkas, video, tautan)
 -- ---------------------------------------------------------------------------
-SELECT t.judul   AS tugas_kuis,
-       mp.nama   AS mata_pelajaran,
-       t.tipe,
-       COUNT(p.id) AS terkumpul,
-       SUM(CASE WHEN n.skor IS NOT NULL THEN 1 ELSE 0 END) AS sudah_dinilai,
-       ROUND(AVG(n.skor), 2) AS rata_rata,
-       MIN(n.skor) AS nilai_terendah,
-       MAX(n.skor) AS nilai_tertinggi
-FROM tugas t
-JOIN mata_pelajaran mp ON mp.id = t.id_mapel
-LEFT JOIN pengumpulan_tugas p ON p.id_tugas = t.id
-LEFT JOIN nilai n ON n.id_kumpul = p.id
-GROUP BY t.id
-ORDER BY mp.nama, t.judul;
+SELECT m.tipe AS jenis_materi, COUNT(*) AS jumlah,
+       GROUP_CONCAT(DISTINCT mp.nama ORDER BY mp.nama SEPARATOR ', ') AS pada_mata_pelajaran
+FROM materi m
+JOIN pertemuan pt ON pt.id = m.id_pertemuan
+JOIN kelas_mapel km ON km.id = pt.id_kelas_mapel
+JOIN mata_pelajaran mp ON mp.id = km.id_mapel
+GROUP BY m.tipe;
 
 
 -- ---------------------------------------------------------------------------
 -- QUERY 11
--- Rincian nilai setiap siswa
--- (dasar penyusunan tabel "Rincian Nilai Siswa")
+-- Rekapitulasi pengerjaan tugas dan kuis
 -- ---------------------------------------------------------------------------
-SELECT u.nama       AS nama_siswa,
-       k.nama_kelas AS kelas,
-       t.judul      AS tugas_kuis,
-       mp.nama      AS mata_pelajaran,
-       t.tipe,
-       IFNULL(CAST(n.skor AS CHAR), 'Belum dinilai') AS nilai,
-       CASE WHEN p.terlambat = 1 THEN 'Terlambat' ELSE 'Tepat waktu' END AS keterangan,
-       IFNULL(n.catatan, '-') AS catatan_guru
-FROM pengumpulan_tugas p
-JOIN siswa s  ON s.id = p.id_siswa
-JOIN users u  ON u.id = s.id_user
-LEFT JOIN kelas k ON k.id = s.id_kelas
-JOIN tugas t  ON t.id = p.id_tugas
-JOIN mata_pelajaran mp ON mp.id = t.id_mapel
-LEFT JOIN nilai n ON n.id_kumpul = p.id
-ORDER BY u.nama, t.judul;
+SELECT per.kode AS periode, mp.nama AS mata_pelajaran, k.nama_kelas,
+       pt.nomor AS pertemuan, t.judul AS tugas_kuis, t.tipe,
+       COUNT(pg.id) AS terkumpul,
+       SUM(CASE WHEN n.skor IS NOT NULL THEN 1 ELSE 0 END) AS sudah_dinilai,
+       ROUND(AVG(n.skor), 2) AS rata_rata,
+       MIN(n.skor) AS nilai_terendah, MAX(n.skor) AS nilai_tertinggi
+FROM tugas t
+JOIN pertemuan pt ON pt.id = t.id_pertemuan
+JOIN kelas_mapel km ON km.id = pt.id_kelas_mapel
+JOIN mata_pelajaran mp ON mp.id = km.id_mapel
+JOIN kelas k  ON k.id = km.id_kelas
+JOIN periode per ON per.id = k.id_periode
+LEFT JOIN pengumpulan_tugas pg ON pg.id_tugas = t.id
+LEFT JOIN nilai n ON n.id_kumpul = pg.id
+GROUP BY t.id
+ORDER BY per.kode DESC, mp.nama, pt.nomor;
 
 
 -- ---------------------------------------------------------------------------
 -- QUERY 12
--- Bukti koreksi otomatis kuis pilihan ganda oleh sistem
--- (memperlihatkan jawaban siswa, kunci jawaban, dan skor tiap butir soal)
+-- Rekap nilai siswa per mata pelajaran pada satu periode
 -- ---------------------------------------------------------------------------
-SELECT u.nama          AS nama_siswa,
-       t.judul         AS kuis,
-       so.urutan       AS no_soal,
-       so.tipe         AS tipe_soal,
-       IFNULL(j.pilihan, '-')       AS jawaban_siswa,
+SELECT u.nama AS nama_siswa, per.kode AS periode, k.nama_kelas,
+       mp.nama AS mata_pelajaran,
+       COUNT(t.id) AS jumlah_tugas,
+       SUM(CASE WHEN n.skor IS NOT NULL THEN 1 ELSE 0 END) AS sudah_dinilai,
+       SUM(CASE WHEN pg.id IS NULL AND t.deadline < NOW() THEN 1 ELSE 0 END) AS tidak_dikumpulkan,
+       ROUND(AVG(n.skor), 2) AS rata_rata_mapel
+FROM siswa_kelas sk
+JOIN siswa s ON s.id = sk.id_siswa
+JOIN users u ON u.id = s.id_user
+JOIN kelas k  ON k.id = sk.id_kelas
+JOIN periode per ON per.id = k.id_periode
+JOIN kelas_mapel km ON km.id_kelas = k.id
+JOIN mata_pelajaran mp ON mp.id = km.id_mapel
+JOIN pertemuan pt ON pt.id_kelas_mapel = km.id
+JOIN tugas t ON t.id_pertemuan = pt.id
+LEFT JOIN pengumpulan_tugas pg ON pg.id_tugas = t.id AND pg.id_siswa = s.id
+LEFT JOIN nilai n ON n.id_kumpul = pg.id
+GROUP BY s.id, km.id
+ORDER BY u.nama, mp.nama;
+
+
+-- ---------------------------------------------------------------------------
+-- QUERY 13
+-- Bukti koreksi otomatis kuis pilihan ganda oleh sistem
+-- ---------------------------------------------------------------------------
+SELECT u.nama AS nama_siswa, t.judul AS kuis, so.urutan AS no_soal, so.tipe AS tipe_soal,
+       IFNULL(j.pilihan, '-')        AS jawaban_siswa,
        IFNULL(so.jawaban_benar, '-') AS kunci_jawaban,
        CASE WHEN so.tipe = 'esai' THEN 'Dinilai guru'
             WHEN j.benar = 1 THEN 'Benar' ELSE 'Salah' END AS hasil_koreksi,
-       j.skor          AS skor_butir,
-       so.bobot        AS bobot_butir
+       j.skor AS skor_butir, so.bobot AS bobot_butir
 FROM jawaban_siswa j
-JOIN pengumpulan_tugas p ON p.id = j.id_pengumpulan
-JOIN siswa s  ON s.id = p.id_siswa
-JOIN users u  ON u.id = s.id_user
-JOIN soal so  ON so.id = j.id_soal
-JOIN tugas t  ON t.id = so.id_tugas
+JOIN pengumpulan_tugas pg ON pg.id = j.id_pengumpulan
+JOIN siswa s ON s.id = pg.id_siswa
+JOIN users u ON u.id = s.id_user
+JOIN soal so ON so.id = j.id_soal
+JOIN tugas t ON t.id = so.id_tugas
 WHERE t.judul = 'Kuis Persamaan dan Pertidaksamaan Linear'
 ORDER BY u.nama, so.urutan;
 
 
 -- ---------------------------------------------------------------------------
--- QUERY 13
+-- QUERY 14
 -- Pembuktian perhitungan nilai akhir kuis (normalisasi total bobot ke 100)
 -- ---------------------------------------------------------------------------
-SELECT u.nama         AS nama_siswa,
-       t.judul        AS kuis,
-       SUM(j.skor)    AS total_skor_diperoleh,
-       SUM(so.bobot)  AS total_bobot_soal,
+SELECT u.nama AS nama_siswa, t.judul AS kuis,
+       SUM(j.skor)   AS total_skor_diperoleh,
+       SUM(so.bobot) AS total_bobot_soal,
        ROUND(SUM(j.skor) / SUM(so.bobot) * 100, 2) AS nilai_akhir_hitung,
-       n.skor         AS nilai_akhir_sistem
+       n.skor AS nilai_akhir_sistem
 FROM jawaban_siswa j
-JOIN pengumpulan_tugas p ON p.id = j.id_pengumpulan
-JOIN siswa s  ON s.id = p.id_siswa
-JOIN users u  ON u.id = s.id_user
-JOIN soal so  ON so.id = j.id_soal
-JOIN tugas t  ON t.id = so.id_tugas
-LEFT JOIN nilai n ON n.id_kumpul = p.id
-GROUP BY p.id
+JOIN pengumpulan_tugas pg ON pg.id = j.id_pengumpulan
+JOIN siswa s ON s.id = pg.id_siswa
+JOIN users u ON u.id = s.id_user
+JOIN soal so ON so.id = j.id_soal
+JOIN tugas t ON t.id = so.id_tugas
+LEFT JOIN nilai n ON n.id_kumpul = pg.id
+GROUP BY pg.id
 HAVING nilai_akhir_sistem IS NOT NULL
 ORDER BY t.judul, u.nama;
 
 
 -- ---------------------------------------------------------------------------
--- QUERY 14
--- Data forum diskusi beserta jumlah balasan tiap topik
+-- QUERY 15
+-- Forum diskusi yang menyatu di dalam pertemuan pembelajaran
 -- ---------------------------------------------------------------------------
-SELECT mp.nama    AS mata_pelajaran,
-       f.judul    AS judul_topik,
-       u.nama     AS penulis,
-       u.role     AS peran,
+SELECT mp.nama AS mata_pelajaran, k.nama_kelas, pt.nomor AS pertemuan,
+       f.judul AS judul_topik, u.nama AS pembuka_topik, u.role AS peran,
        (SELECT COUNT(*) FROM forum_diskusi b WHERE b.id_parent = f.id) AS jumlah_balasan,
-       f.tgl_post AS waktu_kirim
+       f.tgl_post
 FROM forum_diskusi f
 JOIN users u ON u.id = f.id_user
-JOIN mata_pelajaran mp ON mp.id = f.id_mapel
+JOIN pertemuan pt ON pt.id = f.id_pertemuan
+JOIN kelas_mapel km ON km.id = pt.id_kelas_mapel
+JOIN mata_pelajaran mp ON mp.id = km.id_mapel
+JOIN kelas k ON k.id = km.id_kelas
 WHERE f.id_parent IS NULL
-ORDER BY mp.nama, f.tgl_post;
+ORDER BY mp.nama, pt.nomor;
 
 
 -- ---------------------------------------------------------------------------
--- QUERY 15
--- Statistik dashboard administrator
+-- QUERY 16
+-- Statistik dashboard administrator pada periode aktif
 -- ---------------------------------------------------------------------------
-SELECT (SELECT COUNT(*) FROM users WHERE role = 'guru')  AS total_guru,
-       (SELECT COUNT(*) FROM users WHERE role = 'siswa') AS total_siswa,
-       (SELECT COUNT(*) FROM kelas)                      AS total_kelas,
-       (SELECT COUNT(*) FROM mata_pelajaran)             AS total_mata_pelajaran,
-       (SELECT COUNT(*) FROM materi)                     AS total_materi,
-       (SELECT COUNT(*) FROM tugas)                      AS total_tugas;
+SELECT
+  (SELECT kode FROM periode WHERE status = 'aktif')                      AS periode_aktif,
+  (SELECT COUNT(*) FROM users WHERE role = 'guru'  AND aktif = 1)        AS guru_aktif,
+  (SELECT COUNT(*) FROM users WHERE role = 'siswa' AND aktif = 1)        AS siswa_aktif,
+  (SELECT COUNT(*) FROM kelas k JOIN periode p ON p.id = k.id_periode
+     WHERE p.status = 'aktif')                                           AS kelas,
+  (SELECT COUNT(*) FROM mata_pelajaran WHERE aktif = 1)                  AS mata_pelajaran,
+  (SELECT COUNT(*) FROM kelas_mapel km JOIN kelas k ON k.id = km.id_kelas
+     JOIN periode p ON p.id = k.id_periode WHERE p.status = 'aktif')     AS pengampuan,
+  (SELECT COUNT(*) FROM pertemuan pt JOIN kelas_mapel km ON km.id = pt.id_kelas_mapel
+     JOIN kelas k ON k.id = km.id_kelas JOIN periode p ON p.id = k.id_periode
+     WHERE p.status = 'aktif')                                           AS pertemuan,
+  (SELECT COUNT(*) FROM materi m JOIN pertemuan pt ON pt.id = m.id_pertemuan
+     JOIN kelas_mapel km ON km.id = pt.id_kelas_mapel JOIN kelas k ON k.id = km.id_kelas
+     JOIN periode p ON p.id = k.id_periode WHERE p.status = 'aktif')     AS materi,
+  (SELECT COUNT(*) FROM tugas t JOIN pertemuan pt ON pt.id = t.id_pertemuan
+     JOIN kelas_mapel km ON km.id = pt.id_kelas_mapel JOIN kelas k ON k.id = km.id_kelas
+     JOIN periode p ON p.id = k.id_periode WHERE p.status = 'aktif')     AS tugas;

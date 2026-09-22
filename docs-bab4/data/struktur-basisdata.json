@@ -2,7 +2,7 @@
   {
     "tabel": "users",
     "deskripsi": "Menyimpan data akun seluruh pengguna sistem (administrator, guru, dan siswa)",
-    "jumlah_record": 18,
+    "jumlah_record": 23,
     "kolom": [
       {
         "nama": "id",
@@ -63,9 +63,9 @@
     ]
   },
   {
-    "tabel": "kelas",
-    "deskripsi": "Menyimpan data rombongan belajar (kelas) yang ada di sekolah",
-    "jumlah_record": 3,
+    "tabel": "periode",
+    "deskripsi": "Menyimpan periode pembelajaran (tahun ajaran dan semester) beserta status penguncian",
+    "jumlah_record": 2,
     "kolom": [
       {
         "nama": "id",
@@ -73,6 +73,90 @@
         "null": "Tidak",
         "kunci": "Primary Key",
         "keterangan": "Kunci utama (primary key)"
+      },
+      {
+        "nama": "kode",
+        "tipe": "varchar(20)",
+        "null": "Tidak",
+        "kunci": "Unique",
+        "keterangan": "Kode mata pelajaran"
+      },
+      {
+        "nama": "tahun_ajaran",
+        "tipe": "varchar(20)",
+        "null": "Tidak",
+        "kunci": "-",
+        "keterangan": "Tahun ajaran berjalan"
+      },
+      {
+        "nama": "semester",
+        "tipe": "tinyint(4)",
+        "null": "Tidak",
+        "kunci": "-",
+        "keterangan": "Semester pembelajaran (1 = ganjil, 2 = genap)"
+      },
+      {
+        "nama": "tgl_mulai",
+        "tipe": "date",
+        "null": "Ya",
+        "kunci": "-",
+        "keterangan": "Tanggal mulai periode pembelajaran"
+      },
+      {
+        "nama": "tgl_selesai",
+        "tipe": "date",
+        "null": "Ya",
+        "kunci": "-",
+        "keterangan": "Tanggal berakhir periode pembelajaran"
+      },
+      {
+        "nama": "status",
+        "tipe": "enum('draft','aktif','terkunci')",
+        "null": "Tidak",
+        "kunci": "-",
+        "keterangan": "Status periode: draft, aktif, atau terkunci"
+      },
+      {
+        "nama": "dikunci_oleh",
+        "tipe": "int(11)",
+        "null": "Ya",
+        "kunci": "Foreign Key",
+        "keterangan": "Administrator yang mengunci periode pembelajaran"
+      },
+      {
+        "nama": "tgl_dikunci",
+        "tipe": "datetime",
+        "null": "Ya",
+        "kunci": "-",
+        "keterangan": "Waktu periode dikunci oleh administrator"
+      },
+      {
+        "nama": "created_at",
+        "tipe": "timestamp",
+        "null": "Tidak",
+        "kunci": "-",
+        "keterangan": "Waktu pembuatan data"
+      }
+    ]
+  },
+  {
+    "tabel": "kelas",
+    "deskripsi": "Menyimpan data rombongan belajar pada sebuah periode pembelajaran",
+    "jumlah_record": 7,
+    "kolom": [
+      {
+        "nama": "id",
+        "tipe": "int(11)",
+        "null": "Tidak",
+        "kunci": "Primary Key",
+        "keterangan": "Kunci utama (primary key)"
+      },
+      {
+        "nama": "id_periode",
+        "tipe": "int(11)",
+        "null": "Tidak",
+        "kunci": "Foreign Key",
+        "keterangan": "Kunci tamu ke tabel periode"
       },
       {
         "nama": "nama_kelas",
@@ -89,18 +173,18 @@
         "keterangan": "Tingkat kelas (X, XI, XII)"
       },
       {
-        "nama": "tahun_ajaran",
-        "tipe": "varchar(20)",
-        "null": "Tidak",
+        "nama": "wali_kelas",
+        "tipe": "varchar(120)",
+        "null": "Ya",
         "kunci": "-",
-        "keterangan": "Tahun ajaran berjalan"
+        "keterangan": "Nama wali kelas"
       }
     ]
   },
   {
     "tabel": "guru",
     "deskripsi": "Menyimpan data detail profil guru yang berelasi dengan tabel users",
-    "jumlah_record": 4,
+    "jumlah_record": 6,
     "kolom": [
       {
         "nama": "id",
@@ -113,7 +197,7 @@
         "nama": "id_user",
         "tipe": "int(11)",
         "null": "Tidak",
-        "kunci": "Foreign Key",
+        "kunci": "Unique",
         "keterangan": "Kunci tamu ke tabel users"
       },
       {
@@ -122,13 +206,6 @@
         "null": "Ya",
         "kunci": "-",
         "keterangan": "Nomor Induk Pegawai guru"
-      },
-      {
-        "nama": "mapel",
-        "tipe": "varchar(100)",
-        "null": "Ya",
-        "kunci": "-",
-        "keterangan": "Mata pelajaran yang diampu guru"
       },
       {
         "nama": "tgl_lahir",
@@ -148,8 +225,8 @@
   },
   {
     "tabel": "siswa",
-    "deskripsi": "Menyimpan data detail profil siswa beserta kelasnya",
-    "jumlah_record": 13,
+    "deskripsi": "Menyimpan data detail profil siswa yang berelasi dengan tabel users",
+    "jumlah_record": 16,
     "kolom": [
       {
         "nama": "id",
@@ -162,15 +239,8 @@
         "nama": "id_user",
         "tipe": "int(11)",
         "null": "Tidak",
-        "kunci": "Foreign Key",
+        "kunci": "Unique",
         "keterangan": "Kunci tamu ke tabel users"
-      },
-      {
-        "nama": "id_kelas",
-        "tipe": "int(11)",
-        "null": "Ya",
-        "kunci": "Foreign Key",
-        "keterangan": "Kunci tamu ke tabel kelas"
       },
       {
         "nama": "nis",
@@ -196,9 +266,9 @@
     ]
   },
   {
-    "tabel": "mata_pelajaran",
-    "deskripsi": "Menyimpan data mata pelajaran beserta guru pengampunya",
-    "jumlah_record": 5,
+    "tabel": "siswa_kelas",
+    "deskripsi": "Menyimpan keanggotaan siswa pada sebuah kelas di setiap periode",
+    "jumlah_record": 19,
     "kolom": [
       {
         "nama": "id",
@@ -208,11 +278,32 @@
         "keterangan": "Kunci utama (primary key)"
       },
       {
-        "nama": "id_guru",
+        "nama": "id_siswa",
         "tipe": "int(11)",
-        "null": "Ya",
+        "null": "Tidak",
         "kunci": "Foreign Key",
-        "keterangan": "Kunci tamu ke tabel guru"
+        "keterangan": "Kunci tamu ke tabel siswa"
+      },
+      {
+        "nama": "id_kelas",
+        "tipe": "int(11)",
+        "null": "Tidak",
+        "kunci": "Foreign Key",
+        "keterangan": "Kunci tamu ke tabel kelas"
+      }
+    ]
+  },
+  {
+    "tabel": "mata_pelajaran",
+    "deskripsi": "Menyimpan katalog mata pelajaran sekolah",
+    "jumlah_record": 27,
+    "kolom": [
+      {
+        "nama": "id",
+        "tipe": "int(11)",
+        "null": "Tidak",
+        "kunci": "Primary Key",
+        "keterangan": "Kunci utama (primary key)"
       },
       {
         "nama": "nama",
@@ -225,8 +316,15 @@
         "nama": "kode",
         "tipe": "varchar(30)",
         "null": "Ya",
-        "kunci": "-",
+        "kunci": "Unique",
         "keterangan": "Kode mata pelajaran"
+      },
+      {
+        "nama": "kelompok",
+        "tipe": "varchar(60)",
+        "null": "Ya",
+        "kunci": "-",
+        "keterangan": "Kelompok mata pelajaran (wajib, peminatan, muatan lokal)"
       },
       {
         "nama": "deskripsi",
@@ -234,13 +332,20 @@
         "null": "Ya",
         "kunci": "-",
         "keterangan": "Uraian singkat"
+      },
+      {
+        "nama": "aktif",
+        "tipe": "tinyint(1)",
+        "null": "Tidak",
+        "kunci": "-",
+        "keterangan": "Status keaktifan akun pengguna"
       }
     ]
   },
   {
-    "tabel": "materi",
-    "deskripsi": "Menyimpan data materi pembelajaran yang diunggah oleh guru",
-    "jumlah_record": 8,
+    "tabel": "kelas_mapel",
+    "deskripsi": "Menyimpan pengampuan, yaitu mata pelajaran pada sebuah kelas beserta guru pengampunya",
+    "jumlah_record": 17,
     "kolom": [
       {
         "nama": "id",
@@ -250,11 +355,102 @@
         "keterangan": "Kunci utama (primary key)"
       },
       {
+        "nama": "id_kelas",
+        "tipe": "int(11)",
+        "null": "Tidak",
+        "kunci": "Foreign Key",
+        "keterangan": "Kunci tamu ke tabel kelas"
+      },
+      {
         "nama": "id_mapel",
         "tipe": "int(11)",
         "null": "Tidak",
         "kunci": "Foreign Key",
         "keterangan": "Kunci tamu ke tabel mata_pelajaran"
+      },
+      {
+        "nama": "id_guru",
+        "tipe": "int(11)",
+        "null": "Ya",
+        "kunci": "Foreign Key",
+        "keterangan": "Kunci tamu ke tabel guru"
+      }
+    ]
+  },
+  {
+    "tabel": "pertemuan",
+    "deskripsi": "Menyimpan urutan pertemuan pembelajaran pada sebuah kelas mata pelajaran",
+    "jumlah_record": 15,
+    "kolom": [
+      {
+        "nama": "id",
+        "tipe": "int(11)",
+        "null": "Tidak",
+        "kunci": "Primary Key",
+        "keterangan": "Kunci utama (primary key)"
+      },
+      {
+        "nama": "id_kelas_mapel",
+        "tipe": "int(11)",
+        "null": "Tidak",
+        "kunci": "Foreign Key",
+        "keterangan": "Kunci tamu ke tabel kelas_mapel"
+      },
+      {
+        "nama": "nomor",
+        "tipe": "int(11)",
+        "null": "Tidak",
+        "kunci": "-",
+        "keterangan": "Nomor urut pertemuan"
+      },
+      {
+        "nama": "judul",
+        "tipe": "varchar(200)",
+        "null": "Tidak",
+        "kunci": "-",
+        "keterangan": "Judul materi, tugas, atau topik diskusi"
+      },
+      {
+        "nama": "deskripsi",
+        "tipe": "text",
+        "null": "Ya",
+        "kunci": "-",
+        "keterangan": "Uraian singkat"
+      },
+      {
+        "nama": "tanggal",
+        "tipe": "date",
+        "null": "Ya",
+        "kunci": "-",
+        "keterangan": "Tanggal pelaksanaan pertemuan"
+      },
+      {
+        "nama": "created_at",
+        "tipe": "timestamp",
+        "null": "Tidak",
+        "kunci": "-",
+        "keterangan": "Waktu pembuatan data"
+      }
+    ]
+  },
+  {
+    "tabel": "materi",
+    "deskripsi": "Menyimpan materi pembelajaran (teks, berkas, video, atau tautan) pada sebuah pertemuan",
+    "jumlah_record": 21,
+    "kolom": [
+      {
+        "nama": "id",
+        "tipe": "int(11)",
+        "null": "Tidak",
+        "kunci": "Primary Key",
+        "keterangan": "Kunci utama (primary key)"
+      },
+      {
+        "nama": "id_pertemuan",
+        "tipe": "int(11)",
+        "null": "Tidak",
+        "kunci": "Foreign Key",
+        "keterangan": "Kunci tamu ke tabel pertemuan"
       },
       {
         "nama": "judul",
@@ -271,11 +467,25 @@
         "keterangan": "Isi atau uraian materi pembelajaran"
       },
       {
+        "nama": "tipe",
+        "tipe": "enum('teks','file','video','link')",
+        "null": "Tidak",
+        "kunci": "-",
+        "keterangan": "Jenis data (tugas/kuis atau pilihan ganda/esai)"
+      },
+      {
         "nama": "file",
         "tipe": "varchar(255)",
         "null": "Ya",
         "kunci": "-",
         "keterangan": "Nama berkas lampiran yang diunggah"
+      },
+      {
+        "nama": "url",
+        "tipe": "varchar(500)",
+        "null": "Ya",
+        "kunci": "-",
+        "keterangan": "Tautan video atau sumber belajar daring"
       },
       {
         "nama": "tgl_upload",
@@ -289,7 +499,7 @@
   {
     "tabel": "tugas",
     "deskripsi": "Menyimpan data tugas dan kuis beserta tipe dan batas waktunya",
-    "jumlah_record": 6,
+    "jumlah_record": 11,
     "kolom": [
       {
         "nama": "id",
@@ -299,11 +509,11 @@
         "keterangan": "Kunci utama (primary key)"
       },
       {
-        "nama": "id_mapel",
+        "nama": "id_pertemuan",
         "tipe": "int(11)",
         "null": "Tidak",
         "kunci": "Foreign Key",
-        "keterangan": "Kunci tamu ke tabel mata_pelajaran"
+        "keterangan": "Kunci tamu ke tabel pertemuan"
       },
       {
         "nama": "judul",
@@ -429,7 +639,7 @@
   {
     "tabel": "pengumpulan_tugas",
     "deskripsi": "Menyimpan data pengumpulan jawaban tugas oleh siswa",
-    "jumlah_record": 35,
+    "jumlah_record": 32,
     "kolom": [
       {
         "nama": "id",
@@ -485,7 +695,7 @@
   {
     "tabel": "jawaban_siswa",
     "deskripsi": "Menyimpan jawaban siswa pada setiap butir soal kuis",
-    "jumlah_record": 95,
+    "jumlah_record": 62,
     "kolom": [
       {
         "nama": "id",
@@ -541,7 +751,7 @@
   {
     "tabel": "nilai",
     "deskripsi": "Menyimpan data nilai siswa hasil penilaian guru maupun koreksi otomatis",
-    "jumlah_record": 28,
+    "jumlah_record": 26,
     "kolom": [
       {
         "nama": "id",
@@ -589,8 +799,8 @@
   },
   {
     "tabel": "forum_diskusi",
-    "deskripsi": "Menyimpan data topik dan balasan pada forum diskusi",
-    "jumlah_record": 14,
+    "deskripsi": "Menyimpan topik dan balasan forum diskusi pada sebuah pertemuan",
+    "jumlah_record": 8,
     "kolom": [
       {
         "nama": "id",
@@ -600,11 +810,11 @@
         "keterangan": "Kunci utama (primary key)"
       },
       {
-        "nama": "id_mapel",
+        "nama": "id_pertemuan",
         "tipe": "int(11)",
         "null": "Tidak",
         "kunci": "Foreign Key",
-        "keterangan": "Kunci tamu ke tabel mata_pelajaran"
+        "keterangan": "Kunci tamu ke tabel pertemuan"
       },
       {
         "nama": "id_user",
