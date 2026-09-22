@@ -1,0 +1,646 @@
+[
+  {
+    "tabel": "users",
+    "deskripsi": "Menyimpan data akun seluruh pengguna sistem (administrator, guru, dan siswa)",
+    "jumlah_record": 18,
+    "kolom": [
+      {
+        "nama": "id",
+        "tipe": "int(11)",
+        "null": "Tidak",
+        "kunci": "Primary Key",
+        "keterangan": "Kunci utama (primary key)"
+      },
+      {
+        "nama": "nama",
+        "tipe": "varchar(120)",
+        "null": "Tidak",
+        "kunci": "-",
+        "keterangan": "Nama pengguna"
+      },
+      {
+        "nama": "email",
+        "tipe": "varchar(120)",
+        "null": "Tidak",
+        "kunci": "Unique",
+        "keterangan": "Alamat surel yang digunakan untuk login"
+      },
+      {
+        "nama": "password",
+        "tipe": "varchar(255)",
+        "null": "Tidak",
+        "kunci": "-",
+        "keterangan": "Kata sandi yang telah dienkripsi menggunakan bcrypt"
+      },
+      {
+        "nama": "role",
+        "tipe": "enum('admin','guru','siswa')",
+        "null": "Tidak",
+        "kunci": "-",
+        "keterangan": "Level hak akses pengguna (admin, guru, siswa)"
+      },
+      {
+        "nama": "foto",
+        "tipe": "varchar(255)",
+        "null": "Ya",
+        "kunci": "-",
+        "keterangan": "Nama berkas foto profil pengguna"
+      },
+      {
+        "nama": "aktif",
+        "tipe": "tinyint(1)",
+        "null": "Tidak",
+        "kunci": "-",
+        "keterangan": "Status keaktifan akun pengguna"
+      },
+      {
+        "nama": "created_at",
+        "tipe": "timestamp",
+        "null": "Tidak",
+        "kunci": "-",
+        "keterangan": "Waktu pembuatan data"
+      }
+    ]
+  },
+  {
+    "tabel": "kelas",
+    "deskripsi": "Menyimpan data rombongan belajar (kelas) yang ada di sekolah",
+    "jumlah_record": 3,
+    "kolom": [
+      {
+        "nama": "id",
+        "tipe": "int(11)",
+        "null": "Tidak",
+        "kunci": "Primary Key",
+        "keterangan": "Kunci utama (primary key)"
+      },
+      {
+        "nama": "nama_kelas",
+        "tipe": "varchar(50)",
+        "null": "Tidak",
+        "kunci": "-",
+        "keterangan": "Nama rombongan belajar"
+      },
+      {
+        "nama": "tingkat",
+        "tipe": "varchar(10)",
+        "null": "Tidak",
+        "kunci": "-",
+        "keterangan": "Tingkat kelas (X, XI, XII)"
+      },
+      {
+        "nama": "tahun_ajaran",
+        "tipe": "varchar(20)",
+        "null": "Tidak",
+        "kunci": "-",
+        "keterangan": "Tahun ajaran berjalan"
+      }
+    ]
+  },
+  {
+    "tabel": "guru",
+    "deskripsi": "Menyimpan data detail profil guru yang berelasi dengan tabel users",
+    "jumlah_record": 4,
+    "kolom": [
+      {
+        "nama": "id",
+        "tipe": "int(11)",
+        "null": "Tidak",
+        "kunci": "Primary Key",
+        "keterangan": "Kunci utama (primary key)"
+      },
+      {
+        "nama": "id_user",
+        "tipe": "int(11)",
+        "null": "Tidak",
+        "kunci": "Foreign Key",
+        "keterangan": "Kunci tamu ke tabel users"
+      },
+      {
+        "nama": "nip",
+        "tipe": "varchar(30)",
+        "null": "Ya",
+        "kunci": "-",
+        "keterangan": "Nomor Induk Pegawai guru"
+      },
+      {
+        "nama": "mapel",
+        "tipe": "varchar(100)",
+        "null": "Ya",
+        "kunci": "-",
+        "keterangan": "Mata pelajaran yang diampu guru"
+      },
+      {
+        "nama": "tgl_lahir",
+        "tipe": "date",
+        "null": "Ya",
+        "kunci": "-",
+        "keterangan": "Tanggal lahir"
+      },
+      {
+        "nama": "alamat",
+        "tipe": "text",
+        "null": "Ya",
+        "kunci": "-",
+        "keterangan": "Alamat tempat tinggal"
+      }
+    ]
+  },
+  {
+    "tabel": "siswa",
+    "deskripsi": "Menyimpan data detail profil siswa beserta kelasnya",
+    "jumlah_record": 13,
+    "kolom": [
+      {
+        "nama": "id",
+        "tipe": "int(11)",
+        "null": "Tidak",
+        "kunci": "Primary Key",
+        "keterangan": "Kunci utama (primary key)"
+      },
+      {
+        "nama": "id_user",
+        "tipe": "int(11)",
+        "null": "Tidak",
+        "kunci": "Foreign Key",
+        "keterangan": "Kunci tamu ke tabel users"
+      },
+      {
+        "nama": "id_kelas",
+        "tipe": "int(11)",
+        "null": "Ya",
+        "kunci": "Foreign Key",
+        "keterangan": "Kunci tamu ke tabel kelas"
+      },
+      {
+        "nama": "nis",
+        "tipe": "varchar(30)",
+        "null": "Ya",
+        "kunci": "-",
+        "keterangan": "Nomor Induk Siswa"
+      },
+      {
+        "nama": "tgl_lahir",
+        "tipe": "date",
+        "null": "Ya",
+        "kunci": "-",
+        "keterangan": "Tanggal lahir"
+      },
+      {
+        "nama": "alamat",
+        "tipe": "text",
+        "null": "Ya",
+        "kunci": "-",
+        "keterangan": "Alamat tempat tinggal"
+      }
+    ]
+  },
+  {
+    "tabel": "mata_pelajaran",
+    "deskripsi": "Menyimpan data mata pelajaran beserta guru pengampunya",
+    "jumlah_record": 5,
+    "kolom": [
+      {
+        "nama": "id",
+        "tipe": "int(11)",
+        "null": "Tidak",
+        "kunci": "Primary Key",
+        "keterangan": "Kunci utama (primary key)"
+      },
+      {
+        "nama": "id_guru",
+        "tipe": "int(11)",
+        "null": "Ya",
+        "kunci": "Foreign Key",
+        "keterangan": "Kunci tamu ke tabel guru"
+      },
+      {
+        "nama": "nama",
+        "tipe": "varchar(120)",
+        "null": "Tidak",
+        "kunci": "-",
+        "keterangan": "Nama pengguna"
+      },
+      {
+        "nama": "kode",
+        "tipe": "varchar(30)",
+        "null": "Ya",
+        "kunci": "-",
+        "keterangan": "Kode mata pelajaran"
+      },
+      {
+        "nama": "deskripsi",
+        "tipe": "text",
+        "null": "Ya",
+        "kunci": "-",
+        "keterangan": "Uraian singkat"
+      }
+    ]
+  },
+  {
+    "tabel": "materi",
+    "deskripsi": "Menyimpan data materi pembelajaran yang diunggah oleh guru",
+    "jumlah_record": 8,
+    "kolom": [
+      {
+        "nama": "id",
+        "tipe": "int(11)",
+        "null": "Tidak",
+        "kunci": "Primary Key",
+        "keterangan": "Kunci utama (primary key)"
+      },
+      {
+        "nama": "id_mapel",
+        "tipe": "int(11)",
+        "null": "Tidak",
+        "kunci": "Foreign Key",
+        "keterangan": "Kunci tamu ke tabel mata_pelajaran"
+      },
+      {
+        "nama": "judul",
+        "tipe": "varchar(200)",
+        "null": "Tidak",
+        "kunci": "-",
+        "keterangan": "Judul materi, tugas, atau topik diskusi"
+      },
+      {
+        "nama": "konten",
+        "tipe": "text",
+        "null": "Ya",
+        "kunci": "-",
+        "keterangan": "Isi atau uraian materi pembelajaran"
+      },
+      {
+        "nama": "file",
+        "tipe": "varchar(255)",
+        "null": "Ya",
+        "kunci": "-",
+        "keterangan": "Nama berkas lampiran yang diunggah"
+      },
+      {
+        "nama": "tgl_upload",
+        "tipe": "timestamp",
+        "null": "Tidak",
+        "kunci": "-",
+        "keterangan": "Waktu materi diunggah"
+      }
+    ]
+  },
+  {
+    "tabel": "tugas",
+    "deskripsi": "Menyimpan data tugas dan kuis beserta tipe dan batas waktunya",
+    "jumlah_record": 6,
+    "kolom": [
+      {
+        "nama": "id",
+        "tipe": "int(11)",
+        "null": "Tidak",
+        "kunci": "Primary Key",
+        "keterangan": "Kunci utama (primary key)"
+      },
+      {
+        "nama": "id_mapel",
+        "tipe": "int(11)",
+        "null": "Tidak",
+        "kunci": "Foreign Key",
+        "keterangan": "Kunci tamu ke tabel mata_pelajaran"
+      },
+      {
+        "nama": "judul",
+        "tipe": "varchar(200)",
+        "null": "Tidak",
+        "kunci": "-",
+        "keterangan": "Judul materi, tugas, atau topik diskusi"
+      },
+      {
+        "nama": "deskripsi",
+        "tipe": "text",
+        "null": "Ya",
+        "kunci": "-",
+        "keterangan": "Uraian singkat"
+      },
+      {
+        "nama": "deadline",
+        "tipe": "datetime",
+        "null": "Ya",
+        "kunci": "-",
+        "keterangan": "Batas waktu pengumpulan tugas"
+      },
+      {
+        "nama": "tipe",
+        "tipe": "enum('tugas','kuis')",
+        "null": "Tidak",
+        "kunci": "-",
+        "keterangan": "Jenis data (tugas/kuis atau pilihan ganda/esai)"
+      },
+      {
+        "nama": "created_at",
+        "tipe": "timestamp",
+        "null": "Tidak",
+        "kunci": "-",
+        "keterangan": "Waktu pembuatan data"
+      }
+    ]
+  },
+  {
+    "tabel": "soal",
+    "deskripsi": "Menyimpan butir soal pilihan ganda maupun esai pada sebuah kuis",
+    "jumlah_record": 13,
+    "kolom": [
+      {
+        "nama": "id",
+        "tipe": "int(11)",
+        "null": "Tidak",
+        "kunci": "Primary Key",
+        "keterangan": "Kunci utama (primary key)"
+      },
+      {
+        "nama": "id_tugas",
+        "tipe": "int(11)",
+        "null": "Tidak",
+        "kunci": "Foreign Key",
+        "keterangan": "Kunci tamu ke tabel tugas"
+      },
+      {
+        "nama": "pertanyaan",
+        "tipe": "text",
+        "null": "Tidak",
+        "kunci": "-",
+        "keterangan": "Teks pertanyaan butir soal"
+      },
+      {
+        "nama": "tipe",
+        "tipe": "enum('pilihan_ganda','esai')",
+        "null": "Tidak",
+        "kunci": "-",
+        "keterangan": "Jenis data (tugas/kuis atau pilihan ganda/esai)"
+      },
+      {
+        "nama": "pilihan_a",
+        "tipe": "varchar(500)",
+        "null": "Ya",
+        "kunci": "-",
+        "keterangan": "Teks pilihan jawaban A"
+      },
+      {
+        "nama": "pilihan_b",
+        "tipe": "varchar(500)",
+        "null": "Ya",
+        "kunci": "-",
+        "keterangan": "Teks pilihan jawaban B"
+      },
+      {
+        "nama": "pilihan_c",
+        "tipe": "varchar(500)",
+        "null": "Ya",
+        "kunci": "-",
+        "keterangan": "Teks pilihan jawaban C"
+      },
+      {
+        "nama": "pilihan_d",
+        "tipe": "varchar(500)",
+        "null": "Ya",
+        "kunci": "-",
+        "keterangan": "Teks pilihan jawaban D"
+      },
+      {
+        "nama": "jawaban_benar",
+        "tipe": "char(1)",
+        "null": "Ya",
+        "kunci": "-",
+        "keterangan": "Kunci jawaban butir soal pilihan ganda"
+      },
+      {
+        "nama": "bobot",
+        "tipe": "int(11)",
+        "null": "Tidak",
+        "kunci": "-",
+        "keterangan": "Bobot poin butir soal"
+      },
+      {
+        "nama": "urutan",
+        "tipe": "int(11)",
+        "null": "Tidak",
+        "kunci": "-",
+        "keterangan": "Nomor urut butir soal"
+      }
+    ]
+  },
+  {
+    "tabel": "pengumpulan_tugas",
+    "deskripsi": "Menyimpan data pengumpulan jawaban tugas oleh siswa",
+    "jumlah_record": 35,
+    "kolom": [
+      {
+        "nama": "id",
+        "tipe": "int(11)",
+        "null": "Tidak",
+        "kunci": "Primary Key",
+        "keterangan": "Kunci utama (primary key)"
+      },
+      {
+        "nama": "id_tugas",
+        "tipe": "int(11)",
+        "null": "Tidak",
+        "kunci": "Foreign Key",
+        "keterangan": "Kunci tamu ke tabel tugas"
+      },
+      {
+        "nama": "id_siswa",
+        "tipe": "int(11)",
+        "null": "Tidak",
+        "kunci": "Foreign Key",
+        "keterangan": "Kunci tamu ke tabel siswa"
+      },
+      {
+        "nama": "file",
+        "tipe": "varchar(255)",
+        "null": "Ya",
+        "kunci": "-",
+        "keterangan": "Nama berkas lampiran yang diunggah"
+      },
+      {
+        "nama": "jawaban",
+        "tipe": "text",
+        "null": "Ya",
+        "kunci": "-",
+        "keterangan": "Jawaban teks yang dikumpulkan siswa"
+      },
+      {
+        "nama": "tgl_kumpul",
+        "tipe": "timestamp",
+        "null": "Tidak",
+        "kunci": "-",
+        "keterangan": "Waktu pengumpulan tugas"
+      },
+      {
+        "nama": "terlambat",
+        "tipe": "tinyint(1)",
+        "null": "Tidak",
+        "kunci": "-",
+        "keterangan": "Penanda pengumpulan melewati batas waktu"
+      }
+    ]
+  },
+  {
+    "tabel": "jawaban_siswa",
+    "deskripsi": "Menyimpan jawaban siswa pada setiap butir soal kuis",
+    "jumlah_record": 95,
+    "kolom": [
+      {
+        "nama": "id",
+        "tipe": "int(11)",
+        "null": "Tidak",
+        "kunci": "Primary Key",
+        "keterangan": "Kunci utama (primary key)"
+      },
+      {
+        "nama": "id_pengumpulan",
+        "tipe": "int(11)",
+        "null": "Tidak",
+        "kunci": "Foreign Key",
+        "keterangan": "Kunci tamu ke tabel pengumpulan_tugas"
+      },
+      {
+        "nama": "id_soal",
+        "tipe": "int(11)",
+        "null": "Tidak",
+        "kunci": "Foreign Key",
+        "keterangan": "Kunci tamu ke tabel soal"
+      },
+      {
+        "nama": "pilihan",
+        "tipe": "char(1)",
+        "null": "Ya",
+        "kunci": "-",
+        "keterangan": "Pilihan jawaban yang dipilih siswa"
+      },
+      {
+        "nama": "jawaban_teks",
+        "tipe": "text",
+        "null": "Ya",
+        "kunci": "-",
+        "keterangan": "Jawaban esai siswa"
+      },
+      {
+        "nama": "benar",
+        "tipe": "tinyint(4)",
+        "null": "Ya",
+        "kunci": "-",
+        "keterangan": "Hasil koreksi otomatis butir pilihan ganda"
+      },
+      {
+        "nama": "skor",
+        "tipe": "decimal(6,2)",
+        "null": "Ya",
+        "kunci": "-",
+        "keterangan": "Nilai yang diperoleh"
+      }
+    ]
+  },
+  {
+    "tabel": "nilai",
+    "deskripsi": "Menyimpan data nilai siswa hasil penilaian guru maupun koreksi otomatis",
+    "jumlah_record": 28,
+    "kolom": [
+      {
+        "nama": "id",
+        "tipe": "int(11)",
+        "null": "Tidak",
+        "kunci": "Primary Key",
+        "keterangan": "Kunci utama (primary key)"
+      },
+      {
+        "nama": "id_kumpul",
+        "tipe": "int(11)",
+        "null": "Tidak",
+        "kunci": "Unique",
+        "keterangan": "Kunci tamu ke tabel pengumpulan_tugas"
+      },
+      {
+        "nama": "id_guru",
+        "tipe": "int(11)",
+        "null": "Ya",
+        "kunci": "Foreign Key",
+        "keterangan": "Kunci tamu ke tabel guru"
+      },
+      {
+        "nama": "skor",
+        "tipe": "decimal(5,2)",
+        "null": "Ya",
+        "kunci": "-",
+        "keterangan": "Nilai yang diperoleh"
+      },
+      {
+        "nama": "catatan",
+        "tipe": "text",
+        "null": "Ya",
+        "kunci": "-",
+        "keterangan": "Catatan atau umpan balik dari guru"
+      },
+      {
+        "nama": "tgl_penilaian",
+        "tipe": "timestamp",
+        "null": "Tidak",
+        "kunci": "-",
+        "keterangan": "Waktu penilaian dilakukan"
+      }
+    ]
+  },
+  {
+    "tabel": "forum_diskusi",
+    "deskripsi": "Menyimpan data topik dan balasan pada forum diskusi",
+    "jumlah_record": 14,
+    "kolom": [
+      {
+        "nama": "id",
+        "tipe": "int(11)",
+        "null": "Tidak",
+        "kunci": "Primary Key",
+        "keterangan": "Kunci utama (primary key)"
+      },
+      {
+        "nama": "id_mapel",
+        "tipe": "int(11)",
+        "null": "Tidak",
+        "kunci": "Foreign Key",
+        "keterangan": "Kunci tamu ke tabel mata_pelajaran"
+      },
+      {
+        "nama": "id_user",
+        "tipe": "int(11)",
+        "null": "Tidak",
+        "kunci": "Foreign Key",
+        "keterangan": "Kunci tamu ke tabel users"
+      },
+      {
+        "nama": "judul",
+        "tipe": "varchar(200)",
+        "null": "Ya",
+        "kunci": "-",
+        "keterangan": "Judul materi, tugas, atau topik diskusi"
+      },
+      {
+        "nama": "pesan",
+        "tipe": "text",
+        "null": "Tidak",
+        "kunci": "-",
+        "keterangan": "Isi pesan pada forum diskusi"
+      },
+      {
+        "nama": "id_parent",
+        "tipe": "int(11)",
+        "null": "Ya",
+        "kunci": "Foreign Key",
+        "keterangan": "Kunci tamu ke pesan induk pada forum diskusi"
+      },
+      {
+        "nama": "tgl_post",
+        "tipe": "timestamp",
+        "null": "Tidak",
+        "kunci": "-",
+        "keterangan": "Waktu pesan dikirim"
+      }
+    ]
+  }
+]

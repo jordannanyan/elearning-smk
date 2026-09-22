@@ -1,30 +1,31 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { NavLink, Outlet, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
-import type { Role } from '../api/types';
+import api from '../api/client';
+import type { Periode, Role } from '../api/types';
 
 interface MenuItem { to: string; label: string; icon: string; }
 
 const MENUS: Record<Role, MenuItem[]> = {
   admin: [
     { to: '/admin', label: 'Dashboard', icon: '📊' },
+    { to: '/admin/periode', label: 'Periode Pembelajaran', icon: '🗓️' },
     { to: '/admin/guru', label: 'Data Guru', icon: '👨‍🏫' },
     { to: '/admin/siswa', label: 'Data Siswa', icon: '🎓' },
     { to: '/admin/kelas', label: 'Data Kelas', icon: '🏫' },
     { to: '/admin/mapel', label: 'Mata Pelajaran', icon: '📚' },
+    { to: '/admin/pengampuan', label: 'Pengampuan Kelas', icon: '🧩' },
   ],
   guru: [
     { to: '/guru', label: 'Dashboard', icon: '📊' },
-    { to: '/guru/materi', label: 'Materi', icon: '📄' },
-    { to: '/guru/tugas', label: 'Tugas & Kuis', icon: '📝' },
-    { to: '/guru/forum', label: 'Forum Diskusi', icon: '💬' },
+    { to: '/guru/kelas', label: 'Kelas Saya', icon: '🏫' },
+    { to: '/guru/penilaian', label: 'Penilaian', icon: '⭐' },
   ],
   siswa: [
     { to: '/siswa', label: 'Dashboard', icon: '📊' },
-    { to: '/siswa/materi', label: 'Materi', icon: '📄' },
+    { to: '/siswa/kelas', label: 'Kelas Saya', icon: '🏫' },
     { to: '/siswa/tugas', label: 'Tugas & Kuis', icon: '📝' },
     { to: '/siswa/nilai', label: 'Nilai', icon: '⭐' },
-    { to: '/siswa/forum', label: 'Forum Diskusi', icon: '💬' },
   ],
 };
 
@@ -34,6 +35,12 @@ export default function Layout() {
   const { user, logout } = useAuth();
   const nav = useNavigate();
   const [open, setOpen] = useState(false);
+  const [periode, setPeriode] = useState<Periode | null>(null);
+
+  useEffect(() => {
+    api.get('/periode/aktif').then((r) => setPeriode(r.data)).catch(() => setPeriode(null));
+  }, []);
+
   if (!user) return null;
   const menus = MENUS[user.role];
 
@@ -61,6 +68,14 @@ export default function Layout() {
           <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
             <button className="btn secondary small menu-toggle" onClick={() => setOpen((o) => !o)}>☰</button>
             <span className="title">Sistem E-Learning</span>
+            {periode ? (
+              <span className="periode-chip" title="Periode pembelajaran yang sedang berjalan">
+                🗓️ {periode.tahun_ajaran} · Semester {periode.nama_semester}
+                <strong style={{ marginLeft: 6 }}>({periode.kode})</strong>
+              </span>
+            ) : (
+              <span className="periode-chip warn">Belum ada periode aktif</span>
+            )}
           </div>
           <div className="user">
             <div className="avatar">{user.nama.charAt(0).toUpperCase()}</div>

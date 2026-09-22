@@ -9,7 +9,8 @@ const emptyForm = {
   jawaban_benar: 'A', bobot: 10,
 };
 
-export default function SoalManager({ tugas, onClose }: { tugas: Tugas; onClose: () => void }) {
+export default function SoalManager({ tugas, onClose, readOnly = false }:
+  { tugas: Tugas; onClose: () => void; readOnly?: boolean }) {
   const [rows, setRows] = useState<Soal[]>([]);
   const [loading, setLoading] = useState(true);
   const [form, setForm] = useState<any>(emptyForm);
@@ -60,7 +61,7 @@ export default function SoalManager({ tugas, onClose }: { tugas: Tugas; onClose:
           {rows.length} soal · total bobot <strong>{totalBobot}</strong>
           {totalBobot !== 100 && rows.length > 0 && <span className="badge orange" style={{ marginLeft: 6 }}>skor dinormalisasi ke 100</span>}
         </span>
-        <button className="btn small" onClick={openAdd}>+ Tambah Soal</button>
+        {!readOnly && <button className="btn small" onClick={openAdd}>+ Tambah Soal</button>}
       </div>
 
       {loading ? <p className="muted">Memuat...</p>
@@ -87,10 +88,12 @@ export default function SoalManager({ tugas, onClose }: { tugas: Tugas; onClose:
                     </div>
                   )}
                 </div>
-                <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
-                  <button className="btn secondary small" onClick={() => openEdit(s)}>Edit</button>
-                  <button className="btn danger small" onClick={() => del(s)}>Hapus</button>
-                </div>
+                {!readOnly && (
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
+                    <button className="btn secondary small" onClick={() => openEdit(s)}>Edit</button>
+                    <button className="btn danger small" onClick={() => del(s)}>Hapus</button>
+                  </div>
+                )}
               </div>
             </div>
           ))}

@@ -1,6 +1,6 @@
 # Sistem E-Learning SMA Negeri 1 Karau Kuala
 
-Aplikasi e-learning berbasis web sesuai proposal skripsi (metode **RAD**).
+Aplikasi e-learning berbasis web sesuai proposal skripsi (metode **Waterfall**).
 Terdiri dari **backend** (Node.js + Express + MySQL) dan **frontend** (React TypeScript + Vite).
 
 ## Fitur
@@ -42,9 +42,23 @@ npm run dev               # buka http://localhost:5173
 | Siswa | ahmad@siswa.smakk.sch.id | siswa123 |
 
 ## Struktur Database
-Sesuai Class Diagram (Gambar 3.9): `users`, `kelas`, `guru`, `siswa`,
-`mata_pelajaran`, `materi`, `tugas`, `pengumpulan_tugas`, `nilai`, `forum_diskusi`.
-Lihat `backend/src/db/schema.sql`.
+Sesuai Class Diagram pada proposal: `users`, `kelas`, `guru`, `siswa`,
+`mata_pelajaran`, `materi`, `tugas`, `soal`, `pengumpulan_tugas`, `jawaban_siswa`,
+`nilai`, `forum_diskusi`. Lihat `backend/src/db/schema.sql`.
+
+## Bahan BAB IV (dokumentasi & pengujian)
+Folder `docs-bab4/` berisi seluruh tangkapan layar, tabel struktur basis data,
+hasil pengujian Black Box, dan dokumen Word siap pakai untuk BAB IV.
+Skrip pembangkitnya ada di `scripts/`:
+
+| Skrip | Kegunaan |
+|---|---|
+| `scripts/blackbox.js` | Menjalankan 63 skenario pengujian Black Box terhadap REST API sekaligus mengisi data pengumpulan tugas & nilai |
+| `scripts/screenshots.py` | Mengambil 33 tangkapan layar seluruh halaman sistem secara otomatis (Playwright) |
+| `scripts/data-bab4.js` | Mengambil struktur tabel basis data dan statistik data dari MySQL |
+| `scripts/buat-dokumen-bab4.py` | Menyusun `docs-bab4/Lampiran-BAB-IV-Sistem-E-Learning.docx` |
+
+Petunjuk lengkap: lihat `docs-bab4/README.md`.
 
 ## Teknologi
 - Backend: Express, mysql2, JWT (autentikasi), bcryptjs (hash password), multer (upload file)

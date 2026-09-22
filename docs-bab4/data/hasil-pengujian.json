@@ -1,0 +1,576 @@
+{
+  "tanggal": "2026-09-03T01:26:05.836Z",
+  "total": 63,
+  "valid": 63,
+  "tidak_valid": 0,
+  "persentase": 100,
+  "kasus": [
+    {
+      "id": "BB-01",
+      "modul": "Autentikasi",
+      "skenario": "Login administrator dengan email dan password yang benar",
+      "input": "admin@smakk.sch.id / admin123",
+      "harapan": "Sistem menerima login, mengembalikan token dan mengarahkan ke dashboard administrator",
+      "aktual": "HTTP 200, token diterima, role = admin",
+      "status": "Valid"
+    },
+    {
+      "id": "BB-02",
+      "modul": "Autentikasi",
+      "skenario": "Login guru dengan email dan password yang benar",
+      "input": "budi@smakk.sch.id / guru123",
+      "harapan": "Sistem menerima login dan mengarahkan ke dashboard guru",
+      "aktual": "HTTP 200, role = guru",
+      "status": "Valid"
+    },
+    {
+      "id": "BB-03",
+      "modul": "Autentikasi",
+      "skenario": "Login siswa dengan email dan password yang benar",
+      "input": "ahmad@siswa.smakk.sch.id / siswa123",
+      "harapan": "Sistem menerima login dan mengarahkan ke dashboard siswa",
+      "aktual": "HTTP 200, role = siswa",
+      "status": "Valid"
+    },
+    {
+      "id": "BB-04",
+      "modul": "Autentikasi",
+      "skenario": "Login dengan password yang salah",
+      "input": "ahmad@siswa.smakk.sch.id / salah123",
+      "harapan": "Login ditolak dan sistem menampilkan pesan \"Email atau password salah\"",
+      "aktual": "HTTP 401, pesan: \"Email atau password salah\"",
+      "status": "Valid"
+    },
+    {
+      "id": "BB-05",
+      "modul": "Autentikasi",
+      "skenario": "Login dengan email yang tidak terdaftar",
+      "input": "bukanpengguna@smakk.sch.id / admin123",
+      "harapan": "Login ditolak dan sistem menampilkan pesan kesalahan",
+      "aktual": "HTTP 401, pesan: \"Email atau password salah\"",
+      "status": "Valid"
+    },
+    {
+      "id": "BB-06",
+      "modul": "Autentikasi",
+      "skenario": "Login dengan email dan password dikosongkan",
+      "input": "email = (kosong), password = (kosong)",
+      "harapan": "Sistem menolak dan menampilkan pesan \"Email dan password wajib diisi\"",
+      "aktual": "HTTP 400, pesan: \"Email dan password wajib diisi\"",
+      "status": "Valid"
+    },
+    {
+      "id": "BB-07",
+      "modul": "Autentikasi",
+      "skenario": "Mengakses halaman sistem tanpa melakukan login (tanpa token)",
+      "input": "GET /api/dashboard tanpa token",
+      "harapan": "Akses ditolak dan pengguna diarahkan kembali ke halaman login",
+      "aktual": "HTTP 401, pesan: \"Token tidak ditemukan\"",
+      "status": "Valid"
+    },
+    {
+      "id": "BB-08",
+      "modul": "Autentikasi",
+      "skenario": "Mengakses sistem menggunakan token yang tidak valid",
+      "input": "Authorization: Bearer token.tidak.valid",
+      "harapan": "Akses ditolak dengan pesan \"Token tidak valid\"",
+      "aktual": "HTTP 401, pesan: \"Token tidak valid\"",
+      "status": "Valid"
+    },
+    {
+      "id": "BB-09",
+      "modul": "Autentikasi",
+      "skenario": "Siswa mencoba mengakses menu manajemen pengguna milik administrator",
+      "input": "GET /api/users menggunakan token siswa",
+      "harapan": "Akses ditolak karena tidak sesuai hak akses (role)",
+      "aktual": "HTTP 403, pesan: \"Akses ditolak untuk role Anda\"",
+      "status": "Valid"
+    },
+    {
+      "id": "BB-10",
+      "modul": "Manajemen Pengguna",
+      "skenario": "Administrator menampilkan daftar data guru",
+      "input": "Membuka menu Data Guru",
+      "harapan": "Sistem menampilkan seluruh data guru beserta NIP dan mata pelajaran",
+      "aktual": "HTTP 200, 4 data guru ditampilkan",
+      "status": "Valid"
+    },
+    {
+      "id": "BB-11",
+      "modul": "Manajemen Pengguna",
+      "skenario": "Administrator menambah data guru baru dengan data lengkap",
+      "input": "Nama: Hendra Wijaya, S.Pd; Email: hendra@smakk.sch.id; NIP: 199304182018011005",
+      "harapan": "Data guru tersimpan dan tampil pada tabel data guru",
+      "aktual": "HTTP 201, pesan: \"Pengguna berhasil dibuat\"",
+      "status": "Valid"
+    },
+    {
+      "id": "BB-12",
+      "modul": "Manajemen Pengguna",
+      "skenario": "Administrator menambah pengguna dengan email yang sudah terdaftar",
+      "input": "Email: hendra@smakk.sch.id (sudah digunakan)",
+      "harapan": "Sistem menolak dan menampilkan pesan \"Email sudah terpakai\"",
+      "aktual": "HTTP 409, pesan: \"Email sudah terpakai\"",
+      "status": "Valid"
+    },
+    {
+      "id": "BB-13",
+      "modul": "Manajemen Pengguna",
+      "skenario": "Administrator menambah pengguna dengan field wajib dikosongkan",
+      "input": "Email dan password dikosongkan",
+      "harapan": "Sistem menolak dan menampilkan pesan bahwa field wajib diisi",
+      "aktual": "HTTP 400, pesan: \"Nama, email, password, role wajib diisi\"",
+      "status": "Valid"
+    },
+    {
+      "id": "BB-14",
+      "modul": "Manajemen Pengguna",
+      "skenario": "Administrator mengubah data guru yang sudah ada",
+      "input": "Mengubah nama menjadi \"Hendra Wijaya, M.Pd\"",
+      "harapan": "Perubahan data tersimpan dan tampil pada tabel data guru",
+      "aktual": "HTTP 200, pesan: \"Pengguna berhasil diperbarui\"",
+      "status": "Valid"
+    },
+    {
+      "id": "BB-15",
+      "modul": "Manajemen Pengguna",
+      "skenario": "Administrator menghapus data guru",
+      "input": "Menekan tombol Hapus pada data guru Hendra Wijaya, M.Pd",
+      "harapan": "Data guru terhapus dari sistem",
+      "aktual": "HTTP 200, pesan: \"Pengguna berhasil dihapus\"",
+      "status": "Valid"
+    },
+    {
+      "id": "BB-16",
+      "modul": "Manajemen Pengguna",
+      "skenario": "Administrator menambah data siswa dan menempatkannya pada sebuah kelas",
+      "input": "Nama: Wulan Safitri; NIS: 0012345690; Kelas: X IPA 1",
+      "harapan": "Data siswa tersimpan beserta kelasnya dan tampil pada tabel data siswa",
+      "aktual": "HTTP 201, pesan: \"Pengguna berhasil dibuat\"",
+      "status": "Valid"
+    },
+    {
+      "id": "BB-17",
+      "modul": "Manajemen Pengguna",
+      "skenario": "Administrator menampilkan daftar data siswa",
+      "input": "Membuka menu Data Siswa",
+      "harapan": "Sistem menampilkan seluruh data siswa beserta NIS dan kelas",
+      "aktual": "HTTP 200, 13 data siswa ditampilkan",
+      "status": "Valid"
+    },
+    {
+      "id": "BB-18",
+      "modul": "Manajemen Kelas",
+      "skenario": "Administrator menambah data kelas baru",
+      "input": "Nama kelas: XII IPA 1; Tingkat: XII; Tahun ajaran: 2025/2026",
+      "harapan": "Data kelas tersimpan dan tampil pada tabel data kelas",
+      "aktual": "HTTP 201, pesan: \"Kelas berhasil dibuat\"",
+      "status": "Valid"
+    },
+    {
+      "id": "BB-19",
+      "modul": "Manajemen Kelas",
+      "skenario": "Administrator mengubah data kelas",
+      "input": "Mengubah nama kelas menjadi XII IPA 2",
+      "harapan": "Perubahan data kelas tersimpan",
+      "aktual": "HTTP 200, pesan: \"Kelas berhasil diperbarui\"",
+      "status": "Valid"
+    },
+    {
+      "id": "BB-20",
+      "modul": "Manajemen Kelas",
+      "skenario": "Administrator menghapus data kelas",
+      "input": "Menekan tombol Hapus pada kelas XII IPA 2",
+      "harapan": "Data kelas terhapus dari sistem",
+      "aktual": "HTTP 200, pesan: \"Kelas berhasil dihapus\"",
+      "status": "Valid"
+    },
+    {
+      "id": "BB-21",
+      "modul": "Manajemen Mata Pelajaran",
+      "skenario": "Administrator menambah mata pelajaran dan menugaskan guru pengampu",
+      "input": "Nama: Sejarah Indonesia; Kode: SEJ-X; Guru pengampu dipilih dari daftar",
+      "harapan": "Data mata pelajaran tersimpan beserta guru pengampunya",
+      "aktual": "HTTP 201, pesan: \"Mata pelajaran berhasil dibuat\"",
+      "status": "Valid"
+    },
+    {
+      "id": "BB-22",
+      "modul": "Manajemen Mata Pelajaran",
+      "skenario": "Administrator menambah mata pelajaran dengan nama dikosongkan",
+      "input": "Nama mata pelajaran = (kosong)",
+      "harapan": "Sistem menolak dan menampilkan pesan bahwa nama wajib diisi",
+      "aktual": "HTTP 400, pesan: \"Nama mata pelajaran wajib diisi\"",
+      "status": "Valid"
+    },
+    {
+      "id": "BB-23",
+      "modul": "Manajemen Mata Pelajaran",
+      "skenario": "Administrator menghapus data mata pelajaran",
+      "input": "Menekan tombol Hapus pada mata pelajaran Sejarah Indonesia",
+      "harapan": "Data mata pelajaran terhapus dari sistem",
+      "aktual": "HTTP 200, pesan: \"Mata pelajaran berhasil dihapus\"",
+      "status": "Valid"
+    },
+    {
+      "id": "BB-24",
+      "modul": "Materi Pembelajaran",
+      "skenario": "Guru menambah materi pembelajaran beserta file lampiran",
+      "input": "Judul: Latihan Soal SPLDV; Mapel: Matematika Wajib; File: latihan_spldv.txt",
+      "harapan": "Materi tersimpan, file terunggah, dan materi tampil pada daftar materi",
+      "aktual": "HTTP 201, pesan: \"Materi berhasil ditambahkan\"",
+      "status": "Valid"
+    },
+    {
+      "id": "BB-25",
+      "modul": "Materi Pembelajaran",
+      "skenario": "Guru menambah materi dengan judul dikosongkan",
+      "input": "Judul materi = (kosong)",
+      "harapan": "Sistem menolak dan menampilkan pesan bahwa judul wajib diisi",
+      "aktual": "HTTP 400, pesan: \"Mata pelajaran dan judul wajib diisi\"",
+      "status": "Valid"
+    },
+    {
+      "id": "BB-26",
+      "modul": "Materi Pembelajaran",
+      "skenario": "Guru menambah materi pada mata pelajaran yang bukan diampunya",
+      "input": "Guru Matematika menambah materi pada mata pelajaran Bahasa Indonesia",
+      "harapan": "Sistem menolak karena mata pelajaran bukan milik guru tersebut",
+      "aktual": "HTTP 403, pesan: \"Mata pelajaran bukan milik Anda\"",
+      "status": "Valid"
+    },
+    {
+      "id": "BB-27",
+      "modul": "Materi Pembelajaran",
+      "skenario": "Guru mengubah data materi pembelajaran",
+      "input": "Mengubah judul menjadi \"Latihan Soal SPLDV dan Pembahasan\"",
+      "harapan": "Perubahan materi tersimpan dan tampil pada daftar materi",
+      "aktual": "HTTP 200, pesan: \"Materi berhasil diperbarui\"",
+      "status": "Valid"
+    },
+    {
+      "id": "BB-28",
+      "modul": "Materi Pembelajaran",
+      "skenario": "Guru menghapus materi pembelajaran",
+      "input": "Menekan tombol Hapus pada materi \"Latihan Soal SPLDV dan Pembahasan\"",
+      "harapan": "Materi terhapus dari daftar materi",
+      "aktual": "HTTP 200, pesan: \"Materi berhasil dihapus\"",
+      "status": "Valid"
+    },
+    {
+      "id": "BB-29",
+      "modul": "Materi Pembelajaran",
+      "skenario": "Siswa menampilkan seluruh materi pembelajaran",
+      "input": "Membuka menu Materi pada halaman siswa",
+      "harapan": "Sistem menampilkan daftar materi seluruh mata pelajaran beserta guru pengampu",
+      "aktual": "HTTP 200, 8 materi ditampilkan",
+      "status": "Valid"
+    },
+    {
+      "id": "BB-30",
+      "modul": "Materi Pembelajaran",
+      "skenario": "Siswa menyaring materi berdasarkan mata pelajaran",
+      "input": "Filter mata pelajaran: Matematika Wajib",
+      "harapan": "Sistem hanya menampilkan materi mata pelajaran yang dipilih",
+      "aktual": "HTTP 200, 3 materi Matematika Wajib ditampilkan",
+      "status": "Valid"
+    },
+    {
+      "id": "BB-31",
+      "modul": "Materi Pembelajaran",
+      "skenario": "Siswa mengunduh file materi pembelajaran",
+      "input": "Menekan tombol Unduh File pada materi \"Persamaan Linear Satu Variabel\"",
+      "harapan": "File materi berhasil diunduh oleh siswa",
+      "aktual": "HTTP 200, ukuran file 1326 byte",
+      "status": "Valid"
+    },
+    {
+      "id": "BB-32",
+      "modul": "Tugas dan Kuis",
+      "skenario": "Guru membuat tugas baru beserta batas waktu pengumpulan",
+      "input": "Judul: Tugas Proyek Statistika; Tipe: tugas; Deadline: 20 Desember 2026",
+      "harapan": "Tugas tersimpan dan tampil pada daftar tugas guru maupun siswa",
+      "aktual": "HTTP 201, pesan: \"Tugas berhasil dibuat\"",
+      "status": "Valid"
+    },
+    {
+      "id": "BB-33",
+      "modul": "Tugas dan Kuis",
+      "skenario": "Guru membuat tugas dengan judul dikosongkan",
+      "input": "Judul tugas = (kosong)",
+      "harapan": "Sistem menolak dan menampilkan pesan bahwa judul wajib diisi",
+      "aktual": "HTTP 400, pesan: \"Mata pelajaran dan judul wajib diisi\"",
+      "status": "Valid"
+    },
+    {
+      "id": "BB-34",
+      "modul": "Tugas dan Kuis",
+      "skenario": "Guru menambah butir soal pilihan ganda beserta kunci jawaban",
+      "input": "Pertanyaan, empat pilihan jawaban, kunci jawaban B, bobot 20",
+      "harapan": "Butir soal tersimpan dan jumlah soal pada tugas bertambah",
+      "aktual": "HTTP 201, pesan: \"Soal berhasil ditambahkan\"",
+      "status": "Valid"
+    },
+    {
+      "id": "BB-35",
+      "modul": "Tugas dan Kuis",
+      "skenario": "Guru menambah soal pilihan ganda tanpa mengisi pilihan jawaban",
+      "input": "Pilihan A dan B dikosongkan",
+      "harapan": "Sistem menolak dan menampilkan pesan bahwa pilihan jawaban wajib diisi",
+      "aktual": "HTTP 400, pesan: \"Minimal pilihan A dan B diisi\"",
+      "status": "Valid"
+    },
+    {
+      "id": "BB-36",
+      "modul": "Tugas dan Kuis",
+      "skenario": "Guru menghapus tugas beserta butir soalnya",
+      "input": "Menekan tombol Hapus pada tugas \"Tugas Proyek Statistika\"",
+      "harapan": "Tugas beserta seluruh butir soalnya terhapus dari sistem",
+      "aktual": "HTTP 200, pesan: \"Tugas berhasil dihapus\"",
+      "status": "Valid"
+    },
+    {
+      "id": "BB-37",
+      "modul": "Tugas dan Kuis",
+      "skenario": "Guru mengubah tugas milik guru mata pelajaran lain",
+      "input": "Guru Bahasa Indonesia mengubah tugas milik guru Matematika",
+      "harapan": "Sistem menolak karena tugas bukan milik guru tersebut",
+      "aktual": "HTTP 403, pesan: \"Bukan tugas milik Anda\"",
+      "status": "Valid"
+    },
+    {
+      "id": "BB-38",
+      "modul": "Pengerjaan Kuis",
+      "skenario": "Siswa mengerjakan kuis pilihan ganda dan mengirim jawaban",
+      "input": "Siswa ahmad menjawab 5 soal pilihan ganda pada Kuis Persamaan dan Pertidaksamaan Linear (4 jawaban benar)",
+      "harapan": "Jawaban tersimpan, sistem melakukan koreksi otomatis dan langsung menampilkan skor 80",
+      "aktual": "HTTP 200, status penilaian: final, skor otomatis: 80",
+      "status": "Valid"
+    },
+    {
+      "id": "BB-39",
+      "modul": "Pengerjaan Kuis",
+      "skenario": "Sistem mengoreksi jawaban kuis yang sebagian benar dan sebagian salah",
+      "input": "Siswa intan menjawab benar 3 dari 5 soal (bobot tiap soal 20)",
+      "harapan": "Sistem memberikan skor sesuai jumlah jawaban benar, yaitu 60",
+      "aktual": "HTTP 200, skor yang diberikan sistem: 60",
+      "status": "Valid"
+    },
+    {
+      "id": "BB-40",
+      "modul": "Pengerjaan Kuis",
+      "skenario": "Siswa melihat hasil kuis yang telah dinilai beserta kunci jawaban",
+      "input": "Menekan tombol \"Lihat Hasil\" pada kuis yang sudah dikerjakan",
+      "harapan": "Sistem menampilkan nilai akhir, jawaban siswa, serta kunci jawaban tiap butir soal",
+      "aktual": "HTTP 200, nilai akhir: 80.00, kunci jawaban ditampilkan: true",
+      "status": "Valid"
+    },
+    {
+      "id": "BB-41",
+      "modul": "Pengerjaan Kuis",
+      "skenario": "Sistem menyembunyikan kunci jawaban pada kuis yang belum dinilai",
+      "input": "Siswa membuka kuis yang belum dikerjakan",
+      "harapan": "Sistem menampilkan soal tanpa menampilkan kunci jawaban",
+      "aktual": "HTTP 200, kunci jawaban pada respons: tidak ditampilkan",
+      "status": "Valid"
+    },
+    {
+      "id": "BB-42",
+      "modul": "Pengerjaan Kuis",
+      "skenario": "Siswa mengerjakan kuis yang memuat soal pilihan ganda dan soal esai",
+      "input": "Siswa menjawab 3 soal pilihan ganda dan 1 soal esai pada Kuis Teks Deskripsi",
+      "harapan": "Pilihan ganda terkoreksi otomatis, sedangkan nilai akhir tertunda sampai esai dinilai guru",
+      "aktual": "HTTP 200, status penilaian: pending (menunggu penilaian esai oleh guru)",
+      "status": "Valid"
+    },
+    {
+      "id": "BB-43",
+      "modul": "Pengumpulan Tugas",
+      "skenario": "Siswa mengumpulkan tugas berupa jawaban teks beserta lampiran file",
+      "input": "Siswa ahmad mengisi kolom jawaban dan mengunggah file jawaban_ahmad.txt",
+      "harapan": "Tugas tersimpan, file terunggah, dan status berubah menjadi \"Menunggu penilaian\"",
+      "aktual": "HTTP 200, pesan: \"Tugas berhasil dikumpulkan\"",
+      "status": "Valid"
+    },
+    {
+      "id": "BB-44",
+      "modul": "Pengumpulan Tugas",
+      "skenario": "Siswa mengumpulkan tugas setelah batas waktu (deadline) terlewati",
+      "input": "Siswa maya mengumpulkan Latihan Soal Besaran dan Satuan setelah deadline berakhir",
+      "harapan": "Tugas tetap tersimpan namun ditandai sebagai pengumpulan terlambat",
+      "aktual": "HTTP 200, pesan: \"Terkumpul (terlambat)\", penanda terlambat = 1",
+      "status": "Valid"
+    },
+    {
+      "id": "BB-45",
+      "modul": "Penilaian",
+      "skenario": "Guru menampilkan daftar siswa yang telah mengumpulkan tugas",
+      "input": "Menekan tombol \"Pengumpulan\" pada tugas Latihan Persamaan Linear",
+      "harapan": "Sistem menampilkan daftar siswa, waktu pengumpulan, file jawaban, dan status penilaian",
+      "aktual": "HTTP 200, 7 pengumpulan ditampilkan",
+      "status": "Valid"
+    },
+    {
+      "id": "BB-46",
+      "modul": "Penilaian",
+      "skenario": "Guru memberikan nilai dan catatan pada tugas yang dikumpulkan siswa",
+      "input": "Nilai 90 untuk Ahmad Fauzi beserta catatan guru",
+      "harapan": "Nilai tersimpan dan langsung tampil pada rekap nilai siswa",
+      "aktual": "HTTP 200, pesan: \"Nilai berhasil disimpan\"",
+      "status": "Valid"
+    },
+    {
+      "id": "BB-47",
+      "modul": "Penilaian",
+      "skenario": "Guru menyimpan penilaian dengan kolom skor dikosongkan",
+      "input": "Skor = (kosong)",
+      "harapan": "Sistem menolak dan menampilkan pesan bahwa skor wajib diisi",
+      "aktual": "HTTP 400, pesan: \"id_kumpul dan skor wajib diisi\"",
+      "status": "Valid"
+    },
+    {
+      "id": "BB-48",
+      "modul": "Penilaian",
+      "skenario": "Guru memberi nilai pada pengumpulan mata pelajaran guru lain",
+      "input": "Guru Bahasa Indonesia menilai pengumpulan tugas Matematika",
+      "harapan": "Sistem menolak karena pengumpulan bukan pada mata pelajaran guru tersebut",
+      "aktual": "HTTP 403, pesan: \"Bukan pengumpulan pada mapel Anda\"",
+      "status": "Valid"
+    },
+    {
+      "id": "BB-49",
+      "modul": "Penilaian",
+      "skenario": "Guru memeriksa dan menilai jawaban esai pada kuis",
+      "input": "Memberi skor 30 untuk jawaban esai Ahmad Fauzi",
+      "harapan": "Sistem menggabungkan skor pilihan ganda dan esai lalu menghasilkan nilai akhir 0-100",
+      "aktual": "HTTP 200, nilai akhir yang dihasilkan sistem: 100.00",
+      "status": "Valid"
+    },
+    {
+      "id": "BB-50",
+      "modul": "Penilaian",
+      "skenario": "Sistem menandai pengumpulan kuis yang esainya belum dinilai guru",
+      "input": "Membuka daftar pengumpulan Kuis Teks Deskripsi",
+      "harapan": "Pengumpulan yang esainya belum dinilai ditandai \"Perlu nilai esai\" dan nilai akhirnya belum keluar",
+      "aktual": "HTTP 200, 2 pengumpulan ditandai perlu penilaian esai",
+      "status": "Valid"
+    },
+    {
+      "id": "BB-51",
+      "modul": "Rekap Nilai",
+      "skenario": "Siswa melihat rekap nilai seluruh tugas dan kuis",
+      "input": "Membuka menu Nilai pada halaman siswa",
+      "harapan": "Sistem menampilkan seluruh nilai, catatan guru, dan rata-rata nilai siswa",
+      "aktual": "HTTP 200, 4 baris nilai ditampilkan, 4 di antaranya sudah dinilai",
+      "status": "Valid"
+    },
+    {
+      "id": "BB-52",
+      "modul": "Rekap Nilai",
+      "skenario": "Sistem membatasi rekap nilai hanya milik siswa yang sedang login",
+      "input": "Login sebagai siswa lain lalu membuka menu Nilai",
+      "harapan": "Sistem hanya menampilkan nilai milik siswa yang sedang login",
+      "aktual": "HTTP 200, data nilai yang ditampilkan berbeda untuk tiap siswa: ya",
+      "status": "Valid"
+    },
+    {
+      "id": "BB-53",
+      "modul": "Forum Diskusi",
+      "skenario": "Siswa membuat topik diskusi baru pada sebuah mata pelajaran",
+      "input": "Judul topik dan isi pesan diisi, mata pelajaran: Matematika Wajib",
+      "harapan": "Topik tersimpan dan tampil paling atas pada daftar diskusi",
+      "aktual": "HTTP 201, pesan: \"Pesan terkirim\"",
+      "status": "Valid"
+    },
+    {
+      "id": "BB-54",
+      "modul": "Forum Diskusi",
+      "skenario": "Guru membalas topik diskusi yang dibuat siswa",
+      "input": "Menekan tombol Balas lalu menuliskan jawaban pada topik siswa",
+      "harapan": "Balasan tersimpan dan tampil di bawah topik yang bersangkutan",
+      "aktual": "HTTP 201, pesan: \"Pesan terkirim\"",
+      "status": "Valid"
+    },
+    {
+      "id": "BB-55",
+      "modul": "Forum Diskusi",
+      "skenario": "Pengguna mengirim pesan forum dengan isi pesan dikosongkan",
+      "input": "Isi pesan = (kosong)",
+      "harapan": "Sistem menolak dan menampilkan pesan bahwa isi pesan wajib diisi",
+      "aktual": "HTTP 400, pesan: \"Mata pelajaran dan pesan wajib diisi\"",
+      "status": "Valid"
+    },
+    {
+      "id": "BB-56",
+      "modul": "Forum Diskusi",
+      "skenario": "Pengguna menampilkan daftar diskusi pada sebuah mata pelajaran",
+      "input": "Memilih mata pelajaran Matematika Wajib pada halaman forum",
+      "harapan": "Sistem menampilkan seluruh topik beserta balasannya secara berurutan",
+      "aktual": "HTTP 200, 3 topik dengan total 6 balasan",
+      "status": "Valid"
+    },
+    {
+      "id": "BB-57",
+      "modul": "Forum Diskusi",
+      "skenario": "Pengguna mencoba menghapus pesan forum milik pengguna lain",
+      "input": "Siswa bayu menghapus pesan milik siswa rian",
+      "harapan": "Sistem menolak karena pesan bukan milik pengguna tersebut",
+      "aktual": "HTTP 403, pesan: \"Tidak boleh menghapus pesan ini\"",
+      "status": "Valid"
+    },
+    {
+      "id": "BB-58",
+      "modul": "Forum Diskusi",
+      "skenario": "Pengguna menghapus pesan forum miliknya sendiri",
+      "input": "Siswa rian menghapus pesan yang ditulisnya sendiri",
+      "harapan": "Pesan terhapus dari daftar diskusi",
+      "aktual": "HTTP 200, pesan: \"Pesan dihapus\"",
+      "status": "Valid"
+    },
+    {
+      "id": "BB-59",
+      "modul": "Dashboard",
+      "skenario": "Administrator melihat statistik penggunaan sistem pada dashboard",
+      "input": "Membuka dashboard administrator",
+      "harapan": "Sistem menampilkan jumlah guru, siswa, kelas, mata pelajaran, materi, dan tugas",
+      "aktual": "HTTP 200: 4 guru, 13 siswa, 3 kelas, 5 mapel, 8 materi, 6 tugas",
+      "status": "Valid"
+    },
+    {
+      "id": "BB-60",
+      "modul": "Dashboard",
+      "skenario": "Guru melihat ringkasan aktivitas pembelajaran pada dashboard",
+      "input": "Membuka dashboard guru",
+      "harapan": "Sistem menampilkan jumlah mata pelajaran, materi, tugas, dan pekerjaan yang perlu dinilai",
+      "aktual": "HTTP 200: 2 mapel, 3 materi, 2 tugas, 1 perlu dinilai",
+      "status": "Valid"
+    },
+    {
+      "id": "BB-61",
+      "modul": "Dashboard",
+      "skenario": "Siswa melihat ringkasan tugas pada dashboard",
+      "input": "Membuka dashboard siswa",
+      "harapan": "Sistem menampilkan jumlah tugas, tugas yang sudah dikumpulkan, dan yang sudah dinilai",
+      "aktual": "HTTP 200: 6 tugas, 4 dikumpulkan, 2 belum, 4 dinilai",
+      "status": "Valid"
+    },
+    {
+      "id": "BB-62",
+      "modul": "Autentikasi",
+      "skenario": "Pengguna mengubah kata sandi akunnya",
+      "input": "Password lama: siswa123; Password baru: siswa456",
+      "harapan": "Kata sandi berhasil diperbarui dan dapat digunakan untuk login berikutnya",
+      "aktual": "HTTP 200, login dengan kata sandi baru: HTTP 200",
+      "status": "Valid"
+    },
+    {
+      "id": "BB-63",
+      "modul": "Manajemen Pengguna",
+      "skenario": "Administrator menonaktifkan akun pengguna",
+      "input": "Menonaktifkan akun siswa Wulan Safitri, lalu akun tersebut mencoba login",
+      "harapan": "Akun yang dinonaktifkan tidak dapat masuk ke sistem",
+      "aktual": "HTTP 200 saat menonaktifkan; percobaan login: HTTP 403, pesan: \"Akun dinonaktifkan\"",
+      "status": "Valid"
+    }
+  ]
+}

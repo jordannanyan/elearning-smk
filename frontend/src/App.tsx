@@ -5,21 +5,25 @@ import Layout from './components/Layout';
 import Login from './pages/Login';
 
 import AdminDashboard from './pages/admin/Dashboard';
+import AdminPeriode from './pages/admin/Periode';
 import DataGuru from './pages/admin/DataGuru';
 import DataSiswa from './pages/admin/DataSiswa';
 import DataKelas from './pages/admin/DataKelas';
 import DataMapel from './pages/admin/DataMapel';
+import Pengampuan from './pages/admin/Pengampuan';
 
 import GuruDashboard from './pages/guru/Dashboard';
-import GuruMateri from './pages/guru/Materi';
-import GuruTugas from './pages/guru/Tugas';
-import GuruForum from './pages/guru/Forum';
+import GuruKelas from './pages/guru/KelasSaya';
+import GuruKelasDetail from './pages/guru/KelasDetail';
+import GuruPertemuan from './pages/guru/PertemuanDetail';
+import GuruPenilaian from './pages/guru/Penilaian';
 
 import SiswaDashboard from './pages/siswa/Dashboard';
-import SiswaMateri from './pages/siswa/Materi';
+import SiswaKelas from './pages/siswa/KelasSaya';
+import SiswaKelasDetail from './pages/siswa/KelasDetail';
+import SiswaPertemuan from './pages/siswa/PertemuanDetail';
 import SiswaTugas from './pages/siswa/Tugas';
 import SiswaNilai from './pages/siswa/Nilai';
-import SiswaForum from './pages/siswa/Forum';
 
 function Protected({ role, children }: { role: Role; children: JSX.Element }) {
   const { user } = useAuth();
@@ -41,25 +45,29 @@ export default function App() {
 
       <Route element={<Protected role="admin"><Layout /></Protected>}>
         <Route path="/admin" element={<AdminDashboard />} />
+        <Route path="/admin/periode" element={<AdminPeriode />} />
         <Route path="/admin/guru" element={<DataGuru />} />
         <Route path="/admin/siswa" element={<DataSiswa />} />
         <Route path="/admin/kelas" element={<DataKelas />} />
         <Route path="/admin/mapel" element={<DataMapel />} />
+        <Route path="/admin/pengampuan" element={<Pengampuan />} />
       </Route>
 
       <Route element={<Protected role="guru"><Layout /></Protected>}>
         <Route path="/guru" element={<GuruDashboard />} />
-        <Route path="/guru/materi" element={<GuruMateri />} />
-        <Route path="/guru/tugas" element={<GuruTugas />} />
-        <Route path="/guru/forum" element={<GuruForum />} />
+        <Route path="/guru/kelas" element={<GuruKelas />} />
+        <Route path="/guru/kelas/:id" element={<GuruKelasDetail />} />
+        <Route path="/guru/pertemuan/:id" element={<GuruPertemuan />} />
+        <Route path="/guru/penilaian" element={<GuruPenilaian />} />
       </Route>
 
       <Route element={<Protected role="siswa"><Layout /></Protected>}>
         <Route path="/siswa" element={<SiswaDashboard />} />
-        <Route path="/siswa/materi" element={<SiswaMateri />} />
+        <Route path="/siswa/kelas" element={<SiswaKelas />} />
+        <Route path="/siswa/kelas/:id" element={<SiswaKelasDetail />} />
+        <Route path="/siswa/pertemuan/:id" element={<SiswaPertemuan />} />
         <Route path="/siswa/tugas" element={<SiswaTugas />} />
         <Route path="/siswa/nilai" element={<SiswaNilai />} />
-        <Route path="/siswa/forum" element={<SiswaForum />} />
       </Route>
 
       <Route path="*" element={<Home />} />

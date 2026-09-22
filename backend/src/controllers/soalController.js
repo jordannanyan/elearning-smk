@@ -1,15 +1,12 @@
 const pool = require('../config/db');
 const asyncHandler = require('../utils/asyncHandler');
-const { guruIdOf } = require('./mapelController');
+const { kelasMapelDariTugas, kelasMapelMilikGuru } = require('../utils/akses');
 
-// Cek apakah tugas ini berada pada mapel milik guru login
+// Cek apakah tugas ini berada pada kelas mata pelajaran yang diampu guru login
 async function assertTugasMilikGuru(userId, id_tugas) {
-  const gid = await guruIdOf(userId);
-  const [rows] = await pool.query(`
-    SELECT t.id FROM tugas t
-    JOIN mata_pelajaran mp ON mp.id = t.id_mapel
-    WHERE t.id = ? AND mp.id_guru = ?`, [id_tugas, gid]);
-  return rows.length > 0;
+  const idKm = await kelasMapelDariTugas(id_tugas);
+  if (!idKm) return false;
+  return kelasMapelMilikGuru(userId, idKm);
 }
 exports.assertTugasMilikGuru = assertTugasMilikGuru;
 

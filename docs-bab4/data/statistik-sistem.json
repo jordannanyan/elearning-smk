@@ -1,0 +1,443 @@
+{
+  "statistik": [
+    {
+      "tabel": "users",
+      "deskripsi": "Menyimpan data akun seluruh pengguna sistem (administrator, guru, dan siswa)",
+      "jumlah_record": 18
+    },
+    {
+      "tabel": "kelas",
+      "deskripsi": "Menyimpan data rombongan belajar (kelas) yang ada di sekolah",
+      "jumlah_record": 3
+    },
+    {
+      "tabel": "guru",
+      "deskripsi": "Menyimpan data detail profil guru yang berelasi dengan tabel users",
+      "jumlah_record": 4
+    },
+    {
+      "tabel": "siswa",
+      "deskripsi": "Menyimpan data detail profil siswa beserta kelasnya",
+      "jumlah_record": 13
+    },
+    {
+      "tabel": "mata_pelajaran",
+      "deskripsi": "Menyimpan data mata pelajaran beserta guru pengampunya",
+      "jumlah_record": 5
+    },
+    {
+      "tabel": "materi",
+      "deskripsi": "Menyimpan data materi pembelajaran yang diunggah oleh guru",
+      "jumlah_record": 8
+    },
+    {
+      "tabel": "tugas",
+      "deskripsi": "Menyimpan data tugas dan kuis beserta tipe dan batas waktunya",
+      "jumlah_record": 6
+    },
+    {
+      "tabel": "soal",
+      "deskripsi": "Menyimpan butir soal pilihan ganda maupun esai pada sebuah kuis",
+      "jumlah_record": 13
+    },
+    {
+      "tabel": "pengumpulan_tugas",
+      "deskripsi": "Menyimpan data pengumpulan jawaban tugas oleh siswa",
+      "jumlah_record": 35
+    },
+    {
+      "tabel": "jawaban_siswa",
+      "deskripsi": "Menyimpan jawaban siswa pada setiap butir soal kuis",
+      "jumlah_record": 95
+    },
+    {
+      "tabel": "nilai",
+      "deskripsi": "Menyimpan data nilai siswa hasil penilaian guru maupun koreksi otomatis",
+      "jumlah_record": 28
+    },
+    {
+      "tabel": "forum_diskusi",
+      "deskripsi": "Menyimpan data topik dan balasan pada forum diskusi",
+      "jumlah_record": 14
+    }
+  ],
+  "rekap_nilai": [
+    {
+      "siswa": "Ahmad Fauzi",
+      "kelas": "X IPA 1",
+      "tugas": "Kuis Descriptive Text",
+      "tipe": "kuis",
+      "mapel": "Bahasa Inggris",
+      "skor": "98.00",
+      "terlambat": 0
+    },
+    {
+      "siswa": "Ahmad Fauzi",
+      "kelas": "X IPA 1",
+      "tugas": "Kuis Persamaan dan Pertidaksamaan Linear",
+      "tipe": "kuis",
+      "mapel": "Matematika Wajib",
+      "skor": "80.00",
+      "terlambat": 0
+    },
+    {
+      "siswa": "Ahmad Fauzi",
+      "kelas": "X IPA 1",
+      "tugas": "Kuis Teks Deskripsi",
+      "tipe": "kuis",
+      "mapel": "Bahasa Indonesia",
+      "skor": "100.00",
+      "terlambat": 0
+    },
+    {
+      "siswa": "Ahmad Fauzi",
+      "kelas": "X IPA 1",
+      "tugas": "Latihan Persamaan Linear",
+      "tipe": "tugas",
+      "mapel": "Matematika Wajib",
+      "skor": "90.00",
+      "terlambat": 0
+    },
+    {
+      "siswa": "Andi Setiawan",
+      "kelas": "X IPA 2",
+      "tugas": "Kuis Persamaan dan Pertidaksamaan Linear",
+      "tipe": "kuis",
+      "mapel": "Matematika Wajib",
+      "skor": "20.00",
+      "terlambat": 0
+    },
+    {
+      "siswa": "Andi Setiawan",
+      "kelas": "X IPA 2",
+      "tugas": "Latihan Persamaan Linear",
+      "tipe": "tugas",
+      "mapel": "Matematika Wajib",
+      "skor": "80.00",
+      "terlambat": 0
+    },
+    {
+      "siswa": "Andi Setiawan",
+      "kelas": "X IPA 2",
+      "tugas": "Tugas Menulis Teks Deskripsi",
+      "tipe": "tugas",
+      "mapel": "Bahasa Indonesia",
+      "skor": null,
+      "terlambat": 0
+    },
+    {
+      "siswa": "Bayu Saputra",
+      "kelas": "X IPA 1",
+      "tugas": "Kuis Descriptive Text",
+      "tipe": "kuis",
+      "mapel": "Bahasa Inggris",
+      "skor": null,
+      "terlambat": 0
+    },
+    {
+      "siswa": "Bayu Saputra",
+      "kelas": "X IPA 1",
+      "tugas": "Kuis Persamaan dan Pertidaksamaan Linear",
+      "tipe": "kuis",
+      "mapel": "Matematika Wajib",
+      "skor": "40.00",
+      "terlambat": 0
+    },
+    {
+      "siswa": "Bayu Saputra",
+      "kelas": "X IPA 1",
+      "tugas": "Latihan Persamaan Linear",
+      "tipe": "tugas",
+      "mapel": "Matematika Wajib",
+      "skor": null,
+      "terlambat": 0
+    },
+    {
+      "siswa": "Dewi Lestari",
+      "kelas": "X IPA 1",
+      "tugas": "Kuis Descriptive Text",
+      "tipe": "kuis",
+      "mapel": "Bahasa Inggris",
+      "skor": "72.00",
+      "terlambat": 0
+    },
+    {
+      "siswa": "Dewi Lestari",
+      "kelas": "X IPA 1",
+      "tugas": "Kuis Persamaan dan Pertidaksamaan Linear",
+      "tipe": "kuis",
+      "mapel": "Matematika Wajib",
+      "skor": "100.00",
+      "terlambat": 0
+    },
+    {
+      "siswa": "Dewi Lestari",
+      "kelas": "X IPA 1",
+      "tugas": "Kuis Teks Deskripsi",
+      "tipe": "kuis",
+      "mapel": "Bahasa Indonesia",
+      "skor": "73.00",
+      "terlambat": 0
+    },
+    {
+      "siswa": "Dewi Lestari",
+      "kelas": "X IPA 1",
+      "tugas": "Latihan Persamaan Linear",
+      "tipe": "tugas",
+      "mapel": "Matematika Wajib",
+      "skor": "85.00",
+      "terlambat": 0
+    },
+    {
+      "siswa": "Dewi Lestari",
+      "kelas": "X IPA 1",
+      "tugas": "Tugas Menulis Teks Deskripsi",
+      "tipe": "tugas",
+      "mapel": "Bahasa Indonesia",
+      "skor": "92.00",
+      "terlambat": 0
+    },
+    {
+      "siswa": "Fajar Ramadhan",
+      "kelas": "X IPA 2",
+      "tugas": "Kuis Persamaan dan Pertidaksamaan Linear",
+      "tipe": "kuis",
+      "mapel": "Matematika Wajib",
+      "skor": "80.00",
+      "terlambat": 0
+    },
+    {
+      "siswa": "Fajar Ramadhan",
+      "kelas": "X IPA 2",
+      "tugas": "Kuis Teks Deskripsi",
+      "tipe": "kuis",
+      "mapel": "Bahasa Indonesia",
+      "skor": null,
+      "terlambat": 0
+    },
+    {
+      "siswa": "Fajar Ramadhan",
+      "kelas": "X IPA 2",
+      "tugas": "Tugas Menulis Teks Deskripsi",
+      "tipe": "tugas",
+      "mapel": "Bahasa Indonesia",
+      "skor": null,
+      "terlambat": 0
+    },
+    {
+      "siswa": "Intan Permata",
+      "kelas": "XI IPS 1",
+      "tugas": "Kuis Descriptive Text",
+      "tipe": "kuis",
+      "mapel": "Bahasa Inggris",
+      "skor": "99.00",
+      "terlambat": 0
+    },
+    {
+      "siswa": "Intan Permata",
+      "kelas": "XI IPS 1",
+      "tugas": "Kuis Persamaan dan Pertidaksamaan Linear",
+      "tipe": "kuis",
+      "mapel": "Matematika Wajib",
+      "skor": "60.00",
+      "terlambat": 0
+    },
+    {
+      "siswa": "Maya Anggraini",
+      "kelas": "XI IPS 1",
+      "tugas": "Kuis Persamaan dan Pertidaksamaan Linear",
+      "tipe": "kuis",
+      "mapel": "Matematika Wajib",
+      "skor": "80.00",
+      "terlambat": 0
+    },
+    {
+      "siswa": "Maya Anggraini",
+      "kelas": "XI IPS 1",
+      "tugas": "Latihan Soal Besaran dan Satuan",
+      "tipe": "tugas",
+      "mapel": "Fisika",
+      "skor": "78.00",
+      "terlambat": 1
+    },
+    {
+      "siswa": "Nur Aisyah",
+      "kelas": "X IPA 1",
+      "tugas": "Kuis Persamaan dan Pertidaksamaan Linear",
+      "tipe": "kuis",
+      "mapel": "Matematika Wajib",
+      "skor": "100.00",
+      "terlambat": 0
+    },
+    {
+      "siswa": "Nur Aisyah",
+      "kelas": "X IPA 1",
+      "tugas": "Kuis Teks Deskripsi",
+      "tipe": "kuis",
+      "mapel": "Bahasa Indonesia",
+      "skor": null,
+      "terlambat": 0
+    },
+    {
+      "siswa": "Nur Aisyah",
+      "kelas": "X IPA 1",
+      "tugas": "Latihan Persamaan Linear",
+      "tipe": "tugas",
+      "mapel": "Matematika Wajib",
+      "skor": "95.00",
+      "terlambat": 0
+    },
+    {
+      "siswa": "Putri Rahmawati",
+      "kelas": "X IPA 2",
+      "tugas": "Kuis Persamaan dan Pertidaksamaan Linear",
+      "tipe": "kuis",
+      "mapel": "Matematika Wajib",
+      "skor": "80.00",
+      "terlambat": 0
+    },
+    {
+      "siswa": "Putri Rahmawati",
+      "kelas": "X IPA 2",
+      "tugas": "Kuis Teks Deskripsi",
+      "tipe": "kuis",
+      "mapel": "Bahasa Indonesia",
+      "skor": "96.00",
+      "terlambat": 0
+    },
+    {
+      "siswa": "Putri Rahmawati",
+      "kelas": "X IPA 2",
+      "tugas": "Latihan Persamaan Linear",
+      "tipe": "tugas",
+      "mapel": "Matematika Wajib",
+      "skor": "88.00",
+      "terlambat": 0
+    },
+    {
+      "siswa": "Putri Rahmawati",
+      "kelas": "X IPA 2",
+      "tugas": "Tugas Menulis Teks Deskripsi",
+      "tipe": "tugas",
+      "mapel": "Bahasa Indonesia",
+      "skor": "87.00",
+      "terlambat": 0
+    },
+    {
+      "siswa": "Rian Pratama",
+      "kelas": "X IPA 1",
+      "tugas": "Kuis Persamaan dan Pertidaksamaan Linear",
+      "tipe": "kuis",
+      "mapel": "Matematika Wajib",
+      "skor": "60.00",
+      "terlambat": 0
+    },
+    {
+      "siswa": "Rian Pratama",
+      "kelas": "X IPA 1",
+      "tugas": "Latihan Persamaan Linear",
+      "tipe": "tugas",
+      "mapel": "Matematika Wajib",
+      "skor": "75.00",
+      "terlambat": 0
+    },
+    {
+      "siswa": "Rizky Alamsyah",
+      "kelas": "XI IPS 1",
+      "tugas": "Latihan Soal Besaran dan Satuan",
+      "tipe": "tugas",
+      "mapel": "Fisika",
+      "skor": null,
+      "terlambat": 1
+    },
+    {
+      "siswa": "Salsabila Azzahra",
+      "kelas": "X IPA 2",
+      "tugas": "Kuis Persamaan dan Pertidaksamaan Linear",
+      "tipe": "kuis",
+      "mapel": "Matematika Wajib",
+      "skor": "100.00",
+      "terlambat": 0
+    },
+    {
+      "siswa": "Salsabila Azzahra",
+      "kelas": "X IPA 2",
+      "tugas": "Kuis Teks Deskripsi",
+      "tipe": "kuis",
+      "mapel": "Bahasa Indonesia",
+      "skor": "79.00",
+      "terlambat": 0
+    },
+    {
+      "siswa": "Salsabila Azzahra",
+      "kelas": "X IPA 2",
+      "tugas": "Tugas Menulis Teks Deskripsi",
+      "tipe": "tugas",
+      "mapel": "Bahasa Indonesia",
+      "skor": "90.00",
+      "terlambat": 0
+    }
+  ],
+  "ringkasan_tugas": [
+    {
+      "tugas": "Kuis Teks Deskripsi",
+      "tipe": "kuis",
+      "mapel": "Bahasa Indonesia",
+      "jumlah_kumpul": 6,
+      "sudah_dinilai": "4",
+      "rata_rata": "87.00",
+      "nilai_terendah": "73.00",
+      "nilai_tertinggi": "100.00"
+    },
+    {
+      "tugas": "Tugas Menulis Teks Deskripsi",
+      "tipe": "tugas",
+      "mapel": "Bahasa Indonesia",
+      "jumlah_kumpul": 5,
+      "sudah_dinilai": "3",
+      "rata_rata": "89.67",
+      "nilai_terendah": "87.00",
+      "nilai_tertinggi": "92.00"
+    },
+    {
+      "tugas": "Kuis Descriptive Text",
+      "tipe": "kuis",
+      "mapel": "Bahasa Inggris",
+      "jumlah_kumpul": 4,
+      "sudah_dinilai": "3",
+      "rata_rata": "89.67",
+      "nilai_terendah": "72.00",
+      "nilai_tertinggi": "99.00"
+    },
+    {
+      "tugas": "Latihan Soal Besaran dan Satuan",
+      "tipe": "tugas",
+      "mapel": "Fisika",
+      "jumlah_kumpul": 2,
+      "sudah_dinilai": "1",
+      "rata_rata": "78.00",
+      "nilai_terendah": "78.00",
+      "nilai_tertinggi": "78.00"
+    },
+    {
+      "tugas": "Kuis Persamaan dan Pertidaksamaan Linear",
+      "tipe": "kuis",
+      "mapel": "Matematika Wajib",
+      "jumlah_kumpul": 11,
+      "sudah_dinilai": "11",
+      "rata_rata": "72.73",
+      "nilai_terendah": "20.00",
+      "nilai_tertinggi": "100.00"
+    },
+    {
+      "tugas": "Latihan Persamaan Linear",
+      "tipe": "tugas",
+      "mapel": "Matematika Wajib",
+      "jumlah_kumpul": 7,
+      "sudah_dinilai": "6",
+      "rata_rata": "85.50",
+      "nilai_terendah": "75.00",
+      "nilai_tertinggi": "95.00"
+    }
+  ]
+}

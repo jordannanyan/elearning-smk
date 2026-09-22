@@ -1,0 +1,200 @@
+[
+  {
+    "no": 1,
+    "berkas": "01-halaman-login.png",
+    "judul": "Halaman Login",
+    "keterangan": "Halaman login sistem e-learning yang digunakan oleh administrator, guru, dan siswa untuk masuk ke dalam sistem sesuai hak aksesnya."
+  },
+  {
+    "no": 2,
+    "berkas": "02-login-gagal.png",
+    "judul": "Pesan Kesalahan Login",
+    "keterangan": "Tampilan pesan kesalahan ketika pengguna memasukkan email atau password yang tidak sesuai, sehingga sistem menolak proses login."
+  },
+  {
+    "no": 3,
+    "berkas": "03-admin-dashboard.png",
+    "judul": "Halaman Dashboard Administrator",
+    "keterangan": "Dashboard administrator menampilkan rekapitulasi jumlah guru, siswa, kelas, mata pelajaran, materi, dan tugas yang terdapat di dalam sistem."
+  },
+  {
+    "no": 4,
+    "berkas": "04-admin-data-guru.png",
+    "judul": "Halaman Data Guru",
+    "keterangan": "Halaman pengelolaan data guru yang menampilkan nama, NIP, email, dan mata pelajaran yang diampu, beserta tombol untuk menambah, mengubah, dan menghapus data."
+  },
+  {
+    "no": 5,
+    "berkas": "05-admin-form-guru.png",
+    "judul": "Form Tambah Data Guru",
+    "keterangan": "Form penambahan data guru yang memuat isian nama, email, password, NIP, dan mata pelajaran yang diampu."
+  },
+  {
+    "no": 6,
+    "berkas": "06-admin-data-siswa.png",
+    "judul": "Halaman Data Siswa",
+    "keterangan": "Halaman pengelolaan data siswa yang menampilkan nama, NIS, email, dan kelas siswa beserta tombol pengelolaan data."
+  },
+  {
+    "no": 7,
+    "berkas": "07-admin-form-siswa.png",
+    "judul": "Form Tambah Data Siswa",
+    "keterangan": "Form penambahan data siswa yang memuat isian nama, email, password, NIS, dan pilihan kelas tempat siswa ditempatkan."
+  },
+  {
+    "no": 8,
+    "berkas": "08-admin-data-kelas.png",
+    "judul": "Halaman Data Kelas",
+    "keterangan": "Halaman pengelolaan data kelas yang menampilkan nama kelas, tingkat, tahun ajaran, dan jumlah siswa pada setiap kelas."
+  },
+  {
+    "no": 9,
+    "berkas": "09-admin-form-kelas.png",
+    "judul": "Form Tambah Data Kelas",
+    "keterangan": "Form penambahan data kelas yang memuat isian nama kelas, tingkat, dan tahun ajaran."
+  },
+  {
+    "no": 10,
+    "berkas": "10-admin-data-mapel.png",
+    "judul": "Halaman Data Mata Pelajaran",
+    "keterangan": "Halaman pengelolaan data mata pelajaran yang menampilkan nama, kode, guru pengampu, dan deskripsi setiap mata pelajaran."
+  },
+  {
+    "no": 11,
+    "berkas": "11-admin-form-mapel.png",
+    "judul": "Form Tambah Mata Pelajaran",
+    "keterangan": "Form penambahan mata pelajaran yang memuat isian nama, kode, guru pengampu, dan deskripsi mata pelajaran."
+  },
+  {
+    "no": 12,
+    "berkas": "12-guru-dashboard.png",
+    "judul": "Halaman Dashboard Guru",
+    "keterangan": "Dashboard guru menampilkan jumlah mata pelajaran yang diampu, materi, tugas, serta jumlah pekerjaan siswa yang masih perlu dinilai."
+  },
+  {
+    "no": 13,
+    "berkas": "13-guru-materi.png",
+    "judul": "Halaman Kelola Materi Pembelajaran (Guru)",
+    "keterangan": "Halaman pengelolaan materi pembelajaran oleh guru yang menampilkan judul materi, mata pelajaran, file lampiran, dan tanggal unggah."
+  },
+  {
+    "no": 14,
+    "berkas": "14-guru-form-materi.png",
+    "judul": "Form Tambah Materi Pembelajaran",
+    "keterangan": "Form penambahan materi pembelajaran yang memuat pilihan mata pelajaran, judul, konten materi, serta unggahan file pendukung."
+  },
+  {
+    "no": 15,
+    "berkas": "15-guru-tugas.png",
+    "judul": "Halaman Kelola Tugas dan Kuis (Guru)",
+    "keterangan": "Halaman pengelolaan tugas dan kuis oleh guru yang menampilkan judul, tipe, jumlah soal, batas waktu, dan jumlah pekerjaan yang telah terkumpul."
+  },
+  {
+    "no": 16,
+    "berkas": "16-guru-form-tugas.png",
+    "judul": "Form Buat Tugas dan Kuis",
+    "keterangan": "Form pembuatan tugas atau kuis yang memuat pilihan mata pelajaran, tipe (tugas atau kuis), judul, instruksi pengerjaan, dan batas waktu pengumpulan."
+  },
+  {
+    "no": 17,
+    "berkas": "17-guru-kelola-soal.png",
+    "judul": "Halaman Kelola Butir Soal Kuis",
+    "keterangan": "Halaman pengelolaan butir soal kuis yang menampilkan pertanyaan, pilihan jawaban, kunci jawaban yang ditandai, serta bobot setiap butir soal."
+  },
+  {
+    "no": 18,
+    "berkas": "18-guru-form-soal.png",
+    "judul": "Form Tambah Butir Soal",
+    "keterangan": "Form penambahan butir soal yang memuat tipe soal (pilihan ganda atau esai), pertanyaan, pilihan jawaban, kunci jawaban, dan bobot nilai."
+  },
+  {
+    "no": 19,
+    "berkas": "19-guru-daftar-pengumpulan.png",
+    "judul": "Daftar Pengumpulan Tugas Siswa",
+    "keterangan": "Daftar siswa yang telah mengumpulkan tugas beserta waktu pengumpulan, file jawaban, nilai yang telah diberikan, dan tombol untuk melakukan penilaian."
+  },
+  {
+    "no": 20,
+    "berkas": "20-guru-pengumpulan-kuis.png",
+    "judul": "Daftar Pengumpulan Kuis Siswa",
+    "keterangan": "Daftar pengumpulan kuis yang menampilkan status penilaian setiap siswa, yaitu sudah selesai dinilai atau masih memerlukan penilaian pada jawaban esai."
+  },
+  {
+    "no": 21,
+    "berkas": "21-guru-penilaian-esai.png",
+    "judul": "Halaman Pemeriksaan dan Penilaian Jawaban Kuis",
+    "keterangan": "Halaman pemeriksaan jawaban kuis siswa. Jawaban pilihan ganda telah dikoreksi otomatis oleh sistem, sedangkan jawaban esai dinilai secara manual oleh guru dengan mengisi skor dan catatan."
+  },
+  {
+    "no": 22,
+    "berkas": "22-guru-forum.png",
+    "judul": "Halaman Forum Diskusi (Guru)",
+    "keterangan": "Halaman forum diskusi pada sisi guru yang menampilkan topik diskusi beserta balasan dari siswa, serta form untuk memulai topik baru."
+  },
+  {
+    "no": 23,
+    "berkas": "23-siswa-dashboard.png",
+    "judul": "Halaman Dashboard Siswa",
+    "keterangan": "Dashboard siswa menampilkan jumlah mata pelajaran, total tugas, tugas yang sudah dikumpulkan, tugas yang belum dikumpulkan, dan tugas yang sudah dinilai."
+  },
+  {
+    "no": 24,
+    "berkas": "24-siswa-materi.png",
+    "judul": "Halaman Materi Pembelajaran (Siswa)",
+    "keterangan": "Halaman materi pembelajaran pada sisi siswa yang menampilkan judul materi, mata pelajaran, guru pengampu, uraian materi, dan tombol unduh file materi."
+  },
+  {
+    "no": 25,
+    "berkas": "25-siswa-materi-filter.png",
+    "judul": "Penyaringan Materi Berdasarkan Mata Pelajaran",
+    "keterangan": "Hasil penyaringan materi pembelajaran berdasarkan mata pelajaran yang dipilih siswa, sehingga hanya materi mata pelajaran tersebut yang ditampilkan."
+  },
+  {
+    "no": 26,
+    "berkas": "26-siswa-tugas.png",
+    "judul": "Halaman Tugas dan Kuis (Siswa)",
+    "keterangan": "Halaman tugas dan kuis pada sisi siswa yang menampilkan judul, mata pelajaran, guru pengampu, batas waktu, serta status pengerjaan setiap tugas."
+  },
+  {
+    "no": 27,
+    "berkas": "27-siswa-hasil-kuis.png",
+    "judul": "Halaman Hasil Pengerjaan Kuis Siswa",
+    "keterangan": "Tampilan hasil pengerjaan kuis yang telah dinilai. Sistem menampilkan nilai akhir, jawaban yang dipilih siswa, keterangan benar atau salah, serta kunci jawaban setiap butir soal."
+  },
+  {
+    "no": 28,
+    "berkas": "28-siswa-nilai.png",
+    "judul": "Halaman Rekap Nilai Siswa",
+    "keterangan": "Halaman rekap nilai siswa yang menampilkan jumlah tugas yang dikumpulkan, jumlah yang sudah dinilai, rata-rata nilai, serta rincian nilai dan catatan dari guru untuk setiap tugas maupun kuis."
+  },
+  {
+    "no": 29,
+    "berkas": "29-siswa-forum.png",
+    "judul": "Halaman Forum Diskusi (Siswa)",
+    "keterangan": "Halaman forum diskusi pada sisi siswa yang menampilkan topik diskusi, balasan dari guru dan siswa lain, serta form untuk memulai topik baru."
+  },
+  {
+    "no": 30,
+    "berkas": "30-siswa-forum-balas.png",
+    "judul": "Form Balasan Forum Diskusi",
+    "keterangan": "Form balasan pada forum diskusi yang digunakan siswa untuk menanggapi topik diskusi yang dibuat oleh guru maupun siswa lain."
+  },
+  {
+    "no": 31,
+    "berkas": "31-siswa-kerjakan-kuis.png",
+    "judul": "Halaman Pengerjaan Kuis oleh Siswa",
+    "keterangan": "Halaman pengerjaan kuis oleh siswa yang menampilkan butir soal pilihan ganda beserta pilihan jawabannya dan soal esai yang dijawab pada kolom teks."
+  },
+  {
+    "no": 32,
+    "berkas": "32-siswa-kerjakan-tugas.png",
+    "judul": "Halaman Pengerjaan dan Pengumpulan Tugas",
+    "keterangan": "Halaman pengerjaan tugas oleh siswa yang memuat instruksi tugas, batas waktu, kolom jawaban teks, serta pilihan untuk mengunggah file lampiran jawaban."
+  },
+  {
+    "no": 33,
+    "berkas": "33-tampilan-mobile.png",
+    "judul": "Tampilan Sistem pada Perangkat Mobile",
+    "keterangan": "Tampilan sistem e-learning ketika diakses melalui browser pada perangkat smartphone, membuktikan bahwa antarmuka sistem bersifat responsif sesuai kebutuhan non-fungsional ketersediaan."
+  }
+]
