@@ -1,5 +1,5 @@
 {
-  "tanggal": "2026-09-22T14:49:52.942Z",
+  "tanggal": "2026-09-22T14:57:14.421Z",
   "total": 95,
   "valid": 95,
   "tidak_valid": 0,
@@ -515,7 +515,7 @@
       "skenario": "Sistem menampilkan materi berupa teks, berkas, dan video sekaligus",
       "input": "Membuka pertemuan yang memuat berbagai jenis materi",
       "harapan": "Materi teks, berkas unduhan, dan video pembelajaran ditampilkan pada satu pertemuan",
-      "aktual": "Jenis materi yang tampil: teks, file, link",
+      "aktual": "Jenis materi yang tampil: teks, file, video",
       "status": "Valid"
     },
     {

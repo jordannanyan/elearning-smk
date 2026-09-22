@@ -253,7 +253,7 @@ def main():
         page.fill('.modal input >> nth=0', "Video Pembahasan Persamaan Linear")
         page.fill('.modal textarea',
                   "Video penjelasan langkah penyelesaian persamaan linear satu variabel.")
-        page.fill('.modal input >> nth=1', "https://www.youtube.com/watch?v=aQ0hzJfy5hI")
+        page.fill('.modal input >> nth=1', "https://www.youtube.com/watch?v=kYB8IZa5AuE")
         simpan(page, "guru-form-materi", "Form Tambah Materi Pembelajaran",
                "Form penambahan materi dengan pilihan jenis materi: uraian teks, berkas dokumen, "
                "unggahan video, atau tautan video YouTube. Sistem juga menampilkan batasan format "

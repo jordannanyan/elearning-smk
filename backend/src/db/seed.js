@@ -45,6 +45,14 @@ function buatPdfContoh(namaFile, baris) {
   return namaFile;
 }
 
+// Menyalin berkas contoh (mis. video pembelajaran) ke folder uploads
+function salinAsetContoh(namaFile) {
+  if (!fs.existsSync(uploadDir)) fs.mkdirSync(uploadDir, { recursive: true });
+  const sumber = path.join(__dirname, 'assets', namaFile);
+  if (fs.existsSync(sumber)) fs.copyFileSync(sumber, path.join(uploadDir, namaFile));
+  return namaFile;
+}
+
 function hari(selisih, jam = '23:59:00') {
   const d = new Date();
   d.setDate(d.getDate() + selisih);
@@ -321,9 +329,10 @@ async function seed() {
       + 'Bentuk umumnya ax + b = 0 dengan a tidak sama dengan nol.', 'teks');
     await buatMateri(p1, 'Modul Persamaan Linear Satu Variabel (PDF)',
       'Modul lengkap beserta contoh soal dan pembahasan.', 'file', fileMtk);
-    await buatMateri(p1, 'Video Pembahasan Persamaan Linear',
-      'Video penjelasan langkah penyelesaian persamaan linear satu variabel.',
-      'link', null, 'https://www.youtube.com/watch?v=aQ0hzJfy5hI');
+    await buatMateri(p1, 'Video Pembelajaran Persamaan Linear Satu Variabel',
+      'Rekaman penjelasan langkah penyelesaian persamaan linear satu variabel '
+      + 'beserta contoh pengerjaannya.',
+      'video', salinAsetContoh('video_persamaan_linear.webm'));
     await buatTugas(p1, 'Latihan Persamaan Linear',
       'Kerjakan soal nomor 1-10 pada buku paket halaman 25. Tulis langkah penyelesaian secara lengkap, '
       + 'lalu unggah dalam bentuk file atau tuliskan pada kolom jawaban.', hari(9), 'tugas');
@@ -348,9 +357,9 @@ async function seed() {
     await buatMateri(p3, 'Metode Penyelesaian SPLDV',
       'SPLDV dapat diselesaikan dengan metode substitusi, eliminasi, campuran, maupun grafik. '
       + 'Pemilihan metode disesuaikan dengan bentuk persamaannya.', 'teks');
-    await buatMateri(p3, 'Video Metode Eliminasi dan Substitusi',
-      'Tautan video pembelajaran mengenai metode eliminasi dan substitusi pada SPLDV.',
-      'link', null, 'https://www.youtube.com/watch?v=3fRiC5tAcdU');
+    await buatMateri(p3, 'Video Pengayaan: Transformasi Linear dan Matriks',
+      'Tautan video pengayaan mengenai hubungan sistem persamaan linear dengan matriks.',
+      'link', null, 'https://www.youtube.com/watch?v=kYB8IZa5AuE');
     await buatTugas(p3, 'Tugas Proyek SPLDV',
       'Susunlah satu soal cerita yang dapat diselesaikan dengan SPLDV beserta penyelesaiannya, '
       + 'kemudian unggah dalam bentuk dokumen.', hari(2), 'tugas');
@@ -404,9 +413,9 @@ async function seed() {
       'Vektor dan Resultan Gaya', 'Penjumlahan vektor dan penguraian vektor pada sumbu x dan y.', -12);
     await buatMateri(f2, 'Penjumlahan Vektor',
       'Vektor dapat dijumlahkan dengan metode segitiga, jajargenjang, maupun poligon.', 'teks');
-    await buatMateri(f2, 'Video Penguraian Vektor',
-      'Video penjelasan penguraian vektor pada sumbu x dan y.',
-      'link', null, 'https://www.youtube.com/watch?v=4xPqWPtHnMo');
+    await buatMateri(f2, 'Video Pengayaan: Konsep Vektor',
+      'Tautan video pengayaan mengenai konsep vektor dan penguraiannya.',
+      'link', null, 'https://www.youtube.com/watch?v=fNk_zzaMoSs');
 
     // ---------- Bahasa Inggris X MIPA 1 ----------
     const e1 = await buatPertemuan('BING_P1', km.X1_BING, 1,
