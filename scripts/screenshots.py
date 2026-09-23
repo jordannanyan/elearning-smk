@@ -101,9 +101,10 @@ def main():
         # =============================================================
         login(page, "admin@smakk.sch.id", "admin123")
         simpan(page, "admin-dashboard", "Halaman Dashboard Administrator",
-               "Dashboard administrator menampilkan rekapitulasi data sistem pada periode "
-               "pembelajaran yang sedang berjalan, meliputi jumlah guru, siswa, kelas, mata "
-               "pelajaran, pengampuan, pertemuan, materi, serta tugas dan kuis.")
+               "Dashboard administrator dibatasi pada data yang memang dikelola administrator, "
+               "yaitu jumlah guru, siswa, kelas, dan mata pelajaran pada periode pembelajaran "
+               "yang sedang berjalan. Jumlah pertemuan, materi, dan tugas tidak ditampilkan di "
+               "sini karena merupakan ranah guru.")
 
         buka(page, "/admin/periode")
         simpan(page, "admin-periode", "Halaman Periode Pembelajaran",
@@ -135,9 +136,17 @@ def main():
         page.fill('.modal input >> nth=3', "199506152019032007")
         simpan(page, "admin-form-guru", "Form Tambah Data Guru",
                "Form penambahan data guru yang memuat isian nama, email, password, dan NIP. "
-               "Mata pelajaran yang diampu ditentukan terpisah pada menu Pengampuan Kelas.",
+               "Mata pelajaran yang diajar guru ditentukan melalui menu Data Kelas.",
                modal=True)
         page.click('.modal button:has-text("Batal")')
+
+        page.locator('tr:has-text("Budi Santoso") button:has-text("Jadwal")').first.click()
+        page.wait_for_selector('.modal:has-text("Jadwal Mengajar")')
+        simpan(page, "admin-jadwal-guru", "Rincian Jadwal Mengajar Seorang Guru",
+               "Rincian jadwal mengajar yang menjawab pertanyaan guru ini mengajar apa dan di kelas "
+               "mana. Informasi ditampilkan sebagai rincian tersendiri, tidak ditumpuk pada tabel "
+               "daftar guru.", modal=True)
+        page.click('.modal button:has-text("Tutup")')
 
         buka(page, "/admin/siswa")
         simpan(page, "admin-data-siswa", "Halaman Data Siswa",
@@ -157,23 +166,32 @@ def main():
 
         buka(page, "/admin/kelas")
         simpan(page, "admin-data-kelas", "Halaman Data Kelas",
-               "Halaman pengelolaan data kelas. Kelas terikat pada sebuah periode pembelajaran "
-               "sehingga kelas dengan nama sama pada periode berbeda tercatat terpisah dan "
-               "riwayat tiap periode tetap utuh.", full=True)
+               "Data kelas disajikan sebagai kartu agar mudah dibaca. Setiap kartu menampilkan "
+               "tingkat, wali kelas, jumlah siswa, dan jumlah mata pelajaran, serta dapat dibuka "
+               "untuk mengatur isinya.", full=True)
 
-        page.locator('button:has-text("Siswa")').first.click()
+        page.locator('.kartu-ringkas:has-text("X MIPA 1")').first.click()
         page.wait_for_selector(".modal")
-        simpan(page, "admin-anggota-kelas", "Pengelolaan Anggota Kelas",
-               "Dialog pengelolaan anggota kelas yang digunakan administrator untuk menambahkan "
-               "atau mengeluarkan siswa dari sebuah kelas pada periode berjalan.", modal=True)
+        page.wait_for_timeout(1200)
+        simpan(page, "admin-kelas-mapel-guru", "Pengaturan Mata Pelajaran dan Guru Pengajar Kelas",
+               "Penentuan guru dilakukan langsung di dalam kelas yang bersangkutan: setiap mata "
+               "pelajaran pada kelas tersebut dipasangkan dengan guru yang mengajarnya. Dengan cara "
+               "ini satu mata pelajaran dapat diajar guru yang berbeda pada kelas yang berbeda.",
+               modal=True)
+
+        page.locator('.modal .tab-bar button:has-text("Siswa")').click()
+        page.wait_for_timeout(800)
+        simpan(page, "admin-kelas-siswa", "Pengaturan Siswa Anggota Kelas",
+               "Tab Siswa pada rincian kelas digunakan administrator untuk menambahkan atau "
+               "mengeluarkan siswa dari kelas tersebut pada periode berjalan.", modal=True)
         page.click('.modal button:has-text("Tutup")')
 
         buka(page, "/admin/mapel")
         simpan(page, "admin-data-mapel", "Halaman Katalog Mata Pelajaran",
-               "Katalog mata pelajaran SMA yang memuat 27 mata pelajaran, dikelompokkan menjadi "
-               "kelompok wajib, peminatan MIPA, peminatan IPS, peminatan bahasa, dan muatan "
-               "lokal. Kolom Diampu di menunjukkan pada berapa kelas mata pelajaran tersebut "
-               "diajarkan dan berapa guru yang mengampunya.", full=True)
+               "Katalog mata pelajaran sekolah yang dikelompokkan menjadi kelompok wajib, "
+               "peminatan MIPA, peminatan IPS, peminatan bahasa, dan muatan lokal. Kolom "
+               "Diajarkan di Kelas menunjukkan pada tingkat kelas mana mata pelajaran tersebut "
+               "diajarkan. Daftar yang panjang dibagi menjadi beberapa halaman.", full=True)
 
         page.click('button:has-text("+ Tambah Mapel")')
         page.wait_for_selector(".modal")
@@ -185,22 +203,13 @@ def main():
                "kode, kelompok mata pelajaran, dan deskripsi.", modal=True)
         page.click('.modal button:has-text("Batal")')
 
-        buka(page, "/admin/pengampuan")
-        simpan(page, "admin-pengampuan", "Halaman Pengampuan Kelas",
-               "Halaman pengampuan yang menghubungkan kelas, mata pelajaran, dan guru pengampu "
-               "dalam satu periode. Melalui halaman ini satu mata pelajaran dapat diampu oleh "
-               "guru yang berbeda pada tingkat kelas yang berbeda, misalnya Bahasa Indonesia "
-               "kelas X dan kelas XI.", full=True)
-
-        page.click('button:has-text("+ Tambah Pengampuan")')
-        page.wait_for_selector(".modal")
-        page.select_option('.modal select >> nth=1', label="Sejarah Indonesia (Wajib)")
-        page.select_option('.modal select >> nth=2', index=1)
-        simpan(page, "admin-form-pengampuan", "Form Tambah Pengampuan Kelas",
-               "Form penetapan pengampuan yang memuat pilihan kelas, mata pelajaran, dan guru "
-               "pengampu. Pengampuan inilah yang menjadi wadah pertemuan, materi, tugas, dan "
-               "forum diskusi.", modal=True)
-        page.click('.modal button:has-text("Batal")')
+        page.locator('tr:has-text("Bahasa Indonesia") button:has-text("Lihat Kelas")').first.click()
+        page.wait_for_selector('.modal:has-text("Diajarkan di Kelas")')
+        simpan(page, "admin-mapel-detail", "Rincian Mata Pelajaran: Diajarkan di Kelas Mana",
+               "Rincian sebuah mata pelajaran yang memperlihatkan kelas mana saja yang "
+               "mempelajarinya beserta guru yang mengajar di tiap kelas. Terlihat Bahasa Indonesia "
+               "diajar guru yang berbeda antara tingkat X dan tingkat XI.", modal=True)
+        page.click('.modal button:has-text("Tutup")')
 
         # =============================================================
         # 3. GURU
@@ -292,20 +301,23 @@ def main():
 
         buka(page, "/guru/penilaian")
         simpan(page, "guru-penilaian", "Halaman Penilaian (Guru)",
-               "Halaman penilaian menampilkan seluruh tugas dan kuis pada kelas mata pelajaran "
-               "yang diampu guru, lengkap dengan pertemuan asal, batas waktu, dan jumlah "
-               "pekerjaan yang sudah terkumpul.", full=True)
+               "Penilaian dikelompokkan per mata pelajaran, tidak dicampur menjadi satu daftar "
+               "panjang. Setiap kartu menampilkan jumlah tugas, pekerjaan yang terkumpul, dan "
+               "jumlah siswa pada kelas tersebut.", full=True)
 
-        page.locator('tr:has-text("Latihan Persamaan Linear") button:has-text("Periksa & Nilai")').first.click()
+        page.locator('.kartu-ringkas:has-text("Matematika Wajib"):has-text("X MIPA 1")').first.click()
+        page.wait_for_timeout(1000)
+        simpan(page, "guru-penilaian-mapel", "Daftar Tugas pada Satu Mata Pelajaran",
+               "Setelah mata pelajaran dipilih, tugas dan kuisnya ditampilkan berurutan menurut "
+               "pertemuan beserta jumlah pekerjaan yang sudah terkumpul.", full=True)
+
+        page.locator('.kartu-tugas:has-text("Latihan Persamaan Linear") button:has-text("Periksa & Nilai")').first.click()
         page.wait_for_selector('.modal:has-text("Pengumpulan:")')
         simpan(page, "guru-daftar-pengumpulan", "Daftar Pengumpulan Tugas Siswa",
-               "Daftar pengumpulan tugas yang menampilkan seluruh siswa kelas, termasuk siswa "
-               "yang belum mengumpulkan. Dengan demikian tugas yang tidak dikumpulkan ikut "
-               "terpantau oleh guru.", modal=True)
-        page.click('.modal button:has-text("Tutup")')
+               "Daftar pengumpulan menampilkan seluruh siswa kelas, termasuk siswa yang belum "
+               "mengumpulkan, sehingga tugas yang tidak dikumpulkan ikut terpantau guru.",
+               modal=True)
 
-        page.locator('tr:has-text("Latihan Persamaan Linear") button:has-text("Periksa & Nilai")').first.click()
-        page.wait_for_selector('.modal:has-text("Pengumpulan:")')
         page.locator('.modal button:has-text("Nilai")').first.click()
         page.wait_for_selector('.modal >> nth=1')
         page.wait_for_timeout(600)
@@ -313,8 +325,8 @@ def main():
         page.fill('.modal >> nth=-1 >> textarea',
                   "Langkah pengerjaan sudah runtut dan benar. Pertahankan.")
         simpan(page, "guru-form-nilai", "Form Penilaian Tugas oleh Guru",
-               "Form penilaian tugas yang menampilkan jawaban siswa beserta berkas lampirannya, "
-               "kolom nilai 0 sampai 100, dan kolom catatan umpan balik untuk siswa.", modal=True)
+               "Form penilaian menampilkan jawaban siswa beserta berkas lampirannya, kolom nilai "
+               "0 sampai 100, dan kolom catatan umpan balik untuk siswa.", modal=True)
         page.click('.modal >> nth=-1 >> button:has-text("Batal")')
         page.wait_for_timeout(400)
         page.click('.modal button:has-text("Tutup")')
@@ -322,7 +334,9 @@ def main():
         # Penilaian esai pada kuis (guru Bahasa Indonesia)
         login(page, "siti@smakk.sch.id", "guru123")
         buka(page, "/guru/penilaian")
-        page.locator('tr:has-text("Kuis Teks Deskripsi") button:has-text("Periksa & Nilai")').first.click()
+        page.locator('.kartu-ringkas:has-text("Bahasa Indonesia"):has-text("X MIPA 1")').first.click()
+        page.wait_for_timeout(1000)
+        page.locator('.kartu-tugas:has-text("Kuis Teks Deskripsi") button:has-text("Periksa & Nilai")').first.click()
         page.wait_for_selector('.modal:has-text("Pengumpulan:")')
         simpan(page, "guru-pengumpulan-kuis", "Daftar Pengumpulan Kuis Siswa",
                "Daftar pengumpulan kuis beserta status penilaian tiap siswa, yaitu sudah dinilai, "
@@ -378,12 +392,21 @@ def main():
 
         buka(page, "/siswa/tugas")
         simpan(page, "siswa-tugas", "Halaman Tugas dan Kuis (Siswa)",
-               "Halaman tugas dan kuis yang dikelompokkan berdasarkan status pengerjaan, yaitu "
-               "belum dikerjakan, terlewat batas waktu, menunggu penilaian, dan sudah dinilai. "
-               "Setiap tugas menampilkan sisa hari menuju batas waktu beserta penanda warna "
-               "apabila tenggatnya sudah dekat.", full=True)
+               "Tugas disajikan sebagai kartu, bukan tabel, sehingga lebih mudah dibaca sekilas. "
+               "Setiap kartu hanya memuat mata pelajaran, judul, batas waktu, dan sisa hari "
+               "beserta penanda warna kemendesakannya; keterangan lain disembunyikan pada bagian "
+               "rincian. Status pengerjaan dipisahkan melalui tab tersendiri.", full=True)
 
-        page.locator('tr:has-text("Kuis Persamaan dan Pertidaksamaan Linear") button').first.click()
+        page.locator('.kartu-tugas').first.locator('.tombol-rincian').click()
+        page.wait_for_timeout(600)
+        simpan(page, "siswa-tugas-rincian", "Rincian Tugas yang Disembunyikan",
+               "Keterangan tambahan seperti guru pengajar, pertemuan asal, kelas, waktu "
+               "pengumpulan, dan catatan guru hanya ditampilkan ketika rincian dibuka, agar "
+               "tampilan utama tetap ringkas.", full=True)
+
+        page.locator('.tab-bar button:has-text("Sudah Dinilai")').click()
+        page.wait_for_timeout(800)
+        page.locator('.kartu-tugas:has-text("Kuis Persamaan dan Pertidaksamaan Linear") button:has-text("Lihat Hasil")').first.click()
         page.wait_for_selector(".modal")
         page.wait_for_timeout(1200)
         simpan(page, "siswa-hasil-kuis", "Halaman Hasil Pengerjaan Kuis Siswa",

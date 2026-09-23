@@ -92,9 +92,19 @@ exports.summary = asyncHandler(async (req, res) => {
       JOIN siswa_kelas sk ON sk.id_kelas = km.id_kelas
       WHERE km.id_guru = ? AND k.id_periode <=> ?`, [gid, idPeriode]);
 
+    // Daftar kelas yang diajar, agar guru langsung melihat nama kelasnya
+    const [daftarKelas] = await pool.query(`
+      SELECT km.id, mp.nama AS nama_mapel, k.nama_kelas, k.tingkat
+      FROM kelas_mapel km
+      JOIN mata_pelajaran mp ON mp.id = km.id_mapel
+      JOIN kelas k ON k.id = km.id_kelas
+      WHERE km.id_guru = ? AND k.id_periode <=> ?
+      ORDER BY mp.nama, k.nama_kelas`, [gid, idPeriode]);
+
     return res.json({
       role, periode: infoPeriode,
       total_kelas_mapel, total_pertemuan, total_materi, total_tugas, perlu_dinilai, total_siswa,
+      daftar_kelas: daftarKelas,
     });
   }
 

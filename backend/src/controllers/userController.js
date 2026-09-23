@@ -186,6 +186,35 @@ exports.remove = asyncHandler(async (req, res) => {
   res.json({ message: 'Pengguna berhasil dihapus' });
 });
 
+// GET /api/users/:id/jadwal?id_periode=..  (admin)
+//   Jadwal mengajar seorang guru: mata pelajaran apa saja yang diajarkannya
+//   dan pada kelas mana saja. Menjawab pertanyaan "guru ini mengajar apa
+//   dan di kelas mana" tanpa harus membaca tabel gabungan.
+exports.jadwalGuru = asyncHandler(async (req, res) => {
+  const { id_periode } = req.query;
+  const [[g]] = await pool.query('SELECT id FROM guru WHERE id_user = ?', [req.params.id]);
+  if (!g) return res.status(404).json({ message: 'Data guru tidak ditemukan' });
+
+  const params = [g.id];
+  let filter = "p.status = 'aktif'";
+  if (id_periode) { filter = 'k.id_periode = ?'; params.push(id_periode); }
+
+  const [rows] = await pool.query(`
+    SELECT km.id AS id_jadwal, mp.nama AS nama_mapel, mp.kode AS kode_mapel, mp.kelompok,
+           k.nama_kelas, k.tingkat, p.kode AS kode_periode, p.status AS status_periode,
+           (SELECT COUNT(*) FROM siswa_kelas sk WHERE sk.id_kelas = k.id) AS jumlah_siswa,
+           (SELECT COUNT(*) FROM pertemuan pt WHERE pt.id_kelas_mapel = km.id) AS jumlah_pertemuan
+    FROM kelas_mapel km
+    JOIN mata_pelajaran mp ON mp.id = km.id_mapel
+    JOIN kelas k ON k.id = km.id_kelas
+    JOIN periode p ON p.id = k.id_periode
+    WHERE km.id_guru = ? AND ${filter}
+    ORDER BY mp.nama, FIELD(k.tingkat,'X','XI','XII'), k.nama_kelas
+  `, params);
+
+  res.json(rows);
+});
+
 // GET /api/users/siswa-tersedia?id_kelas=..  (admin)
 //   Siswa aktif yang belum terdaftar pada kelas tersebut.
 exports.siswaTersedia = asyncHandler(async (req, res) => {

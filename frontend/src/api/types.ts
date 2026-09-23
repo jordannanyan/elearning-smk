@@ -60,8 +60,9 @@ export interface Mapel {
   kelompok?: string;
   deskripsi?: string;
   aktif: number;
-  jumlah_pengampuan?: number;
+  jumlah_kelas?: number;
   jumlah_guru?: number;
+  tingkat_diajarkan?: string | null;
 }
 
 export interface KelasMapel {

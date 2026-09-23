@@ -10,7 +10,6 @@ import DataGuru from './pages/admin/DataGuru';
 import DataSiswa from './pages/admin/DataSiswa';
 import DataKelas from './pages/admin/DataKelas';
 import DataMapel from './pages/admin/DataMapel';
-import Pengampuan from './pages/admin/Pengampuan';
 
 import GuruDashboard from './pages/guru/Dashboard';
 import GuruKelas from './pages/guru/KelasSaya';
@@ -50,7 +49,6 @@ export default function App() {
         <Route path="/admin/siswa" element={<DataSiswa />} />
         <Route path="/admin/kelas" element={<DataKelas />} />
         <Route path="/admin/mapel" element={<DataMapel />} />
-        <Route path="/admin/pengampuan" element={<Pengampuan />} />
       </Route>
 
       <Route element={<Protected role="guru"><Layout /></Protected>}>

@@ -246,3 +246,85 @@ a.polos { color: inherit; display: block; }
   .topbar { padding: 0 14px; }
   .topbar .periode-chip { display: none; }
 }
+
+/* =====================================================================
+   Kartu tugas, kartu ringkas, dan paginasi
+   ===================================================================== */
+
+/* ---------- Kartu tugas / kuis ---------- */
+.kartu-tugas {
+  background: #fff; border: 1px solid var(--border); border-radius: 10px;
+  padding: 16px 18px; margin-bottom: 12px; display: flex; gap: 16px;
+  align-items: center; flex-wrap: wrap; transition: .15s;
+  border-left: 4px solid var(--border);
+}
+.kartu-tugas:hover { box-shadow: 0 4px 16px rgba(17,24,39,.08); }
+.kartu-tugas.kritis { border-left-color: #b3261e; }
+.kartu-tugas.mendesak { border-left-color: var(--accent); }
+.kartu-tugas.aman { border-left-color: var(--primary); }
+.kartu-tugas.lewat, .kartu-tugas.tanpa_batas { border-left-color: var(--gray); }
+.kartu-tugas .utama { flex: 1; min-width: 220px; }
+.kartu-tugas .judul { font-weight: 700; font-size: 15px; margin: 6px 0 2px; }
+.kartu-tugas .mapel { font-size: 12.5px; color: var(--gray); }
+.kartu-tugas .aksi { display: flex; flex-direction: column; align-items: flex-end; gap: 8px; }
+.kartu-tugas .rincian {
+  width: 100%; border-top: 1px dashed var(--border); padding-top: 10px; margin-top: 4px;
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 8px;
+  font-size: 12.5px; color: var(--gray);
+}
+.kartu-tugas .rincian strong { color: var(--text); font-weight: 600; }
+.tombol-rincian {
+  background: none; border: none; color: var(--primary); cursor: pointer;
+  font-size: 12px; font-weight: 600; padding: 0; text-align: left;
+}
+
+/* ---------- Kartu ringkas (kelas, guru, mata pelajaran) ---------- */
+.kartu-ringkas {
+  background: #fff; border: 1px solid var(--border); border-radius: 12px;
+  padding: 16px 18px; display: flex; flex-direction: column; gap: 10px;
+  transition: .15s; cursor: pointer; border-top: 4px solid var(--primary);
+}
+.kartu-ringkas:hover { box-shadow: 0 6px 20px rgba(17,24,39,.09); transform: translateY(-2px); }
+.kartu-ringkas.abu { border-top-color: var(--gray); }
+.kartu-ringkas h3 { font-size: 15.5px; line-height: 1.3; }
+.kartu-ringkas .sub { font-size: 12.5px; color: var(--gray); }
+.kartu-ringkas .angka-baris { display: flex; gap: 18px; margin-top: 2px; }
+.kartu-ringkas .angka-baris div { font-size: 12px; color: var(--gray); }
+.kartu-ringkas .angka-baris strong { display: block; font-size: 18px; color: var(--text); }
+.kartu-ringkas .kaki {
+  margin-top: auto; padding-top: 10px; border-top: 1px dashed var(--border);
+  font-size: 12px; color: var(--primary); font-weight: 600;
+}
+
+/* ---------- Paginasi ---------- */
+.paginasi {
+  display: flex; align-items: center; justify-content: center; gap: 8px;
+  margin: 18px 0 4px; flex-wrap: wrap;
+}
+.paginasi button {
+  min-width: 34px; padding: 6px 10px; border: 1px solid var(--border);
+  background: #fff; border-radius: 6px; cursor: pointer; font-size: 13px; font-weight: 600;
+  color: var(--text);
+}
+.paginasi button:hover:not(:disabled) { background: #f9fafb; }
+.paginasi button.aktif { background: var(--primary); color: #fff; border-color: var(--primary); }
+.paginasi button:disabled { opacity: .45; cursor: not-allowed; }
+.paginasi .info { font-size: 12.5px; color: var(--gray); margin-right: 6px; }
+
+/* ---------- Daftar rincian di dalam dialog ---------- */
+.rincian-list { display: grid; gap: 10px; }
+.rincian-item {
+  border: 1px solid var(--border); border-radius: 8px; padding: 12px 14px;
+  display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap;
+}
+.rincian-item .kiri { min-width: 180px; }
+.rincian-item .nama { font-weight: 600; font-size: 14px; }
+.rincian-item .ket { font-size: 12.5px; color: var(--gray); margin-top: 2px; }
+
+/* ---------- Tab sederhana ---------- */
+.tab-bar { display: flex; gap: 6px; border-bottom: 1px solid var(--border); margin-bottom: 16px; }
+.tab-bar button {
+  border: none; background: none; padding: 10px 16px; cursor: pointer;
+  font-size: 13.5px; font-weight: 600; color: var(--gray); border-bottom: 3px solid transparent;
+}
+.tab-bar button.aktif { color: var(--primary-dark); border-bottom-color: var(--primary); }

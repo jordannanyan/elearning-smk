@@ -44,6 +44,7 @@ router.delete('/periode/:id', authenticate, authorize('admin'), periode.remove);
 // ---------- Pengguna (admin) ----------
 router.get('/users', authenticate, authorize('admin'), users.list);
 router.get('/users/siswa-tersedia', authenticate, authorize('admin'), users.siswaTersedia);
+router.get('/users/:id/jadwal', authenticate, authorize('admin'), users.jadwalGuru);
 router.post('/users', authenticate, authorize('admin'), users.create);
 router.put('/users/:id', authenticate, authorize('admin'), users.update);
 router.put('/users/:id/status', authenticate, authorize('admin'), users.ubahStatus);
@@ -64,6 +65,7 @@ router.delete('/kelas/:id/siswa/:idSiswa', authenticate, authorize('admin'),
 
 // ---------- Katalog mata pelajaran (admin) ----------
 router.get('/mapel', authenticate, mapel.list);
+router.get('/mapel/:id/detail', authenticate, mapel.detail);
 router.get('/guru/options', authenticate, authorize('admin'), mapel.guruOptions);
 router.post('/mapel', authenticate, authorize('admin'), mapel.create);
 router.put('/mapel/:id', authenticate, authorize('admin'), mapel.update);
