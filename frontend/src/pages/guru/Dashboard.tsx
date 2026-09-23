@@ -12,7 +12,7 @@ export default function GuruDashboard() {
 
   // Ringkasan dibatasi pada hal yang langsung dibutuhkan guru
   const kartu = [
-    ['Mata Pelajaran yang Diajar', d.total_kelas_mapel],
+    ['Mapel Diajar', d.total_kelas_mapel],
     ['Jumlah Siswa', d.total_siswa],
     ['Materi', d.total_materi],
     ['Tugas & Kuis', d.total_tugas],
