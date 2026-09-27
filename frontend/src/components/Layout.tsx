@@ -41,7 +41,8 @@ export default function Layout() {
   }, []);
 
   if (!user) return null;
-  const menus = MENUS[user.role];
+  const menus = MENUS[user.role] ?? [];
+  const namaPengguna = user.nama || 'Pengguna';
 
   function handleLogout() {
     logout();
@@ -59,7 +60,7 @@ export default function Layout() {
             </NavLink>
           ))}
         </nav>
-        <div className="foot">{ROLE_LABEL[user.role]}</div>
+        <div className="foot">{ROLE_LABEL[user.role] ?? '-'}</div>
       </aside>
 
       <div className="main">
@@ -77,9 +78,9 @@ export default function Layout() {
             )}
           </div>
           <div className="user">
-            <div className="avatar">{user.nama.charAt(0).toUpperCase()}</div>
+            <div className="avatar">{namaPengguna.charAt(0).toUpperCase()}</div>
             <div>
-              <div style={{ fontWeight: 600 }}>{user.nama}</div>
+              <div style={{ fontWeight: 600 }}>{namaPengguna}</div>
               <div className="muted" style={{ fontSize: 11 }}>{ROLE_LABEL[user.role]}</div>
             </div>
             <button className="btn secondary small" onClick={handleLogout}>Logout</button>
