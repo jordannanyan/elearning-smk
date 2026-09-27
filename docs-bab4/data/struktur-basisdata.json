@@ -2,7 +2,7 @@
   {
     "tabel": "users",
     "deskripsi": "Menyimpan data akun seluruh pengguna sistem (administrator, guru, dan siswa)",
-    "jumlah_record": 23,
+    "jumlah_record": 317,
     "kolom": [
       {
         "nama": "id",
@@ -142,7 +142,7 @@
   {
     "tabel": "kelas",
     "deskripsi": "Menyimpan data rombongan belajar pada sebuah periode pembelajaran",
-    "jumlah_record": 7,
+    "jumlah_record": 20,
     "kolom": [
       {
         "nama": "id",
@@ -173,18 +173,18 @@
         "keterangan": "Tingkat kelas (X, XI, XII)"
       },
       {
-        "nama": "wali_kelas",
-        "tipe": "varchar(120)",
+        "nama": "id_wali",
+        "tipe": "int(11)",
         "null": "Ya",
-        "kunci": "-",
-        "keterangan": "Nama wali kelas"
+        "kunci": "Foreign Key",
+        "keterangan": "-"
       }
     ]
   },
   {
     "tabel": "guru",
     "deskripsi": "Menyimpan data detail profil guru yang berelasi dengan tabel users",
-    "jumlah_record": 6,
+    "jumlah_record": 28,
     "kolom": [
       {
         "nama": "id",
@@ -226,7 +226,7 @@
   {
     "tabel": "siswa",
     "deskripsi": "Menyimpan data detail profil siswa yang berelasi dengan tabel users",
-    "jumlah_record": 16,
+    "jumlah_record": 288,
     "kolom": [
       {
         "nama": "id",
@@ -268,7 +268,7 @@
   {
     "tabel": "siswa_kelas",
     "deskripsi": "Menyimpan keanggotaan siswa pada sebuah kelas di setiap periode",
-    "jumlah_record": 19,
+    "jumlah_record": 575,
     "kolom": [
       {
         "nama": "id",
@@ -345,7 +345,7 @@
   {
     "tabel": "kelas_mapel",
     "deskripsi": "Menyimpan pengampuan, yaitu mata pelajaran pada sebuah kelas beserta guru pengampunya",
-    "jumlah_record": 17,
+    "jumlah_record": 310,
     "kolom": [
       {
         "nama": "id",
@@ -380,7 +380,7 @@
   {
     "tabel": "pertemuan",
     "deskripsi": "Menyimpan urutan pertemuan pembelajaran pada sebuah kelas mata pelajaran",
-    "jumlah_record": 15,
+    "jumlah_record": 10,
     "kolom": [
       {
         "nama": "id",
@@ -436,7 +436,7 @@
   {
     "tabel": "materi",
     "deskripsi": "Menyimpan materi pembelajaran (teks, berkas, video, atau tautan) pada sebuah pertemuan",
-    "jumlah_record": 21,
+    "jumlah_record": 16,
     "kolom": [
       {
         "nama": "id",
@@ -499,7 +499,7 @@
   {
     "tabel": "tugas",
     "deskripsi": "Menyimpan data tugas dan kuis beserta tipe dan batas waktunya",
-    "jumlah_record": 11,
+    "jumlah_record": 9,
     "kolom": [
       {
         "nama": "id",
@@ -800,7 +800,7 @@
   {
     "tabel": "forum_diskusi",
     "deskripsi": "Menyimpan topik dan balasan forum diskusi pada sebuah pertemuan",
-    "jumlah_record": 8,
+    "jumlah_record": 16,
     "kolom": [
       {
         "nama": "id",

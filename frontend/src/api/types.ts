@@ -36,6 +36,7 @@ export interface UserRow extends User {
   siswa_id?: number;
   kelas_aktif?: string | null;
   jumlah_pengampuan?: number;
+  wali_kelas?: string | null;
 }
 
 /* ---------- Kelas & mata pelajaran ---------- */
@@ -44,7 +45,9 @@ export interface Kelas {
   id_periode: number;
   nama_kelas: string;
   tingkat: string;
-  wali_kelas?: string | null;
+  id_wali?: number | null;
+  nama_wali?: string | null;
+  nip_wali?: string | null;
   kode_periode?: string;
   tahun_ajaran?: string;
   semester?: number;

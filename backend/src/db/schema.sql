@@ -26,9 +26,9 @@ DROP TABLE IF EXISTS pertemuan;
 DROP TABLE IF EXISTS kelas_mapel;
 DROP TABLE IF EXISTS siswa_kelas;
 DROP TABLE IF EXISTS mata_pelajaran;
+DROP TABLE IF EXISTS kelas;
 DROP TABLE IF EXISTS siswa;
 DROP TABLE IF EXISTS guru;
-DROP TABLE IF EXISTS kelas;
 DROP TABLE IF EXISTS periode;
 DROP TABLE IF EXISTS users;
 
@@ -71,21 +71,6 @@ CREATE TABLE periode (
 ) ENGINE=InnoDB;
 
 -- ------------------------------------------------------------------
--- kelas : rombongan belajar pada sebuah periode
---   Kelas X IPA 1 pada 2026/1 berbeda baris dengan X IPA 1 pada 2026/2,
---   sehingga riwayat tiap periode tetap terpisah.
--- ------------------------------------------------------------------
-CREATE TABLE kelas (
-  id          INT AUTO_INCREMENT PRIMARY KEY,
-  id_periode  INT NOT NULL,
-  nama_kelas  VARCHAR(50) NOT NULL,
-  tingkat     VARCHAR(10) NOT NULL,                -- X / XI / XII
-  wali_kelas  VARCHAR(120) DEFAULT NULL,
-  UNIQUE KEY uq_kelas_periode (id_periode, nama_kelas),
-  CONSTRAINT fk_kelas_periode FOREIGN KEY (id_periode) REFERENCES periode(id) ON DELETE CASCADE
-) ENGINE=InnoDB;
-
--- ------------------------------------------------------------------
 -- guru : data profil guru, 1-1 dengan users
 -- ------------------------------------------------------------------
 CREATE TABLE guru (
@@ -109,6 +94,23 @@ CREATE TABLE siswa (
   tgl_lahir DATE DEFAULT NULL,
   alamat    TEXT DEFAULT NULL,
   CONSTRAINT fk_siswa_user FOREIGN KEY (id_user) REFERENCES users(id) ON DELETE CASCADE
+) ENGINE=InnoDB;
+
+-- ------------------------------------------------------------------
+-- kelas : rombongan belajar pada sebuah periode
+--   Kelas X A pada 2026/1 berbeda baris dengan X A pada 2026/2,
+--   sehingga riwayat tiap periode tetap terpisah. Wali kelas mengacu
+--   langsung ke data guru, bukan ditulis sebagai teks bebas.
+-- ------------------------------------------------------------------
+CREATE TABLE kelas (
+  id          INT AUTO_INCREMENT PRIMARY KEY,
+  id_periode  INT NOT NULL,
+  nama_kelas  VARCHAR(50) NOT NULL,
+  tingkat     VARCHAR(10) NOT NULL,                -- X / XI / XII
+  id_wali     INT DEFAULT NULL,                    -- wali kelas, mengacu ke tabel guru
+  UNIQUE KEY uq_kelas_periode (id_periode, nama_kelas),
+  CONSTRAINT fk_kelas_periode FOREIGN KEY (id_periode) REFERENCES periode(id) ON DELETE CASCADE,
+  CONSTRAINT fk_kelas_wali    FOREIGN KEY (id_wali)    REFERENCES guru(id) ON DELETE SET NULL
 ) ENGINE=InnoDB;
 
 -- ------------------------------------------------------------------

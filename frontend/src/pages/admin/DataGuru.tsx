@@ -102,13 +102,15 @@ export default function DataGuru() {
           periode berjalan; klik untuk melihat mata pelajaran apa saja dan di kelas mana. Guru yang
           sudah mengajar tidak dapat dihapus permanen karena akan memutus data materi, tugas, dan
           nilai yang terkait — gunakan tombol <strong>Nonaktifkan</strong> sebagai gantinya.
+          Kolom <strong>Wali Kelas</strong> terisi otomatis dari penetapan wali kelas pada menu
+          Data Kelas.
         </div>
       </div>
 
       <div className="table-wrap">
         <table>
           <thead>
-            <tr><th>Nama</th><th>NIP</th><th>Email</th><th>Mengajar di</th><th>Status</th><th>Aksi</th></tr>
+            <tr><th>Nama</th><th>NIP</th><th>Mengajar di</th><th>Wali Kelas</th><th>Status</th><th>Aksi</th></tr>
           </thead>
           <tbody>
             {loading ? <tr><td colSpan={6} className="center-msg">Memuat...</td></tr>
@@ -116,14 +118,19 @@ export default function DataGuru() {
                 : rows.map((r) => (
                   <tr key={r.id} style={{ opacity: r.aktif ? 1 : .6 }}>
                     <td>{r.nama}</td>
-                    <td className="muted">{r.nip || '-'}</td>
-                    <td className="muted">{r.email}</td>
+                    <td className="muted">{r.nip || '-'}<br />
+                      <span style={{ fontSize: 11.5 }}>{r.email}</span></td>
                     <td>
                       {r.jumlah_pengampuan
                         ? <button className="tombol-rincian" onClick={() => bukaJadwal(r)}>
                           {r.jumlah_pengampuan} kelas — lihat jadwal
                         </button>
                         : <span className="muted">Belum mengajar</span>}
+                    </td>
+                    <td>
+                      {r.wali_kelas
+                        ? <span className="badge green">👤 {r.wali_kelas}</span>
+                        : <span className="muted">-</span>}
                     </td>
                     <td>
                       {r.aktif ? <span className="badge green">Aktif</span>

@@ -28,7 +28,13 @@ exports.list = asyncHandler(async (req, res) => {
               FROM siswa_kelas sk JOIN kelas k ON k.id = sk.id_kelas
               JOIN periode p ON p.id = k.id_periode
               WHERE sk.id_siswa = s.id AND p.status = 'aktif') AS kelas_aktif,
-           (SELECT COUNT(*) FROM kelas_mapel km WHERE km.id_guru = g.id) AS jumlah_pengampuan
+           (SELECT COUNT(*) FROM kelas_mapel km
+              JOIN kelas k2 ON k2.id = km.id_kelas
+              JOIN periode p2 ON p2.id = k2.id_periode
+            WHERE km.id_guru = g.id AND p2.status = 'aktif') AS jumlah_pengampuan,
+           (SELECT GROUP_CONCAT(k.nama_kelas ORDER BY k.nama_kelas SEPARATOR ', ')
+              FROM kelas k JOIN periode p ON p.id = k.id_periode
+              WHERE k.id_wali = g.id AND p.status = 'aktif') AS wali_kelas
     FROM users u
     LEFT JOIN guru g  ON g.id_user = u.id
     LEFT JOIN siswa s ON s.id_user = u.id

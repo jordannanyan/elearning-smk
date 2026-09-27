@@ -12,19 +12,23 @@ exports.list = asyncHandler(async (req, res) => {
 
   const [rows] = await pool.query(`
     SELECT k.*, p.kode AS kode_periode, p.tahun_ajaran, p.semester, p.status AS status_periode,
+           u.nama AS nama_wali, g.nip AS nip_wali,
            (SELECT COUNT(*) FROM siswa_kelas sk WHERE sk.id_kelas = k.id) AS jumlah_siswa,
            (SELECT COUNT(*) FROM kelas_mapel km WHERE km.id_kelas = k.id) AS jumlah_mapel
     FROM kelas k
     JOIN periode p ON p.id = k.id_periode
+    LEFT JOIN guru g  ON g.id = k.id_wali
+    LEFT JOIN users u ON u.id = g.id_user
     ${where.length ? 'WHERE ' + where.join(' AND ') : ''}
-    ORDER BY p.tahun_ajaran DESC, p.semester DESC, k.tingkat, k.nama_kelas
+    ORDER BY p.tahun_ajaran DESC, p.semester DESC,
+             FIELD(k.tingkat,'X','XI','XII'), k.nama_kelas
   `, params);
   res.json(rows);
 });
 
 // POST /api/kelas  (admin)
 exports.create = asyncHandler(async (req, res) => {
-  const { id_periode, nama_kelas, tingkat, wali_kelas } = req.body;
+  const { id_periode, nama_kelas, tingkat, id_wali } = req.body;
   if (!id_periode || !nama_kelas || !tingkat)
     return res.status(400).json({ message: 'Periode, nama kelas, dan tingkat wajib diisi' });
 
@@ -39,18 +43,18 @@ exports.create = asyncHandler(async (req, res) => {
     return res.status(409).json({ message: `Kelas ${nama_kelas} sudah ada pada periode ${p[0].kode}` });
 
   const [r] = await pool.query(
-    'INSERT INTO kelas (id_periode, nama_kelas, tingkat, wali_kelas) VALUES (?,?,?,?)',
-    [id_periode, nama_kelas, tingkat, wali_kelas || null]
+    'INSERT INTO kelas (id_periode, nama_kelas, tingkat, id_wali) VALUES (?,?,?,?)',
+    [id_periode, nama_kelas, tingkat, id_wali || null]
   );
   res.status(201).json({ id: r.insertId, message: 'Kelas berhasil dibuat' });
 });
 
 // PUT /api/kelas/:id  (admin)
 exports.update = asyncHandler(async (req, res) => {
-  const { nama_kelas, tingkat, wali_kelas } = req.body;
+  const { nama_kelas, tingkat, id_wali } = req.body;
   const [r] = await pool.query(
-    'UPDATE kelas SET nama_kelas = ?, tingkat = ?, wali_kelas = ? WHERE id = ?',
-    [nama_kelas, tingkat, wali_kelas || null, req.params.id]
+    'UPDATE kelas SET nama_kelas = ?, tingkat = ?, id_wali = ? WHERE id = ?',
+    [nama_kelas, tingkat, id_wali || null, req.params.id]
   );
   if (!r.affectedRows) return res.status(404).json({ message: 'Kelas tidak ditemukan' });
   res.json({ message: 'Kelas berhasil diperbarui' });

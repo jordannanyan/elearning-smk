@@ -129,7 +129,10 @@ exports.ubahStatus = asyncHandler(async (req, res) => {
 // GET /api/guru/options  -> daftar guru untuk dropdown (admin)
 exports.guruOptions = asyncHandler(async (req, res) => {
   const [rows] = await pool.query(`
-    SELECT g.id, u.nama, g.nip, u.aktif
+    SELECT g.id, u.nama, g.nip, u.aktif,
+           (SELECT GROUP_CONCAT(k.nama_kelas ORDER BY k.nama_kelas SEPARATOR ', ')
+              FROM kelas k JOIN periode p ON p.id = k.id_periode
+              WHERE k.id_wali = g.id AND p.status = 'aktif') AS wali_kelas
     FROM guru g JOIN users u ON u.id = g.id_user
     WHERE u.aktif = 1
     ORDER BY u.nama

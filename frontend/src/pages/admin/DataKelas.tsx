@@ -20,7 +20,7 @@ export default function DataKelas() {
 
   const [show, setShow] = useState(false);
   const [edit, setEdit] = useState<Kelas | null>(null);
-  const [form, setForm] = useState<any>({ id_periode: '', nama_kelas: '', tingkat: 'X', wali_kelas: '' });
+  const [form, setForm] = useState<any>({ id_periode: '', nama_kelas: '', tingkat: 'X', id_wali: '' });
   const [err, setErr] = useState('');
 
   // Dialog rincian kelas
@@ -31,7 +31,7 @@ export default function DataKelas() {
 
   // Form tambah mata pelajaran + guru pengajar
   const [mapel, setMapel] = useState<Mapel[]>([]);
-  const [guru, setGuru] = useState<{ id: number; nama: string; nip?: string }[]>([]);
+  const [guru, setGuru] = useState<{ id: number; nama: string; nip?: string; wali_kelas?: string | null }[]>([]);
   const [fm, setFm] = useState({ id_mapel: '', id_guru: '' });
   const [tersedia, setTersedia] = useState<{ id: number; nama: string; nis?: string }[]>([]);
   const [siswaBaru, setSiswaBaru] = useState('');
@@ -58,14 +58,14 @@ export default function DataKelas() {
   /* ---------------- CRUD kelas ---------------- */
   function openAdd() {
     setEdit(null);
-    setForm({ id_periode: pilih, nama_kelas: '', tingkat: 'X', wali_kelas: '' });
+    setForm({ id_periode: pilih, nama_kelas: '', tingkat: 'X', id_wali: '' });
     setErr(''); setShow(true);
   }
   function openEdit(k: Kelas) {
     setEdit(k);
     setForm({
       id_periode: k.id_periode, nama_kelas: k.nama_kelas,
-      tingkat: k.tingkat, wali_kelas: k.wali_kelas || '',
+      tingkat: k.tingkat, id_wali: k.id_wali || '',
     });
     setErr(''); setShow(true);
   }
@@ -188,7 +188,7 @@ export default function DataKelas() {
                     <div className="sub">Tingkat {k.tingkat} · Periode {k.kode_periode}</div>
                   </div>
                   <div className="sub">
-                    Wali kelas: <strong>{k.wali_kelas || 'Belum ditentukan'}</strong>
+                    👤 Wali kelas: <strong>{k.nama_wali || 'Belum ditentukan'}</strong>
                   </div>
                   <div className="angka-baris">
                     <div><strong>{k.jumlah_siswa}</strong>Siswa</div>
@@ -228,8 +228,22 @@ export default function DataKelas() {
                 <option>X</option><option>XI</option><option>XII</option>
               </select></div>
             <div className="field"><label>Wali Kelas</label>
-              <input value={form.wali_kelas} placeholder="Nama wali kelas"
-                onChange={(e) => setForm({ ...form, wali_kelas: e.target.value })} /></div>
+              <select value={form.id_wali}
+                onChange={(e) => setForm({ ...form, id_wali: e.target.value })}>
+                <option value="">- Belum ditentukan -</option>
+                {guru.map((g) => (
+                  <option key={g.id} value={g.id}>
+                    {g.nama}{g.nip ? ` (${g.nip})` : ''}
+                    {g.wali_kelas && String(g.id) !== String(form.id_wali)
+                      ? ` — sudah wali ${g.wali_kelas}` : ''}
+                  </option>
+                ))}
+              </select>
+              <p className="muted" style={{ fontSize: 12, marginTop: 5 }}>
+                Wali kelas dipilih dari data guru, sehingga tercatat sebagai penugasan guru
+                dan tampil pada halaman Data Guru.
+              </p>
+            </div>
             <div className="modal-actions">
               <button type="button" className="btn secondary" onClick={() => setShow(false)}>Batal</button>
               <button className="btn">Simpan</button>
@@ -243,7 +257,7 @@ export default function DataKelas() {
         <Modal title={`Kelas ${detail.nama_kelas} — Periode ${detail.kode_periode}`}
           onClose={() => setDetail(null)}>
           <p className="muted" style={{ fontSize: 13, marginBottom: 12 }}>
-            Tingkat {detail.tingkat} · Wali kelas {detail.wali_kelas || 'belum ditentukan'}
+            Tingkat {detail.tingkat} · Wali kelas {detail.nama_wali || 'belum ditentukan'}
           </p>
 
           <div className="tab-bar">

@@ -1,0 +1,3263 @@
+{
+ "sekolah": {
+  "nama": "SMA Negeri 1 Karau Kuala",
+  "npsn": "30200792",
+  "nss": "302140209006",
+  "alamat": "Jalan Barito Raya No. 077 RT.24 RW 08 Kelurahan Bangkuang",
+  "kabupaten": "Barito Selatan",
+  "provinsi": "Kalimantan Tengah",
+  "kepala_sekolah": "Yunita Pebrianti, S.Pd"
+ },
+ "sumber": {
+  "pembagian_tugas": "SK Nomor 421.3/001/14/SMAN 1 KK/I/2026 tanggal 5 Januari 2026",
+  "wali_kelas": "SK Nomor 421.3/186/14/SMAN 1 KK/VII/2025 tanggal 9 Juli 2025 (Lampiran IV)",
+  "daftar_siswa": "Daftar Hadir Siswa Tahun Pelajaran 2025/2026"
+ },
+ "kelas": [
+  {
+   "nama": "X A",
+   "tingkat": "X",
+   "wali": "halifah@smakk.sch.id"
+  },
+  {
+   "nama": "X B",
+   "tingkat": "X",
+   "wali": "asnin@smakk.sch.id"
+  },
+  {
+   "nama": "X C",
+   "tingkat": "X",
+   "wali": "nurlaila@smakk.sch.id"
+  },
+  {
+   "nama": "XI A",
+   "tingkat": "XI",
+   "wali": "akhmad@smakk.sch.id"
+  },
+  {
+   "nama": "XI B",
+   "tingkat": "XI",
+   "wali": "martaniah@smakk.sch.id"
+  },
+  {
+   "nama": "XI C",
+   "tingkat": "XI",
+   "wali": "nesvi@smakk.sch.id"
+  },
+  {
+   "nama": "XI D",
+   "tingkat": "XI",
+   "wali": "dewi@smakk.sch.id"
+  },
+  {
+   "nama": "XII A",
+   "tingkat": "XII",
+   "wali": "laily@smakk.sch.id"
+  },
+  {
+   "nama": "XII B",
+   "tingkat": "XII",
+   "wali": "janatin@smakk.sch.id"
+  },
+  {
+   "nama": "XII C",
+   "tingkat": "XII",
+   "wali": "widayani@smakk.sch.id"
+  }
+ ],
+ "mata_pelajaran": [
+  {
+   "nama": "BAHASA INDONESIA",
+   "kode": "BIND",
+   "kelompok": "Wajib"
+  },
+  {
+   "nama": "BAHASA INGGRIS",
+   "kode": "BING",
+   "kelompok": "Wajib"
+  },
+  {
+   "nama": "BAHASA INGGRIS TK LANJT",
+   "kode": "BING-L",
+   "kelompok": "Peminatan"
+  },
+  {
+   "nama": "BIOLOGI",
+   "kode": "BIO",
+   "kelompok": "Wajib"
+  },
+  {
+   "nama": "BIOLOGI PEMINATAN",
+   "kode": "BIO-P",
+   "kelompok": "Peminatan"
+  },
+  {
+   "nama": "EKONOMI",
+   "kode": "EKO",
+   "kelompok": "Wajib"
+  },
+  {
+   "nama": "EKONOMI PEMINATAN",
+   "kode": "EKO-P",
+   "kelompok": "Peminatan"
+  },
+  {
+   "nama": "FISIKA",
+   "kode": "FIS",
+   "kelompok": "Wajib"
+  },
+  {
+   "nama": "FISIKA PEMINATAN",
+   "kode": "FIS-P",
+   "kelompok": "Peminatan"
+  },
+  {
+   "nama": "GEOGRAFI",
+   "kode": "GEO",
+   "kelompok": "Wajib"
+  },
+  {
+   "nama": "INFORMATIKA",
+   "kode": "INFO",
+   "kelompok": "Wajib"
+  },
+  {
+   "nama": "INFORMATIKA PEMINATAN",
+   "kode": "INFO-P",
+   "kelompok": "Peminatan"
+  },
+  {
+   "nama": "KIMIA",
+   "kode": "KIM",
+   "kelompok": "Wajib"
+  },
+  {
+   "nama": "KIMIA PEMINATAN",
+   "kode": "KIM-P",
+   "kelompok": "Peminatan"
+  },
+  {
+   "nama": "MATEMATIKA TK LANJUT",
+   "kode": "MTK-L",
+   "kelompok": "Peminatan"
+  },
+  {
+   "nama": "MATEMATIKA UMUM",
+   "kode": "MTK-U",
+   "kelompok": "Wajib"
+  },
+  {
+   "nama": "MULOK",
+   "kode": "MULOK",
+   "kelompok": "Muatan Lokal"
+  },
+  {
+   "nama": "PAI dan Budi Pekerti",
+   "kode": "PAIBP",
+   "kelompok": "Wajib"
+  },
+  {
+   "nama": "PEND. AGAMA KRISTEN",
+   "kode": "PAK",
+   "kelompok": "Wajib"
+  },
+  {
+   "nama": "PJOK",
+   "kode": "PJOK",
+   "kelompok": "Wajib"
+  },
+  {
+   "nama": "PKWU",
+   "kode": "PKWU",
+   "kelompok": "Wajib"
+  },
+  {
+   "nama": "Pend. PANCASILA",
+   "kode": "PPKN",
+   "kelompok": "Wajib"
+  },
+  {
+   "nama": "SEJARAH",
+   "kode": "SEJ",
+   "kelompok": "Wajib"
+  },
+  {
+   "nama": "SEJARAH PEMINATAN",
+   "kode": "SEJ-P",
+   "kelompok": "Peminatan"
+  },
+  {
+   "nama": "SENI BUDAYA",
+   "kode": "SENBUD",
+   "kelompok": "Wajib"
+  },
+  {
+   "nama": "SOSIOLOGI",
+   "kode": "SOS",
+   "kelompok": "Wajib"
+  },
+  {
+   "nama": "SOSIOLOGI PEMINATAN",
+   "kode": "SOS-P",
+   "kelompok": "Peminatan"
+  }
+ ],
+ "guru": [
+  {
+   "nama": "Yunita Pebrianti, S.Pd",
+   "nip": "19920222 201503 0 002",
+   "email": "yunita@smakk.sch.id",
+   "jabatan": "KEPALA SEKOLAH",
+   "tugas_tambahan": "",
+   "ajar": []
+  },
+  {
+   "nama": "Hermilawaty, S.Ag",
+   "nip": "19741215 200701 2 011",
+   "email": "hermilawaty@smakk.sch.id",
+   "jabatan": "GURU TETAP",
+   "tugas_tambahan": "",
+   "ajar": [
+    {
+     "mapel": "PAI dan Budi Pekerti",
+     "kelas": "X A",
+     "jam": 3
+    },
+    {
+     "mapel": "PAI dan Budi Pekerti",
+     "kelas": "X B",
+     "jam": 3
+    },
+    {
+     "mapel": "PAI dan Budi Pekerti",
+     "kelas": "X C",
+     "jam": 3
+    },
+    {
+     "mapel": "PAI dan Budi Pekerti",
+     "kelas": "XI A",
+     "jam": 3
+    },
+    {
+     "mapel": "PAI dan Budi Pekerti",
+     "kelas": "XI B",
+     "jam": 3
+    },
+    {
+     "mapel": "PAI dan Budi Pekerti",
+     "kelas": "XI C",
+     "jam": 3
+    },
+    {
+     "mapel": "PAI dan Budi Pekerti",
+     "kelas": "XI D",
+     "jam": 3
+    }
+   ]
+  },
+  {
+   "nama": "Mahlian, S.Pd",
+   "nip": "19670209 199403 1 014",
+   "email": "mahlian@smakk.sch.id",
+   "jabatan": "GURU TETAP",
+   "tugas_tambahan": "KEPALA PERPUST",
+   "ajar": [
+    {
+     "mapel": "MATEMATIKA UMUM",
+     "kelas": "X B",
+     "jam": 4
+    },
+    {
+     "mapel": "MATEMATIKA UMUM",
+     "kelas": "X C",
+     "jam": 4
+    },
+    {
+     "mapel": "MATEMATIKA UMUM",
+     "kelas": "XI A",
+     "jam": 4
+    }
+   ]
+  },
+  {
+   "nama": "Nurlaila, S.Pd",
+   "nip": "19770203 200701 2 009",
+   "email": "nurlaila@smakk.sch.id",
+   "jabatan": "GURU TETAP",
+   "tugas_tambahan": "wali Kls, ekstrakul",
+   "ajar": [
+    {
+     "mapel": "Pend. PANCASILA",
+     "kelas": "X A",
+     "jam": 2
+    },
+    {
+     "mapel": "Pend. PANCASILA",
+     "kelas": "X B",
+     "jam": 2
+    },
+    {
+     "mapel": "Pend. PANCASILA",
+     "kelas": "X C",
+     "jam": 2
+    },
+    {
+     "mapel": "Pend. PANCASILA",
+     "kelas": "XI A",
+     "jam": 2
+    },
+    {
+     "mapel": "Pend. PANCASILA",
+     "kelas": "XI B",
+     "jam": 2
+    },
+    {
+     "mapel": "Pend. PANCASILA",
+     "kelas": "XI C",
+     "jam": 2
+    },
+    {
+     "mapel": "Pend. PANCASILA",
+     "kelas": "XI D",
+     "jam": 2
+    },
+    {
+     "mapel": "Pend. PANCASILA",
+     "kelas": "XII A",
+     "jam": 2
+    },
+    {
+     "mapel": "Pend. PANCASILA",
+     "kelas": "XII B",
+     "jam": 2
+    },
+    {
+     "mapel": "Pend. PANCASILA",
+     "kelas": "XII C",
+     "jam": 2
+    }
+   ]
+  },
+  {
+   "nama": "Halifah, S.P",
+   "nip": "19780227 200701 2 009",
+   "email": "halifah@smakk.sch.id",
+   "jabatan": "GURU TETAP",
+   "tugas_tambahan": "",
+   "ajar": [
+    {
+     "mapel": "MATEMATIKA TK LANJUT",
+     "kelas": "XI B",
+     "jam": 5
+    },
+    {
+     "mapel": "MATEMATIKA TK LANJUT",
+     "kelas": "XII A",
+     "jam": 5
+    },
+    {
+     "mapel": "MATEMATIKA TK LANJUT",
+     "kelas": "XII B",
+     "jam": 5
+    },
+    {
+     "mapel": "MATEMATIKA TK LANJUT",
+     "kelas": "XII C",
+     "jam": 5
+    },
+    {
+     "mapel": "MATEMATIKA UMUM",
+     "kelas": "X A",
+     "jam": 4
+    }
+   ]
+  },
+  {
+   "nama": "Samjuhdi, S.P",
+   "nip": "19720616 200501 1 017",
+   "email": "samjuhdi@smakk.sch.id",
+   "jabatan": "GURU TETAP",
+   "tugas_tambahan": "WAKA KURIKLM",
+   "ajar": [
+    {
+     "mapel": "FISIKA",
+     "kelas": "X A",
+     "jam": 3
+    },
+    {
+     "mapel": "FISIKA PEMINATAN",
+     "kelas": "XI A",
+     "jam": 5
+    },
+    {
+     "mapel": "FISIKA PEMINATAN",
+     "kelas": "XI B",
+     "jam": 5
+    }
+   ]
+  },
+  {
+   "nama": "Martaniah, S.Pd",
+   "nip": "19780426 200604 2 028",
+   "email": "martaniah@smakk.sch.id",
+   "jabatan": "GURU TETAP",
+   "tugas_tambahan": "",
+   "ajar": [
+    {
+     "mapel": "BAHASA INDONESIA",
+     "kelas": "XI A",
+     "jam": 4
+    },
+    {
+     "mapel": "BAHASA INDONESIA",
+     "kelas": "XI B",
+     "jam": 4
+    },
+    {
+     "mapel": "BAHASA INDONESIA",
+     "kelas": "XI C",
+     "jam": 4
+    },
+    {
+     "mapel": "BAHASA INDONESIA",
+     "kelas": "XII A",
+     "jam": 4
+    },
+    {
+     "mapel": "BAHASA INDONESIA",
+     "kelas": "XII B",
+     "jam": 4
+    },
+    {
+     "mapel": "BAHASA INDONESIA",
+     "kelas": "XII C",
+     "jam": 4
+    }
+   ]
+  },
+  {
+   "nama": "Ramayadi Jaya, S.Pd",
+   "nip": "19750320 200604 1 025",
+   "email": "ramayadi@smakk.sch.id",
+   "jabatan": "GURU TETAP",
+   "tugas_tambahan": "",
+   "ajar": [
+    {
+     "mapel": "BAHASA INGGRIS",
+     "kelas": "X C",
+     "jam": 3
+    },
+    {
+     "mapel": "BAHASA INGGRIS",
+     "kelas": "XI A",
+     "jam": 3
+    },
+    {
+     "mapel": "BAHASA INGGRIS",
+     "kelas": "XI B",
+     "jam": 3
+    },
+    {
+     "mapel": "BAHASA INGGRIS",
+     "kelas": "XI C",
+     "jam": 3
+    },
+    {
+     "mapel": "BAHASA INGGRIS",
+     "kelas": "XI D",
+     "jam": 3
+    },
+    {
+     "mapel": "BAHASA INGGRIS",
+     "kelas": "XII A",
+     "jam": 3
+    },
+    {
+     "mapel": "BAHASA INGGRIS",
+     "kelas": "XII B",
+     "jam": 3
+    },
+    {
+     "mapel": "BAHASA INGGRIS",
+     "kelas": "XII C",
+     "jam": 3
+    }
+   ]
+  },
+  {
+   "nama": "Edy Priyono, S.E",
+   "nip": "19751125 2006041 021",
+   "email": "edy@smakk.sch.id",
+   "jabatan": "GURU TETAP",
+   "tugas_tambahan": "",
+   "ajar": [
+    {
+     "mapel": "EKONOMI PEMINATAN",
+     "kelas": "XI B",
+     "jam": 5
+    },
+    {
+     "mapel": "EKONOMI PEMINATAN",
+     "kelas": "XI C",
+     "jam": 5
+    },
+    {
+     "mapel": "EKONOMI PEMINATAN",
+     "kelas": "XII C",
+     "jam": 5
+    },
+    {
+     "mapel": "EKONOMI",
+     "kelas": "X A",
+     "jam": 3
+    },
+    {
+     "mapel": "EKONOMI",
+     "kelas": "X B",
+     "jam": 3
+    },
+    {
+     "mapel": "EKONOMI",
+     "kelas": "X C",
+     "jam": 3
+    }
+   ]
+  },
+  {
+   "nama": "Sugianoor, S.Sos",
+   "nip": "19780416 200904 1 001",
+   "email": "sugianoor@smakk.sch.id",
+   "jabatan": "GURU TETAP",
+   "tugas_tambahan": "WAKA SARPRAS",
+   "ajar": [
+    {
+     "mapel": "SOSIOLOGI",
+     "kelas": "X A",
+     "jam": 3
+    },
+    {
+     "mapel": "SOSIOLOGI",
+     "kelas": "X B",
+     "jam": 3
+    },
+    {
+     "mapel": "SOSIOLOGI",
+     "kelas": "X C",
+     "jam": 3
+    },
+    {
+     "mapel": "SOSIOLOGI PEMINATAN",
+     "kelas": "XI D",
+     "jam": 5
+    }
+   ]
+  },
+  {
+   "nama": "Muhammad Rahmadani, S.Pd",
+   "nip": "19780829 200904 1 001",
+   "email": "muhammad@smakk.sch.id",
+   "jabatan": "GURU TETAP",
+   "tugas_tambahan": "KOOR.P5 X A,B,C",
+   "ajar": [
+    {
+     "mapel": "SEJARAH",
+     "kelas": "X A",
+     "jam": 3
+    },
+    {
+     "mapel": "SEJARAH",
+     "kelas": "X B",
+     "jam": 3
+    },
+    {
+     "mapel": "SEJARAH",
+     "kelas": "X C",
+     "jam": 3
+    },
+    {
+     "mapel": "SEJARAH",
+     "kelas": "XI C",
+     "jam": 2
+    },
+    {
+     "mapel": "SEJARAH",
+     "kelas": "XI D",
+     "jam": 2
+    },
+    {
+     "mapel": "SEJARAH",
+     "kelas": "XII A",
+     "jam": 2
+    },
+    {
+     "mapel": "SEJARAH",
+     "kelas": "XII B",
+     "jam": 2
+    },
+    {
+     "mapel": "SEJARAH",
+     "kelas": "XII C",
+     "jam": 2
+    }
+   ]
+  },
+  {
+   "nama": "Widayani, S.Pd",
+   "nip": "19851216 200904 2 001",
+   "email": "widayani@smakk.sch.id",
+   "jabatan": "GURU TETAP",
+   "tugas_tambahan": "wali, eks, pikt",
+   "ajar": [
+    {
+     "mapel": "SEJARAH",
+     "kelas": "XI A",
+     "jam": 2
+    },
+    {
+     "mapel": "SEJARAH",
+     "kelas": "XI B",
+     "jam": 2
+    },
+    {
+     "mapel": "SEJARAH PEMINATAN",
+     "kelas": "XII A",
+     "jam": 5
+    },
+    {
+     "mapel": "SEJARAH PEMINATAN",
+     "kelas": "XII B",
+     "jam": 5
+    },
+    {
+     "mapel": "SEJARAH PEMINATAN",
+     "kelas": "XII C",
+     "jam": 5
+    }
+   ]
+  },
+  {
+   "nama": "Herman Katoppo, S.Pd",
+   "nip": "19810704 201001 1 007",
+   "email": "herman@smakk.sch.id",
+   "jabatan": "GURU TETAP",
+   "tugas_tambahan": "",
+   "ajar": [
+    {
+     "mapel": "BAHASA INGGRIS TK LANJT",
+     "kelas": "XI C",
+     "jam": 5
+    },
+    {
+     "mapel": "BAHASA INGGRIS TK LANJT",
+     "kelas": "XI D",
+     "jam": 5
+    },
+    {
+     "mapel": "BAHASA INGGRIS TK LANJT",
+     "kelas": "XII A",
+     "jam": 5
+    },
+    {
+     "mapel": "BAHASA INGGRIS TK LANJT",
+     "kelas": "XII B",
+     "jam": 5
+    },
+    {
+     "mapel": "BAHASA INGGRIS TK LANJT",
+     "kelas": "XII C",
+     "jam": 5
+    }
+   ]
+  },
+  {
+   "nama": "Siti Kamariah, S. Pd",
+   "nip": "19840622 201001 2 012",
+   "email": "siti@smakk.sch.id",
+   "jabatan": "GURU TETAP",
+   "tugas_tambahan": "KEPALA LABORATM",
+   "ajar": [
+    {
+     "mapel": "FISIKA PEMINATAN",
+     "kelas": "XII A",
+     "jam": 5
+    },
+    {
+     "mapel": "FISIKA PEMINATAN",
+     "kelas": "XII B",
+     "jam": 5
+    },
+    {
+     "mapel": "FISIKA",
+     "kelas": "X C",
+     "jam": 3
+    }
+   ]
+  },
+  {
+   "nama": "Bardin, S.Pd",
+   "nip": "19740602 200701 1 012",
+   "email": "bardin@smakk.sch.id",
+   "jabatan": "GURU TETAP",
+   "tugas_tambahan": "",
+   "ajar": [
+    {
+     "mapel": "BIOLOGI",
+     "kelas": "X A",
+     "jam": 3
+    },
+    {
+     "mapel": "BIOLOGI",
+     "kelas": "X B",
+     "jam": 3
+    },
+    {
+     "mapel": "BIOLOGI",
+     "kelas": "X C",
+     "jam": 3
+    },
+    {
+     "mapel": "BIOLOGI PEMINATAN",
+     "kelas": "XI A",
+     "jam": 5
+    },
+    {
+     "mapel": "BIOLOGI PEMINATAN",
+     "kelas": "XI B",
+     "jam": 5
+    },
+    {
+     "mapel": "BIOLOGI PEMINATAN",
+     "kelas": "XII B",
+     "jam": 5
+    }
+   ]
+  },
+  {
+   "nama": "Robet Januar Simanjuntak, S.Pd",
+   "nip": "19880109 202012 1 011",
+   "email": "robet@smakk.sch.id",
+   "jabatan": "GURU TETAP",
+   "tugas_tambahan": "OPERATOR",
+   "ajar": [
+    {
+     "mapel": "MATEMATIKA UMUM",
+     "kelas": "XI B",
+     "jam": 4
+    },
+    {
+     "mapel": "MATEMATIKA UMUM",
+     "kelas": "XI C",
+     "jam": 4
+    },
+    {
+     "mapel": "MATEMATIKA UMUM",
+     "kelas": "XI D",
+     "jam": 4
+    },
+    {
+     "mapel": "MATEMATIKA UMUM",
+     "kelas": "XII A",
+     "jam": 4
+    },
+    {
+     "mapel": "MATEMATIKA UMUM",
+     "kelas": "XII B",
+     "jam": 4
+    },
+    {
+     "mapel": "MATEMATIKA UMUM",
+     "kelas": "XII C",
+     "jam": 4
+    }
+   ]
+  },
+  {
+   "nama": "Mariani, S.Th",
+   "nip": "19871026 202221 2 004",
+   "email": "mariani@smakk.sch.id",
+   "jabatan": "PPPK",
+   "tugas_tambahan": "",
+   "ajar": [
+    {
+     "mapel": "PEND. AGAMA KRISTEN",
+     "kelas": "X A",
+     "jam": 3
+    },
+    {
+     "mapel": "PEND. AGAMA KRISTEN",
+     "kelas": "X B",
+     "jam": 3
+    },
+    {
+     "mapel": "PEND. AGAMA KRISTEN",
+     "kelas": "XI A",
+     "jam": 3
+    },
+    {
+     "mapel": "PEND. AGAMA KRISTEN",
+     "kelas": "XI B",
+     "jam": 3
+    },
+    {
+     "mapel": "PEND. AGAMA KRISTEN",
+     "kelas": "XI C",
+     "jam": 3
+    },
+    {
+     "mapel": "PEND. AGAMA KRISTEN",
+     "kelas": "XI D",
+     "jam": 3
+    },
+    {
+     "mapel": "PEND. AGAMA KRISTEN",
+     "kelas": "XII A",
+     "jam": 3
+    },
+    {
+     "mapel": "PEND. AGAMA KRISTEN",
+     "kelas": "XII B",
+     "jam": 3
+    },
+    {
+     "mapel": "PEND. AGAMA KRISTEN",
+     "kelas": "XII C",
+     "jam": 3
+    }
+   ]
+  },
+  {
+   "nama": "Wahono Isnandar, S.Pd",
+   "nip": "19951116 202221 1 005",
+   "email": "wahono@smakk.sch.id",
+   "jabatan": "PPPK",
+   "tugas_tambahan": "WAKA HUMAS",
+   "ajar": [
+    {
+     "mapel": "PKWU",
+     "kelas": "X A",
+     "jam": 2
+    },
+    {
+     "mapel": "PKWU",
+     "kelas": "X B",
+     "jam": 2
+    },
+    {
+     "mapel": "PKWU",
+     "kelas": "X C",
+     "jam": 2
+    },
+    {
+     "mapel": "FISIKA",
+     "kelas": "X B",
+     "jam": 3
+    },
+    {
+     "mapel": "FISIKA PEMINATAN",
+     "kelas": "XI C",
+     "jam": 5
+    }
+   ]
+  },
+  {
+   "nama": "Eka Susilawati, , S.Pd.I",
+   "nip": "19901106 202421 2 004",
+   "email": "eka@smakk.sch.id",
+   "jabatan": "PPPK",
+   "tugas_tambahan": "",
+   "ajar": []
+  },
+  {
+   "nama": "Dewi Sartika, S.Pd",
+   "nip": "19910515 202421 2 001",
+   "email": "dewi@smakk.sch.id",
+   "jabatan": "PPPK",
+   "tugas_tambahan": "",
+   "ajar": [
+    {
+     "mapel": "KIMIA",
+     "kelas": "X A",
+     "jam": 3
+    },
+    {
+     "mapel": "KIMIA",
+     "kelas": "X B",
+     "jam": 3
+    },
+    {
+     "mapel": "KIMIA",
+     "kelas": "X C",
+     "jam": 3
+    },
+    {
+     "mapel": "KIMIA PEMINATAN",
+     "kelas": "XI D",
+     "jam": 5
+    },
+    {
+     "mapel": "KIMIA PEMINATAN",
+     "kelas": "XII A",
+     "jam": 5
+    },
+    {
+     "mapel": "KIMIA PEMINATAN",
+     "kelas": "XII C",
+     "jam": 5
+    }
+   ]
+  },
+  {
+   "nama": "Andi Ilhami, S.Kom",
+   "nip": "19981104 202421 1 001",
+   "email": "andi@smakk.sch.id",
+   "jabatan": "PPPK",
+   "tugas_tambahan": "KOOR. P5 X1 C,D",
+   "ajar": [
+    {
+     "mapel": "INFORMATIKA",
+     "kelas": "X A",
+     "jam": 2
+    },
+    {
+     "mapel": "INFORMATIKA",
+     "kelas": "X B",
+     "jam": 2
+    },
+    {
+     "mapel": "INFORMATIKA",
+     "kelas": "X C",
+     "jam": 2
+    },
+    {
+     "mapel": "INFORMATIKA PEMINATAN",
+     "kelas": "XI A",
+     "jam": 5
+    },
+    {
+     "mapel": "INFORMATIKA PEMINATAN",
+     "kelas": "XI C",
+     "jam": 5
+    },
+    {
+     "mapel": "INFORMATIKA PEMINATAN",
+     "kelas": "XI D",
+     "jam": 5
+    }
+   ]
+  },
+  {
+   "nama": "Akhmad Riko, S.Pd.i",
+   "nip": "19911011 202521 1 005",
+   "email": "akhmad@smakk.sch.id",
+   "jabatan": "PPPK",
+   "tugas_tambahan": "WAKA KESISWAAN",
+   "ajar": [
+    {
+     "mapel": "BAHASA INGGRIS TK LANJT",
+     "kelas": "XI A",
+     "jam": 5
+    },
+    {
+     "mapel": "BAHASA INGGRIS TK LANJT",
+     "kelas": "XI B",
+     "jam": 5
+    },
+    {
+     "mapel": "BAHASA INGGRIS",
+     "kelas": "X B",
+     "jam": 3
+    }
+   ]
+  },
+  {
+   "nama": "Janatin, S.Pd.I",
+   "nip": "19870919 202421 2 003",
+   "email": "janatin@smakk.sch.id",
+   "jabatan": "PPPK",
+   "tugas_tambahan": "",
+   "ajar": [
+    {
+     "mapel": "PAI dan Budi Pekerti",
+     "kelas": "XII A",
+     "jam": 3
+    },
+    {
+     "mapel": "PAI dan Budi Pekerti",
+     "kelas": "XII B",
+     "jam": 3
+    },
+    {
+     "mapel": "PAI dan Budi Pekerti",
+     "kelas": "XII C",
+     "jam": 3
+    }
+   ]
+  },
+  {
+   "nama": "Nesvi Lianti Ml, S.Pd",
+   "nip": "19950716 202421 2 007",
+   "email": "nesvi@smakk.sch.id",
+   "jabatan": "PPPK",
+   "tugas_tambahan": "KOOR. P5 XII A,B,C",
+   "ajar": [
+    {
+     "mapel": "MATEMATIKA TK LANJUT",
+     "kelas": "XI A",
+     "jam": 5
+    },
+    {
+     "mapel": "MATEMATIKA TK LANJUT",
+     "kelas": "XI C",
+     "jam": 5
+    },
+    {
+     "mapel": "MATEMATIKA TK LANJUT",
+     "kelas": "XI D",
+     "jam": 5
+    },
+    {
+     "mapel": "MULOK",
+     "kelas": "XII A",
+     "jam": 2
+    },
+    {
+     "mapel": "MULOK",
+     "kelas": "XII B",
+     "jam": 2
+    },
+    {
+     "mapel": "MULOK",
+     "kelas": "XII C",
+     "jam": 2
+    }
+   ]
+  },
+  {
+   "nama": "Kenny Yohanes Tiago, S.Pd",
+   "nip": "19980811 202421 1 007",
+   "email": "kenny@smakk.sch.id",
+   "jabatan": "PPPK",
+   "tugas_tambahan": "",
+   "ajar": [
+    {
+     "mapel": "SENI BUDAYA",
+     "kelas": "XI A",
+     "jam": 2
+    },
+    {
+     "mapel": "SENI BUDAYA",
+     "kelas": "XI B",
+     "jam": 2
+    },
+    {
+     "mapel": "SENI BUDAYA",
+     "kelas": "XI C",
+     "jam": 2
+    },
+    {
+     "mapel": "SENI BUDAYA",
+     "kelas": "XI D",
+     "jam": 2
+    },
+    {
+     "mapel": "SENI BUDAYA",
+     "kelas": "XII A",
+     "jam": 2
+    },
+    {
+     "mapel": "SENI BUDAYA",
+     "kelas": "XII B",
+     "jam": 2
+    },
+    {
+     "mapel": "SENI BUDAYA",
+     "kelas": "XII C",
+     "jam": 2
+    },
+    {
+     "mapel": "PJOK",
+     "kelas": "X A",
+     "jam": 3
+    },
+    {
+     "mapel": "PJOK",
+     "kelas": "X B",
+     "jam": 3
+    },
+    {
+     "mapel": "PJOK",
+     "kelas": "X C",
+     "jam": 3
+    }
+   ]
+  },
+  {
+   "nama": "Laily Mustika, S.Pd.I",
+   "nip": "",
+   "email": "laily@smakk.sch.id",
+   "jabatan": "GTT PROVINSI",
+   "tugas_tambahan": "KOOR. P5 XI A,B",
+   "ajar": [
+    {
+     "mapel": "BAHASA INGGRIS",
+     "kelas": "X A",
+     "jam": 3
+    },
+    {
+     "mapel": "BAHASA INDONESIA",
+     "kelas": "X C",
+     "jam": 4
+    },
+    {
+     "mapel": "BAHASA INDONESIA",
+     "kelas": "XI D",
+     "jam": 4
+    },
+    {
+     "mapel": "GEOGRAFI",
+     "kelas": "X A",
+     "jam": 3
+    },
+    {
+     "mapel": "GEOGRAFI",
+     "kelas": "X B",
+     "jam": 3
+    },
+    {
+     "mapel": "GEOGRAFI",
+     "kelas": "X C",
+     "jam": 3
+    }
+   ]
+  },
+  {
+   "nama": "Asnin Warianto, S.Pd.I",
+   "nip": "",
+   "email": "asnin@smakk.sch.id",
+   "jabatan": "GTT PROVINSI",
+   "tugas_tambahan": "",
+   "ajar": [
+    {
+     "mapel": "MULOK",
+     "kelas": "X A",
+     "jam": 2
+    },
+    {
+     "mapel": "MULOK",
+     "kelas": "X B",
+     "jam": 2
+    },
+    {
+     "mapel": "MULOK",
+     "kelas": "X C",
+     "jam": 2
+    },
+    {
+     "mapel": "MULOK",
+     "kelas": "XI A",
+     "jam": 2
+    },
+    {
+     "mapel": "MULOK",
+     "kelas": "XI B",
+     "jam": 2
+    },
+    {
+     "mapel": "MULOK",
+     "kelas": "XI C",
+     "jam": 2
+    },
+    {
+     "mapel": "MULOK",
+     "kelas": "XI D",
+     "jam": 2
+    },
+    {
+     "mapel": "BAHASA INDONESIA",
+     "kelas": "X A",
+     "jam": 4
+    },
+    {
+     "mapel": "BAHASA INDONESIA",
+     "kelas": "X B",
+     "jam": 4
+    }
+   ]
+  },
+  {
+   "nama": "Rita Feronika, S.Pd",
+   "nip": "",
+   "email": "rita@smakk.sch.id",
+   "jabatan": "GTT PROVINSI",
+   "tugas_tambahan": "",
+   "ajar": [
+    {
+     "mapel": "PJOK",
+     "kelas": "XI A",
+     "jam": 3
+    },
+    {
+     "mapel": "PJOK",
+     "kelas": "XI B",
+     "jam": 3
+    },
+    {
+     "mapel": "PJOK",
+     "kelas": "XI C",
+     "jam": 3
+    },
+    {
+     "mapel": "PJOK",
+     "kelas": "XI D",
+     "jam": 3
+    },
+    {
+     "mapel": "PJOK",
+     "kelas": "XII A",
+     "jam": 3
+    },
+    {
+     "mapel": "PJOK",
+     "kelas": "XII B",
+     "jam": 3
+    },
+    {
+     "mapel": "PJOK",
+     "kelas": "XII C",
+     "jam": 3
+    }
+   ]
+  }
+ ],
+ "siswa": {
+  "X A": [
+   {
+    "nama": "Ahmad Hanapi",
+    "nisn": "3107949342",
+    "nis": "3001",
+    "jk": "L",
+    "email": "ahmad@siswa.smakk.sch.id"
+   },
+   {
+    "nama": "Ahmad Raviza",
+    "nisn": "0083327042",
+    "nis": "3002",
+    "jk": "L",
+    "email": "ahmad.raviza@siswa.smakk.sch.id"
+   },
+   {
+    "nama": "Aminatul Najua",
+    "nisn": "0106771892",
+    "nis": "3005",
+    "jk": "P",
+    "email": "aminatul@siswa.smakk.sch.id"
+   },
+   {
+    "nama": "Audiyah",
+    "nisn": "0104514782",
+    "nis": "3013",
+    "jk": "P",
+    "email": "audiyah@siswa.smakk.sch.id"
+   },
+   {
+    "nama": "Bunga Citra",
+    "nisn": "3105093151",
+    "nis": "3014",
+    "jk": "P",
+    "email": "bunga@siswa.smakk.sch.id"
+   },
+   {
+    "nama": "Dhika Wahyu Ramadhan",
+    "nisn": "0092705205",
+    "nis": "3016",
+    "jk": "L",
+    "email": "dhika@siswa.smakk.sch.id"
+   },
+   {
+    "nama": "Dira Permata Sari",
+    "nisn": "0107399831",
+    "nis": "3018",
+    "jk": "P",
+    "email": "dira@siswa.smakk.sch.id"
+   },
+   {
+    "nama": "Eka Purnama Sari",
+    "nisn": "3118556508",
+    "nis": "3019",
+    "jk": "P",
+    "email": "eka@siswa.smakk.sch.id"
+   },
+   {
+    "nama": "Fajrianor",
+    "nisn": "0105256534",
+    "nis": "3021",
+    "jk": "L",
+    "email": "fajrianor@siswa.smakk.sch.id"
+   },
+   {
+    "nama": "Fatimah Azahra",
+    "nisn": "0105783557",
+    "nis": "3022",
+    "jk": "P",
+    "email": "fatimah@siswa.smakk.sch.id"
+   },
+   {
+    "nama": "Fuza Nabila Syabaniah",
+    "nisn": "0105176898",
+    "nis": "3024",
+    "jk": "P",
+    "email": "fuza@siswa.smakk.sch.id"
+   },
+   {
+    "nama": "Hidayatul Firdaus",
+    "nisn": "3108916300",
+    "nis": "3029",
+    "jk": "L",
+    "email": "hidayatul@siswa.smakk.sch.id"
+   },
+   {
+    "nama": "Ihwan",
+    "nisn": "0108276928",
+    "nis": "3030",
+    "jk": "L",
+    "email": "ihwan@siswa.smakk.sch.id"
+   },
+   {
+    "nama": "Irpan",
+    "nisn": "3095739651",
+    "nis": "3033",
+    "jk": "L",
+    "email": "irpan@siswa.smakk.sch.id"
+   },
+   {
+    "nama": "Jannatul Fatwa",
+    "nisn": "3102958964",
+    "nis": "3034",
+    "jk": "P",
+    "email": "jannatul@siswa.smakk.sch.id"
+   },
+   {
+    "nama": "M. Hafi Ramadhani",
+    "nisn": "0107196362",
+    "nis": "3038",
+    "jk": "P",
+    "email": "m@siswa.smakk.sch.id"
+   },
+   {
+    "nama": "Mega",
+    "nisn": "3106464567",
+    "nis": "3039",
+    "jk": "L",
+    "email": "mega@siswa.smakk.sch.id"
+   },
+   {
+    "nama": "Muhamad Al Fiqih",
+    "nisn": "0105665384",
+    "nis": "3043",
+    "jk": "L",
+    "email": "muhamad@siswa.smakk.sch.id"
+   },
+   {
+    "nama": "Muhammad Rafli Bahtiar",
+    "nisn": "3101862905",
+    "nis": "3045",
+    "jk": "L",
+    "email": "muhammad@siswa.smakk.sch.id"
+   },
+   {
+    "nama": "Nor Djahra",
+    "nisn": "0104910821",
+    "nis": "3053",
+    "jk": "P",
+    "email": "nor@siswa.smakk.sch.id"
+   },
+   {
+    "nama": "Nurjannah",
+    "nisn": "0114989379",
+    "nis": "3055",
+    "jk": "P",
+    "email": "nurjannah@siswa.smakk.sch.id"
+   },
+   {
+    "nama": "Putri",
+    "nisn": "3102383116",
+    "nis": "3056",
+    "jk": "P",
+    "email": "putri@siswa.smakk.sch.id"
+   },
+   {
+    "nama": "Rahmad Andika",
+    "nisn": "3109713739",
+    "nis": "3059",
+    "jk": "L",
+    "email": "rahmad@siswa.smakk.sch.id"
+   },
+   {
+    "nama": "Ramadani",
+    "nisn": "0093950110",
+    "nis": "3060",
+    "jk": "L",
+    "email": "ramadani@siswa.smakk.sch.id"
+   },
+   {
+    "nama": "Riszayanti",
+    "nisn": "0101324889",
+    "nis": "3066",
+    "jk": "P",
+    "email": "riszayanti@siswa.smakk.sch.id"
+   },
+   {
+    "nama": "Salsa Billa",
+    "nisn": "0104818139",
+    "nis": "3070",
+    "jk": "P",
+    "email": "salsa@siswa.smakk.sch.id"
+   },
+   {
+    "nama": "Wenisa",
+    "nisn": "0107491092",
+    "nis": "3076",
+    "jk": "P",
+    "email": "wenisa@siswa.smakk.sch.id"
+   },
+   {
+    "nama": "Yuanita Septia Putri",
+    "nisn": "0106987481",
+    "nis": "3078",
+    "jk": "P",
+    "email": "yuanita@siswa.smakk.sch.id"
+   }
+  ],
+  "X B": [
+   {
+    "nama": "Adya Syakira",
+    "nisn": "3106809802",
+    "nis": "2999",
+    "jk": "P",
+    "email": "adya@siswa.smakk.sch.id"
+   },
+   {
+    "nama": "Ahmat Baihaqi",
+    "nisn": "",
+    "nis": "",
+    "jk": "L",
+    "email": "ahmat@siswa.smakk.sch.id"
+   },
+   {
+    "nama": "Alif Permana Wiguna",
+    "nisn": "0109985770",
+    "nis": "3004",
+    "jk": "L",
+    "email": "alif@siswa.smakk.sch.id"
+   },
+   {
+    "nama": "Amira Febriana",
+    "nisn": "0115920809",
+    "nis": "3006",
+    "jk": "P",
+    "email": "amira@siswa.smakk.sch.id"
+   },
+   {
+    "nama": "Andini",
+    "nisn": "0107393998",
+    "nis": "3008",
+    "jk": "P",
+    "email": "andini@siswa.smakk.sch.id"
+   },
+   {
+    "nama": "Anggi Gladis Prasetyo",
+    "nisn": "0093634611",
+    "nis": "3011",
+    "jk": "P",
+    "email": "anggi@siswa.smakk.sch.id"
+   },
+   {
+    "nama": "Ariska",
+    "nisn": "3102830763",
+    "nis": "3012",
+    "jk": "P",
+    "email": "ariska@siswa.smakk.sch.id"
+   },
+   {
+    "nama": "Citra Lestari",
+    "nisn": "0108231037",
+    "nis": "3015",
+    "jk": "P",
+    "email": "citra@siswa.smakk.sch.id"
+   },
+   {
+    "nama": "Fitreal Ramadhan",
+    "nisn": "0103688130",
+    "nis": "3023",
+    "jk": "L",
+    "email": "fitreal@siswa.smakk.sch.id"
+   },
+   {
+    "nama": "Gina Patimah",
+    "nisn": "3107310870",
+    "nis": "3025",
+    "jk": "P",
+    "email": "gina@siswa.smakk.sch.id"
+   },
+   {
+    "nama": "Haidir",
+    "nisn": "0116196935",
+    "nis": "3027",
+    "jk": "L",
+    "email": "haidir@siswa.smakk.sch.id"
+   },
+   {
+    "nama": "Herni",
+    "nisn": "3090954567",
+    "nis": "3028",
+    "jk": "P",
+    "email": "herni@siswa.smakk.sch.id"
+   },
+   {
+    "nama": "Ipnu Malik",
+    "nisn": "3105617871",
+    "nis": "3031",
+    "jk": "L",
+    "email": "ipnu@siswa.smakk.sch.id"
+   },
+   {
+    "nama": "Irma Hidayanti",
+    "nisn": "0104666160",
+    "nis": "3032",
+    "jk": "P",
+    "email": "irma@siswa.smakk.sch.id"
+   },
+   {
+    "nama": "Lestari",
+    "nisn": "0105716875",
+    "nis": "3036",
+    "jk": "P",
+    "email": "lestari@siswa.smakk.sch.id"
+   },
+   {
+    "nama": "Muhamad Akbar",
+    "nisn": "3106286625",
+    "nis": "3042",
+    "jk": "L",
+    "email": "muhamad.akbar@siswa.smakk.sch.id"
+   },
+   {
+    "nama": "Muhammad Rehan Fadillah",
+    "nisn": "0093742874",
+    "nis": "3046",
+    "jk": "L",
+    "email": "muhammad.rehan@siswa.smakk.sch.id"
+   },
+   {
+    "nama": "Muhammad Zainal Arsyad",
+    "nisn": "0108657739",
+    "nis": "3048",
+    "jk": "L",
+    "email": "muhammad.zainal@siswa.smakk.sch.id"
+   },
+   {
+    "nama": "Mutiara Ramadhani",
+    "nisn": "3097982714",
+    "nis": "3050",
+    "jk": "P",
+    "email": "mutiara@siswa.smakk.sch.id"
+   },
+   {
+    "nama": "Nadia Vega",
+    "nisn": "0101059357",
+    "nis": "3051",
+    "jk": "P",
+    "email": "nadia@siswa.smakk.sch.id"
+   },
+   {
+    "nama": "Norviona",
+    "nisn": "0102718254",
+    "nis": "3054",
+    "jk": "P",
+    "email": "norviona@siswa.smakk.sch.id"
+   },
+   {
+    "nama": "Putri Adinda",
+    "nisn": "3107838370",
+    "nis": "3058",
+    "jk": "P",
+    "email": "putri.adinda@siswa.smakk.sch.id"
+   },
+   {
+    "nama": "Ridho",
+    "nisn": "0093786362",
+    "nis": "3062",
+    "jk": "L",
+    "email": "ridho@siswa.smakk.sch.id"
+   },
+   {
+    "nama": "Rivana",
+    "nisn": "3109772561",
+    "nis": "3067",
+    "jk": "P",
+    "email": "rivana@siswa.smakk.sch.id"
+   },
+   {
+    "nama": "Safari",
+    "nisn": "0095709708",
+    "nis": "3069",
+    "jk": "L",
+    "email": "safari@siswa.smakk.sch.id"
+   },
+   {
+    "nama": "Sarah",
+    "nisn": "0096549675",
+    "nis": "3071",
+    "jk": "P",
+    "email": "sarah@siswa.smakk.sch.id"
+   },
+   {
+    "nama": "Selpia",
+    "nisn": "3102449665",
+    "nis": "3072",
+    "jk": "P",
+    "email": "selpia@siswa.smakk.sch.id"
+   }
+  ],
+  "X C": [
+   {
+    "nama": "Agus Rahmadan",
+    "nisn": "0101420512",
+    "nis": "3000",
+    "jk": "L",
+    "email": "agus@siswa.smakk.sch.id"
+   },
+   {
+    "nama": "Ahmad Salihin",
+    "nisn": "0098264551",
+    "nis": "3003",
+    "jk": "L",
+    "email": "ahmad.salihin@siswa.smakk.sch.id"
+   },
+   {
+    "nama": "Andini Raniah",
+    "nisn": "0108687922",
+    "nis": "3009",
+    "jk": "P",
+    "email": "andini.raniah@siswa.smakk.sch.id"
+   },
+   {
+    "nama": "Anggi Ameliya",
+    "nisn": "0096593608",
+    "nis": "3010",
+    "jk": "P",
+    "email": "anggi.ameliya@siswa.smakk.sch.id"
+   },
+   {
+    "nama": "An-nissa Oktavia",
+    "nisn": "0106129463",
+    "nis": "3007",
+    "jk": "P",
+    "email": "annissa@siswa.smakk.sch.id"
+   },
+   {
+    "nama": "Diky",
+    "nisn": "0103989210",
+    "nis": "3017",
+    "jk": "L",
+    "email": "diky@siswa.smakk.sch.id"
+   },
+   {
+    "nama": "Hafizah",
+    "nisn": "3103705845",
+    "nis": "3026",
+    "jk": "P",
+    "email": "hafizah@siswa.smakk.sch.id"
+   },
+   {
+    "nama": "Jhamal Muqthi",
+    "nisn": "",
+    "nis": "",
+    "jk": "L",
+    "email": "jhamal@siswa.smakk.sch.id"
+   },
+   {
+    "nama": "Laura",
+    "nisn": "0102511454",
+    "nis": "3035",
+    "jk": "P",
+    "email": "laura@siswa.smakk.sch.id"
+   },
+   {
+    "nama": "M. Dziqri Yewosa Aulia",
+    "nisn": "0096586391",
+    "nis": "3037",
+    "jk": "L",
+    "email": "m.dziqri@siswa.smakk.sch.id"
+   },
+   {
+    "nama": "Mellani Assyifa Zahra",
+    "nisn": "0106195445",
+    "nis": "3040",
+    "jk": "P",
+    "email": "mellani@siswa.smakk.sch.id"
+   },
+   {
+    "nama": "Muhamad Afif Ramadan",
+    "nisn": "0098193370",
+    "nis": "3041",
+    "jk": "L",
+    "email": "muhamad.afif@siswa.smakk.sch.id"
+   },
+   {
+    "nama": "Muhammad Patjri",
+    "nisn": "0089924985",
+    "nis": "3044",
+    "jk": "L",
+    "email": "muhammad.patjri@siswa.smakk.sch.id"
+   },
+   {
+    "nama": "Muhammad Zailani",
+    "nisn": "3093978329",
+    "nis": "3047",
+    "jk": "L",
+    "email": "muhammad.zailani@siswa.smakk.sch.id"
+   },
+   {
+    "nama": "Murlan",
+    "nisn": "0106188293",
+    "nis": "3049",
+    "jk": "L",
+    "email": "murlan@siswa.smakk.sch.id"
+   },
+   {
+    "nama": "Naila Sabrina",
+    "nisn": "0101746565",
+    "nis": "3052",
+    "jk": "P",
+    "email": "naila@siswa.smakk.sch.id"
+   },
+   {
+    "nama": "Putri",
+    "nisn": "3102645158",
+    "nis": "3057",
+    "jk": "P",
+    "email": "putri2@siswa.smakk.sch.id"
+   },
+   {
+    "nama": "Repal Aditya",
+    "nisn": "0095189875",
+    "nis": "3061",
+    "jk": "L",
+    "email": "repal@siswa.smakk.sch.id"
+   },
+   {
+    "nama": "Rifky",
+    "nisn": "0102611085",
+    "nis": "3063",
+    "jk": "L",
+    "email": "rifky@siswa.smakk.sch.id"
+   },
+   {
+    "nama": "Riska Alfia",
+    "nisn": "0107651281",
+    "nis": "3064",
+    "jk": "P",
+    "email": "riska@siswa.smakk.sch.id"
+   },
+   {
+    "nama": "Risky Adithia",
+    "nisn": "0107322731",
+    "nis": "3065",
+    "jk": "L",
+    "email": "risky@siswa.smakk.sch.id"
+   },
+   {
+    "nama": "Rizka Angriani",
+    "nisn": "3096994461",
+    "nis": "3068",
+    "jk": "P",
+    "email": "rizka@siswa.smakk.sch.id"
+   },
+   {
+    "nama": "Sri Andini",
+    "nisn": "3093572431",
+    "nis": "3073",
+    "jk": "P",
+    "email": "sri@siswa.smakk.sch.id"
+   },
+   {
+    "nama": "Sri Diana Wulan Dari",
+    "nisn": "3105540796",
+    "nis": "3074",
+    "jk": "P",
+    "email": "sri.diana@siswa.smakk.sch.id"
+   },
+   {
+    "nama": "Syahrini",
+    "nisn": "3101163404",
+    "nis": "3075",
+    "jk": "P",
+    "email": "syahrini@siswa.smakk.sch.id"
+   },
+   {
+    "nama": "Widya Hargianti",
+    "nisn": "0104780701",
+    "nis": "3077",
+    "jk": "P",
+    "email": "widya@siswa.smakk.sch.id"
+   },
+   {
+    "nama": "Yunita Fitri",
+    "nisn": "3102112500",
+    "nis": "3079",
+    "jk": "P",
+    "email": "yunita@siswa.smakk.sch.id"
+   },
+   {
+    "nama": "Zahra As-syifa Muslimah Zatiah",
+    "nisn": "3095100535",
+    "nis": "3080",
+    "jk": "P",
+    "email": "zahra@siswa.smakk.sch.id"
+   }
+  ],
+  "XI A": [
+   {
+    "nama": "Ahmad Fadilah",
+    "nisn": "0094123068",
+    "nis": "2910",
+    "jk": "L",
+    "email": "ahmad.fadilah@siswa.smakk.sch.id"
+   },
+   {
+    "nama": "Ahmad Rizal",
+    "nisn": "3094453607",
+    "nis": "2940",
+    "jk": "L",
+    "email": "ahmad.rizal@siswa.smakk.sch.id"
+   },
+   {
+    "nama": "Ahmad Said",
+    "nisn": "0081411652",
+    "nis": "2912",
+    "jk": "L",
+    "email": "ahmad.said@siswa.smakk.sch.id"
+   },
+   {
+    "nama": "Ahmat Tri Wahyudi",
+    "nisn": "0094656397",
+    "nis": "2913",
+    "jk": "L",
+    "email": "ahmat.tri@siswa.smakk.sch.id"
+   },
+   {
+    "nama": "Alina Az-zahra",
+    "nisn": "0099136061",
+    "nis": "2943",
+    "jk": "P",
+    "email": "alina@siswa.smakk.sch.id"
+   },
+   {
+    "nama": "Angga Wardana",
+    "nisn": "3096940129",
+    "nis": "2915",
+    "jk": "L",
+    "email": "angga@siswa.smakk.sch.id"
+   },
+   {
+    "nama": "Anggi Novita Sari",
+    "nisn": "3099242600",
+    "nis": "2882",
+    "jk": "P",
+    "email": "anggi.novita@siswa.smakk.sch.id"
+   },
+   {
+    "nama": "Assyifa",
+    "nisn": "0098806294",
+    "nis": "2945",
+    "jk": "P",
+    "email": "assyifa@siswa.smakk.sch.id"
+   },
+   {
+    "nama": "Aulia Rahmah",
+    "nisn": "0094131918",
+    "nis": "2883",
+    "jk": "P",
+    "email": "aulia@siswa.smakk.sch.id"
+   },
+   {
+    "nama": "Dila Oktavia",
+    "nisn": "0094731459",
+    "nis": "2918",
+    "jk": "P",
+    "email": "dila@siswa.smakk.sch.id"
+   },
+   {
+    "nama": "Dimas Saputra",
+    "nisn": "3099266591",
+    "nis": "2948",
+    "jk": "L",
+    "email": "dimas@siswa.smakk.sch.id"
+   },
+   {
+    "nama": "Evellin Oktavirena",
+    "nisn": "0099379147",
+    "nis": "3020",
+    "jk": "P",
+    "email": "evellin@siswa.smakk.sch.id"
+   },
+   {
+    "nama": "Khelda",
+    "nisn": "0099016952",
+    "nis": "2957",
+    "jk": "P",
+    "email": "khelda@siswa.smakk.sch.id"
+   },
+   {
+    "nama": "Marvel",
+    "nisn": "0085319810",
+    "nis": "2926",
+    "jk": "L",
+    "email": "marvel@siswa.smakk.sch.id"
+   },
+   {
+    "nama": "Maulidin",
+    "nisn": "0093897199",
+    "nis": "2927",
+    "jk": "L",
+    "email": "maulidin@siswa.smakk.sch.id"
+   },
+   {
+    "nama": "Muhammad Al Imbran",
+    "nisn": "3097802689",
+    "nis": "2894",
+    "jk": "L",
+    "email": "muhammad.al@siswa.smakk.sch.id"
+   },
+   {
+    "nama": "Muhammad Husiin",
+    "nisn": "3094007779",
+    "nis": "2928",
+    "jk": "L",
+    "email": "muhammad.husiin@siswa.smakk.sch.id"
+   },
+   {
+    "nama": "Muhammad Rehan",
+    "nisn": "0091684524",
+    "nis": "2896",
+    "jk": "L",
+    "email": "muhammad2@siswa.smakk.sch.id"
+   },
+   {
+    "nama": "Muhammad Saman Husein",
+    "nisn": "3090454908",
+    "nis": "2897",
+    "jk": "L",
+    "email": "muhammad.saman@siswa.smakk.sch.id"
+   },
+   {
+    "nama": "Muhammad Yusril Reza Banjaran",
+    "nisn": "0091753569",
+    "nis": "2898",
+    "jk": "L",
+    "email": "muhammad.yusril@siswa.smakk.sch.id"
+   },
+   {
+    "nama": "Muttia Indriani Meiysa",
+    "nisn": "3094380630",
+    "nis": "2900",
+    "jk": "P",
+    "email": "muttia@siswa.smakk.sch.id"
+   },
+   {
+    "nama": "Nor Aini",
+    "nisn": "0093859673",
+    "nis": "2978",
+    "jk": "P",
+    "email": "nor.aini@siswa.smakk.sch.id"
+   },
+   {
+    "nama": "Putri Aliya",
+    "nisn": "3096809490",
+    "nis": "2901",
+    "jk": "P",
+    "email": "putri.aliya@siswa.smakk.sch.id"
+   },
+   {
+    "nama": "Ratih Rahmah",
+    "nisn": "3082829456",
+    "nis": "2982",
+    "jk": "P",
+    "email": "ratih@siswa.smakk.sch.id"
+   },
+   {
+    "nama": "Raudatul Jannah",
+    "nisn": "0101165849",
+    "nis": "2984",
+    "jk": "P",
+    "email": "raudatul@siswa.smakk.sch.id"
+   },
+   {
+    "nama": "Refandry",
+    "nisn": "3094718226",
+    "nis": "2985",
+    "jk": "L",
+    "email": "refandry@siswa.smakk.sch.id"
+   },
+   {
+    "nama": "Rehan",
+    "nisn": "3093259296",
+    "nis": "2904",
+    "jk": "L",
+    "email": "rehan@siswa.smakk.sch.id"
+   },
+   {
+    "nama": "Risma Diyanti",
+    "nisn": "3096710476",
+    "nis": "2905",
+    "jk": "P",
+    "email": "risma@siswa.smakk.sch.id"
+   },
+   {
+    "nama": "Sri Windawati Angraini",
+    "nisn": "0095287700",
+    "nis": "2994",
+    "jk": "P",
+    "email": "sri.windawati@siswa.smakk.sch.id"
+   }
+  ],
+  "XI B": [
+   {
+    "nama": "Andhika",
+    "nisn": "0085930276",
+    "nis": "2881",
+    "jk": "L",
+    "email": "andhika@siswa.smakk.sch.id"
+   },
+   {
+    "nama": "Arisma",
+    "nisn": "0094690502",
+    "nis": "2944",
+    "jk": "P",
+    "email": "arisma@siswa.smakk.sch.id"
+   },
+   {
+    "nama": "Chelsea",
+    "nisn": "3099356096",
+    "nis": "2947",
+    "jk": "P",
+    "email": "chelsea@siswa.smakk.sch.id"
+   },
+   {
+    "nama": "Dede Aditya",
+    "nisn": "0083105675",
+    "nis": "2884",
+    "jk": "L",
+    "email": "dede@siswa.smakk.sch.id"
+   },
+   {
+    "nama": "Divo Yulianto",
+    "nisn": "0098877806",
+    "nis": "2887",
+    "jk": "L",
+    "email": "divo@siswa.smakk.sch.id"
+   },
+   {
+    "nama": "Geby Yemima Dotia",
+    "nisn": "0095652184",
+    "nis": "2888",
+    "jk": "P",
+    "email": "geby@siswa.smakk.sch.id"
+   },
+   {
+    "nama": "Imelda",
+    "nisn": "3098274830",
+    "nis": "2951",
+    "jk": "P",
+    "email": "imelda@siswa.smakk.sch.id"
+   },
+   {
+    "nama": "Jauhari Afdan",
+    "nisn": "0094953891",
+    "nis": "2955",
+    "jk": "L",
+    "email": "jauhari@siswa.smakk.sch.id"
+   },
+   {
+    "nama": "M. Dimastian",
+    "nisn": "0092487495",
+    "nis": "2959",
+    "jk": "L",
+    "email": "m.dimastian@siswa.smakk.sch.id"
+   },
+   {
+    "nama": "M. Lutvino Mardian",
+    "nisn": "0094999861",
+    "nis": "2925",
+    "jk": "L",
+    "email": "m.lutvino@siswa.smakk.sch.id"
+   },
+   {
+    "nama": "M. Sahril Ramadan",
+    "nisn": "0087959010",
+    "nis": "2960",
+    "jk": "L",
+    "email": "m.sahril@siswa.smakk.sch.id"
+   },
+   {
+    "nama": "M.junaidi",
+    "nisn": "0081938548",
+    "nis": "2961",
+    "jk": "L",
+    "email": "mjunaidi@siswa.smakk.sch.id"
+   },
+   {
+    "nama": "Maemunah",
+    "nisn": "0086144221",
+    "nis": "2962",
+    "jk": "P",
+    "email": "maemunah@siswa.smakk.sch.id"
+   },
+   {
+    "nama": "Melda",
+    "nisn": "3091047812",
+    "nis": "2966",
+    "jk": "P",
+    "email": "melda@siswa.smakk.sch.id"
+   },
+   {
+    "nama": "Muhamad Zailafif",
+    "nisn": "3089762631",
+    "nis": "2893",
+    "jk": "L",
+    "email": "muhamad.zailafif@siswa.smakk.sch.id"
+   },
+   {
+    "nama": "Muhammad Patdli Yanor",
+    "nisn": "3091594315",
+    "nis": "2970",
+    "jk": "L",
+    "email": "muhammad.patdli@siswa.smakk.sch.id"
+   },
+   {
+    "nama": "Muhammad Rafli",
+    "nisn": "0096941326",
+    "nis": "2971",
+    "jk": "L",
+    "email": "muhammad.rafli@siswa.smakk.sch.id"
+   },
+   {
+    "nama": "Muhammad Ramadhani Satya",
+    "nisn": "0084795288",
+    "nis": "2895",
+    "jk": "L",
+    "email": "muhammad.ramadhani@siswa.smakk.sch.id"
+   },
+   {
+    "nama": "Noor Patimah",
+    "nisn": "0099040425",
+    "nis": "2977",
+    "jk": "P",
+    "email": "noor@siswa.smakk.sch.id"
+   },
+   {
+    "nama": "Nur Putria Wati",
+    "nisn": "0097466762",
+    "nis": "2979",
+    "jk": "P",
+    "email": "nur@siswa.smakk.sch.id"
+   },
+   {
+    "nama": "Nurmala",
+    "nisn": "0096335799",
+    "nis": "2932",
+    "jk": "P",
+    "email": "nurmala@siswa.smakk.sch.id"
+   },
+   {
+    "nama": "Rahmadani",
+    "nisn": "0086654572",
+    "nis": "2980",
+    "jk": "L",
+    "email": "rahmadani@siswa.smakk.sch.id"
+   },
+   {
+    "nama": "Riskia Aditia Rahman",
+    "nisn": "3082856723",
+    "nis": "2988",
+    "jk": "L",
+    "email": "riskia@siswa.smakk.sch.id"
+   },
+   {
+    "nama": "Rohin",
+    "nisn": "0091431374",
+    "nis": "2906",
+    "jk": "L",
+    "email": "rohin@siswa.smakk.sch.id"
+   },
+   {
+    "nama": "Sayang",
+    "nisn": "0099558229",
+    "nis": "2991",
+    "jk": "P",
+    "email": "sayang@siswa.smakk.sch.id"
+   },
+   {
+    "nama": "Siti Rahmah",
+    "nisn": "",
+    "nis": "2993",
+    "jk": "P",
+    "email": "siti@siswa.smakk.sch.id"
+   },
+   {
+    "nama": "Sulis",
+    "nisn": "3088629671",
+    "nis": "2995",
+    "jk": "P",
+    "email": "sulis@siswa.smakk.sch.id"
+   },
+   {
+    "nama": "Winda",
+    "nisn": "3099728466",
+    "nis": "2997",
+    "jk": "P",
+    "email": "winda@siswa.smakk.sch.id"
+   },
+   {
+    "nama": "Zilva Natasya Putri",
+    "nisn": "0093974438",
+    "nis": "2938",
+    "jk": "P",
+    "email": "zilva@siswa.smakk.sch.id"
+   }
+  ],
+  "XI C": [
+   {
+    "nama": "Akhmad Rusyadi",
+    "nisn": "0096771812",
+    "nis": "2941",
+    "jk": "L",
+    "email": "akhmad@siswa.smakk.sch.id"
+   },
+   {
+    "nama": "Annisa Ramadani",
+    "nisn": "0089120899",
+    "nis": "2916",
+    "jk": "P",
+    "email": "annisa@siswa.smakk.sch.id"
+   },
+   {
+    "nama": "Dhea Syafira",
+    "nisn": "3097576836",
+    "nis": "2885",
+    "jk": "P",
+    "email": "dhea@siswa.smakk.sch.id"
+   },
+   {
+    "nama": "Gogi Gustaman",
+    "nisn": "0092836859",
+    "nis": "2949",
+    "jk": "L",
+    "email": "gogi@siswa.smakk.sch.id"
+   },
+   {
+    "nama": "Gujali Rahman",
+    "nisn": "3091322910",
+    "nis": "2921",
+    "jk": "L",
+    "email": "gujali@siswa.smakk.sch.id"
+   },
+   {
+    "nama": "Haili",
+    "nisn": "3093363347",
+    "nis": "2950",
+    "jk": "L",
+    "email": "haili@siswa.smakk.sch.id"
+   },
+   {
+    "nama": "Hilda Putri Norcahyani",
+    "nisn": "3096119282",
+    "nis": "2889",
+    "jk": "P",
+    "email": "hilda@siswa.smakk.sch.id"
+   },
+   {
+    "nama": "Jailani",
+    "nisn": "0091070004",
+    "nis": "2954",
+    "jk": "L",
+    "email": "jailani@siswa.smakk.sch.id"
+   },
+   {
+    "nama": "Kamariyah",
+    "nisn": "0094324484",
+    "nis": "2890",
+    "jk": "P",
+    "email": "kamariyah@siswa.smakk.sch.id"
+   },
+   {
+    "nama": "Karmilo Darprianto",
+    "nisn": "0094487411",
+    "nis": "2956",
+    "jk": "L",
+    "email": "karmilo@siswa.smakk.sch.id"
+   },
+   {
+    "nama": "Ledianto",
+    "nisn": "0095998652",
+    "nis": "2958",
+    "jk": "L",
+    "email": "ledianto@siswa.smakk.sch.id"
+   },
+   {
+    "nama": "M. Risky Aditya",
+    "nisn": "0088502292",
+    "nis": "2891",
+    "jk": "L",
+    "email": "m.risky@siswa.smakk.sch.id"
+   },
+   {
+    "nama": "Mahdiah",
+    "nisn": "0099388876",
+    "nis": "2963",
+    "jk": "P",
+    "email": "mahdiah@siswa.smakk.sch.id"
+   },
+   {
+    "nama": "Maripatu Shaleha",
+    "nisn": "0081117826",
+    "nis": "2964",
+    "jk": "P",
+    "email": "maripatu@siswa.smakk.sch.id"
+   },
+   {
+    "nama": "Muhamad Muzakir",
+    "nisn": "0083110269",
+    "nis": "2967",
+    "jk": "L",
+    "email": "muhamad.muzakir@siswa.smakk.sch.id"
+   },
+   {
+    "nama": "Muhamad Yoga",
+    "nisn": "0091637612",
+    "nis": "2968",
+    "jk": "L",
+    "email": "muhamad.yoga@siswa.smakk.sch.id"
+   },
+   {
+    "nama": "Muhammad Khairani",
+    "nisn": "3092978882",
+    "nis": "2969",
+    "jk": "L",
+    "email": "muhammad.khairani@siswa.smakk.sch.id"
+   },
+   {
+    "nama": "Muhammad Rifky",
+    "nisn": "0098368434",
+    "nis": "2973",
+    "jk": "L",
+    "email": "muhammad.rifky@siswa.smakk.sch.id"
+   },
+   {
+    "nama": "Muhammad Risky Gazali",
+    "nisn": "3087970813",
+    "nis": "2974",
+    "jk": "L",
+    "email": "muhammad.risky@siswa.smakk.sch.id"
+   },
+   {
+    "nama": "Mujainah",
+    "nisn": "0099476058",
+    "nis": "2899",
+    "jk": "P",
+    "email": "mujainah@siswa.smakk.sch.id"
+   },
+   {
+    "nama": "Nadia",
+    "nisn": "0095633201",
+    "nis": "2976",
+    "jk": "P",
+    "email": "nadia2@siswa.smakk.sch.id"
+   },
+   {
+    "nama": "Najirah",
+    "nisn": "0096627641",
+    "nis": "2930",
+    "jk": "P",
+    "email": "najirah@siswa.smakk.sch.id"
+   },
+   {
+    "nama": "Raihannah",
+    "nisn": "3093523111",
+    "nis": "2902",
+    "jk": "P",
+    "email": "raihannah@siswa.smakk.sch.id"
+   },
+   {
+    "nama": "Ratna Safa",
+    "nisn": "0098091705",
+    "nis": "2983",
+    "jk": "P",
+    "email": "ratna@siswa.smakk.sch.id"
+   },
+   {
+    "nama": "Resto Achmad Fauzi",
+    "nisn": "3088571860",
+    "nis": "2934",
+    "jk": "L",
+    "email": "resto@siswa.smakk.sch.id"
+   },
+   {
+    "nama": "Sait",
+    "nisn": "3096883404",
+    "nis": "2990",
+    "jk": "L",
+    "email": "sait@siswa.smakk.sch.id"
+   },
+   {
+    "nama": "Stef Pany Debora",
+    "nisn": "0094622608",
+    "nis": "2909",
+    "jk": "P",
+    "email": "stef@siswa.smakk.sch.id"
+   },
+   {
+    "nama": "Wahyu Ramadhani",
+    "nisn": "0093543767",
+    "nis": "2996",
+    "jk": "L",
+    "email": "wahyu@siswa.smakk.sch.id"
+   }
+  ],
+  "XI D": [
+   {
+    "nama": "Ahmad Naz'ril Affan Isbiantoro",
+    "nisn": "0097549494",
+    "nis": "2911",
+    "jk": "L",
+    "email": "ahmad.nazril@siswa.smakk.sch.id"
+   },
+   {
+    "nama": "Ahmad Ramadan",
+    "nisn": "0086893867",
+    "nis": "2939",
+    "jk": "L",
+    "email": "ahmad.ramadan@siswa.smakk.sch.id"
+   },
+   {
+    "nama": "Alan",
+    "nisn": "0089819562",
+    "nis": "2942",
+    "jk": "L",
+    "email": "alan@siswa.smakk.sch.id"
+   },
+   {
+    "nama": "Andre",
+    "nisn": "0084467401",
+    "nis": "2914",
+    "jk": "L",
+    "email": "andre@siswa.smakk.sch.id"
+   },
+   {
+    "nama": "Bela",
+    "nisn": "0098271939",
+    "nis": "2946",
+    "jk": "P",
+    "email": "bela@siswa.smakk.sch.id"
+   },
+   {
+    "nama": "Denis Hertanto",
+    "nisn": "0085803511",
+    "nis": "2917",
+    "jk": "L",
+    "email": "denis@siswa.smakk.sch.id"
+   },
+   {
+    "nama": "Dini Pertiwi",
+    "nisn": "0089422907",
+    "nis": "2886",
+    "jk": "P",
+    "email": "dini@siswa.smakk.sch.id"
+   },
+   {
+    "nama": "Efrida",
+    "nisn": "0099229675",
+    "nis": "2919",
+    "jk": "P",
+    "email": "efrida@siswa.smakk.sch.id"
+   },
+   {
+    "nama": "Erni Elisa",
+    "nisn": "0085901838",
+    "nis": "2920",
+    "jk": "P",
+    "email": "erni@siswa.smakk.sch.id"
+   },
+   {
+    "nama": "Herno Mey Lino",
+    "nisn": "0099889639",
+    "nis": "2922",
+    "jk": "L",
+    "email": "herno@siswa.smakk.sch.id"
+   },
+   {
+    "nama": "Irpan",
+    "nisn": "0085244100",
+    "nis": "2952",
+    "jk": "L",
+    "email": "irpan2@siswa.smakk.sch.id"
+   },
+   {
+    "nama": "Jailani",
+    "nisn": "3088906834",
+    "nis": "2953",
+    "jk": "L",
+    "email": "jailani2@siswa.smakk.sch.id"
+   },
+   {
+    "nama": "Kasih",
+    "nisn": "0092432747",
+    "nis": "2923",
+    "jk": "P",
+    "email": "kasih@siswa.smakk.sch.id"
+   },
+   {
+    "nama": "Lestary",
+    "nisn": "0097430302",
+    "nis": "2924",
+    "jk": "P",
+    "email": "lestary@siswa.smakk.sch.id"
+   },
+   {
+    "nama": "Muhammad Ridwan Rifai",
+    "nisn": "3090701986",
+    "nis": "2972",
+    "jk": "L",
+    "email": "muhammad.ridwan@siswa.smakk.sch.id"
+   },
+   {
+    "nama": "Muhammad Rizki",
+    "nisn": "3097404295",
+    "nis": "2975",
+    "jk": "L",
+    "email": "muhammad.rizki@siswa.smakk.sch.id"
+   },
+   {
+    "nama": "Mu'min",
+    "nisn": "3096693169",
+    "nis": "2892",
+    "jk": "L",
+    "email": "mumin@siswa.smakk.sch.id"
+   },
+   {
+    "nama": "Nabila",
+    "nisn": "3099701310",
+    "nis": "2929",
+    "jk": "P",
+    "email": "nabila@siswa.smakk.sch.id"
+   },
+   {
+    "nama": "Rahmah Liana",
+    "nisn": "0091542686",
+    "nis": "2981",
+    "jk": "P",
+    "email": "rahmah@siswa.smakk.sch.id"
+   },
+   {
+    "nama": "Ramadan",
+    "nisn": "3086345091",
+    "nis": "2903",
+    "jk": "L",
+    "email": "ramadan@siswa.smakk.sch.id"
+   },
+   {
+    "nama": "Resky Pratama",
+    "nisn": "0094072498",
+    "nis": "2933",
+    "jk": "L",
+    "email": "resky@siswa.smakk.sch.id"
+   },
+   {
+    "nama": "Reyndra Ahmad",
+    "nisn": "0098714335",
+    "nis": "2935",
+    "jk": "L",
+    "email": "reyndra@siswa.smakk.sch.id"
+   },
+   {
+    "nama": "Rima Aulia",
+    "nisn": "0095837662",
+    "nis": "2987",
+    "jk": "P",
+    "email": "rima@siswa.smakk.sch.id"
+   },
+   {
+    "nama": "Risma Putri",
+    "nisn": "3092158148",
+    "nis": "2936",
+    "jk": "P",
+    "email": "risma.putri@siswa.smakk.sch.id"
+   },
+   {
+    "nama": "Rolan",
+    "nisn": "",
+    "nis": "2907",
+    "jk": "L",
+    "email": "rolan@siswa.smakk.sch.id"
+   },
+   {
+    "nama": "Sabda",
+    "nisn": "3092169728",
+    "nis": "2989",
+    "jk": "L",
+    "email": "sabda@siswa.smakk.sch.id"
+   },
+   {
+    "nama": "Sipha",
+    "nisn": "3095997078",
+    "nis": "2908",
+    "jk": "P",
+    "email": "sipha@siswa.smakk.sch.id"
+   },
+   {
+    "nama": "Siska",
+    "nisn": "0091723914",
+    "nis": "2992",
+    "jk": "P",
+    "email": "siska@siswa.smakk.sch.id"
+   }
+  ],
+  "XII A": [
+   {
+    "nama": "Afdillah",
+    "nisn": "0082874740",
+    "nis": "",
+    "jk": "L",
+    "email": "afdillah@siswa.smakk.sch.id"
+   },
+   {
+    "nama": "Ahmad Hariyanto",
+    "nisn": "0086192178",
+    "nis": "",
+    "jk": "L",
+    "email": "ahmad.hariyanto@siswa.smakk.sch.id"
+   },
+   {
+    "nama": "Ahmad Indra Zulpani",
+    "nisn": "0071626491",
+    "nis": "",
+    "jk": "L",
+    "email": "ahmad.indra@siswa.smakk.sch.id"
+   },
+   {
+    "nama": "Ahmad Rafli Susanto",
+    "nisn": "0088982399",
+    "nis": "",
+    "jk": "L",
+    "email": "ahmad.rafli@siswa.smakk.sch.id"
+   },
+   {
+    "nama": "Alwi",
+    "nisn": "0077147371",
+    "nis": "",
+    "jk": "L",
+    "email": "alwi@siswa.smakk.sch.id"
+   },
+   {
+    "nama": "Anugerah Shania",
+    "nisn": "0086436186",
+    "nis": "",
+    "jk": "P",
+    "email": "anugerah@siswa.smakk.sch.id"
+   },
+   {
+    "nama": "Azfa Intan Putri Afin",
+    "nisn": "0084179723",
+    "nis": "",
+    "jk": "P",
+    "email": "azfa@siswa.smakk.sch.id"
+   },
+   {
+    "nama": "Azzahra",
+    "nisn": "0089659447",
+    "nis": "",
+    "jk": "P",
+    "email": "azzahra@siswa.smakk.sch.id"
+   },
+   {
+    "nama": "Denis Prayoga",
+    "nisn": "0088503473",
+    "nis": "",
+    "jk": "L",
+    "email": "denis.prayoga@siswa.smakk.sch.id"
+   },
+   {
+    "nama": "Isranudin",
+    "nisn": "0081267949",
+    "nis": "",
+    "jk": "L",
+    "email": "isranudin@siswa.smakk.sch.id"
+   },
+   {
+    "nama": "Jefri Insani",
+    "nisn": "0075728988",
+    "nis": "",
+    "jk": "L",
+    "email": "jefri@siswa.smakk.sch.id"
+   },
+   {
+    "nama": "Ledy Saputra",
+    "nisn": "0088896586",
+    "nis": "",
+    "jk": "L",
+    "email": "ledy@siswa.smakk.sch.id"
+   },
+   {
+    "nama": "M. Habibi Faith Islamuzzaid",
+    "nisn": "0083832015",
+    "nis": "",
+    "jk": "L",
+    "email": "m.habibi@siswa.smakk.sch.id"
+   },
+   {
+    "nama": "Muhammad Pajli",
+    "nisn": "0079901796",
+    "nis": "",
+    "jk": "L",
+    "email": "muhammad.pajli@siswa.smakk.sch.id"
+   },
+   {
+    "nama": "Muhammad Ramadhani",
+    "nisn": "0069592394",
+    "nis": "",
+    "jk": "L",
+    "email": "muhammad3@siswa.smakk.sch.id"
+   },
+   {
+    "nama": "Muhammad Sabirin",
+    "nisn": "0076846901",
+    "nis": "",
+    "jk": "L",
+    "email": "muhammad.sabirin@siswa.smakk.sch.id"
+   },
+   {
+    "nama": "Najmi Afifah Khairani",
+    "nisn": "0074539178",
+    "nis": "",
+    "jk": "P",
+    "email": "najmi@siswa.smakk.sch.id"
+   },
+   {
+    "nama": "Nina",
+    "nisn": "0081037149",
+    "nis": "",
+    "jk": "P",
+    "email": "nina@siswa.smakk.sch.id"
+   },
+   {
+    "nama": "Noor Hidayanti",
+    "nisn": "0085438024",
+    "nis": "",
+    "jk": "P",
+    "email": "noor.hidayanti@siswa.smakk.sch.id"
+   },
+   {
+    "nama": "Nor Aena",
+    "nisn": "0087085500",
+    "nis": "",
+    "jk": "P",
+    "email": "nor.aena@siswa.smakk.sch.id"
+   },
+   {
+    "nama": "Qa'id Adly Setya",
+    "nisn": "0092211868",
+    "nis": "",
+    "jk": "L",
+    "email": "qaid@siswa.smakk.sch.id"
+   },
+   {
+    "nama": "Radit",
+    "nisn": "3082664756",
+    "nis": "",
+    "jk": "L",
+    "email": "radit@siswa.smakk.sch.id"
+   },
+   {
+    "nama": "Rafi Hidayat",
+    "nisn": "0086108565",
+    "nis": "",
+    "jk": "L",
+    "email": "rafi@siswa.smakk.sch.id"
+   },
+   {
+    "nama": "Raka Dewangga",
+    "nisn": "0069103944",
+    "nis": "",
+    "jk": "L",
+    "email": "raka@siswa.smakk.sch.id"
+   },
+   {
+    "nama": "Rassya",
+    "nisn": "0082565780",
+    "nis": "",
+    "jk": "P",
+    "email": "rassya@siswa.smakk.sch.id"
+   },
+   {
+    "nama": "Rasti",
+    "nisn": "",
+    "nis": "",
+    "jk": "P",
+    "email": "rasti@siswa.smakk.sch.id"
+   },
+   {
+    "nama": "Sarif Hidayat",
+    "nisn": "0083401529",
+    "nis": "",
+    "jk": "L",
+    "email": "sarif@siswa.smakk.sch.id"
+   },
+   {
+    "nama": "Shintia Halwa Nurinayaty",
+    "nisn": "0084171155",
+    "nis": "",
+    "jk": "P",
+    "email": "shintia@siswa.smakk.sch.id"
+   },
+   {
+    "nama": "Sri Dewi Meranti",
+    "nisn": "0081687020",
+    "nis": "",
+    "jk": "P",
+    "email": "sri.dewi@siswa.smakk.sch.id"
+   },
+   {
+    "nama": "Vitha Tussittah",
+    "nisn": "0088883296",
+    "nis": "",
+    "jk": "P",
+    "email": "vitha@siswa.smakk.sch.id"
+   },
+   {
+    "nama": "Zaid As Shiddiq",
+    "nisn": "0075594400",
+    "nis": "",
+    "jk": "L",
+    "email": "zaid@siswa.smakk.sch.id"
+   }
+  ],
+  "XII B": [
+   {
+    "nama": "Adrian Noval",
+    "nisn": "0089837336",
+    "nis": "",
+    "jk": "L",
+    "email": "adrian@siswa.smakk.sch.id"
+   },
+   {
+    "nama": "Aulia Ulfah",
+    "nisn": "0085966400",
+    "nis": "",
+    "jk": "P",
+    "email": "aulia.ulfah@siswa.smakk.sch.id"
+   },
+   {
+    "nama": "Aurel Cintami Putri",
+    "nisn": "0082836788",
+    "nis": "",
+    "jk": "P",
+    "email": "aurel@siswa.smakk.sch.id"
+   },
+   {
+    "nama": "Bintang Surya",
+    "nisn": "0071106726",
+    "nis": "",
+    "jk": "L",
+    "email": "bintang@siswa.smakk.sch.id"
+   },
+   {
+    "nama": "Cindy Oktarissa",
+    "nisn": "0095201686",
+    "nis": "",
+    "jk": "P",
+    "email": "cindy@siswa.smakk.sch.id"
+   },
+   {
+    "nama": "Desi Ratna Sari",
+    "nisn": "0073902825",
+    "nis": "",
+    "jk": "P",
+    "email": "desi@siswa.smakk.sch.id"
+   },
+   {
+    "nama": "Dinda",
+    "nisn": "0084553651",
+    "nis": "",
+    "jk": "P",
+    "email": "dinda@siswa.smakk.sch.id"
+   },
+   {
+    "nama": "Fatmah A'zahra",
+    "nisn": "0087677465",
+    "nis": "",
+    "jk": "P",
+    "email": "fatmah@siswa.smakk.sch.id"
+   },
+   {
+    "nama": "Hanny Rukmana",
+    "nisn": "0088088598",
+    "nis": "",
+    "jk": "P",
+    "email": "hanny@siswa.smakk.sch.id"
+   },
+   {
+    "nama": "Helda Putri",
+    "nisn": "0087121632",
+    "nis": "",
+    "jk": "P",
+    "email": "helda@siswa.smakk.sch.id"
+   },
+   {
+    "nama": "Indra Gunawan",
+    "nisn": "0079159367",
+    "nis": "",
+    "jk": "L",
+    "email": "indra@siswa.smakk.sch.id"
+   },
+   {
+    "nama": "Jesti Mutiara",
+    "nisn": "0087680959",
+    "nis": "",
+    "jk": "P",
+    "email": "jesti@siswa.smakk.sch.id"
+   },
+   {
+    "nama": "Kamelia",
+    "nisn": "0078266189",
+    "nis": "",
+    "jk": "P",
+    "email": "kamelia@siswa.smakk.sch.id"
+   },
+   {
+    "nama": "Lisa Marsela",
+    "nisn": "0073107142",
+    "nis": "",
+    "jk": "P",
+    "email": "lisa@siswa.smakk.sch.id"
+   },
+   {
+    "nama": "Milla Elka Normasari",
+    "nisn": "0083730850",
+    "nis": "",
+    "jk": "P",
+    "email": "milla@siswa.smakk.sch.id"
+   },
+   {
+    "nama": "Monika",
+    "nisn": "0088989849",
+    "nis": "",
+    "jk": "P",
+    "email": "monika@siswa.smakk.sch.id"
+   },
+   {
+    "nama": "Muhamad Amin Badali",
+    "nisn": "0081836083",
+    "nis": "",
+    "jk": "L",
+    "email": "muhamad.amin@siswa.smakk.sch.id"
+   },
+   {
+    "nama": "Muhamadi Saputra",
+    "nisn": "0076982143",
+    "nis": "",
+    "jk": "L",
+    "email": "muhamadi@siswa.smakk.sch.id"
+   },
+   {
+    "nama": "Muhammad Rizky Hidayat",
+    "nisn": "0088449166",
+    "nis": "",
+    "jk": "L",
+    "email": "muhammad.rizky@siswa.smakk.sch.id"
+   },
+   {
+    "nama": "Muhammad Subli",
+    "nisn": "0078120227",
+    "nis": "",
+    "jk": "L",
+    "email": "muhammad.subli@siswa.smakk.sch.id"
+   },
+   {
+    "nama": "Norhadijah",
+    "nisn": "0082559518",
+    "nis": "",
+    "jk": "P",
+    "email": "norhadijah@siswa.smakk.sch.id"
+   },
+   {
+    "nama": "Ongki Saputra",
+    "nisn": "0077957625",
+    "nis": "",
+    "jk": "L",
+    "email": "ongki@siswa.smakk.sch.id"
+   },
+   {
+    "nama": "Prinda Agata",
+    "nisn": "0088850795",
+    "nis": "",
+    "jk": "P",
+    "email": "prinda@siswa.smakk.sch.id"
+   },
+   {
+    "nama": "Putri Aprilia",
+    "nisn": "0086846126",
+    "nis": "",
+    "jk": "P",
+    "email": "putri.aprilia@siswa.smakk.sch.id"
+   },
+   {
+    "nama": "Rahmi Yatika",
+    "nisn": "0089464608",
+    "nis": "",
+    "jk": "P",
+    "email": "rahmi@siswa.smakk.sch.id"
+   },
+   {
+    "nama": "Rico Valentino",
+    "nisn": "0083501440",
+    "nis": "",
+    "jk": "L",
+    "email": "rico@siswa.smakk.sch.id"
+   },
+   {
+    "nama": "Riki Delta",
+    "nisn": "0088632731",
+    "nis": "",
+    "jk": "L",
+    "email": "riki@siswa.smakk.sch.id"
+   },
+   {
+    "nama": "Sera Nabila",
+    "nisn": "0088329569",
+    "nis": "",
+    "jk": "P",
+    "email": "sera@siswa.smakk.sch.id"
+   },
+   {
+    "nama": "Siti Cahaya Murni",
+    "nisn": "0082509053",
+    "nis": "",
+    "jk": "P",
+    "email": "siti.cahaya@siswa.smakk.sch.id"
+   },
+   {
+    "nama": "Zahratunnissa",
+    "nisn": "3083690484",
+    "nis": "",
+    "jk": "P",
+    "email": "zahratunnissa@siswa.smakk.sch.id"
+   },
+   {
+    "nama": "Zulkifli",
+    "nisn": "0089034388",
+    "nis": "",
+    "jk": "L",
+    "email": "zulkifli@siswa.smakk.sch.id"
+   }
+  ],
+  "XII C": [
+   {
+    "nama": "Ahmad Dika",
+    "nisn": "0081664438",
+    "nis": "",
+    "jk": "L",
+    "email": "ahmad.dika@siswa.smakk.sch.id"
+   },
+   {
+    "nama": "Ahmad Firdaus",
+    "nisn": "0081574780",
+    "nis": "",
+    "jk": "L",
+    "email": "ahmad.firdaus@siswa.smakk.sch.id"
+   },
+   {
+    "nama": "Ahmad Wahyu Deriyanto",
+    "nisn": "0089426327",
+    "nis": "",
+    "jk": "L",
+    "email": "ahmad.wahyu@siswa.smakk.sch.id"
+   },
+   {
+    "nama": "Cinta Lestari",
+    "nisn": "0086665552",
+    "nis": "",
+    "jk": "P",
+    "email": "cinta@siswa.smakk.sch.id"
+   },
+   {
+    "nama": "Denis Permana Putra",
+    "nisn": "0088822696",
+    "nis": "",
+    "jk": "L",
+    "email": "denis.permana@siswa.smakk.sch.id"
+   },
+   {
+    "nama": "Fajrianor",
+    "nisn": "0075584827",
+    "nis": "",
+    "jk": "L",
+    "email": "fajrianor2@siswa.smakk.sch.id"
+   },
+   {
+    "nama": "Hepni",
+    "nisn": "0085714768",
+    "nis": "",
+    "jk": "P",
+    "email": "hepni@siswa.smakk.sch.id"
+   },
+   {
+    "nama": "Husnul Khatimah",
+    "nisn": "0084850945",
+    "nis": "",
+    "jk": "P",
+    "email": "husnul@siswa.smakk.sch.id"
+   },
+   {
+    "nama": "Imam",
+    "nisn": "0078748047",
+    "nis": "",
+    "jk": "L",
+    "email": "imam@siswa.smakk.sch.id"
+   },
+   {
+    "nama": "Indra",
+    "nisn": "0087659214",
+    "nis": "",
+    "jk": "L",
+    "email": "indra2@siswa.smakk.sch.id"
+   },
+   {
+    "nama": "Iqbal",
+    "nisn": "0073893045",
+    "nis": "",
+    "jk": "L",
+    "email": "iqbal@siswa.smakk.sch.id"
+   },
+   {
+    "nama": "Levi Yanor",
+    "nisn": "0083656540",
+    "nis": "",
+    "jk": "L",
+    "email": "levi@siswa.smakk.sch.id"
+   },
+   {
+    "nama": "M Rah Ar Am Yewosa Aulia",
+    "nisn": "3089168369",
+    "nis": "",
+    "jk": "L",
+    "email": "m.rah@siswa.smakk.sch.id"
+   },
+   {
+    "nama": "Melati Annailla Dewi",
+    "nisn": "0089635062",
+    "nis": "",
+    "jk": "P",
+    "email": "melati@siswa.smakk.sch.id"
+   },
+   {
+    "nama": "Muhammad Dani",
+    "nisn": "0075489107",
+    "nis": "",
+    "jk": "L",
+    "email": "muhammad.dani@siswa.smakk.sch.id"
+   },
+   {
+    "nama": "Muhammad Dika",
+    "nisn": "0086172095",
+    "nis": "",
+    "jk": "L",
+    "email": "muhammad.dika@siswa.smakk.sch.id"
+   },
+   {
+    "nama": "Muhammad Ridali",
+    "nisn": "0088181226",
+    "nis": "",
+    "jk": "L",
+    "email": "muhammad.ridali@siswa.smakk.sch.id"
+   },
+   {
+    "nama": "Nero",
+    "nisn": "0063010440",
+    "nis": "",
+    "jk": "L",
+    "email": "nero@siswa.smakk.sch.id"
+   },
+   {
+    "nama": "Nor Reka Sari",
+    "nisn": "0073441107",
+    "nis": "",
+    "jk": "P",
+    "email": "nor.reka@siswa.smakk.sch.id"
+   },
+   {
+    "nama": "Norlika",
+    "nisn": "3081701168",
+    "nis": "",
+    "jk": "P",
+    "email": "norlika@siswa.smakk.sch.id"
+   },
+   {
+    "nama": "Nurimbi",
+    "nisn": "0082105960",
+    "nis": "",
+    "jk": "P",
+    "email": "nurimbi@siswa.smakk.sch.id"
+   },
+   {
+    "nama": "Oktavia Rahmadani",
+    "nisn": "0072195721",
+    "nis": "",
+    "jk": "P",
+    "email": "oktavia@siswa.smakk.sch.id"
+   },
+   {
+    "nama": "Riska Wulandari",
+    "nisn": "0082023616",
+    "nis": "",
+    "jk": "P",
+    "email": "riska.wulandari@siswa.smakk.sch.id"
+   },
+   {
+    "nama": "Safira Mehra",
+    "nisn": "0082435727",
+    "nis": "",
+    "jk": "P",
+    "email": "safira@siswa.smakk.sch.id"
+   },
+   {
+    "nama": "Salfaniy",
+    "nisn": "3080055945",
+    "nis": "",
+    "jk": "P",
+    "email": "salfaniy@siswa.smakk.sch.id"
+   },
+   {
+    "nama": "Sandy",
+    "nisn": "0088732825",
+    "nis": "",
+    "jk": "L",
+    "email": "sandy@siswa.smakk.sch.id"
+   },
+   {
+    "nama": "Satrio Wijaksono",
+    "nisn": "0086420925",
+    "nis": "",
+    "jk": "L",
+    "email": "satrio@siswa.smakk.sch.id"
+   },
+   {
+    "nama": "Verlita Valentina",
+    "nisn": "0082583551",
+    "nis": "",
+    "jk": "P",
+    "email": "verlita@siswa.smakk.sch.id"
+   }
+  ]
+ }
+}

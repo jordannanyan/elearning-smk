@@ -1,5 +1,5 @@
 {
-  "tanggal": "2026-09-23T13:40:39.826Z",
+  "tanggal": "2026-09-27T16:28:54.202Z",
   "total": 95,
   "valid": 95,
   "tidak_valid": 0,
@@ -18,7 +18,7 @@
       "id": "BB-02",
       "modul": "Autentikasi",
       "skenario": "Login guru dengan email dan password yang benar",
-      "input": "budi@smakk.sch.id / guru123",
+      "input": "halifah@smakk.sch.id / guru123",
       "harapan": "Sistem menerima login dan mengarahkan ke dashboard guru",
       "aktual": "HTTP 200, role = guru",
       "status": "Valid"
@@ -83,7 +83,7 @@
       "skenario": "Administrator menampilkan daftar periode pembelajaran",
       "input": "Membuka menu Periode Pembelajaran",
       "harapan": "Sistem menampilkan seluruh periode beserta status aktif, draft, atau terkunci",
-      "aktual": "HTTP 200, 2 periode: 2026/1 (aktif), 2025/2 (terkunci)",
+      "aktual": "HTTP 200, 2 periode: 2026/2 (aktif), 2026/1 (terkunci)",
       "status": "Valid"
     },
     {
@@ -92,25 +92,25 @@
       "skenario": "Sistem menampilkan periode yang sedang berjalan pada seluruh halaman",
       "input": "Membuka sistem sebagai guru",
       "harapan": "Sistem menampilkan kode periode aktif beserta tahun ajaran dan semesternya",
-      "aktual": "HTTP 200, periode aktif: 2026/1 (2025/2026 Ganjil)",
+      "aktual": "HTTP 200, periode aktif: 2026/2 (2025/2026 Genap)",
       "status": "Valid"
     },
     {
       "id": "BB-11",
       "modul": "Periode Pembelajaran",
       "skenario": "Administrator menambah periode pembelajaran baru",
-      "input": "Tahun Ajaran 2025/2026, Semester 2 (genap)",
-      "harapan": "Periode tersimpan dengan kode 2026/2 dan berstatus draft",
-      "aktual": "HTTP 201, kode terbentuk: 2026/2",
+      "input": "Tahun Ajaran 2026/2027, Semester 1 (ganjil)",
+      "harapan": "Periode tersimpan dengan kode 2027/1 dan berstatus draft",
+      "aktual": "HTTP 201, kode terbentuk: 2027/1",
       "status": "Valid"
     },
     {
       "id": "BB-12",
       "modul": "Periode Pembelajaran",
       "skenario": "Administrator menambah periode yang sudah terdaftar",
-      "input": "Tahun Ajaran 2025/2026 Semester 2 (sudah ada)",
+      "input": "Tahun Ajaran 2026/2027 Semester 1 (sudah ada)",
       "harapan": "Sistem menolak karena periode dengan kode tersebut sudah terdaftar",
-      "aktual": "HTTP 409, pesan: \"Periode 2026/2 sudah terdaftar\"",
+      "aktual": "HTTP 409, pesan: \"Periode 2027/1 sudah terdaftar\"",
       "status": "Valid"
     },
     {
@@ -126,18 +126,18 @@
       "id": "BB-14",
       "modul": "Periode Pembelajaran",
       "skenario": "Administrator menghapus periode yang belum memiliki kelas",
-      "input": "Menghapus periode 2026/2 yang masih kosong",
+      "input": "Menghapus periode 2027/1 yang masih kosong",
       "harapan": "Periode berhasil dihapus karena belum memuat data pembelajaran",
-      "aktual": "HTTP 200, pesan: \"Periode 2026/2 berhasil dihapus\"",
+      "aktual": "HTTP 200, pesan: \"Periode 2027/1 berhasil dihapus\"",
       "status": "Valid"
     },
     {
       "id": "BB-15",
       "modul": "Periode Pembelajaran",
       "skenario": "Administrator menghapus periode yang sudah berisi kelas",
-      "input": "Menghapus periode 2026/1 yang memuat 5 kelas",
+      "input": "Menghapus periode 2026/2 yang memuat 10 kelas",
       "harapan": "Sistem menolak penghapusan demi menjaga keutuhan data historis",
-      "aktual": "HTTP 409, pesan: \"Periode 2026/1 tidak dapat dihapus karena sudah memiliki 5 kelas. Gunakan penguncian periode untuk mengarsipkannya.\"",
+      "aktual": "HTTP 409, pesan: \"Periode 2026/2 tidak dapat dihapus karena sudah memiliki 10 kelas. Gunakan penguncian periode untuk mengarsipkannya.\"",
       "status": "Valid"
     },
     {
@@ -153,18 +153,18 @@
       "id": "BB-17",
       "modul": "Penguncian Periode",
       "skenario": "Guru menambah pertemuan pada periode yang telah dikunci",
-      "input": "Menambah pertemuan pada mata pelajaran periode 2025/2 (terkunci)",
+      "input": "Menambah pertemuan pada mata pelajaran periode 2026/1 (terkunci)",
       "harapan": "Sistem menolak perubahan karena periode sudah dikunci administrator",
-      "aktual": "HTTP 423, pesan: \"Periode pembelajaran 2025/2 telah dikunci oleh administrator. Data pada periode ini hanya dapat dilihat dan tidak dapat diubah.\"",
+      "aktual": "HTTP 423, pesan: \"Periode pembelajaran 2026/1 telah dikunci oleh administrator. Data pada periode ini hanya dapat dilihat dan tidak dapat diubah.\"",
       "status": "Valid"
     },
     {
       "id": "BB-18",
       "modul": "Penguncian Periode",
       "skenario": "Guru menambah materi pada periode yang telah dikunci",
-      "input": "Menambah materi pada pertemuan periode 2025/2",
+      "input": "Menambah materi pada pertemuan periode 2026/1",
       "harapan": "Sistem menolak karena data periode terkunci bersifat hanya-baca",
-      "aktual": "HTTP 423, pesan: \"Periode pembelajaran 2025/2 telah dikunci oleh administrator. Data pada periode ini hanya dapat dilihat dan tidak dapat diubah.\"",
+      "aktual": "HTTP 423, pesan: \"Periode pembelajaran 2026/1 telah dikunci oleh administrator. Data pada periode ini hanya dapat dilihat dan tidak dapat diubah.\"",
       "status": "Valid"
     },
     {
@@ -173,7 +173,7 @@
       "skenario": "Guru mengubah tugas pada periode yang telah dikunci",
       "input": "Mengubah judul tugas \"Latihan Barisan Aritmetika\" pada periode arsip",
       "harapan": "Sistem menolak perubahan data pada periode terkunci",
-      "aktual": "HTTP 423, pesan: \"Periode pembelajaran 2025/2 telah dikunci oleh administrator. Data pada periode ini hanya dapat dilihat dan tidak dapat diubah.\"",
+      "aktual": "HTTP 423, pesan: \"Periode pembelajaran 2026/1 telah dikunci oleh administrator. Data pada periode ini hanya dapat dilihat dan tidak dapat diubah.\"",
       "status": "Valid"
     },
     {
@@ -182,7 +182,7 @@
       "skenario": "Siswa mengumpulkan tugas pada periode yang telah dikunci",
       "input": "Siswa mengumpulkan tugas pada periode arsip",
       "harapan": "Sistem menolak pengumpulan karena periode sudah ditutup",
-      "aktual": "HTTP 423, pesan: \"Periode pembelajaran 2025/2 telah dikunci oleh administrator. Data pada periode ini hanya dapat dilihat dan tidak dapat diubah.\"",
+      "aktual": "HTTP 423, pesan: \"Periode pembelajaran 2026/1 telah dikunci oleh administrator. Data pada periode ini hanya dapat dilihat dan tidak dapat diubah.\"",
       "status": "Valid"
     },
     {
@@ -200,7 +200,7 @@
       "skenario": "Administrator menampilkan daftar data guru",
       "input": "Membuka menu Data Guru",
       "harapan": "Sistem menampilkan seluruh data guru beserta NIP dan jumlah pengampuannya",
-      "aktual": "HTTP 200, 6 data guru ditampilkan",
+      "aktual": "HTTP 200, 28 data guru ditampilkan",
       "status": "Valid"
     },
     {
@@ -243,16 +243,16 @@
       "id": "BB-27",
       "modul": "Manajemen Pengguna",
       "skenario": "Administrator menghapus guru yang sudah mengampu kelas",
-      "input": "Menghapus akun Budi Santoso, S.Pd yang mengampu 5 kelas",
+      "input": "Menghapus akun Halifah, S.P yang mengampu 5 kelas",
       "harapan": "Sistem menolak penghapusan dan menyarankan penonaktifan akun agar data tetap utuh",
-      "aktual": "HTTP 409, pesan: \"Guru ini masih mengampu 5 kelas mata pelajaran sehingga tidak dapat dihapus. Nonaktifkan akunnya agar data pembelajaran tetap utuh.\"",
+      "aktual": "HTTP 409, pesan: \"Guru ini masih mengampu 10 kelas mata pelajaran sehingga tidak dapat dihapus. Nonaktifkan akunnya agar data pembelajaran tetap utuh.\"",
       "status": "Valid"
     },
     {
       "id": "BB-28",
       "modul": "Manajemen Pengguna",
       "skenario": "Administrator menonaktifkan akun guru sebagai pengganti penghapusan",
-      "input": "Menonaktifkan akun Budi Santoso, S.Pd, lalu akun tersebut mencoba login",
+      "input": "Menonaktifkan akun Halifah, S.P, lalu akun tersebut mencoba login",
       "harapan": "Akun tidak dapat masuk ke sistem, namun seluruh data pembelajarannya tetap tersimpan",
       "aktual": "HTTP 200 saat menonaktifkan; percobaan login: HTTP 403 (\"Akun dinonaktifkan\")",
       "status": "Valid"
@@ -261,7 +261,7 @@
       "id": "BB-29",
       "modul": "Manajemen Pengguna",
       "skenario": "Administrator menambah data siswa dan menempatkannya pada sebuah kelas",
-      "input": "Nama: Wulan Safitri; NIS: 0012345699; Kelas: X MIPA 1",
+      "input": "Nama: Wulan Safitri; NIS: 0012345699; Kelas: X A",
       "harapan": "Data siswa tersimpan beserta penempatan kelasnya pada periode aktif",
       "aktual": "HTTP 201, pesan: \"Pengguna berhasil dibuat\"",
       "status": "Valid"
@@ -272,16 +272,16 @@
       "skenario": "Administrator menampilkan daftar siswa beserta kelasnya",
       "input": "Membuka menu Data Siswa",
       "harapan": "Sistem menampilkan data siswa beserta kelas pada periode pembelajaran aktif",
-      "aktual": "HTTP 200, 16 siswa; contoh: Ahmad Fauzi kelas X MIPA 1",
+      "aktual": "HTTP 200, 288 siswa; contoh: Ahmad Hanapi kelas X A",
       "status": "Valid"
     },
     {
       "id": "BB-31",
       "modul": "Manajemen Pengguna",
       "skenario": "Administrator menghapus siswa yang sudah terdaftar pada kelas",
-      "input": "Menghapus akun Ahmad Fauzi",
+      "input": "Menghapus akun Ahmad Hanapi",
       "harapan": "Sistem menolak dan menyarankan penonaktifan agar riwayat nilai siswa tetap tersimpan",
-      "aktual": "HTTP 409, pesan: \"Siswa ini terdaftar pada 1 kelas dan memiliki 0 pengumpulan tugas sehingga tidak dapat dihapus. Nonaktifkan akunnya (misalnya karena sudah lulus atau pindah) agar riwayat nilainya tetap tersimpan.\"",
+      "aktual": "HTTP 409, pesan: \"Siswa ini terdaftar pada 2 kelas dan memiliki 7 pengumpulan tugas sehingga tidak dapat dihapus. Nonaktifkan akunnya (misalnya karena sudah lulus atau pindah) agar riwayat nilainya tetap tersimpan.\"",
       "status": "Valid"
     },
     {
@@ -297,7 +297,7 @@
       "id": "BB-33",
       "modul": "Manajemen Kelas",
       "skenario": "Administrator menambah kelas pada periode aktif",
-      "input": "Nama kelas: XII IPS 1; Tingkat: XII; Periode: 2026/1",
+      "input": "Nama kelas: XII IPS 1; Tingkat: XII; Periode: 2026/2",
       "harapan": "Kelas tersimpan pada periode pembelajaran yang dipilih",
       "aktual": "HTTP 201, pesan: \"Kelas berhasil dibuat\"",
       "status": "Valid"
@@ -306,18 +306,18 @@
       "id": "BB-34",
       "modul": "Manajemen Kelas",
       "skenario": "Administrator menambah kelas dengan nama yang sudah ada pada periode sama",
-      "input": "Nama kelas: XII IPS 1 (sudah terdaftar pada periode 2026/1)",
+      "input": "Nama kelas: XII IPS 1 (sudah terdaftar pada periode 2026/2)",
       "harapan": "Sistem menolak karena nama kelas harus unik dalam satu periode",
-      "aktual": "HTTP 409, pesan: \"Kelas XII IPS 1 sudah ada pada periode 2026/1\"",
+      "aktual": "HTTP 409, pesan: \"Kelas XII IPS 1 sudah ada pada periode 2026/2\"",
       "status": "Valid"
     },
     {
       "id": "BB-35",
       "modul": "Manajemen Kelas",
       "skenario": "Administrator menghapus kelas yang masih berisi siswa dan mata pelajaran",
-      "input": "Menghapus kelas X MIPA 1",
+      "input": "Menghapus kelas X A",
       "harapan": "Sistem menolak agar data pembelajaran kelas tersebut tidak ikut terhapus",
-      "aktual": "HTTP 409, pesan: \"Kelas tidak dapat dihapus karena masih memiliki 7 siswa dan 6 mata pelajaran. Kosongkan kelas terlebih dahulu atau kunci periodenya.\"",
+      "aktual": "HTTP 409, pesan: \"Kelas tidak dapat dihapus karena masih memiliki 29 siswa dan 17 mata pelajaran. Kosongkan kelas terlebih dahulu atau kunci periodenya.\"",
       "status": "Valid"
     },
     {
@@ -326,32 +326,32 @@
       "skenario": "Administrator menampilkan katalog mata pelajaran sekolah",
       "input": "Membuka menu Mata Pelajaran",
       "harapan": "Sistem menampilkan seluruh mata pelajaran SMA beserta kelompoknya",
-      "aktual": "HTTP 200, 27 mata pelajaran pada 5 kelompok",
+      "aktual": "HTTP 200, 27 mata pelajaran pada 3 kelompok",
       "status": "Valid"
     },
     {
       "id": "BB-37",
-      "modul": "Pengampuan Kelas",
-      "skenario": "Satu mata pelajaran diampu guru berbeda pada tingkat kelas berbeda",
-      "input": "Memeriksa pengampuan mata pelajaran Bahasa Indonesia",
-      "harapan": "Sistem mengizinkan satu mata pelajaran diampu lebih dari satu guru pada kelas berbeda",
-      "aktual": "5 pengampuan oleh 2 guru berbeda: X MIPA 1 (Siti Aminah, S.Pd), X MIPA 2 (Siti Aminah, S.Pd), XI IPS 1 (Lestari Ningsih, S.Pd), XI MIPA 1 (Lestari Ningsih, S.Pd), X MIPA 1 (Siti Aminah, S.Pd)",
+      "modul": "Mata Pelajaran Kelas",
+      "skenario": "Satu mata pelajaran diajar guru berbeda pada tingkat kelas berbeda",
+      "input": "Memeriksa penugasan guru pada mata pelajaran BAHASA INDONESIA",
+      "harapan": "Sistem mengizinkan satu mata pelajaran diajar lebih dari satu guru pada kelas berbeda",
+      "aktual": "Diajarkan di 20 kelas oleh 3 guru berbeda: X A (Asnin Warianto, S.Pd.I), X B (Asnin Warianto, S.Pd.I), X C (Laily Mustika, S.Pd.I), XI A (Martaniah, S.Pd), XI B (Martaniah, S.Pd), XI C (Martaniah, S.Pd), XI D (Laily Mustika, S.Pd.I), XII A (Martaniah, S.Pd), XII B (Martaniah, S.Pd), XII C (Martaniah, S.Pd), X A (Asnin Warianto, S.Pd.I), X B (Asnin Warianto, S.Pd.I), X C (Laily Mustika, S.Pd.I), XI A (Martaniah, S.Pd), XI B (Martaniah, S.Pd), XI C (Martaniah, S.Pd), XI D (Laily Mustika, S.Pd.I), XII A (Martaniah, S.Pd), XII B (Martaniah, S.Pd), XII C (Martaniah, S.Pd)",
       "status": "Valid"
     },
     {
       "id": "BB-38",
       "modul": "Mata Pelajaran",
       "skenario": "Administrator menghapus mata pelajaran yang sudah diajarkan",
-      "input": "Menghapus mata pelajaran Bahasa Indonesia",
+      "input": "Menghapus mata pelajaran BAHASA INDONESIA",
       "harapan": "Sistem menolak dan menyarankan penonaktifan mata pelajaran",
-      "aktual": "HTTP 409, pesan: \"Mata pelajaran \"Bahasa Indonesia\" sudah digunakan pada 5 pengampuan kelas sehingga tidak dapat dihapus. Nonaktifkan mata pelajaran ini agar tidak dapat dipilih lagi.\"",
+      "aktual": "HTTP 409, pesan: \"Mata pelajaran \"BAHASA INDONESIA\" sudah digunakan pada 20 pengampuan kelas sehingga tidak dapat dihapus. Nonaktifkan mata pelajaran ini agar tidak dapat dipilih lagi.\"",
       "status": "Valid"
     },
     {
       "id": "BB-39",
       "modul": "Mata Pelajaran",
       "skenario": "Administrator menonaktifkan mata pelajaran",
-      "input": "Menonaktifkan Bahasa Indonesia",
+      "input": "Menonaktifkan BAHASA INDONESIA",
       "harapan": "Mata pelajaran tidak dapat dipilih lagi pada pengampuan baru, data lama tetap tersimpan",
       "aktual": "HTTP 200, pesan: \"Mata pelajaran dinonaktifkan\"",
       "status": "Valid"
@@ -376,11 +376,11 @@
     },
     {
       "id": "BB-42",
-      "modul": "Kelas Mata Pelajaran",
-      "skenario": "Guru menampilkan daftar kelas mata pelajaran yang diampunya",
-      "input": "Membuka menu Kelas Saya",
-      "harapan": "Sistem hanya menampilkan kelas mata pelajaran yang diampu guru tersebut pada periode aktif",
-      "aktual": "HTTP 200, 4 kelas mata pelajaran: Matematika Wajib (X MIPA 1), Matematika Wajib (X MIPA 2), Matematika Peminatan (XI MIPA 1), Matematika Wajib (XII MIPA 1)",
+      "modul": "Kelas yang Diajar",
+      "skenario": "Guru menampilkan daftar mata pelajaran dan kelas yang diajarnya",
+      "input": "Membuka menu Kelas yang Diajar",
+      "harapan": "Sistem hanya menampilkan mata pelajaran dan kelas yang diajar guru tersebut pada periode aktif",
+      "aktual": "HTTP 200, 5 kelas mata pelajaran: MATEMATIKA UMUM (X A), MATEMATIKA TK LANJUT (XI B), MATEMATIKA TK LANJUT (XII A), MATEMATIKA TK LANJUT (XII B), MATEMATIKA TK LANJUT (XII C)",
       "status": "Valid"
     },
     {
@@ -488,14 +488,14 @@
       "skenario": "Siswa menampilkan daftar mata pelajaran di kelasnya",
       "input": "Membuka menu Kelas Saya",
       "harapan": "Sistem menampilkan kartu mata pelajaran kelas siswa, bukan seluruh materi yang bertumpuk",
-      "aktual": "HTTP 200, 6 mata pelajaran: Bahasa Indonesia, Bahasa Inggris, Fisika, Informatika, Kimia, Matematika Wajib",
+      "aktual": "HTTP 200, 17 mata pelajaran: BAHASA INDONESIA, BAHASA INGGRIS, BIOLOGI, EKONOMI, FISIKA, GEOGRAFI, INFORMATIKA, KIMIA, MATEMATIKA UMUM, MULOK, PAI dan Budi Pekerti, PEND. AGAMA KRISTEN, Pend. PANCASILA, PJOK, PKWU, SEJARAH, SOSIOLOGI",
       "status": "Valid"
     },
     {
       "id": "BB-55",
       "modul": "Alur Pembelajaran Siswa",
       "skenario": "Siswa membuka mata pelajaran lalu melihat daftar pertemuan",
-      "input": "Membuka mata pelajaran Matematika Wajib",
+      "input": "Membuka mata pelajaran MATEMATIKA UMUM",
       "harapan": "Materi tersusun per pertemuan secara berurutan mulai dari pertemuan pertama",
       "aktual": "HTTP 200, 3 pertemuan: Pertemuan 1 (3 materi, 1 tugas); Pertemuan 2 (1 materi, 1 tugas); Pertemuan 3 (2 materi, 1 tugas)",
       "status": "Valid"
@@ -506,7 +506,7 @@
       "skenario": "Siswa membuka satu pertemuan untuk mengikuti pembelajaran",
       "input": "Membuka Pertemuan 1",
       "harapan": "Sistem menampilkan materi, tugas, dan forum diskusi pertemuan tersebut secara berurutan",
-      "aktual": "HTTP 200, 3 materi, 1 tugas, 1 topik diskusi",
+      "aktual": "HTTP 200, 3 materi, 1 tugas, 3 topik diskusi",
       "status": "Valid"
     },
     {
@@ -524,14 +524,14 @@
       "skenario": "Siswa mengunduh berkas materi pembelajaran",
       "input": "Menekan tombol Unduh pada materi \"Modul Persamaan Linear Satu Variabel (PDF)\"",
       "harapan": "Berkas materi berhasil diunduh oleh siswa",
-      "aktual": "HTTP 200, ukuran berkas 1326 byte",
+      "aktual": "HTTP 200, ukuran berkas 1325 byte",
       "status": "Valid"
     },
     {
       "id": "BB-59",
       "modul": "Alur Pembelajaran Siswa",
       "skenario": "Siswa membuka pertemuan pada kelas yang tidak diikutinya",
-      "input": "Membuka pertemuan milik kelas lain",
+      "input": "Siswa kelas X A membuka pertemuan milik kelas X B",
       "harapan": "Akses ditolak karena siswa tidak terdaftar pada kelas tersebut",
       "aktual": "HTTP 403, pesan: \"Anda tidak memiliki akses pada pertemuan ini\"",
       "status": "Valid"
@@ -551,7 +551,7 @@
       "skenario": "Sistem mengelompokkan tugas siswa berdasarkan status pengerjaan",
       "input": "Membuka menu Tugas & Kuis sebagai siswa",
       "harapan": "Tugas terpisah menjadi belum dikerjakan, menunggu penilaian, sudah dinilai, dan terlewat",
-      "aktual": "Status yang terbentuk: terlewat, belum_dikerjakan",
+      "aktual": "Status yang terbentuk: terlewat, belum_dikerjakan, dinilai, menunggu_penilaian",
       "status": "Valid"
     },
     {
@@ -659,14 +659,14 @@
       "skenario": "Guru menampilkan daftar pengumpulan termasuk siswa yang belum mengumpulkan",
       "input": "Membuka daftar pengumpulan tugas Latihan Persamaan Linear",
       "harapan": "Sistem menampilkan seluruh siswa kelas beserta status pengumpulannya, termasuk yang belum mengumpulkan",
-      "aktual": "HTTP 200, 7 siswa; 2 di antaranya belum mengumpulkan",
+      "aktual": "HTTP 200, 29 siswa; 24 di antaranya belum mengumpulkan",
       "status": "Valid"
     },
     {
       "id": "BB-74",
       "modul": "Penilaian",
       "skenario": "Guru memberikan nilai dan catatan pada tugas yang dikumpulkan siswa",
-      "input": "Nilai 90 untuk Ahmad Fauzi beserta catatan guru",
+      "input": "Nilai 90 untuk Ahmad Hanapi beserta catatan guru",
       "harapan": "Nilai tersimpan dan langsung tampil pada rekap nilai siswa",
       "aktual": "HTTP 200, pesan: \"Nilai berhasil disimpan\"",
       "status": "Valid"
@@ -702,7 +702,7 @@
       "id": "BB-78",
       "modul": "Penilaian",
       "skenario": "Guru memeriksa dan menilai jawaban esai pada kuis",
-      "input": "Memberi skor 30 untuk jawaban esai Ahmad Fauzi",
+      "input": "Memberi skor 30 untuk jawaban esai Ahmad Hanapi",
       "harapan": "Sistem menggabungkan skor pilihan ganda dan esai lalu menghasilkan nilai akhir skala 0-100",
       "aktual": "HTTP 200, nilai akhir yang dihasilkan sistem: 100.00",
       "status": "Valid"
@@ -722,7 +722,7 @@
       "skenario": "Siswa melihat rekap nilai yang dikelompokkan per mata pelajaran",
       "input": "Membuka menu Nilai",
       "harapan": "Nilai disajikan terpisah per mata pelajaran beserta rata-rata masing-masing, tidak digabung",
-      "aktual": "HTTP 200, 4 mata pelajaran; contoh: Bahasa Indonesia (rata-rata 100), Bahasa Inggris (rata-rata 98), Fisika (rata-rata null)",
+      "aktual": "HTTP 200, 4 mata pelajaran; contoh: BAHASA INDONESIA (rata-rata 100), BAHASA INGGRIS (rata-rata 98), FISIKA (rata-rata null)",
       "status": "Valid"
     },
     {
@@ -740,7 +740,7 @@
       "skenario": "Siswa menelusuri riwayat nilai pada periode pembelajaran sebelumnya",
       "input": "Memilih periode terdahulu pada menu Nilai",
       "harapan": "Sistem menampilkan daftar periode yang pernah diikuti siswa beserta kelasnya",
-      "aktual": "HTTP 200, 2 periode: 2026/1 (kelas XI MIPA 1), 2025/2 (kelas X MIPA 1)",
+      "aktual": "HTTP 200, 2 periode: 2026/2 (kelas X A), 2026/1 (kelas X A)",
       "status": "Valid"
     },
     {
@@ -756,9 +756,9 @@
       "id": "BB-84",
       "modul": "Rekap Nilai",
       "skenario": "Guru melihat rekap nilai seluruh siswa pada satu kelas mata pelajaran",
-      "input": "Membuka rekap nilai Matematika Wajib kelas X MIPA 1",
+      "input": "Membuka rekap nilai MATEMATIKA UMUM kelas X A",
       "harapan": "Sistem menampilkan nilai seluruh siswa untuk setiap tugas beserta rata-ratanya",
-      "aktual": "HTTP 200, 7 siswa dan 3 tugas ditampilkan",
+      "aktual": "HTTP 200, 29 siswa dan 3 tugas ditampilkan",
       "status": "Valid"
     },
     {
@@ -803,7 +803,7 @@
       "skenario": "Pengguna menampilkan forum diskusi yang menyatu dalam materi pertemuan",
       "input": "Membuka Pertemuan 1 lalu melihat bagian forum diskusi",
       "harapan": "Forum diskusi tampil di dalam pertemuan beserta seluruh balasannya secara berurutan",
-      "aktual": "HTTP 200, 2 topik dengan total 3 balasan",
+      "aktual": "HTTP 200, 4 topik dengan total 9 balasan",
       "status": "Valid"
     },
     {
@@ -830,7 +830,7 @@
       "skenario": "Statistik dashboard administrator sesuai dengan isi menu terkait",
       "input": "Membandingkan angka dashboard dengan jumlah data pada menu Kelas dan Mata Pelajaran",
       "harapan": "Seluruh angka pada dashboard sama dengan jumlah data sebenarnya pada periode aktif",
-      "aktual": "Dashboard: 5 kelas & 27 mapel; data sebenarnya: 5 kelas & 27 mapel",
+      "aktual": "Dashboard: 10 kelas & 27 mapel; data sebenarnya: 10 kelas & 27 mapel",
       "status": "Valid"
     },
     {
@@ -839,7 +839,7 @@
       "skenario": "Guru melihat ringkasan aktivitas pembelajaran pada dashboard",
       "input": "Membuka dashboard guru",
       "harapan": "Sistem menampilkan jumlah kelas, pertemuan, materi, tugas, dan pekerjaan yang perlu dinilai",
-      "aktual": "HTTP 200: 4 kelas mapel, 4 pertemuan, 7 materi, 4 tugas, 2 perlu dinilai",
+      "aktual": "HTTP 200: 5 kelas mapel, 3 pertemuan, 6 materi, 3 tugas, 2 perlu dinilai",
       "status": "Valid"
     },
     {
@@ -848,7 +848,7 @@
       "skenario": "Siswa melihat ringkasan tugas dan pengingat batas waktu pada dashboard",
       "input": "Membuka dashboard siswa",
       "harapan": "Sistem menampilkan ringkasan tugas beserta daftar tugas yang tenggatnya sudah dekat",
-      "aktual": "HTTP 200: kelas X MIPA 1, 7 tugas, 5 dikumpulkan, 1 tugas mendesak",
+      "aktual": "HTTP 200: kelas X A, 7 tugas, 5 dikumpulkan, 1 tugas mendesak",
       "status": "Valid"
     },
     {

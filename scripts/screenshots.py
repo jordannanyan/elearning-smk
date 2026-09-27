@@ -140,7 +140,7 @@ def main():
                modal=True)
         page.click('.modal button:has-text("Batal")')
 
-        page.locator('tr:has-text("Budi Santoso") button:has-text("Jadwal")').first.click()
+        page.locator('tr:has-text("Halifah") button:has-text("Jadwal")').first.click()
         page.wait_for_selector('.modal:has-text("Jadwal Mengajar")')
         simpan(page, "admin-jadwal-guru", "Rincian Jadwal Mengajar Seorang Guru",
                "Rincian jadwal mengajar yang menjawab pertanyaan guru ini mengajar apa dan di kelas "
@@ -170,7 +170,7 @@ def main():
                "tingkat, wali kelas, jumlah siswa, dan jumlah mata pelajaran, serta dapat dibuka "
                "untuk mengatur isinya.", full=True)
 
-        page.locator('.kartu-ringkas:has-text("X MIPA 1")').first.click()
+        page.locator('.kartu-ringkas:has-text("X A")').first.click()
         page.wait_for_selector(".modal")
         page.wait_for_timeout(1200)
         simpan(page, "admin-kelas-mapel-guru", "Pengaturan Mata Pelajaran dan Guru Pengajar Kelas",
@@ -189,21 +189,24 @@ def main():
         buka(page, "/admin/mapel")
         simpan(page, "admin-data-mapel", "Halaman Katalog Mata Pelajaran",
                "Katalog mata pelajaran sekolah yang dikelompokkan menjadi kelompok wajib, "
-               "peminatan MIPA, peminatan IPS, peminatan bahasa, dan muatan lokal. Kolom "
+               "peminatan, dan muatan lokal. Kolom "
                "Diajarkan di Kelas menunjukkan pada tingkat kelas mana mata pelajaran tersebut "
                "diajarkan. Daftar yang panjang dibagi menjadi beberapa halaman.", full=True)
 
         page.click('button:has-text("+ Tambah Mapel")')
         page.wait_for_selector(".modal")
-        page.fill('.modal input >> nth=0', "Bahasa Jerman")
+        page.fill('.modal input >> nth=0', "BAHASA JERMAN")
         page.fill('.modal input >> nth=1', "BJER")
-        page.select_option('.modal select', "Peminatan Bahasa")
+        page.select_option('.modal select', "Peminatan")
         simpan(page, "admin-form-mapel", "Form Tambah Mata Pelajaran",
                "Form penambahan mata pelajaran ke dalam katalog sekolah yang memuat isian nama, "
                "kode, kelompok mata pelajaran, dan deskripsi.", modal=True)
         page.click('.modal button:has-text("Batal")')
 
-        page.locator('tr:has-text("Bahasa Indonesia") button:has-text("Lihat Kelas")').first.click()
+        # Saring kelompok Wajib dulu agar Bahasa Indonesia berada di halaman pertama
+        page.select_option('.pilih-periode select >> nth=1', "Wajib")
+        page.wait_for_timeout(700)
+        page.locator('tr:has(td:text-is("BAHASA INDONESIA")) button:has-text("Lihat Kelas")').first.click()
         page.wait_for_selector('.modal:has-text("Diajarkan di Kelas")')
         simpan(page, "admin-mapel-detail", "Rincian Mata Pelajaran: Diajarkan di Kelas Mana",
                "Rincian sebuah mata pelajaran yang memperlihatkan kelas mana saja yang "
@@ -214,7 +217,7 @@ def main():
         # =============================================================
         # 3. GURU
         # =============================================================
-        login(page, "budi@smakk.sch.id", "guru123")
+        login(page, "halifah@smakk.sch.id", "guru123")
         simpan(page, "guru-dashboard", "Halaman Dashboard Guru",
                "Dashboard guru menampilkan jumlah kelas mata pelajaran yang diampu, jumlah siswa, "
                "pertemuan, materi, tugas, serta pekerjaan siswa yang masih perlu dinilai pada "
@@ -226,8 +229,8 @@ def main():
                "beserta jumlah siswa, pertemuan, materi, dan tugasnya. Guru dapat memilih periode "
                "pembelajaran untuk menelusuri kelas pada periode terdahulu.", full=True)
 
-        # Masuk ke kelas mata pelajaran Matematika Wajib X MIPA 1
-        page.locator('.kartu-mapel:has-text("Matematika Wajib"):has-text("X MIPA 1")').first.click()
+        # Masuk ke kelas mata pelajaran MATEMATIKA UMUM X A
+        page.locator('.kartu-mapel:has-text("MATEMATIKA UMUM"):has-text("X A")').first.click()
         page.wait_for_url("**/guru/kelas/**", timeout=10000)
         page.wait_for_timeout(1200)
         simpan(page, "guru-daftar-pertemuan", "Daftar Pertemuan pada Kelas Mata Pelajaran",
@@ -285,7 +288,7 @@ def main():
 
         # Kelola butir soal pada kuis
         buka(page, "/guru/kelas")
-        page.locator('.kartu-mapel:has-text("Matematika Wajib"):has-text("X MIPA 1")').first.click()
+        page.locator('.kartu-mapel:has-text("MATEMATIKA UMUM"):has-text("X A")').first.click()
         page.wait_for_url("**/guru/kelas/**", timeout=10000)
         page.wait_for_timeout(1000)
         page.locator('.pertemuan-item:has-text("Pertidaksamaan") a:has-text("Kelola Isi")').first.click()
@@ -305,7 +308,7 @@ def main():
                "panjang. Setiap kartu menampilkan jumlah tugas, pekerjaan yang terkumpul, dan "
                "jumlah siswa pada kelas tersebut.", full=True)
 
-        page.locator('.kartu-ringkas:has-text("Matematika Wajib"):has-text("X MIPA 1")').first.click()
+        page.locator('.kartu-ringkas:has-text("MATEMATIKA UMUM"):has-text("X A")').first.click()
         page.wait_for_timeout(1000)
         simpan(page, "guru-penilaian-mapel", "Daftar Tugas pada Satu Mata Pelajaran",
                "Setelah mata pelajaran dipilih, tugas dan kuisnya ditampilkan berurutan menurut "
@@ -332,9 +335,9 @@ def main():
         page.click('.modal button:has-text("Tutup")')
 
         # Penilaian esai pada kuis (guru Bahasa Indonesia)
-        login(page, "siti@smakk.sch.id", "guru123")
+        login(page, "asnin@smakk.sch.id", "guru123")
         buka(page, "/guru/penilaian")
-        page.locator('.kartu-ringkas:has-text("Bahasa Indonesia"):has-text("X MIPA 1")').first.click()
+        page.locator('.kartu-ringkas:has-text("BAHASA INDONESIA"):has-text("X A")').first.click()
         page.wait_for_timeout(1000)
         page.locator('.kartu-tugas:has-text("Kuis Teks Deskripsi") button:has-text("Periksa & Nilai")').first.click()
         page.wait_for_selector('.modal:has-text("Pengumpulan:")')
@@ -373,7 +376,7 @@ def main():
                "Dengan tampilan ini materi tidak lagi bertumpuk menjadi satu daftar panjang.",
                full=True)
 
-        page.locator('.kartu-mapel:has-text("Matematika Wajib")').first.click()
+        page.locator('.kartu-mapel:has-text("MATEMATIKA UMUM")').first.click()
         page.wait_for_url("**/siswa/kelas/**", timeout=10000)
         page.wait_for_timeout(1200)
         simpan(page, "siswa-daftar-pertemuan", "Daftar Pertemuan Mata Pelajaran (Siswa)",
@@ -424,7 +427,7 @@ def main():
 
         # Riwayat periode terdahulu ditampilkan oleh siswa kelas XI yang
         # sebelumnya berada di kelas X pada periode yang sudah dikunci.
-        login(page, "maya@siswa.smakk.sch.id", "siswa123")
+        login(page, "ahmad@siswa.smakk.sch.id", "siswa123")
         buka(page, "/siswa/nilai")
         page.select_option('.pilih-periode select', index=1)
         page.wait_for_timeout(1500)
@@ -434,9 +437,9 @@ def main():
                "sebagai arsip riwayat belajar siswa.", full=True)
 
         # Pengerjaan kuis oleh siswa yang belum mengerjakan
-        login(page, "rian@siswa.smakk.sch.id", "siswa123")
+        login(page, "aminatul@siswa.smakk.sch.id", "siswa123")
         buka(page, "/siswa/tugas")
-        page.locator('tr:has-text("Kuis Teks Deskripsi") button:has-text("Kerjakan")').first.click()
+        page.locator('.kartu-tugas:has-text("Kuis Teks Deskripsi") button:has-text("Kerjakan")')            .first.click()
         page.wait_for_selector(".modal")
         page.wait_for_timeout(1200)
         radios = page.locator('.modal input[type="radio"]')
@@ -452,7 +455,7 @@ def main():
                "ditampilkan selama kuis belum dinilai.", modal=True)
         page.click('.modal button:has-text("Tutup")')
 
-        page.locator('tr:has-text("Tugas Proyek SPLDV") button:has-text("Kerjakan")').first.click()
+        page.locator('.kartu-tugas:has-text("Tugas Proyek SPLDV") button:has-text("Kerjakan")')            .first.click()
         page.wait_for_selector(".modal")
         page.wait_for_timeout(900)
         page.fill('.modal textarea',
@@ -468,7 +471,7 @@ def main():
         # =============================================================
         # 5. PERIODE TERKUNCI
         # =============================================================
-        login(page, "budi@smakk.sch.id", "guru123")
+        login(page, "halifah@smakk.sch.id", "guru123")
         buka(page, "/guru/kelas")
         page.select_option('.pilih-periode select', index=1)
         page.wait_for_timeout(1400)

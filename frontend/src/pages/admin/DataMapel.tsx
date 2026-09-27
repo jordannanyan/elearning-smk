@@ -4,7 +4,7 @@ import Modal from '../../components/Modal';
 import Paginasi from '../../components/Paginasi';
 import type { Mapel, Periode } from '../../api/types';
 
-const KELOMPOK = ['Wajib', 'Peminatan MIPA', 'Peminatan IPS', 'Peminatan Bahasa', 'Muatan Lokal'];
+const KELOMPOK = ['Wajib', 'Peminatan', 'Muatan Lokal'];
 const PER_HALAMAN = 10;
 
 interface RincianKelas {

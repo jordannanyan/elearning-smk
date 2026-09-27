@@ -69,18 +69,18 @@ async function main() {
   });
   const TA = rAdmin.data.token;
 
-  const rGuru = await login('budi@smakk.sch.id', 'guru123');
+  const rGuru = await login('halifah@smakk.sch.id', 'guru123');
   catat({
     modul: 'Autentikasi', skenario: 'Login guru dengan email dan password yang benar',
-    input: 'budi@smakk.sch.id / guru123',
+    input: 'halifah@smakk.sch.id / guru123',
     harapan: 'Sistem menerima login dan mengarahkan ke dashboard guru',
     aktual: `HTTP ${rGuru.status}, role = ${rGuru.data?.user?.role}`,
     sesuai: rGuru.status === 200 && rGuru.data.user.role === 'guru',
   });
   const TG = rGuru.data.token;
-  const TG_SITI = (await login('siti@smakk.sch.id', 'guru123')).data.token;
-  const TG_RAHMAT = (await login('rahmat@smakk.sch.id', 'guru123')).data.token;
-  const TG_DINA = (await login('dina@smakk.sch.id', 'guru123')).data.token;
+  const TG_ASNIN = (await login('asnin@smakk.sch.id', 'guru123')).data.token;
+  const TG_SAMJUHDI = (await login('samjuhdi@smakk.sch.id', 'guru123')).data.token;
+  const TG_LAILY = (await login('laily@smakk.sch.id', 'guru123')).data.token;
 
   const rSiswa = await login('ahmad@siswa.smakk.sch.id', 'siswa123');
   catat({
@@ -164,21 +164,21 @@ async function main() {
   });
 
   const rBuatPeriode = await post('/api/periode', {
-    tahun_ajaran: '2025/2026', semester: 2, tgl_mulai: '2026-01-05', tgl_selesai: '2026-06-19',
+    tahun_ajaran: '2026/2027', semester: 1, tgl_mulai: '2026-07-13', tgl_selesai: '2026-12-18',
   }, TA);
   catat({
     modul: 'Periode Pembelajaran', skenario: 'Administrator menambah periode pembelajaran baru',
-    input: 'Tahun Ajaran 2025/2026, Semester 2 (genap)',
-    harapan: 'Periode tersimpan dengan kode 2026/2 dan berstatus draft',
+    input: 'Tahun Ajaran 2026/2027, Semester 1 (ganjil)',
+    harapan: 'Periode tersimpan dengan kode 2027/1 dan berstatus draft',
     aktual: `HTTP ${rBuatPeriode.status}, kode terbentuk: ${rBuatPeriode.data?.kode}`,
-    sesuai: rBuatPeriode.status === 201 && rBuatPeriode.data.kode === '2026/2',
+    sesuai: rBuatPeriode.status === 201 && rBuatPeriode.data.kode === '2027/1',
   });
   const idPeriodeBaru = rBuatPeriode.data?.id;
 
-  const rPeriodeDuplikat = await post('/api/periode', { tahun_ajaran: '2025/2026', semester: 2 }, TA);
+  const rPeriodeDuplikat = await post('/api/periode', { tahun_ajaran: '2026/2027', semester: 1 }, TA);
   catat({
     modul: 'Periode Pembelajaran', skenario: 'Administrator menambah periode yang sudah terdaftar',
-    input: 'Tahun Ajaran 2025/2026 Semester 2 (sudah ada)',
+    input: 'Tahun Ajaran 2026/2027 Semester 1 (sudah ada)',
     harapan: 'Sistem menolak karena periode dengan kode tersebut sudah terdaftar',
     aktual: `HTTP ${rPeriodeDuplikat.status}, pesan: "${rPeriodeDuplikat.data?.message}"`,
     sesuai: rPeriodeDuplikat.status === 409,
@@ -196,7 +196,7 @@ async function main() {
   const rHapusPeriodeBaru = await del(`/api/periode/${idPeriodeBaru}`, TA);
   catat({
     modul: 'Periode Pembelajaran', skenario: 'Administrator menghapus periode yang belum memiliki kelas',
-    input: 'Menghapus periode 2026/2 yang masih kosong',
+    input: 'Menghapus periode 2027/1 yang masih kosong',
     harapan: 'Periode berhasil dihapus karena belum memuat data pembelajaran',
     aktual: `HTTP ${rHapusPeriodeBaru.status}, pesan: "${rHapusPeriodeBaru.data?.message}"`,
     sesuai: rHapusPeriodeBaru.status === 200,
@@ -261,11 +261,11 @@ async function main() {
     sesuai: rKunciEditTugas.status === 423,
   });
 
-  const TS_MAYA = (await login('maya@siswa.smakk.sch.id', 'siswa123')).data.token;
+  const TS_RIWAYAT = (await login('ahmad.raviza@siswa.smakk.sch.id', 'siswa123')).data.token;
   const fdKunci = new FormData();
   fdKunci.append('jawaban', 'Percobaan mengumpulkan tugas pada periode yang sudah berakhir.');
   const rKunciSubmit = await req('POST', `/api/tugas/${tugasTerkunci.id}/submit`,
-    { token: TS_MAYA, form: fdKunci });
+    { token: TS_RIWAYAT, form: fdKunci });
   catat({
     modul: 'Penguncian Periode', skenario: 'Siswa mengumpulkan tugas pada periode yang telah dikunci',
     input: 'Siswa mengumpulkan tugas pada periode arsip',
@@ -340,7 +340,7 @@ async function main() {
     sesuai: rHapusGuruBaru.status === 200,
   });
 
-  const guruBudi = rListGuru.data.find((u) => u.nama.startsWith('Budi'));
+  const guruBudi = rListGuru.data.find((u) => u.nama.startsWith('Halifah'));
   const rHapusGuruAktif = await del(`/api/users/${guruBudi.id}`, TA);
   catat({
     modul: 'Manajemen Pengguna', skenario: 'Administrator menghapus guru yang sudah mengampu kelas',
@@ -351,7 +351,7 @@ async function main() {
   });
 
   const rNonaktifGuru = await put(`/api/users/${guruBudi.id}/status`, { aktif: false }, TA);
-  const cekLoginNonaktif = await login('budi@smakk.sch.id', 'guru123');
+  const cekLoginNonaktif = await login('halifah@smakk.sch.id', 'guru123');
   await put(`/api/users/${guruBudi.id}/status`, { aktif: true }, TA);
   catat({
     modul: 'Manajemen Pengguna', skenario: 'Administrator menonaktifkan akun guru sebagai pengganti penghapusan',
@@ -363,7 +363,16 @@ async function main() {
   });
 
   const kelasAktif = (await get('/api/kelas', TA)).data;
-  const kelasX1 = kelasAktif.find((k) => k.nama_kelas === 'X MIPA 1');
+  const kelasX1 = kelasAktif.find((k) => k.nama_kelas === 'X A');
+
+  // Bersihkan akun uji dari eksekusi sebelumnya agar skrip dapat
+  // dijalankan berulang kali dengan hasil yang sama.
+  const akunUjiLama = (await get('/api/users?role=siswa', TA)).data
+    .find((u) => u.email === 'wulan@siswa.smakk.sch.id');
+  if (akunUjiLama) {
+    await del(`/api/kelas/${kelasX1.id}/siswa/${akunUjiLama.siswa_id}`, TA);
+    await del(`/api/users/${akunUjiLama.id}`, TA);
+  }
 
   const rTambahSiswa = await post('/api/users', {
     nama: 'Wulan Safitri', email: 'wulan@siswa.smakk.sch.id', password: 'siswa123',
@@ -378,7 +387,7 @@ async function main() {
   });
 
   const rListSiswa = await get('/api/users?role=siswa', TA);
-  const siswaAhmad = rListSiswa.data.find((u) => u.nama === 'Ahmad Fauzi');
+  const siswaAhmad = rListSiswa.data.find((u) => u.nama === 'Ahmad Hanapi');
   catat({
     modul: 'Manajemen Pengguna', skenario: 'Administrator menampilkan daftar siswa beserta kelasnya',
     input: 'Membuka menu Data Siswa',
@@ -460,10 +469,10 @@ async function main() {
     .filter((k) => k.kode_mapel === 'BIND');
   const guruBindBerbeda = new Set(pengampuanBind.map((k) => k.nama_guru));
   catat({
-    modul: 'Pengampuan Kelas', skenario: 'Satu mata pelajaran diampu guru berbeda pada tingkat kelas berbeda',
-    input: `Memeriksa pengampuan mata pelajaran ${mapelBind.nama}`,
-    harapan: 'Sistem mengizinkan satu mata pelajaran diampu lebih dari satu guru pada kelas berbeda',
-    aktual: `${pengampuanBind.length} pengampuan oleh ${guruBindBerbeda.size} guru berbeda: ` +
+    modul: 'Mata Pelajaran Kelas', skenario: 'Satu mata pelajaran diajar guru berbeda pada tingkat kelas berbeda',
+    input: `Memeriksa penugasan guru pada mata pelajaran ${mapelBind.nama}`,
+    harapan: 'Sistem mengizinkan satu mata pelajaran diajar lebih dari satu guru pada kelas berbeda',
+    aktual: `Diajarkan di ${pengampuanBind.length} kelas oleh ${guruBindBerbeda.size} guru berbeda: ` +
       pengampuanBind.map((k) => `${k.nama_kelas} (${k.nama_guru})`).join(', '),
     sesuai: guruBindBerbeda.size >= 2,
   });
@@ -513,11 +522,11 @@ async function main() {
   // E. PERTEMUAN, MATERI, DAN TUGAS
   // =================================================================
   const kmGuru = (await get('/api/kelas-mapel', TG)).data;
-  const kmMtk = kmGuru.find((k) => k.kode_mapel === 'MTK-W' && k.nama_kelas === 'X MIPA 1');
+  const kmMtk = kmGuru.find((k) => k.kode_mapel === 'MTK-U' && k.nama_kelas === 'X A');
   catat({
-    modul: 'Kelas Mata Pelajaran', skenario: 'Guru menampilkan daftar kelas mata pelajaran yang diampunya',
-    input: 'Membuka menu Kelas Saya',
-    harapan: 'Sistem hanya menampilkan kelas mata pelajaran yang diampu guru tersebut pada periode aktif',
+    modul: 'Kelas yang Diajar', skenario: 'Guru menampilkan daftar mata pelajaran dan kelas yang diajarnya',
+    input: 'Membuka menu Kelas yang Diajar',
+    harapan: 'Sistem hanya menampilkan mata pelajaran dan kelas yang diajar guru tersebut pada periode aktif',
     aktual: `HTTP 200, ${kmGuru.length} kelas mata pelajaran: ` +
       kmGuru.map((k) => `${k.nama_mapel} (${k.nama_kelas})`).join(', '),
     sesuai: kmGuru.length > 0 && kmGuru.every((k) => k.status_periode === 'aktif'),
@@ -547,7 +556,7 @@ async function main() {
   });
 
   const rPertemuanBukanMilik = await post(`/api/kelas-mapel/${kmMtk.id}/pertemuan`,
-    { judul: 'Pertemuan oleh guru lain' }, TG_SITI);
+    { judul: 'Pertemuan oleh guru lain' }, TG_ASNIN);
   catat({
     modul: 'Pertemuan', skenario: 'Guru menambah pertemuan pada kelas mata pelajaran yang bukan diampunya',
     input: 'Guru Bahasa Indonesia menambah pertemuan pada kelas Matematika',
@@ -677,10 +686,10 @@ async function main() {
     harapan: 'Sistem menampilkan kartu mata pelajaran kelas siswa, bukan seluruh materi yang bertumpuk',
     aktual: `HTTP 200, ${kmSiswa.length} mata pelajaran: ` +
       kmSiswa.map((k) => k.nama_mapel).join(', '),
-    sesuai: kmSiswa.length > 0 && kmSiswa.every((k) => k.nama_kelas === 'X MIPA 1'),
+    sesuai: kmSiswa.length > 0 && kmSiswa.every((k) => k.nama_kelas === 'X A'),
   });
 
-  const kmSiswaMtk = kmSiswa.find((k) => k.kode_mapel === 'MTK-W');
+  const kmSiswaMtk = kmSiswa.find((k) => k.kode_mapel === 'MTK-U');
   const ptSiswa = (await get(`/api/kelas-mapel/${kmSiswaMtk.id}/pertemuan`, TS)).data;
   catat({
     modul: 'Alur Pembelajaran Siswa', skenario: 'Siswa membuka mata pelajaran lalu melihat daftar pertemuan',
@@ -720,14 +729,20 @@ async function main() {
     sesuai: rUnduh.status === 200,
   });
 
-  const rPertemuanKelasLain = await get(`/api/pertemuan/${ptTerkunci.id}`, TS);
+  // Siswa kelas X A mencoba membuka pertemuan milik kelas X B
+  const kmKelasLain = (await get('/api/kelas-mapel', TG_ASNIN)).data
+    .find((k) => k.nama_kelas !== 'X A');
+  const rPertemuanLain = await post(`/api/kelas-mapel/${kmKelasLain.id}/pertemuan`,
+    { judul: 'Pertemuan uji hak akses antar kelas' }, TG_ASNIN);
+  const rPertemuanKelasLain = await get(`/api/pertemuan/${rPertemuanLain.data.id}`, TS);
   catat({
     modul: 'Alur Pembelajaran Siswa', skenario: 'Siswa membuka pertemuan pada kelas yang tidak diikutinya',
-    input: 'Membuka pertemuan milik kelas lain',
+    input: `Siswa kelas X A membuka pertemuan milik kelas ${kmKelasLain.nama_kelas}`,
     harapan: 'Akses ditolak karena siswa tidak terdaftar pada kelas tersebut',
     aktual: `HTTP ${rPertemuanKelasLain.status}, pesan: "${rPertemuanKelasLain.data?.message}"`,
     sesuai: rPertemuanKelasLain.status === 403,
   });
+  await del(`/api/pertemuan/${rPertemuanLain.data.id}`, TG_ASNIN);
 
   // =================================================================
   // F. TUGAS, KUIS, DAN BATAS WAKTU
@@ -754,7 +769,7 @@ async function main() {
     sesuai: statusTugas.size >= 2,
   });
 
-  const kmGuruMtk = kmGuru.find((k) => k.kode_mapel === 'MTK-W' && k.nama_kelas === 'X MIPA 1');
+  const kmGuruMtk = kmGuru.find((k) => k.kode_mapel === 'MTK-U' && k.nama_kelas === 'X A');
   const ptGuru = (await get(`/api/kelas-mapel/${kmGuruMtk.id}/pertemuan`, TG)).data;
   const rBuatTugas = await post('/api/tugas', {
     id_pertemuan: ptGuru[0].id, judul: 'Tugas Uji Coba Sistem', tipe: 'tugas',
@@ -803,7 +818,7 @@ async function main() {
 
   await del(`/api/tugas/${idTugasUji}`, TG);
 
-  const tugasGuruLain = (await get('/api/tugas', TG_SITI)).data[0];
+  const tugasGuruLain = (await get('/api/tugas', TG_ASNIN)).data[0];
   const rTugasGuruLain = await put(`/api/tugas/${tugasGuruLain.id}`, { judul: 'Diubah' }, TG);
   catat({
     modul: 'Tugas dan Kuis', skenario: 'Guru mengubah tugas milik guru mata pelajaran lain',
@@ -816,7 +831,7 @@ async function main() {
   // =================================================================
   // G. PENGERJAAN OLEH SISWA (sekaligus mengisi data)
   // =================================================================
-  const akunSiswa = ['ahmad', 'dewi', 'rian', 'aisyah', 'bayu', 'putri'];
+  const akunSiswa = ['ahmad', 'ahmad.raviza', 'aminatul', 'audiyah', 'bunga', 'dhika'];
   const tokenSiswa = {};
   for (const s of akunSiswa) {
     tokenSiswa[s] = (await login(`${s}@siswa.smakk.sch.id`, 'siswa123')).data.token;
@@ -835,7 +850,7 @@ async function main() {
   // ---- Kuis Matematika (5 soal pilihan ganda) ----
   const soalKuisMtk = (await get(`/api/tugas/${tKuisMtk.id}/soal`, TG)).data;
   const kunciMtk = soalKuisMtk.map((s) => s.jawaban_benar);
-  const polaMtk = { ahmad: [3], dewi: [], rian: [1, 4], aisyah: [], bayu: [0, 2, 3], putri: [2] };
+  const polaMtk = { ahmad: [3], 'ahmad.raviza': [], aminatul: [1, 4], audiyah: [], bunga: [0, 2, 3], dhika: [2] };
   let rKuisPertama = null;
   for (const [siswa, salah] of Object.entries(polaMtk)) {
     const jawaban = soalKuisMtk.map((s, i) => ({
@@ -866,7 +881,7 @@ async function main() {
     sesuai: rKerjakanUlang.status === 200 && rKerjakanUlang.data.graded === true,
   });
 
-  const belumKerja = await get(`/api/tugas/${tKuisBind.id}/kerjakan`, tokenSiswa.rian);
+  const belumKerja = await get(`/api/tugas/${tKuisBind.id}/kerjakan`, tokenSiswa.aminatul);
   catat({
     modul: 'Pengerjaan Kuis', skenario: 'Sistem menyembunyikan kunci jawaban pada kuis yang belum dinilai',
     input: 'Siswa membuka kuis yang belum dikerjakan',
@@ -877,16 +892,16 @@ async function main() {
   });
 
   // ---- Kuis Bahasa Indonesia (PG + esai) ----
-  const soalKuisBind = (await get(`/api/tugas/${tKuisBind.id}/soal`, TG_SITI)).data;
+  const soalKuisBind = (await get(`/api/tugas/${tKuisBind.id}/soal`, TG_ASNIN)).data;
   const kunciBind = soalKuisBind.map((s) => s.jawaban_benar);
   const esaiBind = {
     ahmad: 'Sekolahku berada di tepi jalan utama Bangkuang. Halamannya luas dengan rumput hijau yang selalu terpangkas rapi. Di depan ruang guru berdiri tiang bendera yang menjulang, dan di sampingnya berjajar pohon ketapang yang meneduhkan.',
-    dewi: 'SMA Negeri 1 Karau Kuala memiliki bangunan bercat putih kebiruan. Setiap pagi koridor kelas dipenuhi suara siswa yang bersiap belajar. Taman kecil di tengah sekolah ditanami bunga kertas berwarna-warni.',
-    putri: 'Ruang kelasku cukup luas dan terang karena memiliki empat jendela besar. Di dinding depan terpasang papan tulis putih dan foto pahlawan. Udara di dalam kelas terasa sejuk saat pagi hari.',
-    aisyah: 'Kantin sekolah berada di samping lapangan basket. Setiap istirahat aromanya harum oleh gorengan hangat. Meja-meja panjangnya selalu penuh oleh siswa yang bercengkerama.',
-    bayu: 'Sekolahku bersih dan nyaman. Ada lapangan upacara di tengah.',
+    'ahmad.raviza': 'SMA Negeri 1 Karau Kuala memiliki bangunan bercat putih kebiruan. Setiap pagi koridor kelas dipenuhi suara siswa yang bersiap belajar. Taman kecil di tengah sekolah ditanami bunga kertas berwarna-warni.',
+    bunga: 'Ruang kelasku cukup luas dan terang karena memiliki empat jendela besar. Di dinding depan terpasang papan tulis putih dan foto pahlawan. Udara di dalam kelas terasa sejuk saat pagi hari.',
+    audiyah: 'Kantin sekolah berada di samping lapangan basket. Setiap istirahat aromanya harum oleh gorengan hangat. Meja-meja panjangnya selalu penuh oleh siswa yang bercengkerama.',
+    dhika: 'Sekolahku bersih dan nyaman. Ada lapangan upacara di tengah.',
   };
-  const polaBind = { ahmad: [], dewi: [1], putri: [], aisyah: [], bayu: [0, 2] };
+  const polaBind = { ahmad: [], 'ahmad.raviza': [1], bunga: [], audiyah: [], dhika: [0, 2] };
   let rEsaiPertama = null;
   for (const [siswa, salah] of Object.entries(polaBind)) {
     const jawaban = soalKuisBind.map((s, i) => (s.tipe === 'esai'
@@ -909,10 +924,10 @@ async function main() {
   // ---- Tugas biasa ----
   const jawabanLatihan = {
     ahmad: 'Nomor 1: 2x + 6 = 14 -> 2x = 8 -> x = 4.\nNomor 2: 3x - 9 = 0 -> 3x = 9 -> x = 3.\nNomor 3: 5x = 3x + 12 -> 2x = 12 -> x = 6.\nLangkah selengkapnya saya lampirkan pada berkas.',
-    dewi: 'Seluruh soal nomor 1 sampai 10 telah saya kerjakan. Hasil pekerjaan saya tulis tangan lalu saya pindai dan lampirkan pada berkas terlampir.',
-    rian: 'Nomor 1 sampai 8 sudah saya kerjakan, nomor 9 dan 10 masih saya ragu pada langkah pemindahan ruas. Mohon koreksinya, Pak.',
-    aisyah: 'Jawaban lengkap nomor 1-10 terlampir pada berkas. Setiap nomor saya sertakan langkah pengerjaannya.',
-    putri: 'Semua soal telah saya kerjakan beserta langkah-langkahnya, terlampir pada berkas jawaban.',
+    'ahmad.raviza': 'Seluruh soal nomor 1 sampai 10 telah saya kerjakan. Hasil pekerjaan saya tulis tangan lalu saya pindai dan lampirkan pada berkas terlampir.',
+    aminatul: 'Nomor 1 sampai 8 sudah saya kerjakan, nomor 9 dan 10 masih saya ragu pada langkah pemindahan ruas. Mohon koreksinya, Pak.',
+    audiyah: 'Jawaban lengkap nomor 1-10 terlampir pada berkas. Setiap nomor saya sertakan langkah pengerjaannya.',
+    bunga: 'Semua soal telah saya kerjakan beserta langkah-langkahnya, terlampir pada berkas jawaban.',
   };
   let rKumpulTugas = null;
   for (const [siswa, teks] of Object.entries(jawabanLatihan)) {
@@ -932,9 +947,9 @@ async function main() {
   });
 
   const teksDeskripsi = {
-    dewi: 'Lingkungan Sekolahku\n\nSMA Negeri 1 Karau Kuala berdiri di tepi jalan utama Kecamatan Karau Kuala. Bangunannya bercat putih dengan lis biru yang tampak bersih setiap pagi.\n\nHalaman sekolah cukup luas dan ditumbuhi rumput hijau. Di tengahnya berdiri tiang bendera, sementara di sisi kiri berjajar pohon ketapang yang rindang.\n\nSuasana sekolahku sangat nyaman untuk belajar. Angin sejuk dari arah sungai membuat udara di ruang kelas tidak pernah terasa panas.',
-    putri: 'Lingkungan Sekolahku\n\nSekolahku terletak tidak jauh dari permukiman warga sehingga mudah dijangkau dengan sepeda.\n\nDi dalam kompleks sekolah terdapat dua belas ruang kelas, satu perpustakaan, dan sebuah laboratorium IPA. Lorong penghubungnya beratap seng sehingga siswa tetap terlindung ketika hujan.\n\nSetiap sudut sekolah dijaga kebersihannya oleh seluruh warga sekolah sehingga suasananya selalu asri.',
-    aisyah: 'Lingkungan Sekolahku\n\nGerbang sekolahku bercat hijau tua dan selalu terbuka sejak pukul enam pagi.\n\nDi sebelah kanan gerbang terdapat taman kecil dengan bunga kertas berwarna merah muda. Lapangan upacara berada tepat di tengah kompleks sekolah.\n\nAku sangat menyukai suasana sekolahku, terutama pada pagi hari ketika embun masih menempel di rumput lapangan.',
+    'ahmad.raviza': 'Lingkungan Sekolahku\n\nSMA Negeri 1 Karau Kuala berdiri di tepi jalan utama Kecamatan Karau Kuala. Bangunannya bercat putih dengan lis biru yang tampak bersih setiap pagi.\n\nHalaman sekolah cukup luas dan ditumbuhi rumput hijau. Di tengahnya berdiri tiang bendera, sementara di sisi kiri berjajar pohon ketapang yang rindang.\n\nSuasana sekolahku sangat nyaman untuk belajar. Angin sejuk dari arah sungai membuat udara di ruang kelas tidak pernah terasa panas.',
+    bunga: 'Lingkungan Sekolahku\n\nSekolahku terletak tidak jauh dari permukiman warga sehingga mudah dijangkau dengan sepeda.\n\nDi dalam kompleks sekolah terdapat dua belas ruang kelas, satu perpustakaan, dan sebuah laboratorium IPA. Lorong penghubungnya beratap seng sehingga siswa tetap terlindung ketika hujan.\n\nSetiap sudut sekolah dijaga kebersihannya oleh seluruh warga sekolah sehingga suasananya selalu asri.',
+    audiyah: 'Lingkungan Sekolahku\n\nGerbang sekolahku bercat hijau tua dan selalu terbuka sejak pukul enam pagi.\n\nDi sebelah kanan gerbang terdapat taman kecil dengan bunga kertas berwarna merah muda. Lapangan upacara berada tepat di tengah kompleks sekolah.\n\nAku sangat menyukai suasana sekolahku, terutama pada pagi hari ketika embun masih menempel di rumput lapangan.',
     ahmad: 'Lingkungan Sekolahku\n\nSMA Negeri 1 Karau Kuala memiliki halaman depan yang luas dengan pagar besi berwarna hijau.\n\nRuang kelas berjajar rapi menghadap lapangan. Setiap kelas memiliki jendela besar sehingga cahaya matahari masuk dengan leluasa.\n\nKarena lingkungannya rindang dan bersih, aku merasa betah berlama-lama di sekolah.',
   };
   for (const [siswa, teks] of Object.entries(teksDeskripsi)) {
@@ -945,15 +960,15 @@ async function main() {
 
   const fdProyek = new FormData();
   fdProyek.append('jawaban', 'Soal cerita: Harga 2 buku dan 3 pensil Rp 21.000, sedangkan 1 buku dan 2 pensil Rp 12.000. Dengan metode eliminasi diperoleh harga buku Rp 6.000 dan pensil Rp 3.000.');
-  await req('POST', `/api/tugas/${tProyekSpldv.id}/submit`, { token: tokenSiswa.dewi, form: fdProyek });
-  await req('POST', `/api/tugas/${tProyekSpldv.id}/submit`, { token: tokenSiswa.aisyah, form: fdProyek });
+  await req('POST', `/api/tugas/${tProyekSpldv.id}/submit`, { token: tokenSiswa['ahmad.raviza'], form: fdProyek });
+  await req('POST', `/api/tugas/${tProyekSpldv.id}/submit`, { token: tokenSiswa.audiyah, form: fdProyek });
 
   // ---- Pengumpulan terlambat ----
   const fdTelat = new FormData();
   fdTelat.append('jawaban', 'Mohon maaf Pak, saya terlambat mengumpulkan karena jaringan internet di rumah bermasalah. Latihan konversi satuan nomor 1-10 sudah saya kerjakan seluruhnya.');
   const rTelat = await req('POST', `/api/tugas/${tLatihanFis.id}/submit`,
-    { token: tokenSiswa.bayu, form: fdTelat });
-  const cekTelat = (await get('/api/tugas', tokenSiswa.bayu)).data.find((t) => t.id === tLatihanFis.id);
+    { token: tokenSiswa.dhika, form: fdTelat });
+  const cekTelat = (await get('/api/tugas', tokenSiswa.dhika)).data.find((t) => t.id === tLatihanFis.id);
   catat({
     modul: 'Pengumpulan Tugas', skenario: 'Siswa mengumpulkan tugas setelah batas waktu (deadline) terlewati',
     input: 'Siswa mengumpulkan Latihan Soal Besaran dan Satuan setelah batas waktunya berakhir',
@@ -964,14 +979,14 @@ async function main() {
   });
 
   // ---- Kuis Bahasa Inggris ----
-  const soalKuisBing = (await get(`/api/tugas/${tKuisBing.id}/soal`, TG_DINA)).data;
+  const soalKuisBing = (await get(`/api/tugas/${tKuisBing.id}/soal`, TG_LAILY)).data;
   const kunciBing = soalKuisBing.map((s) => s.jawaban_benar);
   const esaiBing = {
     ahmad: 'My classroom is on the second floor of the school building. It has four large windows, so the room is always bright. There are thirty-two desks and a white board in front of the class.',
-    dewi: 'My classroom is clean and comfortable. The walls are painted light blue and there are some pictures of Indonesian heroes on them. I like studying there with my classmates.',
-    rian: 'My classroom is big. There is a white board and many chairs.',
+    'ahmad.raviza': 'My classroom is clean and comfortable. The walls are painted light blue and there are some pictures of Indonesian heroes on them. I like studying there with my classmates.',
+    aminatul: 'My classroom is big. There is a white board and many chairs.',
   };
-  for (const [siswa, salah] of Object.entries({ ahmad: [], dewi: [2], rian: [0, 1] })) {
+  for (const [siswa, salah] of Object.entries({ ahmad: [], 'ahmad.raviza': [2], aminatul: [0, 1] })) {
     const jawaban = soalKuisBing.map((s, i) => (s.tipe === 'esai'
       ? { id_soal: s.id, jawaban_teks: esaiBing[siswa] }
       : {
@@ -995,11 +1010,11 @@ async function main() {
   });
 
   const skorLatihan = {
-    'Ahmad Fauzi': [90, 'Langkah pengerjaan sudah runtut dan benar. Pertahankan.'],
-    'Dewi Lestari': [85, 'Jawaban benar, tulisan pada lampiran agar diperjelas lagi.'],
-    'Rian Pratama': [75, 'Nomor 9 dan 10 masih keliru pada pemindahan ruas. Pelajari kembali.'],
-    'Nur Aisyah': [95, 'Sangat baik, seluruh langkah penyelesaian lengkap.'],
-    'Putri Rahmawati': [88, 'Pekerjaan rapi dan jawaban tepat.'],
+    'Ahmad Hanapi': [90, 'Langkah pengerjaan sudah runtut dan benar. Pertahankan.'],
+    'Ahmad Raviza': [85, 'Jawaban benar, tulisan pada lampiran agar diperjelas lagi.'],
+    'Aminatul Najua': [75, 'Nomor 9 dan 10 masih keliru pada pemindahan ruas. Pelajari kembali.'],
+    'Audiyah': [95, 'Sangat baik, seluruh langkah penyelesaian lengkap.'],
+    'Bunga Citra': [88, 'Pekerjaan rapi dan jawaban tepat.'],
   };
   let rNilaiPertama = null;
   for (const s of kumpulLatihan) {
@@ -1035,7 +1050,7 @@ async function main() {
   });
 
   const rNilaiBukanMilik = await post('/api/nilai',
-    { id_kumpul: rNilaiPertama.s.id, skor: 100 }, TG_SITI);
+    { id_kumpul: rNilaiPertama.s.id, skor: 100 }, TG_ASNIN);
   catat({
     modul: 'Penilaian', skenario: 'Guru memberi nilai pada pengumpulan kelas mata pelajaran guru lain',
     input: 'Guru Bahasa Indonesia menilai pengumpulan tugas Matematika',
@@ -1045,12 +1060,12 @@ async function main() {
   });
 
   // ---- Penilaian esai ----
-  const kumpulKuisBind = (await get(`/api/tugas/${tKuisBind.id}/pengumpulan`, TG_SITI)).data;
+  const kumpulKuisBind = (await get(`/api/tugas/${tKuisBind.id}/pengumpulan`, TG_ASNIN)).data;
   const soalEsaiBind = soalKuisBind.find((s) => s.tipe === 'esai');
   const skorEsai = {
-    'Ahmad Fauzi': [30, 'Deskripsi sangat hidup dan struktur sudah tepat.'],
-    'Dewi Lestari': [28, 'Deskripsi baik, tambahkan lagi penggunaan pancaindra.'],
-    'Putri Rahmawati': [26, 'Sudah sesuai struktur, kembangkan lagi deskripsi bagiannya.'],
+    'Ahmad Hanapi': [30, 'Deskripsi sangat hidup dan struktur sudah tepat.'],
+    'Ahmad Raviza': [28, 'Deskripsi baik, tambahkan lagi penggunaan pancaindra.'],
+    'Bunga Citra': [26, 'Sudah sesuai struktur, kembangkan lagi deskripsi bagiannya.'],
   };
   let rNilaiEsai = null;
   for (const s of kumpulKuisBind) {
@@ -1058,10 +1073,10 @@ async function main() {
     if (!nilai || !s.id) continue;
     const r = await post(`/api/pengumpulan/${s.id}/nilai`, {
       scores: [{ id_soal: soalEsaiBind.id, skor: nilai[0] }], catatan: nilai[1],
-    }, TG_SITI);
+    }, TG_ASNIN);
     if (!rNilaiEsai) rNilaiEsai = { s, r, nilai };
   }
-  const rekapCek = (await get(`/api/tugas/${tKuisBind.id}/pengumpulan`, TG_SITI)).data
+  const rekapCek = (await get(`/api/tugas/${tKuisBind.id}/pengumpulan`, TG_ASNIN)).data
     .find((x) => x.nama_siswa === rNilaiEsai.s.nama_siswa);
   catat({
     modul: 'Penilaian', skenario: 'Guru memeriksa dan menilai jawaban esai pada kuis',
@@ -1071,7 +1086,7 @@ async function main() {
     sesuai: rNilaiEsai.r.status === 200 && rekapCek?.skor != null,
   });
 
-  const pendingCek = (await get(`/api/tugas/${tKuisBind.id}/pengumpulan`, TG_SITI)).data
+  const pendingCek = (await get(`/api/tugas/${tKuisBind.id}/pengumpulan`, TG_ASNIN)).data
     .filter((x) => x.status === 'perlu_nilai_esai');
   catat({
     modul: 'Penilaian', skenario: 'Sistem menandai pengumpulan kuis yang esainya belum dinilai guru',
@@ -1083,29 +1098,29 @@ async function main() {
 
   // Penilaian sisa data agar rekap terlihat wajar
   const soalEsaiBing = soalKuisBing.find((s) => s.tipe === 'esai');
-  for (const s of (await get(`/api/tugas/${tKuisBing.id}/pengumpulan`, TG_DINA)).data) {
-    const nilai = { 'Ahmad Fauzi': 23, 'Dewi Lestari': 22 }[s.nama_siswa];
+  for (const s of (await get(`/api/tugas/${tKuisBing.id}/pengumpulan`, TG_LAILY)).data) {
+    const nilai = { 'Ahmad Hanapi': 23, 'Ahmad Raviza': 22 }[s.nama_siswa];
     if (!nilai || !s.id) continue;
     await post(`/api/pengumpulan/${s.id}/nilai`, {
       scores: [{ id_soal: soalEsaiBing.id, skor: nilai }],
       catatan: 'Good description with clear details.',
-    }, TG_DINA);
+    }, TG_LAILY);
   }
-  for (const s of (await get(`/api/tugas/${tTugasBind.id}/pengumpulan`, TG_SITI)).data) {
+  for (const s of (await get(`/api/tugas/${tTugasBind.id}/pengumpulan`, TG_ASNIN)).data) {
     const nilai = {
-      'Dewi Lestari': [92, 'Struktur lengkap dan deskripsi sangat hidup.'],
-      'Putri Rahmawati': [87, 'Sudah baik, penutup dapat dipertegas lagi.'],
-      'Nur Aisyah': [90, 'Pemilihan diksi sangat baik dan runtut.'],
+      'Ahmad Raviza': [92, 'Struktur lengkap dan deskripsi sangat hidup.'],
+      'Bunga Citra': [87, 'Sudah baik, penutup dapat dipertegas lagi.'],
+      'Audiyah': [90, 'Pemilihan diksi sangat baik dan runtut.'],
     }[s.nama_siswa];
     if (!nilai || !s.id) continue;
-    await post('/api/nilai', { id_kumpul: s.id, skor: nilai[0], catatan: nilai[1] }, TG_SITI);
+    await post('/api/nilai', { id_kumpul: s.id, skor: nilai[0], catatan: nilai[1] }, TG_ASNIN);
   }
-  for (const s of (await get(`/api/tugas/${tLatihanFis.id}/pengumpulan`, TG_RAHMAT)).data) {
-    if (s.nama_siswa === 'Bayu Saputra' && s.id) {
+  for (const s of (await get(`/api/tugas/${tLatihanFis.id}/pengumpulan`, TG_SAMJUHDI)).data) {
+    if (s.nama_siswa === 'Dhika Wahyu Ramadhan' && s.id) {
       await post('/api/nilai', {
         id_kumpul: s.id, skor: 78,
         catatan: 'Jawaban benar, namun dikumpulkan melewati batas waktu.',
-      }, TG_RAHMAT);
+      }, TG_SAMJUHDI);
     }
   }
 
@@ -1133,7 +1148,7 @@ async function main() {
       && rRekap.data.mapel.some((m) => m.tugas.some((t) => t.status === 'tidak_dikumpulkan')),
   });
 
-  const periodeSiswaMaya = await get('/api/nilai/saya', TS_MAYA);
+  const periodeSiswaMaya = await get('/api/nilai/saya', TS_RIWAYAT);
   catat({
     modul: 'Rekap Nilai', skenario: 'Siswa menelusuri riwayat nilai pada periode pembelajaran sebelumnya',
     input: 'Memilih periode terdahulu pada menu Nilai',
@@ -1143,14 +1158,14 @@ async function main() {
     sesuai: periodeSiswaMaya.status === 200 && periodeSiswaMaya.data.daftar_periode.length >= 2,
   });
 
-  const rekapDewi = await get('/api/nilai/saya', tokenSiswa.dewi);
-  const berbeda = JSON.stringify(rekapDewi.data.mapel) !== JSON.stringify(rRekap.data.mapel);
+  const rekapSiswaKedua = await get('/api/nilai/saya', tokenSiswa['ahmad.raviza']);
+  const berbeda = JSON.stringify(rekapSiswaKedua.data.mapel) !== JSON.stringify(rRekap.data.mapel);
   catat({
     modul: 'Rekap Nilai', skenario: 'Sistem membatasi rekap nilai hanya milik siswa yang sedang login',
     input: 'Login sebagai siswa lain lalu membuka menu Nilai',
     harapan: 'Sistem hanya menampilkan nilai milik siswa yang sedang login',
-    aktual: `HTTP ${rekapDewi.status}, data nilai tiap siswa berbeda: ${berbeda ? 'ya' : 'tidak'}`,
-    sesuai: rekapDewi.status === 200 && berbeda,
+    aktual: `HTTP ${rekapSiswaKedua.status}, data nilai tiap siswa berbeda: ${berbeda ? 'ya' : 'tidak'}`,
+    sesuai: rekapSiswaKedua.status === 200 && berbeda,
   });
 
   const rRekapGuru = await get(`/api/nilai/kelas-mapel/${kmGuruMtk.id}`, TG);
@@ -1214,10 +1229,10 @@ async function main() {
   await post('/api/forum', {
     id_pertemuan: pertemuanForum.id, id_parent: idTopik,
     pesan: 'Terima kasih Pak, penjelasannya sudah jelas. Berarti tandanya berubah saat pindah ruas ya, Pak.',
-  }, tokenSiswa.dewi);
+  }, tokenSiswa['ahmad.raviza']);
 
   const rPesanKosong = await post('/api/forum',
-    { id_pertemuan: pertemuanForum.id, id_parent: idTopik, pesan: '   ' }, tokenSiswa.rian);
+    { id_pertemuan: pertemuanForum.id, id_parent: idTopik, pesan: '   ' }, tokenSiswa.aminatul);
   catat({
     modul: 'Forum Diskusi', skenario: 'Pengguna mengirim balasan forum dengan isi pesan dikosongkan',
     input: 'Isi pesan = (kosong)',
@@ -1226,7 +1241,7 @@ async function main() {
     sesuai: rPesanKosong.status === 400,
   });
 
-  const rLihatForum = await get(`/api/forum?id_pertemuan=${pertemuanForum.id}`, tokenSiswa.rian);
+  const rLihatForum = await get(`/api/forum?id_pertemuan=${pertemuanForum.id}`, tokenSiswa.aminatul);
   catat({
     modul: 'Forum Diskusi', skenario: 'Pengguna menampilkan forum diskusi yang menyatu dalam materi pertemuan',
     input: `Membuka Pertemuan ${pertemuanForum.nomor} lalu melihat bagian forum diskusi`,
@@ -1239,8 +1254,8 @@ async function main() {
   const pesanUji = await post('/api/forum', {
     id_pertemuan: pertemuanForum.id, id_parent: idTopik,
     pesan: 'Pesan percobaan yang akan dihapus kembali oleh penulisnya.',
-  }, tokenSiswa.rian);
-  const rHapusOrangLain = await del(`/api/forum/${pesanUji.data.id}`, tokenSiswa.bayu);
+  }, tokenSiswa.aminatul);
+  const rHapusOrangLain = await del(`/api/forum/${pesanUji.data.id}`, tokenSiswa.dhika);
   catat({
     modul: 'Forum Diskusi', skenario: 'Pengguna mencoba menghapus pesan forum milik pengguna lain',
     input: 'Siswa lain menekan tombol hapus pada pesan yang bukan miliknya',
@@ -1249,7 +1264,7 @@ async function main() {
     sesuai: rHapusOrangLain.status === 403,
   });
 
-  const rHapusSendiri = await del(`/api/forum/${pesanUji.data.id}`, tokenSiswa.rian);
+  const rHapusSendiri = await del(`/api/forum/${pesanUji.data.id}`, tokenSiswa.aminatul);
   catat({
     modul: 'Forum Diskusi', skenario: 'Pengguna menghapus pesan forum miliknya sendiri',
     input: 'Siswa menghapus balasan yang ditulisnya sendiri',
@@ -1296,8 +1311,8 @@ async function main() {
   });
 
   const rGantiSandi = await put('/api/auth/password',
-    { passwordLama: 'siswa123', passwordBaru: 'siswa456' }, tokenSiswa.putri);
-  const cekSandiBaru = await login('putri@siswa.smakk.sch.id', 'siswa456');
+    { passwordLama: 'siswa123', passwordBaru: 'siswa456' }, tokenSiswa.bunga);
+  const cekSandiBaru = await login('bunga@siswa.smakk.sch.id', 'siswa456');
   await put('/api/auth/password',
     { passwordLama: 'siswa456', passwordBaru: 'siswa123' }, cekSandiBaru.data.token);
   catat({
