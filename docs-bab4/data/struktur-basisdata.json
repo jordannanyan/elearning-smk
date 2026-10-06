@@ -2,7 +2,7 @@
   {
     "tabel": "users",
     "deskripsi": "Menyimpan data akun seluruh pengguna sistem (administrator, guru, dan siswa)",
-    "jumlah_record": 317,
+    "jumlah_record": 316,
     "kolom": [
       {
         "nama": "id",
@@ -226,7 +226,7 @@
   {
     "tabel": "siswa",
     "deskripsi": "Menyimpan data detail profil siswa yang berelasi dengan tabel users",
-    "jumlah_record": 288,
+    "jumlah_record": 287,
     "kolom": [
       {
         "nama": "id",
@@ -268,7 +268,7 @@
   {
     "tabel": "siswa_kelas",
     "deskripsi": "Menyimpan keanggotaan siswa pada sebuah kelas di setiap periode",
-    "jumlah_record": 575,
+    "jumlah_record": 574,
     "kolom": [
       {
         "nama": "id",
@@ -800,7 +800,7 @@
   {
     "tabel": "forum_diskusi",
     "deskripsi": "Menyimpan topik dan balasan forum diskusi pada sebuah pertemuan",
-    "jumlah_record": 16,
+    "jumlah_record": 8,
     "kolom": [
       {
         "nama": "id",

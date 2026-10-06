@@ -1,5 +1,5 @@
 {
-  "tanggal": "2026-09-27T16:28:54.202Z",
+  "tanggal": "2026-10-05T12:15:04.219Z",
   "total": 95,
   "valid": 95,
   "tidak_valid": 0,
@@ -272,7 +272,7 @@
       "skenario": "Administrator menampilkan daftar siswa beserta kelasnya",
       "input": "Membuka menu Data Siswa",
       "harapan": "Sistem menampilkan data siswa beserta kelas pada periode pembelajaran aktif",
-      "aktual": "HTTP 200, 288 siswa; contoh: Ahmad Hanapi kelas X A",
+      "aktual": "HTTP 200, 288 siswa (287 siswa sekolah ditambah 1 siswa uji dari skenario sebelumnya); contoh: Ahmad Hanapi kelas X A",
       "status": "Valid"
     },
     {
@@ -281,7 +281,7 @@
       "skenario": "Administrator menghapus siswa yang sudah terdaftar pada kelas",
       "input": "Menghapus akun Ahmad Hanapi",
       "harapan": "Sistem menolak dan menyarankan penonaktifan agar riwayat nilai siswa tetap tersimpan",
-      "aktual": "HTTP 409, pesan: \"Siswa ini terdaftar pada 2 kelas dan memiliki 7 pengumpulan tugas sehingga tidak dapat dihapus. Nonaktifkan akunnya (misalnya karena sudah lulus atau pindah) agar riwayat nilainya tetap tersimpan.\"",
+      "aktual": "HTTP 409, pesan: \"Siswa ini terdaftar pada 2 kelas dan memiliki 2 pengumpulan tugas sehingga tidak dapat dihapus. Nonaktifkan akunnya (misalnya karena sudah lulus atau pindah) agar riwayat nilainya tetap tersimpan.\"",
       "status": "Valid"
     },
     {
@@ -506,7 +506,7 @@
       "skenario": "Siswa membuka satu pertemuan untuk mengikuti pembelajaran",
       "input": "Membuka Pertemuan 1",
       "harapan": "Sistem menampilkan materi, tugas, dan forum diskusi pertemuan tersebut secara berurutan",
-      "aktual": "HTTP 200, 3 materi, 1 tugas, 3 topik diskusi",
+      "aktual": "HTTP 200, 3 materi, 1 tugas, 1 topik diskusi",
       "status": "Valid"
     },
     {
@@ -551,7 +551,7 @@
       "skenario": "Sistem mengelompokkan tugas siswa berdasarkan status pengerjaan",
       "input": "Membuka menu Tugas & Kuis sebagai siswa",
       "harapan": "Tugas terpisah menjadi belum dikerjakan, menunggu penilaian, sudah dinilai, dan terlewat",
-      "aktual": "Status yang terbentuk: terlewat, belum_dikerjakan, dinilai, menunggu_penilaian",
+      "aktual": "Status yang terbentuk: terlewat, belum_dikerjakan",
       "status": "Valid"
     },
     {
@@ -803,7 +803,7 @@
       "skenario": "Pengguna menampilkan forum diskusi yang menyatu dalam materi pertemuan",
       "input": "Membuka Pertemuan 1 lalu melihat bagian forum diskusi",
       "harapan": "Forum diskusi tampil di dalam pertemuan beserta seluruh balasannya secara berurutan",
-      "aktual": "HTTP 200, 4 topik dengan total 9 balasan",
+      "aktual": "HTTP 200, 2 topik dengan total 3 balasan",
       "status": "Valid"
     },
     {

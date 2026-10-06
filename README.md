@@ -105,6 +105,7 @@ Skrip pembangkitnya ada di `scripts/`:
 | `scripts/screenshots.py` | Mengambil 44 tangkapan layar seluruh halaman sistem secara otomatis (Playwright) |
 | `scripts/data-bab4.js` | Mengambil struktur tabel basis data dan statistik data dari MySQL |
 | `scripts/buat-dokumen-bab4.py` | Menyusun `docs-bab4/Lampiran-BAB-IV-Sistem-E-Learning.docx` |
+| `scripts/buat-dump-sql.py` | Membuat dump SQL `docs-bab4/database/elearning_smakk_bab4.sql` |
 
 Petunjuk lengkap: lihat `docs-bab4/README.md`.
 

@@ -112,12 +112,12 @@ Total **95 skenario**, **95 Valid**, **0 Tidak Valid**
 
 | No | Tabel | Deskripsi | Jumlah Data |
 |---|---|---|---|
-| 1 | `users` | Menyimpan data akun seluruh pengguna sistem (administrator, guru, dan siswa) | 317 |
+| 1 | `users` | Menyimpan data akun seluruh pengguna sistem (administrator, guru, dan siswa) | 316 |
 | 2 | `periode` | Menyimpan periode pembelajaran (tahun ajaran dan semester) beserta status penguncian | 2 |
 | 3 | `kelas` | Menyimpan data rombongan belajar pada sebuah periode pembelajaran | 20 |
 | 4 | `guru` | Menyimpan data detail profil guru yang berelasi dengan tabel users | 28 |
-| 5 | `siswa` | Menyimpan data detail profil siswa yang berelasi dengan tabel users | 288 |
-| 6 | `siswa_kelas` | Menyimpan keanggotaan siswa pada sebuah kelas di setiap periode | 575 |
+| 5 | `siswa` | Menyimpan data detail profil siswa yang berelasi dengan tabel users | 287 |
+| 6 | `siswa_kelas` | Menyimpan keanggotaan siswa pada sebuah kelas di setiap periode | 574 |
 | 7 | `mata_pelajaran` | Menyimpan katalog mata pelajaran sekolah | 27 |
 | 8 | `kelas_mapel` | Menyimpan pengampuan, yaitu mata pelajaran pada sebuah kelas beserta guru pengampunya | 310 |
 | 9 | `pertemuan` | Menyimpan urutan pertemuan pembelajaran pada sebuah kelas mata pelajaran | 10 |
@@ -127,7 +127,7 @@ Total **95 skenario**, **95 Valid**, **0 Tidak Valid**
 | 13 | `pengumpulan_tugas` | Menyimpan data pengumpulan jawaban tugas oleh siswa | 32 |
 | 14 | `jawaban_siswa` | Menyimpan jawaban siswa pada setiap butir soal kuis | 62 |
 | 15 | `nilai` | Menyimpan data nilai siswa hasil penilaian guru maupun koreksi otomatis | 26 |
-| 16 | `forum_diskusi` | Menyimpan topik dan balasan forum diskusi pada sebuah pertemuan | 16 |
+| 16 | `forum_diskusi` | Menyimpan topik dan balasan forum diskusi pada sebuah pertemuan | 8 |
 
 ## Cara membangkitkan ulang
 
@@ -152,6 +152,9 @@ node scripts/data-bab4.js
 
 # 5. Susun dokumen Word lampiran BAB IV
 python scripts/buat-dokumen-bab4.py
+
+# 6. Buat dump SQL basis data
+python scripts/buat-dump-sql.py
 ```
 
 Urutan langkah 1 → 2 → 3 wajib diikuti: skrip screenshot membutuhkan data pengumpulan

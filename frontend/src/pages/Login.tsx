@@ -48,12 +48,6 @@ export default function Login() {
           {loading ? 'Memproses...' : 'Masuk'}
         </button>
 
-        <div className="hint">
-          <strong>Akun demo:</strong><br />
-          Admin: admin@smakk.sch.id / admin123<br />
-          Guru: budi@smakk.sch.id / guru123<br />
-          Siswa: ahmad@siswa.smakk.sch.id / siswa123
-        </div>
       </form>
     </div>
   );

@@ -53,6 +53,23 @@ const del = (u, t) => req('DELETE', u, { token: t });
 const login = (email, password) => post('/api/auth/login', { email, password });
 
 // ---------------------------------------------------------------------
+// Akun uji yang dipakai skenario penambahan dan penonaktifan siswa. Akun
+// ini dibuang kembali setelah seluruh skenario selesai agar isi basis data
+// tetap sama dengan data nyata sekolah, sehingga jumlah siswa yang tampil
+// pada sistem sama dengan yang tercantum di laporan.
+// ---------------------------------------------------------------------
+const EMAIL_AKUN_UJI = 'wulan@siswa.smakk.sch.id';
+
+async function hapusAkunUji(token, idKelas) {
+  const akun = (await get('/api/users?role=siswa', token)).data
+    .find((u) => u.email === EMAIL_AKUN_UJI);
+  if (!akun) return 'tidak ada';
+  await del(`/api/kelas/${idKelas}/siswa/${akun.siswa_id}`, token);
+  const r = await del(`/api/users/${akun.id}`, token);
+  return r.status === 200 ? 'dihapus' : `gagal (HTTP ${r.status}: ${r.data?.message})`;
+}
+
+// ---------------------------------------------------------------------
 async function main() {
   console.log(`\n=== PENGUJIAN BLACK BOX — ${new Date().toLocaleString('id-ID')} ===\n`);
 
@@ -367,12 +384,7 @@ async function main() {
 
   // Bersihkan akun uji dari eksekusi sebelumnya agar skrip dapat
   // dijalankan berulang kali dengan hasil yang sama.
-  const akunUjiLama = (await get('/api/users?role=siswa', TA)).data
-    .find((u) => u.email === 'wulan@siswa.smakk.sch.id');
-  if (akunUjiLama) {
-    await del(`/api/kelas/${kelasX1.id}/siswa/${akunUjiLama.siswa_id}`, TA);
-    await del(`/api/users/${akunUjiLama.id}`, TA);
-  }
+  await hapusAkunUji(TA, kelasX1.id);
 
   const rTambahSiswa = await post('/api/users', {
     nama: 'Wulan Safitri', email: 'wulan@siswa.smakk.sch.id', password: 'siswa123',
@@ -392,8 +404,9 @@ async function main() {
     modul: 'Manajemen Pengguna', skenario: 'Administrator menampilkan daftar siswa beserta kelasnya',
     input: 'Membuka menu Data Siswa',
     harapan: 'Sistem menampilkan data siswa beserta kelas pada periode pembelajaran aktif',
-    aktual: `HTTP ${rListSiswa.status}, ${rListSiswa.data.length} siswa; contoh: ` +
-      `${siswaAhmad.nama} kelas ${siswaAhmad.kelas_aktif}`,
+    aktual: `HTTP ${rListSiswa.status}, ${rListSiswa.data.length} siswa ` +
+      `(${rListSiswa.data.length - 1} siswa sekolah ditambah 1 siswa uji dari skenario sebelumnya); ` +
+      `contoh: ${siswaAhmad.nama} kelas ${siswaAhmad.kelas_aktif}`,
     sesuai: rListSiswa.status === 200 && !!siswaAhmad.kelas_aktif,
   });
 
@@ -1322,6 +1335,17 @@ async function main() {
     aktual: `HTTP ${rGantiSandi.status}, login dengan kata sandi baru: HTTP ${cekSandiBaru.status}`,
     sesuai: rGantiSandi.status === 200 && cekSandiBaru.status === 200,
   });
+
+  // =================================================================
+  // Pembersihan data uji
+  // -----------------------------------------------------------------
+  // Seluruh skenario sudah selesai dicatat, sehingga akun uji tidak lagi
+  // diperlukan. Penghapusannya membuat jumlah data pada sistem kembali
+  // persis sama dengan data nyata sekolah (287 siswa, kelas X A 28 siswa).
+  // =================================================================
+  console.log(`
+Pembersihan akun uji ${EMAIL_AKUN_UJI}: `
+    + `${await hapusAkunUji(TA, kelasX1.id)}`);
 
   // =================================================================
   // Ringkasan

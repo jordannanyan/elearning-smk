@@ -7,15 +7,14 @@
 -- BAB IV Hasil dan Pembahasan, yaitu data yang tampil pada seluruh tangkapan
 -- layar sistem dan data hasil pengujian Black Box Testing (95 skenario).
 --
+-- Data guru, mata pelajaran, pembagian tugas mengajar, wali kelas, kelas, dan
+-- siswa merupakan data nyata SMA Negeri 1 Karau Kuala Tahun Ajaran 2025/2026.
+--
 -- Basis data memuat dua periode pembelajaran:
---   2026/1 (Tahun Ajaran 2025/2026 Ganjil) berstatus AKTIF
---   2025/2 (Tahun Ajaran 2024/2025 Genap)  berstatus TERKUNCI sebagai arsip
+--   2026/2 (Tahun Ajaran 2025/2026 Genap)  berstatus AKTIF
+--   2026/1 (Tahun Ajaran 2025/2026 Ganjil) berstatus TERKUNCI sebagai arsip
 --
--- Data pengumpulan tugas, jawaban kuis, dan nilai pada berkas ini dihasilkan
--- melalui alur nyata sistem (REST API), sehingga skor pilihan ganda merupakan
--- hasil koreksi otomatis sistem dan skor esai merupakan hasil penilaian guru.
---
--- DBMS       : MySQL / MariaDB
+-- DBMS            : MySQL / MariaDB
 -- Nama basis data : elearning_smakk
 -- Karakter set    : utf8mb4 / utf8mb4_unicode_ci
 -- Jumlah tabel    : 16
@@ -27,17 +26,10 @@
 -- Cara import melalui terminal:
 --   mysql -u root < elearning_smakk_bab4.sql
 --
--- Akun untuk pengujian (kata sandi disimpan terenkripsi bcrypt):
---   Administrator : admin@smakk.sch.id            / admin123
---   Guru          : budi@smakk.sch.id             / guru123
---                   siti@smakk.sch.id             / guru123
---                   rahmat@smakk.sch.id           / guru123
---                   dina@smakk.sch.id             / guru123
---                   hendra@smakk.sch.id           / guru123
---                   lestari@smakk.sch.id          / guru123
---   Siswa         : ahmad@siswa.smakk.sch.id      / siswa123
---                   dewi@siswa.smakk.sch.id       / siswa123
---                   (seluruh akun siswa lain juga menggunakan kata sandi siswa123)
+-- Kata sandi seluruh akun disimpan dalam bentuk terenkripsi (bcrypt).
+-- Kata sandi bawaan: administrator "admin123", guru "guru123",
+-- dan siswa "siswa123". Alamat surel tiap pengguna dapat dilihat pada
+-- tabel users setelah berkas ini diimpor.
 --
 -- ===========================================================================
 
@@ -57,7 +49,7 @@ USE `elearning_smakk`;
 -- ===========================================================================
 -- 1. Tabel `users`
 --    Akun seluruh pengguna sistem (administrator, guru, dan siswa)
---    Jumlah data: 317 baris
+--    Jumlah data: 316 baris
 -- ===========================================================================
 
 DROP TABLE IF EXISTS `users`;
@@ -72,324 +64,323 @@ CREATE TABLE `users` (
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   PRIMARY KEY (`id`),
   UNIQUE KEY `email` (`email`)
-) ENGINE=InnoDB AUTO_INCREMENT=323 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (1,'Administrator','admin@smakk.sch.id','$2a$10$h4WF/YywBuClJsJLA6LBbeeOx4Z655R5uifehrqZQVGGhgXjHmENC','admin',NULL,1,'2026-09-27 16:22:47');
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (2,'Yunita Pebrianti, S.Pd','yunita@smakk.sch.id','$2a$10$Iw/v1aFtGonRYqvwiU2HFuyDjJ/cp.qclnYiAoUUDzHhAkMu/iuNS','guru',NULL,1,'2026-09-27 16:22:47');
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (3,'Hermilawaty, S.Ag','hermilawaty@smakk.sch.id','$2a$10$Iw/v1aFtGonRYqvwiU2HFuyDjJ/cp.qclnYiAoUUDzHhAkMu/iuNS','guru',NULL,1,'2026-09-27 16:22:47');
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (4,'Mahlian, S.Pd','mahlian@smakk.sch.id','$2a$10$Iw/v1aFtGonRYqvwiU2HFuyDjJ/cp.qclnYiAoUUDzHhAkMu/iuNS','guru',NULL,1,'2026-09-27 16:22:47');
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (5,'Nurlaila, S.Pd','nurlaila@smakk.sch.id','$2a$10$Iw/v1aFtGonRYqvwiU2HFuyDjJ/cp.qclnYiAoUUDzHhAkMu/iuNS','guru',NULL,1,'2026-09-27 16:22:47');
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (6,'Halifah, S.P','halifah@smakk.sch.id','$2a$10$Iw/v1aFtGonRYqvwiU2HFuyDjJ/cp.qclnYiAoUUDzHhAkMu/iuNS','guru',NULL,1,'2026-09-27 16:22:47');
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (7,'Samjuhdi, S.P','samjuhdi@smakk.sch.id','$2a$10$Iw/v1aFtGonRYqvwiU2HFuyDjJ/cp.qclnYiAoUUDzHhAkMu/iuNS','guru',NULL,1,'2026-09-27 16:22:47');
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (8,'Martaniah, S.Pd','martaniah@smakk.sch.id','$2a$10$Iw/v1aFtGonRYqvwiU2HFuyDjJ/cp.qclnYiAoUUDzHhAkMu/iuNS','guru',NULL,1,'2026-09-27 16:22:47');
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (9,'Ramayadi Jaya, S.Pd','ramayadi@smakk.sch.id','$2a$10$Iw/v1aFtGonRYqvwiU2HFuyDjJ/cp.qclnYiAoUUDzHhAkMu/iuNS','guru',NULL,1,'2026-09-27 16:22:47');
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (10,'Edy Priyono, S.E','edy@smakk.sch.id','$2a$10$Iw/v1aFtGonRYqvwiU2HFuyDjJ/cp.qclnYiAoUUDzHhAkMu/iuNS','guru',NULL,1,'2026-09-27 16:22:47');
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (11,'Sugianoor, S.Sos','sugianoor@smakk.sch.id','$2a$10$Iw/v1aFtGonRYqvwiU2HFuyDjJ/cp.qclnYiAoUUDzHhAkMu/iuNS','guru',NULL,1,'2026-09-27 16:22:47');
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (12,'Muhammad Rahmadani, S.Pd','muhammad@smakk.sch.id','$2a$10$Iw/v1aFtGonRYqvwiU2HFuyDjJ/cp.qclnYiAoUUDzHhAkMu/iuNS','guru',NULL,1,'2026-09-27 16:22:47');
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (13,'Widayani, S.Pd','widayani@smakk.sch.id','$2a$10$Iw/v1aFtGonRYqvwiU2HFuyDjJ/cp.qclnYiAoUUDzHhAkMu/iuNS','guru',NULL,1,'2026-09-27 16:22:47');
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (14,'Herman Katoppo, S.Pd','herman@smakk.sch.id','$2a$10$Iw/v1aFtGonRYqvwiU2HFuyDjJ/cp.qclnYiAoUUDzHhAkMu/iuNS','guru',NULL,1,'2026-09-27 16:22:47');
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (15,'Siti Kamariah, S. Pd','siti@smakk.sch.id','$2a$10$Iw/v1aFtGonRYqvwiU2HFuyDjJ/cp.qclnYiAoUUDzHhAkMu/iuNS','guru',NULL,1,'2026-09-27 16:22:47');
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (16,'Bardin, S.Pd','bardin@smakk.sch.id','$2a$10$Iw/v1aFtGonRYqvwiU2HFuyDjJ/cp.qclnYiAoUUDzHhAkMu/iuNS','guru',NULL,1,'2026-09-27 16:22:47');
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (17,'Robet Januar Simanjuntak, S.Pd','robet@smakk.sch.id','$2a$10$Iw/v1aFtGonRYqvwiU2HFuyDjJ/cp.qclnYiAoUUDzHhAkMu/iuNS','guru',NULL,1,'2026-09-27 16:22:47');
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (18,'Mariani, S.Th','mariani@smakk.sch.id','$2a$10$Iw/v1aFtGonRYqvwiU2HFuyDjJ/cp.qclnYiAoUUDzHhAkMu/iuNS','guru',NULL,1,'2026-09-27 16:22:47');
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (19,'Wahono Isnandar, S.Pd','wahono@smakk.sch.id','$2a$10$Iw/v1aFtGonRYqvwiU2HFuyDjJ/cp.qclnYiAoUUDzHhAkMu/iuNS','guru',NULL,1,'2026-09-27 16:22:47');
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (20,'Eka Susilawati, , S.Pd.I','eka@smakk.sch.id','$2a$10$Iw/v1aFtGonRYqvwiU2HFuyDjJ/cp.qclnYiAoUUDzHhAkMu/iuNS','guru',NULL,1,'2026-09-27 16:22:47');
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (21,'Dewi Sartika, S.Pd','dewi@smakk.sch.id','$2a$10$Iw/v1aFtGonRYqvwiU2HFuyDjJ/cp.qclnYiAoUUDzHhAkMu/iuNS','guru',NULL,1,'2026-09-27 16:22:47');
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (22,'Andi Ilhami, S.Kom','andi@smakk.sch.id','$2a$10$Iw/v1aFtGonRYqvwiU2HFuyDjJ/cp.qclnYiAoUUDzHhAkMu/iuNS','guru',NULL,1,'2026-09-27 16:22:47');
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (23,'Akhmad Riko, S.Pd.i','akhmad@smakk.sch.id','$2a$10$Iw/v1aFtGonRYqvwiU2HFuyDjJ/cp.qclnYiAoUUDzHhAkMu/iuNS','guru',NULL,1,'2026-09-27 16:22:47');
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (24,'Janatin, S.Pd.I','janatin@smakk.sch.id','$2a$10$Iw/v1aFtGonRYqvwiU2HFuyDjJ/cp.qclnYiAoUUDzHhAkMu/iuNS','guru',NULL,1,'2026-09-27 16:22:47');
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (25,'Nesvi Lianti Ml, S.Pd','nesvi@smakk.sch.id','$2a$10$Iw/v1aFtGonRYqvwiU2HFuyDjJ/cp.qclnYiAoUUDzHhAkMu/iuNS','guru',NULL,1,'2026-09-27 16:22:47');
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (26,'Kenny Yohanes Tiago, S.Pd','kenny@smakk.sch.id','$2a$10$Iw/v1aFtGonRYqvwiU2HFuyDjJ/cp.qclnYiAoUUDzHhAkMu/iuNS','guru',NULL,1,'2026-09-27 16:22:47');
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (27,'Laily Mustika, S.Pd.I','laily@smakk.sch.id','$2a$10$Iw/v1aFtGonRYqvwiU2HFuyDjJ/cp.qclnYiAoUUDzHhAkMu/iuNS','guru',NULL,1,'2026-09-27 16:22:47');
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (28,'Asnin Warianto, S.Pd.I','asnin@smakk.sch.id','$2a$10$Iw/v1aFtGonRYqvwiU2HFuyDjJ/cp.qclnYiAoUUDzHhAkMu/iuNS','guru',NULL,1,'2026-09-27 16:22:47');
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (29,'Rita Feronika, S.Pd','rita@smakk.sch.id','$2a$10$Iw/v1aFtGonRYqvwiU2HFuyDjJ/cp.qclnYiAoUUDzHhAkMu/iuNS','guru',NULL,1,'2026-09-27 16:22:47');
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (30,'Ahmad Hanapi','ahmad@siswa.smakk.sch.id','$2a$10$Lwrdq2acLT375XfMv8rXeOOoWRpO5vffFh.cyM4QpfxnrtcbsUGpG','siswa',NULL,1,'2026-09-27 16:22:47');
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (31,'Ahmad Raviza','ahmad.raviza@siswa.smakk.sch.id','$2a$10$Lwrdq2acLT375XfMv8rXeOOoWRpO5vffFh.cyM4QpfxnrtcbsUGpG','siswa',NULL,1,'2026-09-27 16:22:47');
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (32,'Aminatul Najua','aminatul@siswa.smakk.sch.id','$2a$10$Lwrdq2acLT375XfMv8rXeOOoWRpO5vffFh.cyM4QpfxnrtcbsUGpG','siswa',NULL,1,'2026-09-27 16:22:47');
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (33,'Audiyah','audiyah@siswa.smakk.sch.id','$2a$10$Lwrdq2acLT375XfMv8rXeOOoWRpO5vffFh.cyM4QpfxnrtcbsUGpG','siswa',NULL,1,'2026-09-27 16:22:47');
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (34,'Bunga Citra','bunga@siswa.smakk.sch.id','$2a$10$AvEOofaG8By1yq7.7n1Y/uUOclvEwtQC4eRcOAXtBW1i7NbaXP9J2','siswa',NULL,1,'2026-09-27 16:22:47');
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (35,'Dhika Wahyu Ramadhan','dhika@siswa.smakk.sch.id','$2a$10$Lwrdq2acLT375XfMv8rXeOOoWRpO5vffFh.cyM4QpfxnrtcbsUGpG','siswa',NULL,1,'2026-09-27 16:22:47');
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (36,'Dira Permata Sari','dira@siswa.smakk.sch.id','$2a$10$Lwrdq2acLT375XfMv8rXeOOoWRpO5vffFh.cyM4QpfxnrtcbsUGpG','siswa',NULL,1,'2026-09-27 16:22:47');
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (37,'Eka Purnama Sari','eka@siswa.smakk.sch.id','$2a$10$Lwrdq2acLT375XfMv8rXeOOoWRpO5vffFh.cyM4QpfxnrtcbsUGpG','siswa',NULL,1,'2026-09-27 16:22:47');
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (38,'Fajrianor','fajrianor@siswa.smakk.sch.id','$2a$10$Lwrdq2acLT375XfMv8rXeOOoWRpO5vffFh.cyM4QpfxnrtcbsUGpG','siswa',NULL,1,'2026-09-27 16:22:47');
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (39,'Fatimah Azahra','fatimah@siswa.smakk.sch.id','$2a$10$Lwrdq2acLT375XfMv8rXeOOoWRpO5vffFh.cyM4QpfxnrtcbsUGpG','siswa',NULL,1,'2026-09-27 16:22:47');
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (40,'Fuza Nabila Syabaniah','fuza@siswa.smakk.sch.id','$2a$10$Lwrdq2acLT375XfMv8rXeOOoWRpO5vffFh.cyM4QpfxnrtcbsUGpG','siswa',NULL,1,'2026-09-27 16:22:47');
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (41,'Hidayatul Firdaus','hidayatul@siswa.smakk.sch.id','$2a$10$Lwrdq2acLT375XfMv8rXeOOoWRpO5vffFh.cyM4QpfxnrtcbsUGpG','siswa',NULL,1,'2026-09-27 16:22:47');
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (42,'Ihwan','ihwan@siswa.smakk.sch.id','$2a$10$Lwrdq2acLT375XfMv8rXeOOoWRpO5vffFh.cyM4QpfxnrtcbsUGpG','siswa',NULL,1,'2026-09-27 16:22:47');
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (43,'Irpan','irpan@siswa.smakk.sch.id','$2a$10$Lwrdq2acLT375XfMv8rXeOOoWRpO5vffFh.cyM4QpfxnrtcbsUGpG','siswa',NULL,1,'2026-09-27 16:22:47');
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (44,'Jannatul Fatwa','jannatul@siswa.smakk.sch.id','$2a$10$Lwrdq2acLT375XfMv8rXeOOoWRpO5vffFh.cyM4QpfxnrtcbsUGpG','siswa',NULL,1,'2026-09-27 16:22:47');
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (45,'M. Hafi Ramadhani','m@siswa.smakk.sch.id','$2a$10$Lwrdq2acLT375XfMv8rXeOOoWRpO5vffFh.cyM4QpfxnrtcbsUGpG','siswa',NULL,1,'2026-09-27 16:22:47');
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (46,'Mega','mega@siswa.smakk.sch.id','$2a$10$Lwrdq2acLT375XfMv8rXeOOoWRpO5vffFh.cyM4QpfxnrtcbsUGpG','siswa',NULL,1,'2026-09-27 16:22:47');
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (47,'Muhamad Al Fiqih','muhamad@siswa.smakk.sch.id','$2a$10$Lwrdq2acLT375XfMv8rXeOOoWRpO5vffFh.cyM4QpfxnrtcbsUGpG','siswa',NULL,1,'2026-09-27 16:22:47');
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (48,'Muhammad Rafli Bahtiar','muhammad@siswa.smakk.sch.id','$2a$10$Lwrdq2acLT375XfMv8rXeOOoWRpO5vffFh.cyM4QpfxnrtcbsUGpG','siswa',NULL,1,'2026-09-27 16:22:47');
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (49,'Nor Djahra','nor@siswa.smakk.sch.id','$2a$10$Lwrdq2acLT375XfMv8rXeOOoWRpO5vffFh.cyM4QpfxnrtcbsUGpG','siswa',NULL,1,'2026-09-27 16:22:47');
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (50,'Nurjannah','nurjannah@siswa.smakk.sch.id','$2a$10$Lwrdq2acLT375XfMv8rXeOOoWRpO5vffFh.cyM4QpfxnrtcbsUGpG','siswa',NULL,1,'2026-09-27 16:22:47');
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (51,'Putri','putri@siswa.smakk.sch.id','$2a$10$Lwrdq2acLT375XfMv8rXeOOoWRpO5vffFh.cyM4QpfxnrtcbsUGpG','siswa',NULL,1,'2026-09-27 16:22:47');
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (52,'Rahmad Andika','rahmad@siswa.smakk.sch.id','$2a$10$Lwrdq2acLT375XfMv8rXeOOoWRpO5vffFh.cyM4QpfxnrtcbsUGpG','siswa',NULL,1,'2026-09-27 16:22:47');
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (53,'Ramadani','ramadani@siswa.smakk.sch.id','$2a$10$Lwrdq2acLT375XfMv8rXeOOoWRpO5vffFh.cyM4QpfxnrtcbsUGpG','siswa',NULL,1,'2026-09-27 16:22:47');
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (54,'Riszayanti','riszayanti@siswa.smakk.sch.id','$2a$10$Lwrdq2acLT375XfMv8rXeOOoWRpO5vffFh.cyM4QpfxnrtcbsUGpG','siswa',NULL,1,'2026-09-27 16:22:47');
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (55,'Salsa Billa','salsa@siswa.smakk.sch.id','$2a$10$Lwrdq2acLT375XfMv8rXeOOoWRpO5vffFh.cyM4QpfxnrtcbsUGpG','siswa',NULL,1,'2026-09-27 16:22:47');
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (56,'Wenisa','wenisa@siswa.smakk.sch.id','$2a$10$Lwrdq2acLT375XfMv8rXeOOoWRpO5vffFh.cyM4QpfxnrtcbsUGpG','siswa',NULL,1,'2026-09-27 16:22:47');
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (57,'Yuanita Septia Putri','yuanita@siswa.smakk.sch.id','$2a$10$Lwrdq2acLT375XfMv8rXeOOoWRpO5vffFh.cyM4QpfxnrtcbsUGpG','siswa',NULL,1,'2026-09-27 16:22:47');
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (58,'Adya Syakira','adya@siswa.smakk.sch.id','$2a$10$Lwrdq2acLT375XfMv8rXeOOoWRpO5vffFh.cyM4QpfxnrtcbsUGpG','siswa',NULL,1,'2026-09-27 16:22:47');
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (59,'Ahmat Baihaqi','ahmat@siswa.smakk.sch.id','$2a$10$Lwrdq2acLT375XfMv8rXeOOoWRpO5vffFh.cyM4QpfxnrtcbsUGpG','siswa',NULL,1,'2026-09-27 16:22:47');
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (60,'Alif Permana Wiguna','alif@siswa.smakk.sch.id','$2a$10$Lwrdq2acLT375XfMv8rXeOOoWRpO5vffFh.cyM4QpfxnrtcbsUGpG','siswa',NULL,1,'2026-09-27 16:22:47');
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (61,'Amira Febriana','amira@siswa.smakk.sch.id','$2a$10$Lwrdq2acLT375XfMv8rXeOOoWRpO5vffFh.cyM4QpfxnrtcbsUGpG','siswa',NULL,1,'2026-09-27 16:22:47');
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (62,'Andini','andini@siswa.smakk.sch.id','$2a$10$Lwrdq2acLT375XfMv8rXeOOoWRpO5vffFh.cyM4QpfxnrtcbsUGpG','siswa',NULL,1,'2026-09-27 16:22:47');
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (63,'Anggi Gladis Prasetyo','anggi@siswa.smakk.sch.id','$2a$10$Lwrdq2acLT375XfMv8rXeOOoWRpO5vffFh.cyM4QpfxnrtcbsUGpG','siswa',NULL,1,'2026-09-27 16:22:47');
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (64,'Ariska','ariska@siswa.smakk.sch.id','$2a$10$Lwrdq2acLT375XfMv8rXeOOoWRpO5vffFh.cyM4QpfxnrtcbsUGpG','siswa',NULL,1,'2026-09-27 16:22:47');
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (65,'Citra Lestari','citra@siswa.smakk.sch.id','$2a$10$Lwrdq2acLT375XfMv8rXeOOoWRpO5vffFh.cyM4QpfxnrtcbsUGpG','siswa',NULL,1,'2026-09-27 16:22:47');
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (66,'Fitreal Ramadhan','fitreal@siswa.smakk.sch.id','$2a$10$Lwrdq2acLT375XfMv8rXeOOoWRpO5vffFh.cyM4QpfxnrtcbsUGpG','siswa',NULL,1,'2026-09-27 16:22:47');
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (67,'Gina Patimah','gina@siswa.smakk.sch.id','$2a$10$Lwrdq2acLT375XfMv8rXeOOoWRpO5vffFh.cyM4QpfxnrtcbsUGpG','siswa',NULL,1,'2026-09-27 16:22:47');
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (68,'Haidir','haidir@siswa.smakk.sch.id','$2a$10$Lwrdq2acLT375XfMv8rXeOOoWRpO5vffFh.cyM4QpfxnrtcbsUGpG','siswa',NULL,1,'2026-09-27 16:22:47');
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (69,'Herni','herni@siswa.smakk.sch.id','$2a$10$Lwrdq2acLT375XfMv8rXeOOoWRpO5vffFh.cyM4QpfxnrtcbsUGpG','siswa',NULL,1,'2026-09-27 16:22:47');
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (70,'Ipnu Malik','ipnu@siswa.smakk.sch.id','$2a$10$Lwrdq2acLT375XfMv8rXeOOoWRpO5vffFh.cyM4QpfxnrtcbsUGpG','siswa',NULL,1,'2026-09-27 16:22:47');
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (71,'Irma Hidayanti','irma@siswa.smakk.sch.id','$2a$10$Lwrdq2acLT375XfMv8rXeOOoWRpO5vffFh.cyM4QpfxnrtcbsUGpG','siswa',NULL,1,'2026-09-27 16:22:47');
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (72,'Lestari','lestari@siswa.smakk.sch.id','$2a$10$Lwrdq2acLT375XfMv8rXeOOoWRpO5vffFh.cyM4QpfxnrtcbsUGpG','siswa',NULL,1,'2026-09-27 16:22:47');
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (73,'Muhamad Akbar','muhamad.akbar@siswa.smakk.sch.id','$2a$10$Lwrdq2acLT375XfMv8rXeOOoWRpO5vffFh.cyM4QpfxnrtcbsUGpG','siswa',NULL,1,'2026-09-27 16:22:47');
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (74,'Muhammad Rehan Fadillah','muhammad.rehan@siswa.smakk.sch.id','$2a$10$Lwrdq2acLT375XfMv8rXeOOoWRpO5vffFh.cyM4QpfxnrtcbsUGpG','siswa',NULL,1,'2026-09-27 16:22:47');
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (75,'Muhammad Zainal Arsyad','muhammad.zainal@siswa.smakk.sch.id','$2a$10$Lwrdq2acLT375XfMv8rXeOOoWRpO5vffFh.cyM4QpfxnrtcbsUGpG','siswa',NULL,1,'2026-09-27 16:22:47');
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (76,'Mutiara Ramadhani','mutiara@siswa.smakk.sch.id','$2a$10$Lwrdq2acLT375XfMv8rXeOOoWRpO5vffFh.cyM4QpfxnrtcbsUGpG','siswa',NULL,1,'2026-09-27 16:22:47');
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (77,'Nadia Vega','nadia@siswa.smakk.sch.id','$2a$10$Lwrdq2acLT375XfMv8rXeOOoWRpO5vffFh.cyM4QpfxnrtcbsUGpG','siswa',NULL,1,'2026-09-27 16:22:47');
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (78,'Norviona','norviona@siswa.smakk.sch.id','$2a$10$Lwrdq2acLT375XfMv8rXeOOoWRpO5vffFh.cyM4QpfxnrtcbsUGpG','siswa',NULL,1,'2026-09-27 16:22:47');
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (79,'Putri Adinda','putri.adinda@siswa.smakk.sch.id','$2a$10$Lwrdq2acLT375XfMv8rXeOOoWRpO5vffFh.cyM4QpfxnrtcbsUGpG','siswa',NULL,1,'2026-09-27 16:22:47');
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (80,'Ridho','ridho@siswa.smakk.sch.id','$2a$10$Lwrdq2acLT375XfMv8rXeOOoWRpO5vffFh.cyM4QpfxnrtcbsUGpG','siswa',NULL,1,'2026-09-27 16:22:47');
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (81,'Rivana','rivana@siswa.smakk.sch.id','$2a$10$Lwrdq2acLT375XfMv8rXeOOoWRpO5vffFh.cyM4QpfxnrtcbsUGpG','siswa',NULL,1,'2026-09-27 16:22:47');
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (82,'Safari','safari@siswa.smakk.sch.id','$2a$10$Lwrdq2acLT375XfMv8rXeOOoWRpO5vffFh.cyM4QpfxnrtcbsUGpG','siswa',NULL,1,'2026-09-27 16:22:47');
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (83,'Sarah','sarah@siswa.smakk.sch.id','$2a$10$Lwrdq2acLT375XfMv8rXeOOoWRpO5vffFh.cyM4QpfxnrtcbsUGpG','siswa',NULL,1,'2026-09-27 16:22:47');
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (84,'Selpia','selpia@siswa.smakk.sch.id','$2a$10$Lwrdq2acLT375XfMv8rXeOOoWRpO5vffFh.cyM4QpfxnrtcbsUGpG','siswa',NULL,1,'2026-09-27 16:22:47');
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (85,'Agus Rahmadan','agus@siswa.smakk.sch.id','$2a$10$Lwrdq2acLT375XfMv8rXeOOoWRpO5vffFh.cyM4QpfxnrtcbsUGpG','siswa',NULL,1,'2026-09-27 16:22:47');
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (86,'Ahmad Salihin','ahmad.salihin@siswa.smakk.sch.id','$2a$10$Lwrdq2acLT375XfMv8rXeOOoWRpO5vffFh.cyM4QpfxnrtcbsUGpG','siswa',NULL,1,'2026-09-27 16:22:47');
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (87,'Andini Raniah','andini.raniah@siswa.smakk.sch.id','$2a$10$Lwrdq2acLT375XfMv8rXeOOoWRpO5vffFh.cyM4QpfxnrtcbsUGpG','siswa',NULL,1,'2026-09-27 16:22:47');
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (88,'Anggi Ameliya','anggi.ameliya@siswa.smakk.sch.id','$2a$10$Lwrdq2acLT375XfMv8rXeOOoWRpO5vffFh.cyM4QpfxnrtcbsUGpG','siswa',NULL,1,'2026-09-27 16:22:47');
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (89,'An-nissa Oktavia','annissa@siswa.smakk.sch.id','$2a$10$Lwrdq2acLT375XfMv8rXeOOoWRpO5vffFh.cyM4QpfxnrtcbsUGpG','siswa',NULL,1,'2026-09-27 16:22:47');
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (90,'Diky','diky@siswa.smakk.sch.id','$2a$10$Lwrdq2acLT375XfMv8rXeOOoWRpO5vffFh.cyM4QpfxnrtcbsUGpG','siswa',NULL,1,'2026-09-27 16:22:47');
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (91,'Hafizah','hafizah@siswa.smakk.sch.id','$2a$10$Lwrdq2acLT375XfMv8rXeOOoWRpO5vffFh.cyM4QpfxnrtcbsUGpG','siswa',NULL,1,'2026-09-27 16:22:47');
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (92,'Jhamal Muqthi','jhamal@siswa.smakk.sch.id','$2a$10$Lwrdq2acLT375XfMv8rXeOOoWRpO5vffFh.cyM4QpfxnrtcbsUGpG','siswa',NULL,1,'2026-09-27 16:22:47');
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (93,'Laura','laura@siswa.smakk.sch.id','$2a$10$Lwrdq2acLT375XfMv8rXeOOoWRpO5vffFh.cyM4QpfxnrtcbsUGpG','siswa',NULL,1,'2026-09-27 16:22:47');
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (94,'M. Dziqri Yewosa Aulia','m.dziqri@siswa.smakk.sch.id','$2a$10$Lwrdq2acLT375XfMv8rXeOOoWRpO5vffFh.cyM4QpfxnrtcbsUGpG','siswa',NULL,1,'2026-09-27 16:22:47');
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (95,'Mellani Assyifa Zahra','mellani@siswa.smakk.sch.id','$2a$10$Lwrdq2acLT375XfMv8rXeOOoWRpO5vffFh.cyM4QpfxnrtcbsUGpG','siswa',NULL,1,'2026-09-27 16:22:47');
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (96,'Muhamad Afif Ramadan','muhamad.afif@siswa.smakk.sch.id','$2a$10$Lwrdq2acLT375XfMv8rXeOOoWRpO5vffFh.cyM4QpfxnrtcbsUGpG','siswa',NULL,1,'2026-09-27 16:22:47');
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (97,'Muhammad Patjri','muhammad.patjri@siswa.smakk.sch.id','$2a$10$Lwrdq2acLT375XfMv8rXeOOoWRpO5vffFh.cyM4QpfxnrtcbsUGpG','siswa',NULL,1,'2026-09-27 16:22:47');
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (98,'Muhammad Zailani','muhammad.zailani@siswa.smakk.sch.id','$2a$10$Lwrdq2acLT375XfMv8rXeOOoWRpO5vffFh.cyM4QpfxnrtcbsUGpG','siswa',NULL,1,'2026-09-27 16:22:47');
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (99,'Murlan','murlan@siswa.smakk.sch.id','$2a$10$Lwrdq2acLT375XfMv8rXeOOoWRpO5vffFh.cyM4QpfxnrtcbsUGpG','siswa',NULL,1,'2026-09-27 16:22:47');
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (100,'Naila Sabrina','naila@siswa.smakk.sch.id','$2a$10$Lwrdq2acLT375XfMv8rXeOOoWRpO5vffFh.cyM4QpfxnrtcbsUGpG','siswa',NULL,1,'2026-09-27 16:22:47');
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (101,'Putri','putri2@siswa.smakk.sch.id','$2a$10$Lwrdq2acLT375XfMv8rXeOOoWRpO5vffFh.cyM4QpfxnrtcbsUGpG','siswa',NULL,1,'2026-09-27 16:22:47');
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (102,'Repal Aditya','repal@siswa.smakk.sch.id','$2a$10$Lwrdq2acLT375XfMv8rXeOOoWRpO5vffFh.cyM4QpfxnrtcbsUGpG','siswa',NULL,1,'2026-09-27 16:22:47');
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (103,'Rifky','rifky@siswa.smakk.sch.id','$2a$10$Lwrdq2acLT375XfMv8rXeOOoWRpO5vffFh.cyM4QpfxnrtcbsUGpG','siswa',NULL,1,'2026-09-27 16:22:47');
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (104,'Riska Alfia','riska@siswa.smakk.sch.id','$2a$10$Lwrdq2acLT375XfMv8rXeOOoWRpO5vffFh.cyM4QpfxnrtcbsUGpG','siswa',NULL,1,'2026-09-27 16:22:47');
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (105,'Risky Adithia','risky@siswa.smakk.sch.id','$2a$10$Lwrdq2acLT375XfMv8rXeOOoWRpO5vffFh.cyM4QpfxnrtcbsUGpG','siswa',NULL,1,'2026-09-27 16:22:47');
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (106,'Rizka Angriani','rizka@siswa.smakk.sch.id','$2a$10$Lwrdq2acLT375XfMv8rXeOOoWRpO5vffFh.cyM4QpfxnrtcbsUGpG','siswa',NULL,1,'2026-09-27 16:22:47');
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (107,'Sri Andini','sri@siswa.smakk.sch.id','$2a$10$Lwrdq2acLT375XfMv8rXeOOoWRpO5vffFh.cyM4QpfxnrtcbsUGpG','siswa',NULL,1,'2026-09-27 16:22:47');
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (108,'Sri Diana Wulan Dari','sri.diana@siswa.smakk.sch.id','$2a$10$Lwrdq2acLT375XfMv8rXeOOoWRpO5vffFh.cyM4QpfxnrtcbsUGpG','siswa',NULL,1,'2026-09-27 16:22:47');
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (109,'Syahrini','syahrini@siswa.smakk.sch.id','$2a$10$Lwrdq2acLT375XfMv8rXeOOoWRpO5vffFh.cyM4QpfxnrtcbsUGpG','siswa',NULL,1,'2026-09-27 16:22:47');
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (110,'Widya Hargianti','widya@siswa.smakk.sch.id','$2a$10$Lwrdq2acLT375XfMv8rXeOOoWRpO5vffFh.cyM4QpfxnrtcbsUGpG','siswa',NULL,1,'2026-09-27 16:22:47');
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (111,'Yunita Fitri','yunita@siswa.smakk.sch.id','$2a$10$Lwrdq2acLT375XfMv8rXeOOoWRpO5vffFh.cyM4QpfxnrtcbsUGpG','siswa',NULL,1,'2026-09-27 16:22:47');
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (112,'Zahra As-syifa Muslimah Zatiah','zahra@siswa.smakk.sch.id','$2a$10$Lwrdq2acLT375XfMv8rXeOOoWRpO5vffFh.cyM4QpfxnrtcbsUGpG','siswa',NULL,1,'2026-09-27 16:22:47');
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (113,'Ahmad Fadilah','ahmad.fadilah@siswa.smakk.sch.id','$2a$10$Lwrdq2acLT375XfMv8rXeOOoWRpO5vffFh.cyM4QpfxnrtcbsUGpG','siswa',NULL,1,'2026-09-27 16:22:47');
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (114,'Ahmad Rizal','ahmad.rizal@siswa.smakk.sch.id','$2a$10$Lwrdq2acLT375XfMv8rXeOOoWRpO5vffFh.cyM4QpfxnrtcbsUGpG','siswa',NULL,1,'2026-09-27 16:22:47');
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (115,'Ahmad Said','ahmad.said@siswa.smakk.sch.id','$2a$10$Lwrdq2acLT375XfMv8rXeOOoWRpO5vffFh.cyM4QpfxnrtcbsUGpG','siswa',NULL,1,'2026-09-27 16:22:47');
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (116,'Ahmat Tri Wahyudi','ahmat.tri@siswa.smakk.sch.id','$2a$10$Lwrdq2acLT375XfMv8rXeOOoWRpO5vffFh.cyM4QpfxnrtcbsUGpG','siswa',NULL,1,'2026-09-27 16:22:47');
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (117,'Alina Az-zahra','alina@siswa.smakk.sch.id','$2a$10$Lwrdq2acLT375XfMv8rXeOOoWRpO5vffFh.cyM4QpfxnrtcbsUGpG','siswa',NULL,1,'2026-09-27 16:22:47');
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (118,'Angga Wardana','angga@siswa.smakk.sch.id','$2a$10$Lwrdq2acLT375XfMv8rXeOOoWRpO5vffFh.cyM4QpfxnrtcbsUGpG','siswa',NULL,1,'2026-09-27 16:22:47');
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (119,'Anggi Novita Sari','anggi.novita@siswa.smakk.sch.id','$2a$10$Lwrdq2acLT375XfMv8rXeOOoWRpO5vffFh.cyM4QpfxnrtcbsUGpG','siswa',NULL,1,'2026-09-27 16:22:47');
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (120,'Assyifa','assyifa@siswa.smakk.sch.id','$2a$10$Lwrdq2acLT375XfMv8rXeOOoWRpO5vffFh.cyM4QpfxnrtcbsUGpG','siswa',NULL,1,'2026-09-27 16:22:47');
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (121,'Aulia Rahmah','aulia@siswa.smakk.sch.id','$2a$10$Lwrdq2acLT375XfMv8rXeOOoWRpO5vffFh.cyM4QpfxnrtcbsUGpG','siswa',NULL,1,'2026-09-27 16:22:47');
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (122,'Dila Oktavia','dila@siswa.smakk.sch.id','$2a$10$Lwrdq2acLT375XfMv8rXeOOoWRpO5vffFh.cyM4QpfxnrtcbsUGpG','siswa',NULL,1,'2026-09-27 16:22:47');
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (123,'Dimas Saputra','dimas@siswa.smakk.sch.id','$2a$10$Lwrdq2acLT375XfMv8rXeOOoWRpO5vffFh.cyM4QpfxnrtcbsUGpG','siswa',NULL,1,'2026-09-27 16:22:47');
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (124,'Evellin Oktavirena','evellin@siswa.smakk.sch.id','$2a$10$Lwrdq2acLT375XfMv8rXeOOoWRpO5vffFh.cyM4QpfxnrtcbsUGpG','siswa',NULL,1,'2026-09-27 16:22:47');
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (125,'Khelda','khelda@siswa.smakk.sch.id','$2a$10$Lwrdq2acLT375XfMv8rXeOOoWRpO5vffFh.cyM4QpfxnrtcbsUGpG','siswa',NULL,1,'2026-09-27 16:22:47');
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (126,'Marvel','marvel@siswa.smakk.sch.id','$2a$10$Lwrdq2acLT375XfMv8rXeOOoWRpO5vffFh.cyM4QpfxnrtcbsUGpG','siswa',NULL,1,'2026-09-27 16:22:47');
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (127,'Maulidin','maulidin@siswa.smakk.sch.id','$2a$10$Lwrdq2acLT375XfMv8rXeOOoWRpO5vffFh.cyM4QpfxnrtcbsUGpG','siswa',NULL,1,'2026-09-27 16:22:47');
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (128,'Muhammad Al Imbran','muhammad.al@siswa.smakk.sch.id','$2a$10$Lwrdq2acLT375XfMv8rXeOOoWRpO5vffFh.cyM4QpfxnrtcbsUGpG','siswa',NULL,1,'2026-09-27 16:22:47');
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (129,'Muhammad Husiin','muhammad.husiin@siswa.smakk.sch.id','$2a$10$Lwrdq2acLT375XfMv8rXeOOoWRpO5vffFh.cyM4QpfxnrtcbsUGpG','siswa',NULL,1,'2026-09-27 16:22:47');
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (130,'Muhammad Rehan','muhammad2@siswa.smakk.sch.id','$2a$10$Lwrdq2acLT375XfMv8rXeOOoWRpO5vffFh.cyM4QpfxnrtcbsUGpG','siswa',NULL,1,'2026-09-27 16:22:47');
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (131,'Muhammad Saman Husein','muhammad.saman@siswa.smakk.sch.id','$2a$10$Lwrdq2acLT375XfMv8rXeOOoWRpO5vffFh.cyM4QpfxnrtcbsUGpG','siswa',NULL,1,'2026-09-27 16:22:48');
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (132,'Muhammad Yusril Reza Banjaran','muhammad.yusril@siswa.smakk.sch.id','$2a$10$Lwrdq2acLT375XfMv8rXeOOoWRpO5vffFh.cyM4QpfxnrtcbsUGpG','siswa',NULL,1,'2026-09-27 16:22:48');
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (133,'Muttia Indriani Meiysa','muttia@siswa.smakk.sch.id','$2a$10$Lwrdq2acLT375XfMv8rXeOOoWRpO5vffFh.cyM4QpfxnrtcbsUGpG','siswa',NULL,1,'2026-09-27 16:22:48');
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (134,'Nor Aini','nor.aini@siswa.smakk.sch.id','$2a$10$Lwrdq2acLT375XfMv8rXeOOoWRpO5vffFh.cyM4QpfxnrtcbsUGpG','siswa',NULL,1,'2026-09-27 16:22:48');
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (135,'Putri Aliya','putri.aliya@siswa.smakk.sch.id','$2a$10$Lwrdq2acLT375XfMv8rXeOOoWRpO5vffFh.cyM4QpfxnrtcbsUGpG','siswa',NULL,1,'2026-09-27 16:22:48');
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (136,'Ratih Rahmah','ratih@siswa.smakk.sch.id','$2a$10$Lwrdq2acLT375XfMv8rXeOOoWRpO5vffFh.cyM4QpfxnrtcbsUGpG','siswa',NULL,1,'2026-09-27 16:22:48');
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (137,'Raudatul Jannah','raudatul@siswa.smakk.sch.id','$2a$10$Lwrdq2acLT375XfMv8rXeOOoWRpO5vffFh.cyM4QpfxnrtcbsUGpG','siswa',NULL,1,'2026-09-27 16:22:48');
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (138,'Refandry','refandry@siswa.smakk.sch.id','$2a$10$Lwrdq2acLT375XfMv8rXeOOoWRpO5vffFh.cyM4QpfxnrtcbsUGpG','siswa',NULL,1,'2026-09-27 16:22:48');
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (139,'Rehan','rehan@siswa.smakk.sch.id','$2a$10$Lwrdq2acLT375XfMv8rXeOOoWRpO5vffFh.cyM4QpfxnrtcbsUGpG','siswa',NULL,1,'2026-09-27 16:22:48');
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (140,'Risma Diyanti','risma@siswa.smakk.sch.id','$2a$10$Lwrdq2acLT375XfMv8rXeOOoWRpO5vffFh.cyM4QpfxnrtcbsUGpG','siswa',NULL,1,'2026-09-27 16:22:48');
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (141,'Sri Windawati Angraini','sri.windawati@siswa.smakk.sch.id','$2a$10$Lwrdq2acLT375XfMv8rXeOOoWRpO5vffFh.cyM4QpfxnrtcbsUGpG','siswa',NULL,1,'2026-09-27 16:22:48');
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (142,'Andhika','andhika@siswa.smakk.sch.id','$2a$10$Lwrdq2acLT375XfMv8rXeOOoWRpO5vffFh.cyM4QpfxnrtcbsUGpG','siswa',NULL,1,'2026-09-27 16:22:48');
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (143,'Arisma','arisma@siswa.smakk.sch.id','$2a$10$Lwrdq2acLT375XfMv8rXeOOoWRpO5vffFh.cyM4QpfxnrtcbsUGpG','siswa',NULL,1,'2026-09-27 16:22:48');
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (144,'Chelsea','chelsea@siswa.smakk.sch.id','$2a$10$Lwrdq2acLT375XfMv8rXeOOoWRpO5vffFh.cyM4QpfxnrtcbsUGpG','siswa',NULL,1,'2026-09-27 16:22:48');
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (145,'Dede Aditya','dede@siswa.smakk.sch.id','$2a$10$Lwrdq2acLT375XfMv8rXeOOoWRpO5vffFh.cyM4QpfxnrtcbsUGpG','siswa',NULL,1,'2026-09-27 16:22:48');
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (146,'Divo Yulianto','divo@siswa.smakk.sch.id','$2a$10$Lwrdq2acLT375XfMv8rXeOOoWRpO5vffFh.cyM4QpfxnrtcbsUGpG','siswa',NULL,1,'2026-09-27 16:22:48');
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (147,'Geby Yemima Dotia','geby@siswa.smakk.sch.id','$2a$10$Lwrdq2acLT375XfMv8rXeOOoWRpO5vffFh.cyM4QpfxnrtcbsUGpG','siswa',NULL,1,'2026-09-27 16:22:48');
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (148,'Imelda','imelda@siswa.smakk.sch.id','$2a$10$Lwrdq2acLT375XfMv8rXeOOoWRpO5vffFh.cyM4QpfxnrtcbsUGpG','siswa',NULL,1,'2026-09-27 16:22:48');
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (149,'Jauhari Afdan','jauhari@siswa.smakk.sch.id','$2a$10$Lwrdq2acLT375XfMv8rXeOOoWRpO5vffFh.cyM4QpfxnrtcbsUGpG','siswa',NULL,1,'2026-09-27 16:22:48');
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (150,'M. Dimastian','m.dimastian@siswa.smakk.sch.id','$2a$10$Lwrdq2acLT375XfMv8rXeOOoWRpO5vffFh.cyM4QpfxnrtcbsUGpG','siswa',NULL,1,'2026-09-27 16:22:48');
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (151,'M. Lutvino Mardian','m.lutvino@siswa.smakk.sch.id','$2a$10$Lwrdq2acLT375XfMv8rXeOOoWRpO5vffFh.cyM4QpfxnrtcbsUGpG','siswa',NULL,1,'2026-09-27 16:22:48');
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (152,'M. Sahril Ramadan','m.sahril@siswa.smakk.sch.id','$2a$10$Lwrdq2acLT375XfMv8rXeOOoWRpO5vffFh.cyM4QpfxnrtcbsUGpG','siswa',NULL,1,'2026-09-27 16:22:48');
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (153,'M.junaidi','mjunaidi@siswa.smakk.sch.id','$2a$10$Lwrdq2acLT375XfMv8rXeOOoWRpO5vffFh.cyM4QpfxnrtcbsUGpG','siswa',NULL,1,'2026-09-27 16:22:48');
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (154,'Maemunah','maemunah@siswa.smakk.sch.id','$2a$10$Lwrdq2acLT375XfMv8rXeOOoWRpO5vffFh.cyM4QpfxnrtcbsUGpG','siswa',NULL,1,'2026-09-27 16:22:48');
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (155,'Melda','melda@siswa.smakk.sch.id','$2a$10$Lwrdq2acLT375XfMv8rXeOOoWRpO5vffFh.cyM4QpfxnrtcbsUGpG','siswa',NULL,1,'2026-09-27 16:22:48');
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (156,'Muhamad Zailafif','muhamad.zailafif@siswa.smakk.sch.id','$2a$10$Lwrdq2acLT375XfMv8rXeOOoWRpO5vffFh.cyM4QpfxnrtcbsUGpG','siswa',NULL,1,'2026-09-27 16:22:48');
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (157,'Muhammad Patdli Yanor','muhammad.patdli@siswa.smakk.sch.id','$2a$10$Lwrdq2acLT375XfMv8rXeOOoWRpO5vffFh.cyM4QpfxnrtcbsUGpG','siswa',NULL,1,'2026-09-27 16:22:48');
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (158,'Muhammad Rafli','muhammad.rafli@siswa.smakk.sch.id','$2a$10$Lwrdq2acLT375XfMv8rXeOOoWRpO5vffFh.cyM4QpfxnrtcbsUGpG','siswa',NULL,1,'2026-09-27 16:22:48');
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (159,'Muhammad Ramadhani Satya','muhammad.ramadhani@siswa.smakk.sch.id','$2a$10$Lwrdq2acLT375XfMv8rXeOOoWRpO5vffFh.cyM4QpfxnrtcbsUGpG','siswa',NULL,1,'2026-09-27 16:22:48');
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (160,'Noor Patimah','noor@siswa.smakk.sch.id','$2a$10$Lwrdq2acLT375XfMv8rXeOOoWRpO5vffFh.cyM4QpfxnrtcbsUGpG','siswa',NULL,1,'2026-09-27 16:22:48');
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (161,'Nur Putria Wati','nur@siswa.smakk.sch.id','$2a$10$Lwrdq2acLT375XfMv8rXeOOoWRpO5vffFh.cyM4QpfxnrtcbsUGpG','siswa',NULL,1,'2026-09-27 16:22:48');
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (162,'Nurmala','nurmala@siswa.smakk.sch.id','$2a$10$Lwrdq2acLT375XfMv8rXeOOoWRpO5vffFh.cyM4QpfxnrtcbsUGpG','siswa',NULL,1,'2026-09-27 16:22:48');
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (163,'Rahmadani','rahmadani@siswa.smakk.sch.id','$2a$10$Lwrdq2acLT375XfMv8rXeOOoWRpO5vffFh.cyM4QpfxnrtcbsUGpG','siswa',NULL,1,'2026-09-27 16:22:48');
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (164,'Riskia Aditia Rahman','riskia@siswa.smakk.sch.id','$2a$10$Lwrdq2acLT375XfMv8rXeOOoWRpO5vffFh.cyM4QpfxnrtcbsUGpG','siswa',NULL,1,'2026-09-27 16:22:48');
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (165,'Rohin','rohin@siswa.smakk.sch.id','$2a$10$Lwrdq2acLT375XfMv8rXeOOoWRpO5vffFh.cyM4QpfxnrtcbsUGpG','siswa',NULL,1,'2026-09-27 16:22:48');
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (166,'Sayang','sayang@siswa.smakk.sch.id','$2a$10$Lwrdq2acLT375XfMv8rXeOOoWRpO5vffFh.cyM4QpfxnrtcbsUGpG','siswa',NULL,1,'2026-09-27 16:22:48');
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (167,'Siti Rahmah','siti@siswa.smakk.sch.id','$2a$10$Lwrdq2acLT375XfMv8rXeOOoWRpO5vffFh.cyM4QpfxnrtcbsUGpG','siswa',NULL,1,'2026-09-27 16:22:48');
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (168,'Sulis','sulis@siswa.smakk.sch.id','$2a$10$Lwrdq2acLT375XfMv8rXeOOoWRpO5vffFh.cyM4QpfxnrtcbsUGpG','siswa',NULL,1,'2026-09-27 16:22:48');
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (169,'Winda','winda@siswa.smakk.sch.id','$2a$10$Lwrdq2acLT375XfMv8rXeOOoWRpO5vffFh.cyM4QpfxnrtcbsUGpG','siswa',NULL,1,'2026-09-27 16:22:48');
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (170,'Zilva Natasya Putri','zilva@siswa.smakk.sch.id','$2a$10$Lwrdq2acLT375XfMv8rXeOOoWRpO5vffFh.cyM4QpfxnrtcbsUGpG','siswa',NULL,1,'2026-09-27 16:22:48');
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (171,'Akhmad Rusyadi','akhmad@siswa.smakk.sch.id','$2a$10$Lwrdq2acLT375XfMv8rXeOOoWRpO5vffFh.cyM4QpfxnrtcbsUGpG','siswa',NULL,1,'2026-09-27 16:22:48');
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (172,'Annisa Ramadani','annisa@siswa.smakk.sch.id','$2a$10$Lwrdq2acLT375XfMv8rXeOOoWRpO5vffFh.cyM4QpfxnrtcbsUGpG','siswa',NULL,1,'2026-09-27 16:22:48');
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (173,'Dhea Syafira','dhea@siswa.smakk.sch.id','$2a$10$Lwrdq2acLT375XfMv8rXeOOoWRpO5vffFh.cyM4QpfxnrtcbsUGpG','siswa',NULL,1,'2026-09-27 16:22:48');
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (174,'Gogi Gustaman','gogi@siswa.smakk.sch.id','$2a$10$Lwrdq2acLT375XfMv8rXeOOoWRpO5vffFh.cyM4QpfxnrtcbsUGpG','siswa',NULL,1,'2026-09-27 16:22:48');
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (175,'Gujali Rahman','gujali@siswa.smakk.sch.id','$2a$10$Lwrdq2acLT375XfMv8rXeOOoWRpO5vffFh.cyM4QpfxnrtcbsUGpG','siswa',NULL,1,'2026-09-27 16:22:48');
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (176,'Haili','haili@siswa.smakk.sch.id','$2a$10$Lwrdq2acLT375XfMv8rXeOOoWRpO5vffFh.cyM4QpfxnrtcbsUGpG','siswa',NULL,1,'2026-09-27 16:22:48');
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (177,'Hilda Putri Norcahyani','hilda@siswa.smakk.sch.id','$2a$10$Lwrdq2acLT375XfMv8rXeOOoWRpO5vffFh.cyM4QpfxnrtcbsUGpG','siswa',NULL,1,'2026-09-27 16:22:48');
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (178,'Jailani','jailani@siswa.smakk.sch.id','$2a$10$Lwrdq2acLT375XfMv8rXeOOoWRpO5vffFh.cyM4QpfxnrtcbsUGpG','siswa',NULL,1,'2026-09-27 16:22:48');
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (179,'Kamariyah','kamariyah@siswa.smakk.sch.id','$2a$10$Lwrdq2acLT375XfMv8rXeOOoWRpO5vffFh.cyM4QpfxnrtcbsUGpG','siswa',NULL,1,'2026-09-27 16:22:48');
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (180,'Karmilo Darprianto','karmilo@siswa.smakk.sch.id','$2a$10$Lwrdq2acLT375XfMv8rXeOOoWRpO5vffFh.cyM4QpfxnrtcbsUGpG','siswa',NULL,1,'2026-09-27 16:22:48');
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (181,'Ledianto','ledianto@siswa.smakk.sch.id','$2a$10$Lwrdq2acLT375XfMv8rXeOOoWRpO5vffFh.cyM4QpfxnrtcbsUGpG','siswa',NULL,1,'2026-09-27 16:22:48');
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (182,'M. Risky Aditya','m.risky@siswa.smakk.sch.id','$2a$10$Lwrdq2acLT375XfMv8rXeOOoWRpO5vffFh.cyM4QpfxnrtcbsUGpG','siswa',NULL,1,'2026-09-27 16:22:48');
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (183,'Mahdiah','mahdiah@siswa.smakk.sch.id','$2a$10$Lwrdq2acLT375XfMv8rXeOOoWRpO5vffFh.cyM4QpfxnrtcbsUGpG','siswa',NULL,1,'2026-09-27 16:22:48');
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (184,'Maripatu Shaleha','maripatu@siswa.smakk.sch.id','$2a$10$Lwrdq2acLT375XfMv8rXeOOoWRpO5vffFh.cyM4QpfxnrtcbsUGpG','siswa',NULL,1,'2026-09-27 16:22:48');
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (185,'Muhamad Muzakir','muhamad.muzakir@siswa.smakk.sch.id','$2a$10$Lwrdq2acLT375XfMv8rXeOOoWRpO5vffFh.cyM4QpfxnrtcbsUGpG','siswa',NULL,1,'2026-09-27 16:22:48');
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (186,'Muhamad Yoga','muhamad.yoga@siswa.smakk.sch.id','$2a$10$Lwrdq2acLT375XfMv8rXeOOoWRpO5vffFh.cyM4QpfxnrtcbsUGpG','siswa',NULL,1,'2026-09-27 16:22:48');
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (187,'Muhammad Khairani','muhammad.khairani@siswa.smakk.sch.id','$2a$10$Lwrdq2acLT375XfMv8rXeOOoWRpO5vffFh.cyM4QpfxnrtcbsUGpG','siswa',NULL,1,'2026-09-27 16:22:48');
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (188,'Muhammad Rifky','muhammad.rifky@siswa.smakk.sch.id','$2a$10$Lwrdq2acLT375XfMv8rXeOOoWRpO5vffFh.cyM4QpfxnrtcbsUGpG','siswa',NULL,1,'2026-09-27 16:22:48');
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (189,'Muhammad Risky Gazali','muhammad.risky@siswa.smakk.sch.id','$2a$10$Lwrdq2acLT375XfMv8rXeOOoWRpO5vffFh.cyM4QpfxnrtcbsUGpG','siswa',NULL,1,'2026-09-27 16:22:48');
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (190,'Mujainah','mujainah@siswa.smakk.sch.id','$2a$10$Lwrdq2acLT375XfMv8rXeOOoWRpO5vffFh.cyM4QpfxnrtcbsUGpG','siswa',NULL,1,'2026-09-27 16:22:48');
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (191,'Nadia','nadia2@siswa.smakk.sch.id','$2a$10$Lwrdq2acLT375XfMv8rXeOOoWRpO5vffFh.cyM4QpfxnrtcbsUGpG','siswa',NULL,1,'2026-09-27 16:22:48');
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (192,'Najirah','najirah@siswa.smakk.sch.id','$2a$10$Lwrdq2acLT375XfMv8rXeOOoWRpO5vffFh.cyM4QpfxnrtcbsUGpG','siswa',NULL,1,'2026-09-27 16:22:48');
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (193,'Raihannah','raihannah@siswa.smakk.sch.id','$2a$10$Lwrdq2acLT375XfMv8rXeOOoWRpO5vffFh.cyM4QpfxnrtcbsUGpG','siswa',NULL,1,'2026-09-27 16:22:48');
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (194,'Ratna Safa','ratna@siswa.smakk.sch.id','$2a$10$Lwrdq2acLT375XfMv8rXeOOoWRpO5vffFh.cyM4QpfxnrtcbsUGpG','siswa',NULL,1,'2026-09-27 16:22:48');
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (195,'Resto Achmad Fauzi','resto@siswa.smakk.sch.id','$2a$10$Lwrdq2acLT375XfMv8rXeOOoWRpO5vffFh.cyM4QpfxnrtcbsUGpG','siswa',NULL,1,'2026-09-27 16:22:48');
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (196,'Sait','sait@siswa.smakk.sch.id','$2a$10$Lwrdq2acLT375XfMv8rXeOOoWRpO5vffFh.cyM4QpfxnrtcbsUGpG','siswa',NULL,1,'2026-09-27 16:22:48');
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (197,'Stef Pany Debora','stef@siswa.smakk.sch.id','$2a$10$Lwrdq2acLT375XfMv8rXeOOoWRpO5vffFh.cyM4QpfxnrtcbsUGpG','siswa',NULL,1,'2026-09-27 16:22:48');
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (198,'Wahyu Ramadhani','wahyu@siswa.smakk.sch.id','$2a$10$Lwrdq2acLT375XfMv8rXeOOoWRpO5vffFh.cyM4QpfxnrtcbsUGpG','siswa',NULL,1,'2026-09-27 16:22:48');
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (199,'Ahmad Naz\'ril Affan Isbiantoro','ahmad.nazril@siswa.smakk.sch.id','$2a$10$Lwrdq2acLT375XfMv8rXeOOoWRpO5vffFh.cyM4QpfxnrtcbsUGpG','siswa',NULL,1,'2026-09-27 16:22:48');
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (200,'Ahmad Ramadan','ahmad.ramadan@siswa.smakk.sch.id','$2a$10$Lwrdq2acLT375XfMv8rXeOOoWRpO5vffFh.cyM4QpfxnrtcbsUGpG','siswa',NULL,1,'2026-09-27 16:22:48');
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (201,'Alan','alan@siswa.smakk.sch.id','$2a$10$Lwrdq2acLT375XfMv8rXeOOoWRpO5vffFh.cyM4QpfxnrtcbsUGpG','siswa',NULL,1,'2026-09-27 16:22:48');
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (202,'Andre','andre@siswa.smakk.sch.id','$2a$10$Lwrdq2acLT375XfMv8rXeOOoWRpO5vffFh.cyM4QpfxnrtcbsUGpG','siswa',NULL,1,'2026-09-27 16:22:48');
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (203,'Bela','bela@siswa.smakk.sch.id','$2a$10$Lwrdq2acLT375XfMv8rXeOOoWRpO5vffFh.cyM4QpfxnrtcbsUGpG','siswa',NULL,1,'2026-09-27 16:22:48');
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (204,'Denis Hertanto','denis@siswa.smakk.sch.id','$2a$10$Lwrdq2acLT375XfMv8rXeOOoWRpO5vffFh.cyM4QpfxnrtcbsUGpG','siswa',NULL,1,'2026-09-27 16:22:48');
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (205,'Dini Pertiwi','dini@siswa.smakk.sch.id','$2a$10$Lwrdq2acLT375XfMv8rXeOOoWRpO5vffFh.cyM4QpfxnrtcbsUGpG','siswa',NULL,1,'2026-09-27 16:22:48');
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (206,'Efrida','efrida@siswa.smakk.sch.id','$2a$10$Lwrdq2acLT375XfMv8rXeOOoWRpO5vffFh.cyM4QpfxnrtcbsUGpG','siswa',NULL,1,'2026-09-27 16:22:48');
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (207,'Erni Elisa','erni@siswa.smakk.sch.id','$2a$10$Lwrdq2acLT375XfMv8rXeOOoWRpO5vffFh.cyM4QpfxnrtcbsUGpG','siswa',NULL,1,'2026-09-27 16:22:48');
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (208,'Herno Mey Lino','herno@siswa.smakk.sch.id','$2a$10$Lwrdq2acLT375XfMv8rXeOOoWRpO5vffFh.cyM4QpfxnrtcbsUGpG','siswa',NULL,1,'2026-09-27 16:22:48');
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (209,'Irpan','irpan2@siswa.smakk.sch.id','$2a$10$Lwrdq2acLT375XfMv8rXeOOoWRpO5vffFh.cyM4QpfxnrtcbsUGpG','siswa',NULL,1,'2026-09-27 16:22:48');
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (210,'Jailani','jailani2@siswa.smakk.sch.id','$2a$10$Lwrdq2acLT375XfMv8rXeOOoWRpO5vffFh.cyM4QpfxnrtcbsUGpG','siswa',NULL,1,'2026-09-27 16:22:48');
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (211,'Kasih','kasih@siswa.smakk.sch.id','$2a$10$Lwrdq2acLT375XfMv8rXeOOoWRpO5vffFh.cyM4QpfxnrtcbsUGpG','siswa',NULL,1,'2026-09-27 16:22:48');
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (212,'Lestary','lestary@siswa.smakk.sch.id','$2a$10$Lwrdq2acLT375XfMv8rXeOOoWRpO5vffFh.cyM4QpfxnrtcbsUGpG','siswa',NULL,1,'2026-09-27 16:22:48');
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (213,'Muhammad Ridwan Rifai','muhammad.ridwan@siswa.smakk.sch.id','$2a$10$Lwrdq2acLT375XfMv8rXeOOoWRpO5vffFh.cyM4QpfxnrtcbsUGpG','siswa',NULL,1,'2026-09-27 16:22:48');
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (214,'Muhammad Rizki','muhammad.rizki@siswa.smakk.sch.id','$2a$10$Lwrdq2acLT375XfMv8rXeOOoWRpO5vffFh.cyM4QpfxnrtcbsUGpG','siswa',NULL,1,'2026-09-27 16:22:48');
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (215,'Mu\'min','mumin@siswa.smakk.sch.id','$2a$10$Lwrdq2acLT375XfMv8rXeOOoWRpO5vffFh.cyM4QpfxnrtcbsUGpG','siswa',NULL,1,'2026-09-27 16:22:48');
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (216,'Nabila','nabila@siswa.smakk.sch.id','$2a$10$Lwrdq2acLT375XfMv8rXeOOoWRpO5vffFh.cyM4QpfxnrtcbsUGpG','siswa',NULL,1,'2026-09-27 16:22:48');
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (217,'Rahmah Liana','rahmah@siswa.smakk.sch.id','$2a$10$Lwrdq2acLT375XfMv8rXeOOoWRpO5vffFh.cyM4QpfxnrtcbsUGpG','siswa',NULL,1,'2026-09-27 16:22:48');
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (218,'Ramadan','ramadan@siswa.smakk.sch.id','$2a$10$Lwrdq2acLT375XfMv8rXeOOoWRpO5vffFh.cyM4QpfxnrtcbsUGpG','siswa',NULL,1,'2026-09-27 16:22:48');
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (219,'Resky Pratama','resky@siswa.smakk.sch.id','$2a$10$Lwrdq2acLT375XfMv8rXeOOoWRpO5vffFh.cyM4QpfxnrtcbsUGpG','siswa',NULL,1,'2026-09-27 16:22:48');
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (220,'Reyndra Ahmad','reyndra@siswa.smakk.sch.id','$2a$10$Lwrdq2acLT375XfMv8rXeOOoWRpO5vffFh.cyM4QpfxnrtcbsUGpG','siswa',NULL,1,'2026-09-27 16:22:48');
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (221,'Rima Aulia','rima@siswa.smakk.sch.id','$2a$10$Lwrdq2acLT375XfMv8rXeOOoWRpO5vffFh.cyM4QpfxnrtcbsUGpG','siswa',NULL,1,'2026-09-27 16:22:48');
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (222,'Risma Putri','risma.putri@siswa.smakk.sch.id','$2a$10$Lwrdq2acLT375XfMv8rXeOOoWRpO5vffFh.cyM4QpfxnrtcbsUGpG','siswa',NULL,1,'2026-09-27 16:22:48');
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (223,'Rolan','rolan@siswa.smakk.sch.id','$2a$10$Lwrdq2acLT375XfMv8rXeOOoWRpO5vffFh.cyM4QpfxnrtcbsUGpG','siswa',NULL,1,'2026-09-27 16:22:48');
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (224,'Sabda','sabda@siswa.smakk.sch.id','$2a$10$Lwrdq2acLT375XfMv8rXeOOoWRpO5vffFh.cyM4QpfxnrtcbsUGpG','siswa',NULL,1,'2026-09-27 16:22:48');
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (225,'Sipha','sipha@siswa.smakk.sch.id','$2a$10$Lwrdq2acLT375XfMv8rXeOOoWRpO5vffFh.cyM4QpfxnrtcbsUGpG','siswa',NULL,1,'2026-09-27 16:22:48');
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (226,'Siska','siska@siswa.smakk.sch.id','$2a$10$Lwrdq2acLT375XfMv8rXeOOoWRpO5vffFh.cyM4QpfxnrtcbsUGpG','siswa',NULL,1,'2026-09-27 16:22:48');
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (227,'Afdillah','afdillah@siswa.smakk.sch.id','$2a$10$Lwrdq2acLT375XfMv8rXeOOoWRpO5vffFh.cyM4QpfxnrtcbsUGpG','siswa',NULL,1,'2026-09-27 16:22:48');
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (228,'Ahmad Hariyanto','ahmad.hariyanto@siswa.smakk.sch.id','$2a$10$Lwrdq2acLT375XfMv8rXeOOoWRpO5vffFh.cyM4QpfxnrtcbsUGpG','siswa',NULL,1,'2026-09-27 16:22:48');
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (229,'Ahmad Indra Zulpani','ahmad.indra@siswa.smakk.sch.id','$2a$10$Lwrdq2acLT375XfMv8rXeOOoWRpO5vffFh.cyM4QpfxnrtcbsUGpG','siswa',NULL,1,'2026-09-27 16:22:48');
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (230,'Ahmad Rafli Susanto','ahmad.rafli@siswa.smakk.sch.id','$2a$10$Lwrdq2acLT375XfMv8rXeOOoWRpO5vffFh.cyM4QpfxnrtcbsUGpG','siswa',NULL,1,'2026-09-27 16:22:48');
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (231,'Alwi','alwi@siswa.smakk.sch.id','$2a$10$Lwrdq2acLT375XfMv8rXeOOoWRpO5vffFh.cyM4QpfxnrtcbsUGpG','siswa',NULL,1,'2026-09-27 16:22:48');
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (232,'Anugerah Shania','anugerah@siswa.smakk.sch.id','$2a$10$Lwrdq2acLT375XfMv8rXeOOoWRpO5vffFh.cyM4QpfxnrtcbsUGpG','siswa',NULL,1,'2026-09-27 16:22:48');
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (233,'Azfa Intan Putri Afin','azfa@siswa.smakk.sch.id','$2a$10$Lwrdq2acLT375XfMv8rXeOOoWRpO5vffFh.cyM4QpfxnrtcbsUGpG','siswa',NULL,1,'2026-09-27 16:22:48');
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (234,'Azzahra','azzahra@siswa.smakk.sch.id','$2a$10$Lwrdq2acLT375XfMv8rXeOOoWRpO5vffFh.cyM4QpfxnrtcbsUGpG','siswa',NULL,1,'2026-09-27 16:22:48');
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (235,'Denis Prayoga','denis.prayoga@siswa.smakk.sch.id','$2a$10$Lwrdq2acLT375XfMv8rXeOOoWRpO5vffFh.cyM4QpfxnrtcbsUGpG','siswa',NULL,1,'2026-09-27 16:22:48');
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (236,'Isranudin','isranudin@siswa.smakk.sch.id','$2a$10$Lwrdq2acLT375XfMv8rXeOOoWRpO5vffFh.cyM4QpfxnrtcbsUGpG','siswa',NULL,1,'2026-09-27 16:22:48');
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (237,'Jefri Insani','jefri@siswa.smakk.sch.id','$2a$10$Lwrdq2acLT375XfMv8rXeOOoWRpO5vffFh.cyM4QpfxnrtcbsUGpG','siswa',NULL,1,'2026-09-27 16:22:48');
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (238,'Ledy Saputra','ledy@siswa.smakk.sch.id','$2a$10$Lwrdq2acLT375XfMv8rXeOOoWRpO5vffFh.cyM4QpfxnrtcbsUGpG','siswa',NULL,1,'2026-09-27 16:22:48');
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (239,'M. Habibi Faith Islamuzzaid','m.habibi@siswa.smakk.sch.id','$2a$10$Lwrdq2acLT375XfMv8rXeOOoWRpO5vffFh.cyM4QpfxnrtcbsUGpG','siswa',NULL,1,'2026-09-27 16:22:48');
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (240,'Muhammad Pajli','muhammad.pajli@siswa.smakk.sch.id','$2a$10$Lwrdq2acLT375XfMv8rXeOOoWRpO5vffFh.cyM4QpfxnrtcbsUGpG','siswa',NULL,1,'2026-09-27 16:22:48');
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (241,'Muhammad Ramadhani','muhammad3@siswa.smakk.sch.id','$2a$10$Lwrdq2acLT375XfMv8rXeOOoWRpO5vffFh.cyM4QpfxnrtcbsUGpG','siswa',NULL,1,'2026-09-27 16:22:48');
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (242,'Muhammad Sabirin','muhammad.sabirin@siswa.smakk.sch.id','$2a$10$Lwrdq2acLT375XfMv8rXeOOoWRpO5vffFh.cyM4QpfxnrtcbsUGpG','siswa',NULL,1,'2026-09-27 16:22:48');
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (243,'Najmi Afifah Khairani','najmi@siswa.smakk.sch.id','$2a$10$Lwrdq2acLT375XfMv8rXeOOoWRpO5vffFh.cyM4QpfxnrtcbsUGpG','siswa',NULL,1,'2026-09-27 16:22:48');
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (244,'Nina','nina@siswa.smakk.sch.id','$2a$10$Lwrdq2acLT375XfMv8rXeOOoWRpO5vffFh.cyM4QpfxnrtcbsUGpG','siswa',NULL,1,'2026-09-27 16:22:48');
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (245,'Noor Hidayanti','noor.hidayanti@siswa.smakk.sch.id','$2a$10$Lwrdq2acLT375XfMv8rXeOOoWRpO5vffFh.cyM4QpfxnrtcbsUGpG','siswa',NULL,1,'2026-09-27 16:22:48');
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (246,'Nor Aena','nor.aena@siswa.smakk.sch.id','$2a$10$Lwrdq2acLT375XfMv8rXeOOoWRpO5vffFh.cyM4QpfxnrtcbsUGpG','siswa',NULL,1,'2026-09-27 16:22:48');
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (247,'Qa\'id Adly Setya','qaid@siswa.smakk.sch.id','$2a$10$Lwrdq2acLT375XfMv8rXeOOoWRpO5vffFh.cyM4QpfxnrtcbsUGpG','siswa',NULL,1,'2026-09-27 16:22:48');
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (248,'Radit','radit@siswa.smakk.sch.id','$2a$10$Lwrdq2acLT375XfMv8rXeOOoWRpO5vffFh.cyM4QpfxnrtcbsUGpG','siswa',NULL,1,'2026-09-27 16:22:48');
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (249,'Rafi Hidayat','rafi@siswa.smakk.sch.id','$2a$10$Lwrdq2acLT375XfMv8rXeOOoWRpO5vffFh.cyM4QpfxnrtcbsUGpG','siswa',NULL,1,'2026-09-27 16:22:48');
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (250,'Raka Dewangga','raka@siswa.smakk.sch.id','$2a$10$Lwrdq2acLT375XfMv8rXeOOoWRpO5vffFh.cyM4QpfxnrtcbsUGpG','siswa',NULL,1,'2026-09-27 16:22:48');
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (251,'Rassya','rassya@siswa.smakk.sch.id','$2a$10$Lwrdq2acLT375XfMv8rXeOOoWRpO5vffFh.cyM4QpfxnrtcbsUGpG','siswa',NULL,1,'2026-09-27 16:22:48');
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (252,'Rasti','rasti@siswa.smakk.sch.id','$2a$10$Lwrdq2acLT375XfMv8rXeOOoWRpO5vffFh.cyM4QpfxnrtcbsUGpG','siswa',NULL,1,'2026-09-27 16:22:48');
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (253,'Sarif Hidayat','sarif@siswa.smakk.sch.id','$2a$10$Lwrdq2acLT375XfMv8rXeOOoWRpO5vffFh.cyM4QpfxnrtcbsUGpG','siswa',NULL,1,'2026-09-27 16:22:48');
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (254,'Shintia Halwa Nurinayaty','shintia@siswa.smakk.sch.id','$2a$10$Lwrdq2acLT375XfMv8rXeOOoWRpO5vffFh.cyM4QpfxnrtcbsUGpG','siswa',NULL,1,'2026-09-27 16:22:48');
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (255,'Sri Dewi Meranti','sri.dewi@siswa.smakk.sch.id','$2a$10$Lwrdq2acLT375XfMv8rXeOOoWRpO5vffFh.cyM4QpfxnrtcbsUGpG','siswa',NULL,1,'2026-09-27 16:22:48');
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (256,'Vitha Tussittah','vitha@siswa.smakk.sch.id','$2a$10$Lwrdq2acLT375XfMv8rXeOOoWRpO5vffFh.cyM4QpfxnrtcbsUGpG','siswa',NULL,1,'2026-09-27 16:22:48');
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (257,'Zaid As Shiddiq','zaid@siswa.smakk.sch.id','$2a$10$Lwrdq2acLT375XfMv8rXeOOoWRpO5vffFh.cyM4QpfxnrtcbsUGpG','siswa',NULL,1,'2026-09-27 16:22:48');
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (258,'Adrian Noval','adrian@siswa.smakk.sch.id','$2a$10$Lwrdq2acLT375XfMv8rXeOOoWRpO5vffFh.cyM4QpfxnrtcbsUGpG','siswa',NULL,1,'2026-09-27 16:22:48');
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (259,'Aulia Ulfah','aulia.ulfah@siswa.smakk.sch.id','$2a$10$Lwrdq2acLT375XfMv8rXeOOoWRpO5vffFh.cyM4QpfxnrtcbsUGpG','siswa',NULL,1,'2026-09-27 16:22:48');
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (260,'Aurel Cintami Putri','aurel@siswa.smakk.sch.id','$2a$10$Lwrdq2acLT375XfMv8rXeOOoWRpO5vffFh.cyM4QpfxnrtcbsUGpG','siswa',NULL,1,'2026-09-27 16:22:48');
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (261,'Bintang Surya','bintang@siswa.smakk.sch.id','$2a$10$Lwrdq2acLT375XfMv8rXeOOoWRpO5vffFh.cyM4QpfxnrtcbsUGpG','siswa',NULL,1,'2026-09-27 16:22:48');
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (262,'Cindy Oktarissa','cindy@siswa.smakk.sch.id','$2a$10$Lwrdq2acLT375XfMv8rXeOOoWRpO5vffFh.cyM4QpfxnrtcbsUGpG','siswa',NULL,1,'2026-09-27 16:22:48');
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (263,'Desi Ratna Sari','desi@siswa.smakk.sch.id','$2a$10$Lwrdq2acLT375XfMv8rXeOOoWRpO5vffFh.cyM4QpfxnrtcbsUGpG','siswa',NULL,1,'2026-09-27 16:22:48');
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (264,'Dinda','dinda@siswa.smakk.sch.id','$2a$10$Lwrdq2acLT375XfMv8rXeOOoWRpO5vffFh.cyM4QpfxnrtcbsUGpG','siswa',NULL,1,'2026-09-27 16:22:48');
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (265,'Fatmah A\'zahra','fatmah@siswa.smakk.sch.id','$2a$10$Lwrdq2acLT375XfMv8rXeOOoWRpO5vffFh.cyM4QpfxnrtcbsUGpG','siswa',NULL,1,'2026-09-27 16:22:48');
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (266,'Hanny Rukmana','hanny@siswa.smakk.sch.id','$2a$10$Lwrdq2acLT375XfMv8rXeOOoWRpO5vffFh.cyM4QpfxnrtcbsUGpG','siswa',NULL,1,'2026-09-27 16:22:48');
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (267,'Helda Putri','helda@siswa.smakk.sch.id','$2a$10$Lwrdq2acLT375XfMv8rXeOOoWRpO5vffFh.cyM4QpfxnrtcbsUGpG','siswa',NULL,1,'2026-09-27 16:22:48');
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (268,'Indra Gunawan','indra@siswa.smakk.sch.id','$2a$10$Lwrdq2acLT375XfMv8rXeOOoWRpO5vffFh.cyM4QpfxnrtcbsUGpG','siswa',NULL,1,'2026-09-27 16:22:48');
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (269,'Jesti Mutiara','jesti@siswa.smakk.sch.id','$2a$10$Lwrdq2acLT375XfMv8rXeOOoWRpO5vffFh.cyM4QpfxnrtcbsUGpG','siswa',NULL,1,'2026-09-27 16:22:48');
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (270,'Kamelia','kamelia@siswa.smakk.sch.id','$2a$10$Lwrdq2acLT375XfMv8rXeOOoWRpO5vffFh.cyM4QpfxnrtcbsUGpG','siswa',NULL,1,'2026-09-27 16:22:48');
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (271,'Lisa Marsela','lisa@siswa.smakk.sch.id','$2a$10$Lwrdq2acLT375XfMv8rXeOOoWRpO5vffFh.cyM4QpfxnrtcbsUGpG','siswa',NULL,1,'2026-09-27 16:22:48');
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (272,'Milla Elka Normasari','milla@siswa.smakk.sch.id','$2a$10$Lwrdq2acLT375XfMv8rXeOOoWRpO5vffFh.cyM4QpfxnrtcbsUGpG','siswa',NULL,1,'2026-09-27 16:22:48');
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (273,'Monika','monika@siswa.smakk.sch.id','$2a$10$Lwrdq2acLT375XfMv8rXeOOoWRpO5vffFh.cyM4QpfxnrtcbsUGpG','siswa',NULL,1,'2026-09-27 16:22:48');
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (274,'Muhamad Amin Badali','muhamad.amin@siswa.smakk.sch.id','$2a$10$Lwrdq2acLT375XfMv8rXeOOoWRpO5vffFh.cyM4QpfxnrtcbsUGpG','siswa',NULL,1,'2026-09-27 16:22:48');
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (275,'Muhamadi Saputra','muhamadi@siswa.smakk.sch.id','$2a$10$Lwrdq2acLT375XfMv8rXeOOoWRpO5vffFh.cyM4QpfxnrtcbsUGpG','siswa',NULL,1,'2026-09-27 16:22:48');
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (276,'Muhammad Rizky Hidayat','muhammad.rizky@siswa.smakk.sch.id','$2a$10$Lwrdq2acLT375XfMv8rXeOOoWRpO5vffFh.cyM4QpfxnrtcbsUGpG','siswa',NULL,1,'2026-09-27 16:22:48');
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (277,'Muhammad Subli','muhammad.subli@siswa.smakk.sch.id','$2a$10$Lwrdq2acLT375XfMv8rXeOOoWRpO5vffFh.cyM4QpfxnrtcbsUGpG','siswa',NULL,1,'2026-09-27 16:22:48');
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (278,'Norhadijah','norhadijah@siswa.smakk.sch.id','$2a$10$Lwrdq2acLT375XfMv8rXeOOoWRpO5vffFh.cyM4QpfxnrtcbsUGpG','siswa',NULL,1,'2026-09-27 16:22:48');
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (279,'Ongki Saputra','ongki@siswa.smakk.sch.id','$2a$10$Lwrdq2acLT375XfMv8rXeOOoWRpO5vffFh.cyM4QpfxnrtcbsUGpG','siswa',NULL,1,'2026-09-27 16:22:48');
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (280,'Prinda Agata','prinda@siswa.smakk.sch.id','$2a$10$Lwrdq2acLT375XfMv8rXeOOoWRpO5vffFh.cyM4QpfxnrtcbsUGpG','siswa',NULL,1,'2026-09-27 16:22:48');
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (281,'Putri Aprilia','putri.aprilia@siswa.smakk.sch.id','$2a$10$Lwrdq2acLT375XfMv8rXeOOoWRpO5vffFh.cyM4QpfxnrtcbsUGpG','siswa',NULL,1,'2026-09-27 16:22:48');
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (282,'Rahmi Yatika','rahmi@siswa.smakk.sch.id','$2a$10$Lwrdq2acLT375XfMv8rXeOOoWRpO5vffFh.cyM4QpfxnrtcbsUGpG','siswa',NULL,1,'2026-09-27 16:22:48');
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (283,'Rico Valentino','rico@siswa.smakk.sch.id','$2a$10$Lwrdq2acLT375XfMv8rXeOOoWRpO5vffFh.cyM4QpfxnrtcbsUGpG','siswa',NULL,1,'2026-09-27 16:22:48');
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (284,'Riki Delta','riki@siswa.smakk.sch.id','$2a$10$Lwrdq2acLT375XfMv8rXeOOoWRpO5vffFh.cyM4QpfxnrtcbsUGpG','siswa',NULL,1,'2026-09-27 16:22:48');
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (285,'Sera Nabila','sera@siswa.smakk.sch.id','$2a$10$Lwrdq2acLT375XfMv8rXeOOoWRpO5vffFh.cyM4QpfxnrtcbsUGpG','siswa',NULL,1,'2026-09-27 16:22:48');
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (286,'Siti Cahaya Murni','siti.cahaya@siswa.smakk.sch.id','$2a$10$Lwrdq2acLT375XfMv8rXeOOoWRpO5vffFh.cyM4QpfxnrtcbsUGpG','siswa',NULL,1,'2026-09-27 16:22:48');
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (287,'Zahratunnissa','zahratunnissa@siswa.smakk.sch.id','$2a$10$Lwrdq2acLT375XfMv8rXeOOoWRpO5vffFh.cyM4QpfxnrtcbsUGpG','siswa',NULL,1,'2026-09-27 16:22:48');
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (288,'Zulkifli','zulkifli@siswa.smakk.sch.id','$2a$10$Lwrdq2acLT375XfMv8rXeOOoWRpO5vffFh.cyM4QpfxnrtcbsUGpG','siswa',NULL,1,'2026-09-27 16:22:48');
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (289,'Ahmad Dika','ahmad.dika@siswa.smakk.sch.id','$2a$10$Lwrdq2acLT375XfMv8rXeOOoWRpO5vffFh.cyM4QpfxnrtcbsUGpG','siswa',NULL,1,'2026-09-27 16:22:48');
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (290,'Ahmad Firdaus','ahmad.firdaus@siswa.smakk.sch.id','$2a$10$Lwrdq2acLT375XfMv8rXeOOoWRpO5vffFh.cyM4QpfxnrtcbsUGpG','siswa',NULL,1,'2026-09-27 16:22:48');
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (291,'Ahmad Wahyu Deriyanto','ahmad.wahyu@siswa.smakk.sch.id','$2a$10$Lwrdq2acLT375XfMv8rXeOOoWRpO5vffFh.cyM4QpfxnrtcbsUGpG','siswa',NULL,1,'2026-09-27 16:22:48');
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (292,'Cinta Lestari','cinta@siswa.smakk.sch.id','$2a$10$Lwrdq2acLT375XfMv8rXeOOoWRpO5vffFh.cyM4QpfxnrtcbsUGpG','siswa',NULL,1,'2026-09-27 16:22:48');
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (293,'Denis Permana Putra','denis.permana@siswa.smakk.sch.id','$2a$10$Lwrdq2acLT375XfMv8rXeOOoWRpO5vffFh.cyM4QpfxnrtcbsUGpG','siswa',NULL,1,'2026-09-27 16:22:48');
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (294,'Fajrianor','fajrianor2@siswa.smakk.sch.id','$2a$10$Lwrdq2acLT375XfMv8rXeOOoWRpO5vffFh.cyM4QpfxnrtcbsUGpG','siswa',NULL,1,'2026-09-27 16:22:48');
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (295,'Hepni','hepni@siswa.smakk.sch.id','$2a$10$Lwrdq2acLT375XfMv8rXeOOoWRpO5vffFh.cyM4QpfxnrtcbsUGpG','siswa',NULL,1,'2026-09-27 16:22:48');
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (296,'Husnul Khatimah','husnul@siswa.smakk.sch.id','$2a$10$Lwrdq2acLT375XfMv8rXeOOoWRpO5vffFh.cyM4QpfxnrtcbsUGpG','siswa',NULL,1,'2026-09-27 16:22:48');
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (297,'Imam','imam@siswa.smakk.sch.id','$2a$10$Lwrdq2acLT375XfMv8rXeOOoWRpO5vffFh.cyM4QpfxnrtcbsUGpG','siswa',NULL,1,'2026-09-27 16:22:48');
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (298,'Indra','indra2@siswa.smakk.sch.id','$2a$10$Lwrdq2acLT375XfMv8rXeOOoWRpO5vffFh.cyM4QpfxnrtcbsUGpG','siswa',NULL,1,'2026-09-27 16:22:48');
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (299,'Iqbal','iqbal@siswa.smakk.sch.id','$2a$10$Lwrdq2acLT375XfMv8rXeOOoWRpO5vffFh.cyM4QpfxnrtcbsUGpG','siswa',NULL,1,'2026-09-27 16:22:48');
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (300,'Levi Yanor','levi@siswa.smakk.sch.id','$2a$10$Lwrdq2acLT375XfMv8rXeOOoWRpO5vffFh.cyM4QpfxnrtcbsUGpG','siswa',NULL,1,'2026-09-27 16:22:48');
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (301,'M Rah Ar Am Yewosa Aulia','m.rah@siswa.smakk.sch.id','$2a$10$Lwrdq2acLT375XfMv8rXeOOoWRpO5vffFh.cyM4QpfxnrtcbsUGpG','siswa',NULL,1,'2026-09-27 16:22:48');
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (302,'Melati Annailla Dewi','melati@siswa.smakk.sch.id','$2a$10$Lwrdq2acLT375XfMv8rXeOOoWRpO5vffFh.cyM4QpfxnrtcbsUGpG','siswa',NULL,1,'2026-09-27 16:22:48');
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (303,'Muhammad Dani','muhammad.dani@siswa.smakk.sch.id','$2a$10$Lwrdq2acLT375XfMv8rXeOOoWRpO5vffFh.cyM4QpfxnrtcbsUGpG','siswa',NULL,1,'2026-09-27 16:22:49');
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (304,'Muhammad Dika','muhammad.dika@siswa.smakk.sch.id','$2a$10$Lwrdq2acLT375XfMv8rXeOOoWRpO5vffFh.cyM4QpfxnrtcbsUGpG','siswa',NULL,1,'2026-09-27 16:22:49');
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (305,'Muhammad Ridali','muhammad.ridali@siswa.smakk.sch.id','$2a$10$Lwrdq2acLT375XfMv8rXeOOoWRpO5vffFh.cyM4QpfxnrtcbsUGpG','siswa',NULL,1,'2026-09-27 16:22:49');
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (306,'Nero','nero@siswa.smakk.sch.id','$2a$10$Lwrdq2acLT375XfMv8rXeOOoWRpO5vffFh.cyM4QpfxnrtcbsUGpG','siswa',NULL,1,'2026-09-27 16:22:49');
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (307,'Nor Reka Sari','nor.reka@siswa.smakk.sch.id','$2a$10$Lwrdq2acLT375XfMv8rXeOOoWRpO5vffFh.cyM4QpfxnrtcbsUGpG','siswa',NULL,1,'2026-09-27 16:22:49');
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (308,'Norlika','norlika@siswa.smakk.sch.id','$2a$10$Lwrdq2acLT375XfMv8rXeOOoWRpO5vffFh.cyM4QpfxnrtcbsUGpG','siswa',NULL,1,'2026-09-27 16:22:49');
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (309,'Nurimbi','nurimbi@siswa.smakk.sch.id','$2a$10$Lwrdq2acLT375XfMv8rXeOOoWRpO5vffFh.cyM4QpfxnrtcbsUGpG','siswa',NULL,1,'2026-09-27 16:22:49');
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (310,'Oktavia Rahmadani','oktavia@siswa.smakk.sch.id','$2a$10$Lwrdq2acLT375XfMv8rXeOOoWRpO5vffFh.cyM4QpfxnrtcbsUGpG','siswa',NULL,1,'2026-09-27 16:22:49');
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (311,'Riska Wulandari','riska.wulandari@siswa.smakk.sch.id','$2a$10$Lwrdq2acLT375XfMv8rXeOOoWRpO5vffFh.cyM4QpfxnrtcbsUGpG','siswa',NULL,1,'2026-09-27 16:22:49');
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (312,'Safira Mehra','safira@siswa.smakk.sch.id','$2a$10$Lwrdq2acLT375XfMv8rXeOOoWRpO5vffFh.cyM4QpfxnrtcbsUGpG','siswa',NULL,1,'2026-09-27 16:22:49');
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (313,'Salfaniy','salfaniy@siswa.smakk.sch.id','$2a$10$Lwrdq2acLT375XfMv8rXeOOoWRpO5vffFh.cyM4QpfxnrtcbsUGpG','siswa',NULL,1,'2026-09-27 16:22:49');
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (314,'Sandy','sandy@siswa.smakk.sch.id','$2a$10$Lwrdq2acLT375XfMv8rXeOOoWRpO5vffFh.cyM4QpfxnrtcbsUGpG','siswa',NULL,1,'2026-09-27 16:22:49');
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (315,'Satrio Wijaksono','satrio@siswa.smakk.sch.id','$2a$10$Lwrdq2acLT375XfMv8rXeOOoWRpO5vffFh.cyM4QpfxnrtcbsUGpG','siswa',NULL,1,'2026-09-27 16:22:49');
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (316,'Verlita Valentina','verlita@siswa.smakk.sch.id','$2a$10$Lwrdq2acLT375XfMv8rXeOOoWRpO5vffFh.cyM4QpfxnrtcbsUGpG','siswa',NULL,1,'2026-09-27 16:22:49');
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (322,'Wulan Safitri','wulan@siswa.smakk.sch.id','$2a$10$Z/ZXcGquo2jBhzkIEiLNh.fbEnk9enV1YPH9MQFckoV1Yo.AMvRV6','siswa',NULL,1,'2026-09-27 16:28:50');
+) ENGINE=InnoDB AUTO_INCREMENT=319 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (1,'Administrator','admin@smakk.sch.id','$2a$10$vlVJJkF5FhRuG8Itz53Qnurv2ACiC.7UCRCrQrGDkiuBuq9Scex.C','admin',NULL,1,'2026-10-05 12:14:54');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (2,'Yunita Pebrianti, S.Pd','yunita@smakk.sch.id','$2a$10$Wjh1T.R/Nvi0.9QCVtUequndEGC0QbrBjC.oUFD.blf0ovwfwv0De','guru',NULL,1,'2026-10-05 12:14:54');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (3,'Hermilawaty, S.Ag','hermilawaty@smakk.sch.id','$2a$10$Wjh1T.R/Nvi0.9QCVtUequndEGC0QbrBjC.oUFD.blf0ovwfwv0De','guru',NULL,1,'2026-10-05 12:14:54');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (4,'Mahlian, S.Pd','mahlian@smakk.sch.id','$2a$10$Wjh1T.R/Nvi0.9QCVtUequndEGC0QbrBjC.oUFD.blf0ovwfwv0De','guru',NULL,1,'2026-10-05 12:14:54');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (5,'Nurlaila, S.Pd','nurlaila@smakk.sch.id','$2a$10$Wjh1T.R/Nvi0.9QCVtUequndEGC0QbrBjC.oUFD.blf0ovwfwv0De','guru',NULL,1,'2026-10-05 12:14:54');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (6,'Halifah, S.P','halifah@smakk.sch.id','$2a$10$Wjh1T.R/Nvi0.9QCVtUequndEGC0QbrBjC.oUFD.blf0ovwfwv0De','guru',NULL,1,'2026-10-05 12:14:54');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (7,'Samjuhdi, S.P','samjuhdi@smakk.sch.id','$2a$10$Wjh1T.R/Nvi0.9QCVtUequndEGC0QbrBjC.oUFD.blf0ovwfwv0De','guru',NULL,1,'2026-10-05 12:14:54');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (8,'Martaniah, S.Pd','martaniah@smakk.sch.id','$2a$10$Wjh1T.R/Nvi0.9QCVtUequndEGC0QbrBjC.oUFD.blf0ovwfwv0De','guru',NULL,1,'2026-10-05 12:14:54');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (9,'Ramayadi Jaya, S.Pd','ramayadi@smakk.sch.id','$2a$10$Wjh1T.R/Nvi0.9QCVtUequndEGC0QbrBjC.oUFD.blf0ovwfwv0De','guru',NULL,1,'2026-10-05 12:14:54');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (10,'Edy Priyono, S.E','edy@smakk.sch.id','$2a$10$Wjh1T.R/Nvi0.9QCVtUequndEGC0QbrBjC.oUFD.blf0ovwfwv0De','guru',NULL,1,'2026-10-05 12:14:54');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (11,'Sugianoor, S.Sos','sugianoor@smakk.sch.id','$2a$10$Wjh1T.R/Nvi0.9QCVtUequndEGC0QbrBjC.oUFD.blf0ovwfwv0De','guru',NULL,1,'2026-10-05 12:14:54');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (12,'Muhammad Rahmadani, S.Pd','muhammad@smakk.sch.id','$2a$10$Wjh1T.R/Nvi0.9QCVtUequndEGC0QbrBjC.oUFD.blf0ovwfwv0De','guru',NULL,1,'2026-10-05 12:14:54');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (13,'Widayani, S.Pd','widayani@smakk.sch.id','$2a$10$Wjh1T.R/Nvi0.9QCVtUequndEGC0QbrBjC.oUFD.blf0ovwfwv0De','guru',NULL,1,'2026-10-05 12:14:54');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (14,'Herman Katoppo, S.Pd','herman@smakk.sch.id','$2a$10$Wjh1T.R/Nvi0.9QCVtUequndEGC0QbrBjC.oUFD.blf0ovwfwv0De','guru',NULL,1,'2026-10-05 12:14:54');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (15,'Siti Kamariah, S. Pd','siti@smakk.sch.id','$2a$10$Wjh1T.R/Nvi0.9QCVtUequndEGC0QbrBjC.oUFD.blf0ovwfwv0De','guru',NULL,1,'2026-10-05 12:14:54');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (16,'Bardin, S.Pd','bardin@smakk.sch.id','$2a$10$Wjh1T.R/Nvi0.9QCVtUequndEGC0QbrBjC.oUFD.blf0ovwfwv0De','guru',NULL,1,'2026-10-05 12:14:54');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (17,'Robet Januar Simanjuntak, S.Pd','robet@smakk.sch.id','$2a$10$Wjh1T.R/Nvi0.9QCVtUequndEGC0QbrBjC.oUFD.blf0ovwfwv0De','guru',NULL,1,'2026-10-05 12:14:54');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (18,'Mariani, S.Th','mariani@smakk.sch.id','$2a$10$Wjh1T.R/Nvi0.9QCVtUequndEGC0QbrBjC.oUFD.blf0ovwfwv0De','guru',NULL,1,'2026-10-05 12:14:54');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (19,'Wahono Isnandar, S.Pd','wahono@smakk.sch.id','$2a$10$Wjh1T.R/Nvi0.9QCVtUequndEGC0QbrBjC.oUFD.blf0ovwfwv0De','guru',NULL,1,'2026-10-05 12:14:54');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (20,'Eka Susilawati, , S.Pd.I','eka@smakk.sch.id','$2a$10$Wjh1T.R/Nvi0.9QCVtUequndEGC0QbrBjC.oUFD.blf0ovwfwv0De','guru',NULL,1,'2026-10-05 12:14:54');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (21,'Dewi Sartika, S.Pd','dewi@smakk.sch.id','$2a$10$Wjh1T.R/Nvi0.9QCVtUequndEGC0QbrBjC.oUFD.blf0ovwfwv0De','guru',NULL,1,'2026-10-05 12:14:54');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (22,'Andi Ilhami, S.Kom','andi@smakk.sch.id','$2a$10$Wjh1T.R/Nvi0.9QCVtUequndEGC0QbrBjC.oUFD.blf0ovwfwv0De','guru',NULL,1,'2026-10-05 12:14:54');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (23,'Akhmad Riko, S.Pd.i','akhmad@smakk.sch.id','$2a$10$Wjh1T.R/Nvi0.9QCVtUequndEGC0QbrBjC.oUFD.blf0ovwfwv0De','guru',NULL,1,'2026-10-05 12:14:54');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (24,'Janatin, S.Pd.I','janatin@smakk.sch.id','$2a$10$Wjh1T.R/Nvi0.9QCVtUequndEGC0QbrBjC.oUFD.blf0ovwfwv0De','guru',NULL,1,'2026-10-05 12:14:54');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (25,'Nesvi Lianti Ml, S.Pd','nesvi@smakk.sch.id','$2a$10$Wjh1T.R/Nvi0.9QCVtUequndEGC0QbrBjC.oUFD.blf0ovwfwv0De','guru',NULL,1,'2026-10-05 12:14:54');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (26,'Kenny Yohanes Tiago, S.Pd','kenny@smakk.sch.id','$2a$10$Wjh1T.R/Nvi0.9QCVtUequndEGC0QbrBjC.oUFD.blf0ovwfwv0De','guru',NULL,1,'2026-10-05 12:14:54');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (27,'Laily Mustika, S.Pd.I','laily@smakk.sch.id','$2a$10$Wjh1T.R/Nvi0.9QCVtUequndEGC0QbrBjC.oUFD.blf0ovwfwv0De','guru',NULL,1,'2026-10-05 12:14:54');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (28,'Asnin Warianto, S.Pd.I','asnin@smakk.sch.id','$2a$10$Wjh1T.R/Nvi0.9QCVtUequndEGC0QbrBjC.oUFD.blf0ovwfwv0De','guru',NULL,1,'2026-10-05 12:14:54');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (29,'Rita Feronika, S.Pd','rita@smakk.sch.id','$2a$10$Wjh1T.R/Nvi0.9QCVtUequndEGC0QbrBjC.oUFD.blf0ovwfwv0De','guru',NULL,1,'2026-10-05 12:14:54');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (30,'Ahmad Hanapi','ahmad@siswa.smakk.sch.id','$2a$10$0xrCp77199qbqjJnXwD0Y.AXBA2pUBxq7Op5eWCn0cY0.Yc4wSQkG','siswa',NULL,1,'2026-10-05 12:14:54');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (31,'Ahmad Raviza','ahmad.raviza@siswa.smakk.sch.id','$2a$10$0xrCp77199qbqjJnXwD0Y.AXBA2pUBxq7Op5eWCn0cY0.Yc4wSQkG','siswa',NULL,1,'2026-10-05 12:14:54');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (32,'Aminatul Najua','aminatul@siswa.smakk.sch.id','$2a$10$0xrCp77199qbqjJnXwD0Y.AXBA2pUBxq7Op5eWCn0cY0.Yc4wSQkG','siswa',NULL,1,'2026-10-05 12:14:54');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (33,'Audiyah','audiyah@siswa.smakk.sch.id','$2a$10$0xrCp77199qbqjJnXwD0Y.AXBA2pUBxq7Op5eWCn0cY0.Yc4wSQkG','siswa',NULL,1,'2026-10-05 12:14:54');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (34,'Bunga Citra','bunga@siswa.smakk.sch.id','$2a$10$4vXtfgmBKfgNdVDAQ07Y5ujP69xJ0/cdRAcx77MZrFVNQv.sBWHv2','siswa',NULL,1,'2026-10-05 12:14:54');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (35,'Dhika Wahyu Ramadhan','dhika@siswa.smakk.sch.id','$2a$10$0xrCp77199qbqjJnXwD0Y.AXBA2pUBxq7Op5eWCn0cY0.Yc4wSQkG','siswa',NULL,1,'2026-10-05 12:14:55');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (36,'Dira Permata Sari','dira@siswa.smakk.sch.id','$2a$10$0xrCp77199qbqjJnXwD0Y.AXBA2pUBxq7Op5eWCn0cY0.Yc4wSQkG','siswa',NULL,1,'2026-10-05 12:14:55');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (37,'Eka Purnama Sari','eka@siswa.smakk.sch.id','$2a$10$0xrCp77199qbqjJnXwD0Y.AXBA2pUBxq7Op5eWCn0cY0.Yc4wSQkG','siswa',NULL,1,'2026-10-05 12:14:55');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (38,'Fajrianor','fajrianor@siswa.smakk.sch.id','$2a$10$0xrCp77199qbqjJnXwD0Y.AXBA2pUBxq7Op5eWCn0cY0.Yc4wSQkG','siswa',NULL,1,'2026-10-05 12:14:55');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (39,'Fatimah Azahra','fatimah@siswa.smakk.sch.id','$2a$10$0xrCp77199qbqjJnXwD0Y.AXBA2pUBxq7Op5eWCn0cY0.Yc4wSQkG','siswa',NULL,1,'2026-10-05 12:14:55');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (40,'Fuza Nabila Syabaniah','fuza@siswa.smakk.sch.id','$2a$10$0xrCp77199qbqjJnXwD0Y.AXBA2pUBxq7Op5eWCn0cY0.Yc4wSQkG','siswa',NULL,1,'2026-10-05 12:14:55');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (41,'Hidayatul Firdaus','hidayatul@siswa.smakk.sch.id','$2a$10$0xrCp77199qbqjJnXwD0Y.AXBA2pUBxq7Op5eWCn0cY0.Yc4wSQkG','siswa',NULL,1,'2026-10-05 12:14:55');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (42,'Ihwan','ihwan@siswa.smakk.sch.id','$2a$10$0xrCp77199qbqjJnXwD0Y.AXBA2pUBxq7Op5eWCn0cY0.Yc4wSQkG','siswa',NULL,1,'2026-10-05 12:14:55');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (43,'Irpan','irpan@siswa.smakk.sch.id','$2a$10$0xrCp77199qbqjJnXwD0Y.AXBA2pUBxq7Op5eWCn0cY0.Yc4wSQkG','siswa',NULL,1,'2026-10-05 12:14:55');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (44,'Jannatul Fatwa','jannatul@siswa.smakk.sch.id','$2a$10$0xrCp77199qbqjJnXwD0Y.AXBA2pUBxq7Op5eWCn0cY0.Yc4wSQkG','siswa',NULL,1,'2026-10-05 12:14:55');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (45,'M. Hafi Ramadhani','m@siswa.smakk.sch.id','$2a$10$0xrCp77199qbqjJnXwD0Y.AXBA2pUBxq7Op5eWCn0cY0.Yc4wSQkG','siswa',NULL,1,'2026-10-05 12:14:55');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (46,'Mega','mega@siswa.smakk.sch.id','$2a$10$0xrCp77199qbqjJnXwD0Y.AXBA2pUBxq7Op5eWCn0cY0.Yc4wSQkG','siswa',NULL,1,'2026-10-05 12:14:55');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (47,'Muhamad Al Fiqih','muhamad@siswa.smakk.sch.id','$2a$10$0xrCp77199qbqjJnXwD0Y.AXBA2pUBxq7Op5eWCn0cY0.Yc4wSQkG','siswa',NULL,1,'2026-10-05 12:14:55');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (48,'Muhammad Rafli Bahtiar','muhammad@siswa.smakk.sch.id','$2a$10$0xrCp77199qbqjJnXwD0Y.AXBA2pUBxq7Op5eWCn0cY0.Yc4wSQkG','siswa',NULL,1,'2026-10-05 12:14:55');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (49,'Nor Djahra','nor@siswa.smakk.sch.id','$2a$10$0xrCp77199qbqjJnXwD0Y.AXBA2pUBxq7Op5eWCn0cY0.Yc4wSQkG','siswa',NULL,1,'2026-10-05 12:14:55');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (50,'Nurjannah','nurjannah@siswa.smakk.sch.id','$2a$10$0xrCp77199qbqjJnXwD0Y.AXBA2pUBxq7Op5eWCn0cY0.Yc4wSQkG','siswa',NULL,1,'2026-10-05 12:14:55');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (51,'Putri','putri@siswa.smakk.sch.id','$2a$10$0xrCp77199qbqjJnXwD0Y.AXBA2pUBxq7Op5eWCn0cY0.Yc4wSQkG','siswa',NULL,1,'2026-10-05 12:14:55');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (52,'Rahmad Andika','rahmad@siswa.smakk.sch.id','$2a$10$0xrCp77199qbqjJnXwD0Y.AXBA2pUBxq7Op5eWCn0cY0.Yc4wSQkG','siswa',NULL,1,'2026-10-05 12:14:55');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (53,'Ramadani','ramadani@siswa.smakk.sch.id','$2a$10$0xrCp77199qbqjJnXwD0Y.AXBA2pUBxq7Op5eWCn0cY0.Yc4wSQkG','siswa',NULL,1,'2026-10-05 12:14:55');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (54,'Riszayanti','riszayanti@siswa.smakk.sch.id','$2a$10$0xrCp77199qbqjJnXwD0Y.AXBA2pUBxq7Op5eWCn0cY0.Yc4wSQkG','siswa',NULL,1,'2026-10-05 12:14:55');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (55,'Salsa Billa','salsa@siswa.smakk.sch.id','$2a$10$0xrCp77199qbqjJnXwD0Y.AXBA2pUBxq7Op5eWCn0cY0.Yc4wSQkG','siswa',NULL,1,'2026-10-05 12:14:55');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (56,'Wenisa','wenisa@siswa.smakk.sch.id','$2a$10$0xrCp77199qbqjJnXwD0Y.AXBA2pUBxq7Op5eWCn0cY0.Yc4wSQkG','siswa',NULL,1,'2026-10-05 12:14:55');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (57,'Yuanita Septia Putri','yuanita@siswa.smakk.sch.id','$2a$10$0xrCp77199qbqjJnXwD0Y.AXBA2pUBxq7Op5eWCn0cY0.Yc4wSQkG','siswa',NULL,1,'2026-10-05 12:14:55');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (58,'Adya Syakira','adya@siswa.smakk.sch.id','$2a$10$0xrCp77199qbqjJnXwD0Y.AXBA2pUBxq7Op5eWCn0cY0.Yc4wSQkG','siswa',NULL,1,'2026-10-05 12:14:55');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (59,'Ahmat Baihaqi','ahmat@siswa.smakk.sch.id','$2a$10$0xrCp77199qbqjJnXwD0Y.AXBA2pUBxq7Op5eWCn0cY0.Yc4wSQkG','siswa',NULL,1,'2026-10-05 12:14:55');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (60,'Alif Permana Wiguna','alif@siswa.smakk.sch.id','$2a$10$0xrCp77199qbqjJnXwD0Y.AXBA2pUBxq7Op5eWCn0cY0.Yc4wSQkG','siswa',NULL,1,'2026-10-05 12:14:55');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (61,'Amira Febriana','amira@siswa.smakk.sch.id','$2a$10$0xrCp77199qbqjJnXwD0Y.AXBA2pUBxq7Op5eWCn0cY0.Yc4wSQkG','siswa',NULL,1,'2026-10-05 12:14:55');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (62,'Andini','andini@siswa.smakk.sch.id','$2a$10$0xrCp77199qbqjJnXwD0Y.AXBA2pUBxq7Op5eWCn0cY0.Yc4wSQkG','siswa',NULL,1,'2026-10-05 12:14:55');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (63,'Anggi Gladis Prasetyo','anggi@siswa.smakk.sch.id','$2a$10$0xrCp77199qbqjJnXwD0Y.AXBA2pUBxq7Op5eWCn0cY0.Yc4wSQkG','siswa',NULL,1,'2026-10-05 12:14:55');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (64,'Ariska','ariska@siswa.smakk.sch.id','$2a$10$0xrCp77199qbqjJnXwD0Y.AXBA2pUBxq7Op5eWCn0cY0.Yc4wSQkG','siswa',NULL,1,'2026-10-05 12:14:55');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (65,'Citra Lestari','citra@siswa.smakk.sch.id','$2a$10$0xrCp77199qbqjJnXwD0Y.AXBA2pUBxq7Op5eWCn0cY0.Yc4wSQkG','siswa',NULL,1,'2026-10-05 12:14:55');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (66,'Fitreal Ramadhan','fitreal@siswa.smakk.sch.id','$2a$10$0xrCp77199qbqjJnXwD0Y.AXBA2pUBxq7Op5eWCn0cY0.Yc4wSQkG','siswa',NULL,1,'2026-10-05 12:14:55');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (67,'Gina Patimah','gina@siswa.smakk.sch.id','$2a$10$0xrCp77199qbqjJnXwD0Y.AXBA2pUBxq7Op5eWCn0cY0.Yc4wSQkG','siswa',NULL,1,'2026-10-05 12:14:55');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (68,'Haidir','haidir@siswa.smakk.sch.id','$2a$10$0xrCp77199qbqjJnXwD0Y.AXBA2pUBxq7Op5eWCn0cY0.Yc4wSQkG','siswa',NULL,1,'2026-10-05 12:14:55');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (69,'Herni','herni@siswa.smakk.sch.id','$2a$10$0xrCp77199qbqjJnXwD0Y.AXBA2pUBxq7Op5eWCn0cY0.Yc4wSQkG','siswa',NULL,1,'2026-10-05 12:14:55');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (70,'Ipnu Malik','ipnu@siswa.smakk.sch.id','$2a$10$0xrCp77199qbqjJnXwD0Y.AXBA2pUBxq7Op5eWCn0cY0.Yc4wSQkG','siswa',NULL,1,'2026-10-05 12:14:55');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (71,'Irma Hidayanti','irma@siswa.smakk.sch.id','$2a$10$0xrCp77199qbqjJnXwD0Y.AXBA2pUBxq7Op5eWCn0cY0.Yc4wSQkG','siswa',NULL,1,'2026-10-05 12:14:55');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (72,'Lestari','lestari@siswa.smakk.sch.id','$2a$10$0xrCp77199qbqjJnXwD0Y.AXBA2pUBxq7Op5eWCn0cY0.Yc4wSQkG','siswa',NULL,1,'2026-10-05 12:14:55');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (73,'Muhamad Akbar','muhamad.akbar@siswa.smakk.sch.id','$2a$10$0xrCp77199qbqjJnXwD0Y.AXBA2pUBxq7Op5eWCn0cY0.Yc4wSQkG','siswa',NULL,1,'2026-10-05 12:14:55');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (74,'Muhammad Rehan Fadillah','muhammad.rehan@siswa.smakk.sch.id','$2a$10$0xrCp77199qbqjJnXwD0Y.AXBA2pUBxq7Op5eWCn0cY0.Yc4wSQkG','siswa',NULL,1,'2026-10-05 12:14:55');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (75,'Muhammad Zainal Arsyad','muhammad.zainal@siswa.smakk.sch.id','$2a$10$0xrCp77199qbqjJnXwD0Y.AXBA2pUBxq7Op5eWCn0cY0.Yc4wSQkG','siswa',NULL,1,'2026-10-05 12:14:55');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (76,'Mutiara Ramadhani','mutiara@siswa.smakk.sch.id','$2a$10$0xrCp77199qbqjJnXwD0Y.AXBA2pUBxq7Op5eWCn0cY0.Yc4wSQkG','siswa',NULL,1,'2026-10-05 12:14:55');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (77,'Nadia Vega','nadia@siswa.smakk.sch.id','$2a$10$0xrCp77199qbqjJnXwD0Y.AXBA2pUBxq7Op5eWCn0cY0.Yc4wSQkG','siswa',NULL,1,'2026-10-05 12:14:55');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (78,'Norviona','norviona@siswa.smakk.sch.id','$2a$10$0xrCp77199qbqjJnXwD0Y.AXBA2pUBxq7Op5eWCn0cY0.Yc4wSQkG','siswa',NULL,1,'2026-10-05 12:14:55');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (79,'Putri Adinda','putri.adinda@siswa.smakk.sch.id','$2a$10$0xrCp77199qbqjJnXwD0Y.AXBA2pUBxq7Op5eWCn0cY0.Yc4wSQkG','siswa',NULL,1,'2026-10-05 12:14:55');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (80,'Ridho','ridho@siswa.smakk.sch.id','$2a$10$0xrCp77199qbqjJnXwD0Y.AXBA2pUBxq7Op5eWCn0cY0.Yc4wSQkG','siswa',NULL,1,'2026-10-05 12:14:55');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (81,'Rivana','rivana@siswa.smakk.sch.id','$2a$10$0xrCp77199qbqjJnXwD0Y.AXBA2pUBxq7Op5eWCn0cY0.Yc4wSQkG','siswa',NULL,1,'2026-10-05 12:14:55');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (82,'Safari','safari@siswa.smakk.sch.id','$2a$10$0xrCp77199qbqjJnXwD0Y.AXBA2pUBxq7Op5eWCn0cY0.Yc4wSQkG','siswa',NULL,1,'2026-10-05 12:14:55');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (83,'Sarah','sarah@siswa.smakk.sch.id','$2a$10$0xrCp77199qbqjJnXwD0Y.AXBA2pUBxq7Op5eWCn0cY0.Yc4wSQkG','siswa',NULL,1,'2026-10-05 12:14:55');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (84,'Selpia','selpia@siswa.smakk.sch.id','$2a$10$0xrCp77199qbqjJnXwD0Y.AXBA2pUBxq7Op5eWCn0cY0.Yc4wSQkG','siswa',NULL,1,'2026-10-05 12:14:55');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (85,'Agus Rahmadan','agus@siswa.smakk.sch.id','$2a$10$0xrCp77199qbqjJnXwD0Y.AXBA2pUBxq7Op5eWCn0cY0.Yc4wSQkG','siswa',NULL,1,'2026-10-05 12:14:55');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (86,'Ahmad Salihin','ahmad.salihin@siswa.smakk.sch.id','$2a$10$0xrCp77199qbqjJnXwD0Y.AXBA2pUBxq7Op5eWCn0cY0.Yc4wSQkG','siswa',NULL,1,'2026-10-05 12:14:55');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (87,'Andini Raniah','andini.raniah@siswa.smakk.sch.id','$2a$10$0xrCp77199qbqjJnXwD0Y.AXBA2pUBxq7Op5eWCn0cY0.Yc4wSQkG','siswa',NULL,1,'2026-10-05 12:14:55');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (88,'Anggi Ameliya','anggi.ameliya@siswa.smakk.sch.id','$2a$10$0xrCp77199qbqjJnXwD0Y.AXBA2pUBxq7Op5eWCn0cY0.Yc4wSQkG','siswa',NULL,1,'2026-10-05 12:14:55');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (89,'An-nissa Oktavia','annissa@siswa.smakk.sch.id','$2a$10$0xrCp77199qbqjJnXwD0Y.AXBA2pUBxq7Op5eWCn0cY0.Yc4wSQkG','siswa',NULL,1,'2026-10-05 12:14:55');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (90,'Diky','diky@siswa.smakk.sch.id','$2a$10$0xrCp77199qbqjJnXwD0Y.AXBA2pUBxq7Op5eWCn0cY0.Yc4wSQkG','siswa',NULL,1,'2026-10-05 12:14:55');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (91,'Hafizah','hafizah@siswa.smakk.sch.id','$2a$10$0xrCp77199qbqjJnXwD0Y.AXBA2pUBxq7Op5eWCn0cY0.Yc4wSQkG','siswa',NULL,1,'2026-10-05 12:14:55');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (92,'Jhamal Muqthi','jhamal@siswa.smakk.sch.id','$2a$10$0xrCp77199qbqjJnXwD0Y.AXBA2pUBxq7Op5eWCn0cY0.Yc4wSQkG','siswa',NULL,1,'2026-10-05 12:14:55');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (93,'Laura','laura@siswa.smakk.sch.id','$2a$10$0xrCp77199qbqjJnXwD0Y.AXBA2pUBxq7Op5eWCn0cY0.Yc4wSQkG','siswa',NULL,1,'2026-10-05 12:14:55');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (94,'M. Dziqri Yewosa Aulia','m.dziqri@siswa.smakk.sch.id','$2a$10$0xrCp77199qbqjJnXwD0Y.AXBA2pUBxq7Op5eWCn0cY0.Yc4wSQkG','siswa',NULL,1,'2026-10-05 12:14:55');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (95,'Mellani Assyifa Zahra','mellani@siswa.smakk.sch.id','$2a$10$0xrCp77199qbqjJnXwD0Y.AXBA2pUBxq7Op5eWCn0cY0.Yc4wSQkG','siswa',NULL,1,'2026-10-05 12:14:55');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (96,'Muhamad Afif Ramadan','muhamad.afif@siswa.smakk.sch.id','$2a$10$0xrCp77199qbqjJnXwD0Y.AXBA2pUBxq7Op5eWCn0cY0.Yc4wSQkG','siswa',NULL,1,'2026-10-05 12:14:55');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (97,'Muhammad Patjri','muhammad.patjri@siswa.smakk.sch.id','$2a$10$0xrCp77199qbqjJnXwD0Y.AXBA2pUBxq7Op5eWCn0cY0.Yc4wSQkG','siswa',NULL,1,'2026-10-05 12:14:55');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (98,'Muhammad Zailani','muhammad.zailani@siswa.smakk.sch.id','$2a$10$0xrCp77199qbqjJnXwD0Y.AXBA2pUBxq7Op5eWCn0cY0.Yc4wSQkG','siswa',NULL,1,'2026-10-05 12:14:55');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (99,'Murlan','murlan@siswa.smakk.sch.id','$2a$10$0xrCp77199qbqjJnXwD0Y.AXBA2pUBxq7Op5eWCn0cY0.Yc4wSQkG','siswa',NULL,1,'2026-10-05 12:14:55');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (100,'Naila Sabrina','naila@siswa.smakk.sch.id','$2a$10$0xrCp77199qbqjJnXwD0Y.AXBA2pUBxq7Op5eWCn0cY0.Yc4wSQkG','siswa',NULL,1,'2026-10-05 12:14:55');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (101,'Putri','putri2@siswa.smakk.sch.id','$2a$10$0xrCp77199qbqjJnXwD0Y.AXBA2pUBxq7Op5eWCn0cY0.Yc4wSQkG','siswa',NULL,1,'2026-10-05 12:14:55');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (102,'Repal Aditya','repal@siswa.smakk.sch.id','$2a$10$0xrCp77199qbqjJnXwD0Y.AXBA2pUBxq7Op5eWCn0cY0.Yc4wSQkG','siswa',NULL,1,'2026-10-05 12:14:55');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (103,'Rifky','rifky@siswa.smakk.sch.id','$2a$10$0xrCp77199qbqjJnXwD0Y.AXBA2pUBxq7Op5eWCn0cY0.Yc4wSQkG','siswa',NULL,1,'2026-10-05 12:14:55');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (104,'Riska Alfia','riska@siswa.smakk.sch.id','$2a$10$0xrCp77199qbqjJnXwD0Y.AXBA2pUBxq7Op5eWCn0cY0.Yc4wSQkG','siswa',NULL,1,'2026-10-05 12:14:55');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (105,'Risky Adithia','risky@siswa.smakk.sch.id','$2a$10$0xrCp77199qbqjJnXwD0Y.AXBA2pUBxq7Op5eWCn0cY0.Yc4wSQkG','siswa',NULL,1,'2026-10-05 12:14:55');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (106,'Rizka Angriani','rizka@siswa.smakk.sch.id','$2a$10$0xrCp77199qbqjJnXwD0Y.AXBA2pUBxq7Op5eWCn0cY0.Yc4wSQkG','siswa',NULL,1,'2026-10-05 12:14:55');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (107,'Sri Andini','sri@siswa.smakk.sch.id','$2a$10$0xrCp77199qbqjJnXwD0Y.AXBA2pUBxq7Op5eWCn0cY0.Yc4wSQkG','siswa',NULL,1,'2026-10-05 12:14:55');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (108,'Sri Diana Wulan Dari','sri.diana@siswa.smakk.sch.id','$2a$10$0xrCp77199qbqjJnXwD0Y.AXBA2pUBxq7Op5eWCn0cY0.Yc4wSQkG','siswa',NULL,1,'2026-10-05 12:14:55');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (109,'Syahrini','syahrini@siswa.smakk.sch.id','$2a$10$0xrCp77199qbqjJnXwD0Y.AXBA2pUBxq7Op5eWCn0cY0.Yc4wSQkG','siswa',NULL,1,'2026-10-05 12:14:55');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (110,'Widya Hargianti','widya@siswa.smakk.sch.id','$2a$10$0xrCp77199qbqjJnXwD0Y.AXBA2pUBxq7Op5eWCn0cY0.Yc4wSQkG','siswa',NULL,1,'2026-10-05 12:14:55');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (111,'Yunita Fitri','yunita@siswa.smakk.sch.id','$2a$10$0xrCp77199qbqjJnXwD0Y.AXBA2pUBxq7Op5eWCn0cY0.Yc4wSQkG','siswa',NULL,1,'2026-10-05 12:14:55');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (112,'Zahra As-syifa Muslimah Zatiah','zahra@siswa.smakk.sch.id','$2a$10$0xrCp77199qbqjJnXwD0Y.AXBA2pUBxq7Op5eWCn0cY0.Yc4wSQkG','siswa',NULL,1,'2026-10-05 12:14:55');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (113,'Ahmad Fadilah','ahmad.fadilah@siswa.smakk.sch.id','$2a$10$0xrCp77199qbqjJnXwD0Y.AXBA2pUBxq7Op5eWCn0cY0.Yc4wSQkG','siswa',NULL,1,'2026-10-05 12:14:55');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (114,'Ahmad Rizal','ahmad.rizal@siswa.smakk.sch.id','$2a$10$0xrCp77199qbqjJnXwD0Y.AXBA2pUBxq7Op5eWCn0cY0.Yc4wSQkG','siswa',NULL,1,'2026-10-05 12:14:55');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (115,'Ahmad Said','ahmad.said@siswa.smakk.sch.id','$2a$10$0xrCp77199qbqjJnXwD0Y.AXBA2pUBxq7Op5eWCn0cY0.Yc4wSQkG','siswa',NULL,1,'2026-10-05 12:14:55');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (116,'Ahmat Tri Wahyudi','ahmat.tri@siswa.smakk.sch.id','$2a$10$0xrCp77199qbqjJnXwD0Y.AXBA2pUBxq7Op5eWCn0cY0.Yc4wSQkG','siswa',NULL,1,'2026-10-05 12:14:55');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (117,'Alina Az-zahra','alina@siswa.smakk.sch.id','$2a$10$0xrCp77199qbqjJnXwD0Y.AXBA2pUBxq7Op5eWCn0cY0.Yc4wSQkG','siswa',NULL,1,'2026-10-05 12:14:55');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (118,'Angga Wardana','angga@siswa.smakk.sch.id','$2a$10$0xrCp77199qbqjJnXwD0Y.AXBA2pUBxq7Op5eWCn0cY0.Yc4wSQkG','siswa',NULL,1,'2026-10-05 12:14:55');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (119,'Anggi Novita Sari','anggi.novita@siswa.smakk.sch.id','$2a$10$0xrCp77199qbqjJnXwD0Y.AXBA2pUBxq7Op5eWCn0cY0.Yc4wSQkG','siswa',NULL,1,'2026-10-05 12:14:55');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (120,'Assyifa','assyifa@siswa.smakk.sch.id','$2a$10$0xrCp77199qbqjJnXwD0Y.AXBA2pUBxq7Op5eWCn0cY0.Yc4wSQkG','siswa',NULL,1,'2026-10-05 12:14:55');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (121,'Aulia Rahmah','aulia@siswa.smakk.sch.id','$2a$10$0xrCp77199qbqjJnXwD0Y.AXBA2pUBxq7Op5eWCn0cY0.Yc4wSQkG','siswa',NULL,1,'2026-10-05 12:14:55');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (122,'Dila Oktavia','dila@siswa.smakk.sch.id','$2a$10$0xrCp77199qbqjJnXwD0Y.AXBA2pUBxq7Op5eWCn0cY0.Yc4wSQkG','siswa',NULL,1,'2026-10-05 12:14:55');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (123,'Dimas Saputra','dimas@siswa.smakk.sch.id','$2a$10$0xrCp77199qbqjJnXwD0Y.AXBA2pUBxq7Op5eWCn0cY0.Yc4wSQkG','siswa',NULL,1,'2026-10-05 12:14:55');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (124,'Evellin Oktavirena','evellin@siswa.smakk.sch.id','$2a$10$0xrCp77199qbqjJnXwD0Y.AXBA2pUBxq7Op5eWCn0cY0.Yc4wSQkG','siswa',NULL,1,'2026-10-05 12:14:55');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (125,'Khelda','khelda@siswa.smakk.sch.id','$2a$10$0xrCp77199qbqjJnXwD0Y.AXBA2pUBxq7Op5eWCn0cY0.Yc4wSQkG','siswa',NULL,1,'2026-10-05 12:14:55');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (126,'Marvel','marvel@siswa.smakk.sch.id','$2a$10$0xrCp77199qbqjJnXwD0Y.AXBA2pUBxq7Op5eWCn0cY0.Yc4wSQkG','siswa',NULL,1,'2026-10-05 12:14:55');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (127,'Maulidin','maulidin@siswa.smakk.sch.id','$2a$10$0xrCp77199qbqjJnXwD0Y.AXBA2pUBxq7Op5eWCn0cY0.Yc4wSQkG','siswa',NULL,1,'2026-10-05 12:14:55');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (128,'Muhammad Al Imbran','muhammad.al@siswa.smakk.sch.id','$2a$10$0xrCp77199qbqjJnXwD0Y.AXBA2pUBxq7Op5eWCn0cY0.Yc4wSQkG','siswa',NULL,1,'2026-10-05 12:14:55');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (129,'Muhammad Husiin','muhammad.husiin@siswa.smakk.sch.id','$2a$10$0xrCp77199qbqjJnXwD0Y.AXBA2pUBxq7Op5eWCn0cY0.Yc4wSQkG','siswa',NULL,1,'2026-10-05 12:14:55');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (130,'Muhammad Rehan','muhammad2@siswa.smakk.sch.id','$2a$10$0xrCp77199qbqjJnXwD0Y.AXBA2pUBxq7Op5eWCn0cY0.Yc4wSQkG','siswa',NULL,1,'2026-10-05 12:14:55');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (131,'Muhammad Saman Husein','muhammad.saman@siswa.smakk.sch.id','$2a$10$0xrCp77199qbqjJnXwD0Y.AXBA2pUBxq7Op5eWCn0cY0.Yc4wSQkG','siswa',NULL,1,'2026-10-05 12:14:55');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (132,'Muhammad Yusril Reza Banjaran','muhammad.yusril@siswa.smakk.sch.id','$2a$10$0xrCp77199qbqjJnXwD0Y.AXBA2pUBxq7Op5eWCn0cY0.Yc4wSQkG','siswa',NULL,1,'2026-10-05 12:14:55');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (133,'Muttia Indriani Meiysa','muttia@siswa.smakk.sch.id','$2a$10$0xrCp77199qbqjJnXwD0Y.AXBA2pUBxq7Op5eWCn0cY0.Yc4wSQkG','siswa',NULL,1,'2026-10-05 12:14:55');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (134,'Nor Aini','nor.aini@siswa.smakk.sch.id','$2a$10$0xrCp77199qbqjJnXwD0Y.AXBA2pUBxq7Op5eWCn0cY0.Yc4wSQkG','siswa',NULL,1,'2026-10-05 12:14:55');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (135,'Putri Aliya','putri.aliya@siswa.smakk.sch.id','$2a$10$0xrCp77199qbqjJnXwD0Y.AXBA2pUBxq7Op5eWCn0cY0.Yc4wSQkG','siswa',NULL,1,'2026-10-05 12:14:55');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (136,'Ratih Rahmah','ratih@siswa.smakk.sch.id','$2a$10$0xrCp77199qbqjJnXwD0Y.AXBA2pUBxq7Op5eWCn0cY0.Yc4wSQkG','siswa',NULL,1,'2026-10-05 12:14:55');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (137,'Raudatul Jannah','raudatul@siswa.smakk.sch.id','$2a$10$0xrCp77199qbqjJnXwD0Y.AXBA2pUBxq7Op5eWCn0cY0.Yc4wSQkG','siswa',NULL,1,'2026-10-05 12:14:55');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (138,'Refandry','refandry@siswa.smakk.sch.id','$2a$10$0xrCp77199qbqjJnXwD0Y.AXBA2pUBxq7Op5eWCn0cY0.Yc4wSQkG','siswa',NULL,1,'2026-10-05 12:14:55');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (139,'Rehan','rehan@siswa.smakk.sch.id','$2a$10$0xrCp77199qbqjJnXwD0Y.AXBA2pUBxq7Op5eWCn0cY0.Yc4wSQkG','siswa',NULL,1,'2026-10-05 12:14:55');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (140,'Risma Diyanti','risma@siswa.smakk.sch.id','$2a$10$0xrCp77199qbqjJnXwD0Y.AXBA2pUBxq7Op5eWCn0cY0.Yc4wSQkG','siswa',NULL,1,'2026-10-05 12:14:55');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (141,'Sri Windawati Angraini','sri.windawati@siswa.smakk.sch.id','$2a$10$0xrCp77199qbqjJnXwD0Y.AXBA2pUBxq7Op5eWCn0cY0.Yc4wSQkG','siswa',NULL,1,'2026-10-05 12:14:55');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (142,'Andhika','andhika@siswa.smakk.sch.id','$2a$10$0xrCp77199qbqjJnXwD0Y.AXBA2pUBxq7Op5eWCn0cY0.Yc4wSQkG','siswa',NULL,1,'2026-10-05 12:14:55');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (143,'Arisma','arisma@siswa.smakk.sch.id','$2a$10$0xrCp77199qbqjJnXwD0Y.AXBA2pUBxq7Op5eWCn0cY0.Yc4wSQkG','siswa',NULL,1,'2026-10-05 12:14:56');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (144,'Chelsea','chelsea@siswa.smakk.sch.id','$2a$10$0xrCp77199qbqjJnXwD0Y.AXBA2pUBxq7Op5eWCn0cY0.Yc4wSQkG','siswa',NULL,1,'2026-10-05 12:14:56');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (145,'Dede Aditya','dede@siswa.smakk.sch.id','$2a$10$0xrCp77199qbqjJnXwD0Y.AXBA2pUBxq7Op5eWCn0cY0.Yc4wSQkG','siswa',NULL,1,'2026-10-05 12:14:56');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (146,'Divo Yulianto','divo@siswa.smakk.sch.id','$2a$10$0xrCp77199qbqjJnXwD0Y.AXBA2pUBxq7Op5eWCn0cY0.Yc4wSQkG','siswa',NULL,1,'2026-10-05 12:14:56');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (147,'Geby Yemima Dotia','geby@siswa.smakk.sch.id','$2a$10$0xrCp77199qbqjJnXwD0Y.AXBA2pUBxq7Op5eWCn0cY0.Yc4wSQkG','siswa',NULL,1,'2026-10-05 12:14:56');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (148,'Imelda','imelda@siswa.smakk.sch.id','$2a$10$0xrCp77199qbqjJnXwD0Y.AXBA2pUBxq7Op5eWCn0cY0.Yc4wSQkG','siswa',NULL,1,'2026-10-05 12:14:56');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (149,'Jauhari Afdan','jauhari@siswa.smakk.sch.id','$2a$10$0xrCp77199qbqjJnXwD0Y.AXBA2pUBxq7Op5eWCn0cY0.Yc4wSQkG','siswa',NULL,1,'2026-10-05 12:14:56');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (150,'M. Dimastian','m.dimastian@siswa.smakk.sch.id','$2a$10$0xrCp77199qbqjJnXwD0Y.AXBA2pUBxq7Op5eWCn0cY0.Yc4wSQkG','siswa',NULL,1,'2026-10-05 12:14:56');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (151,'M. Lutvino Mardian','m.lutvino@siswa.smakk.sch.id','$2a$10$0xrCp77199qbqjJnXwD0Y.AXBA2pUBxq7Op5eWCn0cY0.Yc4wSQkG','siswa',NULL,1,'2026-10-05 12:14:56');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (152,'M. Sahril Ramadan','m.sahril@siswa.smakk.sch.id','$2a$10$0xrCp77199qbqjJnXwD0Y.AXBA2pUBxq7Op5eWCn0cY0.Yc4wSQkG','siswa',NULL,1,'2026-10-05 12:14:56');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (153,'M.junaidi','mjunaidi@siswa.smakk.sch.id','$2a$10$0xrCp77199qbqjJnXwD0Y.AXBA2pUBxq7Op5eWCn0cY0.Yc4wSQkG','siswa',NULL,1,'2026-10-05 12:14:56');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (154,'Maemunah','maemunah@siswa.smakk.sch.id','$2a$10$0xrCp77199qbqjJnXwD0Y.AXBA2pUBxq7Op5eWCn0cY0.Yc4wSQkG','siswa',NULL,1,'2026-10-05 12:14:56');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (155,'Melda','melda@siswa.smakk.sch.id','$2a$10$0xrCp77199qbqjJnXwD0Y.AXBA2pUBxq7Op5eWCn0cY0.Yc4wSQkG','siswa',NULL,1,'2026-10-05 12:14:56');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (156,'Muhamad Zailafif','muhamad.zailafif@siswa.smakk.sch.id','$2a$10$0xrCp77199qbqjJnXwD0Y.AXBA2pUBxq7Op5eWCn0cY0.Yc4wSQkG','siswa',NULL,1,'2026-10-05 12:14:56');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (157,'Muhammad Patdli Yanor','muhammad.patdli@siswa.smakk.sch.id','$2a$10$0xrCp77199qbqjJnXwD0Y.AXBA2pUBxq7Op5eWCn0cY0.Yc4wSQkG','siswa',NULL,1,'2026-10-05 12:14:56');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (158,'Muhammad Rafli','muhammad.rafli@siswa.smakk.sch.id','$2a$10$0xrCp77199qbqjJnXwD0Y.AXBA2pUBxq7Op5eWCn0cY0.Yc4wSQkG','siswa',NULL,1,'2026-10-05 12:14:56');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (159,'Muhammad Ramadhani Satya','muhammad.ramadhani@siswa.smakk.sch.id','$2a$10$0xrCp77199qbqjJnXwD0Y.AXBA2pUBxq7Op5eWCn0cY0.Yc4wSQkG','siswa',NULL,1,'2026-10-05 12:14:56');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (160,'Noor Patimah','noor@siswa.smakk.sch.id','$2a$10$0xrCp77199qbqjJnXwD0Y.AXBA2pUBxq7Op5eWCn0cY0.Yc4wSQkG','siswa',NULL,1,'2026-10-05 12:14:56');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (161,'Nur Putria Wati','nur@siswa.smakk.sch.id','$2a$10$0xrCp77199qbqjJnXwD0Y.AXBA2pUBxq7Op5eWCn0cY0.Yc4wSQkG','siswa',NULL,1,'2026-10-05 12:14:56');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (162,'Nurmala','nurmala@siswa.smakk.sch.id','$2a$10$0xrCp77199qbqjJnXwD0Y.AXBA2pUBxq7Op5eWCn0cY0.Yc4wSQkG','siswa',NULL,1,'2026-10-05 12:14:56');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (163,'Rahmadani','rahmadani@siswa.smakk.sch.id','$2a$10$0xrCp77199qbqjJnXwD0Y.AXBA2pUBxq7Op5eWCn0cY0.Yc4wSQkG','siswa',NULL,1,'2026-10-05 12:14:56');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (164,'Riskia Aditia Rahman','riskia@siswa.smakk.sch.id','$2a$10$0xrCp77199qbqjJnXwD0Y.AXBA2pUBxq7Op5eWCn0cY0.Yc4wSQkG','siswa',NULL,1,'2026-10-05 12:14:56');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (165,'Rohin','rohin@siswa.smakk.sch.id','$2a$10$0xrCp77199qbqjJnXwD0Y.AXBA2pUBxq7Op5eWCn0cY0.Yc4wSQkG','siswa',NULL,1,'2026-10-05 12:14:56');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (166,'Sayang','sayang@siswa.smakk.sch.id','$2a$10$0xrCp77199qbqjJnXwD0Y.AXBA2pUBxq7Op5eWCn0cY0.Yc4wSQkG','siswa',NULL,1,'2026-10-05 12:14:56');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (167,'Siti Rahmah','siti@siswa.smakk.sch.id','$2a$10$0xrCp77199qbqjJnXwD0Y.AXBA2pUBxq7Op5eWCn0cY0.Yc4wSQkG','siswa',NULL,1,'2026-10-05 12:14:56');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (168,'Sulis','sulis@siswa.smakk.sch.id','$2a$10$0xrCp77199qbqjJnXwD0Y.AXBA2pUBxq7Op5eWCn0cY0.Yc4wSQkG','siswa',NULL,1,'2026-10-05 12:14:56');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (169,'Winda','winda@siswa.smakk.sch.id','$2a$10$0xrCp77199qbqjJnXwD0Y.AXBA2pUBxq7Op5eWCn0cY0.Yc4wSQkG','siswa',NULL,1,'2026-10-05 12:14:56');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (170,'Zilva Natasya Putri','zilva@siswa.smakk.sch.id','$2a$10$0xrCp77199qbqjJnXwD0Y.AXBA2pUBxq7Op5eWCn0cY0.Yc4wSQkG','siswa',NULL,1,'2026-10-05 12:14:56');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (171,'Akhmad Rusyadi','akhmad@siswa.smakk.sch.id','$2a$10$0xrCp77199qbqjJnXwD0Y.AXBA2pUBxq7Op5eWCn0cY0.Yc4wSQkG','siswa',NULL,1,'2026-10-05 12:14:56');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (172,'Annisa Ramadani','annisa@siswa.smakk.sch.id','$2a$10$0xrCp77199qbqjJnXwD0Y.AXBA2pUBxq7Op5eWCn0cY0.Yc4wSQkG','siswa',NULL,1,'2026-10-05 12:14:56');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (173,'Dhea Syafira','dhea@siswa.smakk.sch.id','$2a$10$0xrCp77199qbqjJnXwD0Y.AXBA2pUBxq7Op5eWCn0cY0.Yc4wSQkG','siswa',NULL,1,'2026-10-05 12:14:56');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (174,'Gogi Gustaman','gogi@siswa.smakk.sch.id','$2a$10$0xrCp77199qbqjJnXwD0Y.AXBA2pUBxq7Op5eWCn0cY0.Yc4wSQkG','siswa',NULL,1,'2026-10-05 12:14:56');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (175,'Gujali Rahman','gujali@siswa.smakk.sch.id','$2a$10$0xrCp77199qbqjJnXwD0Y.AXBA2pUBxq7Op5eWCn0cY0.Yc4wSQkG','siswa',NULL,1,'2026-10-05 12:14:56');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (176,'Haili','haili@siswa.smakk.sch.id','$2a$10$0xrCp77199qbqjJnXwD0Y.AXBA2pUBxq7Op5eWCn0cY0.Yc4wSQkG','siswa',NULL,1,'2026-10-05 12:14:56');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (177,'Hilda Putri Norcahyani','hilda@siswa.smakk.sch.id','$2a$10$0xrCp77199qbqjJnXwD0Y.AXBA2pUBxq7Op5eWCn0cY0.Yc4wSQkG','siswa',NULL,1,'2026-10-05 12:14:56');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (178,'Jailani','jailani@siswa.smakk.sch.id','$2a$10$0xrCp77199qbqjJnXwD0Y.AXBA2pUBxq7Op5eWCn0cY0.Yc4wSQkG','siswa',NULL,1,'2026-10-05 12:14:56');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (179,'Kamariyah','kamariyah@siswa.smakk.sch.id','$2a$10$0xrCp77199qbqjJnXwD0Y.AXBA2pUBxq7Op5eWCn0cY0.Yc4wSQkG','siswa',NULL,1,'2026-10-05 12:14:56');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (180,'Karmilo Darprianto','karmilo@siswa.smakk.sch.id','$2a$10$0xrCp77199qbqjJnXwD0Y.AXBA2pUBxq7Op5eWCn0cY0.Yc4wSQkG','siswa',NULL,1,'2026-10-05 12:14:56');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (181,'Ledianto','ledianto@siswa.smakk.sch.id','$2a$10$0xrCp77199qbqjJnXwD0Y.AXBA2pUBxq7Op5eWCn0cY0.Yc4wSQkG','siswa',NULL,1,'2026-10-05 12:14:56');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (182,'M. Risky Aditya','m.risky@siswa.smakk.sch.id','$2a$10$0xrCp77199qbqjJnXwD0Y.AXBA2pUBxq7Op5eWCn0cY0.Yc4wSQkG','siswa',NULL,1,'2026-10-05 12:14:56');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (183,'Mahdiah','mahdiah@siswa.smakk.sch.id','$2a$10$0xrCp77199qbqjJnXwD0Y.AXBA2pUBxq7Op5eWCn0cY0.Yc4wSQkG','siswa',NULL,1,'2026-10-05 12:14:56');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (184,'Maripatu Shaleha','maripatu@siswa.smakk.sch.id','$2a$10$0xrCp77199qbqjJnXwD0Y.AXBA2pUBxq7Op5eWCn0cY0.Yc4wSQkG','siswa',NULL,1,'2026-10-05 12:14:56');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (185,'Muhamad Muzakir','muhamad.muzakir@siswa.smakk.sch.id','$2a$10$0xrCp77199qbqjJnXwD0Y.AXBA2pUBxq7Op5eWCn0cY0.Yc4wSQkG','siswa',NULL,1,'2026-10-05 12:14:56');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (186,'Muhamad Yoga','muhamad.yoga@siswa.smakk.sch.id','$2a$10$0xrCp77199qbqjJnXwD0Y.AXBA2pUBxq7Op5eWCn0cY0.Yc4wSQkG','siswa',NULL,1,'2026-10-05 12:14:56');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (187,'Muhammad Khairani','muhammad.khairani@siswa.smakk.sch.id','$2a$10$0xrCp77199qbqjJnXwD0Y.AXBA2pUBxq7Op5eWCn0cY0.Yc4wSQkG','siswa',NULL,1,'2026-10-05 12:14:56');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (188,'Muhammad Rifky','muhammad.rifky@siswa.smakk.sch.id','$2a$10$0xrCp77199qbqjJnXwD0Y.AXBA2pUBxq7Op5eWCn0cY0.Yc4wSQkG','siswa',NULL,1,'2026-10-05 12:14:56');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (189,'Muhammad Risky Gazali','muhammad.risky@siswa.smakk.sch.id','$2a$10$0xrCp77199qbqjJnXwD0Y.AXBA2pUBxq7Op5eWCn0cY0.Yc4wSQkG','siswa',NULL,1,'2026-10-05 12:14:56');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (190,'Mujainah','mujainah@siswa.smakk.sch.id','$2a$10$0xrCp77199qbqjJnXwD0Y.AXBA2pUBxq7Op5eWCn0cY0.Yc4wSQkG','siswa',NULL,1,'2026-10-05 12:14:56');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (191,'Nadia','nadia2@siswa.smakk.sch.id','$2a$10$0xrCp77199qbqjJnXwD0Y.AXBA2pUBxq7Op5eWCn0cY0.Yc4wSQkG','siswa',NULL,1,'2026-10-05 12:14:56');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (192,'Najirah','najirah@siswa.smakk.sch.id','$2a$10$0xrCp77199qbqjJnXwD0Y.AXBA2pUBxq7Op5eWCn0cY0.Yc4wSQkG','siswa',NULL,1,'2026-10-05 12:14:56');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (193,'Raihannah','raihannah@siswa.smakk.sch.id','$2a$10$0xrCp77199qbqjJnXwD0Y.AXBA2pUBxq7Op5eWCn0cY0.Yc4wSQkG','siswa',NULL,1,'2026-10-05 12:14:56');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (194,'Ratna Safa','ratna@siswa.smakk.sch.id','$2a$10$0xrCp77199qbqjJnXwD0Y.AXBA2pUBxq7Op5eWCn0cY0.Yc4wSQkG','siswa',NULL,1,'2026-10-05 12:14:56');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (195,'Resto Achmad Fauzi','resto@siswa.smakk.sch.id','$2a$10$0xrCp77199qbqjJnXwD0Y.AXBA2pUBxq7Op5eWCn0cY0.Yc4wSQkG','siswa',NULL,1,'2026-10-05 12:14:56');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (196,'Sait','sait@siswa.smakk.sch.id','$2a$10$0xrCp77199qbqjJnXwD0Y.AXBA2pUBxq7Op5eWCn0cY0.Yc4wSQkG','siswa',NULL,1,'2026-10-05 12:14:56');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (197,'Stef Pany Debora','stef@siswa.smakk.sch.id','$2a$10$0xrCp77199qbqjJnXwD0Y.AXBA2pUBxq7Op5eWCn0cY0.Yc4wSQkG','siswa',NULL,1,'2026-10-05 12:14:56');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (198,'Wahyu Ramadhani','wahyu@siswa.smakk.sch.id','$2a$10$0xrCp77199qbqjJnXwD0Y.AXBA2pUBxq7Op5eWCn0cY0.Yc4wSQkG','siswa',NULL,1,'2026-10-05 12:14:56');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (199,'Ahmad Naz\'ril Affan Isbiantoro','ahmad.nazril@siswa.smakk.sch.id','$2a$10$0xrCp77199qbqjJnXwD0Y.AXBA2pUBxq7Op5eWCn0cY0.Yc4wSQkG','siswa',NULL,1,'2026-10-05 12:14:56');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (200,'Ahmad Ramadan','ahmad.ramadan@siswa.smakk.sch.id','$2a$10$0xrCp77199qbqjJnXwD0Y.AXBA2pUBxq7Op5eWCn0cY0.Yc4wSQkG','siswa',NULL,1,'2026-10-05 12:14:56');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (201,'Alan','alan@siswa.smakk.sch.id','$2a$10$0xrCp77199qbqjJnXwD0Y.AXBA2pUBxq7Op5eWCn0cY0.Yc4wSQkG','siswa',NULL,1,'2026-10-05 12:14:56');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (202,'Andre','andre@siswa.smakk.sch.id','$2a$10$0xrCp77199qbqjJnXwD0Y.AXBA2pUBxq7Op5eWCn0cY0.Yc4wSQkG','siswa',NULL,1,'2026-10-05 12:14:56');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (203,'Bela','bela@siswa.smakk.sch.id','$2a$10$0xrCp77199qbqjJnXwD0Y.AXBA2pUBxq7Op5eWCn0cY0.Yc4wSQkG','siswa',NULL,1,'2026-10-05 12:14:56');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (204,'Denis Hertanto','denis@siswa.smakk.sch.id','$2a$10$0xrCp77199qbqjJnXwD0Y.AXBA2pUBxq7Op5eWCn0cY0.Yc4wSQkG','siswa',NULL,1,'2026-10-05 12:14:56');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (205,'Dini Pertiwi','dini@siswa.smakk.sch.id','$2a$10$0xrCp77199qbqjJnXwD0Y.AXBA2pUBxq7Op5eWCn0cY0.Yc4wSQkG','siswa',NULL,1,'2026-10-05 12:14:56');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (206,'Efrida','efrida@siswa.smakk.sch.id','$2a$10$0xrCp77199qbqjJnXwD0Y.AXBA2pUBxq7Op5eWCn0cY0.Yc4wSQkG','siswa',NULL,1,'2026-10-05 12:14:56');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (207,'Erni Elisa','erni@siswa.smakk.sch.id','$2a$10$0xrCp77199qbqjJnXwD0Y.AXBA2pUBxq7Op5eWCn0cY0.Yc4wSQkG','siswa',NULL,1,'2026-10-05 12:14:56');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (208,'Herno Mey Lino','herno@siswa.smakk.sch.id','$2a$10$0xrCp77199qbqjJnXwD0Y.AXBA2pUBxq7Op5eWCn0cY0.Yc4wSQkG','siswa',NULL,1,'2026-10-05 12:14:56');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (209,'Irpan','irpan2@siswa.smakk.sch.id','$2a$10$0xrCp77199qbqjJnXwD0Y.AXBA2pUBxq7Op5eWCn0cY0.Yc4wSQkG','siswa',NULL,1,'2026-10-05 12:14:56');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (210,'Jailani','jailani2@siswa.smakk.sch.id','$2a$10$0xrCp77199qbqjJnXwD0Y.AXBA2pUBxq7Op5eWCn0cY0.Yc4wSQkG','siswa',NULL,1,'2026-10-05 12:14:56');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (211,'Kasih','kasih@siswa.smakk.sch.id','$2a$10$0xrCp77199qbqjJnXwD0Y.AXBA2pUBxq7Op5eWCn0cY0.Yc4wSQkG','siswa',NULL,1,'2026-10-05 12:14:56');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (212,'Lestary','lestary@siswa.smakk.sch.id','$2a$10$0xrCp77199qbqjJnXwD0Y.AXBA2pUBxq7Op5eWCn0cY0.Yc4wSQkG','siswa',NULL,1,'2026-10-05 12:14:56');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (213,'Muhammad Ridwan Rifai','muhammad.ridwan@siswa.smakk.sch.id','$2a$10$0xrCp77199qbqjJnXwD0Y.AXBA2pUBxq7Op5eWCn0cY0.Yc4wSQkG','siswa',NULL,1,'2026-10-05 12:14:56');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (214,'Muhammad Rizki','muhammad.rizki@siswa.smakk.sch.id','$2a$10$0xrCp77199qbqjJnXwD0Y.AXBA2pUBxq7Op5eWCn0cY0.Yc4wSQkG','siswa',NULL,1,'2026-10-05 12:14:56');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (215,'Mu\'min','mumin@siswa.smakk.sch.id','$2a$10$0xrCp77199qbqjJnXwD0Y.AXBA2pUBxq7Op5eWCn0cY0.Yc4wSQkG','siswa',NULL,1,'2026-10-05 12:14:56');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (216,'Nabila','nabila@siswa.smakk.sch.id','$2a$10$0xrCp77199qbqjJnXwD0Y.AXBA2pUBxq7Op5eWCn0cY0.Yc4wSQkG','siswa',NULL,1,'2026-10-05 12:14:56');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (217,'Rahmah Liana','rahmah@siswa.smakk.sch.id','$2a$10$0xrCp77199qbqjJnXwD0Y.AXBA2pUBxq7Op5eWCn0cY0.Yc4wSQkG','siswa',NULL,1,'2026-10-05 12:14:56');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (218,'Ramadan','ramadan@siswa.smakk.sch.id','$2a$10$0xrCp77199qbqjJnXwD0Y.AXBA2pUBxq7Op5eWCn0cY0.Yc4wSQkG','siswa',NULL,1,'2026-10-05 12:14:56');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (219,'Resky Pratama','resky@siswa.smakk.sch.id','$2a$10$0xrCp77199qbqjJnXwD0Y.AXBA2pUBxq7Op5eWCn0cY0.Yc4wSQkG','siswa',NULL,1,'2026-10-05 12:14:56');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (220,'Reyndra Ahmad','reyndra@siswa.smakk.sch.id','$2a$10$0xrCp77199qbqjJnXwD0Y.AXBA2pUBxq7Op5eWCn0cY0.Yc4wSQkG','siswa',NULL,1,'2026-10-05 12:14:56');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (221,'Rima Aulia','rima@siswa.smakk.sch.id','$2a$10$0xrCp77199qbqjJnXwD0Y.AXBA2pUBxq7Op5eWCn0cY0.Yc4wSQkG','siswa',NULL,1,'2026-10-05 12:14:56');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (222,'Risma Putri','risma.putri@siswa.smakk.sch.id','$2a$10$0xrCp77199qbqjJnXwD0Y.AXBA2pUBxq7Op5eWCn0cY0.Yc4wSQkG','siswa',NULL,1,'2026-10-05 12:14:56');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (223,'Rolan','rolan@siswa.smakk.sch.id','$2a$10$0xrCp77199qbqjJnXwD0Y.AXBA2pUBxq7Op5eWCn0cY0.Yc4wSQkG','siswa',NULL,1,'2026-10-05 12:14:56');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (224,'Sabda','sabda@siswa.smakk.sch.id','$2a$10$0xrCp77199qbqjJnXwD0Y.AXBA2pUBxq7Op5eWCn0cY0.Yc4wSQkG','siswa',NULL,1,'2026-10-05 12:14:56');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (225,'Sipha','sipha@siswa.smakk.sch.id','$2a$10$0xrCp77199qbqjJnXwD0Y.AXBA2pUBxq7Op5eWCn0cY0.Yc4wSQkG','siswa',NULL,1,'2026-10-05 12:14:56');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (226,'Siska','siska@siswa.smakk.sch.id','$2a$10$0xrCp77199qbqjJnXwD0Y.AXBA2pUBxq7Op5eWCn0cY0.Yc4wSQkG','siswa',NULL,1,'2026-10-05 12:14:56');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (227,'Afdillah','afdillah@siswa.smakk.sch.id','$2a$10$0xrCp77199qbqjJnXwD0Y.AXBA2pUBxq7Op5eWCn0cY0.Yc4wSQkG','siswa',NULL,1,'2026-10-05 12:14:56');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (228,'Ahmad Hariyanto','ahmad.hariyanto@siswa.smakk.sch.id','$2a$10$0xrCp77199qbqjJnXwD0Y.AXBA2pUBxq7Op5eWCn0cY0.Yc4wSQkG','siswa',NULL,1,'2026-10-05 12:14:56');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (229,'Ahmad Indra Zulpani','ahmad.indra@siswa.smakk.sch.id','$2a$10$0xrCp77199qbqjJnXwD0Y.AXBA2pUBxq7Op5eWCn0cY0.Yc4wSQkG','siswa',NULL,1,'2026-10-05 12:14:56');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (230,'Ahmad Rafli Susanto','ahmad.rafli@siswa.smakk.sch.id','$2a$10$0xrCp77199qbqjJnXwD0Y.AXBA2pUBxq7Op5eWCn0cY0.Yc4wSQkG','siswa',NULL,1,'2026-10-05 12:14:56');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (231,'Alwi','alwi@siswa.smakk.sch.id','$2a$10$0xrCp77199qbqjJnXwD0Y.AXBA2pUBxq7Op5eWCn0cY0.Yc4wSQkG','siswa',NULL,1,'2026-10-05 12:14:56');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (232,'Anugerah Shania','anugerah@siswa.smakk.sch.id','$2a$10$0xrCp77199qbqjJnXwD0Y.AXBA2pUBxq7Op5eWCn0cY0.Yc4wSQkG','siswa',NULL,1,'2026-10-05 12:14:56');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (233,'Azfa Intan Putri Afin','azfa@siswa.smakk.sch.id','$2a$10$0xrCp77199qbqjJnXwD0Y.AXBA2pUBxq7Op5eWCn0cY0.Yc4wSQkG','siswa',NULL,1,'2026-10-05 12:14:56');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (234,'Azzahra','azzahra@siswa.smakk.sch.id','$2a$10$0xrCp77199qbqjJnXwD0Y.AXBA2pUBxq7Op5eWCn0cY0.Yc4wSQkG','siswa',NULL,1,'2026-10-05 12:14:56');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (235,'Denis Prayoga','denis.prayoga@siswa.smakk.sch.id','$2a$10$0xrCp77199qbqjJnXwD0Y.AXBA2pUBxq7Op5eWCn0cY0.Yc4wSQkG','siswa',NULL,1,'2026-10-05 12:14:56');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (236,'Isranudin','isranudin@siswa.smakk.sch.id','$2a$10$0xrCp77199qbqjJnXwD0Y.AXBA2pUBxq7Op5eWCn0cY0.Yc4wSQkG','siswa',NULL,1,'2026-10-05 12:14:56');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (237,'Jefri Insani','jefri@siswa.smakk.sch.id','$2a$10$0xrCp77199qbqjJnXwD0Y.AXBA2pUBxq7Op5eWCn0cY0.Yc4wSQkG','siswa',NULL,1,'2026-10-05 12:14:56');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (238,'Ledy Saputra','ledy@siswa.smakk.sch.id','$2a$10$0xrCp77199qbqjJnXwD0Y.AXBA2pUBxq7Op5eWCn0cY0.Yc4wSQkG','siswa',NULL,1,'2026-10-05 12:14:56');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (239,'M. Habibi Faith Islamuzzaid','m.habibi@siswa.smakk.sch.id','$2a$10$0xrCp77199qbqjJnXwD0Y.AXBA2pUBxq7Op5eWCn0cY0.Yc4wSQkG','siswa',NULL,1,'2026-10-05 12:14:56');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (240,'Muhammad Pajli','muhammad.pajli@siswa.smakk.sch.id','$2a$10$0xrCp77199qbqjJnXwD0Y.AXBA2pUBxq7Op5eWCn0cY0.Yc4wSQkG','siswa',NULL,1,'2026-10-05 12:14:56');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (241,'Muhammad Ramadhani','muhammad3@siswa.smakk.sch.id','$2a$10$0xrCp77199qbqjJnXwD0Y.AXBA2pUBxq7Op5eWCn0cY0.Yc4wSQkG','siswa',NULL,1,'2026-10-05 12:14:56');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (242,'Muhammad Sabirin','muhammad.sabirin@siswa.smakk.sch.id','$2a$10$0xrCp77199qbqjJnXwD0Y.AXBA2pUBxq7Op5eWCn0cY0.Yc4wSQkG','siswa',NULL,1,'2026-10-05 12:14:56');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (243,'Najmi Afifah Khairani','najmi@siswa.smakk.sch.id','$2a$10$0xrCp77199qbqjJnXwD0Y.AXBA2pUBxq7Op5eWCn0cY0.Yc4wSQkG','siswa',NULL,1,'2026-10-05 12:14:56');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (244,'Nina','nina@siswa.smakk.sch.id','$2a$10$0xrCp77199qbqjJnXwD0Y.AXBA2pUBxq7Op5eWCn0cY0.Yc4wSQkG','siswa',NULL,1,'2026-10-05 12:14:56');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (245,'Noor Hidayanti','noor.hidayanti@siswa.smakk.sch.id','$2a$10$0xrCp77199qbqjJnXwD0Y.AXBA2pUBxq7Op5eWCn0cY0.Yc4wSQkG','siswa',NULL,1,'2026-10-05 12:14:56');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (246,'Nor Aena','nor.aena@siswa.smakk.sch.id','$2a$10$0xrCp77199qbqjJnXwD0Y.AXBA2pUBxq7Op5eWCn0cY0.Yc4wSQkG','siswa',NULL,1,'2026-10-05 12:14:56');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (247,'Qa\'id Adly Setya','qaid@siswa.smakk.sch.id','$2a$10$0xrCp77199qbqjJnXwD0Y.AXBA2pUBxq7Op5eWCn0cY0.Yc4wSQkG','siswa',NULL,1,'2026-10-05 12:14:56');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (248,'Radit','radit@siswa.smakk.sch.id','$2a$10$0xrCp77199qbqjJnXwD0Y.AXBA2pUBxq7Op5eWCn0cY0.Yc4wSQkG','siswa',NULL,1,'2026-10-05 12:14:56');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (249,'Rafi Hidayat','rafi@siswa.smakk.sch.id','$2a$10$0xrCp77199qbqjJnXwD0Y.AXBA2pUBxq7Op5eWCn0cY0.Yc4wSQkG','siswa',NULL,1,'2026-10-05 12:14:56');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (250,'Raka Dewangga','raka@siswa.smakk.sch.id','$2a$10$0xrCp77199qbqjJnXwD0Y.AXBA2pUBxq7Op5eWCn0cY0.Yc4wSQkG','siswa',NULL,1,'2026-10-05 12:14:56');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (251,'Rassya','rassya@siswa.smakk.sch.id','$2a$10$0xrCp77199qbqjJnXwD0Y.AXBA2pUBxq7Op5eWCn0cY0.Yc4wSQkG','siswa',NULL,1,'2026-10-05 12:14:56');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (252,'Rasti','rasti@siswa.smakk.sch.id','$2a$10$0xrCp77199qbqjJnXwD0Y.AXBA2pUBxq7Op5eWCn0cY0.Yc4wSQkG','siswa',NULL,1,'2026-10-05 12:14:56');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (253,'Sarif Hidayat','sarif@siswa.smakk.sch.id','$2a$10$0xrCp77199qbqjJnXwD0Y.AXBA2pUBxq7Op5eWCn0cY0.Yc4wSQkG','siswa',NULL,1,'2026-10-05 12:14:56');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (254,'Shintia Halwa Nurinayaty','shintia@siswa.smakk.sch.id','$2a$10$0xrCp77199qbqjJnXwD0Y.AXBA2pUBxq7Op5eWCn0cY0.Yc4wSQkG','siswa',NULL,1,'2026-10-05 12:14:56');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (255,'Sri Dewi Meranti','sri.dewi@siswa.smakk.sch.id','$2a$10$0xrCp77199qbqjJnXwD0Y.AXBA2pUBxq7Op5eWCn0cY0.Yc4wSQkG','siswa',NULL,1,'2026-10-05 12:14:56');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (256,'Vitha Tussittah','vitha@siswa.smakk.sch.id','$2a$10$0xrCp77199qbqjJnXwD0Y.AXBA2pUBxq7Op5eWCn0cY0.Yc4wSQkG','siswa',NULL,1,'2026-10-05 12:14:56');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (257,'Zaid As Shiddiq','zaid@siswa.smakk.sch.id','$2a$10$0xrCp77199qbqjJnXwD0Y.AXBA2pUBxq7Op5eWCn0cY0.Yc4wSQkG','siswa',NULL,1,'2026-10-05 12:14:56');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (258,'Adrian Noval','adrian@siswa.smakk.sch.id','$2a$10$0xrCp77199qbqjJnXwD0Y.AXBA2pUBxq7Op5eWCn0cY0.Yc4wSQkG','siswa',NULL,1,'2026-10-05 12:14:56');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (259,'Aulia Ulfah','aulia.ulfah@siswa.smakk.sch.id','$2a$10$0xrCp77199qbqjJnXwD0Y.AXBA2pUBxq7Op5eWCn0cY0.Yc4wSQkG','siswa',NULL,1,'2026-10-05 12:14:56');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (260,'Aurel Cintami Putri','aurel@siswa.smakk.sch.id','$2a$10$0xrCp77199qbqjJnXwD0Y.AXBA2pUBxq7Op5eWCn0cY0.Yc4wSQkG','siswa',NULL,1,'2026-10-05 12:14:56');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (261,'Bintang Surya','bintang@siswa.smakk.sch.id','$2a$10$0xrCp77199qbqjJnXwD0Y.AXBA2pUBxq7Op5eWCn0cY0.Yc4wSQkG','siswa',NULL,1,'2026-10-05 12:14:56');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (262,'Cindy Oktarissa','cindy@siswa.smakk.sch.id','$2a$10$0xrCp77199qbqjJnXwD0Y.AXBA2pUBxq7Op5eWCn0cY0.Yc4wSQkG','siswa',NULL,1,'2026-10-05 12:14:56');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (263,'Desi Ratna Sari','desi@siswa.smakk.sch.id','$2a$10$0xrCp77199qbqjJnXwD0Y.AXBA2pUBxq7Op5eWCn0cY0.Yc4wSQkG','siswa',NULL,1,'2026-10-05 12:14:56');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (264,'Dinda','dinda@siswa.smakk.sch.id','$2a$10$0xrCp77199qbqjJnXwD0Y.AXBA2pUBxq7Op5eWCn0cY0.Yc4wSQkG','siswa',NULL,1,'2026-10-05 12:14:56');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (265,'Fatmah A\'zahra','fatmah@siswa.smakk.sch.id','$2a$10$0xrCp77199qbqjJnXwD0Y.AXBA2pUBxq7Op5eWCn0cY0.Yc4wSQkG','siswa',NULL,1,'2026-10-05 12:14:57');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (266,'Hanny Rukmana','hanny@siswa.smakk.sch.id','$2a$10$0xrCp77199qbqjJnXwD0Y.AXBA2pUBxq7Op5eWCn0cY0.Yc4wSQkG','siswa',NULL,1,'2026-10-05 12:14:57');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (267,'Helda Putri','helda@siswa.smakk.sch.id','$2a$10$0xrCp77199qbqjJnXwD0Y.AXBA2pUBxq7Op5eWCn0cY0.Yc4wSQkG','siswa',NULL,1,'2026-10-05 12:14:57');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (268,'Indra Gunawan','indra@siswa.smakk.sch.id','$2a$10$0xrCp77199qbqjJnXwD0Y.AXBA2pUBxq7Op5eWCn0cY0.Yc4wSQkG','siswa',NULL,1,'2026-10-05 12:14:57');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (269,'Jesti Mutiara','jesti@siswa.smakk.sch.id','$2a$10$0xrCp77199qbqjJnXwD0Y.AXBA2pUBxq7Op5eWCn0cY0.Yc4wSQkG','siswa',NULL,1,'2026-10-05 12:14:57');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (270,'Kamelia','kamelia@siswa.smakk.sch.id','$2a$10$0xrCp77199qbqjJnXwD0Y.AXBA2pUBxq7Op5eWCn0cY0.Yc4wSQkG','siswa',NULL,1,'2026-10-05 12:14:57');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (271,'Lisa Marsela','lisa@siswa.smakk.sch.id','$2a$10$0xrCp77199qbqjJnXwD0Y.AXBA2pUBxq7Op5eWCn0cY0.Yc4wSQkG','siswa',NULL,1,'2026-10-05 12:14:57');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (272,'Milla Elka Normasari','milla@siswa.smakk.sch.id','$2a$10$0xrCp77199qbqjJnXwD0Y.AXBA2pUBxq7Op5eWCn0cY0.Yc4wSQkG','siswa',NULL,1,'2026-10-05 12:14:57');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (273,'Monika','monika@siswa.smakk.sch.id','$2a$10$0xrCp77199qbqjJnXwD0Y.AXBA2pUBxq7Op5eWCn0cY0.Yc4wSQkG','siswa',NULL,1,'2026-10-05 12:14:57');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (274,'Muhamad Amin Badali','muhamad.amin@siswa.smakk.sch.id','$2a$10$0xrCp77199qbqjJnXwD0Y.AXBA2pUBxq7Op5eWCn0cY0.Yc4wSQkG','siswa',NULL,1,'2026-10-05 12:14:57');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (275,'Muhamadi Saputra','muhamadi@siswa.smakk.sch.id','$2a$10$0xrCp77199qbqjJnXwD0Y.AXBA2pUBxq7Op5eWCn0cY0.Yc4wSQkG','siswa',NULL,1,'2026-10-05 12:14:57');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (276,'Muhammad Rizky Hidayat','muhammad.rizky@siswa.smakk.sch.id','$2a$10$0xrCp77199qbqjJnXwD0Y.AXBA2pUBxq7Op5eWCn0cY0.Yc4wSQkG','siswa',NULL,1,'2026-10-05 12:14:57');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (277,'Muhammad Subli','muhammad.subli@siswa.smakk.sch.id','$2a$10$0xrCp77199qbqjJnXwD0Y.AXBA2pUBxq7Op5eWCn0cY0.Yc4wSQkG','siswa',NULL,1,'2026-10-05 12:14:57');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (278,'Norhadijah','norhadijah@siswa.smakk.sch.id','$2a$10$0xrCp77199qbqjJnXwD0Y.AXBA2pUBxq7Op5eWCn0cY0.Yc4wSQkG','siswa',NULL,1,'2026-10-05 12:14:57');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (279,'Ongki Saputra','ongki@siswa.smakk.sch.id','$2a$10$0xrCp77199qbqjJnXwD0Y.AXBA2pUBxq7Op5eWCn0cY0.Yc4wSQkG','siswa',NULL,1,'2026-10-05 12:14:57');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (280,'Prinda Agata','prinda@siswa.smakk.sch.id','$2a$10$0xrCp77199qbqjJnXwD0Y.AXBA2pUBxq7Op5eWCn0cY0.Yc4wSQkG','siswa',NULL,1,'2026-10-05 12:14:57');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (281,'Putri Aprilia','putri.aprilia@siswa.smakk.sch.id','$2a$10$0xrCp77199qbqjJnXwD0Y.AXBA2pUBxq7Op5eWCn0cY0.Yc4wSQkG','siswa',NULL,1,'2026-10-05 12:14:57');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (282,'Rahmi Yatika','rahmi@siswa.smakk.sch.id','$2a$10$0xrCp77199qbqjJnXwD0Y.AXBA2pUBxq7Op5eWCn0cY0.Yc4wSQkG','siswa',NULL,1,'2026-10-05 12:14:57');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (283,'Rico Valentino','rico@siswa.smakk.sch.id','$2a$10$0xrCp77199qbqjJnXwD0Y.AXBA2pUBxq7Op5eWCn0cY0.Yc4wSQkG','siswa',NULL,1,'2026-10-05 12:14:57');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (284,'Riki Delta','riki@siswa.smakk.sch.id','$2a$10$0xrCp77199qbqjJnXwD0Y.AXBA2pUBxq7Op5eWCn0cY0.Yc4wSQkG','siswa',NULL,1,'2026-10-05 12:14:57');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (285,'Sera Nabila','sera@siswa.smakk.sch.id','$2a$10$0xrCp77199qbqjJnXwD0Y.AXBA2pUBxq7Op5eWCn0cY0.Yc4wSQkG','siswa',NULL,1,'2026-10-05 12:14:57');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (286,'Siti Cahaya Murni','siti.cahaya@siswa.smakk.sch.id','$2a$10$0xrCp77199qbqjJnXwD0Y.AXBA2pUBxq7Op5eWCn0cY0.Yc4wSQkG','siswa',NULL,1,'2026-10-05 12:14:57');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (287,'Zahratunnissa','zahratunnissa@siswa.smakk.sch.id','$2a$10$0xrCp77199qbqjJnXwD0Y.AXBA2pUBxq7Op5eWCn0cY0.Yc4wSQkG','siswa',NULL,1,'2026-10-05 12:14:57');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (288,'Zulkifli','zulkifli@siswa.smakk.sch.id','$2a$10$0xrCp77199qbqjJnXwD0Y.AXBA2pUBxq7Op5eWCn0cY0.Yc4wSQkG','siswa',NULL,1,'2026-10-05 12:14:57');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (289,'Ahmad Dika','ahmad.dika@siswa.smakk.sch.id','$2a$10$0xrCp77199qbqjJnXwD0Y.AXBA2pUBxq7Op5eWCn0cY0.Yc4wSQkG','siswa',NULL,1,'2026-10-05 12:14:57');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (290,'Ahmad Firdaus','ahmad.firdaus@siswa.smakk.sch.id','$2a$10$0xrCp77199qbqjJnXwD0Y.AXBA2pUBxq7Op5eWCn0cY0.Yc4wSQkG','siswa',NULL,1,'2026-10-05 12:14:57');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (291,'Ahmad Wahyu Deriyanto','ahmad.wahyu@siswa.smakk.sch.id','$2a$10$0xrCp77199qbqjJnXwD0Y.AXBA2pUBxq7Op5eWCn0cY0.Yc4wSQkG','siswa',NULL,1,'2026-10-05 12:14:57');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (292,'Cinta Lestari','cinta@siswa.smakk.sch.id','$2a$10$0xrCp77199qbqjJnXwD0Y.AXBA2pUBxq7Op5eWCn0cY0.Yc4wSQkG','siswa',NULL,1,'2026-10-05 12:14:57');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (293,'Denis Permana Putra','denis.permana@siswa.smakk.sch.id','$2a$10$0xrCp77199qbqjJnXwD0Y.AXBA2pUBxq7Op5eWCn0cY0.Yc4wSQkG','siswa',NULL,1,'2026-10-05 12:14:57');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (294,'Fajrianor','fajrianor2@siswa.smakk.sch.id','$2a$10$0xrCp77199qbqjJnXwD0Y.AXBA2pUBxq7Op5eWCn0cY0.Yc4wSQkG','siswa',NULL,1,'2026-10-05 12:14:57');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (295,'Hepni','hepni@siswa.smakk.sch.id','$2a$10$0xrCp77199qbqjJnXwD0Y.AXBA2pUBxq7Op5eWCn0cY0.Yc4wSQkG','siswa',NULL,1,'2026-10-05 12:14:57');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (296,'Husnul Khatimah','husnul@siswa.smakk.sch.id','$2a$10$0xrCp77199qbqjJnXwD0Y.AXBA2pUBxq7Op5eWCn0cY0.Yc4wSQkG','siswa',NULL,1,'2026-10-05 12:14:57');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (297,'Imam','imam@siswa.smakk.sch.id','$2a$10$0xrCp77199qbqjJnXwD0Y.AXBA2pUBxq7Op5eWCn0cY0.Yc4wSQkG','siswa',NULL,1,'2026-10-05 12:14:57');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (298,'Indra','indra2@siswa.smakk.sch.id','$2a$10$0xrCp77199qbqjJnXwD0Y.AXBA2pUBxq7Op5eWCn0cY0.Yc4wSQkG','siswa',NULL,1,'2026-10-05 12:14:57');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (299,'Iqbal','iqbal@siswa.smakk.sch.id','$2a$10$0xrCp77199qbqjJnXwD0Y.AXBA2pUBxq7Op5eWCn0cY0.Yc4wSQkG','siswa',NULL,1,'2026-10-05 12:14:57');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (300,'Levi Yanor','levi@siswa.smakk.sch.id','$2a$10$0xrCp77199qbqjJnXwD0Y.AXBA2pUBxq7Op5eWCn0cY0.Yc4wSQkG','siswa',NULL,1,'2026-10-05 12:14:57');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (301,'M Rah Ar Am Yewosa Aulia','m.rah@siswa.smakk.sch.id','$2a$10$0xrCp77199qbqjJnXwD0Y.AXBA2pUBxq7Op5eWCn0cY0.Yc4wSQkG','siswa',NULL,1,'2026-10-05 12:14:57');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (302,'Melati Annailla Dewi','melati@siswa.smakk.sch.id','$2a$10$0xrCp77199qbqjJnXwD0Y.AXBA2pUBxq7Op5eWCn0cY0.Yc4wSQkG','siswa',NULL,1,'2026-10-05 12:14:57');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (303,'Muhammad Dani','muhammad.dani@siswa.smakk.sch.id','$2a$10$0xrCp77199qbqjJnXwD0Y.AXBA2pUBxq7Op5eWCn0cY0.Yc4wSQkG','siswa',NULL,1,'2026-10-05 12:14:57');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (304,'Muhammad Dika','muhammad.dika@siswa.smakk.sch.id','$2a$10$0xrCp77199qbqjJnXwD0Y.AXBA2pUBxq7Op5eWCn0cY0.Yc4wSQkG','siswa',NULL,1,'2026-10-05 12:14:57');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (305,'Muhammad Ridali','muhammad.ridali@siswa.smakk.sch.id','$2a$10$0xrCp77199qbqjJnXwD0Y.AXBA2pUBxq7Op5eWCn0cY0.Yc4wSQkG','siswa',NULL,1,'2026-10-05 12:14:57');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (306,'Nero','nero@siswa.smakk.sch.id','$2a$10$0xrCp77199qbqjJnXwD0Y.AXBA2pUBxq7Op5eWCn0cY0.Yc4wSQkG','siswa',NULL,1,'2026-10-05 12:14:57');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (307,'Nor Reka Sari','nor.reka@siswa.smakk.sch.id','$2a$10$0xrCp77199qbqjJnXwD0Y.AXBA2pUBxq7Op5eWCn0cY0.Yc4wSQkG','siswa',NULL,1,'2026-10-05 12:14:57');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (308,'Norlika','norlika@siswa.smakk.sch.id','$2a$10$0xrCp77199qbqjJnXwD0Y.AXBA2pUBxq7Op5eWCn0cY0.Yc4wSQkG','siswa',NULL,1,'2026-10-05 12:14:57');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (309,'Nurimbi','nurimbi@siswa.smakk.sch.id','$2a$10$0xrCp77199qbqjJnXwD0Y.AXBA2pUBxq7Op5eWCn0cY0.Yc4wSQkG','siswa',NULL,1,'2026-10-05 12:14:57');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (310,'Oktavia Rahmadani','oktavia@siswa.smakk.sch.id','$2a$10$0xrCp77199qbqjJnXwD0Y.AXBA2pUBxq7Op5eWCn0cY0.Yc4wSQkG','siswa',NULL,1,'2026-10-05 12:14:57');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (311,'Riska Wulandari','riska.wulandari@siswa.smakk.sch.id','$2a$10$0xrCp77199qbqjJnXwD0Y.AXBA2pUBxq7Op5eWCn0cY0.Yc4wSQkG','siswa',NULL,1,'2026-10-05 12:14:57');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (312,'Safira Mehra','safira@siswa.smakk.sch.id','$2a$10$0xrCp77199qbqjJnXwD0Y.AXBA2pUBxq7Op5eWCn0cY0.Yc4wSQkG','siswa',NULL,1,'2026-10-05 12:14:57');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (313,'Salfaniy','salfaniy@siswa.smakk.sch.id','$2a$10$0xrCp77199qbqjJnXwD0Y.AXBA2pUBxq7Op5eWCn0cY0.Yc4wSQkG','siswa',NULL,1,'2026-10-05 12:14:57');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (314,'Sandy','sandy@siswa.smakk.sch.id','$2a$10$0xrCp77199qbqjJnXwD0Y.AXBA2pUBxq7Op5eWCn0cY0.Yc4wSQkG','siswa',NULL,1,'2026-10-05 12:14:57');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (315,'Satrio Wijaksono','satrio@siswa.smakk.sch.id','$2a$10$0xrCp77199qbqjJnXwD0Y.AXBA2pUBxq7Op5eWCn0cY0.Yc4wSQkG','siswa',NULL,1,'2026-10-05 12:14:57');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (316,'Verlita Valentina','verlita@siswa.smakk.sch.id','$2a$10$0xrCp77199qbqjJnXwD0Y.AXBA2pUBxq7Op5eWCn0cY0.Yc4wSQkG','siswa',NULL,1,'2026-10-05 12:14:57');
 
 
 -- ===========================================================================
@@ -414,54 +405,13 @@ CREATE TABLE `periode` (
   UNIQUE KEY `kode` (`kode`),
   KEY `fk_periode_admin` (`dikunci_oleh`),
   CONSTRAINT `fk_periode_admin` FOREIGN KEY (`dikunci_oleh`) REFERENCES `users` (`id`) ON DELETE SET NULL
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-INSERT INTO `periode` (`id`, `kode`, `tahun_ajaran`, `semester`, `tgl_mulai`, `tgl_selesai`, `status`, `dikunci_oleh`, `tgl_dikunci`, `created_at`) VALUES (1,'2026/1','2025/2026',1,'2025-07-14','2025-12-19','terkunci',1,'2025-12-22 10:00:00','2026-09-27 16:22:47');
-INSERT INTO `periode` (`id`, `kode`, `tahun_ajaran`, `semester`, `tgl_mulai`, `tgl_selesai`, `status`, `dikunci_oleh`, `tgl_dikunci`, `created_at`) VALUES (2,'2026/2','2025/2026',2,'2026-01-05','2026-06-19','aktif',NULL,NULL,'2026-09-27 16:22:47');
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+INSERT INTO `periode` (`id`, `kode`, `tahun_ajaran`, `semester`, `tgl_mulai`, `tgl_selesai`, `status`, `dikunci_oleh`, `tgl_dikunci`, `created_at`) VALUES (1,'2026/1','2025/2026',1,'2025-07-14','2025-12-19','terkunci',1,'2025-12-22 10:00:00','2026-10-05 12:14:54');
+INSERT INTO `periode` (`id`, `kode`, `tahun_ajaran`, `semester`, `tgl_mulai`, `tgl_selesai`, `status`, `dikunci_oleh`, `tgl_dikunci`, `created_at`) VALUES (2,'2026/2','2025/2026',2,'2026-01-05','2026-06-19','aktif',NULL,NULL,'2026-10-05 12:14:54');
 
 
 -- ===========================================================================
--- 3. Tabel `kelas`
---    Rombongan belajar pada sebuah periode pembelajaran
---    Jumlah data: 20 baris
--- ===========================================================================
-
-DROP TABLE IF EXISTS `kelas`;
-CREATE TABLE `kelas` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `id_periode` int(11) NOT NULL,
-  `nama_kelas` varchar(50) NOT NULL,
-  `tingkat` varchar(10) NOT NULL,
-  `id_wali` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `uq_kelas_periode` (`id_periode`,`nama_kelas`),
-  KEY `fk_kelas_wali` (`id_wali`),
-  CONSTRAINT `fk_kelas_periode` FOREIGN KEY (`id_periode`) REFERENCES `periode` (`id`) ON DELETE CASCADE,
-  CONSTRAINT `fk_kelas_wali` FOREIGN KEY (`id_wali`) REFERENCES `guru` (`id`) ON DELETE SET NULL
-) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-INSERT INTO `kelas` (`id`, `id_periode`, `nama_kelas`, `tingkat`, `id_wali`) VALUES (1,1,'X A','X',5);
-INSERT INTO `kelas` (`id`, `id_periode`, `nama_kelas`, `tingkat`, `id_wali`) VALUES (2,1,'X B','X',27);
-INSERT INTO `kelas` (`id`, `id_periode`, `nama_kelas`, `tingkat`, `id_wali`) VALUES (3,1,'X C','X',4);
-INSERT INTO `kelas` (`id`, `id_periode`, `nama_kelas`, `tingkat`, `id_wali`) VALUES (4,1,'XI A','XI',22);
-INSERT INTO `kelas` (`id`, `id_periode`, `nama_kelas`, `tingkat`, `id_wali`) VALUES (5,1,'XI B','XI',7);
-INSERT INTO `kelas` (`id`, `id_periode`, `nama_kelas`, `tingkat`, `id_wali`) VALUES (6,1,'XI C','XI',24);
-INSERT INTO `kelas` (`id`, `id_periode`, `nama_kelas`, `tingkat`, `id_wali`) VALUES (7,1,'XI D','XI',20);
-INSERT INTO `kelas` (`id`, `id_periode`, `nama_kelas`, `tingkat`, `id_wali`) VALUES (8,1,'XII A','XII',26);
-INSERT INTO `kelas` (`id`, `id_periode`, `nama_kelas`, `tingkat`, `id_wali`) VALUES (9,1,'XII B','XII',23);
-INSERT INTO `kelas` (`id`, `id_periode`, `nama_kelas`, `tingkat`, `id_wali`) VALUES (10,1,'XII C','XII',12);
-INSERT INTO `kelas` (`id`, `id_periode`, `nama_kelas`, `tingkat`, `id_wali`) VALUES (11,2,'X A','X',5);
-INSERT INTO `kelas` (`id`, `id_periode`, `nama_kelas`, `tingkat`, `id_wali`) VALUES (12,2,'X B','X',27);
-INSERT INTO `kelas` (`id`, `id_periode`, `nama_kelas`, `tingkat`, `id_wali`) VALUES (13,2,'X C','X',4);
-INSERT INTO `kelas` (`id`, `id_periode`, `nama_kelas`, `tingkat`, `id_wali`) VALUES (14,2,'XI A','XI',22);
-INSERT INTO `kelas` (`id`, `id_periode`, `nama_kelas`, `tingkat`, `id_wali`) VALUES (15,2,'XI B','XI',7);
-INSERT INTO `kelas` (`id`, `id_periode`, `nama_kelas`, `tingkat`, `id_wali`) VALUES (16,2,'XI C','XI',24);
-INSERT INTO `kelas` (`id`, `id_periode`, `nama_kelas`, `tingkat`, `id_wali`) VALUES (17,2,'XI D','XI',20);
-INSERT INTO `kelas` (`id`, `id_periode`, `nama_kelas`, `tingkat`, `id_wali`) VALUES (18,2,'XII A','XII',26);
-INSERT INTO `kelas` (`id`, `id_periode`, `nama_kelas`, `tingkat`, `id_wali`) VALUES (19,2,'XII B','XII',23);
-INSERT INTO `kelas` (`id`, `id_periode`, `nama_kelas`, `tingkat`, `id_wali`) VALUES (20,2,'XII C','XII',12);
-
-
--- ===========================================================================
--- 4. Tabel `guru`
+-- 3. Tabel `guru`
 --    Profil guru, berelasi satu-satu dengan tabel users
 --    Jumlah data: 28 baris
 -- ===========================================================================
@@ -476,7 +426,7 @@ CREATE TABLE `guru` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `id_user` (`id_user`),
   CONSTRAINT `fk_guru_user` FOREIGN KEY (`id_user`) REFERENCES `users` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=30 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 INSERT INTO `guru` (`id`, `id_user`, `nip`, `tgl_lahir`, `alamat`) VALUES (1,2,'19920222 201503 0 002',NULL,'KEPALA SEKOLAH');
 INSERT INTO `guru` (`id`, `id_user`, `nip`, `tgl_lahir`, `alamat`) VALUES (2,3,'19741215 200701 2 011',NULL,'GURU TETAP');
 INSERT INTO `guru` (`id`, `id_user`, `nip`, `tgl_lahir`, `alamat`) VALUES (3,4,'19670209 199403 1 014',NULL,'GURU TETAP · KEPALA PERPUST');
@@ -508,9 +458,9 @@ INSERT INTO `guru` (`id`, `id_user`, `nip`, `tgl_lahir`, `alamat`) VALUES (28,29
 
 
 -- ===========================================================================
--- 5. Tabel `siswa`
+-- 4. Tabel `siswa`
 --    Profil siswa, berelasi satu-satu dengan tabel users
---    Jumlah data: 288 baris
+--    Jumlah data: 287 baris
 -- ===========================================================================
 
 DROP TABLE IF EXISTS `siswa`;
@@ -523,7 +473,7 @@ CREATE TABLE `siswa` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `id_user` (`id_user`),
   CONSTRAINT `fk_siswa_user` FOREIGN KEY (`id_user`) REFERENCES `users` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=291 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=289 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 INSERT INTO `siswa` (`id`, `id_user`, `nis`, `tgl_lahir`, `alamat`) VALUES (1,30,'3001',NULL,'Kecamatan Karau Kuala, Barito Selatan');
 INSERT INTO `siswa` (`id`, `id_user`, `nis`, `tgl_lahir`, `alamat`) VALUES (2,31,'3002',NULL,'Kecamatan Karau Kuala, Barito Selatan');
 INSERT INTO `siswa` (`id`, `id_user`, `nis`, `tgl_lahir`, `alamat`) VALUES (3,32,'3005',NULL,'Kecamatan Karau Kuala, Barito Selatan');
@@ -811,13 +761,53 @@ INSERT INTO `siswa` (`id`, `id_user`, `nis`, `tgl_lahir`, `alamat`) VALUES (284,
 INSERT INTO `siswa` (`id`, `id_user`, `nis`, `tgl_lahir`, `alamat`) VALUES (285,314,'0088732825',NULL,'Kecamatan Karau Kuala, Barito Selatan');
 INSERT INTO `siswa` (`id`, `id_user`, `nis`, `tgl_lahir`, `alamat`) VALUES (286,315,'0086420925',NULL,'Kecamatan Karau Kuala, Barito Selatan');
 INSERT INTO `siswa` (`id`, `id_user`, `nis`, `tgl_lahir`, `alamat`) VALUES (287,316,'0082583551',NULL,'Kecamatan Karau Kuala, Barito Selatan');
-INSERT INTO `siswa` (`id`, `id_user`, `nis`, `tgl_lahir`, `alamat`) VALUES (290,322,'0012345699',NULL,NULL);
+
+
+-- ===========================================================================
+-- 5. Tabel `kelas`
+--    Rombongan belajar pada sebuah periode beserta wali kelasnya
+--    Jumlah data: 20 baris
+-- ===========================================================================
+
+DROP TABLE IF EXISTS `kelas`;
+CREATE TABLE `kelas` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id_periode` int(11) NOT NULL,
+  `nama_kelas` varchar(50) NOT NULL,
+  `tingkat` varchar(10) NOT NULL,
+  `id_wali` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `uq_kelas_periode` (`id_periode`,`nama_kelas`),
+  KEY `fk_kelas_wali` (`id_wali`),
+  CONSTRAINT `fk_kelas_periode` FOREIGN KEY (`id_periode`) REFERENCES `periode` (`id`) ON DELETE CASCADE,
+  CONSTRAINT `fk_kelas_wali` FOREIGN KEY (`id_wali`) REFERENCES `guru` (`id`) ON DELETE SET NULL
+) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+INSERT INTO `kelas` (`id`, `id_periode`, `nama_kelas`, `tingkat`, `id_wali`) VALUES (1,1,'X A','X',5);
+INSERT INTO `kelas` (`id`, `id_periode`, `nama_kelas`, `tingkat`, `id_wali`) VALUES (2,1,'X B','X',27);
+INSERT INTO `kelas` (`id`, `id_periode`, `nama_kelas`, `tingkat`, `id_wali`) VALUES (3,1,'X C','X',4);
+INSERT INTO `kelas` (`id`, `id_periode`, `nama_kelas`, `tingkat`, `id_wali`) VALUES (4,1,'XI A','XI',22);
+INSERT INTO `kelas` (`id`, `id_periode`, `nama_kelas`, `tingkat`, `id_wali`) VALUES (5,1,'XI B','XI',7);
+INSERT INTO `kelas` (`id`, `id_periode`, `nama_kelas`, `tingkat`, `id_wali`) VALUES (6,1,'XI C','XI',24);
+INSERT INTO `kelas` (`id`, `id_periode`, `nama_kelas`, `tingkat`, `id_wali`) VALUES (7,1,'XI D','XI',20);
+INSERT INTO `kelas` (`id`, `id_periode`, `nama_kelas`, `tingkat`, `id_wali`) VALUES (8,1,'XII A','XII',26);
+INSERT INTO `kelas` (`id`, `id_periode`, `nama_kelas`, `tingkat`, `id_wali`) VALUES (9,1,'XII B','XII',23);
+INSERT INTO `kelas` (`id`, `id_periode`, `nama_kelas`, `tingkat`, `id_wali`) VALUES (10,1,'XII C','XII',12);
+INSERT INTO `kelas` (`id`, `id_periode`, `nama_kelas`, `tingkat`, `id_wali`) VALUES (11,2,'X A','X',5);
+INSERT INTO `kelas` (`id`, `id_periode`, `nama_kelas`, `tingkat`, `id_wali`) VALUES (12,2,'X B','X',27);
+INSERT INTO `kelas` (`id`, `id_periode`, `nama_kelas`, `tingkat`, `id_wali`) VALUES (13,2,'X C','X',4);
+INSERT INTO `kelas` (`id`, `id_periode`, `nama_kelas`, `tingkat`, `id_wali`) VALUES (14,2,'XI A','XI',22);
+INSERT INTO `kelas` (`id`, `id_periode`, `nama_kelas`, `tingkat`, `id_wali`) VALUES (15,2,'XI B','XI',7);
+INSERT INTO `kelas` (`id`, `id_periode`, `nama_kelas`, `tingkat`, `id_wali`) VALUES (16,2,'XI C','XI',24);
+INSERT INTO `kelas` (`id`, `id_periode`, `nama_kelas`, `tingkat`, `id_wali`) VALUES (17,2,'XI D','XI',20);
+INSERT INTO `kelas` (`id`, `id_periode`, `nama_kelas`, `tingkat`, `id_wali`) VALUES (18,2,'XII A','XII',26);
+INSERT INTO `kelas` (`id`, `id_periode`, `nama_kelas`, `tingkat`, `id_wali`) VALUES (19,2,'XII B','XII',23);
+INSERT INTO `kelas` (`id`, `id_periode`, `nama_kelas`, `tingkat`, `id_wali`) VALUES (20,2,'XII C','XII',12);
 
 
 -- ===========================================================================
 -- 6. Tabel `siswa_kelas`
 --    Keanggotaan siswa pada sebuah kelas di setiap periode
---    Jumlah data: 575 baris
+--    Jumlah data: 574 baris
 -- ===========================================================================
 
 DROP TABLE IF EXISTS `siswa_kelas`;
@@ -830,7 +820,7 @@ CREATE TABLE `siswa_kelas` (
   KEY `fk_sk_kelas` (`id_kelas`),
   CONSTRAINT `fk_sk_kelas` FOREIGN KEY (`id_kelas`) REFERENCES `kelas` (`id`) ON DELETE CASCADE,
   CONSTRAINT `fk_sk_siswa` FOREIGN KEY (`id_siswa`) REFERENCES `siswa` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=578 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=576 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 INSERT INTO `siswa_kelas` (`id`, `id_siswa`, `id_kelas`) VALUES (1,1,1);
 INSERT INTO `siswa_kelas` (`id`, `id_siswa`, `id_kelas`) VALUES (2,1,11);
 INSERT INTO `siswa_kelas` (`id`, `id_siswa`, `id_kelas`) VALUES (3,2,1);
@@ -1405,7 +1395,6 @@ INSERT INTO `siswa_kelas` (`id`, `id_siswa`, `id_kelas`) VALUES (571,286,10);
 INSERT INTO `siswa_kelas` (`id`, `id_siswa`, `id_kelas`) VALUES (572,286,20);
 INSERT INTO `siswa_kelas` (`id`, `id_siswa`, `id_kelas`) VALUES (573,287,10);
 INSERT INTO `siswa_kelas` (`id`, `id_siswa`, `id_kelas`) VALUES (574,287,20);
-INSERT INTO `siswa_kelas` (`id`, `id_siswa`, `id_kelas`) VALUES (577,290,11);
 
 
 -- ===========================================================================
@@ -1424,7 +1413,7 @@ CREATE TABLE `mata_pelajaran` (
   `aktif` tinyint(1) NOT NULL DEFAULT 1,
   PRIMARY KEY (`id`),
   UNIQUE KEY `kode` (`kode`)
-) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 INSERT INTO `mata_pelajaran` (`id`, `nama`, `kode`, `kelompok`, `deskripsi`, `aktif`) VALUES (1,'BAHASA INDONESIA','BIND','Wajib','Mata pelajaran BAHASA INDONESIA kelompok Wajib pada SMA Negeri 1 Karau Kuala',1);
 INSERT INTO `mata_pelajaran` (`id`, `nama`, `kode`, `kelompok`, `deskripsi`, `aktif`) VALUES (2,'BAHASA INGGRIS','BING','Wajib','Mata pelajaran BAHASA INGGRIS kelompok Wajib pada SMA Negeri 1 Karau Kuala',1);
 INSERT INTO `mata_pelajaran` (`id`, `nama`, `kode`, `kelompok`, `deskripsi`, `aktif`) VALUES (3,'BAHASA INGGRIS TK LANJT','BING-L','Peminatan','Mata pelajaran BAHASA INGGRIS TK LANJT kelompok Peminatan pada SMA Negeri 1 Karau Kuala',1);
@@ -1456,7 +1445,7 @@ INSERT INTO `mata_pelajaran` (`id`, `nama`, `kode`, `kelompok`, `deskripsi`, `ak
 
 -- ===========================================================================
 -- 8. Tabel `kelas_mapel`
---    Pengampuan: mata pelajaran pada sebuah kelas beserta guru pengampunya
+--    Mata pelajaran pada sebuah kelas beserta guru pengajarnya
 --    Jumlah data: 310 baris
 -- ===========================================================================
 
@@ -1804,17 +1793,17 @@ CREATE TABLE `pertemuan` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `uq_pertemuan_nomor` (`id_kelas_mapel`,`nomor`),
   CONSTRAINT `fk_pertemuan_km` FOREIGN KEY (`id_kelas_mapel`) REFERENCES `kelas_mapel` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-INSERT INTO `pertemuan` (`id`, `id_kelas_mapel`, `nomor`, `judul`, `deskripsi`, `tanggal`, `created_at`) VALUES (1,50,1,'Konsep Persamaan Linear Satu Variabel','Pengenalan bentuk umum persamaan linear satu variabel serta cara menentukan penyelesaiannya.','2026-09-06','2026-09-27 16:22:49');
-INSERT INTO `pertemuan` (`id`, `id_kelas_mapel`, `nomor`, `judul`, `deskripsi`, `tanggal`, `created_at`) VALUES (2,50,2,'Pertidaksamaan Linear Satu Variabel','Sifat-sifat pertidaksamaan linear dan penyajian himpunan penyelesaian pada garis bilangan.','2026-09-13','2026-09-27 16:22:49');
-INSERT INTO `pertemuan` (`id`, `id_kelas_mapel`, `nomor`, `judul`, `deskripsi`, `tanggal`, `created_at`) VALUES (3,50,3,'Sistem Persamaan Linear Dua Variabel','Penyelesaian SPLDV dengan metode substitusi, eliminasi, dan campuran.','2026-09-20','2026-09-27 16:22:49');
-INSERT INTO `pertemuan` (`id`, `id_kelas_mapel`, `nomor`, `judul`, `deskripsi`, `tanggal`, `created_at`) VALUES (4,294,1,'Struktur dan Kaidah Teks Deskripsi','Mengenal struktur teks deskripsi serta kaidah kebahasaan yang digunakan.','2026-09-07','2026-09-27 16:22:49');
-INSERT INTO `pertemuan` (`id`, `id_kelas_mapel`, `nomor`, `judul`, `deskripsi`, `tanggal`, `created_at`) VALUES (5,294,2,'Menelaah Teks Deskripsi','Menelaah penggunaan kata konkret dan majas dalam teks deskripsi.','2026-09-14','2026-09-27 16:22:49');
-INSERT INTO `pertemuan` (`id`, `id_kelas_mapel`, `nomor`, `judul`, `deskripsi`, `tanggal`, `created_at`) VALUES (6,52,1,'Besaran dan Satuan','Besaran pokok, besaran turunan, dan satuan Sistem Internasional.','2026-09-08','2026-09-27 16:22:49');
-INSERT INTO `pertemuan` (`id`, `id_kelas_mapel`, `nomor`, `judul`, `deskripsi`, `tanggal`, `created_at`) VALUES (7,52,2,'Vektor dan Resultan Gaya','Penjumlahan vektor dan penguraian vektor pada sumbu x dan y.','2026-09-15','2026-09-27 16:22:49');
-INSERT INTO `pertemuan` (`id`, `id_kelas_mapel`, `nomor`, `judul`, `deskripsi`, `tanggal`, `created_at`) VALUES (8,268,1,'Descriptive Text','Social function, generic structure, and language features.','2026-09-09','2026-09-27 16:22:49');
-INSERT INTO `pertemuan` (`id`, `id_kelas_mapel`, `nomor`, `judul`, `deskripsi`, `tanggal`, `created_at`) VALUES (9,49,1,'Barisan dan Deret Aritmetika','Materi barisan dan deret aritmetika pada semester ganjil tahun ajaran 2025/2026.','2026-03-31','2026-09-27 16:22:49');
-INSERT INTO `pertemuan` (`id`, `id_kelas_mapel`, `nomor`, `judul`, `deskripsi`, `tanggal`, `created_at`) VALUES (10,293,1,'Teks Negosiasi','Struktur dan kaidah teks negosiasi.','2026-04-02','2026-09-27 16:22:49');
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+INSERT INTO `pertemuan` (`id`, `id_kelas_mapel`, `nomor`, `judul`, `deskripsi`, `tanggal`, `created_at`) VALUES (1,50,1,'Konsep Persamaan Linear Satu Variabel','Pengenalan bentuk umum persamaan linear satu variabel serta cara menentukan penyelesaiannya.','2026-09-14','2026-10-05 12:14:58');
+INSERT INTO `pertemuan` (`id`, `id_kelas_mapel`, `nomor`, `judul`, `deskripsi`, `tanggal`, `created_at`) VALUES (2,50,2,'Pertidaksamaan Linear Satu Variabel','Sifat-sifat pertidaksamaan linear dan penyajian himpunan penyelesaian pada garis bilangan.','2026-09-21','2026-10-05 12:14:58');
+INSERT INTO `pertemuan` (`id`, `id_kelas_mapel`, `nomor`, `judul`, `deskripsi`, `tanggal`, `created_at`) VALUES (3,50,3,'Sistem Persamaan Linear Dua Variabel','Penyelesaian SPLDV dengan metode substitusi, eliminasi, dan campuran.','2026-09-28','2026-10-05 12:14:58');
+INSERT INTO `pertemuan` (`id`, `id_kelas_mapel`, `nomor`, `judul`, `deskripsi`, `tanggal`, `created_at`) VALUES (4,294,1,'Struktur dan Kaidah Teks Deskripsi','Mengenal struktur teks deskripsi serta kaidah kebahasaan yang digunakan.','2026-09-15','2026-10-05 12:14:58');
+INSERT INTO `pertemuan` (`id`, `id_kelas_mapel`, `nomor`, `judul`, `deskripsi`, `tanggal`, `created_at`) VALUES (5,294,2,'Menelaah Teks Deskripsi','Menelaah penggunaan kata konkret dan majas dalam teks deskripsi.','2026-09-22','2026-10-05 12:14:58');
+INSERT INTO `pertemuan` (`id`, `id_kelas_mapel`, `nomor`, `judul`, `deskripsi`, `tanggal`, `created_at`) VALUES (6,52,1,'Besaran dan Satuan','Besaran pokok, besaran turunan, dan satuan Sistem Internasional.','2026-09-16','2026-10-05 12:14:58');
+INSERT INTO `pertemuan` (`id`, `id_kelas_mapel`, `nomor`, `judul`, `deskripsi`, `tanggal`, `created_at`) VALUES (7,52,2,'Vektor dan Resultan Gaya','Penjumlahan vektor dan penguraian vektor pada sumbu x dan y.','2026-09-23','2026-10-05 12:14:58');
+INSERT INTO `pertemuan` (`id`, `id_kelas_mapel`, `nomor`, `judul`, `deskripsi`, `tanggal`, `created_at`) VALUES (8,268,1,'Descriptive Text','Social function, generic structure, and language features.','2026-09-17','2026-10-05 12:14:58');
+INSERT INTO `pertemuan` (`id`, `id_kelas_mapel`, `nomor`, `judul`, `deskripsi`, `tanggal`, `created_at`) VALUES (9,49,1,'Barisan dan Deret Aritmetika','Materi barisan dan deret aritmetika pada semester ganjil tahun ajaran 2025/2026.','2026-04-08','2026-10-05 12:14:58');
+INSERT INTO `pertemuan` (`id`, `id_kelas_mapel`, `nomor`, `judul`, `deskripsi`, `tanggal`, `created_at`) VALUES (10,293,1,'Teks Negosiasi','Struktur dan kaidah teks negosiasi.','2026-04-10','2026-10-05 12:14:58');
 
 
 -- ===========================================================================
@@ -1836,23 +1825,23 @@ CREATE TABLE `materi` (
   PRIMARY KEY (`id`),
   KEY `fk_materi_pertemuan` (`id_pertemuan`),
   CONSTRAINT `fk_materi_pertemuan` FOREIGN KEY (`id_pertemuan`) REFERENCES `pertemuan` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-INSERT INTO `materi` (`id`, `id_pertemuan`, `judul`, `konten`, `tipe`, `file`, `url`, `tgl_upload`) VALUES (1,1,'Pengantar Persamaan Linear Satu Variabel','Persamaan linear satu variabel adalah persamaan yang memuat tepat satu variabel berpangkat satu. Bentuk umumnya ax + b = 0 dengan a tidak sama dengan nol.','teks',NULL,NULL,'2026-09-27 16:22:49');
-INSERT INTO `materi` (`id`, `id_pertemuan`, `judul`, `konten`, `tipe`, `file`, `url`, `tgl_upload`) VALUES (2,1,'Modul Persamaan Linear Satu Variabel (PDF)','Modul lengkap beserta contoh soal dan pembahasan.','file','modul_persamaan_linear.pdf',NULL,'2026-09-27 16:22:49');
-INSERT INTO `materi` (`id`, `id_pertemuan`, `judul`, `konten`, `tipe`, `file`, `url`, `tgl_upload`) VALUES (3,1,'Video Pembelajaran Persamaan Linear Satu Variabel','Rekaman penjelasan langkah penyelesaian persamaan linear satu variabel beserta contohnya.','video','video_persamaan_linear.webm',NULL,'2026-09-27 16:22:49');
-INSERT INTO `materi` (`id`, `id_pertemuan`, `judul`, `konten`, `tipe`, `file`, `url`, `tgl_upload`) VALUES (4,2,'Sifat-Sifat Pertidaksamaan Linear','Apabila kedua ruas dikalikan atau dibagi bilangan negatif, maka tanda pertidaksamaan berbalik arah.','teks',NULL,NULL,'2026-09-27 16:22:49');
-INSERT INTO `materi` (`id`, `id_pertemuan`, `judul`, `konten`, `tipe`, `file`, `url`, `tgl_upload`) VALUES (5,3,'Metode Penyelesaian SPLDV','SPLDV dapat diselesaikan dengan metode substitusi, eliminasi, campuran, maupun grafik.','teks',NULL,NULL,'2026-09-27 16:22:49');
-INSERT INTO `materi` (`id`, `id_pertemuan`, `judul`, `konten`, `tipe`, `file`, `url`, `tgl_upload`) VALUES (6,3,'Video Pengayaan: Transformasi Linear dan Matriks','Tautan video pengayaan mengenai hubungan sistem persamaan linear dengan matriks.','link',NULL,'https://www.youtube.com/watch?v=kYB8IZa5AuE','2026-09-27 16:22:49');
-INSERT INTO `materi` (`id`, `id_pertemuan`, `judul`, `konten`, `tipe`, `file`, `url`, `tgl_upload`) VALUES (7,4,'Pengertian dan Struktur Teks Deskripsi','Teks deskripsi menggambarkan objek secara rinci sehingga pembaca seolah-olah melihat sendiri objek yang digambarkan. Strukturnya terdiri atas identifikasi, deskripsi bagian, dan penutup.','teks',NULL,NULL,'2026-09-27 16:22:49');
-INSERT INTO `materi` (`id`, `id_pertemuan`, `judul`, `konten`, `tipe`, `file`, `url`, `tgl_upload`) VALUES (8,4,'Modul Teks Deskripsi (PDF)','Modul lengkap teks deskripsi beserta contoh.','file','modul_teks_deskripsi.pdf',NULL,'2026-09-27 16:22:49');
-INSERT INTO `materi` (`id`, `id_pertemuan`, `judul`, `konten`, `tipe`, `file`, `url`, `tgl_upload`) VALUES (9,5,'Kata Konkret dan Majas dalam Teks Deskripsi','Kata konkret membuat deskripsi terasa nyata, sedangkan majas membuat deskripsi menjadi lebih hidup.','teks',NULL,NULL,'2026-09-27 16:22:49');
-INSERT INTO `materi` (`id`, `id_pertemuan`, `judul`, `konten`, `tipe`, `file`, `url`, `tgl_upload`) VALUES (10,6,'Besaran Pokok dan Besaran Turunan','Terdapat tujuh besaran pokok dalam Sistem Internasional. Besaran turunan diperoleh dari kombinasi besaran-besaran pokok tersebut.','teks',NULL,NULL,'2026-09-27 16:22:49');
-INSERT INTO `materi` (`id`, `id_pertemuan`, `judul`, `konten`, `tipe`, `file`, `url`, `tgl_upload`) VALUES (11,6,'Modul Besaran dan Satuan (PDF)','Modul besaran, satuan, dan angka penting.','file','modul_besaran_satuan.pdf',NULL,'2026-09-27 16:22:49');
-INSERT INTO `materi` (`id`, `id_pertemuan`, `judul`, `konten`, `tipe`, `file`, `url`, `tgl_upload`) VALUES (12,7,'Penjumlahan Vektor','Vektor dapat dijumlahkan dengan metode segitiga, jajargenjang, maupun poligon.','teks',NULL,NULL,'2026-09-27 16:22:49');
-INSERT INTO `materi` (`id`, `id_pertemuan`, `judul`, `konten`, `tipe`, `file`, `url`, `tgl_upload`) VALUES (13,7,'Video Pengayaan: Konsep Vektor','Tautan video pengayaan mengenai konsep vektor dan penguraiannya.','link',NULL,'https://www.youtube.com/watch?v=fNk_zzaMoSs','2026-09-27 16:22:49');
-INSERT INTO `materi` (`id`, `id_pertemuan`, `judul`, `konten`, `tipe`, `file`, `url`, `tgl_upload`) VALUES (14,8,'Generic Structure of Descriptive Text','A descriptive text consists of identification and description. It commonly uses simple present tense.','teks',NULL,NULL,'2026-09-27 16:22:49');
-INSERT INTO `materi` (`id`, `id_pertemuan`, `judul`, `konten`, `tipe`, `file`, `url`, `tgl_upload`) VALUES (15,9,'Rumus Suku ke-n Barisan Aritmetika','Suku ke-n barisan aritmetika dirumuskan Un = a + (n-1)b.','teks',NULL,NULL,'2026-09-27 16:22:49');
-INSERT INTO `materi` (`id`, `id_pertemuan`, `judul`, `konten`, `tipe`, `file`, `url`, `tgl_upload`) VALUES (16,10,'Struktur Teks Negosiasi','Teks negosiasi terdiri atas orientasi, pengajuan, penawaran, dan persetujuan.','teks',NULL,NULL,'2026-09-27 16:22:49');
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+INSERT INTO `materi` (`id`, `id_pertemuan`, `judul`, `konten`, `tipe`, `file`, `url`, `tgl_upload`) VALUES (1,1,'Pengantar Persamaan Linear Satu Variabel','Persamaan linear satu variabel adalah persamaan yang memuat tepat satu variabel berpangkat satu. Bentuk umumnya ax + b = 0 dengan a tidak sama dengan nol.','teks',NULL,NULL,'2026-10-05 12:14:58');
+INSERT INTO `materi` (`id`, `id_pertemuan`, `judul`, `konten`, `tipe`, `file`, `url`, `tgl_upload`) VALUES (2,1,'Modul Persamaan Linear Satu Variabel (PDF)','Modul lengkap beserta contoh soal dan pembahasan.','file','modul_persamaan_linear.pdf',NULL,'2026-10-05 12:14:58');
+INSERT INTO `materi` (`id`, `id_pertemuan`, `judul`, `konten`, `tipe`, `file`, `url`, `tgl_upload`) VALUES (3,1,'Video Pembelajaran Persamaan Linear Satu Variabel','Rekaman penjelasan langkah penyelesaian persamaan linear satu variabel beserta contohnya.','video','video_persamaan_linear.webm',NULL,'2026-10-05 12:14:58');
+INSERT INTO `materi` (`id`, `id_pertemuan`, `judul`, `konten`, `tipe`, `file`, `url`, `tgl_upload`) VALUES (4,2,'Sifat-Sifat Pertidaksamaan Linear','Apabila kedua ruas dikalikan atau dibagi bilangan negatif, maka tanda pertidaksamaan berbalik arah.','teks',NULL,NULL,'2026-10-05 12:14:58');
+INSERT INTO `materi` (`id`, `id_pertemuan`, `judul`, `konten`, `tipe`, `file`, `url`, `tgl_upload`) VALUES (5,3,'Metode Penyelesaian SPLDV','SPLDV dapat diselesaikan dengan metode substitusi, eliminasi, campuran, maupun grafik.','teks',NULL,NULL,'2026-10-05 12:14:58');
+INSERT INTO `materi` (`id`, `id_pertemuan`, `judul`, `konten`, `tipe`, `file`, `url`, `tgl_upload`) VALUES (6,3,'Video Pengayaan: Transformasi Linear dan Matriks','Tautan video pengayaan mengenai hubungan sistem persamaan linear dengan matriks.','link',NULL,'https://www.youtube.com/watch?v=kYB8IZa5AuE','2026-10-05 12:14:58');
+INSERT INTO `materi` (`id`, `id_pertemuan`, `judul`, `konten`, `tipe`, `file`, `url`, `tgl_upload`) VALUES (7,4,'Pengertian dan Struktur Teks Deskripsi','Teks deskripsi menggambarkan objek secara rinci sehingga pembaca seolah-olah melihat sendiri objek yang digambarkan. Strukturnya terdiri atas identifikasi, deskripsi bagian, dan penutup.','teks',NULL,NULL,'2026-10-05 12:14:58');
+INSERT INTO `materi` (`id`, `id_pertemuan`, `judul`, `konten`, `tipe`, `file`, `url`, `tgl_upload`) VALUES (8,4,'Modul Teks Deskripsi (PDF)','Modul lengkap teks deskripsi beserta contoh.','file','modul_teks_deskripsi.pdf',NULL,'2026-10-05 12:14:58');
+INSERT INTO `materi` (`id`, `id_pertemuan`, `judul`, `konten`, `tipe`, `file`, `url`, `tgl_upload`) VALUES (9,5,'Kata Konkret dan Majas dalam Teks Deskripsi','Kata konkret membuat deskripsi terasa nyata, sedangkan majas membuat deskripsi menjadi lebih hidup.','teks',NULL,NULL,'2026-10-05 12:14:58');
+INSERT INTO `materi` (`id`, `id_pertemuan`, `judul`, `konten`, `tipe`, `file`, `url`, `tgl_upload`) VALUES (10,6,'Besaran Pokok dan Besaran Turunan','Terdapat tujuh besaran pokok dalam Sistem Internasional. Besaran turunan diperoleh dari kombinasi besaran-besaran pokok tersebut.','teks',NULL,NULL,'2026-10-05 12:14:58');
+INSERT INTO `materi` (`id`, `id_pertemuan`, `judul`, `konten`, `tipe`, `file`, `url`, `tgl_upload`) VALUES (11,6,'Modul Besaran dan Satuan (PDF)','Modul besaran, satuan, dan angka penting.','file','modul_besaran_satuan.pdf',NULL,'2026-10-05 12:14:58');
+INSERT INTO `materi` (`id`, `id_pertemuan`, `judul`, `konten`, `tipe`, `file`, `url`, `tgl_upload`) VALUES (12,7,'Penjumlahan Vektor','Vektor dapat dijumlahkan dengan metode segitiga, jajargenjang, maupun poligon.','teks',NULL,NULL,'2026-10-05 12:14:58');
+INSERT INTO `materi` (`id`, `id_pertemuan`, `judul`, `konten`, `tipe`, `file`, `url`, `tgl_upload`) VALUES (13,7,'Video Pengayaan: Konsep Vektor','Tautan video pengayaan mengenai konsep vektor dan penguraiannya.','link',NULL,'https://www.youtube.com/watch?v=fNk_zzaMoSs','2026-10-05 12:14:58');
+INSERT INTO `materi` (`id`, `id_pertemuan`, `judul`, `konten`, `tipe`, `file`, `url`, `tgl_upload`) VALUES (14,8,'Generic Structure of Descriptive Text','A descriptive text consists of identification and description. It commonly uses simple present tense.','teks',NULL,NULL,'2026-10-05 12:14:58');
+INSERT INTO `materi` (`id`, `id_pertemuan`, `judul`, `konten`, `tipe`, `file`, `url`, `tgl_upload`) VALUES (15,9,'Rumus Suku ke-n Barisan Aritmetika','Suku ke-n barisan aritmetika dirumuskan Un = a + (n-1)b.','teks',NULL,NULL,'2026-10-05 12:14:58');
+INSERT INTO `materi` (`id`, `id_pertemuan`, `judul`, `konten`, `tipe`, `file`, `url`, `tgl_upload`) VALUES (16,10,'Struktur Teks Negosiasi','Teks negosiasi terdiri atas orientasi, pengajuan, penawaran, dan persetujuan.','teks',NULL,NULL,'2026-10-05 12:14:58');
 
 
 -- ===========================================================================
@@ -1873,16 +1862,16 @@ CREATE TABLE `tugas` (
   PRIMARY KEY (`id`),
   KEY `fk_tugas_pertemuan` (`id_pertemuan`),
   CONSTRAINT `fk_tugas_pertemuan` FOREIGN KEY (`id_pertemuan`) REFERENCES `pertemuan` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-INSERT INTO `tugas` (`id`, `id_pertemuan`, `judul`, `deskripsi`, `deadline`, `tipe`, `created_at`) VALUES (1,1,'Latihan Persamaan Linear','Kerjakan soal nomor 1-10 pada buku paket halaman 25. Tulis langkah penyelesaian secara lengkap, lalu unggah dalam bentuk berkas atau tuliskan pada kolom jawaban.','2026-10-06 23:59:00','tugas','2026-09-27 16:22:49');
-INSERT INTO `tugas` (`id`, `id_pertemuan`, `judul`, `deskripsi`, `deadline`, `tipe`, `created_at`) VALUES (2,2,'Kuis Persamaan dan Pertidaksamaan Linear','Kuis pilihan ganda mengenai persamaan dan pertidaksamaan linear satu variabel. Dinilai otomatis oleh sistem.','2026-10-02 23:59:00','kuis','2026-09-27 16:22:49');
-INSERT INTO `tugas` (`id`, `id_pertemuan`, `judul`, `deskripsi`, `deadline`, `tipe`, `created_at`) VALUES (3,3,'Tugas Proyek SPLDV','Susunlah satu soal cerita yang dapat diselesaikan dengan SPLDV beserta penyelesaiannya, kemudian unggah dalam bentuk dokumen.','2026-09-29 23:59:00','tugas','2026-09-27 16:22:49');
-INSERT INTO `tugas` (`id`, `id_pertemuan`, `judul`, `deskripsi`, `deadline`, `tipe`, `created_at`) VALUES (4,4,'Tugas Menulis Teks Deskripsi','Buatlah sebuah teks deskripsi bertema \"Lingkungan Sekolahku\" minimal tiga paragraf sesuai struktur yang telah dipelajari.','2026-10-04 23:59:00','tugas','2026-09-27 16:22:49');
-INSERT INTO `tugas` (`id`, `id_pertemuan`, `judul`, `deskripsi`, `deadline`, `tipe`, `created_at`) VALUES (5,5,'Kuis Teks Deskripsi','Kuis singkat mengenai struktur teks deskripsi. Terdiri atas soal pilihan ganda dan satu soal esai.','2026-10-01 23:59:00','kuis','2026-09-27 16:22:49');
-INSERT INTO `tugas` (`id`, `id_pertemuan`, `judul`, `deskripsi`, `deadline`, `tipe`, `created_at`) VALUES (6,6,'Latihan Soal Besaran dan Satuan','Kerjakan latihan konversi satuan dan penulisan angka penting pada lembar kerja yang telah dibagikan.','2026-09-24 23:59:00','tugas','2026-09-27 16:22:49');
-INSERT INTO `tugas` (`id`, `id_pertemuan`, `judul`, `deskripsi`, `deadline`, `tipe`, `created_at`) VALUES (7,8,'Kuis Descriptive Text','Short quiz about the generic structure and language features of descriptive text.','2026-10-03 23:59:00','kuis','2026-09-27 16:22:49');
-INSERT INTO `tugas` (`id`, `id_pertemuan`, `judul`, `deskripsi`, `deadline`, `tipe`, `created_at`) VALUES (8,9,'Latihan Barisan Aritmetika','Kerjakan soal barisan dan deret aritmetika nomor 1 sampai 10.','2026-04-20 23:59:00','tugas','2026-09-27 16:22:49');
-INSERT INTO `tugas` (`id`, `id_pertemuan`, `judul`, `deskripsi`, `deadline`, `tipe`, `created_at`) VALUES (9,10,'Tugas Menyusun Teks Negosiasi','Susunlah sebuah teks negosiasi jual beli sesuai struktur yang telah dipelajari.','2026-04-22 23:59:00','tugas','2026-09-27 16:22:49');
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+INSERT INTO `tugas` (`id`, `id_pertemuan`, `judul`, `deskripsi`, `deadline`, `tipe`, `created_at`) VALUES (1,1,'Latihan Persamaan Linear','Kerjakan soal nomor 1-10 pada buku paket halaman 25. Tulis langkah penyelesaian secara lengkap, lalu unggah dalam bentuk berkas atau tuliskan pada kolom jawaban.','2026-10-14 23:59:00','tugas','2026-10-05 12:14:58');
+INSERT INTO `tugas` (`id`, `id_pertemuan`, `judul`, `deskripsi`, `deadline`, `tipe`, `created_at`) VALUES (2,2,'Kuis Persamaan dan Pertidaksamaan Linear','Kuis pilihan ganda mengenai persamaan dan pertidaksamaan linear satu variabel. Dinilai otomatis oleh sistem.','2026-10-10 23:59:00','kuis','2026-10-05 12:14:58');
+INSERT INTO `tugas` (`id`, `id_pertemuan`, `judul`, `deskripsi`, `deadline`, `tipe`, `created_at`) VALUES (3,3,'Tugas Proyek SPLDV','Susunlah satu soal cerita yang dapat diselesaikan dengan SPLDV beserta penyelesaiannya, kemudian unggah dalam bentuk dokumen.','2026-10-07 23:59:00','tugas','2026-10-05 12:14:58');
+INSERT INTO `tugas` (`id`, `id_pertemuan`, `judul`, `deskripsi`, `deadline`, `tipe`, `created_at`) VALUES (4,4,'Tugas Menulis Teks Deskripsi','Buatlah sebuah teks deskripsi bertema \"Lingkungan Sekolahku\" minimal tiga paragraf sesuai struktur yang telah dipelajari.','2026-10-12 23:59:00','tugas','2026-10-05 12:14:58');
+INSERT INTO `tugas` (`id`, `id_pertemuan`, `judul`, `deskripsi`, `deadline`, `tipe`, `created_at`) VALUES (5,5,'Kuis Teks Deskripsi','Kuis singkat mengenai struktur teks deskripsi. Terdiri atas soal pilihan ganda dan satu soal esai.','2026-10-09 23:59:00','kuis','2026-10-05 12:14:58');
+INSERT INTO `tugas` (`id`, `id_pertemuan`, `judul`, `deskripsi`, `deadline`, `tipe`, `created_at`) VALUES (6,6,'Latihan Soal Besaran dan Satuan','Kerjakan latihan konversi satuan dan penulisan angka penting pada lembar kerja yang telah dibagikan.','2026-10-02 23:59:00','tugas','2026-10-05 12:14:58');
+INSERT INTO `tugas` (`id`, `id_pertemuan`, `judul`, `deskripsi`, `deadline`, `tipe`, `created_at`) VALUES (7,8,'Kuis Descriptive Text','Short quiz about the generic structure and language features of descriptive text.','2026-10-11 23:59:00','kuis','2026-10-05 12:14:58');
+INSERT INTO `tugas` (`id`, `id_pertemuan`, `judul`, `deskripsi`, `deadline`, `tipe`, `created_at`) VALUES (8,9,'Latihan Barisan Aritmetika','Kerjakan soal barisan dan deret aritmetika nomor 1 sampai 10.','2026-04-28 23:59:00','tugas','2026-10-05 12:14:58');
+INSERT INTO `tugas` (`id`, `id_pertemuan`, `judul`, `deskripsi`, `deadline`, `tipe`, `created_at`) VALUES (9,10,'Tugas Menyusun Teks Negosiasi','Susunlah sebuah teks negosiasi jual beli sesuai struktur yang telah dipelajari.','2026-04-30 23:59:00','tugas','2026-10-05 12:14:58');
 
 
 -- ===========================================================================
@@ -1907,7 +1896,7 @@ CREATE TABLE `soal` (
   PRIMARY KEY (`id`),
   KEY `fk_soal_tugas` (`id_tugas`),
   CONSTRAINT `fk_soal_tugas` FOREIGN KEY (`id_tugas`) REFERENCES `tugas` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 INSERT INTO `soal` (`id`, `id_tugas`, `pertanyaan`, `tipe`, `pilihan_a`, `pilihan_b`, `pilihan_c`, `pilihan_d`, `jawaban_benar`, `bobot`, `urutan`) VALUES (1,2,'Nilai x yang memenuhi persamaan 2x + 6 = 14 adalah ...','pilihan_ganda','2','4','6','8','B',20,1);
 INSERT INTO `soal` (`id`, `id_tugas`, `pertanyaan`, `tipe`, `pilihan_a`, `pilihan_b`, `pilihan_c`, `pilihan_d`, `jawaban_benar`, `bobot`, `urutan`) VALUES (2,2,'Himpunan penyelesaian dari 3x - 9 = 0 adalah ...','pilihan_ganda','{2}','{3}','{4}','{9}','B',20,2);
 INSERT INTO `soal` (`id`, `id_tugas`, `pertanyaan`, `tipe`, `pilihan_a`, `pilihan_b`, `pilihan_c`, `pilihan_d`, `jawaban_benar`, `bobot`, `urutan`) VALUES (3,2,'Bentuk umum persamaan linear satu variabel adalah ...','pilihan_ganda','ax + b = 0','ax2 + bx + c = 0','ax + by = c','a/x = b','A',20,3);
@@ -1943,39 +1932,39 @@ CREATE TABLE `pengumpulan_tugas` (
   KEY `fk_kumpul_siswa` (`id_siswa`),
   CONSTRAINT `fk_kumpul_siswa` FOREIGN KEY (`id_siswa`) REFERENCES `siswa` (`id`) ON DELETE CASCADE,
   CONSTRAINT `fk_kumpul_tugas` FOREIGN KEY (`id_tugas`) REFERENCES `tugas` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=85 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-INSERT INTO `pengumpulan_tugas` (`id`, `id_tugas`, `id_siswa`, `file`, `jawaban`, `tgl_kumpul`, `terlambat`) VALUES (1,8,1,NULL,'Pekerjaan dikumpulkan pada semester ganjil tahun ajaran 2025/2026.','2026-04-15 03:00:00',0);
-INSERT INTO `pengumpulan_tugas` (`id`, `id_tugas`, `id_siswa`, `file`, `jawaban`, `tgl_kumpul`, `terlambat`) VALUES (2,8,2,NULL,'Pekerjaan dikumpulkan pada semester ganjil tahun ajaran 2025/2026.','2026-04-15 03:00:00',0);
-INSERT INTO `pengumpulan_tugas` (`id`, `id_tugas`, `id_siswa`, `file`, `jawaban`, `tgl_kumpul`, `terlambat`) VALUES (3,8,3,NULL,'Pekerjaan dikumpulkan pada semester ganjil tahun ajaran 2025/2026.','2026-04-15 03:00:00',0);
-INSERT INTO `pengumpulan_tugas` (`id`, `id_tugas`, `id_siswa`, `file`, `jawaban`, `tgl_kumpul`, `terlambat`) VALUES (4,9,1,NULL,'Pekerjaan dikumpulkan pada semester ganjil tahun ajaran 2025/2026.','2026-04-15 03:00:00',0);
-INSERT INTO `pengumpulan_tugas` (`id`, `id_tugas`, `id_siswa`, `file`, `jawaban`, `tgl_kumpul`, `terlambat`) VALUES (5,9,2,NULL,'Pekerjaan dikumpulkan pada semester ganjil tahun ajaran 2025/2026.','2026-04-15 03:00:00',0);
-INSERT INTO `pengumpulan_tugas` (`id`, `id_tugas`, `id_siswa`, `file`, `jawaban`, `tgl_kumpul`, `terlambat`) VALUES (6,9,3,NULL,'Pekerjaan dikumpulkan pada semester ganjil tahun ajaran 2025/2026.','2026-04-15 03:00:00',0);
-INSERT INTO `pengumpulan_tugas` (`id`, `id_tugas`, `id_siswa`, `file`, `jawaban`, `tgl_kumpul`, `terlambat`) VALUES (7,2,1,NULL,NULL,'2026-09-27 16:28:52',0);
-INSERT INTO `pengumpulan_tugas` (`id`, `id_tugas`, `id_siswa`, `file`, `jawaban`, `tgl_kumpul`, `terlambat`) VALUES (8,2,2,NULL,NULL,'2026-09-27 16:28:52',0);
-INSERT INTO `pengumpulan_tugas` (`id`, `id_tugas`, `id_siswa`, `file`, `jawaban`, `tgl_kumpul`, `terlambat`) VALUES (9,2,3,NULL,NULL,'2026-09-27 16:28:52',0);
-INSERT INTO `pengumpulan_tugas` (`id`, `id_tugas`, `id_siswa`, `file`, `jawaban`, `tgl_kumpul`, `terlambat`) VALUES (10,2,4,NULL,NULL,'2026-09-27 16:28:52',0);
-INSERT INTO `pengumpulan_tugas` (`id`, `id_tugas`, `id_siswa`, `file`, `jawaban`, `tgl_kumpul`, `terlambat`) VALUES (11,2,5,NULL,NULL,'2026-09-27 16:28:52',0);
-INSERT INTO `pengumpulan_tugas` (`id`, `id_tugas`, `id_siswa`, `file`, `jawaban`, `tgl_kumpul`, `terlambat`) VALUES (12,2,6,NULL,NULL,'2026-09-27 16:28:52',0);
-INSERT INTO `pengumpulan_tugas` (`id`, `id_tugas`, `id_siswa`, `file`, `jawaban`, `tgl_kumpul`, `terlambat`) VALUES (13,5,1,NULL,NULL,'2026-09-27 16:28:52',0);
-INSERT INTO `pengumpulan_tugas` (`id`, `id_tugas`, `id_siswa`, `file`, `jawaban`, `tgl_kumpul`, `terlambat`) VALUES (14,5,2,NULL,NULL,'2026-09-27 16:28:52',0);
-INSERT INTO `pengumpulan_tugas` (`id`, `id_tugas`, `id_siswa`, `file`, `jawaban`, `tgl_kumpul`, `terlambat`) VALUES (15,5,5,NULL,NULL,'2026-09-27 16:28:52',0);
-INSERT INTO `pengumpulan_tugas` (`id`, `id_tugas`, `id_siswa`, `file`, `jawaban`, `tgl_kumpul`, `terlambat`) VALUES (16,5,4,NULL,NULL,'2026-09-27 16:28:52',0);
-INSERT INTO `pengumpulan_tugas` (`id`, `id_tugas`, `id_siswa`, `file`, `jawaban`, `tgl_kumpul`, `terlambat`) VALUES (17,5,6,NULL,NULL,'2026-09-27 16:28:52',0);
-INSERT INTO `pengumpulan_tugas` (`id`, `id_tugas`, `id_siswa`, `file`, `jawaban`, `tgl_kumpul`, `terlambat`) VALUES (18,1,1,'1790526532616_jawaban_ahmad.txt','Nomor 1: 2x + 6 = 14 -> 2x = 8 -> x = 4.\r\nNomor 2: 3x - 9 = 0 -> 3x = 9 -> x = 3.\r\nNomor 3: 5x = 3x + 12 -> 2x = 12 -> x = 6.\r\nLangkah selengkapnya saya lampirkan pada berkas.','2026-09-27 16:28:52',0);
-INSERT INTO `pengumpulan_tugas` (`id`, `id_tugas`, `id_siswa`, `file`, `jawaban`, `tgl_kumpul`, `terlambat`) VALUES (19,1,2,'1790526532630_jawaban_ahmad_raviza.txt','Seluruh soal nomor 1 sampai 10 telah saya kerjakan. Hasil pekerjaan saya tulis tangan lalu saya pindai dan lampirkan pada berkas terlampir.','2026-09-27 16:28:52',0);
-INSERT INTO `pengumpulan_tugas` (`id`, `id_tugas`, `id_siswa`, `file`, `jawaban`, `tgl_kumpul`, `terlambat`) VALUES (20,1,3,'1790526532645_jawaban_aminatul.txt','Nomor 1 sampai 8 sudah saya kerjakan, nomor 9 dan 10 masih saya ragu pada langkah pemindahan ruas. Mohon koreksinya, Pak.','2026-09-27 16:28:52',0);
-INSERT INTO `pengumpulan_tugas` (`id`, `id_tugas`, `id_siswa`, `file`, `jawaban`, `tgl_kumpul`, `terlambat`) VALUES (21,1,4,'1790526532660_jawaban_audiyah.txt','Jawaban lengkap nomor 1-10 terlampir pada berkas. Setiap nomor saya sertakan langkah pengerjaannya.','2026-09-27 16:28:52',0);
-INSERT INTO `pengumpulan_tugas` (`id`, `id_tugas`, `id_siswa`, `file`, `jawaban`, `tgl_kumpul`, `terlambat`) VALUES (22,1,5,'1790526532673_jawaban_bunga.txt','Semua soal telah saya kerjakan beserta langkah-langkahnya, terlampir pada berkas jawaban.','2026-09-27 16:28:52',0);
-INSERT INTO `pengumpulan_tugas` (`id`, `id_tugas`, `id_siswa`, `file`, `jawaban`, `tgl_kumpul`, `terlambat`) VALUES (23,4,2,NULL,'Lingkungan Sekolahku\r\n\r\nSMA Negeri 1 Karau Kuala berdiri di tepi jalan utama Kecamatan Karau Kuala. Bangunannya bercat putih dengan lis biru yang tampak bersih setiap pagi.\r\n\r\nHalaman sekolah cukup luas dan ditumbuhi rumput hijau. Di tengahnya berdiri tiang bendera, sementara di sisi kiri berjajar pohon ketapang yang rindang.\r\n\r\nSuasana sekolahku sangat nyaman untuk belajar. Angin sejuk dari arah sungai membuat udara di ruang kelas tidak pernah terasa panas.','2026-09-27 16:28:52',0);
-INSERT INTO `pengumpulan_tugas` (`id`, `id_tugas`, `id_siswa`, `file`, `jawaban`, `tgl_kumpul`, `terlambat`) VALUES (24,4,5,NULL,'Lingkungan Sekolahku\r\n\r\nSekolahku terletak tidak jauh dari permukiman warga sehingga mudah dijangkau dengan sepeda.\r\n\r\nDi dalam kompleks sekolah terdapat dua belas ruang kelas, satu perpustakaan, dan sebuah laboratorium IPA. Lorong penghubungnya beratap seng sehingga siswa tetap terlindung ketika hujan.\r\n\r\nSetiap sudut sekolah dijaga kebersihannya oleh seluruh warga sekolah sehingga suasananya selalu asri.','2026-09-27 16:28:52',0);
-INSERT INTO `pengumpulan_tugas` (`id`, `id_tugas`, `id_siswa`, `file`, `jawaban`, `tgl_kumpul`, `terlambat`) VALUES (25,4,4,NULL,'Lingkungan Sekolahku\r\n\r\nGerbang sekolahku bercat hijau tua dan selalu terbuka sejak pukul enam pagi.\r\n\r\nDi sebelah kanan gerbang terdapat taman kecil dengan bunga kertas berwarna merah muda. Lapangan upacara berada tepat di tengah kompleks sekolah.\r\n\r\nAku sangat menyukai suasana sekolahku, terutama pada pagi hari ketika embun masih menempel di rumput lapangan.','2026-09-27 16:28:52',0);
-INSERT INTO `pengumpulan_tugas` (`id`, `id_tugas`, `id_siswa`, `file`, `jawaban`, `tgl_kumpul`, `terlambat`) VALUES (26,4,1,NULL,'Lingkungan Sekolahku\r\n\r\nSMA Negeri 1 Karau Kuala memiliki halaman depan yang luas dengan pagar besi berwarna hijau.\r\n\r\nRuang kelas berjajar rapi menghadap lapangan. Setiap kelas memiliki jendela besar sehingga cahaya matahari masuk dengan leluasa.\r\n\r\nKarena lingkungannya rindang dan bersih, aku merasa betah berlama-lama di sekolah.','2026-09-27 16:28:52',0);
-INSERT INTO `pengumpulan_tugas` (`id`, `id_tugas`, `id_siswa`, `file`, `jawaban`, `tgl_kumpul`, `terlambat`) VALUES (27,3,2,NULL,'Soal cerita: Harga 2 buku dan 3 pensil Rp 21.000, sedangkan 1 buku dan 2 pensil Rp 12.000. Dengan metode eliminasi diperoleh harga buku Rp 6.000 dan pensil Rp 3.000.','2026-09-27 16:28:52',0);
-INSERT INTO `pengumpulan_tugas` (`id`, `id_tugas`, `id_siswa`, `file`, `jawaban`, `tgl_kumpul`, `terlambat`) VALUES (28,3,4,NULL,'Soal cerita: Harga 2 buku dan 3 pensil Rp 21.000, sedangkan 1 buku dan 2 pensil Rp 12.000. Dengan metode eliminasi diperoleh harga buku Rp 6.000 dan pensil Rp 3.000.','2026-09-27 16:28:52',0);
-INSERT INTO `pengumpulan_tugas` (`id`, `id_tugas`, `id_siswa`, `file`, `jawaban`, `tgl_kumpul`, `terlambat`) VALUES (29,6,6,NULL,'Mohon maaf Pak, saya terlambat mengumpulkan karena jaringan internet di rumah bermasalah. Latihan konversi satuan nomor 1-10 sudah saya kerjakan seluruhnya.','2026-09-27 16:28:52',1);
-INSERT INTO `pengumpulan_tugas` (`id`, `id_tugas`, `id_siswa`, `file`, `jawaban`, `tgl_kumpul`, `terlambat`) VALUES (30,7,1,NULL,NULL,'2026-09-27 16:28:52',0);
-INSERT INTO `pengumpulan_tugas` (`id`, `id_tugas`, `id_siswa`, `file`, `jawaban`, `tgl_kumpul`, `terlambat`) VALUES (31,7,2,NULL,NULL,'2026-09-27 16:28:52',0);
-INSERT INTO `pengumpulan_tugas` (`id`, `id_tugas`, `id_siswa`, `file`, `jawaban`, `tgl_kumpul`, `terlambat`) VALUES (32,7,3,NULL,NULL,'2026-09-27 16:28:52',0);
+) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+INSERT INTO `pengumpulan_tugas` (`id`, `id_tugas`, `id_siswa`, `file`, `jawaban`, `tgl_kumpul`, `terlambat`) VALUES (1,8,1,NULL,'Pekerjaan dikumpulkan pada semester ganjil tahun ajaran 2025/2026.','2026-04-23 03:00:00',0);
+INSERT INTO `pengumpulan_tugas` (`id`, `id_tugas`, `id_siswa`, `file`, `jawaban`, `tgl_kumpul`, `terlambat`) VALUES (2,8,2,NULL,'Pekerjaan dikumpulkan pada semester ganjil tahun ajaran 2025/2026.','2026-04-23 03:00:00',0);
+INSERT INTO `pengumpulan_tugas` (`id`, `id_tugas`, `id_siswa`, `file`, `jawaban`, `tgl_kumpul`, `terlambat`) VALUES (3,8,3,NULL,'Pekerjaan dikumpulkan pada semester ganjil tahun ajaran 2025/2026.','2026-04-23 03:00:00',0);
+INSERT INTO `pengumpulan_tugas` (`id`, `id_tugas`, `id_siswa`, `file`, `jawaban`, `tgl_kumpul`, `terlambat`) VALUES (4,9,1,NULL,'Pekerjaan dikumpulkan pada semester ganjil tahun ajaran 2025/2026.','2026-04-23 03:00:00',0);
+INSERT INTO `pengumpulan_tugas` (`id`, `id_tugas`, `id_siswa`, `file`, `jawaban`, `tgl_kumpul`, `terlambat`) VALUES (5,9,2,NULL,'Pekerjaan dikumpulkan pada semester ganjil tahun ajaran 2025/2026.','2026-04-23 03:00:00',0);
+INSERT INTO `pengumpulan_tugas` (`id`, `id_tugas`, `id_siswa`, `file`, `jawaban`, `tgl_kumpul`, `terlambat`) VALUES (6,9,3,NULL,'Pekerjaan dikumpulkan pada semester ganjil tahun ajaran 2025/2026.','2026-04-23 03:00:00',0);
+INSERT INTO `pengumpulan_tugas` (`id`, `id_tugas`, `id_siswa`, `file`, `jawaban`, `tgl_kumpul`, `terlambat`) VALUES (7,2,1,NULL,NULL,'2026-10-05 12:15:02',0);
+INSERT INTO `pengumpulan_tugas` (`id`, `id_tugas`, `id_siswa`, `file`, `jawaban`, `tgl_kumpul`, `terlambat`) VALUES (8,2,2,NULL,NULL,'2026-10-05 12:15:02',0);
+INSERT INTO `pengumpulan_tugas` (`id`, `id_tugas`, `id_siswa`, `file`, `jawaban`, `tgl_kumpul`, `terlambat`) VALUES (9,2,3,NULL,NULL,'2026-10-05 12:15:02',0);
+INSERT INTO `pengumpulan_tugas` (`id`, `id_tugas`, `id_siswa`, `file`, `jawaban`, `tgl_kumpul`, `terlambat`) VALUES (10,2,4,NULL,NULL,'2026-10-05 12:15:02',0);
+INSERT INTO `pengumpulan_tugas` (`id`, `id_tugas`, `id_siswa`, `file`, `jawaban`, `tgl_kumpul`, `terlambat`) VALUES (11,2,5,NULL,NULL,'2026-10-05 12:15:02',0);
+INSERT INTO `pengumpulan_tugas` (`id`, `id_tugas`, `id_siswa`, `file`, `jawaban`, `tgl_kumpul`, `terlambat`) VALUES (12,2,6,NULL,NULL,'2026-10-05 12:15:02',0);
+INSERT INTO `pengumpulan_tugas` (`id`, `id_tugas`, `id_siswa`, `file`, `jawaban`, `tgl_kumpul`, `terlambat`) VALUES (13,5,1,NULL,NULL,'2026-10-05 12:15:02',0);
+INSERT INTO `pengumpulan_tugas` (`id`, `id_tugas`, `id_siswa`, `file`, `jawaban`, `tgl_kumpul`, `terlambat`) VALUES (14,5,2,NULL,NULL,'2026-10-05 12:15:02',0);
+INSERT INTO `pengumpulan_tugas` (`id`, `id_tugas`, `id_siswa`, `file`, `jawaban`, `tgl_kumpul`, `terlambat`) VALUES (15,5,5,NULL,NULL,'2026-10-05 12:15:02',0);
+INSERT INTO `pengumpulan_tugas` (`id`, `id_tugas`, `id_siswa`, `file`, `jawaban`, `tgl_kumpul`, `terlambat`) VALUES (16,5,4,NULL,NULL,'2026-10-05 12:15:02',0);
+INSERT INTO `pengumpulan_tugas` (`id`, `id_tugas`, `id_siswa`, `file`, `jawaban`, `tgl_kumpul`, `terlambat`) VALUES (17,5,6,NULL,NULL,'2026-10-05 12:15:02',0);
+INSERT INTO `pengumpulan_tugas` (`id`, `id_tugas`, `id_siswa`, `file`, `jawaban`, `tgl_kumpul`, `terlambat`) VALUES (18,1,1,'1791202502378_jawaban_ahmad.txt','Nomor 1: 2x + 6 = 14 -> 2x = 8 -> x = 4.\r\nNomor 2: 3x - 9 = 0 -> 3x = 9 -> x = 3.\r\nNomor 3: 5x = 3x + 12 -> 2x = 12 -> x = 6.\r\nLangkah selengkapnya saya lampirkan pada berkas.','2026-10-05 12:15:02',0);
+INSERT INTO `pengumpulan_tugas` (`id`, `id_tugas`, `id_siswa`, `file`, `jawaban`, `tgl_kumpul`, `terlambat`) VALUES (19,1,2,'1791202502397_jawaban_ahmad_raviza.txt','Seluruh soal nomor 1 sampai 10 telah saya kerjakan. Hasil pekerjaan saya tulis tangan lalu saya pindai dan lampirkan pada berkas terlampir.','2026-10-05 12:15:02',0);
+INSERT INTO `pengumpulan_tugas` (`id`, `id_tugas`, `id_siswa`, `file`, `jawaban`, `tgl_kumpul`, `terlambat`) VALUES (20,1,3,'1791202502415_jawaban_aminatul.txt','Nomor 1 sampai 8 sudah saya kerjakan, nomor 9 dan 10 masih saya ragu pada langkah pemindahan ruas. Mohon koreksinya, Pak.','2026-10-05 12:15:02',0);
+INSERT INTO `pengumpulan_tugas` (`id`, `id_tugas`, `id_siswa`, `file`, `jawaban`, `tgl_kumpul`, `terlambat`) VALUES (21,1,4,'1791202502429_jawaban_audiyah.txt','Jawaban lengkap nomor 1-10 terlampir pada berkas. Setiap nomor saya sertakan langkah pengerjaannya.','2026-10-05 12:15:02',0);
+INSERT INTO `pengumpulan_tugas` (`id`, `id_tugas`, `id_siswa`, `file`, `jawaban`, `tgl_kumpul`, `terlambat`) VALUES (22,1,5,'1791202502444_jawaban_bunga.txt','Semua soal telah saya kerjakan beserta langkah-langkahnya, terlampir pada berkas jawaban.','2026-10-05 12:15:02',0);
+INSERT INTO `pengumpulan_tugas` (`id`, `id_tugas`, `id_siswa`, `file`, `jawaban`, `tgl_kumpul`, `terlambat`) VALUES (23,4,2,NULL,'Lingkungan Sekolahku\r\n\r\nSMA Negeri 1 Karau Kuala berdiri di tepi jalan utama Kecamatan Karau Kuala. Bangunannya bercat putih dengan lis biru yang tampak bersih setiap pagi.\r\n\r\nHalaman sekolah cukup luas dan ditumbuhi rumput hijau. Di tengahnya berdiri tiang bendera, sementara di sisi kiri berjajar pohon ketapang yang rindang.\r\n\r\nSuasana sekolahku sangat nyaman untuk belajar. Angin sejuk dari arah sungai membuat udara di ruang kelas tidak pernah terasa panas.','2026-10-05 12:15:02',0);
+INSERT INTO `pengumpulan_tugas` (`id`, `id_tugas`, `id_siswa`, `file`, `jawaban`, `tgl_kumpul`, `terlambat`) VALUES (24,4,5,NULL,'Lingkungan Sekolahku\r\n\r\nSekolahku terletak tidak jauh dari permukiman warga sehingga mudah dijangkau dengan sepeda.\r\n\r\nDi dalam kompleks sekolah terdapat dua belas ruang kelas, satu perpustakaan, dan sebuah laboratorium IPA. Lorong penghubungnya beratap seng sehingga siswa tetap terlindung ketika hujan.\r\n\r\nSetiap sudut sekolah dijaga kebersihannya oleh seluruh warga sekolah sehingga suasananya selalu asri.','2026-10-05 12:15:02',0);
+INSERT INTO `pengumpulan_tugas` (`id`, `id_tugas`, `id_siswa`, `file`, `jawaban`, `tgl_kumpul`, `terlambat`) VALUES (25,4,4,NULL,'Lingkungan Sekolahku\r\n\r\nGerbang sekolahku bercat hijau tua dan selalu terbuka sejak pukul enam pagi.\r\n\r\nDi sebelah kanan gerbang terdapat taman kecil dengan bunga kertas berwarna merah muda. Lapangan upacara berada tepat di tengah kompleks sekolah.\r\n\r\nAku sangat menyukai suasana sekolahku, terutama pada pagi hari ketika embun masih menempel di rumput lapangan.','2026-10-05 12:15:02',0);
+INSERT INTO `pengumpulan_tugas` (`id`, `id_tugas`, `id_siswa`, `file`, `jawaban`, `tgl_kumpul`, `terlambat`) VALUES (26,4,1,NULL,'Lingkungan Sekolahku\r\n\r\nSMA Negeri 1 Karau Kuala memiliki halaman depan yang luas dengan pagar besi berwarna hijau.\r\n\r\nRuang kelas berjajar rapi menghadap lapangan. Setiap kelas memiliki jendela besar sehingga cahaya matahari masuk dengan leluasa.\r\n\r\nKarena lingkungannya rindang dan bersih, aku merasa betah berlama-lama di sekolah.','2026-10-05 12:15:02',0);
+INSERT INTO `pengumpulan_tugas` (`id`, `id_tugas`, `id_siswa`, `file`, `jawaban`, `tgl_kumpul`, `terlambat`) VALUES (27,3,2,NULL,'Soal cerita: Harga 2 buku dan 3 pensil Rp 21.000, sedangkan 1 buku dan 2 pensil Rp 12.000. Dengan metode eliminasi diperoleh harga buku Rp 6.000 dan pensil Rp 3.000.','2026-10-05 12:15:02',0);
+INSERT INTO `pengumpulan_tugas` (`id`, `id_tugas`, `id_siswa`, `file`, `jawaban`, `tgl_kumpul`, `terlambat`) VALUES (28,3,4,NULL,'Soal cerita: Harga 2 buku dan 3 pensil Rp 21.000, sedangkan 1 buku dan 2 pensil Rp 12.000. Dengan metode eliminasi diperoleh harga buku Rp 6.000 dan pensil Rp 3.000.','2026-10-05 12:15:02',0);
+INSERT INTO `pengumpulan_tugas` (`id`, `id_tugas`, `id_siswa`, `file`, `jawaban`, `tgl_kumpul`, `terlambat`) VALUES (29,6,6,NULL,'Mohon maaf Pak, saya terlambat mengumpulkan karena jaringan internet di rumah bermasalah. Latihan konversi satuan nomor 1-10 sudah saya kerjakan seluruhnya.','2026-10-05 12:15:02',1);
+INSERT INTO `pengumpulan_tugas` (`id`, `id_tugas`, `id_siswa`, `file`, `jawaban`, `tgl_kumpul`, `terlambat`) VALUES (30,7,1,NULL,NULL,'2026-10-05 12:15:02',0);
+INSERT INTO `pengumpulan_tugas` (`id`, `id_tugas`, `id_siswa`, `file`, `jawaban`, `tgl_kumpul`, `terlambat`) VALUES (31,7,2,NULL,NULL,'2026-10-05 12:15:02',0);
+INSERT INTO `pengumpulan_tugas` (`id`, `id_tugas`, `id_siswa`, `file`, `jawaban`, `tgl_kumpul`, `terlambat`) VALUES (32,7,3,NULL,NULL,'2026-10-05 12:15:02',0);
 
 
 -- ===========================================================================
@@ -1998,69 +1987,69 @@ CREATE TABLE `jawaban_siswa` (
   KEY `fk_jwb_soal` (`id_soal`),
   CONSTRAINT `fk_jwb_pengumpulan` FOREIGN KEY (`id_pengumpulan`) REFERENCES `pengumpulan_tugas` (`id`) ON DELETE CASCADE,
   CONSTRAINT `fk_jwb_soal` FOREIGN KEY (`id_soal`) REFERENCES `soal` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=187 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-INSERT INTO `jawaban_siswa` (`id`, `id_pengumpulan`, `id_soal`, `pilihan`, `jawaban_teks`, `benar`, `skor`) VALUES (125,7,1,'B',NULL,1,20.00);
-INSERT INTO `jawaban_siswa` (`id`, `id_pengumpulan`, `id_soal`, `pilihan`, `jawaban_teks`, `benar`, `skor`) VALUES (126,7,2,'B',NULL,1,20.00);
-INSERT INTO `jawaban_siswa` (`id`, `id_pengumpulan`, `id_soal`, `pilihan`, `jawaban_teks`, `benar`, `skor`) VALUES (127,7,3,'A',NULL,1,20.00);
-INSERT INTO `jawaban_siswa` (`id`, `id_pengumpulan`, `id_soal`, `pilihan`, `jawaban_teks`, `benar`, `skor`) VALUES (128,7,4,'A',NULL,0,0.00);
-INSERT INTO `jawaban_siswa` (`id`, `id_pengumpulan`, `id_soal`, `pilihan`, `jawaban_teks`, `benar`, `skor`) VALUES (129,7,5,'C',NULL,1,20.00);
-INSERT INTO `jawaban_siswa` (`id`, `id_pengumpulan`, `id_soal`, `pilihan`, `jawaban_teks`, `benar`, `skor`) VALUES (130,8,1,'B',NULL,1,20.00);
-INSERT INTO `jawaban_siswa` (`id`, `id_pengumpulan`, `id_soal`, `pilihan`, `jawaban_teks`, `benar`, `skor`) VALUES (131,8,2,'B',NULL,1,20.00);
-INSERT INTO `jawaban_siswa` (`id`, `id_pengumpulan`, `id_soal`, `pilihan`, `jawaban_teks`, `benar`, `skor`) VALUES (132,8,3,'A',NULL,1,20.00);
-INSERT INTO `jawaban_siswa` (`id`, `id_pengumpulan`, `id_soal`, `pilihan`, `jawaban_teks`, `benar`, `skor`) VALUES (133,8,4,'B',NULL,1,20.00);
-INSERT INTO `jawaban_siswa` (`id`, `id_pengumpulan`, `id_soal`, `pilihan`, `jawaban_teks`, `benar`, `skor`) VALUES (134,8,5,'C',NULL,1,20.00);
-INSERT INTO `jawaban_siswa` (`id`, `id_pengumpulan`, `id_soal`, `pilihan`, `jawaban_teks`, `benar`, `skor`) VALUES (135,9,1,'B',NULL,1,20.00);
-INSERT INTO `jawaban_siswa` (`id`, `id_pengumpulan`, `id_soal`, `pilihan`, `jawaban_teks`, `benar`, `skor`) VALUES (136,9,2,'A',NULL,0,0.00);
-INSERT INTO `jawaban_siswa` (`id`, `id_pengumpulan`, `id_soal`, `pilihan`, `jawaban_teks`, `benar`, `skor`) VALUES (137,9,3,'A',NULL,1,20.00);
-INSERT INTO `jawaban_siswa` (`id`, `id_pengumpulan`, `id_soal`, `pilihan`, `jawaban_teks`, `benar`, `skor`) VALUES (138,9,4,'B',NULL,1,20.00);
-INSERT INTO `jawaban_siswa` (`id`, `id_pengumpulan`, `id_soal`, `pilihan`, `jawaban_teks`, `benar`, `skor`) VALUES (139,9,5,'A',NULL,0,0.00);
-INSERT INTO `jawaban_siswa` (`id`, `id_pengumpulan`, `id_soal`, `pilihan`, `jawaban_teks`, `benar`, `skor`) VALUES (140,10,1,'B',NULL,1,20.00);
-INSERT INTO `jawaban_siswa` (`id`, `id_pengumpulan`, `id_soal`, `pilihan`, `jawaban_teks`, `benar`, `skor`) VALUES (141,10,2,'B',NULL,1,20.00);
-INSERT INTO `jawaban_siswa` (`id`, `id_pengumpulan`, `id_soal`, `pilihan`, `jawaban_teks`, `benar`, `skor`) VALUES (142,10,3,'A',NULL,1,20.00);
-INSERT INTO `jawaban_siswa` (`id`, `id_pengumpulan`, `id_soal`, `pilihan`, `jawaban_teks`, `benar`, `skor`) VALUES (143,10,4,'B',NULL,1,20.00);
-INSERT INTO `jawaban_siswa` (`id`, `id_pengumpulan`, `id_soal`, `pilihan`, `jawaban_teks`, `benar`, `skor`) VALUES (144,10,5,'C',NULL,1,20.00);
-INSERT INTO `jawaban_siswa` (`id`, `id_pengumpulan`, `id_soal`, `pilihan`, `jawaban_teks`, `benar`, `skor`) VALUES (145,11,1,'A',NULL,0,0.00);
-INSERT INTO `jawaban_siswa` (`id`, `id_pengumpulan`, `id_soal`, `pilihan`, `jawaban_teks`, `benar`, `skor`) VALUES (146,11,2,'B',NULL,1,20.00);
-INSERT INTO `jawaban_siswa` (`id`, `id_pengumpulan`, `id_soal`, `pilihan`, `jawaban_teks`, `benar`, `skor`) VALUES (147,11,3,'B',NULL,0,0.00);
-INSERT INTO `jawaban_siswa` (`id`, `id_pengumpulan`, `id_soal`, `pilihan`, `jawaban_teks`, `benar`, `skor`) VALUES (148,11,4,'A',NULL,0,0.00);
-INSERT INTO `jawaban_siswa` (`id`, `id_pengumpulan`, `id_soal`, `pilihan`, `jawaban_teks`, `benar`, `skor`) VALUES (149,11,5,'C',NULL,1,20.00);
-INSERT INTO `jawaban_siswa` (`id`, `id_pengumpulan`, `id_soal`, `pilihan`, `jawaban_teks`, `benar`, `skor`) VALUES (150,12,1,'B',NULL,1,20.00);
-INSERT INTO `jawaban_siswa` (`id`, `id_pengumpulan`, `id_soal`, `pilihan`, `jawaban_teks`, `benar`, `skor`) VALUES (151,12,2,'B',NULL,1,20.00);
-INSERT INTO `jawaban_siswa` (`id`, `id_pengumpulan`, `id_soal`, `pilihan`, `jawaban_teks`, `benar`, `skor`) VALUES (152,12,3,'B',NULL,0,0.00);
-INSERT INTO `jawaban_siswa` (`id`, `id_pengumpulan`, `id_soal`, `pilihan`, `jawaban_teks`, `benar`, `skor`) VALUES (153,12,4,'B',NULL,1,20.00);
-INSERT INTO `jawaban_siswa` (`id`, `id_pengumpulan`, `id_soal`, `pilihan`, `jawaban_teks`, `benar`, `skor`) VALUES (154,12,5,'C',NULL,1,20.00);
-INSERT INTO `jawaban_siswa` (`id`, `id_pengumpulan`, `id_soal`, `pilihan`, `jawaban_teks`, `benar`, `skor`) VALUES (155,13,6,'B',NULL,1,25.00);
-INSERT INTO `jawaban_siswa` (`id`, `id_pengumpulan`, `id_soal`, `pilihan`, `jawaban_teks`, `benar`, `skor`) VALUES (156,13,7,'A',NULL,1,25.00);
-INSERT INTO `jawaban_siswa` (`id`, `id_pengumpulan`, `id_soal`, `pilihan`, `jawaban_teks`, `benar`, `skor`) VALUES (157,13,8,'B',NULL,1,20.00);
-INSERT INTO `jawaban_siswa` (`id`, `id_pengumpulan`, `id_soal`, `pilihan`, `jawaban_teks`, `benar`, `skor`) VALUES (158,13,9,NULL,'Sekolahku berada di tepi jalan utama Bangkuang. Halamannya luas dengan rumput hijau yang selalu terpangkas rapi. Di depan ruang guru berdiri tiang bendera yang menjulang, dan di sampingnya berjajar pohon ketapang yang meneduhkan.',NULL,30.00);
-INSERT INTO `jawaban_siswa` (`id`, `id_pengumpulan`, `id_soal`, `pilihan`, `jawaban_teks`, `benar`, `skor`) VALUES (159,14,6,'B',NULL,1,25.00);
-INSERT INTO `jawaban_siswa` (`id`, `id_pengumpulan`, `id_soal`, `pilihan`, `jawaban_teks`, `benar`, `skor`) VALUES (160,14,7,'B',NULL,0,0.00);
-INSERT INTO `jawaban_siswa` (`id`, `id_pengumpulan`, `id_soal`, `pilihan`, `jawaban_teks`, `benar`, `skor`) VALUES (161,14,8,'B',NULL,1,20.00);
-INSERT INTO `jawaban_siswa` (`id`, `id_pengumpulan`, `id_soal`, `pilihan`, `jawaban_teks`, `benar`, `skor`) VALUES (162,14,9,NULL,'SMA Negeri 1 Karau Kuala memiliki bangunan bercat putih kebiruan. Setiap pagi koridor kelas dipenuhi suara siswa yang bersiap belajar. Taman kecil di tengah sekolah ditanami bunga kertas berwarna-warni.',NULL,28.00);
-INSERT INTO `jawaban_siswa` (`id`, `id_pengumpulan`, `id_soal`, `pilihan`, `jawaban_teks`, `benar`, `skor`) VALUES (163,15,6,'B',NULL,1,25.00);
-INSERT INTO `jawaban_siswa` (`id`, `id_pengumpulan`, `id_soal`, `pilihan`, `jawaban_teks`, `benar`, `skor`) VALUES (164,15,7,'A',NULL,1,25.00);
-INSERT INTO `jawaban_siswa` (`id`, `id_pengumpulan`, `id_soal`, `pilihan`, `jawaban_teks`, `benar`, `skor`) VALUES (165,15,8,'B',NULL,1,20.00);
-INSERT INTO `jawaban_siswa` (`id`, `id_pengumpulan`, `id_soal`, `pilihan`, `jawaban_teks`, `benar`, `skor`) VALUES (166,15,9,NULL,'Ruang kelasku cukup luas dan terang karena memiliki empat jendela besar. Di dinding depan terpasang papan tulis putih dan foto pahlawan. Udara di dalam kelas terasa sejuk saat pagi hari.',NULL,26.00);
-INSERT INTO `jawaban_siswa` (`id`, `id_pengumpulan`, `id_soal`, `pilihan`, `jawaban_teks`, `benar`, `skor`) VALUES (167,16,6,'B',NULL,1,25.00);
-INSERT INTO `jawaban_siswa` (`id`, `id_pengumpulan`, `id_soal`, `pilihan`, `jawaban_teks`, `benar`, `skor`) VALUES (168,16,7,'A',NULL,1,25.00);
-INSERT INTO `jawaban_siswa` (`id`, `id_pengumpulan`, `id_soal`, `pilihan`, `jawaban_teks`, `benar`, `skor`) VALUES (169,16,8,'B',NULL,1,20.00);
-INSERT INTO `jawaban_siswa` (`id`, `id_pengumpulan`, `id_soal`, `pilihan`, `jawaban_teks`, `benar`, `skor`) VALUES (170,16,9,NULL,'Kantin sekolah berada di samping lapangan basket. Setiap istirahat aromanya harum oleh gorengan hangat. Meja-meja panjangnya selalu penuh oleh siswa yang bercengkerama.',NULL,NULL);
-INSERT INTO `jawaban_siswa` (`id`, `id_pengumpulan`, `id_soal`, `pilihan`, `jawaban_teks`, `benar`, `skor`) VALUES (171,17,6,'A',NULL,0,0.00);
-INSERT INTO `jawaban_siswa` (`id`, `id_pengumpulan`, `id_soal`, `pilihan`, `jawaban_teks`, `benar`, `skor`) VALUES (172,17,7,'A',NULL,1,25.00);
-INSERT INTO `jawaban_siswa` (`id`, `id_pengumpulan`, `id_soal`, `pilihan`, `jawaban_teks`, `benar`, `skor`) VALUES (173,17,8,'A',NULL,0,0.00);
-INSERT INTO `jawaban_siswa` (`id`, `id_pengumpulan`, `id_soal`, `pilihan`, `jawaban_teks`, `benar`, `skor`) VALUES (174,17,9,NULL,'Sekolahku bersih dan nyaman. Ada lapangan upacara di tengah.',NULL,NULL);
-INSERT INTO `jawaban_siswa` (`id`, `id_pengumpulan`, `id_soal`, `pilihan`, `jawaban_teks`, `benar`, `skor`) VALUES (175,30,10,'B',NULL,1,25.00);
-INSERT INTO `jawaban_siswa` (`id`, `id_pengumpulan`, `id_soal`, `pilihan`, `jawaban_teks`, `benar`, `skor`) VALUES (176,30,11,'B',NULL,1,25.00);
-INSERT INTO `jawaban_siswa` (`id`, `id_pengumpulan`, `id_soal`, `pilihan`, `jawaban_teks`, `benar`, `skor`) VALUES (177,30,12,'A',NULL,1,25.00);
-INSERT INTO `jawaban_siswa` (`id`, `id_pengumpulan`, `id_soal`, `pilihan`, `jawaban_teks`, `benar`, `skor`) VALUES (178,30,13,NULL,'My classroom is on the second floor of the school building. It has four large windows, so the room is always bright. There are thirty-two desks and a white board in front of the class.',NULL,23.00);
-INSERT INTO `jawaban_siswa` (`id`, `id_pengumpulan`, `id_soal`, `pilihan`, `jawaban_teks`, `benar`, `skor`) VALUES (179,31,10,'B',NULL,1,25.00);
-INSERT INTO `jawaban_siswa` (`id`, `id_pengumpulan`, `id_soal`, `pilihan`, `jawaban_teks`, `benar`, `skor`) VALUES (180,31,11,'B',NULL,1,25.00);
-INSERT INTO `jawaban_siswa` (`id`, `id_pengumpulan`, `id_soal`, `pilihan`, `jawaban_teks`, `benar`, `skor`) VALUES (181,31,12,'B',NULL,0,0.00);
-INSERT INTO `jawaban_siswa` (`id`, `id_pengumpulan`, `id_soal`, `pilihan`, `jawaban_teks`, `benar`, `skor`) VALUES (182,31,13,NULL,'My classroom is clean and comfortable. The walls are painted light blue and there are some pictures of Indonesian heroes on them. I like studying there with my classmates.',NULL,22.00);
-INSERT INTO `jawaban_siswa` (`id`, `id_pengumpulan`, `id_soal`, `pilihan`, `jawaban_teks`, `benar`, `skor`) VALUES (183,32,10,'A',NULL,0,0.00);
-INSERT INTO `jawaban_siswa` (`id`, `id_pengumpulan`, `id_soal`, `pilihan`, `jawaban_teks`, `benar`, `skor`) VALUES (184,32,11,'A',NULL,0,0.00);
-INSERT INTO `jawaban_siswa` (`id`, `id_pengumpulan`, `id_soal`, `pilihan`, `jawaban_teks`, `benar`, `skor`) VALUES (185,32,12,'A',NULL,1,25.00);
-INSERT INTO `jawaban_siswa` (`id`, `id_pengumpulan`, `id_soal`, `pilihan`, `jawaban_teks`, `benar`, `skor`) VALUES (186,32,13,NULL,'My classroom is big. There is a white board and many chairs.',NULL,NULL);
+) ENGINE=InnoDB AUTO_INCREMENT=63 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+INSERT INTO `jawaban_siswa` (`id`, `id_pengumpulan`, `id_soal`, `pilihan`, `jawaban_teks`, `benar`, `skor`) VALUES (1,7,1,'B',NULL,1,20.00);
+INSERT INTO `jawaban_siswa` (`id`, `id_pengumpulan`, `id_soal`, `pilihan`, `jawaban_teks`, `benar`, `skor`) VALUES (2,7,2,'B',NULL,1,20.00);
+INSERT INTO `jawaban_siswa` (`id`, `id_pengumpulan`, `id_soal`, `pilihan`, `jawaban_teks`, `benar`, `skor`) VALUES (3,7,3,'A',NULL,1,20.00);
+INSERT INTO `jawaban_siswa` (`id`, `id_pengumpulan`, `id_soal`, `pilihan`, `jawaban_teks`, `benar`, `skor`) VALUES (4,7,4,'A',NULL,0,0.00);
+INSERT INTO `jawaban_siswa` (`id`, `id_pengumpulan`, `id_soal`, `pilihan`, `jawaban_teks`, `benar`, `skor`) VALUES (5,7,5,'C',NULL,1,20.00);
+INSERT INTO `jawaban_siswa` (`id`, `id_pengumpulan`, `id_soal`, `pilihan`, `jawaban_teks`, `benar`, `skor`) VALUES (6,8,1,'B',NULL,1,20.00);
+INSERT INTO `jawaban_siswa` (`id`, `id_pengumpulan`, `id_soal`, `pilihan`, `jawaban_teks`, `benar`, `skor`) VALUES (7,8,2,'B',NULL,1,20.00);
+INSERT INTO `jawaban_siswa` (`id`, `id_pengumpulan`, `id_soal`, `pilihan`, `jawaban_teks`, `benar`, `skor`) VALUES (8,8,3,'A',NULL,1,20.00);
+INSERT INTO `jawaban_siswa` (`id`, `id_pengumpulan`, `id_soal`, `pilihan`, `jawaban_teks`, `benar`, `skor`) VALUES (9,8,4,'B',NULL,1,20.00);
+INSERT INTO `jawaban_siswa` (`id`, `id_pengumpulan`, `id_soal`, `pilihan`, `jawaban_teks`, `benar`, `skor`) VALUES (10,8,5,'C',NULL,1,20.00);
+INSERT INTO `jawaban_siswa` (`id`, `id_pengumpulan`, `id_soal`, `pilihan`, `jawaban_teks`, `benar`, `skor`) VALUES (11,9,1,'B',NULL,1,20.00);
+INSERT INTO `jawaban_siswa` (`id`, `id_pengumpulan`, `id_soal`, `pilihan`, `jawaban_teks`, `benar`, `skor`) VALUES (12,9,2,'A',NULL,0,0.00);
+INSERT INTO `jawaban_siswa` (`id`, `id_pengumpulan`, `id_soal`, `pilihan`, `jawaban_teks`, `benar`, `skor`) VALUES (13,9,3,'A',NULL,1,20.00);
+INSERT INTO `jawaban_siswa` (`id`, `id_pengumpulan`, `id_soal`, `pilihan`, `jawaban_teks`, `benar`, `skor`) VALUES (14,9,4,'B',NULL,1,20.00);
+INSERT INTO `jawaban_siswa` (`id`, `id_pengumpulan`, `id_soal`, `pilihan`, `jawaban_teks`, `benar`, `skor`) VALUES (15,9,5,'A',NULL,0,0.00);
+INSERT INTO `jawaban_siswa` (`id`, `id_pengumpulan`, `id_soal`, `pilihan`, `jawaban_teks`, `benar`, `skor`) VALUES (16,10,1,'B',NULL,1,20.00);
+INSERT INTO `jawaban_siswa` (`id`, `id_pengumpulan`, `id_soal`, `pilihan`, `jawaban_teks`, `benar`, `skor`) VALUES (17,10,2,'B',NULL,1,20.00);
+INSERT INTO `jawaban_siswa` (`id`, `id_pengumpulan`, `id_soal`, `pilihan`, `jawaban_teks`, `benar`, `skor`) VALUES (18,10,3,'A',NULL,1,20.00);
+INSERT INTO `jawaban_siswa` (`id`, `id_pengumpulan`, `id_soal`, `pilihan`, `jawaban_teks`, `benar`, `skor`) VALUES (19,10,4,'B',NULL,1,20.00);
+INSERT INTO `jawaban_siswa` (`id`, `id_pengumpulan`, `id_soal`, `pilihan`, `jawaban_teks`, `benar`, `skor`) VALUES (20,10,5,'C',NULL,1,20.00);
+INSERT INTO `jawaban_siswa` (`id`, `id_pengumpulan`, `id_soal`, `pilihan`, `jawaban_teks`, `benar`, `skor`) VALUES (21,11,1,'A',NULL,0,0.00);
+INSERT INTO `jawaban_siswa` (`id`, `id_pengumpulan`, `id_soal`, `pilihan`, `jawaban_teks`, `benar`, `skor`) VALUES (22,11,2,'B',NULL,1,20.00);
+INSERT INTO `jawaban_siswa` (`id`, `id_pengumpulan`, `id_soal`, `pilihan`, `jawaban_teks`, `benar`, `skor`) VALUES (23,11,3,'B',NULL,0,0.00);
+INSERT INTO `jawaban_siswa` (`id`, `id_pengumpulan`, `id_soal`, `pilihan`, `jawaban_teks`, `benar`, `skor`) VALUES (24,11,4,'A',NULL,0,0.00);
+INSERT INTO `jawaban_siswa` (`id`, `id_pengumpulan`, `id_soal`, `pilihan`, `jawaban_teks`, `benar`, `skor`) VALUES (25,11,5,'C',NULL,1,20.00);
+INSERT INTO `jawaban_siswa` (`id`, `id_pengumpulan`, `id_soal`, `pilihan`, `jawaban_teks`, `benar`, `skor`) VALUES (26,12,1,'B',NULL,1,20.00);
+INSERT INTO `jawaban_siswa` (`id`, `id_pengumpulan`, `id_soal`, `pilihan`, `jawaban_teks`, `benar`, `skor`) VALUES (27,12,2,'B',NULL,1,20.00);
+INSERT INTO `jawaban_siswa` (`id`, `id_pengumpulan`, `id_soal`, `pilihan`, `jawaban_teks`, `benar`, `skor`) VALUES (28,12,3,'B',NULL,0,0.00);
+INSERT INTO `jawaban_siswa` (`id`, `id_pengumpulan`, `id_soal`, `pilihan`, `jawaban_teks`, `benar`, `skor`) VALUES (29,12,4,'B',NULL,1,20.00);
+INSERT INTO `jawaban_siswa` (`id`, `id_pengumpulan`, `id_soal`, `pilihan`, `jawaban_teks`, `benar`, `skor`) VALUES (30,12,5,'C',NULL,1,20.00);
+INSERT INTO `jawaban_siswa` (`id`, `id_pengumpulan`, `id_soal`, `pilihan`, `jawaban_teks`, `benar`, `skor`) VALUES (31,13,6,'B',NULL,1,25.00);
+INSERT INTO `jawaban_siswa` (`id`, `id_pengumpulan`, `id_soal`, `pilihan`, `jawaban_teks`, `benar`, `skor`) VALUES (32,13,7,'A',NULL,1,25.00);
+INSERT INTO `jawaban_siswa` (`id`, `id_pengumpulan`, `id_soal`, `pilihan`, `jawaban_teks`, `benar`, `skor`) VALUES (33,13,8,'B',NULL,1,20.00);
+INSERT INTO `jawaban_siswa` (`id`, `id_pengumpulan`, `id_soal`, `pilihan`, `jawaban_teks`, `benar`, `skor`) VALUES (34,13,9,NULL,'Sekolahku berada di tepi jalan utama Bangkuang. Halamannya luas dengan rumput hijau yang selalu terpangkas rapi. Di depan ruang guru berdiri tiang bendera yang menjulang, dan di sampingnya berjajar pohon ketapang yang meneduhkan.',NULL,30.00);
+INSERT INTO `jawaban_siswa` (`id`, `id_pengumpulan`, `id_soal`, `pilihan`, `jawaban_teks`, `benar`, `skor`) VALUES (35,14,6,'B',NULL,1,25.00);
+INSERT INTO `jawaban_siswa` (`id`, `id_pengumpulan`, `id_soal`, `pilihan`, `jawaban_teks`, `benar`, `skor`) VALUES (36,14,7,'B',NULL,0,0.00);
+INSERT INTO `jawaban_siswa` (`id`, `id_pengumpulan`, `id_soal`, `pilihan`, `jawaban_teks`, `benar`, `skor`) VALUES (37,14,8,'B',NULL,1,20.00);
+INSERT INTO `jawaban_siswa` (`id`, `id_pengumpulan`, `id_soal`, `pilihan`, `jawaban_teks`, `benar`, `skor`) VALUES (38,14,9,NULL,'SMA Negeri 1 Karau Kuala memiliki bangunan bercat putih kebiruan. Setiap pagi koridor kelas dipenuhi suara siswa yang bersiap belajar. Taman kecil di tengah sekolah ditanami bunga kertas berwarna-warni.',NULL,28.00);
+INSERT INTO `jawaban_siswa` (`id`, `id_pengumpulan`, `id_soal`, `pilihan`, `jawaban_teks`, `benar`, `skor`) VALUES (39,15,6,'B',NULL,1,25.00);
+INSERT INTO `jawaban_siswa` (`id`, `id_pengumpulan`, `id_soal`, `pilihan`, `jawaban_teks`, `benar`, `skor`) VALUES (40,15,7,'A',NULL,1,25.00);
+INSERT INTO `jawaban_siswa` (`id`, `id_pengumpulan`, `id_soal`, `pilihan`, `jawaban_teks`, `benar`, `skor`) VALUES (41,15,8,'B',NULL,1,20.00);
+INSERT INTO `jawaban_siswa` (`id`, `id_pengumpulan`, `id_soal`, `pilihan`, `jawaban_teks`, `benar`, `skor`) VALUES (42,15,9,NULL,'Ruang kelasku cukup luas dan terang karena memiliki empat jendela besar. Di dinding depan terpasang papan tulis putih dan foto pahlawan. Udara di dalam kelas terasa sejuk saat pagi hari.',NULL,26.00);
+INSERT INTO `jawaban_siswa` (`id`, `id_pengumpulan`, `id_soal`, `pilihan`, `jawaban_teks`, `benar`, `skor`) VALUES (43,16,6,'B',NULL,1,25.00);
+INSERT INTO `jawaban_siswa` (`id`, `id_pengumpulan`, `id_soal`, `pilihan`, `jawaban_teks`, `benar`, `skor`) VALUES (44,16,7,'A',NULL,1,25.00);
+INSERT INTO `jawaban_siswa` (`id`, `id_pengumpulan`, `id_soal`, `pilihan`, `jawaban_teks`, `benar`, `skor`) VALUES (45,16,8,'B',NULL,1,20.00);
+INSERT INTO `jawaban_siswa` (`id`, `id_pengumpulan`, `id_soal`, `pilihan`, `jawaban_teks`, `benar`, `skor`) VALUES (46,16,9,NULL,'Kantin sekolah berada di samping lapangan basket. Setiap istirahat aromanya harum oleh gorengan hangat. Meja-meja panjangnya selalu penuh oleh siswa yang bercengkerama.',NULL,NULL);
+INSERT INTO `jawaban_siswa` (`id`, `id_pengumpulan`, `id_soal`, `pilihan`, `jawaban_teks`, `benar`, `skor`) VALUES (47,17,6,'A',NULL,0,0.00);
+INSERT INTO `jawaban_siswa` (`id`, `id_pengumpulan`, `id_soal`, `pilihan`, `jawaban_teks`, `benar`, `skor`) VALUES (48,17,7,'A',NULL,1,25.00);
+INSERT INTO `jawaban_siswa` (`id`, `id_pengumpulan`, `id_soal`, `pilihan`, `jawaban_teks`, `benar`, `skor`) VALUES (49,17,8,'A',NULL,0,0.00);
+INSERT INTO `jawaban_siswa` (`id`, `id_pengumpulan`, `id_soal`, `pilihan`, `jawaban_teks`, `benar`, `skor`) VALUES (50,17,9,NULL,'Sekolahku bersih dan nyaman. Ada lapangan upacara di tengah.',NULL,NULL);
+INSERT INTO `jawaban_siswa` (`id`, `id_pengumpulan`, `id_soal`, `pilihan`, `jawaban_teks`, `benar`, `skor`) VALUES (51,30,10,'B',NULL,1,25.00);
+INSERT INTO `jawaban_siswa` (`id`, `id_pengumpulan`, `id_soal`, `pilihan`, `jawaban_teks`, `benar`, `skor`) VALUES (52,30,11,'B',NULL,1,25.00);
+INSERT INTO `jawaban_siswa` (`id`, `id_pengumpulan`, `id_soal`, `pilihan`, `jawaban_teks`, `benar`, `skor`) VALUES (53,30,12,'A',NULL,1,25.00);
+INSERT INTO `jawaban_siswa` (`id`, `id_pengumpulan`, `id_soal`, `pilihan`, `jawaban_teks`, `benar`, `skor`) VALUES (54,30,13,NULL,'My classroom is on the second floor of the school building. It has four large windows, so the room is always bright. There are thirty-two desks and a white board in front of the class.',NULL,23.00);
+INSERT INTO `jawaban_siswa` (`id`, `id_pengumpulan`, `id_soal`, `pilihan`, `jawaban_teks`, `benar`, `skor`) VALUES (55,31,10,'B',NULL,1,25.00);
+INSERT INTO `jawaban_siswa` (`id`, `id_pengumpulan`, `id_soal`, `pilihan`, `jawaban_teks`, `benar`, `skor`) VALUES (56,31,11,'B',NULL,1,25.00);
+INSERT INTO `jawaban_siswa` (`id`, `id_pengumpulan`, `id_soal`, `pilihan`, `jawaban_teks`, `benar`, `skor`) VALUES (57,31,12,'B',NULL,0,0.00);
+INSERT INTO `jawaban_siswa` (`id`, `id_pengumpulan`, `id_soal`, `pilihan`, `jawaban_teks`, `benar`, `skor`) VALUES (58,31,13,NULL,'My classroom is clean and comfortable. The walls are painted light blue and there are some pictures of Indonesian heroes on them. I like studying there with my classmates.',NULL,22.00);
+INSERT INTO `jawaban_siswa` (`id`, `id_pengumpulan`, `id_soal`, `pilihan`, `jawaban_teks`, `benar`, `skor`) VALUES (59,32,10,'A',NULL,0,0.00);
+INSERT INTO `jawaban_siswa` (`id`, `id_pengumpulan`, `id_soal`, `pilihan`, `jawaban_teks`, `benar`, `skor`) VALUES (60,32,11,'A',NULL,0,0.00);
+INSERT INTO `jawaban_siswa` (`id`, `id_pengumpulan`, `id_soal`, `pilihan`, `jawaban_teks`, `benar`, `skor`) VALUES (61,32,12,'A',NULL,1,25.00);
+INSERT INTO `jawaban_siswa` (`id`, `id_pengumpulan`, `id_soal`, `pilihan`, `jawaban_teks`, `benar`, `skor`) VALUES (62,32,13,NULL,'My classroom is big. There is a white board and many chairs.',NULL,NULL);
 
 
 -- ===========================================================================
@@ -2082,39 +2071,39 @@ CREATE TABLE `nilai` (
   KEY `fk_nilai_guru` (`id_guru`),
   CONSTRAINT `fk_nilai_guru` FOREIGN KEY (`id_guru`) REFERENCES `guru` (`id`) ON DELETE SET NULL,
   CONSTRAINT `fk_nilai_kumpul` FOREIGN KEY (`id_kumpul`) REFERENCES `pengumpulan_tugas` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=67 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-INSERT INTO `nilai` (`id`, `id_kumpul`, `id_guru`, `skor`, `catatan`, `tgl_penilaian`) VALUES (1,1,5,88.00,'Pengerjaan runtut dan rumus digunakan dengan tepat.','2026-04-20 02:00:00');
-INSERT INTO `nilai` (`id`, `id_kumpul`, `id_guru`, `skor`, `catatan`, `tgl_penilaian`) VALUES (2,2,5,76.00,'Sudah benar, namun beberapa langkah masih dipersingkat.','2026-04-20 02:00:00');
-INSERT INTO `nilai` (`id`, `id_kumpul`, `id_guru`, `skor`, `catatan`, `tgl_penilaian`) VALUES (3,3,5,92.00,'Sangat baik, seluruh nomor dikerjakan dengan lengkap.','2026-04-20 02:00:00');
-INSERT INTO `nilai` (`id`, `id_kumpul`, `id_guru`, `skor`, `catatan`, `tgl_penilaian`) VALUES (4,4,27,85.00,'Struktur teks negosiasi sudah lengkap.','2026-04-20 02:00:00');
-INSERT INTO `nilai` (`id`, `id_kumpul`, `id_guru`, `skor`, `catatan`, `tgl_penilaian`) VALUES (5,5,27,80.00,'Bagian penawaran dapat dikembangkan lagi.','2026-04-20 02:00:00');
-INSERT INTO `nilai` (`id`, `id_kumpul`, `id_guru`, `skor`, `catatan`, `tgl_penilaian`) VALUES (6,6,27,90.00,'Dialog negosiasi tersusun sangat runtut.','2026-04-20 02:00:00');
-INSERT INTO `nilai` (`id`, `id_kumpul`, `id_guru`, `skor`, `catatan`, `tgl_penilaian`) VALUES (7,7,NULL,80.00,NULL,'2026-09-27 16:28:52');
-INSERT INTO `nilai` (`id`, `id_kumpul`, `id_guru`, `skor`, `catatan`, `tgl_penilaian`) VALUES (8,8,NULL,100.00,NULL,'2026-09-27 16:28:52');
-INSERT INTO `nilai` (`id`, `id_kumpul`, `id_guru`, `skor`, `catatan`, `tgl_penilaian`) VALUES (9,9,NULL,60.00,NULL,'2026-09-27 16:28:52');
-INSERT INTO `nilai` (`id`, `id_kumpul`, `id_guru`, `skor`, `catatan`, `tgl_penilaian`) VALUES (10,10,NULL,100.00,NULL,'2026-09-27 16:28:52');
-INSERT INTO `nilai` (`id`, `id_kumpul`, `id_guru`, `skor`, `catatan`, `tgl_penilaian`) VALUES (11,11,NULL,40.00,NULL,'2026-09-27 16:28:52');
-INSERT INTO `nilai` (`id`, `id_kumpul`, `id_guru`, `skor`, `catatan`, `tgl_penilaian`) VALUES (12,12,NULL,80.00,NULL,'2026-09-27 16:28:52');
-INSERT INTO `nilai` (`id`, `id_kumpul`, `id_guru`, `skor`, `catatan`, `tgl_penilaian`) VALUES (13,18,5,90.00,'Langkah pengerjaan sudah runtut dan benar. Pertahankan.','2026-09-27 16:28:52');
-INSERT INTO `nilai` (`id`, `id_kumpul`, `id_guru`, `skor`, `catatan`, `tgl_penilaian`) VALUES (14,19,5,85.00,'Jawaban benar, tulisan pada lampiran agar diperjelas lagi.','2026-09-27 16:28:52');
-INSERT INTO `nilai` (`id`, `id_kumpul`, `id_guru`, `skor`, `catatan`, `tgl_penilaian`) VALUES (15,20,5,75.00,'Nomor 9 dan 10 masih keliru pada pemindahan ruas. Pelajari kembali.','2026-09-27 16:28:52');
-INSERT INTO `nilai` (`id`, `id_kumpul`, `id_guru`, `skor`, `catatan`, `tgl_penilaian`) VALUES (16,21,5,95.00,'Sangat baik, seluruh langkah penyelesaian lengkap.','2026-09-27 16:28:52');
-INSERT INTO `nilai` (`id`, `id_kumpul`, `id_guru`, `skor`, `catatan`, `tgl_penilaian`) VALUES (17,22,5,88.00,'Pekerjaan rapi dan jawaban tepat.','2026-09-27 16:28:52');
-INSERT INTO `nilai` (`id`, `id_kumpul`, `id_guru`, `skor`, `catatan`, `tgl_penilaian`) VALUES (23,23,27,92.00,'Struktur lengkap dan deskripsi sangat hidup.','2026-09-27 16:28:53');
-INSERT INTO `nilai` (`id`, `id_kumpul`, `id_guru`, `skor`, `catatan`, `tgl_penilaian`) VALUES (24,25,27,90.00,'Pemilihan diksi sangat baik dan runtut.','2026-09-27 16:28:53');
-INSERT INTO `nilai` (`id`, `id_kumpul`, `id_guru`, `skor`, `catatan`, `tgl_penilaian`) VALUES (25,24,27,87.00,'Sudah baik, penutup dapat dipertegas lagi.','2026-09-27 16:28:53');
-INSERT INTO `nilai` (`id`, `id_kumpul`, `id_guru`, `skor`, `catatan`, `tgl_penilaian`) VALUES (26,29,6,78.00,'Jawaban benar, namun dikumpulkan melewati batas waktu.','2026-09-27 16:28:53');
-INSERT INTO `nilai` (`id`, `id_kumpul`, `id_guru`, `skor`, `catatan`, `tgl_penilaian`) VALUES (58,13,27,100.00,'Deskripsi sangat hidup dan struktur sudah tepat.','2026-09-27 16:28:53');
-INSERT INTO `nilai` (`id`, `id_kumpul`, `id_guru`, `skor`, `catatan`, `tgl_penilaian`) VALUES (59,14,27,73.00,'Deskripsi baik, tambahkan lagi penggunaan pancaindra.','2026-09-27 16:28:53');
-INSERT INTO `nilai` (`id`, `id_kumpul`, `id_guru`, `skor`, `catatan`, `tgl_penilaian`) VALUES (60,15,27,96.00,'Sudah sesuai struktur, kembangkan lagi deskripsi bagiannya.','2026-09-27 16:28:53');
-INSERT INTO `nilai` (`id`, `id_kumpul`, `id_guru`, `skor`, `catatan`, `tgl_penilaian`) VALUES (61,30,26,98.00,'Good description with clear details.','2026-09-27 16:28:53');
-INSERT INTO `nilai` (`id`, `id_kumpul`, `id_guru`, `skor`, `catatan`, `tgl_penilaian`) VALUES (62,31,26,72.00,'Good description with clear details.','2026-09-27 16:28:53');
+) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+INSERT INTO `nilai` (`id`, `id_kumpul`, `id_guru`, `skor`, `catatan`, `tgl_penilaian`) VALUES (1,1,5,88.00,'Pengerjaan runtut dan rumus digunakan dengan tepat.','2026-04-28 02:00:00');
+INSERT INTO `nilai` (`id`, `id_kumpul`, `id_guru`, `skor`, `catatan`, `tgl_penilaian`) VALUES (2,2,5,76.00,'Sudah benar, namun beberapa langkah masih dipersingkat.','2026-04-28 02:00:00');
+INSERT INTO `nilai` (`id`, `id_kumpul`, `id_guru`, `skor`, `catatan`, `tgl_penilaian`) VALUES (3,3,5,92.00,'Sangat baik, seluruh nomor dikerjakan dengan lengkap.','2026-04-28 02:00:00');
+INSERT INTO `nilai` (`id`, `id_kumpul`, `id_guru`, `skor`, `catatan`, `tgl_penilaian`) VALUES (4,4,27,85.00,'Struktur teks negosiasi sudah lengkap.','2026-04-28 02:00:00');
+INSERT INTO `nilai` (`id`, `id_kumpul`, `id_guru`, `skor`, `catatan`, `tgl_penilaian`) VALUES (5,5,27,80.00,'Bagian penawaran dapat dikembangkan lagi.','2026-04-28 02:00:00');
+INSERT INTO `nilai` (`id`, `id_kumpul`, `id_guru`, `skor`, `catatan`, `tgl_penilaian`) VALUES (6,6,27,90.00,'Dialog negosiasi tersusun sangat runtut.','2026-04-28 02:00:00');
+INSERT INTO `nilai` (`id`, `id_kumpul`, `id_guru`, `skor`, `catatan`, `tgl_penilaian`) VALUES (7,7,NULL,80.00,NULL,'2026-10-05 12:15:02');
+INSERT INTO `nilai` (`id`, `id_kumpul`, `id_guru`, `skor`, `catatan`, `tgl_penilaian`) VALUES (8,8,NULL,100.00,NULL,'2026-10-05 12:15:02');
+INSERT INTO `nilai` (`id`, `id_kumpul`, `id_guru`, `skor`, `catatan`, `tgl_penilaian`) VALUES (9,9,NULL,60.00,NULL,'2026-10-05 12:15:02');
+INSERT INTO `nilai` (`id`, `id_kumpul`, `id_guru`, `skor`, `catatan`, `tgl_penilaian`) VALUES (10,10,NULL,100.00,NULL,'2026-10-05 12:15:02');
+INSERT INTO `nilai` (`id`, `id_kumpul`, `id_guru`, `skor`, `catatan`, `tgl_penilaian`) VALUES (11,11,NULL,40.00,NULL,'2026-10-05 12:15:02');
+INSERT INTO `nilai` (`id`, `id_kumpul`, `id_guru`, `skor`, `catatan`, `tgl_penilaian`) VALUES (12,12,NULL,80.00,NULL,'2026-10-05 12:15:02');
+INSERT INTO `nilai` (`id`, `id_kumpul`, `id_guru`, `skor`, `catatan`, `tgl_penilaian`) VALUES (13,18,5,90.00,'Langkah pengerjaan sudah runtut dan benar. Pertahankan.','2026-10-05 12:15:02');
+INSERT INTO `nilai` (`id`, `id_kumpul`, `id_guru`, `skor`, `catatan`, `tgl_penilaian`) VALUES (14,19,5,85.00,'Jawaban benar, tulisan pada lampiran agar diperjelas lagi.','2026-10-05 12:15:02');
+INSERT INTO `nilai` (`id`, `id_kumpul`, `id_guru`, `skor`, `catatan`, `tgl_penilaian`) VALUES (15,20,5,75.00,'Nomor 9 dan 10 masih keliru pada pemindahan ruas. Pelajari kembali.','2026-10-05 12:15:02');
+INSERT INTO `nilai` (`id`, `id_kumpul`, `id_guru`, `skor`, `catatan`, `tgl_penilaian`) VALUES (16,21,5,95.00,'Sangat baik, seluruh langkah penyelesaian lengkap.','2026-10-05 12:15:02');
+INSERT INTO `nilai` (`id`, `id_kumpul`, `id_guru`, `skor`, `catatan`, `tgl_penilaian`) VALUES (17,22,5,88.00,'Pekerjaan rapi dan jawaban tepat.','2026-10-05 12:15:02');
+INSERT INTO `nilai` (`id`, `id_kumpul`, `id_guru`, `skor`, `catatan`, `tgl_penilaian`) VALUES (18,13,27,100.00,'Deskripsi sangat hidup dan struktur sudah tepat.','2026-10-05 12:15:02');
+INSERT INTO `nilai` (`id`, `id_kumpul`, `id_guru`, `skor`, `catatan`, `tgl_penilaian`) VALUES (19,14,27,73.00,'Deskripsi baik, tambahkan lagi penggunaan pancaindra.','2026-10-05 12:15:02');
+INSERT INTO `nilai` (`id`, `id_kumpul`, `id_guru`, `skor`, `catatan`, `tgl_penilaian`) VALUES (20,15,27,96.00,'Sudah sesuai struktur, kembangkan lagi deskripsi bagiannya.','2026-10-05 12:15:02');
+INSERT INTO `nilai` (`id`, `id_kumpul`, `id_guru`, `skor`, `catatan`, `tgl_penilaian`) VALUES (21,30,26,98.00,'Good description with clear details.','2026-10-05 12:15:02');
+INSERT INTO `nilai` (`id`, `id_kumpul`, `id_guru`, `skor`, `catatan`, `tgl_penilaian`) VALUES (22,31,26,72.00,'Good description with clear details.','2026-10-05 12:15:02');
+INSERT INTO `nilai` (`id`, `id_kumpul`, `id_guru`, `skor`, `catatan`, `tgl_penilaian`) VALUES (23,23,27,92.00,'Struktur lengkap dan deskripsi sangat hidup.','2026-10-05 12:15:02');
+INSERT INTO `nilai` (`id`, `id_kumpul`, `id_guru`, `skor`, `catatan`, `tgl_penilaian`) VALUES (24,25,27,90.00,'Pemilihan diksi sangat baik dan runtut.','2026-10-05 12:15:02');
+INSERT INTO `nilai` (`id`, `id_kumpul`, `id_guru`, `skor`, `catatan`, `tgl_penilaian`) VALUES (25,24,27,87.00,'Sudah baik, penutup dapat dipertegas lagi.','2026-10-05 12:15:03');
+INSERT INTO `nilai` (`id`, `id_kumpul`, `id_guru`, `skor`, `catatan`, `tgl_penilaian`) VALUES (26,29,6,78.00,'Jawaban benar, namun dikumpulkan melewati batas waktu.','2026-10-05 12:15:03');
 
 
 -- ===========================================================================
 -- 16. Tabel `forum_diskusi`
 --    Topik dan balasan forum diskusi pada sebuah pertemuan
---    Jumlah data: 16 baris
+--    Jumlah data: 8 baris
 -- ===========================================================================
 
 DROP TABLE IF EXISTS `forum_diskusi`;
@@ -2133,27 +2122,19 @@ CREATE TABLE `forum_diskusi` (
   CONSTRAINT `fk_forum_parent` FOREIGN KEY (`id_parent`) REFERENCES `forum_diskusi` (`id`) ON DELETE CASCADE,
   CONSTRAINT `fk_forum_pertemuan` FOREIGN KEY (`id_pertemuan`) REFERENCES `pertemuan` (`id`) ON DELETE CASCADE,
   CONSTRAINT `fk_forum_user` FOREIGN KEY (`id_user`) REFERENCES `users` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-INSERT INTO `forum_diskusi` (`id`, `id_pertemuan`, `id_user`, `judul`, `pesan`, `id_parent`, `tgl_post`) VALUES (1,1,6,'Diskusi Pertemuan 1: Persamaan Linear','Selamat pagi anak-anak. Silakan tuliskan di forum ini bagian materi persamaan linear satu variabel yang masih sulit dipahami, nanti Ibu bahas ulang pada pertemuan berikutnya.',NULL,'2026-09-27 16:22:49');
-INSERT INTO `forum_diskusi` (`id`, `id_pertemuan`, `id_user`, `judul`, `pesan`, `id_parent`, `tgl_post`) VALUES (2,2,6,'Tanya Jawab Pertidaksamaan Linear','Bagian mana dari sifat pertidaksamaan yang paling sering membuat kalian keliru? Silakan tanyakan di sini.',NULL,'2026-09-27 16:22:49');
-INSERT INTO `forum_diskusi` (`id`, `id_pertemuan`, `id_user`, `judul`, `pesan`, `id_parent`, `tgl_post`) VALUES (3,4,28,'Tips Menulis Teks Deskripsi','Anak-anak, dalam menulis teks deskripsi gunakan pancaindra kalian: apa yang dilihat, didengar, dan dirasakan. Silakan tanyakan di sini jika ada kesulitan.',NULL,'2026-09-27 16:22:49');
-INSERT INTO `forum_diskusi` (`id`, `id_pertemuan`, `id_user`, `judul`, `pesan`, `id_parent`, `tgl_post`) VALUES (4,6,7,'Pengumpulan Latihan Besaran dan Satuan','Batas waktu pengumpulan latihan soal besaran dan satuan sudah berakhir. Bagi yang belum mengumpulkan, silakan hubungi Bapak dan tetap unggah pekerjaan kalian melalui sistem.',NULL,'2026-09-27 16:22:49');
-INSERT INTO `forum_diskusi` (`id`, `id_pertemuan`, `id_user`, `judul`, `pesan`, `id_parent`, `tgl_post`) VALUES (5,1,6,'Kesulitan pada Latihan Persamaan Linear','Anak-anak, bagian mana dari latihan persamaan linear yang masih terasa sulit? Tuliskan di sini agar Bapak bahas kembali pada pertemuan berikutnya.',NULL,'2026-09-27 16:27:49');
-INSERT INTO `forum_diskusi` (`id`, `id_pertemuan`, `id_user`, `judul`, `pesan`, `id_parent`, `tgl_post`) VALUES (6,1,30,NULL,'Saya masih bingung ketika variabel berada di kedua ruas, contohnya 5x = 3x + 12, Pak.',5,'2026-09-27 16:27:49');
-INSERT INTO `forum_diskusi` (`id`, `id_pertemuan`, `id_user`, `judul`, `pesan`, `id_parent`, `tgl_post`) VALUES (7,1,6,NULL,'Pertanyaan bagus, Ahmad. Pindahkan semua suku yang memuat variabel ke ruas kiri sehingga menjadi 5x - 3x = 12, lalu 2x = 12 dan x = 6.',5,'2026-09-27 16:27:49');
-INSERT INTO `forum_diskusi` (`id`, `id_pertemuan`, `id_user`, `judul`, `pesan`, `id_parent`, `tgl_post`) VALUES (8,1,31,NULL,'Terima kasih Pak, penjelasannya sudah jelas. Berarti tandanya berubah saat pindah ruas ya, Pak.',5,'2026-09-27 16:27:49');
-INSERT INTO `forum_diskusi` (`id`, `id_pertemuan`, `id_user`, `judul`, `pesan`, `id_parent`, `tgl_post`) VALUES (10,1,6,'Kesulitan pada Latihan Persamaan Linear','Anak-anak, bagian mana dari latihan persamaan linear yang masih terasa sulit? Tuliskan di sini agar Bapak bahas kembali pada pertemuan berikutnya.',NULL,'2026-09-27 16:28:48');
-INSERT INTO `forum_diskusi` (`id`, `id_pertemuan`, `id_user`, `judul`, `pesan`, `id_parent`, `tgl_post`) VALUES (11,1,30,NULL,'Saya masih bingung ketika variabel berada di kedua ruas, contohnya 5x = 3x + 12, Pak.',10,'2026-09-27 16:28:48');
-INSERT INTO `forum_diskusi` (`id`, `id_pertemuan`, `id_user`, `judul`, `pesan`, `id_parent`, `tgl_post`) VALUES (12,1,6,NULL,'Pertanyaan bagus, Ahmad. Pindahkan semua suku yang memuat variabel ke ruas kiri sehingga menjadi 5x - 3x = 12, lalu 2x = 12 dan x = 6.',10,'2026-09-27 16:28:48');
-INSERT INTO `forum_diskusi` (`id`, `id_pertemuan`, `id_user`, `judul`, `pesan`, `id_parent`, `tgl_post`) VALUES (13,1,31,NULL,'Terima kasih Pak, penjelasannya sudah jelas. Berarti tandanya berubah saat pindah ruas ya, Pak.',10,'2026-09-27 16:28:48');
-INSERT INTO `forum_diskusi` (`id`, `id_pertemuan`, `id_user`, `judul`, `pesan`, `id_parent`, `tgl_post`) VALUES (15,1,6,'Kesulitan pada Latihan Persamaan Linear','Anak-anak, bagian mana dari latihan persamaan linear yang masih terasa sulit? Tuliskan di sini agar Bapak bahas kembali pada pertemuan berikutnya.',NULL,'2026-09-27 16:28:53');
-INSERT INTO `forum_diskusi` (`id`, `id_pertemuan`, `id_user`, `judul`, `pesan`, `id_parent`, `tgl_post`) VALUES (16,1,30,NULL,'Saya masih bingung ketika variabel berada di kedua ruas, contohnya 5x = 3x + 12, Pak.',15,'2026-09-27 16:28:53');
-INSERT INTO `forum_diskusi` (`id`, `id_pertemuan`, `id_user`, `judul`, `pesan`, `id_parent`, `tgl_post`) VALUES (17,1,6,NULL,'Pertanyaan bagus, Ahmad. Pindahkan semua suku yang memuat variabel ke ruas kiri sehingga menjadi 5x - 3x = 12, lalu 2x = 12 dan x = 6.',15,'2026-09-27 16:28:53');
-INSERT INTO `forum_diskusi` (`id`, `id_pertemuan`, `id_user`, `judul`, `pesan`, `id_parent`, `tgl_post`) VALUES (18,1,31,NULL,'Terima kasih Pak, penjelasannya sudah jelas. Berarti tandanya berubah saat pindah ruas ya, Pak.',15,'2026-09-27 16:28:53');
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+INSERT INTO `forum_diskusi` (`id`, `id_pertemuan`, `id_user`, `judul`, `pesan`, `id_parent`, `tgl_post`) VALUES (1,1,6,'Diskusi Pertemuan 1: Persamaan Linear','Selamat pagi anak-anak. Silakan tuliskan di forum ini bagian materi persamaan linear satu variabel yang masih sulit dipahami, nanti Ibu bahas ulang pada pertemuan berikutnya.',NULL,'2026-10-05 12:14:58');
+INSERT INTO `forum_diskusi` (`id`, `id_pertemuan`, `id_user`, `judul`, `pesan`, `id_parent`, `tgl_post`) VALUES (2,2,6,'Tanya Jawab Pertidaksamaan Linear','Bagian mana dari sifat pertidaksamaan yang paling sering membuat kalian keliru? Silakan tanyakan di sini.',NULL,'2026-10-05 12:14:58');
+INSERT INTO `forum_diskusi` (`id`, `id_pertemuan`, `id_user`, `judul`, `pesan`, `id_parent`, `tgl_post`) VALUES (3,4,28,'Tips Menulis Teks Deskripsi','Anak-anak, dalam menulis teks deskripsi gunakan pancaindra kalian: apa yang dilihat, didengar, dan dirasakan. Silakan tanyakan di sini jika ada kesulitan.',NULL,'2026-10-05 12:14:58');
+INSERT INTO `forum_diskusi` (`id`, `id_pertemuan`, `id_user`, `judul`, `pesan`, `id_parent`, `tgl_post`) VALUES (4,6,7,'Pengumpulan Latihan Besaran dan Satuan','Batas waktu pengumpulan latihan soal besaran dan satuan sudah berakhir. Bagi yang belum mengumpulkan, silakan hubungi Bapak dan tetap unggah pekerjaan kalian melalui sistem.',NULL,'2026-10-05 12:14:58');
+INSERT INTO `forum_diskusi` (`id`, `id_pertemuan`, `id_user`, `judul`, `pesan`, `id_parent`, `tgl_post`) VALUES (5,1,6,'Kesulitan pada Latihan Persamaan Linear','Anak-anak, bagian mana dari latihan persamaan linear yang masih terasa sulit? Tuliskan di sini agar Bapak bahas kembali pada pertemuan berikutnya.',NULL,'2026-10-05 12:15:03');
+INSERT INTO `forum_diskusi` (`id`, `id_pertemuan`, `id_user`, `judul`, `pesan`, `id_parent`, `tgl_post`) VALUES (6,1,30,NULL,'Saya masih bingung ketika variabel berada di kedua ruas, contohnya 5x = 3x + 12, Pak.',5,'2026-10-05 12:15:03');
+INSERT INTO `forum_diskusi` (`id`, `id_pertemuan`, `id_user`, `judul`, `pesan`, `id_parent`, `tgl_post`) VALUES (7,1,6,NULL,'Pertanyaan bagus, Ahmad. Pindahkan semua suku yang memuat variabel ke ruas kiri sehingga menjadi 5x - 3x = 12, lalu 2x = 12 dan x = 6.',5,'2026-10-05 12:15:03');
+INSERT INTO `forum_diskusi` (`id`, `id_pertemuan`, `id_user`, `judul`, `pesan`, `id_parent`, `tgl_post`) VALUES (8,1,31,NULL,'Terima kasih Pak, penjelasannya sudah jelas. Berarti tandanya berubah saat pindah ruas ya, Pak.',5,'2026-10-05 12:15:03');
 
 
 -- ===========================================================================
--- Selesai. Total 1751 baris data pada 16 tabel.
+-- Selesai. Total 1740 baris data pada 16 tabel.
 -- ===========================================================================
 
 SET FOREIGN_KEY_CHECKS = 1;
