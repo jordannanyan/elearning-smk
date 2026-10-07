@@ -1,7 +1,11 @@
 import { useEffect, useState } from 'react';
 import api from '../../api/client';
 import Modal from '../../components/Modal';
+import Paginasi from '../../components/Paginasi';
+import PilihStatus from '../../components/PilihStatus';
 import type { UserRow } from '../../api/types';
+
+const PER_HALAMAN = 10;
 
 interface JadwalGuru {
   id_jadwal: number; nama_mapel: string; kode_mapel: string; kelompok: string;
@@ -13,6 +17,8 @@ export default function DataGuru() {
   const [rows, setRows] = useState<UserRow[]>([]);
   const [loading, setLoading] = useState(true);
   const [filter, setFilter] = useState<'' | 'aktif' | 'nonaktif'>('');
+  const [cari, setCari] = useState('');
+  const [halaman, setHalaman] = useState(1);
   const [show, setShow] = useState(false);
   const [edit, setEdit] = useState<UserRow | null>(null);
   const [form, setForm] = useState<any>({ nama: '', email: '', password: '', nip: '' });
@@ -31,11 +37,22 @@ export default function DataGuru() {
 
   async function load() {
     setLoading(true);
-    const { data } = await api.get('/users', { params: { role: 'guru', status: filter || undefined } });
+    const { data } = await api.get('/users', {
+      params: { role: 'guru', status: filter || undefined, q: cari || undefined },
+    });
     setRows(data);
     setLoading(false);
   }
-  useEffect(() => { load(); }, [filter]);
+
+  // Pencarian dijalankan sesaat setelah pengguna berhenti mengetik agar
+  // tidak mengirim permintaan ke server pada setiap ketukan papan ketik.
+  useEffect(() => {
+    const jeda = setTimeout(() => { setHalaman(1); load(); }, 350);
+    return () => clearTimeout(jeda);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [filter, cari]);
+
+  const tampil = rows.slice((halaman - 1) * PER_HALAMAN, halaman * PER_HALAMAN);
 
   function openAdd() {
     setEdit(null); setForm({ nama: '', email: '', password: '', nip: '' });
@@ -58,8 +75,7 @@ export default function DataGuru() {
 
   // Penonaktifan akun menggantikan penghapusan data agar relasi
   // pengampuan, materi, tugas, dan nilai tidak ikut terhapus.
-  async function ubahStatus(r: UserRow) {
-    const jadiAktif = !r.aktif;
+  async function ubahStatus(r: UserRow, jadiAktif: boolean) {
     const pesan = jadiAktif
       ? `Aktifkan kembali akun ${r.nama}?`
       : `Nonaktifkan akun ${r.nama}?\n\nGuru tidak dapat lagi masuk ke sistem, namun seluruh `
@@ -70,7 +86,9 @@ export default function DataGuru() {
   }
 
   async function hapus(r: UserRow) {
-    if (!confirm(`Hapus permanen data guru ${r.nama}?`)) return;
+    if (!confirm(`Hapus permanen data guru ${r.nama}?\n\n`
+      + 'Data yang sudah dihapus tidak dapat dikembalikan. Gunakan status Nonaktif '
+      + 'apabila guru hanya berhenti mengajar.')) return;
     try {
       await api.delete(`/users/${r.id}`);
       load();
@@ -84,7 +102,9 @@ export default function DataGuru() {
     <div>
       <div className="page-head">
         <h2>Data Guru</h2>
-        <div style={{ display: 'flex', gap: 10, alignItems: 'center' }}>
+        <div style={{ display: 'flex', gap: 10, alignItems: 'center', flexWrap: 'wrap' }}>
+          <input placeholder="Cari nama / email guru..." value={cari} style={{ width: 210 }}
+            onChange={(e) => setCari(e.target.value)} />
           <select value={filter} onChange={(e) => setFilter(e.target.value as any)}
             style={{ width: 'auto' }}>
             <option value="">Semua Status</option>
@@ -99,11 +119,11 @@ export default function DataGuru() {
         <span className="ikon">ℹ️</span>
         <div>
           Kolom <strong>Mengajar di</strong> menunjukkan berapa kelas yang diajar guru tersebut pada
-          periode berjalan; klik untuk melihat mata pelajaran apa saja dan di kelas mana. Guru yang
-          sudah mengajar tidak dapat dihapus permanen karena akan memutus data materi, tugas, dan
-          nilai yang terkait — gunakan tombol <strong>Nonaktifkan</strong> sebagai gantinya.
-          Kolom <strong>Wali Kelas</strong> terisi otomatis dari penetapan wali kelas pada menu
-          Data Kelas.
+          periode berjalan; klik untuk melihat mata pelajaran apa saja dan di kelas mana. Status guru
+          diubah melalui <strong>dropdown pada kolom Status</strong>. Guru yang sudah mengajar tidak
+          dapat dihapus permanen karena akan memutus data materi, tugas, dan nilai yang terkait —
+          pilih <strong>Nonaktif</strong> sebagai gantinya. Kolom <strong>Wali Kelas</strong> terisi
+          otomatis dari penetapan wali kelas pada menu Data Kelas.
         </div>
       </div>
 
@@ -114,46 +134,50 @@ export default function DataGuru() {
           </thead>
           <tbody>
             {loading ? <tr><td colSpan={6} className="center-msg">Memuat...</td></tr>
-              : rows.length === 0 ? <tr><td colSpan={6} className="center-msg">Belum ada data guru</td></tr>
-                : rows.map((r) => (
-                  <tr key={r.id} style={{ opacity: r.aktif ? 1 : .6 }}>
-                    <td>{r.nama}</td>
-                    <td className="muted">{r.nip || '-'}<br />
-                      <span style={{ fontSize: 11.5 }}>{r.email}</span></td>
-                    <td>
-                      {r.jumlah_pengampuan
-                        ? <button className="tombol-rincian" onClick={() => bukaJadwal(r)}>
-                          {r.jumlah_pengampuan} kelas — lihat jadwal
-                        </button>
-                        : <span className="muted">Belum mengajar</span>}
-                    </td>
-                    <td>
-                      {r.wali_kelas
-                        ? <span className="badge green">👤 {r.wali_kelas}</span>
-                        : <span className="muted">-</span>}
-                    </td>
-                    <td>
-                      {r.aktif ? <span className="badge green">Aktif</span>
-                        : <span className="badge gray">Nonaktif</span>}
-                    </td>
-                    <td>
-                      <div className="row-actions">
-                        <button className="btn small" onClick={() => bukaJadwal(r)}>Jadwal</button>
-                        <button className="btn secondary small" onClick={() => openEdit(r)}>Edit</button>
-                        <button className={`btn small ${r.aktif ? 'secondary' : ''}`}
-                          onClick={() => ubahStatus(r)}>
-                          {r.aktif ? 'Nonaktifkan' : 'Aktifkan'}
-                        </button>
-                        {!r.jumlah_pengampuan && (
-                          <button className="btn danger small" onClick={() => hapus(r)}>Hapus</button>
-                        )}
-                      </div>
-                    </td>
-                  </tr>
-                ))}
+              : tampil.length === 0 ? (
+                <tr><td colSpan={6} className="center-msg">
+                  {cari ? `Tidak ada guru yang cocok dengan "${cari}"` : 'Belum ada data guru'}
+                </td></tr>
+              ) : tampil.map((r) => (
+                <tr key={r.id} style={{ opacity: r.aktif ? 1 : .6 }}>
+                  <td>{r.nama}</td>
+                  <td className="muted">{r.nip || '-'}<br />
+                    <span style={{ fontSize: 11.5 }}>{r.email}</span></td>
+                  <td>
+                    {r.jumlah_pengampuan
+                      ? <button className="tombol-rincian" onClick={() => bukaJadwal(r)}>
+                        {r.jumlah_pengampuan} kelas — lihat jadwal
+                      </button>
+                      : <span className="muted">Belum mengajar</span>}
+                  </td>
+                  <td>
+                    {r.wali_kelas
+                      ? <span className="badge green">👤 {r.wali_kelas}</span>
+                      : <span className="muted">-</span>}
+                  </td>
+                  <td>
+                    <PilihStatus
+                      aktif={!!r.aktif}
+                      bolehHapus={!r.jumlah_pengampuan}
+                      alasanTakBolehHapus="Guru ini masih mengajar, sehingga tidak dapat dihapus permanen"
+                      onUbahStatus={(jadiAktif) => ubahStatus(r, jadiAktif)}
+                      onHapus={() => hapus(r)}
+                    />
+                  </td>
+                  <td>
+                    <div className="row-actions">
+                      <button className="btn small" onClick={() => bukaJadwal(r)}>Jadwal</button>
+                      <button className="btn secondary small" onClick={() => openEdit(r)}>Edit</button>
+                    </div>
+                  </td>
+                </tr>
+              ))}
           </tbody>
         </table>
       </div>
+
+      <Paginasi halaman={halaman} totalData={rows.length}
+        perHalaman={PER_HALAMAN} onGanti={setHalaman} />
 
       {jadwalDari && (
         <Modal title={`Jadwal Mengajar — ${jadwalDari.nama}`} onClose={() => setJadwalDari(null)}>

@@ -35,9 +35,10 @@ Periode Pembelajaran (2026/2)
 
 | Role | Fitur |
 |------|-------|
+| **Pengunjung** | Halaman depan sekolah tanpa login: profil dan identitas sekolah, rekapitulasi jumlah guru/siswa/kelas/mata pelajaran, fitur sistem, dan alur pembelajaran |
 | **Administrator** | Login, kelola periode pembelajaran (aktifkan/kunci/buka kunci), kelola data guru & siswa (aktif/nonaktif), kelola kelas beserta mata pelajaran, guru pengajar, dan siswa anggotanya, kelola katalog mata pelajaran, pantau statistik sistem |
-| **Guru** | Login, kelola mata pelajaran dan kelas yang diajar, susun pertemuan, unggah materi (teks/berkas/video/tautan YouTube), buat tugas & kuis beserta butir soal, periksa pengumpulan (termasuk siswa yang belum mengumpulkan), beri nilai, buka forum diskusi |
-| **Siswa** | Login, lihat kartu mata pelajaran di kelasnya, ikuti pembelajaran per pertemuan, unduh berkas & tonton video, kerjakan tugas/kuis dengan penanda sisa waktu, lihat rekap nilai per mata pelajaran dan riwayat antar-periode, balas forum diskusi |
+| **Guru** | Login, kelola mata pelajaran dan kelas yang diajar, susun pertemuan, unggah materi (teks/berkas/video/tautan YouTube), buat tugas & kuis beserta butir soal, periksa pengumpulan (termasuk siswa yang belum mengumpulkan), beri nilai, buka forum diskusi, lihat raport sementara per kelas |
+| **Siswa** | Login, lihat kartu mata pelajaran di kelasnya, ikuti pembelajaran per pertemuan, unduh berkas & tonton video, kerjakan tugas/kuis dengan penanda sisa waktu, lihat rekap nilai per mata pelajaran dan riwayat antar-periode, lihat raport sementara dirinya dalam satu halaman, balas forum diskusi |
 
 ## Prasyarat
 - **Node.js** v18+
@@ -74,6 +75,7 @@ Basis data diisi dengan **data nyata SMA Negeri 1 Karau Kuala**, bukan data kara
 | Kelas | 10 | idem |
 | Wali kelas | 10 | SK Nomor 421.3/186/14/SMAN 1 KK/VII/2025 tanggal 9 Juli 2025 (Lampiran IV) |
 | Siswa | 287 | Daftar Hadir Siswa Tahun Pelajaran 2025/2026 |
+| Identitas sekolah (NPSN, NSS, alamat, kepala sekolah) | — | Kop surat dan lampiran SK Nomor 421.3/186/14/SMAN 1 KK/VII/2025 |
 
 Berkas sumber dibaca oleh `python scripts/impor-data-sekolah.py` yang menghasilkan
 `backend/src/db/data/sekolah.json`, lalu dimuat ke basis data oleh `npm run db:seed`.
@@ -101,11 +103,12 @@ Skrip pembangkitnya ada di `scripts/`:
 | Skrip | Kegunaan |
 |---|---|
 | `scripts/impor-data-sekolah.py` | Membaca berkas resmi sekolah (SK pembagian tugas, SK wali kelas, daftar hadir siswa) menjadi `sekolah.json` |
-| `scripts/blackbox.js` | Menjalankan 95 skenario pengujian Black Box terhadap REST API sekaligus mengisi data pengumpulan tugas & nilai |
-| `scripts/screenshots.py` | Mengambil 44 tangkapan layar seluruh halaman sistem secara otomatis (Playwright) |
+| `scripts/blackbox.js` | Menjalankan 101 skenario pengujian Black Box terhadap REST API sekaligus mengisi data pengumpulan tugas & nilai |
+| `scripts/screenshots.py` | Mengambil 50 tangkapan layar seluruh halaman sistem secara otomatis (Playwright) |
 | `scripts/data-bab4.js` | Mengambil struktur tabel basis data dan statistik data dari MySQL |
 | `scripts/buat-dokumen-bab4.py` | Menyusun `docs-bab4/Lampiran-BAB-IV-Sistem-E-Learning.docx` |
 | `scripts/buat-dump-sql.py` | Membuat dump SQL `docs-bab4/database/elearning_smakk_bab4.sql` |
+| `scripts/segarkan-readme.py` | Menyegarkan daftar gambar, ringkasan pengujian, dan jumlah data pada `docs-bab4/README.md` |
 
 Petunjuk lengkap: lihat `docs-bab4/README.md`.
 

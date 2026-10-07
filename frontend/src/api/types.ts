@@ -304,3 +304,57 @@ export interface Dashboard {
   periode: Periode | null;
   [key: string]: any;
 }
+
+/* ---------- Raport sementara ---------- */
+export interface Predikat { huruf: string; keterangan: string; }
+
+export interface KelasRaport {
+  id: number; nama_kelas: string; tingkat: string;
+  kode: string; tahun_ajaran: string; semester: number; nama_semester: string;
+  status_periode: StatusPeriode;
+  wali_kelas: boolean;
+  jumlah_siswa: number; jumlah_mapel: number;
+  mapel_diajar: string | null;
+}
+
+export interface MapelRaport {
+  id_kelas_mapel: number; nama_mapel: string; kode_mapel: string | null;
+  kelompok: string | null; nama_guru: string | null; jumlah_tugas: number;
+}
+
+export interface RaportKelas {
+  kelas: {
+    id: number; nama_kelas: string; tingkat: string; kode: string;
+    tahun_ajaran: string; semester: number; nama_semester: string;
+    status_periode: StatusPeriode; wali_kelas: string | null;
+  };
+  mapel: MapelRaport[];
+  siswa: {
+    id_siswa: number; nama: string; nis: string | null;
+    nilai: Record<number, { rata_rata: number | null; jumlah_dinilai: number }>;
+    jumlah_mapel_dinilai: number; jumlah_mapel_tuntas: number;
+    rata_rata: number | null; predikat: Predikat; peringkat: number | null;
+  }[];
+  kkm: number;
+}
+
+export interface RaportSiswa {
+  identitas: { nama: string; nis: string | null } | null;
+  daftar_periode: {
+    id_periode: number; kode: string; tahun_ajaran: string; semester: number;
+    nama_semester: string; status: StatusPeriode;
+    id_kelas: number; nama_kelas: string; tingkat: string;
+  }[];
+  periode?: { id_periode: number };
+  kelas: RaportKelas['kelas'] | null;
+  mapel: (MapelRaport & {
+    jumlah_dinilai: number; rata_rata: number | null;
+    predikat: Predikat; tuntas: boolean | null;
+  })[];
+  ringkasan: {
+    rata_rata: number | null; predikat: Predikat; peringkat: number | null;
+    jumlah_siswa: number; jumlah_mapel: number;
+    jumlah_mapel_dinilai: number; jumlah_mapel_tuntas: number;
+  } | null;
+  kkm: number;
+}

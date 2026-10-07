@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import api from '../../api/client';
 import Modal from '../../components/Modal';
+import Paginasi from '../../components/Paginasi';
 import type { AnggotaKelas, Kelas, KelasMapel, Mapel, Periode } from '../../api/types';
 
 // ---------------------------------------------------------------------
@@ -12,8 +13,11 @@ import type { AnggotaKelas, Kelas, KelasMapel, Mapel, Periode } from '../../api/
 // guru ditugaskan pada mata pelajaran di sebuah kelas.
 // ---------------------------------------------------------------------
 
+const PER_HALAMAN = 9;
+
 export default function DataKelas() {
   const [rows, setRows] = useState<Kelas[]>([]);
+  const [halaman, setHalaman] = useState(1);
   const [periode, setPeriode] = useState<Periode[]>([]);
   const [pilih, setPilih] = useState('');
   const [loading, setLoading] = useState(true);
@@ -53,7 +57,7 @@ export default function DataKelas() {
     ]);
     setRows(k.data); setMapel(m.data); setGuru(g.data); setLoading(false);
   }
-  useEffect(() => { load(); }, [pilih]);
+  useEffect(() => { load(); setHalaman(1); }, [pilih]);
 
   /* ---------------- CRUD kelas ---------------- */
   function openAdd() {
@@ -180,7 +184,7 @@ export default function DataKelas() {
         : rows.length === 0 ? <div className="card center-msg">Belum ada kelas pada periode ini.</div>
           : (
             <div className="kartu-grid">
-              {rows.map((k) => (
+              {rows.slice((halaman - 1) * PER_HALAMAN, halaman * PER_HALAMAN).map((k) => (
                 <div className={`kartu-ringkas ${terkunci ? 'abu' : ''}`} key={k.id}
                   onClick={() => bukaDetail(k)}>
                   <div>
@@ -207,6 +211,9 @@ export default function DataKelas() {
               ))}
             </div>
           )}
+
+      <Paginasi halaman={halaman} totalData={rows.length}
+        perHalaman={PER_HALAMAN} onGanti={setHalaman} />
 
       {/* ---------------- Form kelas ---------------- */}
       {show && (

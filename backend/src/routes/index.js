@@ -17,11 +17,16 @@ const soal = require('../controllers/soalController');
 const nilai = require('../controllers/nilaiController');
 const forum = require('../controllers/forumController');
 const dashboard = require('../controllers/dashboardController');
+const raport = require('../controllers/raportController');
+const publik = require('../controllers/publikController');
 
 // Pintasan penulisan middleware penguncian periode
 const kunci = (entitas, ambilId) => pastikanPeriodeTerbuka(entitas, ambilId);
 const dariParam = (req) => req.params.id;
 const dariBody = (kolom) => (req) => req.body[kolom];
+
+// ---------- Halaman depan (tanpa login) ----------
+router.get('/publik/profil', publik.profil);
 
 // ---------- Auth ----------
 router.post('/auth/login', auth.login);
@@ -136,6 +141,11 @@ router.post('/nilai', authenticate, authorize('guru'),
   kunci('pengumpulan', dariBody('id_kumpul')), nilai.beriNilai);
 router.get('/nilai/saya', authenticate, authorize('siswa'), nilai.rekapSiswa);
 router.get('/nilai/kelas-mapel/:id', authenticate, authorize('guru', 'admin'), nilai.rekapKelasMapel);
+
+// ---------- Raport sementara ----------
+router.get('/raport/kelas', authenticate, authorize('guru'), raport.kelasGuru);
+router.get('/raport/saya', authenticate, authorize('siswa'), raport.raportSiswa);
+router.get('/raport/kelas/:id', authenticate, authorize('guru', 'admin'), raport.raportKelas);
 
 // ---------- Forum diskusi ----------
 router.get('/forum', authenticate, forum.list);

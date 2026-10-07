@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from 'react';
 import api from '../../api/client';
 import Modal from '../../components/Modal';
 import Paginasi from '../../components/Paginasi';
+import PilihStatus from '../../components/PilihStatus';
 import type { Mapel, Periode } from '../../api/types';
 
 const KELOMPOK = ['Wajib', 'Peminatan', 'Muatan Lokal'];
@@ -66,8 +67,7 @@ export default function DataMapel() {
       setShow(false); load();
     } catch (e: any) { setErr(e.response?.data?.message || 'Gagal menyimpan'); }
   }
-  async function ubahStatus(r: Mapel) {
-    const jadiAktif = !r.aktif;
+  async function ubahStatus(r: Mapel, jadiAktif: boolean) {
     if (!confirm(jadiAktif
       ? `Aktifkan kembali mata pelajaran ${r.nama}?`
       : `Nonaktifkan mata pelajaran ${r.nama}?\n\nMata pelajaran tidak dapat lagi dipilih saat `
@@ -76,7 +76,11 @@ export default function DataMapel() {
     load();
   }
   async function hapus(r: Mapel) {
-    if (!confirm(`Hapus mata pelajaran ${r.nama}?`)) return;
+    if (!confirm(`Hapus permanen mata pelajaran ${r.nama}?
+
+`
+      + 'Data yang sudah dihapus tidak dapat dikembalikan. Gunakan status Nonaktif '
+      + 'apabila mata pelajaran hanya tidak diajarkan lagi.')) return;
     try { await api.delete(`/mapel/${r.id}`); load(); }
     catch (e: any) { alert(e.response?.data?.message || 'Gagal menghapus'); }
   }
@@ -148,17 +152,19 @@ export default function DataMapel() {
                         : <span className="muted">Belum diajarkan</span>}
                     </td>
                     <td>{r.jumlah_guru || 0} guru</td>
-                    <td>{r.aktif ? <span className="badge green">Aktif</span>
-                      : <span className="badge gray">Nonaktif</span>}</td>
+                    <td>
+                      <PilihStatus
+                        aktif={!!r.aktif}
+                        bolehHapus={!r.jumlah_kelas}
+                        alasanTakBolehHapus="Mata pelajaran ini masih diajarkan di kelas, sehingga tidak dapat dihapus permanen"
+                        onUbahStatus={(jadiAktif) => ubahStatus(r, jadiAktif)}
+                        onHapus={() => hapus(r)}
+                      />
+                    </td>
                     <td>
                       <div className="row-actions">
                         <button className="btn small" onClick={() => bukaDetail(r)}>Lihat Kelas</button>
                         <button className="btn secondary small" onClick={() => openEdit(r)}>Edit</button>
-                        <button className={`btn small ${r.aktif ? 'secondary' : ''}`}
-                          onClick={() => ubahStatus(r)}>{r.aktif ? 'Nonaktifkan' : 'Aktifkan'}</button>
-                        {!r.jumlah_kelas && (
-                          <button className="btn danger small" onClick={() => hapus(r)}>Hapus</button>
-                        )}
                       </div>
                     </td>
                   </tr>

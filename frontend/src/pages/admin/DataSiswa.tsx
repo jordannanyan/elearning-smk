@@ -1,7 +1,11 @@
 import { useEffect, useState } from 'react';
 import api from '../../api/client';
 import Modal from '../../components/Modal';
+import Paginasi from '../../components/Paginasi';
+import PilihStatus from '../../components/PilihStatus';
 import type { Kelas, UserRow } from '../../api/types';
+
+const PER_HALAMAN = 10;
 
 export default function DataSiswa() {
   const [rows, setRows] = useState<UserRow[]>([]);
@@ -9,6 +13,7 @@ export default function DataSiswa() {
   const [loading, setLoading] = useState(true);
   const [filter, setFilter] = useState<'' | 'aktif' | 'nonaktif'>('');
   const [cari, setCari] = useState('');
+  const [halaman, setHalaman] = useState(1);
   const [show, setShow] = useState(false);
   const [edit, setEdit] = useState<UserRow | null>(null);
   const [form, setForm] = useState<any>({ nama: '', email: '', password: '', nis: '', id_kelas: '' });
@@ -22,7 +27,15 @@ export default function DataSiswa() {
     ]);
     setRows(u.data); setKelas(k.data); setLoading(false);
   }
-  useEffect(() => { load(); }, [filter]);
+  // Pencarian dijalankan sesaat setelah pengguna berhenti mengetik agar
+  // tidak mengirim permintaan ke server pada setiap ketukan papan ketik.
+  useEffect(() => {
+    const jeda = setTimeout(() => { setHalaman(1); load(); }, 350);
+    return () => clearTimeout(jeda);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [filter, cari]);
+
+  const tampil = rows.slice((halaman - 1) * PER_HALAMAN, halaman * PER_HALAMAN);
 
   function openAdd() {
     setEdit(null);
@@ -52,8 +65,7 @@ export default function DataSiswa() {
 
   // Siswa yang lulus atau pindah cukup dinonaktifkan, tidak dihapus,
   // agar riwayat nilainya pada periode terdahulu tetap dapat ditelusuri.
-  async function ubahStatus(r: UserRow) {
-    const jadiAktif = !r.aktif;
+  async function ubahStatus(r: UserRow, jadiAktif: boolean) {
     const pesan = jadiAktif
       ? `Aktifkan kembali akun ${r.nama}?`
       : `Nonaktifkan akun ${r.nama}?\n\nGunakan ini apabila siswa sudah lulus atau pindah sekolah. `
@@ -64,7 +76,11 @@ export default function DataSiswa() {
   }
 
   async function hapus(r: UserRow) {
-    if (!confirm(`Hapus permanen data siswa ${r.nama}?`)) return;
+    if (!confirm(`Hapus permanen data siswa ${r.nama}?
+
+`
+      + 'Data yang sudah dihapus tidak dapat dikembalikan. Gunakan status Nonaktif '
+      + 'apabila siswa lulus atau pindah sekolah.')) return;
     try {
       await api.delete(`/users/${r.id}`);
       load();
@@ -79,9 +95,8 @@ export default function DataSiswa() {
       <div className="page-head">
         <h2>Data Siswa</h2>
         <div style={{ display: 'flex', gap: 10, alignItems: 'center', flexWrap: 'wrap' }}>
-          <input placeholder="Cari nama / email..." value={cari} style={{ width: 200 }}
-            onChange={(e) => setCari(e.target.value)}
-            onKeyDown={(e) => { if (e.key === 'Enter') load(); }} />
+          <input placeholder="Cari nama / email siswa..." value={cari} style={{ width: 210 }}
+            onChange={(e) => setCari(e.target.value)} />
           <select value={filter} onChange={(e) => setFilter(e.target.value as any)} style={{ width: 'auto' }}>
             <option value="">Semua Status</option>
             <option value="aktif">Hanya Aktif</option>
@@ -96,8 +111,9 @@ export default function DataSiswa() {
         <div>
           Siswa yang telah lulus atau pindah sekolah <strong>tidak dihapus</strong>, melainkan cukup
           <strong> dinonaktifkan</strong>. Dengan begitu riwayat pengumpulan tugas dan nilainya pada
-          periode terdahulu tetap dapat ditelusuri. Kolom kelas menampilkan kelas siswa pada periode
-          pembelajaran yang sedang aktif.
+          periode terdahulu tetap dapat ditelusuri. Status siswa diubah melalui <strong>dropdown
+          pada kolom Status</strong>. Kolom kelas menampilkan kelas siswa pada periode pembelajaran
+          yang sedang aktif.
         </div>
       </div>
 
@@ -108,8 +124,11 @@ export default function DataSiswa() {
           </thead>
           <tbody>
             {loading ? <tr><td colSpan={6} className="center-msg">Memuat...</td></tr>
-              : rows.length === 0 ? <tr><td colSpan={6} className="center-msg">Belum ada data siswa</td></tr>
-                : rows.map((r) => (
+              : tampil.length === 0 ? (
+                <tr><td colSpan={6} className="center-msg">
+                  {cari ? `Tidak ada siswa yang cocok dengan "${cari}"` : 'Belum ada data siswa'}
+                </td></tr>
+              ) : tampil.map((r) => (
                   <tr key={r.id} style={{ opacity: r.aktif ? 1 : .6 }}>
                     <td>{r.nama}</td>
                     <td className="muted">{r.nis || '-'}</td>
@@ -117,18 +136,18 @@ export default function DataSiswa() {
                     <td>{r.kelas_aktif
                       ? <span className="badge green">{r.kelas_aktif}</span>
                       : <span className="muted">Belum ditempatkan</span>}</td>
-                    <td>{r.aktif ? <span className="badge green">Aktif</span>
-                      : <span className="badge gray">Nonaktif</span>}</td>
+                    <td>
+                      <PilihStatus
+                        aktif={!!r.aktif}
+                        bolehHapus={!r.kelas_aktif}
+                        alasanTakBolehHapus="Siswa ini masih terdaftar pada sebuah kelas, sehingga tidak dapat dihapus permanen"
+                        onUbahStatus={(jadiAktif) => ubahStatus(r, jadiAktif)}
+                        onHapus={() => hapus(r)}
+                      />
+                    </td>
                     <td>
                       <div className="row-actions">
                         <button className="btn secondary small" onClick={() => openEdit(r)}>Edit</button>
-                        <button className={`btn small ${r.aktif ? 'secondary' : ''}`}
-                          onClick={() => ubahStatus(r)}>
-                          {r.aktif ? 'Nonaktifkan' : 'Aktifkan'}
-                        </button>
-                        {!r.kelas_aktif && (
-                          <button className="btn danger small" onClick={() => hapus(r)}>Hapus</button>
-                        )}
                       </div>
                     </td>
                   </tr>
@@ -136,6 +155,9 @@ export default function DataSiswa() {
           </tbody>
         </table>
       </div>
+
+      <Paginasi halaman={halaman} totalData={rows.length}
+        perHalaman={PER_HALAMAN} onGanti={setHalaman} />
 
       {show && (
         <Modal title={edit ? 'Edit Siswa' : 'Tambah Siswa'} onClose={() => setShow(false)}>

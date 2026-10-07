@@ -1337,6 +1337,93 @@ async function main() {
   });
 
   // =================================================================
+  // J. HALAMAN DEPAN DAN RAPORT SEMENTARA
+  // =================================================================
+  const rProfil = await get('/api/publik/profil');
+  catat({
+    modul: 'Halaman Depan', skenario: 'Pengunjung membuka halaman depan sekolah tanpa login',
+    input: 'Membuka alamat sistem tanpa memasukkan akun',
+    harapan: 'Sistem menampilkan profil sekolah beserta rekapitulasi jumlah guru, siswa, '
+      + 'kelas, dan mata pelajaran, tanpa menampilkan data pribadi',
+    aktual: `HTTP ${rProfil.status}: ${rProfil.data?.sekolah?.nama}, NPSN ${rProfil.data?.sekolah?.npsn}, `
+      + `${rProfil.data?.statistik?.total_guru} guru, ${rProfil.data?.statistik?.total_siswa} siswa, `
+      + `${rProfil.data?.statistik?.total_kelas} kelas`,
+    sesuai: rProfil.status === 200 && !!rProfil.data.sekolah.npsn
+      && rProfil.data.statistik.total_siswa > 0,
+  });
+
+  const rKelasRaport = await get('/api/raport/kelas', TG);
+  const kelasWali = rKelasRaport.data.find((k) => k.wali_kelas && k.status_periode === 'aktif');
+  catat({
+    modul: 'Raport Sementara', skenario: 'Guru melihat daftar kelas yang dapat dibuka raportnya',
+    input: 'Membuka menu Raport Sementara',
+    harapan: 'Sistem menampilkan kelas yang diajar guru tersebut beserta kelas yang diwalikannya',
+    aktual: `HTTP ${rKelasRaport.status}, ${rKelasRaport.data.length} kelas; `
+      + `sebagai wali kelas: ${kelasWali ? kelasWali.nama_kelas : '-'}`,
+    sesuai: rKelasRaport.status === 200 && rKelasRaport.data.length > 0 && !!kelasWali,
+  });
+
+  const rRaportKelas = await get(`/api/raport/kelas/${kelasWali.id}`, TG);
+  const siswaBernilai = rRaportKelas.data.siswa.filter((s) => s.rata_rata != null);
+  const peringkatSatu = siswaBernilai.find((s) => s.peringkat === 1);
+  catat({
+    modul: 'Raport Sementara', skenario: 'Wali kelas membuka raport sementara seluruh siswa di kelasnya',
+    input: `Membuka raport sementara kelas ${kelasWali.nama_kelas}`,
+    harapan: 'Sistem menampilkan nilai rata-rata tiap siswa pada setiap mata pelajaran beserta '
+      + 'predikat dan peringkat kelasnya',
+    aktual: `HTTP ${rRaportKelas.status}: ${rRaportKelas.data.siswa.length} siswa, `
+      + `${rRaportKelas.data.mapel.length} mata pelajaran, KKM ${rRaportKelas.data.kkm}; `
+      + `peringkat 1 = ${peringkatSatu ? `${peringkatSatu.nama} (${peringkatSatu.rata_rata}, `
+        + `predikat ${peringkatSatu.predikat.huruf})` : '-'}`,
+    sesuai: rRaportKelas.status === 200 && rRaportKelas.data.siswa.length > 0
+      && rRaportKelas.data.mapel.length > 0 && !!peringkatSatu,
+  });
+
+  // Guru Bahasa Inggris tidak mengajar maupun menjadi wali pada kelas tersebut
+  const kelasBukanMilikLaily = (await get('/api/raport/kelas', TG_LAILY)).data
+    .map((k) => k.id);
+  const kelasTerlarang = rKelasRaport.data
+    .find((k) => !kelasBukanMilikLaily.includes(k.id));
+  const rRaportTerlarang = kelasTerlarang
+    ? await get(`/api/raport/kelas/${kelasTerlarang.id}`, TG_LAILY)
+    : { status: 403, data: { message: 'tidak ada kelas pembanding' } };
+  catat({
+    modul: 'Raport Sementara', skenario: 'Guru mencoba membuka raport kelas yang bukan kelasnya',
+    input: `Guru Laily Mustika membuka raport kelas ${kelasTerlarang ? kelasTerlarang.nama_kelas : '-'}`,
+    harapan: 'Sistem menolak karena guru tersebut tidak mengajar maupun menjadi wali kelas di sana',
+    aktual: `HTTP ${rRaportTerlarang.status}, pesan: "${rRaportTerlarang.data?.message}"`,
+    sesuai: rRaportTerlarang.status === 403,
+  });
+
+  const rRaportSaya = await get('/api/raport/saya', tokenSiswa.ahmad);
+  const rk = rRaportSaya.data.ringkasan;
+  catat({
+    modul: 'Raport Sementara', skenario: 'Siswa melihat raport sementara dirinya dalam satu halaman',
+    input: 'Membuka menu Raport Sementara',
+    harapan: 'Sistem menampilkan seluruh mata pelajaran di kelasnya beserta nilai rata-rata, '
+      + 'predikat, ketuntasan terhadap KKM, dan peringkat kelas',
+    aktual: `HTTP ${rRaportSaya.status}: ${rRaportSaya.data.identitas?.nama} kelas `
+      + `${rRaportSaya.data.kelas?.nama_kelas}, ${rRaportSaya.data.mapel.length} mata pelajaran, `
+      + `rata-rata ${rk?.rata_rata} (predikat ${rk?.predikat?.huruf}), `
+      + `peringkat ${rk?.peringkat} dari ${rk?.jumlah_siswa} siswa`,
+    sesuai: rRaportSaya.status === 200 && rRaportSaya.data.mapel.length > 0
+      && rk.rata_rata != null && rk.peringkat != null,
+  });
+
+  const periodeArsip = rRaportSaya.data.daftar_periode.find((p) => p.status === 'terkunci');
+  const rRaportArsip = await get(`/api/raport/saya?id_periode=${periodeArsip.id_periode}`,
+    tokenSiswa.ahmad);
+  catat({
+    modul: 'Raport Sementara', skenario: 'Siswa melihat raport pada periode pembelajaran terdahulu',
+    input: `Memilih periode ${periodeArsip.kode} yang berstatus terkunci`,
+    harapan: 'Sistem menampilkan raport siswa pada kelas yang diikutinya di periode tersebut',
+    aktual: `HTTP ${rRaportArsip.status}: periode ${rRaportArsip.data.kelas?.kode}, kelas `
+      + `${rRaportArsip.data.kelas?.nama_kelas}, rata-rata `
+      + `${rRaportArsip.data.ringkasan?.rata_rata}`,
+    sesuai: rRaportArsip.status === 200 && rRaportArsip.data.kelas?.kode === periodeArsip.kode,
+  });
+
+  // =================================================================
   // Pembersihan data uji
   // -----------------------------------------------------------------
   // Seluruh skenario sudah selesai dicatat, sehingga akun uji tidak lagi

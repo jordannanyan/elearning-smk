@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import api from '../../api/client';
 import Modal from '../../components/Modal';
+import Paginasi from '../../components/Paginasi';
 import type { Periode } from '../../api/types';
 
 const LABEL_STATUS: Record<string, { teks: string; warna: string }> = {
@@ -15,8 +16,11 @@ function fmtTanggal(t?: string | null) {
     { day: 'numeric', month: 'long', year: 'numeric' });
 }
 
+const PER_HALAMAN = 10;
+
 export default function AdminPeriode() {
   const [rows, setRows] = useState<Periode[]>([]);
+  const [halaman, setHalaman] = useState(1);
   const [loading, setLoading] = useState(true);
   const [show, setShow] = useState(false);
   const [edit, setEdit] = useState<Periode | null>(null);
@@ -120,7 +124,7 @@ export default function AdminPeriode() {
           <tbody>
             {loading ? <tr><td colSpan={9} className="center-msg">Memuat...</td></tr>
               : rows.length === 0 ? <tr><td colSpan={9} className="center-msg">Belum ada periode pembelajaran</td></tr>
-                : rows.map((p) => {
+                : rows.slice((halaman - 1) * PER_HALAMAN, halaman * PER_HALAMAN).map((p) => {
                   const st = LABEL_STATUS[p.status];
                   return (
                     <tr key={p.id}>
@@ -163,6 +167,9 @@ export default function AdminPeriode() {
           </tbody>
         </table>
       </div>
+
+      <Paginasi halaman={halaman} totalData={rows.length}
+        perHalaman={PER_HALAMAN} onGanti={setHalaman} />
 
       {show && (
         <Modal title={edit ? `Edit Periode ${edit.kode}` : 'Tambah Periode Pembelajaran'}

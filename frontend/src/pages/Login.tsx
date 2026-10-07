@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 
 export default function Login() {
@@ -17,8 +17,8 @@ export default function Login() {
     setErr('');
     setLoading(true);
     try {
-      await login(email, password);
-      nav('/', { replace: true });
+      const masuk = await login(email, password);
+      nav(`/${masuk.role}`, { replace: true });
     } catch (e: any) {
       setErr(e.response?.data?.message || 'Gagal login. Periksa koneksi server.');
     } finally {
@@ -48,6 +48,7 @@ export default function Login() {
           {loading ? 'Memproses...' : 'Masuk'}
         </button>
 
+        <p className="tautan-beranda"><Link to="/">← Kembali ke halaman depan sekolah</Link></p>
       </form>
     </div>
   );

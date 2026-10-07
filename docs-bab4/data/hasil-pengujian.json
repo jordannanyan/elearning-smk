@@ -1,7 +1,7 @@
 {
-  "tanggal": "2026-10-05T12:15:04.219Z",
-  "total": 95,
-  "valid": 95,
+  "tanggal": "2026-10-07T14:17:16.021Z",
+  "total": 101,
+  "valid": 101,
   "tidak_valid": 0,
   "persentase": 100,
   "kasus": [
@@ -281,7 +281,7 @@
       "skenario": "Administrator menghapus siswa yang sudah terdaftar pada kelas",
       "input": "Menghapus akun Ahmad Hanapi",
       "harapan": "Sistem menolak dan menyarankan penonaktifan agar riwayat nilai siswa tetap tersimpan",
-      "aktual": "HTTP 409, pesan: \"Siswa ini terdaftar pada 2 kelas dan memiliki 2 pengumpulan tugas sehingga tidak dapat dihapus. Nonaktifkan akunnya (misalnya karena sudah lulus atau pindah) agar riwayat nilainya tetap tersimpan.\"",
+      "aktual": "HTTP 409, pesan: \"Siswa ini terdaftar pada 2 kelas dan memiliki 7 pengumpulan tugas sehingga tidak dapat dihapus. Nonaktifkan akunnya (misalnya karena sudah lulus atau pindah) agar riwayat nilainya tetap tersimpan.\"",
       "status": "Valid"
     },
     {
@@ -506,7 +506,7 @@
       "skenario": "Siswa membuka satu pertemuan untuk mengikuti pembelajaran",
       "input": "Membuka Pertemuan 1",
       "harapan": "Sistem menampilkan materi, tugas, dan forum diskusi pertemuan tersebut secara berurutan",
-      "aktual": "HTTP 200, 3 materi, 1 tugas, 1 topik diskusi",
+      "aktual": "HTTP 200, 3 materi, 1 tugas, 4 topik diskusi",
       "status": "Valid"
     },
     {
@@ -542,7 +542,7 @@
       "skenario": "Sistem menampilkan sisa hari menuju batas waktu pengumpulan",
       "input": "Membuka daftar tugas sebagai siswa",
       "harapan": "Setiap tugas menampilkan sisa hari beserta penanda tingkat kemendesakannya",
-      "aktual": "Contoh: \"Tugas Proyek SPLDV\" sisa 3 hari, penanda mendesak",
+      "aktual": "Contoh: \"Tugas Proyek SPLDV\" sisa 1 hari, penanda kritis",
       "status": "Valid"
     },
     {
@@ -551,7 +551,7 @@
       "skenario": "Sistem mengelompokkan tugas siswa berdasarkan status pengerjaan",
       "input": "Membuka menu Tugas & Kuis sebagai siswa",
       "harapan": "Tugas terpisah menjadi belum dikerjakan, menunggu penilaian, sudah dinilai, dan terlewat",
-      "aktual": "Status yang terbentuk: terlewat, belum_dikerjakan",
+      "aktual": "Status yang terbentuk: terlewat, belum_dikerjakan, dinilai, menunggu_penilaian",
       "status": "Valid"
     },
     {
@@ -803,7 +803,7 @@
       "skenario": "Pengguna menampilkan forum diskusi yang menyatu dalam materi pertemuan",
       "input": "Membuka Pertemuan 1 lalu melihat bagian forum diskusi",
       "harapan": "Forum diskusi tampil di dalam pertemuan beserta seluruh balasannya secara berurutan",
-      "aktual": "HTTP 200, 2 topik dengan total 3 balasan",
+      "aktual": "HTTP 200, 5 topik dengan total 12 balasan",
       "status": "Valid"
     },
     {
@@ -858,6 +858,60 @@
       "input": "Password lama: siswa123; Password baru: siswa456",
       "harapan": "Kata sandi berhasil diperbarui dan dapat digunakan untuk login berikutnya",
       "aktual": "HTTP 200, login dengan kata sandi baru: HTTP 200",
+      "status": "Valid"
+    },
+    {
+      "id": "BB-96",
+      "modul": "Halaman Depan",
+      "skenario": "Pengunjung membuka halaman depan sekolah tanpa login",
+      "input": "Membuka alamat sistem tanpa memasukkan akun",
+      "harapan": "Sistem menampilkan profil sekolah beserta rekapitulasi jumlah guru, siswa, kelas, dan mata pelajaran, tanpa menampilkan data pribadi",
+      "aktual": "HTTP 200: SMA Negeri 1 Karau Kuala, NPSN 30200792, 28 guru, 288 siswa, 10 kelas",
+      "status": "Valid"
+    },
+    {
+      "id": "BB-97",
+      "modul": "Raport Sementara",
+      "skenario": "Guru melihat daftar kelas yang dapat dibuka raportnya",
+      "input": "Membuka menu Raport Sementara",
+      "harapan": "Sistem menampilkan kelas yang diajar guru tersebut beserta kelas yang diwalikannya",
+      "aktual": "HTTP 200, 10 kelas; sebagai wali kelas: X A",
+      "status": "Valid"
+    },
+    {
+      "id": "BB-98",
+      "modul": "Raport Sementara",
+      "skenario": "Wali kelas membuka raport sementara seluruh siswa di kelasnya",
+      "input": "Membuka raport sementara kelas X A",
+      "harapan": "Sistem menampilkan nilai rata-rata tiap siswa pada setiap mata pelajaran beserta predikat dan peringkat kelasnya",
+      "aktual": "HTTP 200: 29 siswa, 17 mata pelajaran, KKM 75; peringkat 1 = Ahmad Hanapi (94.33, predikat A)",
+      "status": "Valid"
+    },
+    {
+      "id": "BB-99",
+      "modul": "Raport Sementara",
+      "skenario": "Guru mencoba membuka raport kelas yang bukan kelasnya",
+      "input": "Guru Laily Mustika membuka raport kelas XI B",
+      "harapan": "Sistem menolak karena guru tersebut tidak mengajar maupun menjadi wali kelas di sana",
+      "aktual": "HTTP 403, pesan: \"Bukan kelas yang Anda ajar maupun Anda walikan\"",
+      "status": "Valid"
+    },
+    {
+      "id": "BB-100",
+      "modul": "Raport Sementara",
+      "skenario": "Siswa melihat raport sementara dirinya dalam satu halaman",
+      "input": "Membuka menu Raport Sementara",
+      "harapan": "Sistem menampilkan seluruh mata pelajaran di kelasnya beserta nilai rata-rata, predikat, ketuntasan terhadap KKM, dan peringkat kelas",
+      "aktual": "HTTP 200: Ahmad Hanapi kelas X A, 17 mata pelajaran, rata-rata 94.33 (predikat A), peringkat 1 dari 29 siswa",
+      "status": "Valid"
+    },
+    {
+      "id": "BB-101",
+      "modul": "Raport Sementara",
+      "skenario": "Siswa melihat raport pada periode pembelajaran terdahulu",
+      "input": "Memilih periode 2026/1 yang berstatus terkunci",
+      "harapan": "Sistem menampilkan raport siswa pada kelas yang diikutinya di periode tersebut",
+      "aktual": "HTTP 200: periode 2026/1, kelas X A, rata-rata 86.5",
       "status": "Valid"
     }
   ]

@@ -79,8 +79,17 @@ def main():
         page = ctx.new_page()
 
         # =============================================================
-        # 1. HALAMAN LOGIN
+        # 1. HALAMAN DEPAN DAN LOGIN
         # =============================================================
+        page.goto(BASE, wait_until="networkidle")
+        page.evaluate("() => { localStorage.clear(); }")
+        page.goto(BASE, wait_until="networkidle")
+        simpan(page, "halaman-depan", "Halaman Depan Sekolah",
+               "Halaman depan yang dapat dibuka tanpa login. Halaman ini memuat identitas dan "
+               "profil SMA Negeri 1 Karau Kuala, rekapitulasi jumlah guru, siswa, rombongan "
+               "belajar, dan mata pelajaran pada periode berjalan, fitur sistem untuk setiap "
+               "peran pengguna, serta alur pembelajaran yang digunakan sistem.", full=True)
+
         page.goto(f"{BASE}/login", wait_until="networkidle")
         page.evaluate("() => { localStorage.clear(); }")
         page.goto(f"{BASE}/login", wait_until="networkidle")
@@ -127,7 +136,16 @@ def main():
         simpan(page, "admin-data-guru", "Halaman Data Guru",
                "Halaman pengelolaan data guru. Guru yang sudah mengampu kelas tidak dapat "
                "dihapus permanen karena akan memutus relasi data pembelajaran, sehingga sistem "
-               "menyediakan tombol Nonaktifkan sebagai gantinya.", full=True)
+               "menyediakan status Nonaktif sebagai gantinya. Status guru beserta pilihan hapus "
+               "permanen disatukan dalam satu dropdown pada kolom Status.", full=True)
+
+        page.fill('input[placeholder*="Cari"]', "nurlaila")
+        page.wait_for_timeout(1200)
+        simpan(page, "admin-cari-guru", "Pencarian Data Guru",
+               "Pencarian data guru berdasarkan nama atau alamat surel. Hasil pencarian "
+               "diperbarui secara otomatis sesaat setelah pengguna berhenti mengetik.")
+        page.fill('input[placeholder*="Cari"]', "")
+        page.wait_for_timeout(1200)
 
         page.click('button:has-text("+ Tambah Guru")')
         page.wait_for_selector(".modal")
@@ -152,7 +170,16 @@ def main():
         simpan(page, "admin-data-siswa", "Halaman Data Siswa",
                "Halaman pengelolaan data siswa beserta kelasnya pada periode aktif. Siswa yang "
                "sudah lulus atau pindah cukup dinonaktifkan agar riwayat nilainya tetap "
-               "tersimpan di dalam sistem.", full=True)
+               "tersimpan di dalam sistem. Status siswa beserta pilihan hapus permanen "
+               "disatukan dalam satu dropdown pada kolom Status, dan daftar yang panjang "
+               "dibagi menjadi beberapa halaman.", full=True)
+
+        page.locator('.paginasi button').nth(3).click()
+        page.wait_for_timeout(700)
+        simpan(page, "admin-siswa-paginasi", "Paginasi pada Halaman Data Siswa",
+               "Daftar siswa yang berjumlah ratusan dibagi menjadi beberapa halaman. Keterangan "
+               "jumlah data yang sedang ditampilkan berada di sebelah kiri nomor halaman.",
+               full=True)
 
         page.click('button:has-text("+ Tambah Siswa")')
         page.wait_for_selector(".modal")
@@ -360,6 +387,21 @@ def main():
         page.wait_for_timeout(400)
         page.click('.modal button:has-text("Tutup")')
 
+        buka(page, "/guru/raport")
+        simpan(page, "guru-raport-daftar", "Daftar Kelas pada Menu Raport Sementara",
+               "Menu Raport Sementara menampilkan kelas yang diajar guru tersebut beserta kelas "
+               "yang diwalikannya. Kelas yang diwalikan ditandai dengan label Wali Kelas.",
+               full=True)
+
+        page.locator('.kartu-ringkas:has-text("Wali Kelas") '
+                     'button:has-text("Lihat Raport Sementara")').first.click()
+        page.wait_for_timeout(1600)
+        simpan(page, "guru-raport-kelas", "Raport Sementara Satu Kelas (Guru)",
+               "Raport sementara seluruh siswa pada satu kelas. Nilai setiap mata pelajaran "
+               "merupakan rata-rata tugas dan kuis yang sudah dinilai, dilengkapi rata-rata "
+               "keseluruhan, predikat, dan peringkat kelas. Nilai yang belum mencapai KKM "
+               "ditandai dengan warna berbeda.", full=True)
+
         # =============================================================
         # 4. SISWA
         # =============================================================
@@ -435,6 +477,14 @@ def main():
                "Riwayat nilai siswa pada periode pembelajaran terdahulu yang telah dikunci "
                "administrator. Nilai pada periode tersebut bersifat final dan hanya dapat dilihat "
                "sebagai arsip riwayat belajar siswa.", full=True)
+
+        buka(page, "/siswa/raport")
+        simpan(page, "siswa-raport", "Halaman Raport Sementara Siswa",
+               "Raport sementara siswa yang merangkum seluruh mata pelajaran di kelasnya dalam "
+               "satu halaman, memuat identitas siswa, nilai rata-rata tiap mata pelajaran, "
+               "predikat, keterangan ketuntasan terhadap KKM, serta rata-rata keseluruhan dan "
+               "peringkat kelas. Periode pembelajaran dapat diganti untuk melihat raport pada "
+               "kelas yang diikuti sebelumnya.", full=True)
 
         # Pengerjaan kuis oleh siswa yang belum mengerjakan
         login(page, "aminatul@siswa.smakk.sch.id", "siswa123")

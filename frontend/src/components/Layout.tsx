@@ -19,12 +19,14 @@ const MENUS: Record<Role, MenuItem[]> = {
     { to: '/guru', label: 'Dashboard', icon: '📊' },
     { to: '/guru/kelas', label: 'Kelas yang Diajar', icon: '🏫' },
     { to: '/guru/penilaian', label: 'Penilaian', icon: '⭐' },
+    { to: '/guru/raport', label: 'Raport Sementara', icon: '📋' },
   ],
   siswa: [
     { to: '/siswa', label: 'Dashboard', icon: '📊' },
     { to: '/siswa/kelas', label: 'Kelas Saya', icon: '🏫' },
     { to: '/siswa/tugas', label: 'Tugas & Kuis', icon: '📝' },
     { to: '/siswa/nilai', label: 'Nilai', icon: '⭐' },
+    { to: '/siswa/raport', label: 'Raport Sementara', icon: '📋' },
   ],
 };
 
