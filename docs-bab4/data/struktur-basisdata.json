@@ -220,6 +220,13 @@
         "null": "Ya",
         "kunci": "-",
         "keterangan": "Alamat tempat tinggal"
+      },
+      {
+        "nama": "kode_jadwal",
+        "tipe": "tinyint(4)",
+        "null": "Ya",
+        "kunci": "-",
+        "keterangan": "-"
       }
     ]
   },
@@ -800,7 +807,7 @@
   {
     "tabel": "forum_diskusi",
     "deskripsi": "Menyimpan topik dan balasan forum diskusi pada sebuah pertemuan",
-    "jumlah_record": 20,
+    "jumlah_record": 8,
     "kolom": [
       {
         "nama": "id",
@@ -850,6 +857,251 @@
         "null": "Tidak",
         "kunci": "-",
         "keterangan": "Waktu pesan dikirim"
+      }
+    ]
+  },
+  {
+    "tabel": "jam_pelajaran",
+    "deskripsi": "Menyimpan pembagian waktu jam pelajaran sekolah, termasuk jam istirahat",
+    "jumlah_record": 23,
+    "kolom": [
+      {
+        "nama": "id",
+        "tipe": "int(11)",
+        "null": "Tidak",
+        "kunci": "Primary Key",
+        "keterangan": "Kunci utama (primary key)"
+      },
+      {
+        "nama": "kelompok",
+        "tipe": "enum('umum','jumat')",
+        "null": "Tidak",
+        "kunci": "Foreign Key",
+        "keterangan": "Kelompok mata pelajaran (wajib, peminatan, muatan lokal)"
+      },
+      {
+        "nama": "urutan",
+        "tipe": "tinyint(4)",
+        "null": "Tidak",
+        "kunci": "-",
+        "keterangan": "Nomor urut butir soal"
+      },
+      {
+        "nama": "jenis",
+        "tipe": "enum('pelajaran','istirahat','jumatan')",
+        "null": "Tidak",
+        "kunci": "-",
+        "keterangan": "-"
+      },
+      {
+        "nama": "jam_ke",
+        "tipe": "tinyint(4)",
+        "null": "Ya",
+        "kunci": "-",
+        "keterangan": "-"
+      },
+      {
+        "nama": "mulai",
+        "tipe": "varchar(8)",
+        "null": "Tidak",
+        "kunci": "-",
+        "keterangan": "-"
+      },
+      {
+        "nama": "selesai",
+        "tipe": "varchar(8)",
+        "null": "Tidak",
+        "kunci": "-",
+        "keterangan": "-"
+      }
+    ]
+  },
+  {
+    "tabel": "jadwal",
+    "deskripsi": "Menyimpan jadwal mata pelajaran tiap kelas pada sebuah periode, satu baris untuk setiap hari dan jam ke berapa",
+    "jumlah_record": 504,
+    "kolom": [
+      {
+        "nama": "id",
+        "tipe": "int(11)",
+        "null": "Tidak",
+        "kunci": "Primary Key",
+        "keterangan": "Kunci utama (primary key)"
+      },
+      {
+        "nama": "id_periode",
+        "tipe": "int(11)",
+        "null": "Tidak",
+        "kunci": "Foreign Key",
+        "keterangan": "Kunci tamu ke tabel periode"
+      },
+      {
+        "nama": "id_kelas",
+        "tipe": "int(11)",
+        "null": "Tidak",
+        "kunci": "Foreign Key",
+        "keterangan": "Kunci tamu ke tabel kelas"
+      },
+      {
+        "nama": "hari",
+        "tipe": "tinyint(4)",
+        "null": "Tidak",
+        "kunci": "-",
+        "keterangan": "-"
+      },
+      {
+        "nama": "jam_ke",
+        "tipe": "tinyint(4)",
+        "null": "Tidak",
+        "kunci": "-",
+        "keterangan": "-"
+      },
+      {
+        "nama": "kode",
+        "tipe": "varchar(8)",
+        "null": "Ya",
+        "kunci": "-",
+        "keterangan": "Kode mata pelajaran"
+      },
+      {
+        "nama": "nama_mapel",
+        "tipe": "varchar(60)",
+        "null": "Ya",
+        "kunci": "-",
+        "keterangan": "-"
+      },
+      {
+        "nama": "id_guru",
+        "tipe": "int(11)",
+        "null": "Ya",
+        "kunci": "Foreign Key",
+        "keterangan": "Kunci tamu ke tabel guru"
+      },
+      {
+        "nama": "kegiatan",
+        "tipe": "varchar(60)",
+        "null": "Ya",
+        "kunci": "-",
+        "keterangan": "-"
+      }
+    ]
+  },
+  {
+    "tabel": "presensi",
+    "deskripsi": "Menyimpan daftar hadir sebuah pertemuan beserta status dibuka atau ditutupnya",
+    "jumlah_record": 4,
+    "kolom": [
+      {
+        "nama": "id",
+        "tipe": "int(11)",
+        "null": "Tidak",
+        "kunci": "Primary Key",
+        "keterangan": "Kunci utama (primary key)"
+      },
+      {
+        "nama": "id_pertemuan",
+        "tipe": "int(11)",
+        "null": "Tidak",
+        "kunci": "Unique",
+        "keterangan": "Kunci tamu ke tabel pertemuan"
+      },
+      {
+        "nama": "id_guru",
+        "tipe": "int(11)",
+        "null": "Ya",
+        "kunci": "Foreign Key",
+        "keterangan": "Kunci tamu ke tabel guru"
+      },
+      {
+        "nama": "tanggal",
+        "tipe": "date",
+        "null": "Tidak",
+        "kunci": "-",
+        "keterangan": "Tanggal pelaksanaan pertemuan"
+      },
+      {
+        "nama": "status",
+        "tipe": "enum('dibuka','ditutup')",
+        "null": "Tidak",
+        "kunci": "-",
+        "keterangan": "Status periode: draft, aktif, atau terkunci"
+      },
+      {
+        "nama": "catatan",
+        "tipe": "varchar(255)",
+        "null": "Ya",
+        "kunci": "-",
+        "keterangan": "Catatan atau umpan balik dari guru"
+      },
+      {
+        "nama": "tgl_buka",
+        "tipe": "timestamp",
+        "null": "Tidak",
+        "kunci": "-",
+        "keterangan": "-"
+      },
+      {
+        "nama": "tgl_tutup",
+        "tipe": "datetime",
+        "null": "Ya",
+        "kunci": "-",
+        "keterangan": "-"
+      }
+    ]
+  },
+  {
+    "tabel": "presensi_siswa",
+    "deskripsi": "Menyimpan kehadiran tiap siswa pada sebuah presensi (hadir, sakit, izin, alpa)",
+    "jumlah_record": 93,
+    "kolom": [
+      {
+        "nama": "id",
+        "tipe": "int(11)",
+        "null": "Tidak",
+        "kunci": "Primary Key",
+        "keterangan": "Kunci utama (primary key)"
+      },
+      {
+        "nama": "id_presensi",
+        "tipe": "int(11)",
+        "null": "Tidak",
+        "kunci": "Foreign Key",
+        "keterangan": "-"
+      },
+      {
+        "nama": "id_siswa",
+        "tipe": "int(11)",
+        "null": "Tidak",
+        "kunci": "Foreign Key",
+        "keterangan": "Kunci tamu ke tabel siswa"
+      },
+      {
+        "nama": "status",
+        "tipe": "enum('hadir','sakit','izin','alpa')",
+        "null": "Tidak",
+        "kunci": "-",
+        "keterangan": "Status periode: draft, aktif, atau terkunci"
+      },
+      {
+        "nama": "keterangan",
+        "tipe": "varchar(255)",
+        "null": "Ya",
+        "kunci": "-",
+        "keterangan": "-"
+      },
+      {
+        "nama": "dicatat_oleh",
+        "tipe": "enum('siswa','guru')",
+        "null": "Tidak",
+        "kunci": "-",
+        "keterangan": "-"
+      },
+      {
+        "nama": "waktu",
+        "tipe": "timestamp",
+        "null": "Tidak",
+        "kunci": "-",
+        "keterangan": "-"
       }
     ]
   }

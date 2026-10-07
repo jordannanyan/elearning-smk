@@ -37,6 +37,10 @@ TABEL = [
     ("jawaban_siswa",     "Jawaban siswa pada setiap butir soal kuis"),
     ("nilai",             "Nilai hasil penilaian guru maupun koreksi otomatis sistem"),
     ("forum_diskusi",     "Topik dan balasan forum diskusi pada sebuah pertemuan"),
+    ("jam_pelajaran",     "Pembagian waktu jam pelajaran sekolah beserta jam istirahatnya"),
+    ("jadwal",            "Jadwal mata pelajaran tiap kelas pada sebuah periode pembelajaran"),
+    ("presensi",          "Daftar hadir sebuah pertemuan beserta status dibuka/ditutupnya"),
+    ("presensi_siswa",    "Kehadiran tiap siswa pada sebuah presensi"),
 ]
 
 GARIS = "-- " + "=" * 75
@@ -72,8 +76,9 @@ def main():
 -- BAB IV Hasil dan Pembahasan, yaitu data yang tampil pada seluruh tangkapan
 -- layar sistem dan data hasil pengujian Black Box Testing (95 skenario).
 --
--- Data guru, mata pelajaran, pembagian tugas mengajar, wali kelas, kelas, dan
--- siswa merupakan data nyata SMA Negeri 1 Karau Kuala Tahun Ajaran 2025/2026.
+-- Data guru, mata pelajaran, pembagian tugas mengajar, wali kelas, kelas,
+-- siswa, dan jadwal mata pelajaran merupakan data nyata SMA Negeri 1 Karau
+-- Kuala Tahun Ajaran 2025/2026.
 --
 -- Basis data memuat dua periode pembelajaran:
 --   2026/2 (Tahun Ajaran 2025/2026 Genap)  berstatus AKTIF

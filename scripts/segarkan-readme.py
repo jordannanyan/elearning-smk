@@ -18,10 +18,12 @@ DATA = os.path.join(ROOT, "docs-bab4", "data")
 README = os.path.join(ROOT, "docs-bab4", "README.md")
 MYSQL = r"C:\xampp\mysql\bin\mysql.exe"
 DB = "elearning_smakk"
+SATUKAN = chr(10)
 
 TABEL = ["users", "periode", "kelas", "guru", "siswa", "siswa_kelas", "mata_pelajaran",
          "kelas_mapel", "pertemuan", "materi", "tugas", "soal", "pengumpulan_tugas",
-         "jawaban_siswa", "nilai", "forum_diskusi"]
+         "jawaban_siswa", "nilai", "forum_diskusi",
+         "jam_pelajaran", "jadwal", "presensi", "presensi_siswa"]
 
 
 def muat(nama):
@@ -71,15 +73,19 @@ def main():
               for nama, d in modul.items()]
     ringkasan = "\n".join(baris) + "\n\n"
 
-    # ---- Jumlah data tiap tabel ----
+    # ---- Tabel basis data beserta jumlah datanya ----
     teks = open(README, encoding="utf8").read()
     n = jumlah_baris()
-    teks = re.sub(r"\| (\d+) \| `(\w+)` \|([^|]*)\| (\d+) \|",
-                  lambda m: f"| {m.group(1)} | `{m.group(2)}` |{m.group(3)}| "
-                            f"{n.get(m.group(2), m.group(4))} |", teks)
+    struktur = muat("struktur-basisdata.json")
+    baris = ["", "| No | Tabel | Deskripsi | Jumlah Data |", "|---|---|---|---|"]
+    for i, t in enumerate(struktur, start=1):
+        baris.append(f"| {i} | `{t['tabel']}` | {t['deskripsi']} | "
+                     f"{n.get(t['tabel'], t.get('jumlah_record', 0))} |")
+    tabel_basisdata = SATUKAN.join(baris) + SATUKAN * 2
 
     teks = ganti_bagian(teks, "Daftar tangkapan layar", daftar_gambar)
     teks = ganti_bagian(teks, "Ringkasan hasil pengujian Black Box", ringkasan)
+    teks = ganti_bagian(teks, "Tabel basis data hasil implementasi", tabel_basisdata)
     teks = teks.replace(f"| `screenshots/` | 44 tangkapan layar",
                         f"| `screenshots/` | {len(gambar)} tangkapan layar")
     teks = re.sub(r"\| `screenshots/` \| \d+ tangkapan layar",
@@ -90,7 +96,7 @@ def main():
     with open(README, "w", encoding="utf8", newline="\n") as f:
         f.write(teks)
     print(f"[OK] docs-bab4/README.md disegarkan "
-          f"({len(gambar)} gambar, {uji['total']} skenario, {len(TABEL)} tabel)")
+          f"({len(gambar)} gambar, {uji['total']} skenario, {len(struktur)} tabel)")
 
 
 if __name__ == "__main__":

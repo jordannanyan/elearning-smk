@@ -283,6 +283,17 @@ def main():
                "pertemuan sebelumnya.", modal=True)
         page.click('.modal button:has-text("Batal")')
 
+        page.locator('a:has-text("Kelola Isi")').last.click()
+        page.wait_for_url("**/guru/pertemuan/**", timeout=10000)
+        page.wait_for_timeout(1400)
+        simpan(page, "guru-presensi-pertemuan", "Pengelolaan Presensi pada Sebuah Pertemuan (Guru)",
+               "Guru membuka presensi pada pertemuan yang sedang berlangsung. Selama presensi "
+               "dibuka, siswa menyatakan kehadirannya sendiri, sedangkan guru melengkapi "
+               "keterangan siswa yang sakit, izin, atau alpa melalui dropdown pada kolom Status. "
+               "Setelah presensi ditutup, siswa yang belum mengisi tercatat alpa.", full=True)
+
+        page.go_back()
+        page.wait_for_timeout(900)
         page.locator('a:has-text("Kelola Isi")').first.click()
         page.wait_for_url("**/guru/pertemuan/**", timeout=10000)
         page.wait_for_timeout(1200)
@@ -409,6 +420,21 @@ def main():
                "keseluruhan, predikat, dan peringkat kelas. Nilai yang belum mencapai KKM "
                "ditandai dengan warna berbeda.", full=True)
 
+        buka(page, "/guru/jadwal")
+        simpan(page, "guru-jadwal-mengajar", "Jadwal Mengajar Guru",
+               "Jadwal mengajar guru yang bersangkutan disusun per hari beserta jam pelajaran, "
+               "mata pelajaran, dan kelas yang diajar. Jadwal dimuat dari jadwal resmi sekolah "
+               "sehingga isinya sama dengan jadwal yang berlaku di sekolah.", full=True)
+
+        buka(page, "/guru/presensi")
+        page.locator('.kartu-ringkas:has-text("BAHASA INDONESIA"):has-text("X A") '
+                     'button:has-text("Lihat Rekap Presensi")').first.click()
+        page.wait_for_timeout(1500)
+        simpan(page, "guru-rekap-presensi", "Rekap Presensi Satu Mata Pelajaran (Guru)",
+               "Rekap kehadiran seluruh siswa pada setiap pertemuan yang presensinya sudah "
+               "dibuka, dilengkapi jumlah hadir, sakit, izin, alpa, dan persentase kehadiran "
+               "masing-masing siswa.", full=True)
+
         # =============================================================
         # 4. SISWA
         # =============================================================
@@ -433,6 +459,16 @@ def main():
                "pertemuan pertama, sehingga siswa dapat mengikuti alur pembelajaran secara runut.",
                full=True)
 
+        page.locator('.pertemuan-item').last.click()
+        page.wait_for_url("**/siswa/pertemuan/**", timeout=10000)
+        page.wait_for_timeout(1500)
+        simpan(page, "siswa-presensi-pertemuan", "Pengisian Presensi oleh Siswa",
+               "Ketika guru membuka presensi, siswa menyatakan kehadirannya sendiri melalui "
+               "tombol Saya Hadir pada halaman pertemuan. Status kehadiran siswa beserta "
+               "rekapitulasi kehadiran kelas ditampilkan pada panel yang sama.")
+
+        page.go_back()
+        page.wait_for_timeout(900)
         page.locator('.pertemuan-item').first.click()
         page.wait_for_url("**/siswa/pertemuan/**", timeout=10000)
         page.wait_for_timeout(1500)
@@ -492,6 +528,25 @@ def main():
                "predikat, keterangan ketuntasan terhadap KKM, serta rata-rata keseluruhan dan "
                "peringkat kelas. Periode pembelajaran dapat diganti untuk melihat raport pada "
                "kelas yang diikuti sebelumnya.", full=True)
+
+        buka(page, "/siswa/jadwal")
+        simpan(page, "siswa-jadwal-kelas", "Jadwal Pelajaran Kelas Siswa",
+               "Jadwal pelajaran kelas siswa disusun per hari beserta jam pelajaran, mata "
+               "pelajaran, kode jadwal, dan guru pengajarnya.", full=True)
+
+        page.click('button:has-text("Jadwal Sekolah")')
+        page.wait_for_timeout(1200)
+        simpan(page, "jadwal-sekolah-format-sk", "Jadwal Mata Pelajaran Seluruh Sekolah",
+               "Jadwal seluruh kelas ditampilkan dengan susunan yang sama dengan jadwal resmi "
+               "sekolah: baris jam ke- terhadap kolom kelas yang dikelompokkan menurut fase, "
+               "isi sel berupa kode gabungan huruf mata pelajaran dan nomor guru, serta "
+               "dilengkapi legenda kode guru, kode mata pelajaran, dan pembagian waktu sekolah. "
+               "Kolom kelas siswa yang sedang masuk diberi penanda warna.", full=True)
+
+        buka(page, "/siswa/presensi")
+        simpan(page, "siswa-rekap-presensi", "Rekap Kehadiran Siswa",
+               "Rekap kehadiran siswa pada seluruh mata pelajaran di periode berjalan, memuat "
+               "persentase kehadiran serta jumlah hadir, sakit, izin, dan alpa.", full=True)
 
         # Pengerjaan kuis oleh siswa yang belum mengerjakan
         login(page, "aminatul@siswa.smakk.sch.id", "siswa123")

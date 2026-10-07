@@ -78,7 +78,27 @@
     {
       "tabel": "forum_diskusi",
       "deskripsi": "Menyimpan topik dan balasan forum diskusi pada sebuah pertemuan",
-      "jumlah_record": 20
+      "jumlah_record": 8
+    },
+    {
+      "tabel": "jam_pelajaran",
+      "deskripsi": "Menyimpan pembagian waktu jam pelajaran sekolah, termasuk jam istirahat",
+      "jumlah_record": 23
+    },
+    {
+      "tabel": "jadwal",
+      "deskripsi": "Menyimpan jadwal mata pelajaran tiap kelas pada sebuah periode, satu baris untuk setiap hari dan jam ke berapa",
+      "jumlah_record": 504
+    },
+    {
+      "tabel": "presensi",
+      "deskripsi": "Menyimpan daftar hadir sebuah pertemuan beserta status dibuka atau ditutupnya",
+      "jumlah_record": 4
+    },
+    {
+      "tabel": "presensi_siswa",
+      "deskripsi": "Menyimpan kehadiran tiap siswa pada sebuah presensi (hadir, sakit, izin, alpa)",
+      "jumlah_record": 93
     }
   ],
   "periode": [

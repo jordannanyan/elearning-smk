@@ -1541,6 +1541,19 @@ async function main() {
   });
 
   const rPresensiSiswaLain = await post(`/api/presensi/${idPresensi}/hadir`, {}, tokenSiswa.dhika);
+
+  // Sebagian besar siswa ditandai hadir dan beberapa diberi keterangan,
+  // supaya rekap presensi memuat keadaan yang wajar seperti di kelas,
+  // bukan hanya dua siswa hadir dan sisanya alpa.
+  for (let i = 0; i < anggotaBind.length; i += 1) {
+    const sw = anggotaBind[i];
+    if ([sAhmad.id_siswa, sAudiyah.id_siswa].includes(sw.id_siswa)) continue;
+    const status = i % 13 === 5 ? 'izin' : i % 11 === 7 ? 'alpa' : 'hadir';
+    const ket = status === 'izin' ? 'Mengikuti kegiatan sekolah' : null;
+    await put(`/api/presensi/${idPresensi}/siswa/${sw.id_siswa}`, { status, keterangan: ket },
+      TG_ASNIN);
+  }
+
   const rTutup = await post(`/api/presensi/${idPresensi}/tutup`, {}, TG_ASNIN);
   catat({
     modul: 'Presensi', skenario: 'Guru menutup presensi dan siswa yang belum mengisi dicatat alpa',

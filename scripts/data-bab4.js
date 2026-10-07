@@ -34,6 +34,11 @@ const DESKRIPSI_TABEL = {
   jawaban_siswa: 'Menyimpan jawaban siswa pada setiap butir soal kuis',
   nilai: 'Menyimpan data nilai siswa hasil penilaian guru maupun koreksi otomatis',
   forum_diskusi: 'Menyimpan topik dan balasan forum diskusi pada sebuah pertemuan',
+  jam_pelajaran: 'Menyimpan pembagian waktu jam pelajaran sekolah, termasuk jam istirahat',
+  jadwal: 'Menyimpan jadwal mata pelajaran tiap kelas pada sebuah periode, satu baris untuk '
+    + 'setiap hari dan jam ke berapa',
+  presensi: 'Menyimpan daftar hadir sebuah pertemuan beserta status dibuka atau ditutupnya',
+  presensi_siswa: 'Menyimpan kehadiran tiap siswa pada sebuah presensi (hadir, sakit, izin, alpa)',
 };
 
 const KETERANGAN_KOLOM = {

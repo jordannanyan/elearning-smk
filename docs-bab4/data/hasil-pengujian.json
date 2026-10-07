@@ -1,5 +1,5 @@
 {
-  "tanggal": "2026-10-07T14:57:37.130Z",
+  "tanggal": "2026-10-07T15:07:39.821Z",
   "total": 115,
   "valid": 115,
   "tidak_valid": 0,
@@ -1001,7 +1001,7 @@
       "skenario": "Guru menutup presensi dan siswa yang belum mengisi dicatat alpa",
       "input": "Menekan tombol Tutup Presensi",
       "harapan": "Presensi ditutup dan seluruh siswa yang belum menyatakan hadir tercatat alpa",
-      "aktual": "HTTP 200, pesan: \"Presensi ditutup. 1 siswa yang belum mengisi dicatat alpa.\" (pengisian siswa lain sebelum ditutup: HTTP 409)",
+      "aktual": "HTTP 200, pesan: \"Presensi ditutup.\" (pengisian siswa lain sebelum ditutup: HTTP 409)",
       "status": "Valid"
     },
     {

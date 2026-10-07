@@ -30,6 +30,13 @@ Periode Pembelajaran (2026/2)
   menu Data Kelas dan otomatis tampil pada kolom Wali Kelas di menu Data Guru.
 - **Pengguna tidak dihapus permanen**, melainkan dinonaktifkan, agar relasi materi,
   tugas, dan nilai tetap utuh.
+- **Jadwal mata pelajaran** dimuat dari jadwal resmi sekolah dan ditampilkan kembali
+  dengan susunan yang sama: baris jam ke- terhadap kolom kelas, isi sel berupa kode
+  gabungan huruf mata pelajaran dan nomor guru (misalnya `E16`), beserta legenda kode
+  guru, kode mata pelajaran, dan pembagian waktu sekolah.
+- **Presensi kehadiran** dibuka guru pada sebuah pertemuan. Selama dibuka, siswa
+  menyatakan hadir sendiri; guru melengkapi keterangan sakit, izin, atau alpa, lalu
+  menutupnya. Siswa yang belum mengisi sampai presensi ditutup tercatat alpa.
 
 ## Fitur
 
@@ -37,8 +44,8 @@ Periode Pembelajaran (2026/2)
 |------|-------|
 | **Pengunjung** | Halaman depan sekolah tanpa login: profil dan identitas sekolah, rekapitulasi jumlah guru/siswa/kelas/mata pelajaran, fitur sistem, dan alur pembelajaran |
 | **Administrator** | Login, kelola periode pembelajaran (aktifkan/kunci/buka kunci), kelola data guru & siswa (aktif/nonaktif), kelola kelas beserta mata pelajaran, guru pengajar, dan siswa anggotanya, kelola katalog mata pelajaran, pantau statistik sistem |
-| **Guru** | Login, kelola mata pelajaran dan kelas yang diajar, susun pertemuan, unggah materi (teks/berkas/video/tautan YouTube), buat tugas & kuis beserta butir soal, periksa pengumpulan (termasuk siswa yang belum mengumpulkan), beri nilai, buka forum diskusi, lihat raport sementara per kelas |
-| **Siswa** | Login, lihat kartu mata pelajaran di kelasnya, ikuti pembelajaran per pertemuan, unduh berkas & tonton video, kerjakan tugas/kuis dengan penanda sisa waktu, lihat rekap nilai per mata pelajaran dan riwayat antar-periode, lihat raport sementara dirinya dalam satu halaman, balas forum diskusi |
+| **Guru** | Login, kelola mata pelajaran dan kelas yang diajar, susun pertemuan, unggah materi (teks/berkas/video/tautan YouTube), buat tugas & kuis beserta butir soal, periksa pengumpulan (termasuk siswa yang belum mengumpulkan), beri nilai, buka forum diskusi, lihat raport sementara per kelas, lihat jadwal mengajar, buka dan tutup presensi kehadiran beserta rekapnya |
+| **Siswa** | Login, lihat kartu mata pelajaran di kelasnya, ikuti pembelajaran per pertemuan, unduh berkas & tonton video, kerjakan tugas/kuis dengan penanda sisa waktu, lihat rekap nilai per mata pelajaran dan riwayat antar-periode, lihat raport sementara dirinya dalam satu halaman, lihat jadwal pelajaran kelasnya, menyatakan kehadiran pada presensi yang dibuka guru beserta rekapnya, balas forum diskusi |
 
 ## Prasyarat
 - **Node.js** v18+
@@ -75,6 +82,7 @@ Basis data diisi dengan **data nyata SMA Negeri 1 Karau Kuala**, bukan data kara
 | Kelas | 10 | idem |
 | Wali kelas | 10 | SK Nomor 421.3/186/14/SMAN 1 KK/VII/2025 tanggal 9 Juli 2025 (Lampiran IV) |
 | Siswa | 287 | Daftar Hadir Siswa Tahun Pelajaran 2025/2026 |
+| Jadwal mata pelajaran | 504 jam | Jadwal Mata Pelajaran Semester II TA 2025/2026 (lembar `jadwal 45 menit`) |
 | Identitas sekolah (NPSN, NSS, alamat, kepala sekolah) | — | Kop surat dan lampiran SK Nomor 421.3/186/14/SMAN 1 KK/VII/2025 |
 
 Berkas sumber dibaca oleh `python scripts/impor-data-sekolah.py` yang menghasilkan
@@ -91,9 +99,10 @@ Jalankan ulang importir tersebut apabila sekolah mengirim berkas yang diperbarui
 Alamat surel dibentuk otomatis dari nama masing-masing pengguna.
 
 ## Struktur Database
-16 tabel: `users`, `periode`, `kelas`, `guru`, `siswa`, `siswa_kelas`, `mata_pelajaran`,
+20 tabel: `users`, `periode`, `kelas`, `guru`, `siswa`, `siswa_kelas`, `mata_pelajaran`,
 `kelas_mapel`, `pertemuan`, `materi`, `tugas`, `soal`, `pengumpulan_tugas`,
-`jawaban_siswa`, `nilai`, `forum_diskusi`. Lihat `backend/src/db/schema.sql`.
+`jawaban_siswa`, `nilai`, `forum_diskusi`, `jam_pelajaran`, `jadwal`, `presensi`,
+`presensi_siswa`. Lihat `backend/src/db/schema.sql`.
 
 ## Bahan BAB IV (dokumentasi & pengujian)
 Folder `docs-bab4/` berisi seluruh tangkapan layar, tabel struktur basis data,
@@ -103,8 +112,8 @@ Skrip pembangkitnya ada di `scripts/`:
 | Skrip | Kegunaan |
 |---|---|
 | `scripts/impor-data-sekolah.py` | Membaca berkas resmi sekolah (SK pembagian tugas, SK wali kelas, daftar hadir siswa) menjadi `sekolah.json` |
-| `scripts/blackbox.js` | Menjalankan 101 skenario pengujian Black Box terhadap REST API sekaligus mengisi data pengumpulan tugas & nilai |
-| `scripts/screenshots.py` | Mengambil 50 tangkapan layar seluruh halaman sistem secara otomatis (Playwright) |
+| `scripts/blackbox.js` | Menjalankan 115 skenario pengujian Black Box terhadap REST API sekaligus mengisi data pengumpulan tugas & nilai |
+| `scripts/screenshots.py` | Mengambil 57 tangkapan layar seluruh halaman sistem secara otomatis (Playwright) |
 | `scripts/data-bab4.js` | Mengambil struktur tabel basis data dan statistik data dari MySQL |
 | `scripts/buat-dokumen-bab4.py` | Menyusun `docs-bab4/Lampiran-BAB-IV-Sistem-E-Learning.docx` |
 | `scripts/buat-dump-sql.py` | Membuat dump SQL `docs-bab4/database/elearning_smakk_bab4.sql` |
