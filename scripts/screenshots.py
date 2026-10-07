@@ -248,6 +248,31 @@ def main():
                "diajar guru yang berbeda antara tingkat X dan tingkat XI.", modal=True)
         page.click('.modal button:has-text("Tutup")')
 
+        buka(page, "/admin/jadwal")
+        simpan(page, "admin-jadwal", "Halaman Penyusunan Jadwal Pelajaran",
+               "Administrator menyusun jadwal dengan susunan yang sama dengan jadwal resmi "
+               "sekolah, yaitu baris jam ke- terhadap kolom kelas yang dikelompokkan menurut "
+               "fase. Periode dan hari dipilih melalui dropdown di kanan atas, dan setiap sel "
+               "dapat diklik untuk diisi.", full=True)
+
+        page.locator('.tabel-jadwal-sunting tbody tr').nth(1).locator('td').nth(1).click()
+        page.wait_for_selector(".modal")
+        simpan(page, "admin-jadwal-sel", "Pengisian Satu Jam Pelajaran pada Jadwal",
+               "Form pengisian sebuah sel jadwal. Administrator memilih mata pelajaran beserta "
+               "guru pengajarnya, atau menandai jam tersebut sebagai kegiatan sekolah seperti "
+               "upacara bendera. Kode sel dibentuk otomatis dari huruf mata pelajaran dan nomor "
+               "kode guru.", modal=True)
+
+        # Percobaan menjadwalkan guru yang sudah mengajar di kelas lain
+        page.select_option('.modal select >> nth=1', label="Akhmad Riko, S.Pd.i (kode 22)")
+        page.click('.modal button:has-text("Simpan")')
+        page.wait_for_selector(".modal .error-box", timeout=10000)
+        simpan(page, "admin-jadwal-bentrok", "Penolakan Jadwal yang Bentrok",
+               "Sistem menolak penjadwalan apabila guru yang sama ditugaskan pada dua kelas di "
+               "hari dan jam yang sama, serta menyebutkan kelas lain yang sudah diajarnya "
+               "sehingga administrator dapat langsung memperbaikinya.", modal=True)
+        page.click('.modal button:has-text("Batal")')
+
         # =============================================================
         # 3. GURU
         # =============================================================

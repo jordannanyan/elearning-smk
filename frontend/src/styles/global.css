@@ -546,3 +546,8 @@ a.polos { color: inherit; display: block; }
   .tabel-jadwal th, .tabel-jadwal td { padding: 2px 3px; }
   .jadwal-hari { break-inside: avoid; }
 }
+
+/* Sel jadwal yang dapat disunting administrator */
+.tabel-jadwal-sunting td.dapat-disunting { cursor: pointer; }
+.tabel-jadwal-sunting td.dapat-disunting:hover { background: var(--primary-light); outline: 2px solid var(--primary); outline-offset: -2px; }
+.tabel-jadwal-sunting td.kosong { color: #cbd5e1; font-weight: 700; }

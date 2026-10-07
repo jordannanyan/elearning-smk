@@ -14,6 +14,7 @@ const MENUS: Record<Role, MenuItem[]> = {
     { to: '/admin/siswa', label: 'Data Siswa', icon: '🎓' },
     { to: '/admin/kelas', label: 'Data Kelas', icon: '🏫' },
     { to: '/admin/mapel', label: 'Mata Pelajaran', icon: '📚' },
+    { to: '/admin/jadwal', label: 'Jadwal Pelajaran', icon: '🗓️' },
   ],
   guru: [
     { to: '/guru', label: 'Dashboard', icon: '📊' },

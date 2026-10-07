@@ -13,11 +13,11 @@ logika aplikasi yang sesungguhnya.
 | Berkas | Keterangan |
 |---|---|
 | `Lampiran-BAB-IV-Sistem-E-Learning.docx` | **Dokumen utama.** Berisi seluruh gambar, tabel struktur basis data, tabel hasil pengujian Black Box, dan rekap nilai — siap disalin ke laporan skripsi. |
-| `screenshots/` | 57 tangkapan layar beresolusi tinggi (2880 px, siap cetak). |
+| `screenshots/` | 60 tangkapan layar beresolusi tinggi (2880 px, siap cetak). |
 | `database/elearning_smakk_bab4.sql` | Dump SQL struktur + seluruh data BAB IV, siap diimpor lewat phpMyAdmin. |
 | `database/query-bab4.sql` | 16 query SQL yang dipakai menghasilkan tabel-tabel data pada BAB IV. |
 | `data/daftar-gambar.json` | Daftar gambar beserta judul dan kalimat penjelasnya. |
-| `data/hasil-pengujian.json` | Hasil 115 skenario pengujian Black Box. |
+| `data/hasil-pengujian.json` | Hasil 122 skenario pengujian Black Box. |
 | `data/struktur-basisdata.json` | Struktur 16 tabel basis data hasil implementasi. |
 | `data/statistik-sistem.json` | Statistik data sistem dan rekapitulasi nilai siswa. |
 
@@ -55,55 +55,58 @@ materi/tugas/nilai dan siswa tidak dapat mengumpulkan tugas.
 | 17 | `17-admin-data-mapel.png` | Halaman Katalog Mata Pelajaran |
 | 18 | `18-admin-form-mapel.png` | Form Tambah Mata Pelajaran |
 | 19 | `19-admin-mapel-detail.png` | Rincian Mata Pelajaran: Diajarkan di Kelas Mana |
-| 20 | `20-guru-dashboard.png` | Halaman Dashboard Guru |
-| 21 | `21-guru-kelas-saya.png` | Halaman Kelas Saya (Guru) |
-| 22 | `22-guru-daftar-pertemuan.png` | Daftar Pertemuan pada Kelas Mata Pelajaran |
-| 23 | `23-guru-form-pertemuan.png` | Form Tambah Pertemuan |
-| 24 | `24-guru-presensi-pertemuan.png` | Pengelolaan Presensi pada Sebuah Pertemuan (Guru) |
-| 25 | `25-guru-isi-pertemuan.png` | Halaman Kelola Isi Pertemuan (Guru) |
-| 26 | `26-guru-form-materi.png` | Form Tambah Materi Pembelajaran |
-| 27 | `27-guru-form-tugas.png` | Form Buat Tugas dan Kuis |
-| 28 | `28-guru-kelola-soal.png` | Halaman Kelola Butir Soal Kuis |
-| 29 | `29-guru-penilaian.png` | Halaman Penilaian (Guru) |
-| 30 | `30-guru-penilaian-mapel.png` | Daftar Tugas pada Satu Mata Pelajaran |
-| 31 | `31-guru-daftar-pengumpulan.png` | Daftar Pengumpulan Tugas Siswa |
-| 32 | `32-guru-form-nilai.png` | Form Penilaian Tugas oleh Guru |
-| 33 | `33-guru-pengumpulan-kuis.png` | Daftar Pengumpulan Kuis Siswa |
-| 34 | `34-guru-penilaian-esai.png` | Halaman Pemeriksaan dan Penilaian Jawaban Kuis |
-| 35 | `35-guru-raport-daftar.png` | Daftar Kelas pada Menu Raport Sementara |
-| 36 | `36-guru-raport-kelas.png` | Raport Sementara Satu Kelas (Guru) |
-| 37 | `37-guru-jadwal-mengajar.png` | Jadwal Mengajar Guru |
-| 38 | `38-guru-rekap-presensi.png` | Rekap Presensi Satu Mata Pelajaran (Guru) |
-| 39 | `39-siswa-dashboard.png` | Halaman Dashboard Siswa |
-| 40 | `40-siswa-kelas-saya.png` | Halaman Kelas Saya (Siswa) |
-| 41 | `41-siswa-daftar-pertemuan.png` | Daftar Pertemuan Mata Pelajaran (Siswa) |
-| 42 | `42-siswa-presensi-pertemuan.png` | Pengisian Presensi oleh Siswa |
-| 43 | `43-siswa-isi-pertemuan.png` | Halaman Isi Pertemuan (Siswa) |
-| 44 | `44-siswa-tugas.png` | Halaman Tugas dan Kuis (Siswa) |
-| 45 | `45-siswa-tugas-rincian.png` | Rincian Tugas yang Disembunyikan |
-| 46 | `46-siswa-hasil-kuis.png` | Halaman Hasil Pengerjaan Kuis Siswa |
-| 47 | `47-siswa-nilai.png` | Halaman Rekap Nilai Siswa |
-| 48 | `48-siswa-nilai-arsip.png` | Riwayat Nilai pada Periode Sebelumnya |
-| 49 | `49-siswa-raport.png` | Halaman Raport Sementara Siswa |
-| 50 | `50-siswa-jadwal-kelas.png` | Jadwal Pelajaran Kelas Siswa |
-| 51 | `51-jadwal-sekolah-format-sk.png` | Jadwal Mata Pelajaran Seluruh Sekolah |
-| 52 | `52-siswa-rekap-presensi.png` | Rekap Kehadiran Siswa |
-| 53 | `53-siswa-kerjakan-kuis.png` | Halaman Pengerjaan Kuis oleh Siswa |
-| 54 | `54-siswa-kerjakan-tugas.png` | Halaman Pengerjaan dan Pengumpulan Tugas |
-| 55 | `55-periode-terkunci-guru.png` | Tampilan Periode yang Telah Dikunci |
-| 56 | `56-periode-terkunci-pertemuan.png` | Isi Pertemuan pada Periode Terkunci |
-| 57 | `57-tampilan-mobile.png` | Tampilan Sistem pada Perangkat Mobile |
+| 20 | `20-admin-jadwal.png` | Halaman Penyusunan Jadwal Pelajaran |
+| 21 | `21-admin-jadwal-sel.png` | Pengisian Satu Jam Pelajaran pada Jadwal |
+| 22 | `22-admin-jadwal-bentrok.png` | Penolakan Jadwal yang Bentrok |
+| 23 | `23-guru-dashboard.png` | Halaman Dashboard Guru |
+| 24 | `24-guru-kelas-saya.png` | Halaman Kelas Saya (Guru) |
+| 25 | `25-guru-daftar-pertemuan.png` | Daftar Pertemuan pada Kelas Mata Pelajaran |
+| 26 | `26-guru-form-pertemuan.png` | Form Tambah Pertemuan |
+| 27 | `27-guru-presensi-pertemuan.png` | Pengelolaan Presensi pada Sebuah Pertemuan (Guru) |
+| 28 | `28-guru-isi-pertemuan.png` | Halaman Kelola Isi Pertemuan (Guru) |
+| 29 | `29-guru-form-materi.png` | Form Tambah Materi Pembelajaran |
+| 30 | `30-guru-form-tugas.png` | Form Buat Tugas dan Kuis |
+| 31 | `31-guru-kelola-soal.png` | Halaman Kelola Butir Soal Kuis |
+| 32 | `32-guru-penilaian.png` | Halaman Penilaian (Guru) |
+| 33 | `33-guru-penilaian-mapel.png` | Daftar Tugas pada Satu Mata Pelajaran |
+| 34 | `34-guru-daftar-pengumpulan.png` | Daftar Pengumpulan Tugas Siswa |
+| 35 | `35-guru-form-nilai.png` | Form Penilaian Tugas oleh Guru |
+| 36 | `36-guru-pengumpulan-kuis.png` | Daftar Pengumpulan Kuis Siswa |
+| 37 | `37-guru-penilaian-esai.png` | Halaman Pemeriksaan dan Penilaian Jawaban Kuis |
+| 38 | `38-guru-raport-daftar.png` | Daftar Kelas pada Menu Raport Sementara |
+| 39 | `39-guru-raport-kelas.png` | Raport Sementara Satu Kelas (Guru) |
+| 40 | `40-guru-jadwal-mengajar.png` | Jadwal Mengajar Guru |
+| 41 | `41-guru-rekap-presensi.png` | Rekap Presensi Satu Mata Pelajaran (Guru) |
+| 42 | `42-siswa-dashboard.png` | Halaman Dashboard Siswa |
+| 43 | `43-siswa-kelas-saya.png` | Halaman Kelas Saya (Siswa) |
+| 44 | `44-siswa-daftar-pertemuan.png` | Daftar Pertemuan Mata Pelajaran (Siswa) |
+| 45 | `45-siswa-presensi-pertemuan.png` | Pengisian Presensi oleh Siswa |
+| 46 | `46-siswa-isi-pertemuan.png` | Halaman Isi Pertemuan (Siswa) |
+| 47 | `47-siswa-tugas.png` | Halaman Tugas dan Kuis (Siswa) |
+| 48 | `48-siswa-tugas-rincian.png` | Rincian Tugas yang Disembunyikan |
+| 49 | `49-siswa-hasil-kuis.png` | Halaman Hasil Pengerjaan Kuis Siswa |
+| 50 | `50-siswa-nilai.png` | Halaman Rekap Nilai Siswa |
+| 51 | `51-siswa-nilai-arsip.png` | Riwayat Nilai pada Periode Sebelumnya |
+| 52 | `52-siswa-raport.png` | Halaman Raport Sementara Siswa |
+| 53 | `53-siswa-jadwal-kelas.png` | Jadwal Pelajaran Kelas Siswa |
+| 54 | `54-jadwal-sekolah-format-sk.png` | Jadwal Mata Pelajaran Seluruh Sekolah |
+| 55 | `55-siswa-rekap-presensi.png` | Rekap Kehadiran Siswa |
+| 56 | `56-siswa-kerjakan-kuis.png` | Halaman Pengerjaan Kuis oleh Siswa |
+| 57 | `57-siswa-kerjakan-tugas.png` | Halaman Pengerjaan dan Pengumpulan Tugas |
+| 58 | `58-periode-terkunci-guru.png` | Tampilan Periode yang Telah Dikunci |
+| 59 | `59-periode-terkunci-pertemuan.png` | Isi Pertemuan pada Periode Terkunci |
+| 60 | `60-tampilan-mobile.png` | Tampilan Sistem pada Perangkat Mobile |
 
 ## Ringkasan hasil pengujian Black Box
 
-Total **115 skenario**, **115 Valid**, **0 Tidak Valid**
+Total **122 skenario**, **122 Valid**, **0 Tidak Valid**
 (**100.00%** keberhasilan).
 
 | Modul | Skenario | Valid | Tidak Valid |
 |---|---|---|---|
 | Autentikasi | 9 | 9 | 0 |
 | Periode Pembelajaran | 8 | 8 | 0 |
-| Penguncian Periode | 5 | 5 | 0 |
+| Penguncian Periode | 6 | 6 | 0 |
 | Manajemen Pengguna | 11 | 11 | 0 |
 | Manajemen Kelas | 3 | 3 | 0 |
 | Mata Pelajaran | 5 | 5 | 0 |
@@ -122,7 +125,7 @@ Total **115 skenario**, **115 Valid**, **0 Tidak Valid**
 | Dashboard | 3 | 3 | 0 |
 | Halaman Depan | 1 | 1 | 0 |
 | Raport Sementara | 5 | 5 | 0 |
-| Jadwal Pelajaran | 3 | 3 | 0 |
+| Jadwal Pelajaran | 9 | 9 | 0 |
 | Presensi | 11 | 11 | 0 |
 
 ## Tabel basis data hasil implementasi

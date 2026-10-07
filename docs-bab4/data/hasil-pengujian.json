@@ -1,7 +1,7 @@
 {
-  "tanggal": "2026-10-07T15:07:39.821Z",
-  "total": 115,
-  "valid": 115,
+  "tanggal": "2026-10-07T15:29:36.361Z",
+  "total": 122,
+  "valid": 122,
   "tidak_valid": 0,
   "persentase": 100,
   "kasus": [
@@ -943,6 +943,69 @@
     },
     {
       "id": "BB-105",
+      "modul": "Jadwal Pelajaran",
+      "skenario": "Administrator membuka bahan penyusunan jadwal",
+      "input": "Membuka menu Jadwal Pelajaran pada halaman administrator",
+      "harapan": "Sistem menyediakan daftar kelas, hari, jam pelajaran, mata pelajaran beserta hurufnya, dan daftar guru sebagai pilihan penyusunan jadwal",
+      "aktual": "HTTP 200: 10 kelas, 5 hari, 14 baris waktu, 26 mata pelajaran, 28 guru",
+      "status": "Valid"
+    },
+    {
+      "id": "BB-106",
+      "modul": "Jadwal Pelajaran",
+      "skenario": "Administrator mengisi jam pelajaran yang masih kosong",
+      "input": "Kelas X A, Jumat jam ke-6, MATEMATIKA [U] oleh Mahlian, S.Pd",
+      "harapan": "Jadwal tersimpan dan sistem membentuk kode sel dari huruf mata pelajaran beserta nomor kode guru",
+      "aktual": "HTTP 200, kode terbentuk: \"E3\"",
+      "status": "Valid"
+    },
+    {
+      "id": "BB-107",
+      "modul": "Jadwal Pelajaran",
+      "skenario": "Administrator menjadwalkan guru pada dua kelas di jam yang sama",
+      "input": "Menugaskan Andi Ilhami, S.Kom di kelas X A padahal sudah mengajar di kelas XI A pada Jumat jam ke-6",
+      "harapan": "Sistem menolak dan menyebutkan kelas lain yang sudah diajar guru tersebut pada hari dan jam yang sama",
+      "aktual": "HTTP 409, pesan: \"Jadwal bentrok: Andi Ilhami, S.Kom sudah mengajar INFORM. PMNTN di kelas XI A pada hari dan jam yang sama.\"",
+      "status": "Valid"
+    },
+    {
+      "id": "BB-108",
+      "modul": "Jadwal Pelajaran",
+      "skenario": "Administrator menandai sebuah jam sebagai kegiatan sekolah",
+      "input": "Kelas X A, Jumat jam ke-7, kegiatan PRAMUKA",
+      "harapan": "Jam tersebut tersimpan sebagai kegiatan sekolah, bukan mata pelajaran",
+      "aktual": "HTTP 200, pesan: \"Jadwal berhasil disimpan\"",
+      "status": "Valid"
+    },
+    {
+      "id": "BB-109",
+      "modul": "Jadwal Pelajaran",
+      "skenario": "Administrator menyimpan jadwal tanpa mengisi apa pun",
+      "input": "Mata pelajaran dan kegiatan sama-sama dikosongkan",
+      "harapan": "Sistem menolak karena salah satu di antaranya wajib diisi",
+      "aktual": "HTTP 400, pesan: \"Pilih mata pelajaran atau isi kegiatan\"",
+      "status": "Valid"
+    },
+    {
+      "id": "BB-110",
+      "modul": "Penguncian Periode",
+      "skenario": "Administrator mengubah jadwal pada periode yang telah dikunci",
+      "input": "Mengisi jadwal kelas X A pada periode 2026/1",
+      "harapan": "Sistem menolak karena seluruh data pada periode terkunci bersifat hanya-baca",
+      "aktual": "HTTP 423, pesan: \"Periode pembelajaran 2026/1 telah dikunci oleh administrator. Data pada periode ini hanya dapat dilihat dan tidak dapat diubah.\"",
+      "status": "Valid"
+    },
+    {
+      "id": "BB-111",
+      "modul": "Jadwal Pelajaran",
+      "skenario": "Administrator mengosongkan kembali sebuah jam pelajaran",
+      "input": "Mengosongkan jam pelajaran kelas X A pada Jumat",
+      "harapan": "Jam pelajaran tersebut kembali kosong pada tabel jadwal",
+      "aktual": "HTTP 200, pesan: \"Jam pelajaran dikosongkan\"",
+      "status": "Valid"
+    },
+    {
+      "id": "BB-112",
       "modul": "Presensi",
       "skenario": "Guru membuka presensi pada sebuah pertemuan",
       "input": "Membuka presensi pertemuan 1: Struktur dan Kaidah Teks Deskripsi",
@@ -951,7 +1014,7 @@
       "status": "Valid"
     },
     {
-      "id": "BB-106",
+      "id": "BB-113",
       "modul": "Presensi",
       "skenario": "Guru membuka presensi yang sudah terbuka",
       "input": "Menekan tombol buka presensi untuk kedua kalinya",
@@ -960,7 +1023,7 @@
       "status": "Valid"
     },
     {
-      "id": "BB-107",
+      "id": "BB-114",
       "modul": "Presensi",
       "skenario": "Siswa menyatakan kehadirannya pada pertemuan yang presensinya dibuka",
       "input": "Menekan tombol Saya Hadir",
@@ -969,7 +1032,7 @@
       "status": "Valid"
     },
     {
-      "id": "BB-108",
+      "id": "BB-115",
       "modul": "Presensi",
       "skenario": "Siswa menyatakan hadir dua kali pada pertemuan yang sama",
       "input": "Menekan tombol Saya Hadir untuk kedua kalinya",
@@ -978,7 +1041,7 @@
       "status": "Valid"
     },
     {
-      "id": "BB-109",
+      "id": "BB-116",
       "modul": "Presensi",
       "skenario": "Guru mencatat keterangan siswa yang berhalangan hadir",
       "input": "Menandai Audiyah sakit dengan keterangan surat dokter",
@@ -987,7 +1050,7 @@
       "status": "Valid"
     },
     {
-      "id": "BB-110",
+      "id": "BB-117",
       "modul": "Presensi",
       "skenario": "Guru mengisi status kehadiran dengan nilai yang tidak dikenal",
       "input": "Status kehadiran: \"bolos\"",
@@ -996,16 +1059,16 @@
       "status": "Valid"
     },
     {
-      "id": "BB-111",
+      "id": "BB-118",
       "modul": "Presensi",
       "skenario": "Guru menutup presensi dan siswa yang belum mengisi dicatat alpa",
       "input": "Menekan tombol Tutup Presensi",
       "harapan": "Presensi ditutup dan seluruh siswa yang belum menyatakan hadir tercatat alpa",
-      "aktual": "HTTP 200, pesan: \"Presensi ditutup.\" (pengisian siswa lain sebelum ditutup: HTTP 409)",
+      "aktual": "HTTP 200, pesan: \"Presensi ditutup.\" (pengisian siswa lain sebelum ditutup: HTTP 200)",
       "status": "Valid"
     },
     {
-      "id": "BB-112",
+      "id": "BB-119",
       "modul": "Presensi",
       "skenario": "Siswa mencoba mengisi presensi yang sudah ditutup guru",
       "input": "Menekan tombol Saya Hadir setelah presensi ditutup",
@@ -1014,7 +1077,7 @@
       "status": "Valid"
     },
     {
-      "id": "BB-113",
+      "id": "BB-120",
       "modul": "Presensi",
       "skenario": "Guru melihat rekap kehadiran seluruh siswa pada satu mata pelajaran",
       "input": "Membuka rekap presensi BAHASA INDONESIA kelas X A",
@@ -1023,7 +1086,7 @@
       "status": "Valid"
     },
     {
-      "id": "BB-114",
+      "id": "BB-121",
       "modul": "Presensi",
       "skenario": "Siswa melihat rekap kehadirannya sendiri per mata pelajaran",
       "input": "Membuka menu Presensi",
@@ -1032,7 +1095,7 @@
       "status": "Valid"
     },
     {
-      "id": "BB-115",
+      "id": "BB-122",
       "modul": "Presensi",
       "skenario": "Guru mencoba melihat presensi mata pelajaran yang bukan diampunya",
       "input": "Guru Fisika membuka rekap presensi Bahasa Indonesia",

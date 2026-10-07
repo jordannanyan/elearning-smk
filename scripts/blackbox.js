@@ -1469,6 +1469,106 @@ async function main() {
       && js.slot.length > 0 && js.kode_guru.length > 0 && js.kode_mapel.length > 0,
   });
 
+  // -----------------------------------------------------------------
+  // Penyusunan jadwal oleh administrator
+  // -----------------------------------------------------------------
+  // Pengujian memakai jam yang memang kosong pada jadwal resmi, yaitu
+  // kelas X A hari Jumat jam ke-6 dan ke-7, lalu dikosongkan kembali di
+  // akhir supaya jadwal tetap sama dengan berkas sekolah.
+  const refJadwal = (await get('/api/jadwal/referensi', TA)).data;
+  const kelasXAJadwal = refJadwal.kelas.find((k) => k.nama_kelas === 'X A');
+  const guruBebas = refJadwal.guru.find((g) => g.nama.startsWith('Mahlian'));
+
+  catat({
+    modul: 'Jadwal Pelajaran', skenario: 'Administrator membuka bahan penyusunan jadwal',
+    input: 'Membuka menu Jadwal Pelajaran pada halaman administrator',
+    harapan: 'Sistem menyediakan daftar kelas, hari, jam pelajaran, mata pelajaran beserta '
+      + 'hurufnya, dan daftar guru sebagai pilihan penyusunan jadwal',
+    aktual: `HTTP 200: ${refJadwal.kelas.length} kelas, ${refJadwal.hari.length} hari, `
+      + `${refJadwal.jam.umum.length} baris waktu, ${refJadwal.mapel.length} mata pelajaran, `
+      + `${refJadwal.guru.length} guru`,
+    sesuai: refJadwal.kelas.length > 0 && refJadwal.mapel.length > 0
+      && refJadwal.guru.length > 0,
+  });
+
+  const rIsiJadwal = await post('/api/jadwal', {
+    id_kelas: kelasXAJadwal.id, hari: 5, jam_ke: 6,
+    huruf_mapel: 'E', nama_mapel: 'MATEMATIKA [U]', id_guru: guruBebas.id,
+  }, TA);
+  catat({
+    modul: 'Jadwal Pelajaran', skenario: 'Administrator mengisi jam pelajaran yang masih kosong',
+    input: `Kelas X A, Jumat jam ke-6, MATEMATIKA [U] oleh ${guruBebas.nama}`,
+    harapan: 'Jadwal tersimpan dan sistem membentuk kode sel dari huruf mata pelajaran '
+      + 'beserta nomor kode guru',
+    aktual: `HTTP ${rIsiJadwal.status}, kode terbentuk: "${rIsiJadwal.data?.kode}"`,
+    sesuai: rIsiJadwal.status === 200 && /^[A-Z]\d+$/.test(rIsiJadwal.data?.kode || ''),
+  });
+
+  // Guru yang sudah terjadwal mengajar di kelas lain pada jam yang sama
+  const jadwalJumat6 = (await get('/api/jadwal/sekolah', TA)).data.slot
+    .find((s) => s.hari === 5 && s.jam_ke === 6 && s.id_guru && s.nama_kelas !== 'X A');
+  const rBentrok = await post('/api/jadwal', {
+    id_kelas: kelasXAJadwal.id, hari: 5, jam_ke: 6,
+    huruf_mapel: 'E', nama_mapel: 'MATEMATIKA [U]', id_guru: jadwalJumat6.id_guru,
+  }, TA);
+  catat({
+    modul: 'Jadwal Pelajaran', skenario: 'Administrator menjadwalkan guru pada dua kelas di jam yang sama',
+    input: `Menugaskan ${jadwalJumat6.nama_guru} di kelas X A padahal sudah mengajar `
+      + `di kelas ${jadwalJumat6.nama_kelas} pada Jumat jam ke-6`,
+    harapan: 'Sistem menolak dan menyebutkan kelas lain yang sudah diajar guru tersebut '
+      + 'pada hari dan jam yang sama',
+    aktual: `HTTP ${rBentrok.status}, pesan: "${rBentrok.data?.message}"`,
+    sesuai: rBentrok.status === 409 && rBentrok.data?.bentrok?.kelas === jadwalJumat6.nama_kelas,
+  });
+
+  const rKegiatan = await post('/api/jadwal', {
+    id_kelas: kelasXAJadwal.id, hari: 5, jam_ke: 7, kegiatan: 'PRAMUKA',
+  }, TA);
+  catat({
+    modul: 'Jadwal Pelajaran', skenario: 'Administrator menandai sebuah jam sebagai kegiatan sekolah',
+    input: 'Kelas X A, Jumat jam ke-7, kegiatan PRAMUKA',
+    harapan: 'Jam tersebut tersimpan sebagai kegiatan sekolah, bukan mata pelajaran',
+    aktual: `HTTP ${rKegiatan.status}, pesan: "${rKegiatan.data?.message}"`,
+    sesuai: rKegiatan.status === 200,
+  });
+
+  const rJadwalKosong = await post('/api/jadwal', {
+    id_kelas: kelasXAJadwal.id, hari: 5, jam_ke: 7,
+  }, TA);
+  catat({
+    modul: 'Jadwal Pelajaran', skenario: 'Administrator menyimpan jadwal tanpa mengisi apa pun',
+    input: 'Mata pelajaran dan kegiatan sama-sama dikosongkan',
+    harapan: 'Sistem menolak karena salah satu di antaranya wajib diisi',
+    aktual: `HTTP ${rJadwalKosong.status}, pesan: "${rJadwalKosong.data?.message}"`,
+    sesuai: rJadwalKosong.status === 400,
+  });
+
+  // Jadwal pada periode terkunci tidak boleh diubah
+  const kelasTerkunciJadwal = (await get('/api/kelas?id_periode=' + pTerkunci.id, TA)).data[0];
+  const rJadwalTerkunci = await post('/api/jadwal', {
+    id_kelas: kelasTerkunciJadwal.id, hari: 1, jam_ke: 1,
+    huruf_mapel: 'E', nama_mapel: 'MATEMATIKA [U]', id_guru: guruBebas.id,
+  }, TA);
+  catat({
+    modul: 'Penguncian Periode', skenario: 'Administrator mengubah jadwal pada periode yang telah dikunci',
+    input: `Mengisi jadwal kelas ${kelasTerkunciJadwal.nama_kelas} pada periode ${pTerkunci.kode}`,
+    harapan: 'Sistem menolak karena seluruh data pada periode terkunci bersifat hanya-baca',
+    aktual: `HTTP ${rJadwalTerkunci.status}, pesan: "${rJadwalTerkunci.data?.message}"`,
+    sesuai: rJadwalTerkunci.status === 423,
+  });
+
+  const slotUji = (await get('/api/jadwal/sekolah', TA)).data.slot
+    .filter((s) => s.nama_kelas === 'X A' && s.hari === 5 && [6, 7].includes(s.jam_ke));
+  const rHapusJadwal = await del(`/api/jadwal/${slotUji[0].id}`, TA);
+  for (const s of slotUji.slice(1)) await del(`/api/jadwal/${s.id}`, TA);
+  catat({
+    modul: 'Jadwal Pelajaran', skenario: 'Administrator mengosongkan kembali sebuah jam pelajaran',
+    input: 'Mengosongkan jam pelajaran kelas X A pada Jumat',
+    harapan: 'Jam pelajaran tersebut kembali kosong pada tabel jadwal',
+    aktual: `HTTP ${rHapusJadwal.status}, pesan: "${rHapusJadwal.data?.message}"`,
+    sesuai: rHapusJadwal.status === 200,
+  });
+
   // =================================================================
   // L. PRESENSI (DAFTAR HADIR)
   // =================================================================

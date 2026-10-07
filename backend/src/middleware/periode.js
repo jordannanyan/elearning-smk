@@ -54,6 +54,8 @@ const JALUR = {
                 JOIN kelas_mapel km ON km.id = pt.id_kelas_mapel
                 JOIN kelas k ON k.id = km.id_kelas
                 JOIN periode p ON p.id = k.id_periode WHERE pg.id = ?`,
+  jadwal: `SELECT p.* FROM jadwal j
+           JOIN periode p ON p.id = j.id_periode WHERE j.id = ?`,
   presensi: `SELECT p.* FROM presensi pr
              JOIN pertemuan pt ON pt.id = pr.id_pertemuan
              JOIN kelas_mapel km ON km.id = pt.id_kelas_mapel

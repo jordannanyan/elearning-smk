@@ -475,3 +475,13 @@ export interface RekapPresensiKelas {
     persen_hadir: number | null;
   }[];
 }
+
+export interface ReferensiJadwal {
+  periode: InfoPeriodeJadwal;
+  kelas: { id: number; nama_kelas: string; tingkat: string }[];
+  hari: string[];
+  jam: { umum: JamPelajaran[]; jumat: JamPelajaran[] };
+  mapel: { kode: string; nama: string }[];
+  guru: { id: number; nama: string; kode_jadwal: number | null }[];
+  kegiatan: string[];
+}

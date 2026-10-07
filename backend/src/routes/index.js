@@ -148,6 +148,11 @@ router.get('/nilai/kelas-mapel/:id', authenticate, authorize('guru', 'admin'), n
 router.get('/jadwal/sekolah', authenticate, jadwal.sekolah);
 router.get('/jadwal/saya', authenticate, authorize('guru', 'siswa'), jadwal.saya);
 router.get('/jadwal/periode', authenticate, jadwal.periodeTersedia);
+router.get('/jadwal/referensi', authenticate, authorize('admin'), jadwal.referensi);
+router.post('/jadwal', authenticate, authorize('admin'),
+  kunci('kelas', dariBody('id_kelas')), jadwal.simpanSlot);
+router.delete('/jadwal/:id', authenticate, authorize('admin'),
+  kunci('jadwal', dariParam), jadwal.hapusSlot);
 
 // ---------- Presensi (daftar hadir) ----------
 router.get('/presensi/saya', authenticate, authorize('siswa'), presensi.rekapSiswa);
