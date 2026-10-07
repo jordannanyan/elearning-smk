@@ -15,6 +15,10 @@ CREATE DATABASE IF NOT EXISTS elearning_smakk
 USE elearning_smakk;
 
 -- Urutan drop diperhatikan karena foreign key
+DROP TABLE IF EXISTS presensi_siswa;
+DROP TABLE IF EXISTS presensi;
+DROP TABLE IF EXISTS jadwal;
+DROP TABLE IF EXISTS jam_pelajaran;
 DROP TABLE IF EXISTS jawaban_siswa;
 DROP TABLE IF EXISTS soal;
 DROP TABLE IF EXISTS nilai;
@@ -79,6 +83,9 @@ CREATE TABLE guru (
   nip       VARCHAR(30) DEFAULT NULL,
   tgl_lahir DATE DEFAULT NULL,
   alamat    TEXT DEFAULT NULL,
+  -- Nomor kode guru sebagaimana tercantum pada jadwal resmi sekolah,
+  -- dipakai untuk membentuk kode seperti E16 pada tabel jadwal.
+  kode_jadwal TINYINT DEFAULT NULL,
   CONSTRAINT fk_guru_user FOREIGN KEY (id_user) REFERENCES users(id) ON DELETE CASCADE
 ) ENGINE=InnoDB;
 
@@ -287,4 +294,86 @@ CREATE TABLE forum_diskusi (
   CONSTRAINT fk_forum_pertemuan FOREIGN KEY (id_pertemuan) REFERENCES pertemuan(id) ON DELETE CASCADE,
   CONSTRAINT fk_forum_user      FOREIGN KEY (id_user)      REFERENCES users(id) ON DELETE CASCADE,
   CONSTRAINT fk_forum_parent    FOREIGN KEY (id_parent)    REFERENCES forum_diskusi(id) ON DELETE CASCADE
+) ENGINE=InnoDB;
+
+-- ------------------------------------------------------------------
+-- jam_pelajaran : pembagian waktu jam pelajaran sekolah
+--   Disalin dari tabel WAKTU SEKOLAH pada jadwal resmi. Baris istirahat
+--   dan Jumatan ikut disimpan agar tampilan jadwal pada sistem sama
+--   persis dengan tabel yang tercantum di SK.
+-- ------------------------------------------------------------------
+CREATE TABLE jam_pelajaran (
+  id       INT AUTO_INCREMENT PRIMARY KEY,
+  kelompok ENUM('umum','jumat') NOT NULL DEFAULT 'umum',
+  urutan   TINYINT NOT NULL,
+  jenis    ENUM('pelajaran','istirahat','jumatan') NOT NULL DEFAULT 'pelajaran',
+  jam_ke   TINYINT DEFAULT NULL,
+  mulai    VARCHAR(8) NOT NULL,
+  selesai  VARCHAR(8) NOT NULL,
+  UNIQUE KEY uq_jam (kelompok, urutan)
+) ENGINE=InnoDB;
+
+-- ------------------------------------------------------------------
+-- jadwal : jadwal mata pelajaran per kelas pada sebuah periode
+--   Satu baris mewakili satu sel pada tabel jadwal resmi, yaitu
+--   pertemuan sebuah kelas pada hari dan jam ke berapa. Kolom `kode`
+--   menyimpan kode asli pada jadwal sekolah, misalnya E16 yang berarti
+--   MATEMATIKA [U] diajar oleh guru bernomor 16, sehingga jadwal dapat
+--   ditampilkan kembali dalam format yang sama dengan SK.
+--   Baris tanpa mata pelajaran, seperti UPACARA BENDERA, PRAMUKA,
+--   KEAGAMAAN, dan P5, disimpan pada kolom `kegiatan`.
+-- ------------------------------------------------------------------
+CREATE TABLE jadwal (
+  id         INT AUTO_INCREMENT PRIMARY KEY,
+  id_periode INT NOT NULL,
+  id_kelas   INT NOT NULL,
+  hari       TINYINT NOT NULL,
+  jam_ke     TINYINT NOT NULL,
+  kode       VARCHAR(8) DEFAULT NULL,
+  nama_mapel VARCHAR(60) DEFAULT NULL,
+  id_guru    INT DEFAULT NULL,
+  kegiatan   VARCHAR(60) DEFAULT NULL,
+  UNIQUE KEY uq_jadwal (id_periode, id_kelas, hari, jam_ke),
+  CONSTRAINT fk_jadwal_periode FOREIGN KEY (id_periode) REFERENCES periode(id) ON DELETE CASCADE,
+  CONSTRAINT fk_jadwal_kelas   FOREIGN KEY (id_kelas)   REFERENCES kelas(id) ON DELETE CASCADE,
+  CONSTRAINT fk_jadwal_guru    FOREIGN KEY (id_guru)    REFERENCES guru(id) ON DELETE SET NULL
+) ENGINE=InnoDB;
+
+-- ------------------------------------------------------------------
+-- presensi : daftar hadir sebuah pertemuan pembelajaran
+--   Guru membuka presensi pada pertemuan yang sedang berlangsung,
+--   siswa menyatakan kehadirannya selama presensi masih dibuka, lalu
+--   guru menutupnya. Siswa yang tidak menyatakan hadir sampai presensi
+--   ditutup dicatat sebagai alpa.
+-- ------------------------------------------------------------------
+CREATE TABLE presensi (
+  id           INT AUTO_INCREMENT PRIMARY KEY,
+  id_pertemuan INT NOT NULL,
+  id_guru      INT DEFAULT NULL,
+  tanggal      DATE NOT NULL,
+  status       ENUM('dibuka','ditutup') NOT NULL DEFAULT 'dibuka',
+  catatan      VARCHAR(255) DEFAULT NULL,
+  tgl_buka     TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  tgl_tutup    DATETIME DEFAULT NULL,
+  UNIQUE KEY uq_presensi_pertemuan (id_pertemuan),
+  CONSTRAINT fk_presensi_pertemuan FOREIGN KEY (id_pertemuan) REFERENCES pertemuan(id) ON DELETE CASCADE,
+  CONSTRAINT fk_presensi_guru      FOREIGN KEY (id_guru)      REFERENCES guru(id) ON DELETE SET NULL
+) ENGINE=InnoDB;
+
+-- ------------------------------------------------------------------
+-- presensi_siswa : kehadiran tiap siswa pada sebuah presensi
+--   `dicatat_oleh` membedakan kehadiran yang dinyatakan sendiri oleh
+--   siswa dengan keterangan yang ditetapkan guru (sakit, izin, alpa).
+-- ------------------------------------------------------------------
+CREATE TABLE presensi_siswa (
+  id           INT AUTO_INCREMENT PRIMARY KEY,
+  id_presensi  INT NOT NULL,
+  id_siswa     INT NOT NULL,
+  status       ENUM('hadir','sakit','izin','alpa') NOT NULL DEFAULT 'alpa',
+  keterangan   VARCHAR(255) DEFAULT NULL,
+  dicatat_oleh ENUM('siswa','guru') NOT NULL DEFAULT 'guru',
+  waktu        TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  UNIQUE KEY uq_presensi_siswa (id_presensi, id_siswa),
+  CONSTRAINT fk_ps_presensi FOREIGN KEY (id_presensi) REFERENCES presensi(id) ON DELETE CASCADE,
+  CONSTRAINT fk_ps_siswa    FOREIGN KEY (id_siswa)    REFERENCES siswa(id) ON DELETE CASCADE
 ) ENGINE=InnoDB;

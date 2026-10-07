@@ -3,6 +3,7 @@ import { Link, useParams } from 'react-router-dom';
 import api from '../../api/client';
 import MateriIsi from '../../components/MateriIsi';
 import KerjakanTugas from '../../components/KerjakanTugas';
+import PanelPresensi from '../../components/PanelPresensi';
 import type { IsiPertemuan, Tugas } from '../../api/types';
 
 function fmt(dt?: string | null) {
@@ -75,6 +76,8 @@ export default function SiswaPertemuanDetail() {
       )}
 
       {/* ---------------- MATERI ---------------- */}
+      <PanelPresensi idPertemuan={p.id} peran="siswa" terkunci={terkunci} />
+
       <div className="blok">
         <div className="kepala"><span>📄 Materi Pembelajaran</span></div>
         <div className="badan">

@@ -193,6 +193,55 @@ async function seed() {
       }
     }
 
+
+    // =============================================================
+    // Jam pelajaran dan jadwal mata pelajaran
+    // -------------------------------------------------------------
+    // Keduanya disalin apa adanya dari jadwal resmi sekolah, yaitu
+    // Jadwal Mata Pelajaran Semester II Tahun Ajaran 2025/2026, agar
+    // tampilannya di sistem sama dengan tabel pada SK. Jadwal hanya
+    // dimuat pada periode genap karena berkas sumbernya memang jadwal
+    // semester genap.
+    // =============================================================
+    const JADWAL = SEKOLAH.jadwal;
+    for (const [kelompok, daftar] of [['umum', JADWAL.jam], ['jumat', JADWAL.jam_jumat]]) {
+      let urutan = 0;
+      for (const j of daftar) {
+        urutan += 1;
+        await conn.query(
+          `INSERT INTO jam_pelajaran (kelompok, urutan, jenis, jam_ke, mulai, selesai)
+           VALUES (?,?,?,?,?,?)`,
+          [kelompok, urutan, j.jenis, j.jam_ke, j.mulai, j.selesai]);
+      }
+    }
+
+    // Nomor kode guru pada jadwal resmi dicatat pada data guru supaya
+    // kode seperti E16 dapat ditelusuri ke akun gurunya.
+    for (const kg of JADWAL.kode_guru) {
+      if (kg.email && guruId[kg.email]) {
+        await conn.query('UPDATE guru SET kode_jadwal = ? WHERE id = ?',
+          [kg.nomor, guruId[kg.email]]);
+      }
+    }
+
+    const HARI = { 'SENIN': 1, 'SELASA': 2, 'RABU': 3, 'KAMIS': 4, "JUM'AT": 5 };
+    const guruKode = {};        // nomor kode guru -> guru.id
+    for (const kg of JADWAL.kode_guru) {
+      if (kg.email && guruId[kg.email]) guruKode[kg.nomor] = guruId[kg.email];
+    }
+
+    let jumlahJadwal = 0;
+    for (const s of JADWAL.slot) {
+      const idKelas = kelasId[P_GENAP][s.kelas];
+      if (!idKelas) continue;
+      await conn.query(
+        `INSERT INTO jadwal (id_periode, id_kelas, hari, jam_ke, kode, nama_mapel, id_guru, kegiatan)
+         VALUES (?,?,?,?,?,?,?,?)`,
+        [P_GENAP, idKelas, HARI[s.hari], s.jam_ke, s.kode, s.mapel,
+          s.guru ? (guruKode[s.guru] || null) : null, s.kegiatan]);
+      jumlahJadwal += 1;
+    }
+
     // =============================================================
     // Bahan peragaan: pertemuan, materi, tugas, kuis, dan forum
     // pada beberapa mata pelajaran kelas X A
@@ -454,6 +503,65 @@ async function seed() {
       }
     }
 
+
+    // =============================================================
+    // Presensi (daftar hadir) contoh pada pertemuan Matematika X A
+    // -------------------------------------------------------------
+    // Dua pertemuan pertama presensinya sudah ditutup lengkap dengan
+    // keterangan sakit, izin, dan alpa, sedangkan pertemuan terakhir
+    // masih dibuka sehingga siswa dapat mencoba menyatakan hadir.
+    // =============================================================
+    const siswaXAJadwal = SEKOLAH.siswa['X A'];
+    const guruMtk = guruId['halifah@smakk.sch.id'];
+
+    async function buatPresensi(idPertemuan, idGuru, geser, status, keterangan) {
+      const [r] = await conn.query(
+        `INSERT INTO presensi (id_pertemuan, id_guru, tanggal, status, catatan, tgl_tutup)
+         VALUES (?,?,?,?,?,?)`,
+        [idPertemuan, idGuru, tanggal(geser), status, keterangan,
+          status === 'ditutup' ? hari(geser, '09:30:00') : null]);
+      return r.insertId;
+    }
+
+    // Pola kehadiran dibuat berbeda tiap pertemuan agar rekapnya tidak
+    // seragam: indeks siswa yang tidak hadir beserta keterangannya.
+    async function isiKehadiran(idPresensi, geser, khusus) {
+      for (let i = 0; i < siswaXAJadwal.length; i += 1) {
+        const k = khusus[i];
+        const status = k ? k[0] : 'hadir';
+        const ket = k ? k[1] : null;
+        await conn.query(
+          `INSERT INTO presensi_siswa (id_presensi, id_siswa, status, keterangan, dicatat_oleh, waktu)
+           VALUES (?,?,?,?,?,?)`,
+          [idPresensi, siswaId[siswaXAJadwal[i].email], status, ket,
+            status === 'hadir' ? 'siswa' : 'guru', hari(geser, '07:05:00')]);
+      }
+    }
+
+    const pres1 = await buatPresensi(p1, guruMtk, -21, 'ditutup',
+      'Pembelajaran berjalan lancar, seluruh siswa mengikuti dengan baik.');
+    await isiKehadiran(pres1, -21, {
+      3: ['sakit', 'Surat keterangan dokter'],
+      11: ['izin', 'Mengikuti lomba olahraga tingkat kabupaten'],
+    });
+
+    const pres2 = await buatPresensi(p2, guruMtk, -14, 'ditutup',
+      'Dua siswa tidak hadir tanpa keterangan dan akan ditindaklanjuti wali kelas.');
+    await isiKehadiran(pres2, -14, {
+      5: ['sakit', 'Demam'],
+      9: ['alpa', null],
+      17: ['alpa', null],
+    });
+
+    // Presensi pertemuan terakhir sengaja dibiarkan terbuka
+    const pres3 = await buatPresensi(p3, guruMtk, -7, 'dibuka', null);
+    for (let i = 0; i < 9; i += 1) {
+      await conn.query(
+        `INSERT INTO presensi_siswa (id_presensi, id_siswa, status, dicatat_oleh, waktu)
+         VALUES (?,?,'hadir','siswa',?)`,
+        [pres3, siswaId[siswaXAJadwal[i].email], hari(-7, '07:03:00')]);
+    }
+
     // =============================================================
     // Ringkasan
     // =============================================================
@@ -469,6 +577,9 @@ async function seed() {
     console.log(`     penugasan mengajar    : ${jumlahAjar} per periode`);
     console.log(`     pertemuan / materi    : ${await hitung('pertemuan')} / ${await hitung('materi')}`);
     console.log(`     tugas / butir soal    : ${await hitung('tugas')} / ${totalSoal}`);
+    console.log(`     jadwal pelajaran      : ${jumlahJadwal} jam pada periode 2026/2`);
+    console.log(`     presensi contoh       : ${await hitung('presensi')} pertemuan / `
+      + `${await hitung('presensi_siswa')} baris kehadiran`);
     console.log('\nAkun untuk login:');
     console.log('  Admin : admin@smakk.sch.id / admin123');
     console.log(`  Guru  : ${SEKOLAH.guru.slice(0, 4).map((g) => g.email).join(', ')} / guru123`);

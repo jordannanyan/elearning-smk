@@ -358,3 +358,120 @@ export interface RaportSiswa {
   } | null;
   kkm: number;
 }
+
+/* ---------- Jadwal mata pelajaran ---------- */
+export interface JamPelajaran {
+  kelompok?: 'umum' | 'jumat';
+  urutan?: number;
+  jenis: 'pelajaran' | 'istirahat' | 'jumatan';
+  jam_ke: number | null;
+  mulai: string;
+  selesai: string;
+}
+
+export interface SlotJadwal {
+  id: number;
+  id_kelas?: number;
+  nama_kelas?: string;
+  tingkat?: string;
+  hari: number;
+  nama_hari?: string;
+  jam_ke: number;
+  kode: string | null;
+  huruf_mapel?: string | null;
+  nama_mapel: string | null;
+  kegiatan: string | null;
+  id_guru?: number | null;
+  nama_guru?: string | null;
+  kode_jadwal?: number | null;   // nomor kode guru pada jadwal resmi
+}
+
+export interface InfoPeriodeJadwal {
+  id: number; kode: string; tahun_ajaran: string; semester: number;
+  status: StatusPeriode; nama_semester: string;
+}
+
+export interface JadwalSekolah {
+  periode: InfoPeriodeJadwal | null;
+  sekolah: string;
+  kelas: { id: number; nama_kelas: string; tingkat: string }[];
+  hari: string[];
+  jam: { umum: JamPelajaran[]; jumat: JamPelajaran[] };
+  slot: SlotJadwal[];
+  kode_guru: { nomor: number; nama: string }[];
+  kode_mapel: { kode: string; nama: string }[];
+}
+
+export interface JadwalSaya {
+  periode: InfoPeriodeJadwal | null;
+  milik: {
+    jenis: 'kelas' | 'guru'; nama: string; tingkat?: string;
+    wali_kelas?: string | null; kode_jadwal?: number | null; jumlah_jam?: number;
+  } | null;
+  hari: string[];
+  jam: { umum: JamPelajaran[]; jumat: JamPelajaran[] };
+  slot: SlotJadwal[];
+}
+
+/* ---------- Presensi (daftar hadir) ---------- */
+export type StatusKehadiran = 'hadir' | 'sakit' | 'izin' | 'alpa';
+
+export interface BarisPresensi {
+  id_siswa: number; nama: string; nis: string | null;
+  status: StatusKehadiran | null; label: string;
+  keterangan: string | null;
+  dicatat_oleh: 'siswa' | 'guru' | null;
+  waktu: string | null;
+}
+
+export interface RingkasanPresensi {
+  hadir: number; sakit: number; izin: number; alpa: number;
+  belum: number; total: number; persen_hadir: number;
+}
+
+export interface PresensiPertemuan {
+  pertemuan: {
+    id: number; nomor: number; judul: string; tanggal: string | null;
+    nama_mapel: string; nama_kelas: string; kode_periode: string; status_periode: StatusPeriode;
+  };
+  presensi: {
+    id: number; status: 'dibuka' | 'ditutup'; tanggal: string;
+    catatan: string | null; nama_guru: string | null;
+    tgl_buka: string; tgl_tutup: string | null;
+  } | null;
+  daftar: BarisPresensi[];
+  ringkasan: RingkasanPresensi | null;
+  saya: BarisPresensi | null;
+}
+
+export interface RekapPresensiSiswa {
+  mapel: {
+    id_kelas_mapel: number; nama_mapel: string; kode_mapel: string | null;
+    nama_guru: string | null; nama_kelas: string;
+    jumlah_pertemuan: number; persen_hadir: number | null;
+    hadir: number; sakit: number; izin: number; alpa: number; belum: number;
+    pertemuan: {
+      id_pertemuan: number; nomor: number; judul: string; tanggal: string | null;
+      status_presensi: 'dibuka' | 'ditutup'; id_presensi: number;
+      kehadiran: StatusKehadiran | null; label: string; keterangan: string | null;
+    }[];
+  }[];
+  ringkasan: {
+    hadir: number; sakit: number; izin: number; alpa: number;
+    belum: number; pertemuan: number; persen_hadir: number | null;
+  } | null;
+}
+
+export interface RekapPresensiKelas {
+  kelas_mapel: { id_kelas: number; nama_kelas: string; nama_mapel: string };
+  pertemuan: {
+    id: number; nomor: number; judul: string;
+    id_presensi: number | null; status: 'dibuka' | 'ditutup' | null; tanggal: string | null;
+  }[];
+  siswa: {
+    id_siswa: number; nama: string; nis: string | null;
+    kehadiran: Record<number, StatusKehadiran | null>;
+    hadir: number; sakit: number; izin: number; alpa: number;
+    persen_hadir: number | null;
+  }[];
+}

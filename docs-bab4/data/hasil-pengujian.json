@@ -1,7 +1,7 @@
 {
-  "tanggal": "2026-10-07T14:17:16.021Z",
-  "total": 101,
-  "valid": 101,
+  "tanggal": "2026-10-07T14:57:37.130Z",
+  "total": 115,
+  "valid": 115,
   "tidak_valid": 0,
   "persentase": 100,
   "kasus": [
@@ -506,7 +506,7 @@
       "skenario": "Siswa membuka satu pertemuan untuk mengikuti pembelajaran",
       "input": "Membuka Pertemuan 1",
       "harapan": "Sistem menampilkan materi, tugas, dan forum diskusi pertemuan tersebut secara berurutan",
-      "aktual": "HTTP 200, 3 materi, 1 tugas, 4 topik diskusi",
+      "aktual": "HTTP 200, 3 materi, 1 tugas, 2 topik diskusi",
       "status": "Valid"
     },
     {
@@ -542,7 +542,7 @@
       "skenario": "Sistem menampilkan sisa hari menuju batas waktu pengumpulan",
       "input": "Membuka daftar tugas sebagai siswa",
       "harapan": "Setiap tugas menampilkan sisa hari beserta penanda tingkat kemendesakannya",
-      "aktual": "Contoh: \"Tugas Proyek SPLDV\" sisa 1 hari, penanda kritis",
+      "aktual": "Contoh: \"Tugas Proyek SPLDV\" sisa 3 hari, penanda mendesak",
       "status": "Valid"
     },
     {
@@ -803,7 +803,7 @@
       "skenario": "Pengguna menampilkan forum diskusi yang menyatu dalam materi pertemuan",
       "input": "Membuka Pertemuan 1 lalu melihat bagian forum diskusi",
       "harapan": "Forum diskusi tampil di dalam pertemuan beserta seluruh balasannya secara berurutan",
-      "aktual": "HTTP 200, 5 topik dengan total 12 balasan",
+      "aktual": "HTTP 200, 3 topik dengan total 6 balasan",
       "status": "Valid"
     },
     {
@@ -912,6 +912,132 @@
       "input": "Memilih periode 2026/1 yang berstatus terkunci",
       "harapan": "Sistem menampilkan raport siswa pada kelas yang diikutinya di periode tersebut",
       "aktual": "HTTP 200: periode 2026/1, kelas X A, rata-rata 86.5",
+      "status": "Valid"
+    },
+    {
+      "id": "BB-102",
+      "modul": "Jadwal Pelajaran",
+      "skenario": "Siswa melihat jadwal pelajaran kelasnya",
+      "input": "Membuka menu Jadwal Pelajaran",
+      "harapan": "Sistem menampilkan jadwal kelas siswa tersebut per hari beserta jam, mata pelajaran, dan guru pengajarnya",
+      "aktual": "HTTP 200: kelas X A, 49 jam seminggu; Senin jam 2 = INFORMATIKA",
+      "status": "Valid"
+    },
+    {
+      "id": "BB-103",
+      "modul": "Jadwal Pelajaran",
+      "skenario": "Guru melihat jadwal mengajarnya sendiri",
+      "input": "Membuka menu Jadwal Pelajaran sebagai guru",
+      "harapan": "Sistem menampilkan jam mengajar guru tersebut beserta kelas yang diajarnya",
+      "aktual": "HTTP 200: Halifah, S.P (kode guru 5), 23 jam mengajar per minggu",
+      "status": "Valid"
+    },
+    {
+      "id": "BB-104",
+      "modul": "Jadwal Pelajaran",
+      "skenario": "Pengguna melihat jadwal seluruh sekolah beserta legendanya",
+      "input": "Membuka tab Jadwal Sekolah",
+      "harapan": "Sistem menampilkan jadwal seluruh kelas dalam susunan yang sama dengan jadwal resmi sekolah, lengkap dengan kode guru, kode mata pelajaran, dan pembagian waktu",
+      "aktual": "HTTP 200: 10 kelas, 5 hari, 504 jam pelajaran, 28 kode guru, 26 kode mata pelajaran, 14 baris waktu",
+      "status": "Valid"
+    },
+    {
+      "id": "BB-105",
+      "modul": "Presensi",
+      "skenario": "Guru membuka presensi pada sebuah pertemuan",
+      "input": "Membuka presensi pertemuan 1: Struktur dan Kaidah Teks Deskripsi",
+      "harapan": "Presensi terbuka sehingga siswa dapat menyatakan kehadirannya",
+      "aktual": "HTTP 200, pesan: \"Presensi dibuka kembali\"",
+      "status": "Valid"
+    },
+    {
+      "id": "BB-106",
+      "modul": "Presensi",
+      "skenario": "Guru membuka presensi yang sudah terbuka",
+      "input": "Menekan tombol buka presensi untuk kedua kalinya",
+      "harapan": "Sistem menolak karena presensi pertemuan tersebut sudah dibuka",
+      "aktual": "HTTP 409, pesan: \"Presensi pertemuan ini sudah dibuka\"",
+      "status": "Valid"
+    },
+    {
+      "id": "BB-107",
+      "modul": "Presensi",
+      "skenario": "Siswa menyatakan kehadirannya pada pertemuan yang presensinya dibuka",
+      "input": "Menekan tombol Saya Hadir",
+      "harapan": "Kehadiran siswa tercatat beserta waktu pengisiannya",
+      "aktual": "HTTP 200, pesan: \"Kehadiran Anda berhasil dicatat\"",
+      "status": "Valid"
+    },
+    {
+      "id": "BB-108",
+      "modul": "Presensi",
+      "skenario": "Siswa menyatakan hadir dua kali pada pertemuan yang sama",
+      "input": "Menekan tombol Saya Hadir untuk kedua kalinya",
+      "harapan": "Sistem menolak karena kehadiran siswa tersebut sudah tercatat",
+      "aktual": "HTTP 409, pesan: \"Anda sudah tercatat hadir pada pertemuan ini\"",
+      "status": "Valid"
+    },
+    {
+      "id": "BB-109",
+      "modul": "Presensi",
+      "skenario": "Guru mencatat keterangan siswa yang berhalangan hadir",
+      "input": "Menandai Audiyah sakit dengan keterangan surat dokter",
+      "harapan": "Status kehadiran siswa tersimpan beserta keterangannya",
+      "aktual": "HTTP 200, pesan: \"Kehadiran siswa dicatat sebagai Sakit\"",
+      "status": "Valid"
+    },
+    {
+      "id": "BB-110",
+      "modul": "Presensi",
+      "skenario": "Guru mengisi status kehadiran dengan nilai yang tidak dikenal",
+      "input": "Status kehadiran: \"bolos\"",
+      "harapan": "Sistem menolak karena status kehadiran hanya hadir, sakit, izin, atau alpa",
+      "aktual": "HTTP 400, pesan: \"Status kehadiran tidak valid\"",
+      "status": "Valid"
+    },
+    {
+      "id": "BB-111",
+      "modul": "Presensi",
+      "skenario": "Guru menutup presensi dan siswa yang belum mengisi dicatat alpa",
+      "input": "Menekan tombol Tutup Presensi",
+      "harapan": "Presensi ditutup dan seluruh siswa yang belum menyatakan hadir tercatat alpa",
+      "aktual": "HTTP 200, pesan: \"Presensi ditutup. 1 siswa yang belum mengisi dicatat alpa.\" (pengisian siswa lain sebelum ditutup: HTTP 409)",
+      "status": "Valid"
+    },
+    {
+      "id": "BB-112",
+      "modul": "Presensi",
+      "skenario": "Siswa mencoba mengisi presensi yang sudah ditutup guru",
+      "input": "Menekan tombol Saya Hadir setelah presensi ditutup",
+      "harapan": "Sistem menolak karena presensi pertemuan tersebut sudah ditutup",
+      "aktual": "HTTP 409, pesan: \"Presensi sudah ditutup guru, kehadiran tidak dapat diisi lagi\"",
+      "status": "Valid"
+    },
+    {
+      "id": "BB-113",
+      "modul": "Presensi",
+      "skenario": "Guru melihat rekap kehadiran seluruh siswa pada satu mata pelajaran",
+      "input": "Membuka rekap presensi BAHASA INDONESIA kelas X A",
+      "harapan": "Sistem menampilkan kehadiran tiap siswa pada setiap pertemuan beserta rekapitulasi hadir, sakit, izin, alpa, dan persentase kehadirannya",
+      "aktual": "HTTP 200: 29 siswa, 2 pertemuan; contoh: Ahmad Hanapi hadir 1x (100%)",
+      "status": "Valid"
+    },
+    {
+      "id": "BB-114",
+      "modul": "Presensi",
+      "skenario": "Siswa melihat rekap kehadirannya sendiri per mata pelajaran",
+      "input": "Membuka menu Presensi",
+      "harapan": "Sistem menampilkan jumlah hadir, sakit, izin, alpa, dan persentase kehadiran siswa pada setiap mata pelajaran",
+      "aktual": "HTTP 200: 2 mata pelajaran, kehadiran keseluruhan 100% (4 dari 4 pertemuan)",
+      "status": "Valid"
+    },
+    {
+      "id": "BB-115",
+      "modul": "Presensi",
+      "skenario": "Guru mencoba melihat presensi mata pelajaran yang bukan diampunya",
+      "input": "Guru Fisika membuka rekap presensi Bahasa Indonesia",
+      "harapan": "Sistem menolak karena guru tersebut tidak mengampu mata pelajaran itu",
+      "aktual": "HTTP 403, pesan: \"Bukan kelas mata pelajaran yang Anda ampu\"",
       "status": "Valid"
     }
   ]

@@ -11,7 +11,8 @@
  "sumber": {
   "pembagian_tugas": "SK Nomor 421.3/001/14/SMAN 1 KK/I/2026 tanggal 5 Januari 2026",
   "wali_kelas": "SK Nomor 421.3/186/14/SMAN 1 KK/VII/2025 tanggal 9 Juli 2025 (Lampiran IV)",
-  "daftar_siswa": "Daftar Hadir Siswa Tahun Pelajaran 2025/2026"
+  "daftar_siswa": "Daftar Hadir Siswa Tahun Pelajaran 2025/2026",
+  "jadwal": "Jadwal Mata Pelajaran Semester II Tahun Ajaran 2025/2026 SMA Negeri 1 Karau Kuala"
  },
  "kelas": [
   {
@@ -3257,6 +3258,4940 @@
     "nis": "",
     "jk": "P",
     "email": "verlita@siswa.smakk.sch.id"
+   }
+  ]
+ },
+ "jadwal": {
+  "lembar": "jadwal 45 menit",
+  "judul": "JADWAL MATA PELAJARAN SEMESTER II (DUA)",
+  "sekolah": "SMAN 1 KARAU KUALA",
+  "tahun_ajaran": "2025/2026",
+  "kode_guru": [
+   {
+    "nomor": 1,
+    "nama": "YUNITA PEBRIANTI, S.Pd",
+    "email": "yunita@smakk.sch.id"
+   },
+   {
+    "nomor": 2,
+    "nama": "HERMILAWATY, S.Ag",
+    "email": "hermilawaty@smakk.sch.id"
+   },
+   {
+    "nomor": 3,
+    "nama": "MAHLIAN, S.Pd",
+    "email": "mahlian@smakk.sch.id"
+   },
+   {
+    "nomor": 4,
+    "nama": "NURLAILA, S.Pd",
+    "email": "nurlaila@smakk.sch.id"
+   },
+   {
+    "nomor": 5,
+    "nama": "HALIFAH, SP",
+    "email": "halifah@smakk.sch.id"
+   },
+   {
+    "nomor": 6,
+    "nama": "SAMJUHDI, SP",
+    "email": "samjuhdi@smakk.sch.id"
+   },
+   {
+    "nomor": 7,
+    "nama": "MARTANIAH, S.Pd",
+    "email": "martaniah@smakk.sch.id"
+   },
+   {
+    "nomor": 8,
+    "nama": "RAMAYADI JAYA, S.Pd",
+    "email": "ramayadi@smakk.sch.id"
+   },
+   {
+    "nomor": 9,
+    "nama": "EDY PRIYONO, SE",
+    "email": "edy@smakk.sch.id"
+   },
+   {
+    "nomor": 10,
+    "nama": "SUGIANOOR, S.Sos",
+    "email": "sugianoor@smakk.sch.id"
+   },
+   {
+    "nomor": 11,
+    "nama": "M. RAHMADANI, S.Pd",
+    "email": "muhammad@smakk.sch.id"
+   },
+   {
+    "nomor": 12,
+    "nama": "WIDAYANI, S.Pd",
+    "email": "widayani@smakk.sch.id"
+   },
+   {
+    "nomor": 13,
+    "nama": "HERMAN K, S.Pd",
+    "email": "herman@smakk.sch.id"
+   },
+   {
+    "nomor": 14,
+    "nama": "SITI KAMARIAH, S.Pd",
+    "email": "siti@smakk.sch.id"
+   },
+   {
+    "nomor": 15,
+    "nama": "BARDIN, S.Pd",
+    "email": "bardin@smakk.sch.id"
+   },
+   {
+    "nomor": 16,
+    "nama": "ROBET JANUAR S. S.Pd",
+    "email": "robet@smakk.sch.id"
+   },
+   {
+    "nomor": 17,
+    "nama": "MARIANI. S.Th",
+    "email": "mariani@smakk.sch.id"
+   },
+   {
+    "nomor": 18,
+    "nama": "WAHONO ISNANDAR, S.Pd",
+    "email": "wahono@smakk.sch.id"
+   },
+   {
+    "nomor": 19,
+    "nama": "EKA SUSILAWATI, S.Pd.I",
+    "email": "eka@smakk.sch.id"
+   },
+   {
+    "nomor": 20,
+    "nama": "DEWI SARTIKA, S.Pd",
+    "email": "dewi@smakk.sch.id"
+   },
+   {
+    "nomor": 21,
+    "nama": "ANDI ILHAMI, S.Kom",
+    "email": "andi@smakk.sch.id"
+   },
+   {
+    "nomor": 22,
+    "nama": "AKHMAD RIKO, S.Pd.I",
+    "email": "akhmad@smakk.sch.id"
+   },
+   {
+    "nomor": 23,
+    "nama": "JANATIN, S.Pd.I",
+    "email": "janatin@smakk.sch.id"
+   },
+   {
+    "nomor": 24,
+    "nama": "NESVI LIANTI ML, S.Pd",
+    "email": "nesvi@smakk.sch.id"
+   },
+   {
+    "nomor": 25,
+    "nama": "KENNY YOHANES.T. S.Pd",
+    "email": "kenny@smakk.sch.id"
+   },
+   {
+    "nomor": 26,
+    "nama": "LAILY MUSTIKA, S.Pd.I",
+    "email": "laily@smakk.sch.id"
+   },
+   {
+    "nomor": 27,
+    "nama": "ASNIN WARIANTO, S.Pd.I",
+    "email": "asnin@smakk.sch.id"
+   },
+   {
+    "nomor": 28,
+    "nama": "RITA FERONIKA, S.Pd",
+    "email": "rita@smakk.sch.id"
+   }
+  ],
+  "kode_mapel": [
+   {
+    "kode": "A",
+    "nama": "PEND.AGAMA & BP"
+   },
+   {
+    "kode": "B",
+    "nama": "Pend. Pancasila"
+   },
+   {
+    "kode": "C",
+    "nama": "B INDONESIA"
+   },
+   {
+    "kode": "D",
+    "nama": "B. INGGRIS"
+   },
+   {
+    "kode": "E",
+    "nama": "MATEMATIKA [U]"
+   },
+   {
+    "kode": "F",
+    "nama": "FISIKA"
+   },
+   {
+    "kode": "G",
+    "nama": "KIMIA"
+   },
+   {
+    "kode": "H",
+    "nama": "BIOLOGI"
+   },
+   {
+    "kode": "I",
+    "nama": "SEJARAH"
+   },
+   {
+    "kode": "J",
+    "nama": "GEOGRAFI"
+   },
+   {
+    "kode": "K",
+    "nama": "EKONOMI"
+   },
+   {
+    "kode": "L",
+    "nama": "SOSIOLOGI"
+   },
+   {
+    "kode": "M",
+    "nama": "SENI BUDAYA"
+   },
+   {
+    "kode": "N",
+    "nama": "PJOK"
+   },
+   {
+    "kode": "O",
+    "nama": "INFORMATIKA"
+   },
+   {
+    "kode": "P",
+    "nama": "PKWU"
+   },
+   {
+    "kode": "Q",
+    "nama": "MUATAN LOKAL"
+   },
+   {
+    "kode": "R",
+    "nama": "MTK TKT LANJUT"
+   },
+   {
+    "kode": "S",
+    "nama": "B. ING.TK LANJUT"
+   },
+   {
+    "kode": "T",
+    "nama": "SEJARAH TK LANJT"
+   },
+   {
+    "kode": "U",
+    "nama": "INFORM. PMNTN"
+   },
+   {
+    "kode": "V",
+    "nama": "SOSIO PEMINATAN"
+   },
+   {
+    "kode": "W",
+    "nama": "FISIKA PEMINTN"
+   },
+   {
+    "kode": "X",
+    "nama": "EKONOMI PEMINTN"
+   },
+   {
+    "kode": "Y",
+    "nama": "BIOLOGI PMNTN"
+   },
+   {
+    "kode": "Z",
+    "nama": "KIMIA PEMINTN"
+   }
+  ],
+  "jam": [
+   {
+    "jenis": "pelajaran",
+    "jam_ke": 1,
+    "mulai": "07.00",
+    "selesai": "07.45"
+   },
+   {
+    "jenis": "pelajaran",
+    "jam_ke": 2,
+    "mulai": "07.45",
+    "selesai": "08.30"
+   },
+   {
+    "jenis": "pelajaran",
+    "jam_ke": 3,
+    "mulai": "08.30",
+    "selesai": "09.15"
+   },
+   {
+    "jenis": "pelajaran",
+    "jam_ke": 4,
+    "mulai": "09.15",
+    "selesai": "10.00"
+   },
+   {
+    "jenis": "istirahat",
+    "jam_ke": null,
+    "mulai": "10.00",
+    "selesai": "10.15"
+   },
+   {
+    "jenis": "pelajaran",
+    "jam_ke": 5,
+    "mulai": "10.15",
+    "selesai": "11.00"
+   },
+   {
+    "jenis": "pelajaran",
+    "jam_ke": 6,
+    "mulai": "11.00",
+    "selesai": "11.45"
+   },
+   {
+    "jenis": "istirahat",
+    "jam_ke": null,
+    "mulai": "11.45",
+    "selesai": "12.15"
+   },
+   {
+    "jenis": "pelajaran",
+    "jam_ke": 7,
+    "mulai": "12.15",
+    "selesai": "13.00"
+   },
+   {
+    "jenis": "pelajaran",
+    "jam_ke": 8,
+    "mulai": "13.00",
+    "selesai": "13.45"
+   },
+   {
+    "jenis": "istirahat",
+    "jam_ke": null,
+    "mulai": "13.45",
+    "selesai": "14.00"
+   },
+   {
+    "jenis": "pelajaran",
+    "jam_ke": 9,
+    "mulai": "14.00",
+    "selesai": "14.45"
+   },
+   {
+    "jenis": "pelajaran",
+    "jam_ke": 10,
+    "mulai": "14.45",
+    "selesai": "15.30"
+   },
+   {
+    "jenis": "pelajaran",
+    "jam_ke": 11,
+    "mulai": "15.30",
+    "selesai": "16.15"
+   }
+  ],
+  "jam_jumat": [
+   {
+    "jenis": "pelajaran",
+    "jam_ke": 1,
+    "mulai": "06.30",
+    "selesai": "07.15"
+   },
+   {
+    "jenis": "pelajaran",
+    "jam_ke": 2,
+    "mulai": "07.15",
+    "selesai": "08.00"
+   },
+   {
+    "jenis": "pelajaran",
+    "jam_ke": 3,
+    "mulai": "08.00",
+    "selesai": "08.45"
+   },
+   {
+    "jenis": "istirahat",
+    "jam_ke": null,
+    "mulai": "08.45",
+    "selesai": "09.00"
+   },
+   {
+    "jenis": "pelajaran",
+    "jam_ke": 4,
+    "mulai": "09.00",
+    "selesai": "09.45"
+   },
+   {
+    "jenis": "pelajaran",
+    "jam_ke": 5,
+    "mulai": "09.45",
+    "selesai": "10.30"
+   },
+   {
+    "jenis": "jumatan",
+    "jam_ke": null,
+    "mulai": "10.30",
+    "selesai": "12.30"
+   },
+   {
+    "jenis": "pelajaran",
+    "jam_ke": 6,
+    "mulai": "12.30",
+    "selesai": "13.15"
+   },
+   {
+    "jenis": "pelajaran",
+    "jam_ke": 7,
+    "mulai": "13.15",
+    "selesai": "14.00"
+   }
+  ],
+  "slot": [
+   {
+    "hari": "SENIN",
+    "jam_ke": 1,
+    "kelas": "X A",
+    "kode": null,
+    "mapel": null,
+    "guru": null,
+    "kegiatan": "UPACARA BENDERA"
+   },
+   {
+    "hari": "SENIN",
+    "jam_ke": 1,
+    "kelas": "X B",
+    "kode": null,
+    "mapel": null,
+    "guru": null,
+    "kegiatan": "UPACARA BENDERA"
+   },
+   {
+    "hari": "SENIN",
+    "jam_ke": 1,
+    "kelas": "X C",
+    "kode": null,
+    "mapel": null,
+    "guru": null,
+    "kegiatan": "UPACARA BENDERA"
+   },
+   {
+    "hari": "SENIN",
+    "jam_ke": 1,
+    "kelas": "XI A",
+    "kode": null,
+    "mapel": null,
+    "guru": null,
+    "kegiatan": "UPACARA BENDERA"
+   },
+   {
+    "hari": "SENIN",
+    "jam_ke": 1,
+    "kelas": "XI B",
+    "kode": null,
+    "mapel": null,
+    "guru": null,
+    "kegiatan": "UPACARA BENDERA"
+   },
+   {
+    "hari": "SENIN",
+    "jam_ke": 1,
+    "kelas": "XI C",
+    "kode": null,
+    "mapel": null,
+    "guru": null,
+    "kegiatan": "UPACARA BENDERA"
+   },
+   {
+    "hari": "SENIN",
+    "jam_ke": 1,
+    "kelas": "XI D",
+    "kode": null,
+    "mapel": null,
+    "guru": null,
+    "kegiatan": "UPACARA BENDERA"
+   },
+   {
+    "hari": "SENIN",
+    "jam_ke": 1,
+    "kelas": "XII A",
+    "kode": null,
+    "mapel": null,
+    "guru": null,
+    "kegiatan": "UPACARA BENDERA"
+   },
+   {
+    "hari": "SENIN",
+    "jam_ke": 1,
+    "kelas": "XII B",
+    "kode": null,
+    "mapel": null,
+    "guru": null,
+    "kegiatan": "UPACARA BENDERA"
+   },
+   {
+    "hari": "SENIN",
+    "jam_ke": 1,
+    "kelas": "XII C",
+    "kode": null,
+    "mapel": null,
+    "guru": null,
+    "kegiatan": "UPACARA BENDERA"
+   },
+   {
+    "hari": "SENIN",
+    "jam_ke": 2,
+    "kelas": "X A",
+    "kode": "O21",
+    "mapel": "INFORMATIKA",
+    "guru": 21,
+    "kegiatan": null
+   },
+   {
+    "hari": "SENIN",
+    "jam_ke": 2,
+    "kelas": "X B",
+    "kode": "D22",
+    "mapel": "B. INGGRIS",
+    "guru": 22,
+    "kegiatan": null
+   },
+   {
+    "hari": "SENIN",
+    "jam_ke": 2,
+    "kelas": "X C",
+    "kode": "E3",
+    "mapel": "MATEMATIKA [U]",
+    "guru": 3,
+    "kegiatan": null
+   },
+   {
+    "hari": "SENIN",
+    "jam_ke": 2,
+    "kelas": "XI A",
+    "kode": "D8",
+    "mapel": "B. INGGRIS",
+    "guru": 8,
+    "kegiatan": null
+   },
+   {
+    "hari": "SENIN",
+    "jam_ke": 2,
+    "kelas": "XI B",
+    "kode": "A2",
+    "mapel": "PEND.AGAMA & BP",
+    "guru": 2,
+    "kegiatan": null
+   },
+   {
+    "hari": "SENIN",
+    "jam_ke": 2,
+    "kelas": "XI C",
+    "kode": "X9",
+    "mapel": "EKONOMI PEMINTN",
+    "guru": 9,
+    "kegiatan": null
+   },
+   {
+    "hari": "SENIN",
+    "jam_ke": 2,
+    "kelas": "XI D",
+    "kode": "E16",
+    "mapel": "MATEMATIKA [U]",
+    "guru": 16,
+    "kegiatan": null
+   },
+   {
+    "hari": "SENIN",
+    "jam_ke": 2,
+    "kelas": "XII A",
+    "kode": "W14",
+    "mapel": "FISIKA PEMINTN",
+    "guru": 14,
+    "kegiatan": null
+   },
+   {
+    "hari": "SENIN",
+    "jam_ke": 2,
+    "kelas": "XII B",
+    "kode": "Q24",
+    "mapel": "MUATAN LOKAL",
+    "guru": 24,
+    "kegiatan": null
+   },
+   {
+    "hari": "SENIN",
+    "jam_ke": 2,
+    "kelas": "XII C",
+    "kode": "B4",
+    "mapel": "Pend. Pancasila",
+    "guru": 4,
+    "kegiatan": null
+   },
+   {
+    "hari": "SENIN",
+    "jam_ke": 3,
+    "kelas": "X A",
+    "kode": "O21",
+    "mapel": "INFORMATIKA",
+    "guru": 21,
+    "kegiatan": null
+   },
+   {
+    "hari": "SENIN",
+    "jam_ke": 3,
+    "kelas": "X B",
+    "kode": "D22",
+    "mapel": "B. INGGRIS",
+    "guru": 22,
+    "kegiatan": null
+   },
+   {
+    "hari": "SENIN",
+    "jam_ke": 3,
+    "kelas": "X C",
+    "kode": "E3",
+    "mapel": "MATEMATIKA [U]",
+    "guru": 3,
+    "kegiatan": null
+   },
+   {
+    "hari": "SENIN",
+    "jam_ke": 3,
+    "kelas": "XI A",
+    "kode": "D8",
+    "mapel": "B. INGGRIS",
+    "guru": 8,
+    "kegiatan": null
+   },
+   {
+    "hari": "SENIN",
+    "jam_ke": 3,
+    "kelas": "XI B",
+    "kode": "A2",
+    "mapel": "PEND.AGAMA & BP",
+    "guru": 2,
+    "kegiatan": null
+   },
+   {
+    "hari": "SENIN",
+    "jam_ke": 3,
+    "kelas": "XI C",
+    "kode": "X9",
+    "mapel": "EKONOMI PEMINTN",
+    "guru": 9,
+    "kegiatan": null
+   },
+   {
+    "hari": "SENIN",
+    "jam_ke": 3,
+    "kelas": "XI D",
+    "kode": "E16",
+    "mapel": "MATEMATIKA [U]",
+    "guru": 16,
+    "kegiatan": null
+   },
+   {
+    "hari": "SENIN",
+    "jam_ke": 3,
+    "kelas": "XII A",
+    "kode": "W14",
+    "mapel": "FISIKA PEMINTN",
+    "guru": 14,
+    "kegiatan": null
+   },
+   {
+    "hari": "SENIN",
+    "jam_ke": 3,
+    "kelas": "XII B",
+    "kode": "T12",
+    "mapel": "SEJARAH TK LANJT",
+    "guru": 12,
+    "kegiatan": null
+   },
+   {
+    "hari": "SENIN",
+    "jam_ke": 3,
+    "kelas": "XII C",
+    "kode": "B4",
+    "mapel": "Pend. Pancasila",
+    "guru": 4,
+    "kegiatan": null
+   },
+   {
+    "hari": "SENIN",
+    "jam_ke": 4,
+    "kelas": "X A",
+    "kode": "B4",
+    "mapel": "Pend. Pancasila",
+    "guru": 4,
+    "kegiatan": null
+   },
+   {
+    "hari": "SENIN",
+    "jam_ke": 4,
+    "kelas": "X B",
+    "kode": "D22",
+    "mapel": "B. INGGRIS",
+    "guru": 22,
+    "kegiatan": null
+   },
+   {
+    "hari": "SENIN",
+    "jam_ke": 4,
+    "kelas": "X C",
+    "kode": "E3",
+    "mapel": "MATEMATIKA [U]",
+    "guru": 3,
+    "kegiatan": null
+   },
+   {
+    "hari": "SENIN",
+    "jam_ke": 4,
+    "kelas": "XI A",
+    "kode": "D8",
+    "mapel": "B. INGGRIS",
+    "guru": 8,
+    "kegiatan": null
+   },
+   {
+    "hari": "SENIN",
+    "jam_ke": 4,
+    "kelas": "XI B",
+    "kode": "R5",
+    "mapel": "MTK TKT LANJUT",
+    "guru": 5,
+    "kegiatan": null
+   },
+   {
+    "hari": "SENIN",
+    "jam_ke": 4,
+    "kelas": "XI C",
+    "kode": "I11",
+    "mapel": "SEJARAH",
+    "guru": 11,
+    "kegiatan": null
+   },
+   {
+    "hari": "SENIN",
+    "jam_ke": 4,
+    "kelas": "XI D",
+    "kode": "E16",
+    "mapel": "MATEMATIKA [U]",
+    "guru": 16,
+    "kegiatan": null
+   },
+   {
+    "hari": "SENIN",
+    "jam_ke": 4,
+    "kelas": "XII A",
+    "kode": "W14",
+    "mapel": "FISIKA PEMINTN",
+    "guru": 14,
+    "kegiatan": null
+   },
+   {
+    "hari": "SENIN",
+    "jam_ke": 4,
+    "kelas": "XII B",
+    "kode": "T12",
+    "mapel": "SEJARAH TK LANJT",
+    "guru": 12,
+    "kegiatan": null
+   },
+   {
+    "hari": "SENIN",
+    "jam_ke": 4,
+    "kelas": "XII C",
+    "kode": "S13",
+    "mapel": "B. ING.TK LANJUT",
+    "guru": 13,
+    "kegiatan": null
+   },
+   {
+    "hari": "SENIN",
+    "jam_ke": 5,
+    "kelas": "X A",
+    "kode": "A2",
+    "mapel": "PEND.AGAMA & BP",
+    "guru": 2,
+    "kegiatan": null
+   },
+   {
+    "hari": "SENIN",
+    "jam_ke": 5,
+    "kelas": "X B",
+    "kode": "K9",
+    "mapel": "EKONOMI",
+    "guru": 9,
+    "kegiatan": null
+   },
+   {
+    "hari": "SENIN",
+    "jam_ke": 5,
+    "kelas": "X C",
+    "kode": "Q27",
+    "mapel": "MUATAN LOKAL",
+    "guru": 27,
+    "kegiatan": null
+   },
+   {
+    "hari": "SENIN",
+    "jam_ke": 5,
+    "kelas": "XI A",
+    "kode": "W6",
+    "mapel": "FISIKA PEMINTN",
+    "guru": 6,
+    "kegiatan": null
+   },
+   {
+    "hari": "SENIN",
+    "jam_ke": 5,
+    "kelas": "XI B",
+    "kode": "R5",
+    "mapel": "MTK TKT LANJUT",
+    "guru": 5,
+    "kegiatan": null
+   },
+   {
+    "hari": "SENIN",
+    "jam_ke": 5,
+    "kelas": "XI C",
+    "kode": "R24",
+    "mapel": "MTK TKT LANJUT",
+    "guru": 24,
+    "kegiatan": null
+   },
+   {
+    "hari": "SENIN",
+    "jam_ke": 5,
+    "kelas": "XI D",
+    "kode": "U21",
+    "mapel": "INFORM. PMNTN",
+    "guru": 21,
+    "kegiatan": null
+   },
+   {
+    "hari": "SENIN",
+    "jam_ke": 5,
+    "kelas": "XII A",
+    "kode": "E16",
+    "mapel": "MATEMATIKA [U]",
+    "guru": 16,
+    "kegiatan": null
+   },
+   {
+    "hari": "SENIN",
+    "jam_ke": 5,
+    "kelas": "XII B",
+    "kode": "T12",
+    "mapel": "SEJARAH TK LANJT",
+    "guru": 12,
+    "kegiatan": null
+   },
+   {
+    "hari": "SENIN",
+    "jam_ke": 5,
+    "kelas": "XII C",
+    "kode": "S13",
+    "mapel": "B. ING.TK LANJUT",
+    "guru": 13,
+    "kegiatan": null
+   },
+   {
+    "hari": "SENIN",
+    "jam_ke": 6,
+    "kelas": "X A",
+    "kode": "A2",
+    "mapel": "PEND.AGAMA & BP",
+    "guru": 2,
+    "kegiatan": null
+   },
+   {
+    "hari": "SENIN",
+    "jam_ke": 6,
+    "kelas": "X B",
+    "kode": "K9",
+    "mapel": "EKONOMI",
+    "guru": 9,
+    "kegiatan": null
+   },
+   {
+    "hari": "SENIN",
+    "jam_ke": 6,
+    "kelas": "X C",
+    "kode": "I11",
+    "mapel": "SEJARAH",
+    "guru": 11,
+    "kegiatan": null
+   },
+   {
+    "hari": "SENIN",
+    "jam_ke": 6,
+    "kelas": "XI A",
+    "kode": "W6",
+    "mapel": "FISIKA PEMINTN",
+    "guru": 6,
+    "kegiatan": null
+   },
+   {
+    "hari": "SENIN",
+    "jam_ke": 6,
+    "kelas": "XI B",
+    "kode": "S22",
+    "mapel": "B. ING.TK LANJUT",
+    "guru": 22,
+    "kegiatan": null
+   },
+   {
+    "hari": "SENIN",
+    "jam_ke": 6,
+    "kelas": "XI C",
+    "kode": "R24",
+    "mapel": "MTK TKT LANJUT",
+    "guru": 24,
+    "kegiatan": null
+   },
+   {
+    "hari": "SENIN",
+    "jam_ke": 6,
+    "kelas": "XI D",
+    "kode": "U21",
+    "mapel": "INFORM. PMNTN",
+    "guru": 21,
+    "kegiatan": null
+   },
+   {
+    "hari": "SENIN",
+    "jam_ke": 6,
+    "kelas": "XII A",
+    "kode": "E16",
+    "mapel": "MATEMATIKA [U]",
+    "guru": 16,
+    "kegiatan": null
+   },
+   {
+    "hari": "SENIN",
+    "jam_ke": 6,
+    "kelas": "XII B",
+    "kode": "R5",
+    "mapel": "MTK TKT LANJUT",
+    "guru": 5,
+    "kegiatan": null
+   },
+   {
+    "hari": "SENIN",
+    "jam_ke": 6,
+    "kelas": "XII C",
+    "kode": "S13",
+    "mapel": "B. ING.TK LANJUT",
+    "guru": 13,
+    "kegiatan": null
+   },
+   {
+    "hari": "SENIN",
+    "jam_ke": 7,
+    "kelas": "X A",
+    "kode": "F6",
+    "mapel": "FISIKA",
+    "guru": 6,
+    "kegiatan": null
+   },
+   {
+    "hari": "SENIN",
+    "jam_ke": 7,
+    "kelas": "X B",
+    "kode": "E3",
+    "mapel": "MATEMATIKA [U]",
+    "guru": 3,
+    "kegiatan": null
+   },
+   {
+    "hari": "SENIN",
+    "jam_ke": 7,
+    "kelas": "X C",
+    "kode": "K9",
+    "mapel": "EKONOMI",
+    "guru": 9,
+    "kegiatan": null
+   },
+   {
+    "hari": "SENIN",
+    "jam_ke": 7,
+    "kelas": "XI A",
+    "kode": "R24",
+    "mapel": "MTK TKT LANJUT",
+    "guru": 24,
+    "kegiatan": null
+   },
+   {
+    "hari": "SENIN",
+    "jam_ke": 7,
+    "kelas": "XI B",
+    "kode": "S22",
+    "mapel": "B. ING.TK LANJUT",
+    "guru": 22,
+    "kegiatan": null
+   },
+   {
+    "hari": "SENIN",
+    "jam_ke": 7,
+    "kelas": "XI C",
+    "kode": "Q27",
+    "mapel": "MUATAN LOKAL",
+    "guru": 27,
+    "kegiatan": null
+   },
+   {
+    "hari": "SENIN",
+    "jam_ke": 7,
+    "kelas": "XI D",
+    "kode": "S13",
+    "mapel": "B. ING.TK LANJUT",
+    "guru": 13,
+    "kegiatan": null
+   },
+   {
+    "hari": "SENIN",
+    "jam_ke": 7,
+    "kelas": "XII A",
+    "kode": "E16",
+    "mapel": "MATEMATIKA [U]",
+    "guru": 16,
+    "kegiatan": null
+   },
+   {
+    "hari": "SENIN",
+    "jam_ke": 7,
+    "kelas": "XII B",
+    "kode": "R5",
+    "mapel": "MTK TKT LANJUT",
+    "guru": 5,
+    "kegiatan": null
+   },
+   {
+    "hari": "SENIN",
+    "jam_ke": 7,
+    "kelas": "XII C",
+    "kode": "A23",
+    "mapel": "PEND.AGAMA & BP",
+    "guru": 23,
+    "kegiatan": null
+   },
+   {
+    "hari": "SENIN",
+    "jam_ke": 8,
+    "kelas": "X A",
+    "kode": "F6",
+    "mapel": "FISIKA",
+    "guru": 6,
+    "kegiatan": null
+   },
+   {
+    "hari": "SENIN",
+    "jam_ke": 8,
+    "kelas": "X B",
+    "kode": "E3",
+    "mapel": "MATEMATIKA [U]",
+    "guru": 3,
+    "kegiatan": null
+   },
+   {
+    "hari": "SENIN",
+    "jam_ke": 8,
+    "kelas": "X C",
+    "kode": "K9",
+    "mapel": "EKONOMI",
+    "guru": 9,
+    "kegiatan": null
+   },
+   {
+    "hari": "SENIN",
+    "jam_ke": 8,
+    "kelas": "XI A",
+    "kode": "R24",
+    "mapel": "MTK TKT LANJUT",
+    "guru": 24,
+    "kegiatan": null
+   },
+   {
+    "hari": "SENIN",
+    "jam_ke": 8,
+    "kelas": "XI B",
+    "kode": "S22",
+    "mapel": "B. ING.TK LANJUT",
+    "guru": 22,
+    "kegiatan": null
+   },
+   {
+    "hari": "SENIN",
+    "jam_ke": 8,
+    "kelas": "XI C",
+    "kode": "Q27",
+    "mapel": "MUATAN LOKAL",
+    "guru": 27,
+    "kegiatan": null
+   },
+   {
+    "hari": "SENIN",
+    "jam_ke": 8,
+    "kelas": "XI D",
+    "kode": "S13",
+    "mapel": "B. ING.TK LANJUT",
+    "guru": 13,
+    "kegiatan": null
+   },
+   {
+    "hari": "SENIN",
+    "jam_ke": 8,
+    "kelas": "XII A",
+    "kode": "B4",
+    "mapel": "Pend. Pancasila",
+    "guru": 4,
+    "kegiatan": null
+   },
+   {
+    "hari": "SENIN",
+    "jam_ke": 8,
+    "kelas": "XII B",
+    "kode": "R5",
+    "mapel": "MTK TKT LANJUT",
+    "guru": 5,
+    "kegiatan": null
+   },
+   {
+    "hari": "SENIN",
+    "jam_ke": 8,
+    "kelas": "XII C",
+    "kode": "A23",
+    "mapel": "PEND.AGAMA & BP",
+    "guru": 23,
+    "kegiatan": null
+   },
+   {
+    "hari": "SENIN",
+    "jam_ke": 9,
+    "kelas": "X A",
+    "kode": "C27",
+    "mapel": "B INDONESIA",
+    "guru": 27,
+    "kegiatan": null
+   },
+   {
+    "hari": "SENIN",
+    "jam_ke": 9,
+    "kelas": "X B",
+    "kode": "E3",
+    "mapel": "MATEMATIKA [U]",
+    "guru": 3,
+    "kegiatan": null
+   },
+   {
+    "hari": "SENIN",
+    "jam_ke": 9,
+    "kelas": "X C",
+    "kode": "C26",
+    "mapel": "B INDONESIA",
+    "guru": 26,
+    "kegiatan": null
+   },
+   {
+    "hari": "SENIN",
+    "jam_ke": 9,
+    "kelas": "XI A",
+    "kode": "S22",
+    "mapel": "B. ING.TK LANJUT",
+    "guru": 22,
+    "kegiatan": null
+   },
+   {
+    "hari": "SENIN",
+    "jam_ke": 9,
+    "kelas": "XI B",
+    "kode": "D8",
+    "mapel": "B. INGGRIS",
+    "guru": 8,
+    "kegiatan": null
+   },
+   {
+    "hari": "SENIN",
+    "jam_ke": 9,
+    "kelas": "XI C",
+    "kode": "U21",
+    "mapel": "INFORM. PMNTN",
+    "guru": 21,
+    "kegiatan": null
+   },
+   {
+    "hari": "SENIN",
+    "jam_ke": 9,
+    "kelas": "XI D",
+    "kode": "I11",
+    "mapel": "SEJARAH",
+    "guru": 11,
+    "kegiatan": null
+   },
+   {
+    "hari": "SENIN",
+    "jam_ke": 9,
+    "kelas": "XII A",
+    "kode": "B4",
+    "mapel": "Pend. Pancasila",
+    "guru": 4,
+    "kegiatan": null
+   },
+   {
+    "hari": "SENIN",
+    "jam_ke": 9,
+    "kelas": "XII B",
+    "kode": "E16",
+    "mapel": "MATEMATIKA [U]",
+    "guru": 16,
+    "kegiatan": null
+   },
+   {
+    "hari": "SENIN",
+    "jam_ke": 9,
+    "kelas": "XII C",
+    "kode": "X9",
+    "mapel": "EKONOMI PEMINTN",
+    "guru": 9,
+    "kegiatan": null
+   },
+   {
+    "hari": "SENIN",
+    "jam_ke": 10,
+    "kelas": "X A",
+    "kode": "C27",
+    "mapel": "B INDONESIA",
+    "guru": 27,
+    "kegiatan": null
+   },
+   {
+    "hari": "SENIN",
+    "jam_ke": 10,
+    "kelas": "X B",
+    "kode": "A2",
+    "mapel": "PEND.AGAMA & BP",
+    "guru": 2,
+    "kegiatan": null
+   },
+   {
+    "hari": "SENIN",
+    "jam_ke": 10,
+    "kelas": "X C",
+    "kode": "C26",
+    "mapel": "B INDONESIA",
+    "guru": 26,
+    "kegiatan": null
+   },
+   {
+    "hari": "SENIN",
+    "jam_ke": 10,
+    "kelas": "XI A",
+    "kode": "S22",
+    "mapel": "B. ING.TK LANJUT",
+    "guru": 22,
+    "kegiatan": null
+   },
+   {
+    "hari": "SENIN",
+    "jam_ke": 10,
+    "kelas": "XI B",
+    "kode": "D8",
+    "mapel": "B. INGGRIS",
+    "guru": 8,
+    "kegiatan": null
+   },
+   {
+    "hari": "SENIN",
+    "jam_ke": 10,
+    "kelas": "XI C",
+    "kode": "U21",
+    "mapel": "INFORM. PMNTN",
+    "guru": 21,
+    "kegiatan": null
+   },
+   {
+    "hari": "SENIN",
+    "jam_ke": 10,
+    "kelas": "XI D",
+    "kode": "B4",
+    "mapel": "Pend. Pancasila",
+    "guru": 4,
+    "kegiatan": null
+   },
+   {
+    "hari": "SENIN",
+    "jam_ke": 10,
+    "kelas": "XII A",
+    "kode": "T12",
+    "mapel": "SEJARAH TK LANJT",
+    "guru": 12,
+    "kegiatan": null
+   },
+   {
+    "hari": "SENIN",
+    "jam_ke": 10,
+    "kelas": "XII B",
+    "kode": "E16",
+    "mapel": "MATEMATIKA [U]",
+    "guru": 16,
+    "kegiatan": null
+   },
+   {
+    "hari": "SENIN",
+    "jam_ke": 10,
+    "kelas": "XII C",
+    "kode": "X9",
+    "mapel": "EKONOMI PEMINTN",
+    "guru": 9,
+    "kegiatan": null
+   },
+   {
+    "hari": "SENIN",
+    "jam_ke": 11,
+    "kelas": "X A",
+    "kode": "C27",
+    "mapel": "B INDONESIA",
+    "guru": 27,
+    "kegiatan": null
+   },
+   {
+    "hari": "SENIN",
+    "jam_ke": 11,
+    "kelas": "X B",
+    "kode": "A2",
+    "mapel": "PEND.AGAMA & BP",
+    "guru": 2,
+    "kegiatan": null
+   },
+   {
+    "hari": "SENIN",
+    "jam_ke": 11,
+    "kelas": "X C",
+    "kode": "C26",
+    "mapel": "B INDONESIA",
+    "guru": 26,
+    "kegiatan": null
+   },
+   {
+    "hari": "SENIN",
+    "jam_ke": 11,
+    "kelas": "XI A",
+    "kode": "S22",
+    "mapel": "B. ING.TK LANJUT",
+    "guru": 22,
+    "kegiatan": null
+   },
+   {
+    "hari": "SENIN",
+    "jam_ke": 11,
+    "kelas": "XI B",
+    "kode": "D8",
+    "mapel": "B. INGGRIS",
+    "guru": 8,
+    "kegiatan": null
+   },
+   {
+    "hari": "SENIN",
+    "jam_ke": 11,
+    "kelas": "XI C",
+    "kode": "U21",
+    "mapel": "INFORM. PMNTN",
+    "guru": 21,
+    "kegiatan": null
+   },
+   {
+    "hari": "SENIN",
+    "jam_ke": 11,
+    "kelas": "XI D",
+    "kode": "B4",
+    "mapel": "Pend. Pancasila",
+    "guru": 4,
+    "kegiatan": null
+   },
+   {
+    "hari": "SENIN",
+    "jam_ke": 11,
+    "kelas": "XII A",
+    "kode": "T12",
+    "mapel": "SEJARAH TK LANJT",
+    "guru": 12,
+    "kegiatan": null
+   },
+   {
+    "hari": "SENIN",
+    "jam_ke": 11,
+    "kelas": "XII B",
+    "kode": "E16",
+    "mapel": "MATEMATIKA [U]",
+    "guru": 16,
+    "kegiatan": null
+   },
+   {
+    "hari": "SENIN",
+    "jam_ke": 11,
+    "kelas": "XII C",
+    "kode": "X9",
+    "mapel": "EKONOMI PEMINTN",
+    "guru": 9,
+    "kegiatan": null
+   },
+   {
+    "hari": "SELASA",
+    "jam_ke": 1,
+    "kelas": "X A",
+    "kode": null,
+    "mapel": null,
+    "guru": 2,
+    "kegiatan": "P5"
+   },
+   {
+    "hari": "SELASA",
+    "jam_ke": 1,
+    "kelas": "X B",
+    "kode": null,
+    "mapel": null,
+    "guru": 20,
+    "kegiatan": "P5"
+   },
+   {
+    "hari": "SELASA",
+    "jam_ke": 1,
+    "kelas": "X C",
+    "kode": null,
+    "mapel": null,
+    "guru": 26,
+    "kegiatan": "P5"
+   },
+   {
+    "hari": "SELASA",
+    "jam_ke": 1,
+    "kelas": "XI A",
+    "kode": "N28",
+    "mapel": "PJOK",
+    "guru": 28,
+    "kegiatan": null
+   },
+   {
+    "hari": "SELASA",
+    "jam_ke": 1,
+    "kelas": "XI B",
+    "kode": "X9",
+    "mapel": "EKONOMI PEMINTN",
+    "guru": 9,
+    "kegiatan": null
+   },
+   {
+    "hari": "SELASA",
+    "jam_ke": 1,
+    "kelas": "XI C",
+    "kode": "B4",
+    "mapel": "Pend. Pancasila",
+    "guru": 4,
+    "kegiatan": null
+   },
+   {
+    "hari": "SELASA",
+    "jam_ke": 1,
+    "kelas": "XI D",
+    "kode": "D8",
+    "mapel": "B. INGGRIS",
+    "guru": 8,
+    "kegiatan": null
+   },
+   {
+    "hari": "SELASA",
+    "jam_ke": 1,
+    "kelas": "XII A",
+    "kode": "C7",
+    "mapel": "B INDONESIA",
+    "guru": 7,
+    "kegiatan": null
+   },
+   {
+    "hari": "SELASA",
+    "jam_ke": 1,
+    "kelas": "XII B",
+    "kode": "Y15",
+    "mapel": "BIOLOGI PMNTN",
+    "guru": 15,
+    "kegiatan": null
+   },
+   {
+    "hari": "SELASA",
+    "jam_ke": 1,
+    "kelas": "XII C",
+    "kode": "R5",
+    "mapel": "MTK TKT LANJUT",
+    "guru": 5,
+    "kegiatan": null
+   },
+   {
+    "hari": "SELASA",
+    "jam_ke": 2,
+    "kelas": "X A",
+    "kode": null,
+    "mapel": null,
+    "guru": 20,
+    "kegiatan": "P5"
+   },
+   {
+    "hari": "SELASA",
+    "jam_ke": 2,
+    "kelas": "X B",
+    "kode": null,
+    "mapel": null,
+    "guru": 2,
+    "kegiatan": "P5"
+   },
+   {
+    "hari": "SELASA",
+    "jam_ke": 2,
+    "kelas": "X C",
+    "kode": null,
+    "mapel": null,
+    "guru": 3,
+    "kegiatan": "P5"
+   },
+   {
+    "hari": "SELASA",
+    "jam_ke": 2,
+    "kelas": "XI A",
+    "kode": "N28",
+    "mapel": "PJOK",
+    "guru": 28,
+    "kegiatan": null
+   },
+   {
+    "hari": "SELASA",
+    "jam_ke": 2,
+    "kelas": "XI B",
+    "kode": "X9",
+    "mapel": "EKONOMI PEMINTN",
+    "guru": 9,
+    "kegiatan": null
+   },
+   {
+    "hari": "SELASA",
+    "jam_ke": 2,
+    "kelas": "XI C",
+    "kode": "B4",
+    "mapel": "Pend. Pancasila",
+    "guru": 4,
+    "kegiatan": null
+   },
+   {
+    "hari": "SELASA",
+    "jam_ke": 2,
+    "kelas": "XI D",
+    "kode": "D8",
+    "mapel": "B. INGGRIS",
+    "guru": 8,
+    "kegiatan": null
+   },
+   {
+    "hari": "SELASA",
+    "jam_ke": 2,
+    "kelas": "XII A",
+    "kode": "C7",
+    "mapel": "B INDONESIA",
+    "guru": 7,
+    "kegiatan": null
+   },
+   {
+    "hari": "SELASA",
+    "jam_ke": 2,
+    "kelas": "XII B",
+    "kode": "Y15",
+    "mapel": "BIOLOGI PMNTN",
+    "guru": 15,
+    "kegiatan": null
+   },
+   {
+    "hari": "SELASA",
+    "jam_ke": 2,
+    "kelas": "XII C",
+    "kode": "R5",
+    "mapel": "MTK TKT LANJUT",
+    "guru": 5,
+    "kegiatan": null
+   },
+   {
+    "hari": "SELASA",
+    "jam_ke": 3,
+    "kelas": "X A",
+    "kode": null,
+    "mapel": null,
+    "guru": 10,
+    "kegiatan": "P5"
+   },
+   {
+    "hari": "SELASA",
+    "jam_ke": 3,
+    "kelas": "X B",
+    "kode": null,
+    "mapel": null,
+    "guru": 3,
+    "kegiatan": "P5"
+   },
+   {
+    "hari": "SELASA",
+    "jam_ke": 3,
+    "kelas": "X C",
+    "kode": null,
+    "mapel": null,
+    "guru": 2,
+    "kegiatan": "P5"
+   },
+   {
+    "hari": "SELASA",
+    "jam_ke": 3,
+    "kelas": "XI A",
+    "kode": "Q27",
+    "mapel": "MUATAN LOKAL",
+    "guru": 27,
+    "kegiatan": null
+   },
+   {
+    "hari": "SELASA",
+    "jam_ke": 3,
+    "kelas": "XI B",
+    "kode": "I12",
+    "mapel": "SEJARAH",
+    "guru": 12,
+    "kegiatan": null
+   },
+   {
+    "hari": "SELASA",
+    "jam_ke": 3,
+    "kelas": "XI C",
+    "kode": "U21",
+    "mapel": "INFORM. PMNTN",
+    "guru": 21,
+    "kegiatan": null
+   },
+   {
+    "hari": "SELASA",
+    "jam_ke": 3,
+    "kelas": "XI D",
+    "kode": "D8",
+    "mapel": "B. INGGRIS",
+    "guru": 8,
+    "kegiatan": null
+   },
+   {
+    "hari": "SELASA",
+    "jam_ke": 3,
+    "kelas": "XII A",
+    "kode": "R5",
+    "mapel": "MTK TKT LANJUT",
+    "guru": 5,
+    "kegiatan": null
+   },
+   {
+    "hari": "SELASA",
+    "jam_ke": 3,
+    "kelas": "XII B",
+    "kode": "A23",
+    "mapel": "PEND.AGAMA & BP",
+    "guru": 23,
+    "kegiatan": null
+   },
+   {
+    "hari": "SELASA",
+    "jam_ke": 3,
+    "kelas": "XII C",
+    "kode": "E16",
+    "mapel": "MATEMATIKA [U]",
+    "guru": 16,
+    "kegiatan": null
+   },
+   {
+    "hari": "SELASA",
+    "jam_ke": 4,
+    "kelas": "X A",
+    "kode": null,
+    "mapel": null,
+    "guru": 6,
+    "kegiatan": "P5"
+   },
+   {
+    "hari": "SELASA",
+    "jam_ke": 4,
+    "kelas": "X B",
+    "kode": null,
+    "mapel": null,
+    "guru": 18,
+    "kegiatan": "P5"
+   },
+   {
+    "hari": "SELASA",
+    "jam_ke": 4,
+    "kelas": "X C",
+    "kode": null,
+    "mapel": null,
+    "guru": 11,
+    "kegiatan": "P5"
+   },
+   {
+    "hari": "SELASA",
+    "jam_ke": 4,
+    "kelas": "XI A",
+    "kode": "Q27",
+    "mapel": "MUATAN LOKAL",
+    "guru": 27,
+    "kegiatan": null
+   },
+   {
+    "hari": "SELASA",
+    "jam_ke": 4,
+    "kelas": "XI B",
+    "kode": "I12",
+    "mapel": "SEJARAH",
+    "guru": 12,
+    "kegiatan": null
+   },
+   {
+    "hari": "SELASA",
+    "jam_ke": 4,
+    "kelas": "XI C",
+    "kode": "U21",
+    "mapel": "INFORM. PMNTN",
+    "guru": 21,
+    "kegiatan": null
+   },
+   {
+    "hari": "SELASA",
+    "jam_ke": 4,
+    "kelas": "XI D",
+    "kode": "V10",
+    "mapel": "SOSIO PEMINATAN",
+    "guru": 10,
+    "kegiatan": null
+   },
+   {
+    "hari": "SELASA",
+    "jam_ke": 4,
+    "kelas": "XII A",
+    "kode": "R5",
+    "mapel": "MTK TKT LANJUT",
+    "guru": 5,
+    "kegiatan": null
+   },
+   {
+    "hari": "SELASA",
+    "jam_ke": 4,
+    "kelas": "XII B",
+    "kode": "A23",
+    "mapel": "PEND.AGAMA & BP",
+    "guru": 23,
+    "kegiatan": null
+   },
+   {
+    "hari": "SELASA",
+    "jam_ke": 4,
+    "kelas": "XII C",
+    "kode": "E16",
+    "mapel": "MATEMATIKA [U]",
+    "guru": 16,
+    "kegiatan": null
+   },
+   {
+    "hari": "SELASA",
+    "jam_ke": 5,
+    "kelas": "X A",
+    "kode": null,
+    "mapel": null,
+    "guru": 9,
+    "kegiatan": "P5"
+   },
+   {
+    "hari": "SELASA",
+    "jam_ke": 5,
+    "kelas": "X B",
+    "kode": null,
+    "mapel": null,
+    "guru": 11,
+    "kegiatan": "P5"
+   },
+   {
+    "hari": "SELASA",
+    "jam_ke": 5,
+    "kelas": "X C",
+    "kode": null,
+    "mapel": null,
+    "guru": 20,
+    "kegiatan": "P5"
+   },
+   {
+    "hari": "SELASA",
+    "jam_ke": 5,
+    "kelas": "XI A",
+    "kode": "W6",
+    "mapel": "FISIKA PEMINTN",
+    "guru": 6,
+    "kegiatan": null
+   },
+   {
+    "hari": "SELASA",
+    "jam_ke": 5,
+    "kelas": "XI B",
+    "kode": "R5",
+    "mapel": "MTK TKT LANJUT",
+    "guru": 5,
+    "kegiatan": null
+   },
+   {
+    "hari": "SELASA",
+    "jam_ke": 5,
+    "kelas": "XI C",
+    "kode": "R24",
+    "mapel": "MTK TKT LANJUT",
+    "guru": 24,
+    "kegiatan": null
+   },
+   {
+    "hari": "SELASA",
+    "jam_ke": 5,
+    "kelas": "XI D",
+    "kode": "V10",
+    "mapel": "SOSIO PEMINATAN",
+    "guru": 10,
+    "kegiatan": null
+   },
+   {
+    "hari": "SELASA",
+    "jam_ke": 5,
+    "kelas": "XII A",
+    "kode": null,
+    "mapel": null,
+    "guru": 28,
+    "kegiatan": "P5"
+   },
+   {
+    "hari": "SELASA",
+    "jam_ke": 5,
+    "kelas": "XII B",
+    "kode": null,
+    "mapel": null,
+    "guru": 23,
+    "kegiatan": "P5"
+   },
+   {
+    "hari": "SELASA",
+    "jam_ke": 5,
+    "kelas": "XII C",
+    "kode": null,
+    "mapel": null,
+    "guru": 16,
+    "kegiatan": "P5"
+   },
+   {
+    "hari": "SELASA",
+    "jam_ke": 6,
+    "kelas": "X A",
+    "kode": null,
+    "mapel": null,
+    "guru": 11,
+    "kegiatan": "P5"
+   },
+   {
+    "hari": "SELASA",
+    "jam_ke": 6,
+    "kelas": "X B",
+    "kode": null,
+    "mapel": null,
+    "guru": 9,
+    "kegiatan": "P5"
+   },
+   {
+    "hari": "SELASA",
+    "jam_ke": 6,
+    "kelas": "X C",
+    "kode": null,
+    "mapel": null,
+    "guru": 10,
+    "kegiatan": "P5"
+   },
+   {
+    "hari": "SELASA",
+    "jam_ke": 6,
+    "kelas": "XI A",
+    "kode": "W6",
+    "mapel": "FISIKA PEMINTN",
+    "guru": 6,
+    "kegiatan": null
+   },
+   {
+    "hari": "SELASA",
+    "jam_ke": 6,
+    "kelas": "XI B",
+    "kode": "R5",
+    "mapel": "MTK TKT LANJUT",
+    "guru": 5,
+    "kegiatan": null
+   },
+   {
+    "hari": "SELASA",
+    "jam_ke": 6,
+    "kelas": "XI C",
+    "kode": "R24",
+    "mapel": "MTK TKT LANJUT",
+    "guru": 24,
+    "kegiatan": null
+   },
+   {
+    "hari": "SELASA",
+    "jam_ke": 6,
+    "kelas": "XI D",
+    "kode": "Z20",
+    "mapel": "KIMIA PEMINTN",
+    "guru": 20,
+    "kegiatan": null
+   },
+   {
+    "hari": "SELASA",
+    "jam_ke": 6,
+    "kelas": "XII A",
+    "kode": null,
+    "mapel": null,
+    "guru": 16,
+    "kegiatan": "P5"
+   },
+   {
+    "hari": "SELASA",
+    "jam_ke": 6,
+    "kelas": "XII B",
+    "kode": null,
+    "mapel": null,
+    "guru": 7,
+    "kegiatan": "P5"
+   },
+   {
+    "hari": "SELASA",
+    "jam_ke": 6,
+    "kelas": "XII C",
+    "kode": null,
+    "mapel": null,
+    "guru": 28,
+    "kegiatan": "P5"
+   },
+   {
+    "hari": "SELASA",
+    "jam_ke": 7,
+    "kelas": "X A",
+    "kode": null,
+    "mapel": null,
+    "guru": 26,
+    "kegiatan": "P5"
+   },
+   {
+    "hari": "SELASA",
+    "jam_ke": 7,
+    "kelas": "X B",
+    "kode": null,
+    "mapel": null,
+    "guru": 10,
+    "kegiatan": "P5"
+   },
+   {
+    "hari": "SELASA",
+    "jam_ke": 7,
+    "kelas": "X C",
+    "kode": null,
+    "mapel": null,
+    "guru": 9,
+    "kegiatan": "P5"
+   },
+   {
+    "hari": "SELASA",
+    "jam_ke": 7,
+    "kelas": "XI A",
+    "kode": "W6",
+    "mapel": "FISIKA PEMINTN",
+    "guru": 6,
+    "kegiatan": null
+   },
+   {
+    "hari": "SELASA",
+    "jam_ke": 7,
+    "kelas": "XI B",
+    "kode": "R5",
+    "mapel": "MTK TKT LANJUT",
+    "guru": 5,
+    "kegiatan": null
+   },
+   {
+    "hari": "SELASA",
+    "jam_ke": 7,
+    "kelas": "XI C",
+    "kode": "R24",
+    "mapel": "MTK TKT LANJUT",
+    "guru": 24,
+    "kegiatan": null
+   },
+   {
+    "hari": "SELASA",
+    "jam_ke": 7,
+    "kelas": "XI D",
+    "kode": "Z20",
+    "mapel": "KIMIA PEMINTN",
+    "guru": 20,
+    "kegiatan": null
+   },
+   {
+    "hari": "SELASA",
+    "jam_ke": 7,
+    "kelas": "XII A",
+    "kode": null,
+    "mapel": null,
+    "guru": 7,
+    "kegiatan": "P5"
+   },
+   {
+    "hari": "SELASA",
+    "jam_ke": 7,
+    "kelas": "XII B",
+    "kode": null,
+    "mapel": null,
+    "guru": 28,
+    "kegiatan": "P5"
+   },
+   {
+    "hari": "SELASA",
+    "jam_ke": 7,
+    "kelas": "XII C",
+    "kode": null,
+    "mapel": null,
+    "guru": 23,
+    "kegiatan": "P5"
+   },
+   {
+    "hari": "SELASA",
+    "jam_ke": 8,
+    "kelas": "X A",
+    "kode": null,
+    "mapel": null,
+    "guru": 5,
+    "kegiatan": "P5"
+   },
+   {
+    "hari": "SELASA",
+    "jam_ke": 8,
+    "kelas": "X B",
+    "kode": null,
+    "mapel": null,
+    "guru": 27,
+    "kegiatan": "P5"
+   },
+   {
+    "hari": "SELASA",
+    "jam_ke": 8,
+    "kelas": "X C",
+    "kode": null,
+    "mapel": null,
+    "guru": 14,
+    "kegiatan": "P5"
+   },
+   {
+    "hari": "SELASA",
+    "jam_ke": 8,
+    "kelas": "XI A",
+    "kode": null,
+    "mapel": null,
+    "guru": 3,
+    "kegiatan": "P5"
+   },
+   {
+    "hari": "SELASA",
+    "jam_ke": 8,
+    "kelas": "XI B",
+    "kode": null,
+    "mapel": null,
+    "guru": 28,
+    "kegiatan": "P5"
+   },
+   {
+    "hari": "SELASA",
+    "jam_ke": 8,
+    "kelas": "XI C",
+    "kode": null,
+    "mapel": null,
+    "guru": 2,
+    "kegiatan": "P5"
+   },
+   {
+    "hari": "SELASA",
+    "jam_ke": 8,
+    "kelas": "XI D",
+    "kode": null,
+    "mapel": null,
+    "guru": 26,
+    "kegiatan": "P5"
+   },
+   {
+    "hari": "SELASA",
+    "jam_ke": 8,
+    "kelas": "XII A",
+    "kode": null,
+    "mapel": null,
+    "guru": 23,
+    "kegiatan": "P5"
+   },
+   {
+    "hari": "SELASA",
+    "jam_ke": 8,
+    "kelas": "XII B",
+    "kode": null,
+    "mapel": null,
+    "guru": 16,
+    "kegiatan": "P5"
+   },
+   {
+    "hari": "SELASA",
+    "jam_ke": 8,
+    "kelas": "XII C",
+    "kode": null,
+    "mapel": null,
+    "guru": 7,
+    "kegiatan": "P5"
+   },
+   {
+    "hari": "SELASA",
+    "jam_ke": 9,
+    "kelas": "X A",
+    "kode": null,
+    "mapel": null,
+    "guru": 27,
+    "kegiatan": "P5"
+   },
+   {
+    "hari": "SELASA",
+    "jam_ke": 9,
+    "kelas": "X B",
+    "kode": null,
+    "mapel": null,
+    "guru": 25,
+    "kegiatan": "P5"
+   },
+   {
+    "hari": "SELASA",
+    "jam_ke": 9,
+    "kelas": "X C",
+    "kode": null,
+    "mapel": null,
+    "guru": 15,
+    "kegiatan": "P5"
+   },
+   {
+    "hari": "SELASA",
+    "jam_ke": 9,
+    "kelas": "XI A",
+    "kode": null,
+    "mapel": null,
+    "guru": 28,
+    "kegiatan": "P5"
+   },
+   {
+    "hari": "SELASA",
+    "jam_ke": 9,
+    "kelas": "XI B",
+    "kode": null,
+    "mapel": null,
+    "guru": 2,
+    "kegiatan": "P5"
+   },
+   {
+    "hari": "SELASA",
+    "jam_ke": 9,
+    "kelas": "XI C",
+    "kode": null,
+    "mapel": null,
+    "guru": 7,
+    "kegiatan": "P5"
+   },
+   {
+    "hari": "SELASA",
+    "jam_ke": 9,
+    "kelas": "XI D",
+    "kode": null,
+    "mapel": null,
+    "guru": 16,
+    "kegiatan": "P5"
+   },
+   {
+    "hari": "SELASA",
+    "jam_ke": 9,
+    "kelas": "XII A",
+    "kode": "T12",
+    "mapel": "SEJARAH TK LANJT",
+    "guru": 12,
+    "kegiatan": null
+   },
+   {
+    "hari": "SELASA",
+    "jam_ke": 9,
+    "kelas": "XII B",
+    "kode": "S13",
+    "mapel": "B. ING.TK LANJUT",
+    "guru": 13,
+    "kegiatan": null
+   },
+   {
+    "hari": "SELASA",
+    "jam_ke": 9,
+    "kelas": "XII C",
+    "kode": "Z20",
+    "mapel": "KIMIA PEMINTN",
+    "guru": 20,
+    "kegiatan": null
+   },
+   {
+    "hari": "SELASA",
+    "jam_ke": 10,
+    "kelas": "X A",
+    "kode": null,
+    "mapel": null,
+    "guru": 25,
+    "kegiatan": "P5"
+   },
+   {
+    "hari": "SELASA",
+    "jam_ke": 10,
+    "kelas": "X B",
+    "kode": null,
+    "mapel": null,
+    "guru": 15,
+    "kegiatan": "P5"
+   },
+   {
+    "hari": "SELASA",
+    "jam_ke": 10,
+    "kelas": "X C",
+    "kode": null,
+    "mapel": null,
+    "guru": 26,
+    "kegiatan": "P5"
+   },
+   {
+    "hari": "SELASA",
+    "jam_ke": 10,
+    "kelas": "XI A",
+    "kode": null,
+    "mapel": null,
+    "guru": 2,
+    "kegiatan": "P5"
+   },
+   {
+    "hari": "SELASA",
+    "jam_ke": 10,
+    "kelas": "XI B",
+    "kode": null,
+    "mapel": null,
+    "guru": 7,
+    "kegiatan": "P5"
+   },
+   {
+    "hari": "SELASA",
+    "jam_ke": 10,
+    "kelas": "XI C",
+    "kode": null,
+    "mapel": null,
+    "guru": 16,
+    "kegiatan": "P5"
+   },
+   {
+    "hari": "SELASA",
+    "jam_ke": 10,
+    "kelas": "XI D",
+    "kode": null,
+    "mapel": null,
+    "guru": 28,
+    "kegiatan": "P5"
+   },
+   {
+    "hari": "SELASA",
+    "jam_ke": 10,
+    "kelas": "XII A",
+    "kode": "T12",
+    "mapel": "SEJARAH TK LANJT",
+    "guru": 12,
+    "kegiatan": null
+   },
+   {
+    "hari": "SELASA",
+    "jam_ke": 10,
+    "kelas": "XII B",
+    "kode": "S13",
+    "mapel": "B. ING.TK LANJUT",
+    "guru": 13,
+    "kegiatan": null
+   },
+   {
+    "hari": "SELASA",
+    "jam_ke": 10,
+    "kelas": "XII C",
+    "kode": "Z20",
+    "mapel": "KIMIA PEMINTN",
+    "guru": 20,
+    "kegiatan": null
+   },
+   {
+    "hari": "SELASA",
+    "jam_ke": 11,
+    "kelas": "X A",
+    "kode": null,
+    "mapel": null,
+    "guru": 15,
+    "kegiatan": "P5"
+   },
+   {
+    "hari": "SELASA",
+    "jam_ke": 11,
+    "kelas": "X B",
+    "kode": null,
+    "mapel": null,
+    "guru": 26,
+    "kegiatan": "P5"
+   },
+   {
+    "hari": "SELASA",
+    "jam_ke": 11,
+    "kelas": "X C",
+    "kode": null,
+    "mapel": null,
+    "guru": 25,
+    "kegiatan": "P5"
+   },
+   {
+    "hari": "SELASA",
+    "jam_ke": 11,
+    "kelas": "XI A",
+    "kode": null,
+    "mapel": null,
+    "guru": 7,
+    "kegiatan": "P5"
+   },
+   {
+    "hari": "SELASA",
+    "jam_ke": 11,
+    "kelas": "XI B",
+    "kode": null,
+    "mapel": null,
+    "guru": 16,
+    "kegiatan": "P5"
+   },
+   {
+    "hari": "SELASA",
+    "jam_ke": 11,
+    "kelas": "XI C",
+    "kode": null,
+    "mapel": null,
+    "guru": 28,
+    "kegiatan": "P5"
+   },
+   {
+    "hari": "SELASA",
+    "jam_ke": 11,
+    "kelas": "XI D",
+    "kode": null,
+    "mapel": null,
+    "guru": 2,
+    "kegiatan": "P5"
+   },
+   {
+    "hari": "SELASA",
+    "jam_ke": 11,
+    "kelas": "XII A",
+    "kode": "T12",
+    "mapel": "SEJARAH TK LANJT",
+    "guru": 12,
+    "kegiatan": null
+   },
+   {
+    "hari": "SELASA",
+    "jam_ke": 11,
+    "kelas": "XII B",
+    "kode": "S13",
+    "mapel": "B. ING.TK LANJUT",
+    "guru": 13,
+    "kegiatan": null
+   },
+   {
+    "hari": "SELASA",
+    "jam_ke": 11,
+    "kelas": "XII C",
+    "kode": "Z20",
+    "mapel": "KIMIA PEMINTN",
+    "guru": 20,
+    "kegiatan": null
+   },
+   {
+    "hari": "RABU",
+    "jam_ke": 1,
+    "kelas": "X A",
+    "kode": "N25",
+    "mapel": "PJOK",
+    "guru": 25,
+    "kegiatan": null
+   },
+   {
+    "hari": "RABU",
+    "jam_ke": 1,
+    "kelas": "X B",
+    "kode": "G20",
+    "mapel": "KIMIA",
+    "guru": 20,
+    "kegiatan": null
+   },
+   {
+    "hari": "RABU",
+    "jam_ke": 1,
+    "kelas": "X C",
+    "kode": "J26",
+    "mapel": "GEOGRAFI",
+    "guru": 26,
+    "kegiatan": null
+   },
+   {
+    "hari": "RABU",
+    "jam_ke": 1,
+    "kelas": "XI A",
+    "kode": "Y15",
+    "mapel": "BIOLOGI PMNTN",
+    "guru": 15,
+    "kegiatan": null
+   },
+   {
+    "hari": "RABU",
+    "jam_ke": 1,
+    "kelas": "XI B",
+    "kode": "E16",
+    "mapel": "MATEMATIKA [U]",
+    "guru": 16,
+    "kegiatan": null
+   },
+   {
+    "hari": "RABU",
+    "jam_ke": 1,
+    "kelas": "XI C",
+    "kode": "I11",
+    "mapel": "SEJARAH",
+    "guru": 11,
+    "kegiatan": null
+   },
+   {
+    "hari": "RABU",
+    "jam_ke": 1,
+    "kelas": "XI D",
+    "kode": "R24",
+    "mapel": "MTK TKT LANJUT",
+    "guru": 24,
+    "kegiatan": null
+   },
+   {
+    "hari": "RABU",
+    "jam_ke": 1,
+    "kelas": "XII A",
+    "kode": "N28",
+    "mapel": "PJOK",
+    "guru": 28,
+    "kegiatan": null
+   },
+   {
+    "hari": "RABU",
+    "jam_ke": 1,
+    "kelas": "XII B",
+    "kode": "W14",
+    "mapel": "FISIKA PEMINTN",
+    "guru": 14,
+    "kegiatan": null
+   },
+   {
+    "hari": "RABU",
+    "jam_ke": 1,
+    "kelas": "XII C",
+    "kode": "T12",
+    "mapel": "SEJARAH TK LANJT",
+    "guru": 12,
+    "kegiatan": null
+   },
+   {
+    "hari": "RABU",
+    "jam_ke": 2,
+    "kelas": "X A",
+    "kode": "N25",
+    "mapel": "PJOK",
+    "guru": 25,
+    "kegiatan": null
+   },
+   {
+    "hari": "RABU",
+    "jam_ke": 2,
+    "kelas": "X B",
+    "kode": "G20",
+    "mapel": "KIMIA",
+    "guru": 20,
+    "kegiatan": null
+   },
+   {
+    "hari": "RABU",
+    "jam_ke": 2,
+    "kelas": "X C",
+    "kode": "J26",
+    "mapel": "GEOGRAFI",
+    "guru": 26,
+    "kegiatan": null
+   },
+   {
+    "hari": "RABU",
+    "jam_ke": 2,
+    "kelas": "XI A",
+    "kode": "Y15",
+    "mapel": "BIOLOGI PMNTN",
+    "guru": 15,
+    "kegiatan": null
+   },
+   {
+    "hari": "RABU",
+    "jam_ke": 2,
+    "kelas": "XI B",
+    "kode": "E16",
+    "mapel": "MATEMATIKA [U]",
+    "guru": 16,
+    "kegiatan": null
+   },
+   {
+    "hari": "RABU",
+    "jam_ke": 2,
+    "kelas": "XI C",
+    "kode": "D8",
+    "mapel": "B. INGGRIS",
+    "guru": 8,
+    "kegiatan": null
+   },
+   {
+    "hari": "RABU",
+    "jam_ke": 2,
+    "kelas": "XI D",
+    "kode": "R24",
+    "mapel": "MTK TKT LANJUT",
+    "guru": 24,
+    "kegiatan": null
+   },
+   {
+    "hari": "RABU",
+    "jam_ke": 2,
+    "kelas": "XII A",
+    "kode": "N28",
+    "mapel": "PJOK",
+    "guru": 28,
+    "kegiatan": null
+   },
+   {
+    "hari": "RABU",
+    "jam_ke": 2,
+    "kelas": "XII B",
+    "kode": "W14",
+    "mapel": "FISIKA PEMINTN",
+    "guru": 14,
+    "kegiatan": null
+   },
+   {
+    "hari": "RABU",
+    "jam_ke": 2,
+    "kelas": "XII C",
+    "kode": "T12",
+    "mapel": "SEJARAH TK LANJT",
+    "guru": 12,
+    "kegiatan": null
+   },
+   {
+    "hari": "RABU",
+    "jam_ke": 3,
+    "kelas": "X A",
+    "kode": "G20",
+    "mapel": "KIMIA",
+    "guru": 20,
+    "kegiatan": null
+   },
+   {
+    "hari": "RABU",
+    "jam_ke": 3,
+    "kelas": "X B",
+    "kode": "I11",
+    "mapel": "SEJARAH",
+    "guru": 11,
+    "kegiatan": null
+   },
+   {
+    "hari": "RABU",
+    "jam_ke": 3,
+    "kelas": "X C",
+    "kode": "L10",
+    "mapel": "SOSIOLOGI",
+    "guru": 10,
+    "kegiatan": null
+   },
+   {
+    "hari": "RABU",
+    "jam_ke": 3,
+    "kelas": "XI A",
+    "kode": "Y15",
+    "mapel": "BIOLOGI PMNTN",
+    "guru": 15,
+    "kegiatan": null
+   },
+   {
+    "hari": "RABU",
+    "jam_ke": 3,
+    "kelas": "XI B",
+    "kode": "E16",
+    "mapel": "MATEMATIKA [U]",
+    "guru": 16,
+    "kegiatan": null
+   },
+   {
+    "hari": "RABU",
+    "jam_ke": 3,
+    "kelas": "XI C",
+    "kode": "D8",
+    "mapel": "B. INGGRIS",
+    "guru": 8,
+    "kegiatan": null
+   },
+   {
+    "hari": "RABU",
+    "jam_ke": 3,
+    "kelas": "XI D",
+    "kode": "R24",
+    "mapel": "MTK TKT LANJUT",
+    "guru": 24,
+    "kegiatan": null
+   },
+   {
+    "hari": "RABU",
+    "jam_ke": 3,
+    "kelas": "XII A",
+    "kode": "S13",
+    "mapel": "B. ING.TK LANJUT",
+    "guru": 13,
+    "kegiatan": null
+   },
+   {
+    "hari": "RABU",
+    "jam_ke": 3,
+    "kelas": "XII B",
+    "kode": "W14",
+    "mapel": "FISIKA PEMINTN",
+    "guru": 14,
+    "kegiatan": null
+   },
+   {
+    "hari": "RABU",
+    "jam_ke": 3,
+    "kelas": "XII C",
+    "kode": "T12",
+    "mapel": "SEJARAH TK LANJT",
+    "guru": 12,
+    "kegiatan": null
+   },
+   {
+    "hari": "RABU",
+    "jam_ke": 4,
+    "kelas": "X A",
+    "kode": "G20",
+    "mapel": "KIMIA",
+    "guru": 20,
+    "kegiatan": null
+   },
+   {
+    "hari": "RABU",
+    "jam_ke": 4,
+    "kelas": "X B",
+    "kode": "I11",
+    "mapel": "SEJARAH",
+    "guru": 11,
+    "kegiatan": null
+   },
+   {
+    "hari": "RABU",
+    "jam_ke": 4,
+    "kelas": "X C",
+    "kode": "L10",
+    "mapel": "SOSIOLOGI",
+    "guru": 10,
+    "kegiatan": null
+   },
+   {
+    "hari": "RABU",
+    "jam_ke": 4,
+    "kelas": "XI A",
+    "kode": "E3",
+    "mapel": "MATEMATIKA [U]",
+    "guru": 3,
+    "kegiatan": null
+   },
+   {
+    "hari": "RABU",
+    "jam_ke": 4,
+    "kelas": "XI B",
+    "kode": "B4",
+    "mapel": "Pend. Pancasila",
+    "guru": 4,
+    "kegiatan": null
+   },
+   {
+    "hari": "RABU",
+    "jam_ke": 4,
+    "kelas": "XI C",
+    "kode": "D8",
+    "mapel": "B. INGGRIS",
+    "guru": 8,
+    "kegiatan": null
+   },
+   {
+    "hari": "RABU",
+    "jam_ke": 4,
+    "kelas": "XI D",
+    "kode": "C26",
+    "mapel": "B INDONESIA",
+    "guru": 26,
+    "kegiatan": null
+   },
+   {
+    "hari": "RABU",
+    "jam_ke": 4,
+    "kelas": "XII A",
+    "kode": "S13",
+    "mapel": "B. ING.TK LANJUT",
+    "guru": 13,
+    "kegiatan": null
+   },
+   {
+    "hari": "RABU",
+    "jam_ke": 4,
+    "kelas": "XII B",
+    "kode": "Q24",
+    "mapel": "MUATAN LOKAL",
+    "guru": 24,
+    "kegiatan": null
+   },
+   {
+    "hari": "RABU",
+    "jam_ke": 4,
+    "kelas": "XII C",
+    "kode": "C7",
+    "mapel": "B INDONESIA",
+    "guru": 7,
+    "kegiatan": null
+   },
+   {
+    "hari": "RABU",
+    "jam_ke": 5,
+    "kelas": "X A",
+    "kode": "I11",
+    "mapel": "SEJARAH",
+    "guru": 11,
+    "kegiatan": null
+   },
+   {
+    "hari": "RABU",
+    "jam_ke": 5,
+    "kelas": "X B",
+    "kode": "L10",
+    "mapel": "SOSIOLOGI",
+    "guru": 10,
+    "kegiatan": null
+   },
+   {
+    "hari": "RABU",
+    "jam_ke": 5,
+    "kelas": "X C",
+    "kode": "H15",
+    "mapel": "BIOLOGI",
+    "guru": 15,
+    "kegiatan": null
+   },
+   {
+    "hari": "RABU",
+    "jam_ke": 5,
+    "kelas": "XI A",
+    "kode": "E3",
+    "mapel": "MATEMATIKA [U]",
+    "guru": 3,
+    "kegiatan": null
+   },
+   {
+    "hari": "RABU",
+    "jam_ke": 5,
+    "kelas": "XI B",
+    "kode": "B4",
+    "mapel": "Pend. Pancasila",
+    "guru": 4,
+    "kegiatan": null
+   },
+   {
+    "hari": "RABU",
+    "jam_ke": 5,
+    "kelas": "XI C",
+    "kode": "N28",
+    "mapel": "PJOK",
+    "guru": 28,
+    "kegiatan": null
+   },
+   {
+    "hari": "RABU",
+    "jam_ke": 5,
+    "kelas": "XI D",
+    "kode": "C26",
+    "mapel": "B INDONESIA",
+    "guru": 26,
+    "kegiatan": null
+   },
+   {
+    "hari": "RABU",
+    "jam_ke": 5,
+    "kelas": "XII A",
+    "kode": "W14",
+    "mapel": "FISIKA PEMINTN",
+    "guru": 14,
+    "kegiatan": null
+   },
+   {
+    "hari": "RABU",
+    "jam_ke": 5,
+    "kelas": "XII B",
+    "kode": "S13",
+    "mapel": "B. ING.TK LANJUT",
+    "guru": 13,
+    "kegiatan": null
+   },
+   {
+    "hari": "RABU",
+    "jam_ke": 5,
+    "kelas": "XII C",
+    "kode": "C7",
+    "mapel": "B INDONESIA",
+    "guru": 7,
+    "kegiatan": null
+   },
+   {
+    "hari": "RABU",
+    "jam_ke": 6,
+    "kelas": "X A",
+    "kode": "I11",
+    "mapel": "SEJARAH",
+    "guru": 11,
+    "kegiatan": null
+   },
+   {
+    "hari": "RABU",
+    "jam_ke": 6,
+    "kelas": "X B",
+    "kode": "L10",
+    "mapel": "SOSIOLOGI",
+    "guru": 10,
+    "kegiatan": null
+   },
+   {
+    "hari": "RABU",
+    "jam_ke": 6,
+    "kelas": "X C",
+    "kode": "H15",
+    "mapel": "BIOLOGI",
+    "guru": 15,
+    "kegiatan": null
+   },
+   {
+    "hari": "RABU",
+    "jam_ke": 6,
+    "kelas": "XI A",
+    "kode": "E3",
+    "mapel": "MATEMATIKA [U]",
+    "guru": 3,
+    "kegiatan": null
+   },
+   {
+    "hari": "RABU",
+    "jam_ke": 6,
+    "kelas": "XI B",
+    "kode": "W6",
+    "mapel": "FISIKA PEMINTN",
+    "guru": 6,
+    "kegiatan": null
+   },
+   {
+    "hari": "RABU",
+    "jam_ke": 6,
+    "kelas": "XI C",
+    "kode": "N28",
+    "mapel": "PJOK",
+    "guru": 28,
+    "kegiatan": null
+   },
+   {
+    "hari": "RABU",
+    "jam_ke": 6,
+    "kelas": "XI D",
+    "kode": "C26",
+    "mapel": "B INDONESIA",
+    "guru": 26,
+    "kegiatan": null
+   },
+   {
+    "hari": "RABU",
+    "jam_ke": 6,
+    "kelas": "XII A",
+    "kode": "W14",
+    "mapel": "FISIKA PEMINTN",
+    "guru": 14,
+    "kegiatan": null
+   },
+   {
+    "hari": "RABU",
+    "jam_ke": 6,
+    "kelas": "XII B",
+    "kode": "S13",
+    "mapel": "B. ING.TK LANJUT",
+    "guru": 13,
+    "kegiatan": null
+   },
+   {
+    "hari": "RABU",
+    "jam_ke": 6,
+    "kelas": "XII C",
+    "kode": "C7",
+    "mapel": "B INDONESIA",
+    "guru": 7,
+    "kegiatan": null
+   },
+   {
+    "hari": "RABU",
+    "jam_ke": 7,
+    "kelas": "X A",
+    "kode": "J26",
+    "mapel": "GEOGRAFI",
+    "guru": 26,
+    "kegiatan": null
+   },
+   {
+    "hari": "RABU",
+    "jam_ke": 7,
+    "kelas": "X B",
+    "kode": "F18",
+    "mapel": "FISIKA",
+    "guru": 18,
+    "kegiatan": null
+   },
+   {
+    "hari": "RABU",
+    "jam_ke": 7,
+    "kelas": "X C",
+    "kode": "F14",
+    "mapel": "FISIKA",
+    "guru": 14,
+    "kegiatan": null
+   },
+   {
+    "hari": "RABU",
+    "jam_ke": 7,
+    "kelas": "XI A",
+    "kode": "B4",
+    "mapel": "Pend. Pancasila",
+    "guru": 4,
+    "kegiatan": null
+   },
+   {
+    "hari": "RABU",
+    "jam_ke": 7,
+    "kelas": "XI B",
+    "kode": "W6",
+    "mapel": "FISIKA PEMINTN",
+    "guru": 6,
+    "kegiatan": null
+   },
+   {
+    "hari": "RABU",
+    "jam_ke": 7,
+    "kelas": "XI C",
+    "kode": "S13",
+    "mapel": "B. ING.TK LANJUT",
+    "guru": 13,
+    "kegiatan": null
+   },
+   {
+    "hari": "RABU",
+    "jam_ke": 7,
+    "kelas": "XI D",
+    "kode": "M25",
+    "mapel": "SENI BUDAYA",
+    "guru": 25,
+    "kegiatan": null
+   },
+   {
+    "hari": "RABU",
+    "jam_ke": 7,
+    "kelas": "XII A",
+    "kode": "Z20",
+    "mapel": "KIMIA PEMINTN",
+    "guru": 20,
+    "kegiatan": null
+   },
+   {
+    "hari": "RABU",
+    "jam_ke": 7,
+    "kelas": "XII B",
+    "kode": "T12",
+    "mapel": "SEJARAH TK LANJT",
+    "guru": 12,
+    "kegiatan": null
+   },
+   {
+    "hari": "RABU",
+    "jam_ke": 7,
+    "kelas": "XII C",
+    "kode": "D8",
+    "mapel": "B. INGGRIS",
+    "guru": 8,
+    "kegiatan": null
+   },
+   {
+    "hari": "RABU",
+    "jam_ke": 8,
+    "kelas": "X A",
+    "kode": "J26",
+    "mapel": "GEOGRAFI",
+    "guru": 26,
+    "kegiatan": null
+   },
+   {
+    "hari": "RABU",
+    "jam_ke": 8,
+    "kelas": "X B",
+    "kode": "F18",
+    "mapel": "FISIKA",
+    "guru": 18,
+    "kegiatan": null
+   },
+   {
+    "hari": "RABU",
+    "jam_ke": 8,
+    "kelas": "X C",
+    "kode": "F14",
+    "mapel": "FISIKA",
+    "guru": 14,
+    "kegiatan": null
+   },
+   {
+    "hari": "RABU",
+    "jam_ke": 8,
+    "kelas": "XI A",
+    "kode": "B4",
+    "mapel": "Pend. Pancasila",
+    "guru": 4,
+    "kegiatan": null
+   },
+   {
+    "hari": "RABU",
+    "jam_ke": 8,
+    "kelas": "XI B",
+    "kode": "W6",
+    "mapel": "FISIKA PEMINTN",
+    "guru": 6,
+    "kegiatan": null
+   },
+   {
+    "hari": "RABU",
+    "jam_ke": 8,
+    "kelas": "XI C",
+    "kode": "S13",
+    "mapel": "B. ING.TK LANJUT",
+    "guru": 13,
+    "kegiatan": null
+   },
+   {
+    "hari": "RABU",
+    "jam_ke": 8,
+    "kelas": "XI D",
+    "kode": "M25",
+    "mapel": "SENI BUDAYA",
+    "guru": 25,
+    "kegiatan": null
+   },
+   {
+    "hari": "RABU",
+    "jam_ke": 8,
+    "kelas": "XII A",
+    "kode": "Z20",
+    "mapel": "KIMIA PEMINTN",
+    "guru": 20,
+    "kegiatan": null
+   },
+   {
+    "hari": "RABU",
+    "jam_ke": 8,
+    "kelas": "XII B",
+    "kode": "T12",
+    "mapel": "SEJARAH TK LANJT",
+    "guru": 12,
+    "kegiatan": null
+   },
+   {
+    "hari": "RABU",
+    "jam_ke": 8,
+    "kelas": "XII C",
+    "kode": "D8",
+    "mapel": "B. INGGRIS",
+    "guru": 8,
+    "kegiatan": null
+   },
+   {
+    "hari": "RABU",
+    "jam_ke": 9,
+    "kelas": "X A",
+    "kode": "L10",
+    "mapel": "SOSIOLOGI",
+    "guru": 10,
+    "kegiatan": null
+   },
+   {
+    "hari": "RABU",
+    "jam_ke": 9,
+    "kelas": "X B",
+    "kode": "J26",
+    "mapel": "GEOGRAFI",
+    "guru": 26,
+    "kegiatan": null
+   },
+   {
+    "hari": "RABU",
+    "jam_ke": 9,
+    "kelas": "X C",
+    "kode": "B4",
+    "mapel": "Pend. Pancasila",
+    "guru": 4,
+    "kegiatan": null
+   },
+   {
+    "hari": "RABU",
+    "jam_ke": 9,
+    "kelas": "XI A",
+    "kode": "R24",
+    "mapel": "MTK TKT LANJUT",
+    "guru": 24,
+    "kegiatan": null
+   },
+   {
+    "hari": "RABU",
+    "jam_ke": 9,
+    "kelas": "XI B",
+    "kode": "Y15",
+    "mapel": "BIOLOGI PMNTN",
+    "guru": 15,
+    "kegiatan": null
+   },
+   {
+    "hari": "RABU",
+    "jam_ke": 9,
+    "kelas": "XI C",
+    "kode": "E16",
+    "mapel": "MATEMATIKA [U]",
+    "guru": 16,
+    "kegiatan": null
+   },
+   {
+    "hari": "RABU",
+    "jam_ke": 9,
+    "kelas": "XI D",
+    "kode": "S13",
+    "mapel": "B. ING.TK LANJUT",
+    "guru": 13,
+    "kegiatan": null
+   },
+   {
+    "hari": "RABU",
+    "jam_ke": 9,
+    "kelas": "XII A",
+    "kode": "Z20",
+    "mapel": "KIMIA PEMINTN",
+    "guru": 20,
+    "kegiatan": null
+   },
+   {
+    "hari": "RABU",
+    "jam_ke": 9,
+    "kelas": "XII B",
+    "kode": "C7",
+    "mapel": "B INDONESIA",
+    "guru": 7,
+    "kegiatan": null
+   },
+   {
+    "hari": "RABU",
+    "jam_ke": 9,
+    "kelas": "XII C",
+    "kode": "D8",
+    "mapel": "B. INGGRIS",
+    "guru": 8,
+    "kegiatan": null
+   },
+   {
+    "hari": "RABU",
+    "jam_ke": 10,
+    "kelas": "X A",
+    "kode": "L10",
+    "mapel": "SOSIOLOGI",
+    "guru": 10,
+    "kegiatan": null
+   },
+   {
+    "hari": "RABU",
+    "jam_ke": 10,
+    "kelas": "X B",
+    "kode": "J26",
+    "mapel": "GEOGRAFI",
+    "guru": 26,
+    "kegiatan": null
+   },
+   {
+    "hari": "RABU",
+    "jam_ke": 10,
+    "kelas": "X C",
+    "kode": "B4",
+    "mapel": "Pend. Pancasila",
+    "guru": 4,
+    "kegiatan": null
+   },
+   {
+    "hari": "RABU",
+    "jam_ke": 10,
+    "kelas": "XI A",
+    "kode": "R24",
+    "mapel": "MTK TKT LANJUT",
+    "guru": 24,
+    "kegiatan": null
+   },
+   {
+    "hari": "RABU",
+    "jam_ke": 10,
+    "kelas": "XI B",
+    "kode": "Y15",
+    "mapel": "BIOLOGI PMNTN",
+    "guru": 15,
+    "kegiatan": null
+   },
+   {
+    "hari": "RABU",
+    "jam_ke": 10,
+    "kelas": "XI C",
+    "kode": "E16",
+    "mapel": "MATEMATIKA [U]",
+    "guru": 16,
+    "kegiatan": null
+   },
+   {
+    "hari": "RABU",
+    "jam_ke": 10,
+    "kelas": "XI D",
+    "kode": "S13",
+    "mapel": "B. ING.TK LANJUT",
+    "guru": 13,
+    "kegiatan": null
+   },
+   {
+    "hari": "RABU",
+    "jam_ke": 10,
+    "kelas": "XII A",
+    "kode": "M25",
+    "mapel": "SENI BUDAYA",
+    "guru": 25,
+    "kegiatan": null
+   },
+   {
+    "hari": "RABU",
+    "jam_ke": 10,
+    "kelas": "XII B",
+    "kode": "C7",
+    "mapel": "B INDONESIA",
+    "guru": 7,
+    "kegiatan": null
+   },
+   {
+    "hari": "RABU",
+    "jam_ke": 10,
+    "kelas": "XII C",
+    "kode": "I11",
+    "mapel": "SEJARAH",
+    "guru": 11,
+    "kegiatan": null
+   },
+   {
+    "hari": "RABU",
+    "jam_ke": 11,
+    "kelas": "X A",
+    "kode": null,
+    "mapel": null,
+    "guru": null,
+    "kegiatan": "KEAGAMAAN"
+   },
+   {
+    "hari": "RABU",
+    "jam_ke": 11,
+    "kelas": "X B",
+    "kode": null,
+    "mapel": null,
+    "guru": null,
+    "kegiatan": "KEAGAMAAN"
+   },
+   {
+    "hari": "RABU",
+    "jam_ke": 11,
+    "kelas": "X C",
+    "kode": null,
+    "mapel": null,
+    "guru": null,
+    "kegiatan": "KEAGAMAAN"
+   },
+   {
+    "hari": "RABU",
+    "jam_ke": 11,
+    "kelas": "XI A",
+    "kode": "R24",
+    "mapel": "MTK TKT LANJUT",
+    "guru": 24,
+    "kegiatan": null
+   },
+   {
+    "hari": "RABU",
+    "jam_ke": 11,
+    "kelas": "XI B",
+    "kode": "Y15",
+    "mapel": "BIOLOGI PMNTN",
+    "guru": 15,
+    "kegiatan": null
+   },
+   {
+    "hari": "RABU",
+    "jam_ke": 11,
+    "kelas": "XI C",
+    "kode": "E16",
+    "mapel": "MATEMATIKA [U]",
+    "guru": 16,
+    "kegiatan": null
+   },
+   {
+    "hari": "RABU",
+    "jam_ke": 11,
+    "kelas": "XI D",
+    "kode": "S13",
+    "mapel": "B. ING.TK LANJUT",
+    "guru": 13,
+    "kegiatan": null
+   },
+   {
+    "hari": "RABU",
+    "jam_ke": 11,
+    "kelas": "XII A",
+    "kode": "M25",
+    "mapel": "SENI BUDAYA",
+    "guru": 25,
+    "kegiatan": null
+   },
+   {
+    "hari": "RABU",
+    "jam_ke": 11,
+    "kelas": "XII B",
+    "kode": "C7",
+    "mapel": "B INDONESIA",
+    "guru": 7,
+    "kegiatan": null
+   },
+   {
+    "hari": "RABU",
+    "jam_ke": 11,
+    "kelas": "XII C",
+    "kode": "I11",
+    "mapel": "SEJARAH",
+    "guru": 11,
+    "kegiatan": null
+   },
+   {
+    "hari": "KAMIS",
+    "jam_ke": 1,
+    "kelas": "X A",
+    "kode": "B4",
+    "mapel": "Pend. Pancasila",
+    "guru": 4,
+    "kegiatan": null
+   },
+   {
+    "hari": "KAMIS",
+    "jam_ke": 1,
+    "kelas": "X B",
+    "kode": "Q27",
+    "mapel": "MUATAN LOKAL",
+    "guru": 27,
+    "kegiatan": null
+   },
+   {
+    "hari": "KAMIS",
+    "jam_ke": 1,
+    "kelas": "X C",
+    "kode": "N25",
+    "mapel": "PJOK",
+    "guru": 25,
+    "kegiatan": null
+   },
+   {
+    "hari": "KAMIS",
+    "jam_ke": 1,
+    "kelas": "XI A",
+    "kode": "Y15",
+    "mapel": "BIOLOGI PMNTN",
+    "guru": 15,
+    "kegiatan": null
+   },
+   {
+    "hari": "KAMIS",
+    "jam_ke": 1,
+    "kelas": "XI B",
+    "kode": "N28",
+    "mapel": "PJOK",
+    "guru": 28,
+    "kegiatan": null
+   },
+   {
+    "hari": "KAMIS",
+    "jam_ke": 1,
+    "kelas": "XI C",
+    "kode": "C7",
+    "mapel": "B INDONESIA",
+    "guru": 7,
+    "kegiatan": null
+   },
+   {
+    "hari": "KAMIS",
+    "jam_ke": 1,
+    "kelas": "XI D",
+    "kode": "I11",
+    "mapel": "SEJARAH",
+    "guru": 11,
+    "kegiatan": null
+   },
+   {
+    "hari": "KAMIS",
+    "jam_ke": 1,
+    "kelas": "XII A",
+    "kode": "D8",
+    "mapel": "B. INGGRIS",
+    "guru": 8,
+    "kegiatan": null
+   },
+   {
+    "hari": "KAMIS",
+    "jam_ke": 1,
+    "kelas": "XII B",
+    "kode": "R5",
+    "mapel": "MTK TKT LANJUT",
+    "guru": 5,
+    "kegiatan": null
+   },
+   {
+    "hari": "KAMIS",
+    "jam_ke": 1,
+    "kelas": "XII C",
+    "kode": "X9",
+    "mapel": "EKONOMI PEMINTN",
+    "guru": 9,
+    "kegiatan": null
+   },
+   {
+    "hari": "KAMIS",
+    "jam_ke": 2,
+    "kelas": "X A",
+    "kode": "P18",
+    "mapel": "PKWU",
+    "guru": 18,
+    "kegiatan": null
+   },
+   {
+    "hari": "KAMIS",
+    "jam_ke": 2,
+    "kelas": "X B",
+    "kode": "Q27",
+    "mapel": "MUATAN LOKAL",
+    "guru": 27,
+    "kegiatan": null
+   },
+   {
+    "hari": "KAMIS",
+    "jam_ke": 2,
+    "kelas": "X C",
+    "kode": "N25",
+    "mapel": "PJOK",
+    "guru": 25,
+    "kegiatan": null
+   },
+   {
+    "hari": "KAMIS",
+    "jam_ke": 2,
+    "kelas": "XI A",
+    "kode": "Y15",
+    "mapel": "BIOLOGI PMNTN",
+    "guru": 15,
+    "kegiatan": null
+   },
+   {
+    "hari": "KAMIS",
+    "jam_ke": 2,
+    "kelas": "XI B",
+    "kode": "N28",
+    "mapel": "PJOK",
+    "guru": 28,
+    "kegiatan": null
+   },
+   {
+    "hari": "KAMIS",
+    "jam_ke": 2,
+    "kelas": "XI C",
+    "kode": "C7",
+    "mapel": "B INDONESIA",
+    "guru": 7,
+    "kegiatan": null
+   },
+   {
+    "hari": "KAMIS",
+    "jam_ke": 2,
+    "kelas": "XI D",
+    "kode": "Z20",
+    "mapel": "KIMIA PEMINTN",
+    "guru": 20,
+    "kegiatan": null
+   },
+   {
+    "hari": "KAMIS",
+    "jam_ke": 2,
+    "kelas": "XII A",
+    "kode": "D8",
+    "mapel": "B. INGGRIS",
+    "guru": 8,
+    "kegiatan": null
+   },
+   {
+    "hari": "KAMIS",
+    "jam_ke": 2,
+    "kelas": "XII B",
+    "kode": "R5",
+    "mapel": "MTK TKT LANJUT",
+    "guru": 5,
+    "kegiatan": null
+   },
+   {
+    "hari": "KAMIS",
+    "jam_ke": 2,
+    "kelas": "XII C",
+    "kode": "X9",
+    "mapel": "EKONOMI PEMINTN",
+    "guru": 9,
+    "kegiatan": null
+   },
+   {
+    "hari": "KAMIS",
+    "jam_ke": 3,
+    "kelas": "X A",
+    "kode": "P18",
+    "mapel": "PKWU",
+    "guru": 18,
+    "kegiatan": null
+   },
+   {
+    "hari": "KAMIS",
+    "jam_ke": 3,
+    "kelas": "X B",
+    "kode": "O21",
+    "mapel": "INFORMATIKA",
+    "guru": 21,
+    "kegiatan": null
+   },
+   {
+    "hari": "KAMIS",
+    "jam_ke": 3,
+    "kelas": "X C",
+    "kode": "I11",
+    "mapel": "SEJARAH",
+    "guru": 11,
+    "kegiatan": null
+   },
+   {
+    "hari": "KAMIS",
+    "jam_ke": 3,
+    "kelas": "XI A",
+    "kode": "M25",
+    "mapel": "SENI BUDAYA",
+    "guru": 25,
+    "kegiatan": null
+   },
+   {
+    "hari": "KAMIS",
+    "jam_ke": 3,
+    "kelas": "XI B",
+    "kode": "Q27",
+    "mapel": "MUATAN LOKAL",
+    "guru": 27,
+    "kegiatan": null
+   },
+   {
+    "hari": "KAMIS",
+    "jam_ke": 3,
+    "kelas": "XI C",
+    "kode": "C7",
+    "mapel": "B INDONESIA",
+    "guru": 7,
+    "kegiatan": null
+   },
+   {
+    "hari": "KAMIS",
+    "jam_ke": 3,
+    "kelas": "XI D",
+    "kode": "Z20",
+    "mapel": "KIMIA PEMINTN",
+    "guru": 20,
+    "kegiatan": null
+   },
+   {
+    "hari": "KAMIS",
+    "jam_ke": 3,
+    "kelas": "XII A",
+    "kode": "D8",
+    "mapel": "B. INGGRIS",
+    "guru": 8,
+    "kegiatan": null
+   },
+   {
+    "hari": "KAMIS",
+    "jam_ke": 3,
+    "kelas": "XII B",
+    "kode": "N28",
+    "mapel": "PJOK",
+    "guru": 28,
+    "kegiatan": null
+   },
+   {
+    "hari": "KAMIS",
+    "jam_ke": 3,
+    "kelas": "XII C",
+    "kode": "S13",
+    "mapel": "B. ING.TK LANJUT",
+    "guru": 13,
+    "kegiatan": null
+   },
+   {
+    "hari": "KAMIS",
+    "jam_ke": 4,
+    "kelas": "X A",
+    "kode": "E5",
+    "mapel": "MATEMATIKA [U]",
+    "guru": 5,
+    "kegiatan": null
+   },
+   {
+    "hari": "KAMIS",
+    "jam_ke": 4,
+    "kelas": "X B",
+    "kode": "O21",
+    "mapel": "INFORMATIKA",
+    "guru": 21,
+    "kegiatan": null
+   },
+   {
+    "hari": "KAMIS",
+    "jam_ke": 4,
+    "kelas": "X C",
+    "kode": "D8",
+    "mapel": "B. INGGRIS",
+    "guru": 8,
+    "kegiatan": null
+   },
+   {
+    "hari": "KAMIS",
+    "jam_ke": 4,
+    "kelas": "XI A",
+    "kode": "M25",
+    "mapel": "SENI BUDAYA",
+    "guru": 25,
+    "kegiatan": null
+   },
+   {
+    "hari": "KAMIS",
+    "jam_ke": 4,
+    "kelas": "XI B",
+    "kode": "Q27",
+    "mapel": "MUATAN LOKAL",
+    "guru": 27,
+    "kegiatan": null
+   },
+   {
+    "hari": "KAMIS",
+    "jam_ke": 4,
+    "kelas": "XI C",
+    "kode": "X9",
+    "mapel": "EKONOMI PEMINTN",
+    "guru": 9,
+    "kegiatan": null
+   },
+   {
+    "hari": "KAMIS",
+    "jam_ke": 4,
+    "kelas": "XI D",
+    "kode": "Z20",
+    "mapel": "KIMIA PEMINTN",
+    "guru": 20,
+    "kegiatan": null
+   },
+   {
+    "hari": "KAMIS",
+    "jam_ke": 4,
+    "kelas": "XII A",
+    "kode": "C7",
+    "mapel": "B INDONESIA",
+    "guru": 7,
+    "kegiatan": null
+   },
+   {
+    "hari": "KAMIS",
+    "jam_ke": 4,
+    "kelas": "XII B",
+    "kode": "N28",
+    "mapel": "PJOK",
+    "guru": 28,
+    "kegiatan": null
+   },
+   {
+    "hari": "KAMIS",
+    "jam_ke": 4,
+    "kelas": "XII C",
+    "kode": "S13",
+    "mapel": "B. ING.TK LANJUT",
+    "guru": 13,
+    "kegiatan": null
+   },
+   {
+    "hari": "KAMIS",
+    "jam_ke": 5,
+    "kelas": "X A",
+    "kode": "E5",
+    "mapel": "MATEMATIKA [U]",
+    "guru": 5,
+    "kegiatan": null
+   },
+   {
+    "hari": "KAMIS",
+    "jam_ke": 5,
+    "kelas": "X B",
+    "kode": "P18",
+    "mapel": "PKWU",
+    "guru": 18,
+    "kegiatan": null
+   },
+   {
+    "hari": "KAMIS",
+    "jam_ke": 5,
+    "kelas": "X C",
+    "kode": "D8",
+    "mapel": "B. INGGRIS",
+    "guru": 8,
+    "kegiatan": null
+   },
+   {
+    "hari": "KAMIS",
+    "jam_ke": 5,
+    "kelas": "XI A",
+    "kode": "S22",
+    "mapel": "B. ING.TK LANJUT",
+    "guru": 22,
+    "kegiatan": null
+   },
+   {
+    "hari": "KAMIS",
+    "jam_ke": 5,
+    "kelas": "XI B",
+    "kode": "Y15",
+    "mapel": "BIOLOGI PMNTN",
+    "guru": 15,
+    "kegiatan": null
+   },
+   {
+    "hari": "KAMIS",
+    "jam_ke": 5,
+    "kelas": "XI C",
+    "kode": "X9",
+    "mapel": "EKONOMI PEMINTN",
+    "guru": 9,
+    "kegiatan": null
+   },
+   {
+    "hari": "KAMIS",
+    "jam_ke": 5,
+    "kelas": "XI D",
+    "kode": "A2",
+    "mapel": "PEND.AGAMA & BP",
+    "guru": 2,
+    "kegiatan": null
+   },
+   {
+    "hari": "KAMIS",
+    "jam_ke": 5,
+    "kelas": "XII A",
+    "kode": "S13",
+    "mapel": "B. ING.TK LANJUT",
+    "guru": 13,
+    "kegiatan": null
+   },
+   {
+    "hari": "KAMIS",
+    "jam_ke": 5,
+    "kelas": "XII B",
+    "kode": "B4",
+    "mapel": "Pend. Pancasila",
+    "guru": 4,
+    "kegiatan": null
+   },
+   {
+    "hari": "KAMIS",
+    "jam_ke": 5,
+    "kelas": "XII C",
+    "kode": "Z20",
+    "mapel": "KIMIA PEMINTN",
+    "guru": 20,
+    "kegiatan": null
+   },
+   {
+    "hari": "KAMIS",
+    "jam_ke": 6,
+    "kelas": "X A",
+    "kode": "E5",
+    "mapel": "MATEMATIKA [U]",
+    "guru": 5,
+    "kegiatan": null
+   },
+   {
+    "hari": "KAMIS",
+    "jam_ke": 6,
+    "kelas": "X B",
+    "kode": "P18",
+    "mapel": "PKWU",
+    "guru": 18,
+    "kegiatan": null
+   },
+   {
+    "hari": "KAMIS",
+    "jam_ke": 6,
+    "kelas": "X C",
+    "kode": "D8",
+    "mapel": "B. INGGRIS",
+    "guru": 8,
+    "kegiatan": null
+   },
+   {
+    "hari": "KAMIS",
+    "jam_ke": 6,
+    "kelas": "XI A",
+    "kode": "S22",
+    "mapel": "B. ING.TK LANJUT",
+    "guru": 22,
+    "kegiatan": null
+   },
+   {
+    "hari": "KAMIS",
+    "jam_ke": 6,
+    "kelas": "XI B",
+    "kode": "Y15",
+    "mapel": "BIOLOGI PMNTN",
+    "guru": 15,
+    "kegiatan": null
+   },
+   {
+    "hari": "KAMIS",
+    "jam_ke": 6,
+    "kelas": "XI C",
+    "kode": "X9",
+    "mapel": "EKONOMI PEMINTN",
+    "guru": 9,
+    "kegiatan": null
+   },
+   {
+    "hari": "KAMIS",
+    "jam_ke": 6,
+    "kelas": "XI D",
+    "kode": "A2",
+    "mapel": "PEND.AGAMA & BP",
+    "guru": 2,
+    "kegiatan": null
+   },
+   {
+    "hari": "KAMIS",
+    "jam_ke": 6,
+    "kelas": "XII A",
+    "kode": "S13",
+    "mapel": "B. ING.TK LANJUT",
+    "guru": 13,
+    "kegiatan": null
+   },
+   {
+    "hari": "KAMIS",
+    "jam_ke": 6,
+    "kelas": "XII B",
+    "kode": "B4",
+    "mapel": "Pend. Pancasila",
+    "guru": 4,
+    "kegiatan": null
+   },
+   {
+    "hari": "KAMIS",
+    "jam_ke": 6,
+    "kelas": "XII C",
+    "kode": "Z20",
+    "mapel": "KIMIA PEMINTN",
+    "guru": 20,
+    "kegiatan": null
+   },
+   {
+    "hari": "KAMIS",
+    "jam_ke": 7,
+    "kelas": "X A",
+    "kode": "K9",
+    "mapel": "EKONOMI",
+    "guru": 9,
+    "kegiatan": null
+   },
+   {
+    "hari": "KAMIS",
+    "jam_ke": 7,
+    "kelas": "X B",
+    "kode": "H15",
+    "mapel": "BIOLOGI",
+    "guru": 15,
+    "kegiatan": null
+   },
+   {
+    "hari": "KAMIS",
+    "jam_ke": 7,
+    "kelas": "X C",
+    "kode": "O21",
+    "mapel": "INFORMATIKA",
+    "guru": 21,
+    "kegiatan": null
+   },
+   {
+    "hari": "KAMIS",
+    "jam_ke": 7,
+    "kelas": "XI A",
+    "kode": "A2",
+    "mapel": "PEND.AGAMA & BP",
+    "guru": 2,
+    "kegiatan": null
+   },
+   {
+    "hari": "KAMIS",
+    "jam_ke": 7,
+    "kelas": "XI B",
+    "kode": "M25",
+    "mapel": "SENI BUDAYA",
+    "guru": 25,
+    "kegiatan": null
+   },
+   {
+    "hari": "KAMIS",
+    "jam_ke": 7,
+    "kelas": "XI C",
+    "kode": "W18",
+    "mapel": "FISIKA PEMINTN",
+    "guru": 18,
+    "kegiatan": null
+   },
+   {
+    "hari": "KAMIS",
+    "jam_ke": 7,
+    "kelas": "XI D",
+    "kode": "Q27",
+    "mapel": "MUATAN LOKAL",
+    "guru": 27,
+    "kegiatan": null
+   },
+   {
+    "hari": "KAMIS",
+    "jam_ke": 7,
+    "kelas": "XII A",
+    "kode": "S13",
+    "mapel": "B. ING.TK LANJUT",
+    "guru": 13,
+    "kegiatan": null
+   },
+   {
+    "hari": "KAMIS",
+    "jam_ke": 7,
+    "kelas": "XII B",
+    "kode": "D8",
+    "mapel": "B. INGGRIS",
+    "guru": 8,
+    "kegiatan": null
+   },
+   {
+    "hari": "KAMIS",
+    "jam_ke": 7,
+    "kelas": "XII C",
+    "kode": "R5",
+    "mapel": "MTK TKT LANJUT",
+    "guru": 5,
+    "kegiatan": null
+   },
+   {
+    "hari": "KAMIS",
+    "jam_ke": 8,
+    "kelas": "X A",
+    "kode": "K9",
+    "mapel": "EKONOMI",
+    "guru": 9,
+    "kegiatan": null
+   },
+   {
+    "hari": "KAMIS",
+    "jam_ke": 8,
+    "kelas": "X B",
+    "kode": "H15",
+    "mapel": "BIOLOGI",
+    "guru": 15,
+    "kegiatan": null
+   },
+   {
+    "hari": "KAMIS",
+    "jam_ke": 8,
+    "kelas": "X C",
+    "kode": "O21",
+    "mapel": "INFORMATIKA",
+    "guru": 21,
+    "kegiatan": null
+   },
+   {
+    "hari": "KAMIS",
+    "jam_ke": 8,
+    "kelas": "XI A",
+    "kode": "A2",
+    "mapel": "PEND.AGAMA & BP",
+    "guru": 2,
+    "kegiatan": null
+   },
+   {
+    "hari": "KAMIS",
+    "jam_ke": 8,
+    "kelas": "XI B",
+    "kode": "M25",
+    "mapel": "SENI BUDAYA",
+    "guru": 25,
+    "kegiatan": null
+   },
+   {
+    "hari": "KAMIS",
+    "jam_ke": 8,
+    "kelas": "XI C",
+    "kode": "W18",
+    "mapel": "FISIKA PEMINTN",
+    "guru": 18,
+    "kegiatan": null
+   },
+   {
+    "hari": "KAMIS",
+    "jam_ke": 8,
+    "kelas": "XI D",
+    "kode": "Q27",
+    "mapel": "MUATAN LOKAL",
+    "guru": 27,
+    "kegiatan": null
+   },
+   {
+    "hari": "KAMIS",
+    "jam_ke": 8,
+    "kelas": "XII A",
+    "kode": "I11",
+    "mapel": "SEJARAH",
+    "guru": 11,
+    "kegiatan": null
+   },
+   {
+    "hari": "KAMIS",
+    "jam_ke": 8,
+    "kelas": "XII B",
+    "kode": "D8",
+    "mapel": "B. INGGRIS",
+    "guru": 8,
+    "kegiatan": null
+   },
+   {
+    "hari": "KAMIS",
+    "jam_ke": 8,
+    "kelas": "XII C",
+    "kode": "R5",
+    "mapel": "MTK TKT LANJUT",
+    "guru": 5,
+    "kegiatan": null
+   },
+   {
+    "hari": "KAMIS",
+    "jam_ke": 9,
+    "kelas": "X A",
+    "kode": "Q27",
+    "mapel": "MUATAN LOKAL",
+    "guru": 27,
+    "kegiatan": null
+   },
+   {
+    "hari": "KAMIS",
+    "jam_ke": 9,
+    "kelas": "X B",
+    "kode": "B4",
+    "mapel": "Pend. Pancasila",
+    "guru": 4,
+    "kegiatan": null
+   },
+   {
+    "hari": "KAMIS",
+    "jam_ke": 9,
+    "kelas": "X C",
+    "kode": "P18",
+    "mapel": "PKWU",
+    "guru": 18,
+    "kegiatan": null
+   },
+   {
+    "hari": "KAMIS",
+    "jam_ke": 9,
+    "kelas": "XI A",
+    "kode": "U21",
+    "mapel": "INFORM. PMNTN",
+    "guru": 21,
+    "kegiatan": null
+   },
+   {
+    "hari": "KAMIS",
+    "jam_ke": 9,
+    "kelas": "XI B",
+    "kode": "C7",
+    "mapel": "B INDONESIA",
+    "guru": 7,
+    "kegiatan": null
+   },
+   {
+    "hari": "KAMIS",
+    "jam_ke": 9,
+    "kelas": "XI C",
+    "kode": "S13",
+    "mapel": "B. ING.TK LANJUT",
+    "guru": 13,
+    "kegiatan": null
+   },
+   {
+    "hari": "KAMIS",
+    "jam_ke": 9,
+    "kelas": "XI D",
+    "kode": "V10",
+    "mapel": "SOSIO PEMINATAN",
+    "guru": 10,
+    "kegiatan": null
+   },
+   {
+    "hari": "KAMIS",
+    "jam_ke": 9,
+    "kelas": "XII A",
+    "kode": "I11",
+    "mapel": "SEJARAH",
+    "guru": 11,
+    "kegiatan": null
+   },
+   {
+    "hari": "KAMIS",
+    "jam_ke": 9,
+    "kelas": "XII B",
+    "kode": "D8",
+    "mapel": "B. INGGRIS",
+    "guru": 8,
+    "kegiatan": null
+   },
+   {
+    "hari": "KAMIS",
+    "jam_ke": 9,
+    "kelas": "XII C",
+    "kode": "R5",
+    "mapel": "MTK TKT LANJUT",
+    "guru": 5,
+    "kegiatan": null
+   },
+   {
+    "hari": "KAMIS",
+    "jam_ke": 10,
+    "kelas": "X A",
+    "kode": "Q27",
+    "mapel": "MUATAN LOKAL",
+    "guru": 27,
+    "kegiatan": null
+   },
+   {
+    "hari": "KAMIS",
+    "jam_ke": 10,
+    "kelas": "X B",
+    "kode": "B4",
+    "mapel": "Pend. Pancasila",
+    "guru": 4,
+    "kegiatan": null
+   },
+   {
+    "hari": "KAMIS",
+    "jam_ke": 10,
+    "kelas": "X C",
+    "kode": "P18",
+    "mapel": "PKWU",
+    "guru": 18,
+    "kegiatan": null
+   },
+   {
+    "hari": "KAMIS",
+    "jam_ke": 10,
+    "kelas": "XI A",
+    "kode": "U21",
+    "mapel": "INFORM. PMNTN",
+    "guru": 21,
+    "kegiatan": null
+   },
+   {
+    "hari": "KAMIS",
+    "jam_ke": 10,
+    "kelas": "XI B",
+    "kode": "C7",
+    "mapel": "B INDONESIA",
+    "guru": 7,
+    "kegiatan": null
+   },
+   {
+    "hari": "KAMIS",
+    "jam_ke": 10,
+    "kelas": "XI C",
+    "kode": "S13",
+    "mapel": "B. ING.TK LANJUT",
+    "guru": 13,
+    "kegiatan": null
+   },
+   {
+    "hari": "KAMIS",
+    "jam_ke": 10,
+    "kelas": "XI D",
+    "kode": "V10",
+    "mapel": "SOSIO PEMINATAN",
+    "guru": 10,
+    "kegiatan": null
+   },
+   {
+    "hari": "KAMIS",
+    "jam_ke": 10,
+    "kelas": "XII A",
+    "kode": "Z20",
+    "mapel": "KIMIA PEMINTN",
+    "guru": 20,
+    "kegiatan": null
+   },
+   {
+    "hari": "KAMIS",
+    "jam_ke": 10,
+    "kelas": "XII B",
+    "kode": "I11",
+    "mapel": "SEJARAH",
+    "guru": 11,
+    "kegiatan": null
+   },
+   {
+    "hari": "KAMIS",
+    "jam_ke": 10,
+    "kelas": "XII C",
+    "kode": "M25",
+    "mapel": "SENI BUDAYA",
+    "guru": 25,
+    "kegiatan": null
+   },
+   {
+    "hari": "KAMIS",
+    "jam_ke": 11,
+    "kelas": "X A",
+    "kode": null,
+    "mapel": null,
+    "guru": null,
+    "kegiatan": "PRAMUKA"
+   },
+   {
+    "hari": "KAMIS",
+    "jam_ke": 11,
+    "kelas": "X B",
+    "kode": null,
+    "mapel": null,
+    "guru": null,
+    "kegiatan": "PRAMUKA"
+   },
+   {
+    "hari": "KAMIS",
+    "jam_ke": 11,
+    "kelas": "X C",
+    "kode": null,
+    "mapel": null,
+    "guru": null,
+    "kegiatan": "PRAMUKA"
+   },
+   {
+    "hari": "KAMIS",
+    "jam_ke": 11,
+    "kelas": "XI A",
+    "kode": "U21",
+    "mapel": "INFORM. PMNTN",
+    "guru": 21,
+    "kegiatan": null
+   },
+   {
+    "hari": "KAMIS",
+    "jam_ke": 11,
+    "kelas": "XI B",
+    "kode": "C7",
+    "mapel": "B INDONESIA",
+    "guru": 7,
+    "kegiatan": null
+   },
+   {
+    "hari": "KAMIS",
+    "jam_ke": 11,
+    "kelas": "XI C",
+    "kode": "S13",
+    "mapel": "B. ING.TK LANJUT",
+    "guru": 13,
+    "kegiatan": null
+   },
+   {
+    "hari": "KAMIS",
+    "jam_ke": 11,
+    "kelas": "XI D",
+    "kode": "V10",
+    "mapel": "SOSIO PEMINATAN",
+    "guru": 10,
+    "kegiatan": null
+   },
+   {
+    "hari": "KAMIS",
+    "jam_ke": 11,
+    "kelas": "XII A",
+    "kode": "Z20",
+    "mapel": "KIMIA PEMINTN",
+    "guru": 20,
+    "kegiatan": null
+   },
+   {
+    "hari": "KAMIS",
+    "jam_ke": 11,
+    "kelas": "XII B",
+    "kode": "I11",
+    "mapel": "SEJARAH",
+    "guru": 11,
+    "kegiatan": null
+   },
+   {
+    "hari": "KAMIS",
+    "jam_ke": 11,
+    "kelas": "XII C",
+    "kode": "M25",
+    "mapel": "SENI BUDAYA",
+    "guru": 25,
+    "kegiatan": null
+   },
+   {
+    "hari": "JUM'AT",
+    "jam_ke": 1,
+    "kelas": "X A",
+    "kode": "D26",
+    "mapel": "B. INGGRIS",
+    "guru": 26,
+    "kegiatan": null
+   },
+   {
+    "hari": "JUM'AT",
+    "jam_ke": 1,
+    "kelas": "X B",
+    "kode": "N25",
+    "mapel": "PJOK",
+    "guru": 25,
+    "kegiatan": null
+   },
+   {
+    "hari": "JUM'AT",
+    "jam_ke": 1,
+    "kelas": "X C",
+    "kode": "Q27",
+    "mapel": "MUATAN LOKAL",
+    "guru": 27,
+    "kegiatan": null
+   },
+   {
+    "hari": "JUM'AT",
+    "jam_ke": 1,
+    "kelas": "XI A",
+    "kode": "C7",
+    "mapel": "B INDONESIA",
+    "guru": 7,
+    "kegiatan": null
+   },
+   {
+    "hari": "JUM'AT",
+    "jam_ke": 1,
+    "kelas": "XI B",
+    "kode": "X9",
+    "mapel": "EKONOMI PEMINTN",
+    "guru": 9,
+    "kegiatan": null
+   },
+   {
+    "hari": "JUM'AT",
+    "jam_ke": 1,
+    "kelas": "XI C",
+    "kode": "A2",
+    "mapel": "PEND.AGAMA & BP",
+    "guru": 2,
+    "kegiatan": null
+   },
+   {
+    "hari": "JUM'AT",
+    "jam_ke": 1,
+    "kelas": "XI D",
+    "kode": "N28",
+    "mapel": "PJOK",
+    "guru": 28,
+    "kegiatan": null
+   },
+   {
+    "hari": "JUM'AT",
+    "jam_ke": 1,
+    "kelas": "XII A",
+    "kode": "R5",
+    "mapel": "MTK TKT LANJUT",
+    "guru": 5,
+    "kegiatan": null
+   },
+   {
+    "hari": "JUM'AT",
+    "jam_ke": 1,
+    "kelas": "XII B",
+    "kode": "Y15",
+    "mapel": "BIOLOGI PMNTN",
+    "guru": 15,
+    "kegiatan": null
+   },
+   {
+    "hari": "JUM'AT",
+    "jam_ke": 1,
+    "kelas": "XII C",
+    "kode": "Q24",
+    "mapel": "MUATAN LOKAL",
+    "guru": 24,
+    "kegiatan": null
+   },
+   {
+    "hari": "JUM'AT",
+    "jam_ke": 2,
+    "kelas": "X A",
+    "kode": "D26",
+    "mapel": "B. INGGRIS",
+    "guru": 26,
+    "kegiatan": null
+   },
+   {
+    "hari": "JUM'AT",
+    "jam_ke": 2,
+    "kelas": "X B",
+    "kode": "N25",
+    "mapel": "PJOK",
+    "guru": 25,
+    "kegiatan": null
+   },
+   {
+    "hari": "JUM'AT",
+    "jam_ke": 2,
+    "kelas": "X C",
+    "kode": "G20",
+    "mapel": "KIMIA",
+    "guru": 20,
+    "kegiatan": null
+   },
+   {
+    "hari": "JUM'AT",
+    "jam_ke": 2,
+    "kelas": "XI A",
+    "kode": "C7",
+    "mapel": "B INDONESIA",
+    "guru": 7,
+    "kegiatan": null
+   },
+   {
+    "hari": "JUM'AT",
+    "jam_ke": 2,
+    "kelas": "XI B",
+    "kode": "X9",
+    "mapel": "EKONOMI PEMINTN",
+    "guru": 9,
+    "kegiatan": null
+   },
+   {
+    "hari": "JUM'AT",
+    "jam_ke": 2,
+    "kelas": "XI C",
+    "kode": "A2",
+    "mapel": "PEND.AGAMA & BP",
+    "guru": 2,
+    "kegiatan": null
+   },
+   {
+    "hari": "JUM'AT",
+    "jam_ke": 2,
+    "kelas": "XI D",
+    "kode": "N28",
+    "mapel": "PJOK",
+    "guru": 28,
+    "kegiatan": null
+   },
+   {
+    "hari": "JUM'AT",
+    "jam_ke": 2,
+    "kelas": "XII A",
+    "kode": "R5",
+    "mapel": "MTK TKT LANJUT",
+    "guru": 5,
+    "kegiatan": null
+   },
+   {
+    "hari": "JUM'AT",
+    "jam_ke": 2,
+    "kelas": "XII B",
+    "kode": "Y15",
+    "mapel": "BIOLOGI PMNTN",
+    "guru": 15,
+    "kegiatan": null
+   },
+   {
+    "hari": "JUM'AT",
+    "jam_ke": 2,
+    "kelas": "XII C",
+    "kode": "Q24",
+    "mapel": "MUATAN LOKAL",
+    "guru": 24,
+    "kegiatan": null
+   },
+   {
+    "hari": "JUM'AT",
+    "jam_ke": 3,
+    "kelas": "X A",
+    "kode": "D26",
+    "mapel": "B. INGGRIS",
+    "guru": 26,
+    "kegiatan": null
+   },
+   {
+    "hari": "JUM'AT",
+    "jam_ke": 3,
+    "kelas": "X B",
+    "kode": "C27",
+    "mapel": "B INDONESIA",
+    "guru": 27,
+    "kegiatan": null
+   },
+   {
+    "hari": "JUM'AT",
+    "jam_ke": 3,
+    "kelas": "X C",
+    "kode": "G20",
+    "mapel": "KIMIA",
+    "guru": 20,
+    "kegiatan": null
+   },
+   {
+    "hari": "JUM'AT",
+    "jam_ke": 3,
+    "kelas": "XI A",
+    "kode": "C7",
+    "mapel": "B INDONESIA",
+    "guru": 7,
+    "kegiatan": null
+   },
+   {
+    "hari": "JUM'AT",
+    "jam_ke": 3,
+    "kelas": "XI B",
+    "kode": "X9",
+    "mapel": "EKONOMI PEMINTN",
+    "guru": 9,
+    "kegiatan": null
+   },
+   {
+    "hari": "JUM'AT",
+    "jam_ke": 3,
+    "kelas": "XI C",
+    "kode": "W18",
+    "mapel": "FISIKA PEMINTN",
+    "guru": 18,
+    "kegiatan": null
+   },
+   {
+    "hari": "JUM'AT",
+    "jam_ke": 3,
+    "kelas": "XI D",
+    "kode": "U21",
+    "mapel": "INFORM. PMNTN",
+    "guru": 21,
+    "kegiatan": null
+   },
+   {
+    "hari": "JUM'AT",
+    "jam_ke": 3,
+    "kelas": "XII A",
+    "kode": "R5",
+    "mapel": "MTK TKT LANJUT",
+    "guru": 5,
+    "kegiatan": null
+   },
+   {
+    "hari": "JUM'AT",
+    "jam_ke": 3,
+    "kelas": "XII B",
+    "kode": "Y15",
+    "mapel": "BIOLOGI PMNTN",
+    "guru": 15,
+    "kegiatan": null
+   },
+   {
+    "hari": "JUM'AT",
+    "jam_ke": 3,
+    "kelas": "XII C",
+    "kode": "E16",
+    "mapel": "MATEMATIKA [U]",
+    "guru": 16,
+    "kegiatan": null
+   },
+   {
+    "hari": "JUM'AT",
+    "jam_ke": 4,
+    "kelas": "X A",
+    "kode": "H15",
+    "mapel": "BIOLOGI",
+    "guru": 15,
+    "kegiatan": null
+   },
+   {
+    "hari": "JUM'AT",
+    "jam_ke": 4,
+    "kelas": "X B",
+    "kode": "C27",
+    "mapel": "B INDONESIA",
+    "guru": 27,
+    "kegiatan": null
+   },
+   {
+    "hari": "JUM'AT",
+    "jam_ke": 4,
+    "kelas": "X C",
+    "kode": "A2",
+    "mapel": "PEND.AGAMA & BP",
+    "guru": 2,
+    "kegiatan": null
+   },
+   {
+    "hari": "JUM'AT",
+    "jam_ke": 4,
+    "kelas": "XI A",
+    "kode": "I12",
+    "mapel": "SEJARAH",
+    "guru": 12,
+    "kegiatan": null
+   },
+   {
+    "hari": "JUM'AT",
+    "jam_ke": 4,
+    "kelas": "XI B",
+    "kode": "W6",
+    "mapel": "FISIKA PEMINTN",
+    "guru": 6,
+    "kegiatan": null
+   },
+   {
+    "hari": "JUM'AT",
+    "jam_ke": 4,
+    "kelas": "XI C",
+    "kode": "W18",
+    "mapel": "FISIKA PEMINTN",
+    "guru": 18,
+    "kegiatan": null
+   },
+   {
+    "hari": "JUM'AT",
+    "jam_ke": 4,
+    "kelas": "XI D",
+    "kode": "U21",
+    "mapel": "INFORM. PMNTN",
+    "guru": 21,
+    "kegiatan": null
+   },
+   {
+    "hari": "JUM'AT",
+    "jam_ke": 4,
+    "kelas": "XII A",
+    "kode": "Q24",
+    "mapel": "MUATAN LOKAL",
+    "guru": 24,
+    "kegiatan": null
+   },
+   {
+    "hari": "JUM'AT",
+    "jam_ke": 4,
+    "kelas": "XII B",
+    "kode": "M25",
+    "mapel": "SENI BUDAYA",
+    "guru": 25,
+    "kegiatan": null
+   },
+   {
+    "hari": "JUM'AT",
+    "jam_ke": 4,
+    "kelas": "XII C",
+    "kode": "N28",
+    "mapel": "PJOK",
+    "guru": 28,
+    "kegiatan": null
+   },
+   {
+    "hari": "JUM'AT",
+    "jam_ke": 5,
+    "kelas": "X A",
+    "kode": "H15",
+    "mapel": "BIOLOGI",
+    "guru": 15,
+    "kegiatan": null
+   },
+   {
+    "hari": "JUM'AT",
+    "jam_ke": 5,
+    "kelas": "X B",
+    "kode": "C27",
+    "mapel": "B INDONESIA",
+    "guru": 27,
+    "kegiatan": null
+   },
+   {
+    "hari": "JUM'AT",
+    "jam_ke": 5,
+    "kelas": "X C",
+    "kode": "A2",
+    "mapel": "PEND.AGAMA & BP",
+    "guru": 2,
+    "kegiatan": null
+   },
+   {
+    "hari": "JUM'AT",
+    "jam_ke": 5,
+    "kelas": "XI A",
+    "kode": "I12",
+    "mapel": "SEJARAH",
+    "guru": 12,
+    "kegiatan": null
+   },
+   {
+    "hari": "JUM'AT",
+    "jam_ke": 5,
+    "kelas": "XI B",
+    "kode": "W6",
+    "mapel": "FISIKA PEMINTN",
+    "guru": 6,
+    "kegiatan": null
+   },
+   {
+    "hari": "JUM'AT",
+    "jam_ke": 5,
+    "kelas": "XI C",
+    "kode": "W18",
+    "mapel": "FISIKA PEMINTN",
+    "guru": 18,
+    "kegiatan": null
+   },
+   {
+    "hari": "JUM'AT",
+    "jam_ke": 5,
+    "kelas": "XI D",
+    "kode": "U21",
+    "mapel": "INFORM. PMNTN",
+    "guru": 21,
+    "kegiatan": null
+   },
+   {
+    "hari": "JUM'AT",
+    "jam_ke": 5,
+    "kelas": "XII A",
+    "kode": "Q24",
+    "mapel": "MUATAN LOKAL",
+    "guru": 24,
+    "kegiatan": null
+   },
+   {
+    "hari": "JUM'AT",
+    "jam_ke": 5,
+    "kelas": "XII B",
+    "kode": "M25",
+    "mapel": "SENI BUDAYA",
+    "guru": 25,
+    "kegiatan": null
+   },
+   {
+    "hari": "JUM'AT",
+    "jam_ke": 5,
+    "kelas": "XII C",
+    "kode": "N28",
+    "mapel": "PJOK",
+    "guru": 28,
+    "kegiatan": null
+   },
+   {
+    "hari": "JUM'AT",
+    "jam_ke": 6,
+    "kelas": "XI A",
+    "kode": "U21",
+    "mapel": "INFORM. PMNTN",
+    "guru": 21,
+    "kegiatan": null
+   },
+   {
+    "hari": "JUM'AT",
+    "jam_ke": 6,
+    "kelas": "XI B",
+    "kode": "S22",
+    "mapel": "B. ING.TK LANJUT",
+    "guru": 22,
+    "kegiatan": null
+   },
+   {
+    "hari": "JUM'AT",
+    "jam_ke": 6,
+    "kelas": "XI C",
+    "kode": "M25",
+    "mapel": "SENI BUDAYA",
+    "guru": 25,
+    "kegiatan": null
+   },
+   {
+    "hari": "JUM'AT",
+    "jam_ke": 6,
+    "kelas": "XI D",
+    "kode": "R24",
+    "mapel": "MTK TKT LANJUT",
+    "guru": 24,
+    "kegiatan": null
+   },
+   {
+    "hari": "JUM'AT",
+    "jam_ke": 6,
+    "kelas": "XII A",
+    "kode": "A23",
+    "mapel": "PEND.AGAMA & BP",
+    "guru": 23,
+    "kegiatan": null
+   },
+   {
+    "hari": "JUM'AT",
+    "jam_ke": 6,
+    "kelas": "XII B",
+    "kode": "W14",
+    "mapel": "FISIKA PEMINTN",
+    "guru": 14,
+    "kegiatan": null
+   },
+   {
+    "hari": "JUM'AT",
+    "jam_ke": 6,
+    "kelas": "XII C",
+    "kode": "T12",
+    "mapel": "SEJARAH TK LANJT",
+    "guru": 12,
+    "kegiatan": null
+   },
+   {
+    "hari": "JUM'AT",
+    "jam_ke": 7,
+    "kelas": "XI A",
+    "kode": "U21",
+    "mapel": "INFORM. PMNTN",
+    "guru": 21,
+    "kegiatan": null
+   },
+   {
+    "hari": "JUM'AT",
+    "jam_ke": 7,
+    "kelas": "XI B",
+    "kode": "S22",
+    "mapel": "B. ING.TK LANJUT",
+    "guru": 22,
+    "kegiatan": null
+   },
+   {
+    "hari": "JUM'AT",
+    "jam_ke": 7,
+    "kelas": "XI C",
+    "kode": "M25",
+    "mapel": "SENI BUDAYA",
+    "guru": 25,
+    "kegiatan": null
+   },
+   {
+    "hari": "JUM'AT",
+    "jam_ke": 7,
+    "kelas": "XI D",
+    "kode": "R24",
+    "mapel": "MTK TKT LANJUT",
+    "guru": 24,
+    "kegiatan": null
+   },
+   {
+    "hari": "JUM'AT",
+    "jam_ke": 7,
+    "kelas": "XII A",
+    "kode": "A23",
+    "mapel": "PEND.AGAMA & BP",
+    "guru": 23,
+    "kegiatan": null
+   },
+   {
+    "hari": "JUM'AT",
+    "jam_ke": 7,
+    "kelas": "XII B",
+    "kode": "W14",
+    "mapel": "FISIKA PEMINTN",
+    "guru": 14,
+    "kegiatan": null
+   },
+   {
+    "hari": "JUM'AT",
+    "jam_ke": 7,
+    "kelas": "XII C",
+    "kode": "T12",
+    "mapel": "SEJARAH TK LANJT",
+    "guru": 12,
+    "kegiatan": null
    }
   ]
  }

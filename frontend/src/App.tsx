@@ -4,6 +4,7 @@ import type { Role } from './api/types';
 import Layout from './components/Layout';
 import Login from './pages/Login';
 import Landing from './pages/Landing';
+import Jadwal from './pages/Jadwal';
 
 import AdminDashboard from './pages/admin/Dashboard';
 import AdminPeriode from './pages/admin/Periode';
@@ -18,6 +19,7 @@ import GuruKelasDetail from './pages/guru/KelasDetail';
 import GuruPertemuan from './pages/guru/PertemuanDetail';
 import GuruPenilaian from './pages/guru/Penilaian';
 import GuruRaport from './pages/guru/Raport';
+import GuruPresensi from './pages/guru/Presensi';
 
 import SiswaDashboard from './pages/siswa/Dashboard';
 import SiswaKelas from './pages/siswa/KelasSaya';
@@ -26,6 +28,7 @@ import SiswaPertemuan from './pages/siswa/PertemuanDetail';
 import SiswaTugas from './pages/siswa/Tugas';
 import SiswaNilai from './pages/siswa/Nilai';
 import SiswaRaport from './pages/siswa/Raport';
+import SiswaPresensi from './pages/siswa/Presensi';
 
 function Protected({ role, children }: { role: Role; children: JSX.Element }) {
   const { user } = useAuth();
@@ -63,6 +66,8 @@ export default function App() {
         <Route path="/guru/pertemuan/:id" element={<GuruPertemuan />} />
         <Route path="/guru/penilaian" element={<GuruPenilaian />} />
         <Route path="/guru/raport" element={<GuruRaport />} />
+        <Route path="/guru/presensi" element={<GuruPresensi />} />
+        <Route path="/guru/jadwal" element={<Jadwal />} />
       </Route>
 
       <Route element={<Protected role="siswa"><Layout /></Protected>}>
@@ -73,6 +78,8 @@ export default function App() {
         <Route path="/siswa/tugas" element={<SiswaTugas />} />
         <Route path="/siswa/nilai" element={<SiswaNilai />} />
         <Route path="/siswa/raport" element={<SiswaRaport />} />
+        <Route path="/siswa/presensi" element={<SiswaPresensi />} />
+        <Route path="/siswa/jadwal" element={<Jadwal />} />
       </Route>
 
       <Route path="*" element={<Home />} />

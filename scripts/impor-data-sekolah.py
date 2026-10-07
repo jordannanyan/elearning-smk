@@ -30,6 +30,7 @@ KELUARAN = os.path.join(ROOT, "backend", "src", "db", "data", "sekolah.json")
 BERKAS_TUGAS = os.path.join(SUMBER, "LAMP I SK PBM  TA 2526 SMTR II.xlsx")
 BERKAS_ABSEN = os.path.join(
     SUMBER, "Absensi  - SMA NEGERI 1 KARAU KUALA 2025 - 2026 EDIT.xlsx")
+BERKAS_JADWAL = os.path.join(SUMBER, "JADWAL PEL  SEMTR 1I TA 2526.xlsx")
 
 KELAS = ['X A', 'X B', 'X C', 'XI A', 'XI B', 'XI C', 'XI D', 'XII A', 'XII B', 'XII C']
 
@@ -166,10 +167,202 @@ def baca_siswa():
     return hasil
 
 
+
+# ---------------------------------------------------------------------
+# Jadwal mata pelajaran
+# ---------------------------------------------------------------------
+# Dibaca dari lembar "jadwal 45 menit" pada berkas jadwal sekolah, yaitu
+# jadwal Semester II Tahun Ajaran 2025/2026 yang susunan kelasnya sama
+# dengan data siswa. Lembar tersebut memuat lima blok hari yang masing
+# masing berupa tabel JAM KE- (baris) terhadap kelas (kolom), dengan isi
+# sel berupa kode gabungan huruf mata pelajaran dan nomor guru, misalnya
+# "E16" berarti MATEMATIKA [U] yang diajar guru bernomor 16.
+# ---------------------------------------------------------------------
+LEMBAR_JADWAL = "jadwal 45 menit"
+
+# (nama hari, kolom JAM KE-, baris awal, baris akhir, baris kepala kelas,
+#  kolom kelas pertama, kolom kelas terakhir)
+BLOK_HARI = [
+    ("SENIN",  4,  9, 22,  8,  5, 16),
+    ("SELASA", 20, 9, 22,  8, 21, 32),
+    ("RABU",   36, 9, 22,  8, 37, 48),
+    ("KAMIS",  4, 27, 40, 26,  5, 16),
+    ("JUM'AT", 20, 27, 35, 26, 21, 32),
+]
+
+# Jam pelajaran hari biasa, disalin dari tabel WAKTU SEKOLAH pada lembar
+# yang sama. Baris istirahat ikut disimpan agar tampilan di sistem sama
+# persis dengan tabel pada SK.
+JAM_UMUM = [
+    ("pelajaran", 1, "07.00", "07.45"), ("pelajaran", 2, "07.45", "08.30"),
+    ("pelajaran", 3, "08.30", "09.15"), ("pelajaran", 4, "09.15", "10.00"),
+    ("istirahat", None, "10.00", "10.15"),
+    ("pelajaran", 5, "10.15", "11.00"), ("pelajaran", 6, "11.00", "11.45"),
+    ("istirahat", None, "11.45", "12.15"),
+    ("pelajaran", 7, "12.15", "13.00"), ("pelajaran", 8, "13.00", "13.45"),
+    ("istirahat", None, "13.45", "14.00"),
+    ("pelajaran", 9, "14.00", "14.45"), ("pelajaran", 10, "14.45", "15.30"),
+    ("pelajaran", 11, "15.30", "16.15"),
+]
+
+# Catatan *) pada lembar yang sama: khusus jadwal PBM hari Jumat
+JAM_JUMAT = [
+    ("pelajaran", 1, "06.30", "07.15"), ("pelajaran", 2, "07.15", "08.00"),
+    ("pelajaran", 3, "08.00", "08.45"),
+    ("istirahat", None, "08.45", "09.00"),
+    ("pelajaran", 4, "09.00", "09.45"), ("pelajaran", 5, "09.45", "10.30"),
+    ("jumatan", None, "10.30", "12.30"),
+    ("pelajaran", 6, "12.30", "13.15"), ("pelajaran", 7, "13.15", "14.00"),
+]
+
+
+def peta_gabungan(ws):
+    """Nilai sel gabungan (merge) hanya tersimpan pada sel kiri-atasnya.
+    Fungsi ini menyalin nilai tersebut ke seluruh sel anggotanya supaya
+    keterangan seperti UPACARA BENDERA terbaca pada semua kolom kelas."""
+    peta = {}
+    for rng in ws.merged_cells.ranges:
+        nilai = ws.cell(rng.min_row, rng.min_col).value
+        if nilai is None:
+            continue
+        for r in range(rng.min_row, rng.max_row + 1):
+            for c in range(rng.min_col, rng.max_col + 1):
+                peta[(r, c)] = nilai
+    return peta
+
+
+def nama_kelas_baku(teks):
+    """XA -> X A, XIA -> XI A, XIIB -> XII B."""
+    rapat = re.sub(r'\s+', '', str(teks)).upper()
+    for k in KELAS:
+        if re.sub(r'\s+', '', k) == rapat:
+            return k
+    return None
+
+
+def baca_jadwal():
+    wb = openpyxl.load_workbook(BERKAS_JADWAL, data_only=True)
+    ws = wb[LEMBAR_JADWAL]
+    gabung = peta_gabungan(ws)
+
+    def sel(r, c):
+        v = ws.cell(r, c).value
+        return v if v is not None else gabung.get((r, c))
+
+    # --- Legenda kode guru (nomor 1..28) ---
+    kode_guru = []
+    for r in range(45, 56):
+        for c in (4, 10, 17):
+            no, nama = ws.cell(r, c).value, ws.cell(r, c + 1).value
+            if isinstance(no, (int, float)) and nama:
+                kode_guru.append({"nomor": int(no), "nama": rapikan(nama)})
+    kode_guru.sort(key=lambda x: x["nomor"])
+
+    # --- Legenda kode mata pelajaran (huruf A..Z) ---
+    kode_mapel = {}
+    for r in range(26, 41):
+        for c in (36, 42):
+            kode, nama = ws.cell(r, c).value, ws.cell(r, c + 1).value
+            if kode and nama and re.fullmatch(r'[A-Z]', str(kode).strip()):
+                kode_mapel[str(kode).strip()] = rapikan(nama)
+
+    # --- Isi tabel tiap hari ---
+    slot, lewat = [], []
+    for hari, kol_jam, r1, r2, r_kepala, c1, c2 in BLOK_HARI:
+        kelas_kolom = {}
+        for c in range(c1, c2 + 1):
+            k = nama_kelas_baku(ws.cell(r_kepala, c).value or '')
+            if k:
+                kelas_kolom[c] = k
+
+        for r in range(r1, r2 + 1):
+            jam = ws.cell(r, kol_jam).value
+            if not isinstance(jam, (int, float)):
+                continue
+            for c, kelas in kelas_kolom.items():
+                isi = sel(r, c)
+                if isi is None or str(isi).strip() in ('', '-'):
+                    continue
+                teks = rapikan(isi)
+                baris = {"hari": hari, "jam_ke": int(jam), "kelas": kelas,
+                         "kode": None, "mapel": None, "guru": None, "kegiatan": None}
+
+                cocok = re.fullmatch(r'([A-Z])\s*(\d{1,2})', teks)
+                if cocok:
+                    huruf, nomor = cocok.group(1), int(cocok.group(2))
+                    baris["kode"] = f"{huruf}{nomor}"
+                    baris["mapel"] = kode_mapel.get(huruf)
+                    baris["guru"] = nomor
+                    if not baris["mapel"]:
+                        lewat.append(f'{hari} jam {jam} {kelas}: huruf "{huruf}" tanpa keterangan')
+                elif re.fullmatch(r'\d{1,2}', teks):
+                    # Hanya nomor guru: jam Projek Penguatan Profil Pelajar
+                    # Pancasila (P5) sebagaimana ditandai pada lembar jadwal.
+                    baris["guru"] = int(teks)
+                    baris["kegiatan"] = "P5"
+                else:
+                    baris["kegiatan"] = teks.upper()
+                slot.append(baris)
+
+    for p in lewat[:5]:
+        print(f"  [!] {p}")
+
+    return {
+        "lembar": LEMBAR_JADWAL,
+        "judul": rapikan(ws.cell(1, 2).value),
+        "sekolah": rapikan(ws.cell(2, 2).value),
+        "tahun_ajaran": rapikan(ws.cell(3, 20).value).replace("TAHUN AJARAN :", "").strip(),
+        "kode_guru": kode_guru,
+        "kode_mapel": [{"kode": k, "nama": v} for k, v in sorted(kode_mapel.items())],
+        "jam": [{"jenis": j, "jam_ke": n, "mulai": m, "selesai": s} for j, n, m, s in JAM_UMUM],
+        "jam_jumat": [{"jenis": j, "jam_ke": n, "mulai": m, "selesai": s}
+                      for j, n, m, s in JAM_JUMAT],
+        "slot": slot,
+    }
+
+
+
+# Nama guru pada lembar jadwal ditulis lebih singkat daripada pada SK
+# pembagian tugas, sehingga sebagian perlu dipadankan secara eksplisit.
+ALIAS_GURU_JADWAL = {
+    "M. RAHMADANI": "Muhammad Rahmadani",
+}
+
+
+def kunci_nama(nama):
+    inti = unicodedata.normalize('NFKD', nama.split(',')[0])
+    inti = inti.encode('ascii', 'ignore').decode()
+    return re.sub(r'[^a-z ]', ' ', inti.lower()).split()
+
+
+def cocokkan_guru_jadwal(jadwal, guru):
+    """Melengkapi tiap kode guru pada jadwal dengan surel guru yang
+    bersangkutan, agar jadwal dapat ditautkan ke akun guru di sistem."""
+    indeks = {" ".join(kunci_nama(g["nama"])): g for g in guru}
+    tak_cocok = []
+    for kg in jadwal["kode_guru"]:
+        nama = ALIAS_GURU_JADWAL.get(kg["nama"].split(',')[0].strip(), kg["nama"])
+        kata = kunci_nama(nama)
+        cocok = indeks.get(" ".join(kata))
+        if not cocok:
+            kandidat = [g for k, g in indeks.items() if kata and kata[0] in k.split()]
+            if len(kandidat) != 1:
+                kandidat = [g for k, g in indeks.items()
+                            if all(w in k.split() for w in kata)]
+            cocok = kandidat[0] if len(kandidat) == 1 else None
+        kg["email"] = cocok["email"] if cocok else None
+        if not cocok:
+            tak_cocok.append(f'{kg["nomor"]} {kg["nama"]}')
+    for t in tak_cocok:
+        print(f"  [!] kode guru jadwal tidak cocok dengan daftar guru: {t}")
+    return sum(1 for kg in jadwal["kode_guru"] if kg["email"])
+
+
 def main():
     guru_mentah = baca_siswa  # penanda agar urutan pemanggilan jelas
     guru_mentah = baca_guru()
     siswa_kelas = baca_siswa()
+    jadwal = baca_jadwal()
 
     dipakai = {'admin'}
     guru = []
@@ -192,6 +385,8 @@ def main():
         wali[kelas] = cocok[0]["email"] if cocok else None
         if not cocok:
             print(f"  [!] wali kelas {kelas} ({kunci}) tidak ditemukan pada daftar guru")
+
+    cocok_jadwal = cocokkan_guru_jadwal(jadwal, guru)
 
     mapel_dipakai = sorted({a["mapel"] for g in guru for a in g["ajar"]})
     mapel = [{"nama": m, "kode": KODE.get(m, m[:8].upper()),
@@ -218,11 +413,14 @@ def main():
             "pembagian_tugas": "SK Nomor 421.3/001/14/SMAN 1 KK/I/2026 tanggal 5 Januari 2026",
             "wali_kelas": "SK Nomor 421.3/186/14/SMAN 1 KK/VII/2025 tanggal 9 Juli 2025 (Lampiran IV)",
             "daftar_siswa": "Daftar Hadir Siswa Tahun Pelajaran 2025/2026",
+            "jadwal": "Jadwal Mata Pelajaran Semester II Tahun Ajaran 2025/2026 "
+                      "SMA Negeri 1 Karau Kuala",
         },
         "kelas": [{"nama": k, "tingkat": k.split()[0], "wali": wali.get(k)} for k in KELAS],
         "mata_pelajaran": mapel,
         "guru": guru,
         "siswa": siswa,
+        "jadwal": jadwal,
     }
 
     os.makedirs(os.path.dirname(KELUARAN), exist_ok=True)
@@ -234,6 +432,9 @@ def main():
     print(f"     {sum(len(v) for v in siswa.values())} siswa · "
           f"{sum(len(g['ajar']) for g in guru)} penugasan mengajar")
     print(f"     wali kelas tercatat: {sum(1 for v in wali.values() if v)}/{len(KELAS)}")
+    print(f"     jadwal: {len(jadwal['slot'])} jam pelajaran · "
+          f"{len(jadwal['kode_guru'])} kode guru · {len(jadwal['kode_mapel'])} kode mapel")
+    print(f"     kode guru jadwal tertaut ke akun: {cocok_jadwal}/{len(jadwal['kode_guru'])}")
 
 
 if __name__ == "__main__":

@@ -99,8 +99,8 @@ export default function DataSiswa() {
             onChange={(e) => setCari(e.target.value)} />
           <select value={filter} onChange={(e) => setFilter(e.target.value as any)} style={{ width: 'auto' }}>
             <option value="">Semua Status</option>
-            <option value="aktif">Hanya Aktif</option>
-            <option value="nonaktif">Hanya Nonaktif</option>
+            <option value="aktif">Aktif</option>
+            <option value="nonaktif">Nonaktif</option>
           </select>
           <button className="btn" onClick={openAdd}>+ Tambah Siswa</button>
         </div>

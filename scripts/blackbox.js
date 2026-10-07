@@ -1336,6 +1336,9 @@ async function main() {
     sesuai: rGantiSandi.status === 200 && cekSandiBaru.status === 200,
   });
 
+  const kmBindXA = (await get('/api/kelas-mapel', TG_ASNIN)).data
+    .find((k) => k.nama_mapel === 'BAHASA INDONESIA' && k.nama_kelas === 'X A').id;
+
   // =================================================================
   // J. HALAMAN DEPAN DAN RAPORT SEMENTARA
   // =================================================================
@@ -1421,6 +1424,175 @@ async function main() {
       + `${rRaportArsip.data.kelas?.nama_kelas}, rata-rata `
       + `${rRaportArsip.data.ringkasan?.rata_rata}`,
     sesuai: rRaportArsip.status === 200 && rRaportArsip.data.kelas?.kode === periodeArsip.kode,
+  });
+
+  // =================================================================
+  // K. JADWAL MATA PELAJARAN
+  // =================================================================
+  const rJadwalSiswa = await get('/api/jadwal/saya', tokenSiswa.ahmad);
+  const seninSiswa = rJadwalSiswa.data.slot.filter((s) => s.hari === 1);
+  catat({
+    modul: 'Jadwal Pelajaran', skenario: 'Siswa melihat jadwal pelajaran kelasnya',
+    input: 'Membuka menu Jadwal Pelajaran',
+    harapan: 'Sistem menampilkan jadwal kelas siswa tersebut per hari beserta jam, '
+      + 'mata pelajaran, dan guru pengajarnya',
+    aktual: `HTTP ${rJadwalSiswa.status}: kelas ${rJadwalSiswa.data.milik?.nama}, `
+      + `${rJadwalSiswa.data.slot.length} jam seminggu; Senin jam 2 = `
+      + `${seninSiswa.find((s) => s.jam_ke === 2)?.nama_mapel}`,
+    sesuai: rJadwalSiswa.status === 200 && rJadwalSiswa.data.slot.length > 0
+      && rJadwalSiswa.data.milik?.jenis === 'kelas',
+  });
+
+  const rJadwalGuru = await get('/api/jadwal/saya', TG);
+  catat({
+    modul: 'Jadwal Pelajaran', skenario: 'Guru melihat jadwal mengajarnya sendiri',
+    input: 'Membuka menu Jadwal Pelajaran sebagai guru',
+    harapan: 'Sistem menampilkan jam mengajar guru tersebut beserta kelas yang diajarnya',
+    aktual: `HTTP ${rJadwalGuru.status}: ${rJadwalGuru.data.milik?.nama} `
+      + `(kode guru ${rJadwalGuru.data.milik?.kode_jadwal}), `
+      + `${rJadwalGuru.data.milik?.jumlah_jam} jam mengajar per minggu`,
+    sesuai: rJadwalGuru.status === 200 && rJadwalGuru.data.slot.length > 0
+      && rJadwalGuru.data.milik?.jenis === 'guru',
+  });
+
+  const rJadwalSekolah = await get('/api/jadwal/sekolah', tokenSiswa.ahmad);
+  const js = rJadwalSekolah.data;
+  catat({
+    modul: 'Jadwal Pelajaran', skenario: 'Pengguna melihat jadwal seluruh sekolah beserta legendanya',
+    input: 'Membuka tab Jadwal Sekolah',
+    harapan: 'Sistem menampilkan jadwal seluruh kelas dalam susunan yang sama dengan jadwal '
+      + 'resmi sekolah, lengkap dengan kode guru, kode mata pelajaran, dan pembagian waktu',
+    aktual: `HTTP ${rJadwalSekolah.status}: ${js.kelas?.length} kelas, ${js.hari?.length} hari, `
+      + `${js.slot?.length} jam pelajaran, ${js.kode_guru?.length} kode guru, `
+      + `${js.kode_mapel?.length} kode mata pelajaran, ${js.jam?.umum?.length} baris waktu`,
+    sesuai: rJadwalSekolah.status === 200 && js.kelas.length === 10 && js.hari.length === 5
+      && js.slot.length > 0 && js.kode_guru.length > 0 && js.kode_mapel.length > 0,
+  });
+
+  // =================================================================
+  // L. PRESENSI (DAFTAR HADIR)
+  // =================================================================
+  // Pengujian memakai pertemuan Bahasa Indonesia agar presensi contoh
+  // pada Matematika tidak terganggu.
+  const ptBind = (await get(`/api/kelas-mapel/${kmBindXA}/pertemuan`, TG_ASNIN)).data[0];
+
+  const rBukaPresensi = await post(`/api/pertemuan/${ptBind.id}/presensi`, {}, TG_ASNIN);
+  const idPresensi = rBukaPresensi.data?.id;
+  catat({
+    modul: 'Presensi', skenario: 'Guru membuka presensi pada sebuah pertemuan',
+    input: `Membuka presensi pertemuan ${ptBind.nomor}: ${ptBind.judul}`,
+    harapan: 'Presensi terbuka sehingga siswa dapat menyatakan kehadirannya',
+    aktual: `HTTP ${rBukaPresensi.status}, pesan: "${rBukaPresensi.data?.message}"`,
+    sesuai: [200, 201].includes(rBukaPresensi.status) && !!idPresensi,
+  });
+
+  const rBukaUlang = await post(`/api/pertemuan/${ptBind.id}/presensi`, {}, TG_ASNIN);
+  catat({
+    modul: 'Presensi', skenario: 'Guru membuka presensi yang sudah terbuka',
+    input: 'Menekan tombol buka presensi untuk kedua kalinya',
+    harapan: 'Sistem menolak karena presensi pertemuan tersebut sudah dibuka',
+    aktual: `HTTP ${rBukaUlang.status}, pesan: "${rBukaUlang.data?.message}"`,
+    sesuai: rBukaUlang.status === 409,
+  });
+
+  // Status siswa uji dikembalikan ke alpa supaya hasil pengujian sama
+  // pada setiap kali skrip dijalankan.
+  const anggotaBind = (await get(`/api/presensi/kelas-mapel/${kmBindXA}`, TG_ASNIN)).data.siswa;
+  const sAhmad = anggotaBind.find((s) => s.nama === 'Ahmad Hanapi');
+  const sAudiyah = anggotaBind.find((s) => s.nama === 'Audiyah');
+  await put(`/api/presensi/${idPresensi}/siswa/${sAhmad.id_siswa}`, { status: 'alpa' }, TG_ASNIN);
+
+  const rHadir = await post(`/api/presensi/${idPresensi}/hadir`, {}, tokenSiswa.ahmad);
+  catat({
+    modul: 'Presensi', skenario: 'Siswa menyatakan kehadirannya pada pertemuan yang presensinya dibuka',
+    input: 'Menekan tombol Saya Hadir',
+    harapan: 'Kehadiran siswa tercatat beserta waktu pengisiannya',
+    aktual: `HTTP ${rHadir.status}, pesan: "${rHadir.data?.message}"`,
+    sesuai: rHadir.status === 200,
+  });
+
+  const rHadirUlang = await post(`/api/presensi/${idPresensi}/hadir`, {}, tokenSiswa.ahmad);
+  catat({
+    modul: 'Presensi', skenario: 'Siswa menyatakan hadir dua kali pada pertemuan yang sama',
+    input: 'Menekan tombol Saya Hadir untuk kedua kalinya',
+    harapan: 'Sistem menolak karena kehadiran siswa tersebut sudah tercatat',
+    aktual: `HTTP ${rHadirUlang.status}, pesan: "${rHadirUlang.data?.message}"`,
+    sesuai: rHadirUlang.status === 409,
+  });
+
+  const rSakit = await put(`/api/presensi/${idPresensi}/siswa/${sAudiyah.id_siswa}`,
+    { status: 'sakit', keterangan: 'Surat keterangan dokter' }, TG_ASNIN);
+  catat({
+    modul: 'Presensi', skenario: 'Guru mencatat keterangan siswa yang berhalangan hadir',
+    input: `Menandai ${sAudiyah.nama} sakit dengan keterangan surat dokter`,
+    harapan: 'Status kehadiran siswa tersimpan beserta keterangannya',
+    aktual: `HTTP ${rSakit.status}, pesan: "${rSakit.data?.message}"`,
+    sesuai: rSakit.status === 200,
+  });
+
+  const rStatusSalah = await put(`/api/presensi/${idPresensi}/siswa/${sAudiyah.id_siswa}`,
+    { status: 'bolos' }, TG_ASNIN);
+  catat({
+    modul: 'Presensi', skenario: 'Guru mengisi status kehadiran dengan nilai yang tidak dikenal',
+    input: 'Status kehadiran: "bolos"',
+    harapan: 'Sistem menolak karena status kehadiran hanya hadir, sakit, izin, atau alpa',
+    aktual: `HTTP ${rStatusSalah.status}, pesan: "${rStatusSalah.data?.message}"`,
+    sesuai: rStatusSalah.status === 400,
+  });
+
+  const rPresensiSiswaLain = await post(`/api/presensi/${idPresensi}/hadir`, {}, tokenSiswa.dhika);
+  const rTutup = await post(`/api/presensi/${idPresensi}/tutup`, {}, TG_ASNIN);
+  catat({
+    modul: 'Presensi', skenario: 'Guru menutup presensi dan siswa yang belum mengisi dicatat alpa',
+    input: 'Menekan tombol Tutup Presensi',
+    harapan: 'Presensi ditutup dan seluruh siswa yang belum menyatakan hadir tercatat alpa',
+    aktual: `HTTP ${rTutup.status}, pesan: "${rTutup.data?.message}" `
+      + `(pengisian siswa lain sebelum ditutup: HTTP ${rPresensiSiswaLain.status})`,
+    sesuai: rTutup.status === 200 && rTutup.data.ditandai_alpa >= 0,
+  });
+
+  const rHadirTertutup = await post(`/api/presensi/${idPresensi}/hadir`, {}, tokenSiswa.bunga);
+  catat({
+    modul: 'Presensi', skenario: 'Siswa mencoba mengisi presensi yang sudah ditutup guru',
+    input: 'Menekan tombol Saya Hadir setelah presensi ditutup',
+    harapan: 'Sistem menolak karena presensi pertemuan tersebut sudah ditutup',
+    aktual: `HTTP ${rHadirTertutup.status}, pesan: "${rHadirTertutup.data?.message}"`,
+    sesuai: rHadirTertutup.status === 409,
+  });
+
+  const rRekapKelas = await get(`/api/presensi/kelas-mapel/${kmBindXA}`, TG_ASNIN);
+  const rekapHadir = rRekapKelas.data;
+  catat({
+    modul: 'Presensi', skenario: 'Guru melihat rekap kehadiran seluruh siswa pada satu mata pelajaran',
+    input: `Membuka rekap presensi ${rekapHadir.kelas_mapel?.nama_mapel} kelas ${rekapHadir.kelas_mapel?.nama_kelas}`,
+    harapan: 'Sistem menampilkan kehadiran tiap siswa pada setiap pertemuan beserta '
+      + 'rekapitulasi hadir, sakit, izin, alpa, dan persentase kehadirannya',
+    aktual: `HTTP ${rRekapKelas.status}: ${rekapHadir.siswa?.length} siswa, ${rekapHadir.pertemuan?.length} pertemuan; `
+      + `contoh: ${rekapHadir.siswa?.[0]?.nama} hadir ${rekapHadir.siswa?.[0]?.hadir}x `
+      + `(${rekapHadir.siswa?.[0]?.persen_hadir}%)`,
+    sesuai: rRekapKelas.status === 200 && rekapHadir.siswa.length > 0
+      && rekapHadir.siswa[0].persen_hadir !== undefined,
+  });
+
+  const rRekapSaya = await get('/api/presensi/saya', tokenSiswa.ahmad);
+  catat({
+    modul: 'Presensi', skenario: 'Siswa melihat rekap kehadirannya sendiri per mata pelajaran',
+    input: 'Membuka menu Presensi',
+    harapan: 'Sistem menampilkan jumlah hadir, sakit, izin, alpa, dan persentase kehadiran '
+      + 'siswa pada setiap mata pelajaran',
+    aktual: `HTTP ${rRekapSaya.status}: ${rRekapSaya.data.mapel?.length} mata pelajaran, `
+      + `kehadiran keseluruhan ${rRekapSaya.data.ringkasan?.persen_hadir}% `
+      + `(${rRekapSaya.data.ringkasan?.hadir} dari ${rRekapSaya.data.ringkasan?.pertemuan} pertemuan)`,
+    sesuai: rRekapSaya.status === 200 && rRekapSaya.data.mapel.length > 0,
+  });
+
+  const rPresensiKelasLain = await get(`/api/presensi/kelas-mapel/${kmBindXA}`, TG_SAMJUHDI);
+  catat({
+    modul: 'Presensi', skenario: 'Guru mencoba melihat presensi mata pelajaran yang bukan diampunya',
+    input: 'Guru Fisika membuka rekap presensi Bahasa Indonesia',
+    harapan: 'Sistem menolak karena guru tersebut tidak mengampu mata pelajaran itu',
+    aktual: `HTTP ${rPresensiKelasLain.status}, pesan: "${rPresensiKelasLain.data?.message}"`,
+    sesuai: rPresensiKelasLain.status === 403,
   });
 
   // =================================================================

@@ -18,6 +18,8 @@ const nilai = require('../controllers/nilaiController');
 const forum = require('../controllers/forumController');
 const dashboard = require('../controllers/dashboardController');
 const raport = require('../controllers/raportController');
+const jadwal = require('../controllers/jadwalController');
+const presensi = require('../controllers/presensiController');
 const publik = require('../controllers/publikController');
 
 // Pintasan penulisan middleware penguncian periode
@@ -141,6 +143,25 @@ router.post('/nilai', authenticate, authorize('guru'),
   kunci('pengumpulan', dariBody('id_kumpul')), nilai.beriNilai);
 router.get('/nilai/saya', authenticate, authorize('siswa'), nilai.rekapSiswa);
 router.get('/nilai/kelas-mapel/:id', authenticate, authorize('guru', 'admin'), nilai.rekapKelasMapel);
+
+// ---------- Jadwal mata pelajaran ----------
+router.get('/jadwal/sekolah', authenticate, jadwal.sekolah);
+router.get('/jadwal/saya', authenticate, authorize('guru', 'siswa'), jadwal.saya);
+router.get('/jadwal/periode', authenticate, jadwal.periodeTersedia);
+
+// ---------- Presensi (daftar hadir) ----------
+router.get('/presensi/saya', authenticate, authorize('siswa'), presensi.rekapSiswa);
+router.get('/presensi/kelas-mapel/:id', authenticate, authorize('guru', 'admin'),
+  presensi.rekapKelasMapel);
+router.get('/pertemuan/:id/presensi', authenticate, presensi.detail);
+router.post('/pertemuan/:id/presensi', authenticate, authorize('guru'),
+  kunci('pertemuan', dariParam), presensi.buka);
+router.post('/presensi/:id/tutup', authenticate, authorize('guru'),
+  kunci('presensi', dariParam), presensi.tutup);
+router.post('/presensi/:id/hadir', authenticate, authorize('siswa'),
+  kunci('presensi', dariParam), presensi.hadir);
+router.put('/presensi/:id/siswa/:idSiswa', authenticate, authorize('guru'),
+  kunci('presensi', dariParam), presensi.setStatus);
 
 // ---------- Raport sementara ----------
 router.get('/raport/kelas', authenticate, authorize('guru'), raport.kelasGuru);

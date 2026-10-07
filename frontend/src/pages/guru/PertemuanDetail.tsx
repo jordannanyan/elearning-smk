@@ -4,6 +4,7 @@ import api from '../../api/client';
 import Modal from '../../components/Modal';
 import SoalManager from '../../components/SoalManager';
 import MateriIsi from '../../components/MateriIsi';
+import PanelPresensi from '../../components/PanelPresensi';
 import type { IsiPertemuan, Materi, TipeMateri, Tugas } from '../../api/types';
 
 function fmt(dt?: string | null) {
@@ -154,6 +155,8 @@ export default function GuruPertemuanDetail() {
           <div>Periode <strong>{p.kode_periode}</strong> terkunci. Isi pertemuan ini hanya dapat dilihat.</div>
         </div>
       )}
+
+      <PanelPresensi idPertemuan={p.id} peran="guru" terkunci={terkunci} />
 
       {/* ---------------- MATERI ---------------- */}
       <div className="blok">

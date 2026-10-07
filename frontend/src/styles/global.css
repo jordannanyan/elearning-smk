@@ -307,7 +307,8 @@ a.polos { color: inherit; display: block; }
   background: #fff; border-radius: 6px; cursor: pointer; font-size: 13px; font-weight: 600;
   color: var(--text);
 }
-.paginasi button:hover:not(:disabled) { background: #f9fafb; }
+.paginasi button:not(.aktif):hover:not(:disabled) { background: #f9fafb; }
+.paginasi button.aktif:hover { background: var(--primary-dark); }
 .paginasi button.aktif { background: var(--primary); color: #fff; border-color: var(--primary); }
 .paginasi button:disabled { opacity: .45; cursor: not-allowed; }
 .paginasi .info { font-size: 12.5px; color: var(--gray); margin-right: 6px; }
@@ -461,3 +462,87 @@ a.polos { color: inherit; display: block; }
 }
 
 .tautan-beranda { text-align: center; margin-top: 16px; font-size: 12.5px; }
+
+/* ---------- Tab pemilih tampilan ---------- */
+.tab-pilih { display: inline-flex; border: 1px solid var(--border); border-radius: 8px; overflow: hidden; }
+.tab-pilih button { border: 0; background: #fff; padding: 8px 14px; font-size: 13px;
+  font-weight: 600; color: var(--gray); cursor: pointer; }
+.tab-pilih button + button { border-left: 1px solid var(--border); }
+.tab-pilih button.aktif { background: var(--primary); color: #fff; }
+
+/* ---------- Jadwal format SK ---------- */
+.lembar-jadwal { background: #fff; border: 1px solid var(--border); border-radius: 10px; padding: 22px; }
+.kepala-jadwal { text-align: center; border-bottom: 2px solid var(--text);
+  padding-bottom: 12px; margin-bottom: 18px; }
+.kepala-jadwal h3 { font-size: 16px; letter-spacing: .4px; }
+.kepala-jadwal p { font-size: 13.5px; margin-top: 2px; }
+
+.jadwal-hari + .jadwal-hari { margin-top: 22px; }
+.jadwal-hari .judul-hari { font-weight: 700; font-size: 13.5px; letter-spacing: .5px;
+  background: var(--primary-light); color: var(--primary-dark);
+  padding: 6px 10px; border-radius: 6px 6px 0 0; }
+
+.tabel-jadwal { width: 100%; border-collapse: collapse; font-size: 12px; }
+.tabel-jadwal th, .tabel-jadwal td { border: 1px solid #cbd5e1; padding: 4px 6px;
+  text-align: center; white-space: nowrap; }
+.tabel-jadwal thead th { background: #f1f5f9; font-size: 11.5px; font-weight: 700; }
+.tabel-jadwal .kol-jam { width: 62px; background: #f8fafc; font-weight: 600; }
+.tabel-jadwal td.kegiatan { background: #fef9c3; font-weight: 600; font-size: 11px;
+  letter-spacing: .3px; }
+.tabel-jadwal td.sorot, .tabel-jadwal th.sorot { background: var(--primary-light);
+  color: var(--primary-dark); font-weight: 700; }
+.tabel-jadwal .baris-istirahat td { background: #f8fafc; color: var(--gray);
+  font-size: 11px; letter-spacing: .4px; }
+
+.legenda-jadwal { display: grid; grid-template-columns: 1.3fr 1.1fr .8fr; gap: 24px;
+  margin-top: 22px; padding-top: 16px; border-top: 1px dashed var(--border); font-size: 12.5px; }
+.legenda-jadwal h4 { font-size: 12.5px; letter-spacing: .4px; margin-bottom: 8px; }
+.legenda-jadwal ul, .legenda-jadwal ol { list-style: none; line-height: 1.85; }
+.kode-guru li .no { display: inline-block; min-width: 22px; font-weight: 700; color: var(--primary); }
+.kode-mapel li { display: flex; gap: 6px; align-items: baseline; }
+.tabel-waktu { width: 100%; border-collapse: collapse; font-size: 12px; }
+.tabel-waktu td { border: 1px solid var(--border); padding: 3px 6px; }
+.tabel-waktu td:first-child { width: 58px; text-align: center; font-weight: 600; }
+.tabel-waktu tr.istirahat td { background: #f8fafc; color: var(--gray); font-weight: 400; }
+@media (max-width: 900px) { .legenda-jadwal { grid-template-columns: 1fr; } }
+
+/* ---------- Jadwal pribadi ---------- */
+.jadwal-saya-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; }
+.kartu-hari { background: #fff; border: 1px solid var(--border); border-radius: 10px; padding: 16px; }
+.kartu-hari h3 { font-size: 13.5px; letter-spacing: .5px; color: var(--primary-dark);
+  padding-bottom: 8px; border-bottom: 1px solid var(--border); margin-bottom: 10px; }
+.kartu-hari ul { list-style: none; }
+.kartu-hari li { display: flex; gap: 10px; padding: 7px 0; }
+.kartu-hari li + li { border-top: 1px dashed var(--border); }
+.kartu-hari li.kegiatan .nama { color: #92600a; }
+.kartu-hari .jam { flex-shrink: 0; width: 56px; text-align: center; }
+.kartu-hari .jam strong { display: block; font-size: 15px; color: var(--primary); line-height: 1.1; }
+.kartu-hari .jam small { font-size: 10px; color: var(--gray); }
+.kartu-hari .isi { min-width: 0; }
+.kartu-hari .nama { display: block; font-weight: 600; font-size: 12.5px; }
+.kartu-hari .ket { font-size: 11.5px; color: var(--gray); }
+.kartu-hari .kosong { font-size: 12.5px; padding: 6px 0; }
+
+/* ---------- Presensi ---------- */
+.presensi-saya { display: flex; align-items: center; justify-content: space-between;
+  gap: 16px; flex-wrap: wrap; padding-bottom: 14px; border-bottom: 1px dashed var(--border); }
+.presensi-saya .status-besar { margin-top: 4px; font-size: 15px; }
+.rekap-presensi { display: grid; grid-template-columns: repeat(auto-fit, minmax(88px, 1fr));
+  gap: 10px; margin-top: 14px; }
+.rekap-presensi div { background: #f8fafc; border: 1px solid var(--border); border-radius: 8px;
+  padding: 10px; text-align: center; font-size: 11.5px; color: var(--gray); }
+.rekap-presensi strong { display: block; font-size: 19px; color: var(--text); line-height: 1.2; }
+
+.tabel-raport .sel-hadir { text-align: center; font-weight: 700; font-size: 11.5px; }
+.tabel-raport .sel-hadir.hadir { color: #166534; background: #f0fdf4; }
+.tabel-raport .sel-hadir.sakit { color: #92600a; background: #fdf9ed; }
+.tabel-raport .sel-hadir.izin  { color: #1e40af; background: #eff6ff; }
+.tabel-raport .sel-hadir.alpa  { color: #a12622; background: #fdf2f2; }
+
+@media print {
+  .tab-pilih { display: none !important; }
+  .lembar-jadwal { border: 0; padding: 0; }
+  .tabel-jadwal { font-size: 9px; }
+  .tabel-jadwal th, .tabel-jadwal td { padding: 2px 3px; }
+  .jadwal-hari { break-inside: avoid; }
+}

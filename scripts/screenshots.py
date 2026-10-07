@@ -8,6 +8,7 @@
 # Jalankan  : python scripts/screenshots.py
 # Keluaran  : docs-bab4/screenshots/*.png  dan  docs-bab4/data/daftar-gambar.json
 # =====================================================================
+import glob
 import json
 import os
 from playwright.sync_api import sync_playwright
@@ -18,6 +19,12 @@ OUT = os.path.join(ROOT, "docs-bab4", "screenshots")
 DATA = os.path.join(ROOT, "docs-bab4", "data")
 os.makedirs(OUT, exist_ok=True)
 os.makedirs(DATA, exist_ok=True)
+
+# Tangkapan layar lama dibuang lebih dahulu. Tanpa langkah ini, berkas
+# dari eksekusi sebelumnya akan tertinggal dengan penomoran yang berbeda
+# ketika ada halaman baru disisipkan di tengah urutan.
+for _lama in glob.glob(os.path.join(OUT, "*.png")):
+    os.remove(_lama)
 
 W, H = 1440, 900
 daftar = []
