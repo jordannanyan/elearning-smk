@@ -344,6 +344,54 @@ async function seed() {
       'Susunlah satu soal cerita yang dapat diselesaikan dengan SPLDV beserta penyelesaiannya, '
       + 'kemudian unggah dalam bentuk dokumen.', hari(2), 'tugas');
 
+
+    // ---------- Ujian Tengah dan Akhir Semester Matematika X A ----------
+    // Dua penilaian ini melengkapi rangkaian penilaian satu semester,
+    // sehingga daftar nilai guru terbaca runut mulai dari tugas pertama,
+    // kuis, Ujian Tengah Semester, sampai Ujian Akhir Semester.
+    const p4 = await buatPertemuan(kmMtk, 4, 'Ujian Tengah Semester',
+      'Ujian tengah semester yang mencakup persamaan dan pertidaksamaan linear '
+      + 'serta sistem persamaan linear dua variabel.', -10);
+    await buatMateri(p4, 'Kisi-Kisi Ujian Tengah Semester',
+      'Materi yang diujikan meliputi persamaan linear satu variabel, pertidaksamaan linear '
+      + 'satu variabel, dan sistem persamaan linear dua variabel.', 'teks');
+    const utsMtk = await buatTugas(p4, 'Ujian Tengah Semester Matematika Umum',
+      'Kerjakan seluruh soal ujian tengah semester secara mandiri. Tuliskan langkah '
+      + 'penyelesaian dengan lengkap.', hari(-9), 'uts');
+
+    const p5 = await buatPertemuan(kmMtk, 5, 'Ujian Akhir Semester',
+      'Ujian akhir semester yang mencakup seluruh materi matematika umum kelas X '
+      + 'pada semester genap.', -3);
+    const uasMtk = await buatTugas(p5, 'Ujian Akhir Semester Matematika Umum',
+      'Ujian akhir semester meliputi seluruh capaian pembelajaran yang telah dipelajari '
+      + 'sepanjang semester ini.', hari(-2), 'uas');
+
+    // Hasil ujian diisikan langsung karena pelaksanaannya berlangsung di
+    // kelas, bukan melalui pengumpulan berkas di dalam sistem.
+    const siswaXAUjian = SEKOLAH.siswa['X A'];
+    const nilaiUts = [82, 90, 75, 68, 88, 79, 94, 71, 85, 77, 92, 66, 80, 87,
+      73, 95, 69, 84, 78, 91, 74, 86, 70, 89, 81, 76, 93, 83];
+    const nilaiUas = [85, 92, 78, 72, 90, 81, 96, 74, 87, 80, 94, 70, 83, 89,
+      76, 97, 73, 86, 82, 93, 77, 88, 75, 91, 84, 79, 95, 86];
+
+    for (let i = 0; i < siswaXAUjian.length; i += 1) {
+      for (const [idTugas, daftar, geser] of [[utsMtk, nilaiUts, -9], [uasMtk, nilaiUas, -2]]) {
+        const skor = daftar[i % daftar.length];
+        const [pg] = await conn.query(
+          `INSERT INTO pengumpulan_tugas (id_tugas, id_siswa, jawaban, tgl_kumpul, terlambat)
+           VALUES (?,?,?,?,0)`,
+          [idTugas, siswaId[siswaXAUjian[i].email],
+            'Lembar jawaban ujian dikumpulkan di kelas.', hari(geser, '09:30:00')]);
+        await conn.query(
+          'INSERT INTO nilai (id_kumpul, id_guru, skor, catatan, tgl_penilaian) VALUES (?,?,?,?,?)',
+          [pg.insertId, guruId['halifah@smakk.sch.id'], skor,
+            skor >= 85 ? 'Hasil ujian sangat baik.'
+              : skor >= 75 ? 'Hasil ujian sudah mencapai ketuntasan.'
+                : 'Perlu pengayaan pada materi yang belum dikuasai.',
+            hari(geser + 1, '14:00:00')]);
+      }
+    }
+
     // ---------- Bahasa Indonesia X A ----------
     const b1 = await buatPertemuan(kmBind, 1, 'Struktur dan Kaidah Teks Deskripsi',
       'Mengenal struktur teks deskripsi serta kaidah kebahasaan yang digunakan.', -20);

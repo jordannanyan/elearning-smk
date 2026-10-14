@@ -545,6 +545,10 @@ async function main() {
     sesuai: kmGuru.length > 0 && kmGuru.every((k) => k.status_periode === 'aktif'),
   });
 
+  // Nomor pertemuan baru dibandingkan dengan jumlah pertemuan yang sudah
+  // ada, bukan angka tetap, agar pengujian tetap sahih ketika data
+  // peragaan bertambah.
+  const pertemuanSebelum = (await get(`/api/kelas-mapel/${kmMtk.id}/pertemuan`, TG)).data.length;
   const rBuatPertemuan = await post(`/api/kelas-mapel/${kmMtk.id}/pertemuan`, {
     judul: 'Nilai Mutlak Persamaan Linear',
     deskripsi: 'Konsep nilai mutlak dan penyelesaian persamaan nilai mutlak linear satu variabel.',
@@ -555,7 +559,8 @@ async function main() {
     input: 'Judul: Nilai Mutlak Persamaan Linear',
     harapan: 'Pertemuan tersimpan dengan nomor urut otomatis melanjutkan pertemuan sebelumnya',
     aktual: `HTTP ${rBuatPertemuan.status}, tersimpan sebagai Pertemuan ke-${rBuatPertemuan.data?.nomor}`,
-    sesuai: rBuatPertemuan.status === 201 && rBuatPertemuan.data.nomor === 4,
+    sesuai: rBuatPertemuan.status === 201
+      && rBuatPertemuan.data.nomor === pertemuanSebelum + 1,
   });
   const idPertemuanBaru = rBuatPertemuan.data?.id;
 
@@ -1642,16 +1647,38 @@ async function main() {
 
   const rPresensiSiswaLain = await post(`/api/presensi/${idPresensi}/hadir`, {}, tokenSiswa.dhika);
 
-  // Sebagian besar siswa ditandai hadir dan beberapa diberi keterangan,
-  // supaya rekap presensi memuat keadaan yang wajar seperti di kelas,
-  // bukan hanya dua siswa hadir dan sisanya alpa.
-  for (let i = 0; i < anggotaBind.length; i += 1) {
-    const sw = anggotaBind[i];
-    if ([sAhmad.id_siswa, sAudiyah.id_siswa].includes(sw.id_siswa)) continue;
-    const status = i % 13 === 5 ? 'izin' : i % 11 === 7 ? 'alpa' : 'hadir';
-    const ket = status === 'izin' ? 'Mengikuti kegiatan sekolah' : null;
-    await put(`/api/presensi/${idPresensi}/siswa/${sw.id_siswa}`, { status, keterangan: ket },
-      TG_ASNIN);
+  const rGuruHadir = await put(`/api/presensi/${idPresensi}/siswa/${sAhmad.id_siswa}`,
+    { status: 'hadir' }, TG_ASNIN);
+  catat({
+    modul: 'Presensi', skenario: 'Guru mencoba menandai siswa hadir',
+    input: `Guru menetapkan status hadir untuk ${sAhmad.nama}`,
+    harapan: 'Sistem menolak karena kehadiran hanya sah apabila dinyatakan sendiri oleh siswa; '
+      + 'guru sebatas mencatat keterangan sakit, izin, atau alpa',
+    aktual: `HTTP ${rGuruHadir.status}, pesan: "${rGuruHadir.data?.message}"`,
+    sesuai: rGuruHadir.status === 403,
+  });
+
+  // Sebagian besar siswa menyatakan hadir sendiri melalui akunnya, dan
+  // beberapa diberi keterangan oleh guru, supaya rekap presensi memuat
+  // keadaan yang wajar seperti di kelas.
+  const anggotaKelasBind = (await get('/api/users?role=siswa', TA)).data
+    .filter((u) => (u.kelas_aktif || '').split(', ').includes('X A'));
+  let mengisiSendiri = 0;
+  for (let i = 0; i < anggotaKelasBind.length; i += 1) {
+    const u = anggotaKelasBind[i];
+    if (i % 13 === 5 || i % 11 === 7) continue;          // berhalangan hadir
+    const masuk = await login(u.email, 'siswa123');
+    if (masuk.status !== 200) continue;
+    const r = await post(`/api/presensi/${idPresensi}/hadir`, {}, masuk.data.token);
+    if (r.status === 200) mengisiSendiri += 1;
+  }
+  for (let i = 0; i < anggotaKelasBind.length; i += 1) {
+    if (i % 13 !== 5) continue;
+    const sw = anggotaBind.find((a) => a.nama === anggotaKelasBind[i].nama);
+    if (sw) {
+      await put(`/api/presensi/${idPresensi}/siswa/${sw.id_siswa}`,
+        { status: 'izin', keterangan: 'Mengikuti kegiatan sekolah' }, TG_ASNIN);
+    }
   }
 
   const rTutup = await post(`/api/presensi/${idPresensi}/tutup`, {}, TG_ASNIN);
@@ -1660,7 +1687,7 @@ async function main() {
     input: 'Menekan tombol Tutup Presensi',
     harapan: 'Presensi ditutup dan seluruh siswa yang belum menyatakan hadir tercatat alpa',
     aktual: `HTTP ${rTutup.status}, pesan: "${rTutup.data?.message}" `
-      + `(pengisian siswa lain sebelum ditutup: HTTP ${rPresensiSiswaLain.status})`,
+      + `(${mengisiSendiri} siswa menyatakan hadir sendiri sebelum presensi ditutup)`,
     sesuai: rTutup.status === 200 && rTutup.data.ditandai_alpa >= 0,
   });
 

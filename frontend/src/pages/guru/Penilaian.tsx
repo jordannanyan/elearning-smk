@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import api, { API_BASE } from '../../api/client';
 import Modal from '../../components/Modal';
 import PenilaianModal from '../../components/PenilaianModal';
+import DaftarNilaiMapel from '../../components/DaftarNilaiMapel';
 import type { KelasMapel, PengumpulanRow, Periode, Tugas } from '../../api/types';
 
 // ---------------------------------------------------------------------
@@ -30,8 +31,11 @@ export default function GuruPenilaian() {
   const [tugas, setTugas] = useState<Tugas[]>([]);
   const [loading, setLoading] = useState(true);
 
-  // Mata pelajaran yang sedang dibuka
+  // Mata pelajaran yang sedang dibuka, beserta tampilan yang dipilih:
+  // daftar tugas untuk memeriksa pekerjaan, atau daftar nilai yang
+  // merangkum seluruh penilaian satu semester.
   const [terbuka, setTerbuka] = useState<KelasMapel | null>(null);
+  const [tampilan, setTampilan] = useState<'tugas' | 'nilai'>('tugas');
 
   const [detail, setDetail] = useState<Tugas | null>(null);
   const [subs, setSubs] = useState<PengumpulanRow[]>([]);
@@ -145,7 +149,7 @@ export default function GuruPenilaian() {
                     const jml = tugas.filter((t) => t.id_kelas_mapel === km.id).length;
                     return (
                       <div className={`kartu-ringkas ${terkunci ? 'abu' : ''}`} key={km.id}
-                        onClick={() => setTerbuka(km)}>
+                        onClick={() => { setTerbuka(km); setTampilan('tugas'); }}>
                         <div>
                           <h3>{km.nama_mapel}</h3>
                           <div className="sub">🏫 {km.nama_kelas} · Tingkat {km.tingkat}</div>
@@ -165,15 +169,28 @@ export default function GuruPenilaian() {
         ) : (
           /* ---------- Tugas pada satu mata pelajaran ---------- */
           <>
-            <div className="notice info">
+            <div className="notice info tanpa-cetak">
               <span className="ikon">📘</span>
               <div>
                 <strong>{terbuka.nama_mapel}</strong> — kelas {terbuka.nama_kelas} ·{' '}
-                {terbuka.jumlah_siswa} siswa · {tugasTerbuka.length} tugas &amp; kuis
+                {terbuka.jumlah_siswa} siswa · {tugasTerbuka.length} penilaian
               </div>
             </div>
 
-            {tugasTerbuka.length === 0
+            <div className="tanpa-cetak" style={{ display: 'flex', gap: 10, marginBottom: 16 }}>
+              <div className="tab-pilih">
+                <button className={tampilan === 'tugas' ? 'aktif' : ''}
+                  onClick={() => setTampilan('tugas')}>Periksa Pekerjaan</button>
+                <button className={tampilan === 'nilai' ? 'aktif' : ''}
+                  onClick={() => setTampilan('nilai')}>Daftar Nilai</button>
+              </div>
+              {tampilan === 'nilai' && (
+                <button className="btn secondary" onClick={() => window.print()}>🖨️ Cetak</button>
+              )}
+            </div>
+
+            {tampilan === 'nilai' ? <DaftarNilaiMapel idKelasMapel={terbuka.id} />
+              : tugasTerbuka.length === 0
               ? <div className="card center-msg">Belum ada tugas pada mata pelajaran ini.</div>
               : tugasTerbuka.map((t) => (
                 <div className="kartu-tugas aman" key={t.id}>

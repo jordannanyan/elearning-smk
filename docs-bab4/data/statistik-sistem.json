@@ -43,17 +43,17 @@
     {
       "tabel": "pertemuan",
       "deskripsi": "Menyimpan urutan pertemuan pembelajaran pada sebuah kelas mata pelajaran",
-      "jumlah_record": 10
+      "jumlah_record": 12
     },
     {
       "tabel": "materi",
       "deskripsi": "Menyimpan materi pembelajaran (teks, berkas, video, atau tautan) pada sebuah pertemuan",
-      "jumlah_record": 16
+      "jumlah_record": 17
     },
     {
       "tabel": "tugas",
       "deskripsi": "Menyimpan data tugas dan kuis beserta tipe dan batas waktunya",
-      "jumlah_record": 9
+      "jumlah_record": 11
     },
     {
       "tabel": "soal",
@@ -63,7 +63,7 @@
     {
       "tabel": "pengumpulan_tugas",
       "deskripsi": "Menyimpan data pengumpulan jawaban tugas oleh siswa",
-      "jumlah_record": 32
+      "jumlah_record": 88
     },
     {
       "tabel": "jawaban_siswa",
@@ -73,7 +73,7 @@
     {
       "tabel": "nilai",
       "deskripsi": "Menyimpan data nilai siswa hasil penilaian guru maupun koreksi otomatis",
-      "jumlah_record": 26
+      "jumlah_record": 82
     },
     {
       "tabel": "forum_diskusi",
@@ -182,6 +182,28 @@
       "terlambat": 0
     },
     {
+      "siswa": "Ahmad Hanapi",
+      "kelas": "X A",
+      "periode": "2026/2",
+      "mapel": "MATEMATIKA UMUM",
+      "pertemuan": 4,
+      "tugas": "Ujian Tengah Semester Matematika Umum",
+      "tipe": "uts",
+      "skor": "82.00",
+      "terlambat": 0
+    },
+    {
+      "siswa": "Ahmad Hanapi",
+      "kelas": "X A",
+      "periode": "2026/2",
+      "mapel": "MATEMATIKA UMUM",
+      "pertemuan": 5,
+      "tugas": "Ujian Akhir Semester Matematika Umum",
+      "tipe": "uas",
+      "skor": "85.00",
+      "terlambat": 0
+    },
+    {
       "siswa": "Ahmad Raviza",
       "kelas": "X A",
       "periode": "2026/2",
@@ -248,6 +270,28 @@
       "terlambat": 0
     },
     {
+      "siswa": "Ahmad Raviza",
+      "kelas": "X A",
+      "periode": "2026/2",
+      "mapel": "MATEMATIKA UMUM",
+      "pertemuan": 4,
+      "tugas": "Ujian Tengah Semester Matematika Umum",
+      "tipe": "uts",
+      "skor": "90.00",
+      "terlambat": 0
+    },
+    {
+      "siswa": "Ahmad Raviza",
+      "kelas": "X A",
+      "periode": "2026/2",
+      "mapel": "MATEMATIKA UMUM",
+      "pertemuan": 5,
+      "tugas": "Ujian Akhir Semester Matematika Umum",
+      "tipe": "uas",
+      "skor": "92.00",
+      "terlambat": 0
+    },
+    {
       "siswa": "Aminatul Najua",
       "kelas": "X A",
       "periode": "2026/2",
@@ -278,6 +322,28 @@
       "tugas": "Kuis Persamaan dan Pertidaksamaan Linear",
       "tipe": "kuis",
       "skor": "60.00",
+      "terlambat": 0
+    },
+    {
+      "siswa": "Aminatul Najua",
+      "kelas": "X A",
+      "periode": "2026/2",
+      "mapel": "MATEMATIKA UMUM",
+      "pertemuan": 4,
+      "tugas": "Ujian Tengah Semester Matematika Umum",
+      "tipe": "uts",
+      "skor": "75.00",
+      "terlambat": 0
+    },
+    {
+      "siswa": "Aminatul Najua",
+      "kelas": "X A",
+      "periode": "2026/2",
+      "mapel": "MATEMATIKA UMUM",
+      "pertemuan": 5,
+      "tugas": "Ujian Akhir Semester Matematika Umum",
+      "tipe": "uas",
+      "skor": "78.00",
       "terlambat": 0
     },
     {
@@ -336,6 +402,28 @@
       "terlambat": 0
     },
     {
+      "siswa": "Audiyah",
+      "kelas": "X A",
+      "periode": "2026/2",
+      "mapel": "MATEMATIKA UMUM",
+      "pertemuan": 4,
+      "tugas": "Ujian Tengah Semester Matematika Umum",
+      "tipe": "uts",
+      "skor": "68.00",
+      "terlambat": 0
+    },
+    {
+      "siswa": "Audiyah",
+      "kelas": "X A",
+      "periode": "2026/2",
+      "mapel": "MATEMATIKA UMUM",
+      "pertemuan": 5,
+      "tugas": "Ujian Akhir Semester Matematika Umum",
+      "tipe": "uas",
+      "skor": "72.00",
+      "terlambat": 0
+    },
+    {
       "siswa": "Bunga Citra",
       "kelas": "X A",
       "periode": "2026/2",
@@ -380,6 +468,28 @@
       "terlambat": 0
     },
     {
+      "siswa": "Bunga Citra",
+      "kelas": "X A",
+      "periode": "2026/2",
+      "mapel": "MATEMATIKA UMUM",
+      "pertemuan": 4,
+      "tugas": "Ujian Tengah Semester Matematika Umum",
+      "tipe": "uts",
+      "skor": "88.00",
+      "terlambat": 0
+    },
+    {
+      "siswa": "Bunga Citra",
+      "kelas": "X A",
+      "periode": "2026/2",
+      "mapel": "MATEMATIKA UMUM",
+      "pertemuan": 5,
+      "tugas": "Ujian Akhir Semester Matematika Umum",
+      "tipe": "uas",
+      "skor": "90.00",
+      "terlambat": 0
+    },
+    {
       "siswa": "Dhika Wahyu Ramadhan",
       "kelas": "X A",
       "periode": "2026/2",
@@ -410,6 +520,512 @@
       "tugas": "Kuis Persamaan dan Pertidaksamaan Linear",
       "tipe": "kuis",
       "skor": "80.00",
+      "terlambat": 0
+    },
+    {
+      "siswa": "Dhika Wahyu Ramadhan",
+      "kelas": "X A",
+      "periode": "2026/2",
+      "mapel": "MATEMATIKA UMUM",
+      "pertemuan": 4,
+      "tugas": "Ujian Tengah Semester Matematika Umum",
+      "tipe": "uts",
+      "skor": "79.00",
+      "terlambat": 0
+    },
+    {
+      "siswa": "Dhika Wahyu Ramadhan",
+      "kelas": "X A",
+      "periode": "2026/2",
+      "mapel": "MATEMATIKA UMUM",
+      "pertemuan": 5,
+      "tugas": "Ujian Akhir Semester Matematika Umum",
+      "tipe": "uas",
+      "skor": "81.00",
+      "terlambat": 0
+    },
+    {
+      "siswa": "Dira Permata Sari",
+      "kelas": "X A",
+      "periode": "2026/2",
+      "mapel": "MATEMATIKA UMUM",
+      "pertemuan": 4,
+      "tugas": "Ujian Tengah Semester Matematika Umum",
+      "tipe": "uts",
+      "skor": "94.00",
+      "terlambat": 0
+    },
+    {
+      "siswa": "Dira Permata Sari",
+      "kelas": "X A",
+      "periode": "2026/2",
+      "mapel": "MATEMATIKA UMUM",
+      "pertemuan": 5,
+      "tugas": "Ujian Akhir Semester Matematika Umum",
+      "tipe": "uas",
+      "skor": "96.00",
+      "terlambat": 0
+    },
+    {
+      "siswa": "Eka Purnama Sari",
+      "kelas": "X A",
+      "periode": "2026/2",
+      "mapel": "MATEMATIKA UMUM",
+      "pertemuan": 4,
+      "tugas": "Ujian Tengah Semester Matematika Umum",
+      "tipe": "uts",
+      "skor": "71.00",
+      "terlambat": 0
+    },
+    {
+      "siswa": "Eka Purnama Sari",
+      "kelas": "X A",
+      "periode": "2026/2",
+      "mapel": "MATEMATIKA UMUM",
+      "pertemuan": 5,
+      "tugas": "Ujian Akhir Semester Matematika Umum",
+      "tipe": "uas",
+      "skor": "74.00",
+      "terlambat": 0
+    },
+    {
+      "siswa": "Fajrianor",
+      "kelas": "X A",
+      "periode": "2026/2",
+      "mapel": "MATEMATIKA UMUM",
+      "pertemuan": 4,
+      "tugas": "Ujian Tengah Semester Matematika Umum",
+      "tipe": "uts",
+      "skor": "85.00",
+      "terlambat": 0
+    },
+    {
+      "siswa": "Fajrianor",
+      "kelas": "X A",
+      "periode": "2026/2",
+      "mapel": "MATEMATIKA UMUM",
+      "pertemuan": 5,
+      "tugas": "Ujian Akhir Semester Matematika Umum",
+      "tipe": "uas",
+      "skor": "87.00",
+      "terlambat": 0
+    },
+    {
+      "siswa": "Fatimah Azahra",
+      "kelas": "X A",
+      "periode": "2026/2",
+      "mapel": "MATEMATIKA UMUM",
+      "pertemuan": 4,
+      "tugas": "Ujian Tengah Semester Matematika Umum",
+      "tipe": "uts",
+      "skor": "77.00",
+      "terlambat": 0
+    },
+    {
+      "siswa": "Fatimah Azahra",
+      "kelas": "X A",
+      "periode": "2026/2",
+      "mapel": "MATEMATIKA UMUM",
+      "pertemuan": 5,
+      "tugas": "Ujian Akhir Semester Matematika Umum",
+      "tipe": "uas",
+      "skor": "80.00",
+      "terlambat": 0
+    },
+    {
+      "siswa": "Fuza Nabila Syabaniah",
+      "kelas": "X A",
+      "periode": "2026/2",
+      "mapel": "MATEMATIKA UMUM",
+      "pertemuan": 4,
+      "tugas": "Ujian Tengah Semester Matematika Umum",
+      "tipe": "uts",
+      "skor": "92.00",
+      "terlambat": 0
+    },
+    {
+      "siswa": "Fuza Nabila Syabaniah",
+      "kelas": "X A",
+      "periode": "2026/2",
+      "mapel": "MATEMATIKA UMUM",
+      "pertemuan": 5,
+      "tugas": "Ujian Akhir Semester Matematika Umum",
+      "tipe": "uas",
+      "skor": "94.00",
+      "terlambat": 0
+    },
+    {
+      "siswa": "Hidayatul Firdaus",
+      "kelas": "X A",
+      "periode": "2026/2",
+      "mapel": "MATEMATIKA UMUM",
+      "pertemuan": 4,
+      "tugas": "Ujian Tengah Semester Matematika Umum",
+      "tipe": "uts",
+      "skor": "66.00",
+      "terlambat": 0
+    },
+    {
+      "siswa": "Hidayatul Firdaus",
+      "kelas": "X A",
+      "periode": "2026/2",
+      "mapel": "MATEMATIKA UMUM",
+      "pertemuan": 5,
+      "tugas": "Ujian Akhir Semester Matematika Umum",
+      "tipe": "uas",
+      "skor": "70.00",
+      "terlambat": 0
+    },
+    {
+      "siswa": "Ihwan",
+      "kelas": "X A",
+      "periode": "2026/2",
+      "mapel": "MATEMATIKA UMUM",
+      "pertemuan": 4,
+      "tugas": "Ujian Tengah Semester Matematika Umum",
+      "tipe": "uts",
+      "skor": "80.00",
+      "terlambat": 0
+    },
+    {
+      "siswa": "Ihwan",
+      "kelas": "X A",
+      "periode": "2026/2",
+      "mapel": "MATEMATIKA UMUM",
+      "pertemuan": 5,
+      "tugas": "Ujian Akhir Semester Matematika Umum",
+      "tipe": "uas",
+      "skor": "83.00",
+      "terlambat": 0
+    },
+    {
+      "siswa": "Irpan",
+      "kelas": "X A",
+      "periode": "2026/2",
+      "mapel": "MATEMATIKA UMUM",
+      "pertemuan": 4,
+      "tugas": "Ujian Tengah Semester Matematika Umum",
+      "tipe": "uts",
+      "skor": "87.00",
+      "terlambat": 0
+    },
+    {
+      "siswa": "Irpan",
+      "kelas": "X A",
+      "periode": "2026/2",
+      "mapel": "MATEMATIKA UMUM",
+      "pertemuan": 5,
+      "tugas": "Ujian Akhir Semester Matematika Umum",
+      "tipe": "uas",
+      "skor": "89.00",
+      "terlambat": 0
+    },
+    {
+      "siswa": "Jannatul Fatwa",
+      "kelas": "X A",
+      "periode": "2026/2",
+      "mapel": "MATEMATIKA UMUM",
+      "pertemuan": 4,
+      "tugas": "Ujian Tengah Semester Matematika Umum",
+      "tipe": "uts",
+      "skor": "73.00",
+      "terlambat": 0
+    },
+    {
+      "siswa": "Jannatul Fatwa",
+      "kelas": "X A",
+      "periode": "2026/2",
+      "mapel": "MATEMATIKA UMUM",
+      "pertemuan": 5,
+      "tugas": "Ujian Akhir Semester Matematika Umum",
+      "tipe": "uas",
+      "skor": "76.00",
+      "terlambat": 0
+    },
+    {
+      "siswa": "M. Hafi Ramadhani",
+      "kelas": "X A",
+      "periode": "2026/2",
+      "mapel": "MATEMATIKA UMUM",
+      "pertemuan": 4,
+      "tugas": "Ujian Tengah Semester Matematika Umum",
+      "tipe": "uts",
+      "skor": "95.00",
+      "terlambat": 0
+    },
+    {
+      "siswa": "M. Hafi Ramadhani",
+      "kelas": "X A",
+      "periode": "2026/2",
+      "mapel": "MATEMATIKA UMUM",
+      "pertemuan": 5,
+      "tugas": "Ujian Akhir Semester Matematika Umum",
+      "tipe": "uas",
+      "skor": "97.00",
+      "terlambat": 0
+    },
+    {
+      "siswa": "Mega",
+      "kelas": "X A",
+      "periode": "2026/2",
+      "mapel": "MATEMATIKA UMUM",
+      "pertemuan": 4,
+      "tugas": "Ujian Tengah Semester Matematika Umum",
+      "tipe": "uts",
+      "skor": "69.00",
+      "terlambat": 0
+    },
+    {
+      "siswa": "Mega",
+      "kelas": "X A",
+      "periode": "2026/2",
+      "mapel": "MATEMATIKA UMUM",
+      "pertemuan": 5,
+      "tugas": "Ujian Akhir Semester Matematika Umum",
+      "tipe": "uas",
+      "skor": "73.00",
+      "terlambat": 0
+    },
+    {
+      "siswa": "Muhamad Al Fiqih",
+      "kelas": "X A",
+      "periode": "2026/2",
+      "mapel": "MATEMATIKA UMUM",
+      "pertemuan": 4,
+      "tugas": "Ujian Tengah Semester Matematika Umum",
+      "tipe": "uts",
+      "skor": "84.00",
+      "terlambat": 0
+    },
+    {
+      "siswa": "Muhamad Al Fiqih",
+      "kelas": "X A",
+      "periode": "2026/2",
+      "mapel": "MATEMATIKA UMUM",
+      "pertemuan": 5,
+      "tugas": "Ujian Akhir Semester Matematika Umum",
+      "tipe": "uas",
+      "skor": "86.00",
+      "terlambat": 0
+    },
+    {
+      "siswa": "Muhammad Rafli Bahtiar",
+      "kelas": "X A",
+      "periode": "2026/2",
+      "mapel": "MATEMATIKA UMUM",
+      "pertemuan": 4,
+      "tugas": "Ujian Tengah Semester Matematika Umum",
+      "tipe": "uts",
+      "skor": "78.00",
+      "terlambat": 0
+    },
+    {
+      "siswa": "Muhammad Rafli Bahtiar",
+      "kelas": "X A",
+      "periode": "2026/2",
+      "mapel": "MATEMATIKA UMUM",
+      "pertemuan": 5,
+      "tugas": "Ujian Akhir Semester Matematika Umum",
+      "tipe": "uas",
+      "skor": "82.00",
+      "terlambat": 0
+    },
+    {
+      "siswa": "Nor Djahra",
+      "kelas": "X A",
+      "periode": "2026/2",
+      "mapel": "MATEMATIKA UMUM",
+      "pertemuan": 4,
+      "tugas": "Ujian Tengah Semester Matematika Umum",
+      "tipe": "uts",
+      "skor": "91.00",
+      "terlambat": 0
+    },
+    {
+      "siswa": "Nor Djahra",
+      "kelas": "X A",
+      "periode": "2026/2",
+      "mapel": "MATEMATIKA UMUM",
+      "pertemuan": 5,
+      "tugas": "Ujian Akhir Semester Matematika Umum",
+      "tipe": "uas",
+      "skor": "93.00",
+      "terlambat": 0
+    },
+    {
+      "siswa": "Nurjannah",
+      "kelas": "X A",
+      "periode": "2026/2",
+      "mapel": "MATEMATIKA UMUM",
+      "pertemuan": 4,
+      "tugas": "Ujian Tengah Semester Matematika Umum",
+      "tipe": "uts",
+      "skor": "74.00",
+      "terlambat": 0
+    },
+    {
+      "siswa": "Nurjannah",
+      "kelas": "X A",
+      "periode": "2026/2",
+      "mapel": "MATEMATIKA UMUM",
+      "pertemuan": 5,
+      "tugas": "Ujian Akhir Semester Matematika Umum",
+      "tipe": "uas",
+      "skor": "77.00",
+      "terlambat": 0
+    },
+    {
+      "siswa": "Putri",
+      "kelas": "X A",
+      "periode": "2026/2",
+      "mapel": "MATEMATIKA UMUM",
+      "pertemuan": 4,
+      "tugas": "Ujian Tengah Semester Matematika Umum",
+      "tipe": "uts",
+      "skor": "86.00",
+      "terlambat": 0
+    },
+    {
+      "siswa": "Putri",
+      "kelas": "X A",
+      "periode": "2026/2",
+      "mapel": "MATEMATIKA UMUM",
+      "pertemuan": 5,
+      "tugas": "Ujian Akhir Semester Matematika Umum",
+      "tipe": "uas",
+      "skor": "88.00",
+      "terlambat": 0
+    },
+    {
+      "siswa": "Rahmad Andika",
+      "kelas": "X A",
+      "periode": "2026/2",
+      "mapel": "MATEMATIKA UMUM",
+      "pertemuan": 4,
+      "tugas": "Ujian Tengah Semester Matematika Umum",
+      "tipe": "uts",
+      "skor": "70.00",
+      "terlambat": 0
+    },
+    {
+      "siswa": "Rahmad Andika",
+      "kelas": "X A",
+      "periode": "2026/2",
+      "mapel": "MATEMATIKA UMUM",
+      "pertemuan": 5,
+      "tugas": "Ujian Akhir Semester Matematika Umum",
+      "tipe": "uas",
+      "skor": "75.00",
+      "terlambat": 0
+    },
+    {
+      "siswa": "Ramadani",
+      "kelas": "X A",
+      "periode": "2026/2",
+      "mapel": "MATEMATIKA UMUM",
+      "pertemuan": 4,
+      "tugas": "Ujian Tengah Semester Matematika Umum",
+      "tipe": "uts",
+      "skor": "89.00",
+      "terlambat": 0
+    },
+    {
+      "siswa": "Ramadani",
+      "kelas": "X A",
+      "periode": "2026/2",
+      "mapel": "MATEMATIKA UMUM",
+      "pertemuan": 5,
+      "tugas": "Ujian Akhir Semester Matematika Umum",
+      "tipe": "uas",
+      "skor": "91.00",
+      "terlambat": 0
+    },
+    {
+      "siswa": "Riszayanti",
+      "kelas": "X A",
+      "periode": "2026/2",
+      "mapel": "MATEMATIKA UMUM",
+      "pertemuan": 4,
+      "tugas": "Ujian Tengah Semester Matematika Umum",
+      "tipe": "uts",
+      "skor": "81.00",
+      "terlambat": 0
+    },
+    {
+      "siswa": "Riszayanti",
+      "kelas": "X A",
+      "periode": "2026/2",
+      "mapel": "MATEMATIKA UMUM",
+      "pertemuan": 5,
+      "tugas": "Ujian Akhir Semester Matematika Umum",
+      "tipe": "uas",
+      "skor": "84.00",
+      "terlambat": 0
+    },
+    {
+      "siswa": "Salsa Billa",
+      "kelas": "X A",
+      "periode": "2026/2",
+      "mapel": "MATEMATIKA UMUM",
+      "pertemuan": 4,
+      "tugas": "Ujian Tengah Semester Matematika Umum",
+      "tipe": "uts",
+      "skor": "76.00",
+      "terlambat": 0
+    },
+    {
+      "siswa": "Salsa Billa",
+      "kelas": "X A",
+      "periode": "2026/2",
+      "mapel": "MATEMATIKA UMUM",
+      "pertemuan": 5,
+      "tugas": "Ujian Akhir Semester Matematika Umum",
+      "tipe": "uas",
+      "skor": "79.00",
+      "terlambat": 0
+    },
+    {
+      "siswa": "Wenisa",
+      "kelas": "X A",
+      "periode": "2026/2",
+      "mapel": "MATEMATIKA UMUM",
+      "pertemuan": 4,
+      "tugas": "Ujian Tengah Semester Matematika Umum",
+      "tipe": "uts",
+      "skor": "93.00",
+      "terlambat": 0
+    },
+    {
+      "siswa": "Wenisa",
+      "kelas": "X A",
+      "periode": "2026/2",
+      "mapel": "MATEMATIKA UMUM",
+      "pertemuan": 5,
+      "tugas": "Ujian Akhir Semester Matematika Umum",
+      "tipe": "uas",
+      "skor": "95.00",
+      "terlambat": 0
+    },
+    {
+      "siswa": "Yuanita Septia Putri",
+      "kelas": "X A",
+      "periode": "2026/2",
+      "mapel": "MATEMATIKA UMUM",
+      "pertemuan": 4,
+      "tugas": "Ujian Tengah Semester Matematika Umum",
+      "tipe": "uts",
+      "skor": "83.00",
+      "terlambat": 0
+    },
+    {
+      "siswa": "Yuanita Septia Putri",
+      "kelas": "X A",
+      "periode": "2026/2",
+      "mapel": "MATEMATIKA UMUM",
+      "pertemuan": 5,
+      "tugas": "Ujian Akhir Semester Matematika Umum",
+      "tipe": "uas",
+      "skor": "86.00",
       "terlambat": 0
     },
     {
@@ -570,6 +1186,32 @@
       "rata_rata": null,
       "nilai_terendah": null,
       "nilai_tertinggi": null
+    },
+    {
+      "periode": "2026/2",
+      "mapel": "MATEMATIKA UMUM",
+      "kelas": "X A",
+      "pertemuan": 4,
+      "tugas": "Ujian Tengah Semester Matematika Umum",
+      "tipe": "uts",
+      "jumlah_kumpul": 28,
+      "sudah_dinilai": "28",
+      "rata_rata": "81.29",
+      "nilai_terendah": "66.00",
+      "nilai_tertinggi": "95.00"
+    },
+    {
+      "periode": "2026/2",
+      "mapel": "MATEMATIKA UMUM",
+      "kelas": "X A",
+      "pertemuan": 5,
+      "tugas": "Ujian Akhir Semester Matematika Umum",
+      "tipe": "uas",
+      "jumlah_kumpul": 28,
+      "sudah_dinilai": "28",
+      "rata_rata": "84.04",
+      "nilai_terendah": "70.00",
+      "nilai_tertinggi": "97.00"
     },
     {
       "periode": "2026/1",

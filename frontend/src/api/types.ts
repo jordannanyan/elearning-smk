@@ -134,7 +134,9 @@ export interface Materi {
 }
 
 /* ---------- Tugas & kuis ---------- */
-export type TipeTugas = 'tugas' | 'kuis';
+// Jenis penilaian sepanjang semester, berurut dari tugas harian
+// sampai Ujian Akhir Semester.
+export type TipeTugas = 'tugas' | 'kuis' | 'uts' | 'uas';
 export type Urgensi = 'lewat' | 'kritis' | 'mendesak' | 'aman' | 'tanpa_batas';
 export type StatusTugasSiswa =
   | 'belum_dikerjakan' | 'menunggu_penilaian' | 'dinilai' | 'terlewat';
@@ -484,4 +486,22 @@ export interface ReferensiJadwal {
   mapel: { kode: string; nama: string }[];
   guru: { id: number; nama: string; kode_jadwal: number | null }[];
   kegiatan: string[];
+}
+
+/* ---------- Daftar nilai satu mata pelajaran ---------- */
+export interface DaftarNilaiKelasMapel {
+  kelas_mapel: {
+    id: number; nama_mapel: string; kode_mapel: string | null;
+    nama_kelas: string; tingkat: string; nama_guru: string | null;
+    kode_periode: string; status_periode: StatusPeriode;
+  };
+  tugas: {
+    id: number; judul: string; tipe: TipeTugas; deadline: string | null;
+    nomor_pertemuan: number; jumlah_kumpul: number;
+  }[];
+  siswa: {
+    id: number; nama: string; nis: string | null;
+    nilai: Record<number, string | number | null>;
+    jumlah_dinilai: number; rata_rata: number | null;
+  }[];
 }

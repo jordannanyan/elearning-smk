@@ -206,7 +206,9 @@ CREATE TABLE tugas (
   judul       VARCHAR(200) NOT NULL,
   deskripsi   TEXT DEFAULT NULL,
   deadline    DATETIME DEFAULT NULL,
-  tipe        ENUM('tugas','kuis') NOT NULL DEFAULT 'tugas',
+  -- Jenis penilaian berurut sepanjang semester: tugas harian, kuis,
+  -- Ujian Tengah Semester, sampai Ujian Akhir Semester.
+  tipe        ENUM('tugas','kuis','uts','uas') NOT NULL DEFAULT 'tugas',
   created_at  TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   CONSTRAINT fk_tugas_pertemuan FOREIGN KEY (id_pertemuan) REFERENCES pertemuan(id) ON DELETE CASCADE
 ) ENGINE=InnoDB;

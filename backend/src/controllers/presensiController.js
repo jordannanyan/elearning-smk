@@ -219,6 +219,17 @@ exports.setStatus = asyncHandler(async (req, res) => {
   if (!STATUS.includes(status))
     return res.status(400).json({ message: 'Status kehadiran tidak valid' });
 
+  // Kehadiran hanya sah apabila dinyatakan sendiri oleh siswa yang
+  // bersangkutan. Guru sebatas mencatat keterangan siswa yang tidak
+  // hadir, sehingga daftar hadir benar-benar mencerminkan pengakuan
+  // siswa, bukan penandaan sepihak guru.
+  if (status === 'hadir') {
+    return res.status(403).json({
+      message: 'Kehadiran diisi sendiri oleh siswa melalui tombol Saya Hadir. '
+        + 'Guru hanya dapat mencatat keterangan sakit, izin, atau alpa.',
+    });
+  }
+
   const [[pr]] = await pool.query('SELECT * FROM presensi WHERE id = ?', [req.params.id]);
   if (!pr) return res.status(404).json({ message: 'Presensi tidak ditemukan' });
   const idKm = await kelasMapelDariPertemuan(pr.id_pertemuan);

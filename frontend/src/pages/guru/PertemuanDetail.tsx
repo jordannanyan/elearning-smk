@@ -355,6 +355,8 @@ export default function GuruPertemuanDetail() {
               <select value={ft.tipe} onChange={(e) => setFt({ ...ft, tipe: e.target.value })}>
                 <option value="tugas">Tugas (kumpul teks / berkas)</option>
                 <option value="kuis">Kuis (soal pilihan ganda / esai)</option>
+                <option value="uts">Ujian Tengah Semester (UTS)</option>
+                <option value="uas">Ujian Akhir Semester (UAS)</option>
               </select></div>
             <div className="field"><label>Judul</label>
               <input value={ft.judul} required

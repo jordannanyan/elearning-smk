@@ -11,7 +11,10 @@ import type { PresensiPertemuan, StatusKehadiran } from '../api/types';
 const WARNA: Record<StatusKehadiran, string> = {
   hadir: 'green', sakit: 'orange', izin: 'biru', alpa: 'red',
 };
-const PILIHAN: StatusKehadiran[] = ['hadir', 'sakit', 'izin', 'alpa'];
+// Guru hanya mencatat keterangan siswa yang tidak hadir. Status "hadir"
+// sengaja tidak tersedia di sini karena kehadiran harus dinyatakan
+// sendiri oleh siswa yang bersangkutan.
+const PILIHAN_GURU: StatusKehadiran[] = ['sakit', 'izin', 'alpa'];
 
 export default function PanelPresensi({ idPertemuan, peran, terkunci }: {
   idPertemuan: number;
@@ -151,6 +154,12 @@ export default function PanelPresensi({ idPertemuan, peran, terkunci }: {
               <div><strong>{r?.persen_hadir}%</strong>Kehadiran</div>
             </div>
 
+            <p className="muted" style={{ fontSize: 12.5, marginTop: 12 }}>
+              Kehadiran diisi sendiri oleh siswa melalui tombol <strong>Saya Hadir</strong> pada
+              halaman pertemuan. Guru mencatat keterangan bagi siswa yang tidak hadir, yaitu
+              sakit, izin, atau alpa.
+            </p>
+
             <input placeholder="Cari nama / NIS siswa..." value={cari} style={{ margin: '12px 0' }}
               onChange={(e) => setCari(e.target.value)} />
 
@@ -172,11 +181,16 @@ export default function PanelPresensi({ idPertemuan, peran, terkunci }: {
                         ) : (
                           <select className={`pilih-status ${d.status === 'hadir' ? 'aktif' : 'nonaktif'}`}
                             value={d.status || ''} disabled={sibuk}
+                            title={d.status === 'hadir'
+                              ? 'Siswa ini sudah menyatakan hadir sendiri'
+                              : 'Pilih keterangan bagi siswa yang tidak hadir'}
                             onChange={(e) => jalankan(() => api.put(
                               `/presensi/${pr.id}/siswa/${d.id_siswa}`,
                               { status: e.target.value, keterangan: d.keterangan }))}>
                             {!d.status && <option value="">Belum mengisi</option>}
-                            {PILIHAN.map((s) => (
+                            {d.status === 'hadir'
+                              && <option value="hadir">Hadir (diisi siswa)</option>}
+                            {PILIHAN_GURU.map((s) => (
                               <option key={s} value={s}>
                                 {s.charAt(0).toUpperCase() + s.slice(1)}
                               </option>

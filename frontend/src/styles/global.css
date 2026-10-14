@@ -353,6 +353,16 @@ a.polos { color: inherit; display: block; }
 .landing-hero .tanda { display: inline-block; background: rgba(255,255,255,.16);
   border: 1px solid rgba(255,255,255,.3); border-radius: 999px; padding: 5px 14px;
   font-size: 12.5px; margin-bottom: 18px; }
+.landing-hero .kata-sistem { font-size: 15px; letter-spacing: 7px; font-weight: 600;
+  color: rgba(255,255,255,.75); margin-bottom: 2px; }
+.landing-hero .kata-elearning { font-size: clamp(52px, 11vw, 132px); line-height: .95;
+  font-weight: 800; letter-spacing: -2px; margin-bottom: 10px; text-transform: uppercase;
+  text-shadow: 0 6px 24px rgba(0,0,0,.18); }
+.landing-hero .kata-sekolah { font-size: clamp(14px, 2.2vw, 22px); font-weight: 600;
+  letter-spacing: 2px; color: rgba(255,255,255,.95); margin-bottom: 14px; }
+.landing-hero .slogan-hero { font-size: 19px; font-weight: 500; line-height: 1.5;
+  color: #fff; max-width: 620px; margin-bottom: 14px;
+  padding-left: 14px; border-left: 3px solid rgba(255,255,255,.5); }
 .landing-hero h1 { font-size: 38px; line-height: 1.22; margin-bottom: 16px; }
 .landing-hero p { max-width: 640px; font-size: 15px; line-height: 1.75; color: rgba(255,255,255,.9); }
 .tombol-hero { display: flex; gap: 12px; margin-top: 28px; flex-wrap: wrap; }
@@ -404,6 +414,8 @@ a.polos { color: inherit; display: block; }
 
 @media (max-width: 760px) {
   .landing-hero h1 { font-size: 27px; }
+  .landing-hero .kata-sistem { letter-spacing: 4px; font-size: 13px; }
+  .landing-hero .kata-elearning { letter-spacing: -1px; }
   .landing-bar nav a:not(.btn) { display: none; }
   .profil-grid { grid-template-columns: 1fr; }
   .profil-identitas > div { grid-template-columns: 1fr; gap: 2px; }
@@ -551,3 +563,6 @@ a.polos { color: inherit; display: block; }
 .tabel-jadwal-sunting td.dapat-disunting { cursor: pointer; }
 .tabel-jadwal-sunting td.dapat-disunting:hover { background: var(--primary-light); outline: 2px solid var(--primary); outline-offset: -2px; }
 .tabel-jadwal-sunting td.kosong { color: #cbd5e1; font-weight: 700; }
+
+/* Baris rata-rata kelas pada daftar nilai */
+.tabel-raport .baris-rata td { background: #f8fafc; border-top: 2px solid var(--border); }

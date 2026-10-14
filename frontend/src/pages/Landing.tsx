@@ -83,7 +83,10 @@ export default function Landing() {
               {' '}({profil.periode.kode})
             </span>
           )}
-          <h1>Belajar tidak lagi terbatas<br />ruang dan waktu kelas</h1>
+          <p className="kata-sistem">SISTEM</p>
+          <h1 className="kata-elearning">E&#8209;LEARNING</h1>
+          <p className="kata-sekolah">SMA NEGERI 1 KARAU KUALA</p>
+          <p className="slogan-hero">Belajar tidak lagi terbatas ruang dan waktu kelas</p>
           <p>
             Sistem e-learning SMA Negeri 1 Karau Kuala menyatukan materi, tugas, kuis, forum diskusi,
             dan penilaian dalam satu tempat. Guru dapat membagikan materi kapan saja dan siswa dapat

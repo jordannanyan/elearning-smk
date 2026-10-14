@@ -1,4 +1,8 @@
 const pool = require('../config/db');
+
+// Jenis penilaian yang dikenal sistem, berurut sepanjang semester
+const TIPE_TUGAS = ['tugas', 'kuis', 'uts', 'uas'];
+const bakuTipe = (t) => (TIPE_TUGAS.includes(t) ? t : 'tugas');
 const asyncHandler = require('../utils/asyncHandler');
 const {
   guruIdOf, siswaIdOf, kelasMapelMilikGuru,
@@ -95,7 +99,7 @@ exports.create = asyncHandler(async (req, res) => {
 
   const [r] = await pool.query(
     'INSERT INTO tugas (id_pertemuan, judul, deskripsi, deadline, tipe) VALUES (?,?,?,?,?)',
-    [id_pertemuan, judul, deskripsi || null, deadline || null, tipe === 'kuis' ? 'kuis' : 'tugas']
+    [id_pertemuan, judul, deskripsi || null, deadline || null, bakuTipe(tipe)]
   );
   res.status(201).json({ id: r.insertId, message: 'Tugas berhasil dibuat' });
 });
@@ -110,7 +114,7 @@ exports.update = asyncHandler(async (req, res) => {
 
   await pool.query(
     'UPDATE tugas SET judul = ?, deskripsi = ?, deadline = ?, tipe = ? WHERE id = ?',
-    [judul, deskripsi || null, deadline || null, tipe === 'kuis' ? 'kuis' : 'tugas', req.params.id]
+    [judul, deskripsi || null, deadline || null, bakuTipe(tipe), req.params.id]
   );
   res.json({ message: 'Tugas berhasil diperbarui' });
 });

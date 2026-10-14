@@ -387,7 +387,7 @@
   {
     "tabel": "pertemuan",
     "deskripsi": "Menyimpan urutan pertemuan pembelajaran pada sebuah kelas mata pelajaran",
-    "jumlah_record": 10,
+    "jumlah_record": 12,
     "kolom": [
       {
         "nama": "id",
@@ -443,7 +443,7 @@
   {
     "tabel": "materi",
     "deskripsi": "Menyimpan materi pembelajaran (teks, berkas, video, atau tautan) pada sebuah pertemuan",
-    "jumlah_record": 16,
+    "jumlah_record": 17,
     "kolom": [
       {
         "nama": "id",
@@ -506,7 +506,7 @@
   {
     "tabel": "tugas",
     "deskripsi": "Menyimpan data tugas dan kuis beserta tipe dan batas waktunya",
-    "jumlah_record": 9,
+    "jumlah_record": 11,
     "kolom": [
       {
         "nama": "id",
@@ -545,7 +545,7 @@
       },
       {
         "nama": "tipe",
-        "tipe": "enum('tugas','kuis')",
+        "tipe": "enum('tugas','kuis','uts','uas')",
         "null": "Tidak",
         "kunci": "-",
         "keterangan": "Jenis data (tugas/kuis atau pilihan ganda/esai)"
@@ -646,7 +646,7 @@
   {
     "tabel": "pengumpulan_tugas",
     "deskripsi": "Menyimpan data pengumpulan jawaban tugas oleh siswa",
-    "jumlah_record": 32,
+    "jumlah_record": 88,
     "kolom": [
       {
         "nama": "id",
@@ -758,7 +758,7 @@
   {
     "tabel": "nilai",
     "deskripsi": "Menyimpan data nilai siswa hasil penilaian guru maupun koreksi otomatis",
-    "jumlah_record": 26,
+    "jumlah_record": 82,
     "kolom": [
       {
         "nama": "id",

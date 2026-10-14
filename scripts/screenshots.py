@@ -308,7 +308,8 @@ def main():
                "pertemuan sebelumnya.", modal=True)
         page.click('.modal button:has-text("Batal")')
 
-        page.locator('a:has-text("Kelola Isi")').last.click()
+        page.locator('.pertemuan-item:has-text("Sistem Persamaan Linear Dua Variabel") '
+                     'a:has-text("Kelola Isi")').first.click()
         page.wait_for_url("**/guru/pertemuan/**", timeout=10000)
         page.wait_for_timeout(1400)
         simpan(page, "guru-presensi-pertemuan", "Pengelolaan Presensi pada Sebuah Pertemuan (Guru)",
@@ -383,6 +384,16 @@ def main():
         simpan(page, "guru-penilaian-mapel", "Daftar Tugas pada Satu Mata Pelajaran",
                "Setelah mata pelajaran dipilih, tugas dan kuisnya ditampilkan berurutan menurut "
                "pertemuan beserta jumlah pekerjaan yang sudah terkumpul.", full=True)
+
+        page.click('button:has-text("Daftar Nilai")')
+        page.wait_for_timeout(1400)
+        simpan(page, "guru-daftar-nilai", "Daftar Nilai Satu Mata Pelajaran",
+               "Daftar nilai menampilkan seluruh penilaian sepanjang semester secara berurutan "
+               "menurut pertemuan, mulai dari tugas paling awal, kuis, Ujian Tengah Semester, "
+               "sampai Ujian Akhir Semester, beserta nilai tiap siswa, rata-rata masing-masing "
+               "siswa, dan rata-rata kelas pada setiap penilaian.", full=True)
+        page.click('button:has-text("Periksa Pekerjaan")')
+        page.wait_for_timeout(900)
 
         page.locator('.kartu-tugas:has-text("Latihan Persamaan Linear") button:has-text("Periksa & Nilai")').first.click()
         page.wait_for_selector('.modal:has-text("Pengumpulan:")')
@@ -484,7 +495,7 @@ def main():
                "pertemuan pertama, sehingga siswa dapat mengikuti alur pembelajaran secara runut.",
                full=True)
 
-        page.locator('.pertemuan-item').last.click()
+        page.locator('.pertemuan-item:has-text("Sistem Persamaan Linear Dua Variabel")')            .first.click()
         page.wait_for_url("**/siswa/pertemuan/**", timeout=10000)
         page.wait_for_timeout(1500)
         simpan(page, "siswa-presensi-pertemuan", "Pengisian Presensi oleh Siswa",

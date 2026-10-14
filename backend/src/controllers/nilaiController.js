@@ -134,14 +134,34 @@ exports.rekapSiswa = asyncHandler(async (req, res) => {
   });
 });
 
-// GET /api/nilai/kelas-mapel/:id  (guru) -> rekap nilai satu kelas mata pelajaran
+// GET /api/nilai/kelas-mapel/:id  (guru & admin)
+//   Daftar nilai satu mata pelajaran: seluruh penilaian sepanjang
+//   semester disusun berurutan mulai dari tugas pertama, kuis, Ujian
+//   Tengah Semester, sampai Ujian Akhir Semester, lengkap dengan nilai
+//   tiap siswa pada masing-masing penilaian.
 exports.rekapKelasMapel = asyncHandler(async (req, res) => {
   const idKm = req.params.id;
   if (req.user.role === 'guru' && !(await kelasMapelMilikGuru(req.user.id, idKm)))
     return res.status(403).json({ message: 'Bukan kelas mata pelajaran yang Anda ampu' });
 
+  const [[km]] = await pool.query(`
+    SELECT km.id, mp.nama AS nama_mapel, mp.kode AS kode_mapel,
+           k.nama_kelas, k.tingkat, ug.nama AS nama_guru,
+           p.kode AS kode_periode, p.status AS status_periode
+    FROM kelas_mapel km
+    JOIN mata_pelajaran mp ON mp.id = km.id_mapel
+    JOIN kelas k ON k.id = km.id_kelas
+    JOIN periode p ON p.id = k.id_periode
+    LEFT JOIN guru g ON g.id = km.id_guru
+    LEFT JOIN users ug ON ug.id = g.id_user
+    WHERE km.id = ?`, [idKm]);
+  if (!km) return res.status(404).json({ message: 'Kelas mata pelajaran tidak ditemukan' });
+
+  // Urutan penilaian mengikuti urutan pertemuan, sehingga terbaca runut
+  // dari tugas paling awal sampai ujian akhir semester.
   const [tugas] = await pool.query(`
-    SELECT t.id, t.judul, t.tipe, pt.nomor AS nomor_pertemuan
+    SELECT t.id, t.judul, t.tipe, t.deadline, pt.nomor AS nomor_pertemuan,
+           (SELECT COUNT(*) FROM pengumpulan_tugas pg WHERE pg.id_tugas = t.id) AS jumlah_kumpul
     FROM tugas t JOIN pertemuan pt ON pt.id = t.id_pertemuan
     WHERE pt.id_kelas_mapel = ? ORDER BY pt.nomor, t.id`, [idKm]);
 
@@ -153,19 +173,30 @@ exports.rekapKelasMapel = asyncHandler(async (req, res) => {
     JOIN users u ON u.id = s.id_user
     WHERE km.id = ? ORDER BY u.nama`, [idKm]);
 
+  // Seluruh nilai diambil sekali jalan, bukan satu kueri per siswa per
+  // tugas, supaya halaman tetap ringan pada kelas berisi puluhan siswa.
+  const [skor] = await pool.query(`
+    SELECT pg.id_tugas, pg.id_siswa, n.skor
+    FROM pengumpulan_tugas pg
+    JOIN tugas t ON t.id = pg.id_tugas
+    JOIN pertemuan pt ON pt.id = t.id_pertemuan
+    LEFT JOIN nilai n ON n.id_kumpul = pg.id
+    WHERE pt.id_kelas_mapel = ?`, [idKm]);
+
+  const peta = new Map();
+  for (const b of skor) peta.set(`${b.id_siswa}|${b.id_tugas}`, b.skor);
+
   for (const s of siswa) {
     s.nilai = {};
     for (const t of tugas) {
-      const [[n]] = await pool.query(`
-        SELECT n.skor FROM pengumpulan_tugas pg
-        LEFT JOIN nilai n ON n.id_kumpul = pg.id
-        WHERE pg.id_tugas = ? AND pg.id_siswa = ?`, [t.id, s.id]);
-      s.nilai[t.id] = n ? n.skor : null;
+      const v = peta.get(`${s.id}|${t.id}`);
+      s.nilai[t.id] = v === undefined ? null : v;
     }
     const angka = Object.values(s.nilai).filter((v) => v != null).map(Number);
+    s.jumlah_dinilai = angka.length;
     s.rata_rata = angka.length
       ? Math.round((angka.reduce((a, b) => a + b, 0) / angka.length) * 100) / 100 : null;
   }
 
-  res.json({ tugas, siswa });
+  res.json({ kelas_mapel: km, tugas, siswa });
 });
