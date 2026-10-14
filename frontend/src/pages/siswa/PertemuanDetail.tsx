@@ -5,6 +5,7 @@ import MateriIsi from '../../components/MateriIsi';
 import KerjakanTugas from '../../components/KerjakanTugas';
 import PanelPresensi from '../../components/PanelPresensi';
 import type { IsiPertemuan, Tugas } from '../../api/types';
+import { labelTipe, warnaTipe } from '../../utils/tugas';
 
 function fmt(dt?: string | null) {
   if (!dt) return 'Tanpa batas';
@@ -102,7 +103,7 @@ export default function SiswaPertemuanDetail() {
                   <div style={{ display: 'flex', justifyContent: 'space-between', gap: 12, flexWrap: 'wrap' }}>
                     <div style={{ flex: 1, minWidth: 220 }}>
                       <div style={{ display: 'flex', gap: 6, marginBottom: 6, flexWrap: 'wrap' }}>
-                        <span className={`badge ${t.tipe === 'kuis' ? 'orange' : 'green'}`}>{t.tipe}</span>
+                        <span className={`badge ${warnaTipe(t.tipe)}`}>{labelTipe(t.tipe)}</span>
                         {!!t.jumlah_soal && <span className="badge gray">{t.jumlah_soal} soal</span>}
                         <LabelDeadline t={t} />
                       </div>

@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import api from '../../api/client';
 import type { RekapNilai } from '../../api/types';
+import { labelTipe, warnaTipe } from '../../utils/tugas';
 
 const STATUS: Record<string, { teks: string; warna: string }> = {
   dinilai: { teks: 'Dinilai', warna: 'green' },
@@ -132,7 +133,7 @@ export default function SiswaNilai() {
                       <tr key={t.id_tugas}>
                         <td className="muted">Pertemuan {t.nomor_pertemuan}</td>
                         <td>{t.judul_tugas}</td>
-                        <td><span className={`badge ${t.tipe === 'kuis' ? 'orange' : 'green'}`}>{t.tipe}</span></td>
+                        <td><span className={`badge ${warnaTipe(t.tipe)}`}>{labelTipe(t.tipe)}</span></td>
                         <td className="muted">
                           {t.tgl_kumpul ? t.tgl_kumpul.slice(0, 10) : '-'}
                           {t.terlambat && <span className="badge red" style={{ marginLeft: 6 }}>Telat</span>}

@@ -36,9 +36,14 @@ Periode Pembelajaran (2026/2)
   gabungan huruf mata pelajaran dan nomor guru (misalnya `E16`), beserta legenda kode
   guru, kode mata pelajaran, dan pembagian waktu sekolah. Seorang guru tidak dapat
   dijadwalkan pada dua kelas di hari dan jam yang sama.
-- **Presensi kehadiran** dibuka guru pada sebuah pertemuan. Selama dibuka, siswa
-  menyatakan hadir sendiri; guru melengkapi keterangan sakit, izin, atau alpa, lalu
-  menutupnya. Siswa yang belum mengisi sampai presensi ditutup tercatat alpa.
+- **Presensi kehadiran** dibuka guru pada sebuah pertemuan. Kehadiran **hanya sah
+  apabila dinyatakan sendiri oleh siswa** melalui tombol Saya Hadir; guru tidak dapat
+  menandai siswa hadir dan sebatas mencatat keterangan sakit, izin, atau alpa, lalu
+  menutup presensi. Siswa yang belum mengisi sampai presensi ditutup tercatat alpa.
+- **Penilaian satu semester** tersusun berurutan menurut pertemuan, mulai dari tugas
+  harian, kuis, Ujian Tengah Semester, sampai Ujian Akhir Semester. Guru dapat membuka
+  daftar nilai per mata pelajaran yang memuat seluruh penilaian tersebut beserta nilai
+  tiap siswa dan rata-rata kelasnya.
 
 ## Fitur
 
@@ -46,7 +51,7 @@ Periode Pembelajaran (2026/2)
 |------|-------|
 | **Pengunjung** | Halaman depan sekolah tanpa login: profil dan identitas sekolah, rekapitulasi jumlah guru/siswa/kelas/mata pelajaran, fitur sistem, dan alur pembelajaran |
 | **Administrator** | Login, kelola periode pembelajaran (aktifkan/kunci/buka kunci), kelola data guru & siswa (aktif/nonaktif), kelola kelas beserta mata pelajaran, guru pengajar, dan siswa anggotanya, kelola katalog mata pelajaran, susun jadwal pelajaran tiap kelas, pantau statistik sistem |
-| **Guru** | Login, kelola mata pelajaran dan kelas yang diajar, susun pertemuan, unggah materi (teks/berkas/video/tautan YouTube), buat tugas & kuis beserta butir soal, periksa pengumpulan (termasuk siswa yang belum mengumpulkan), beri nilai, buka forum diskusi, lihat raport sementara per kelas, lihat jadwal mengajar, buka dan tutup presensi kehadiran beserta rekapnya |
+| **Guru** | Login, kelola mata pelajaran dan kelas yang diajar, susun pertemuan, unggah materi (teks/berkas/video/tautan YouTube), buat penilaian (tugas, kuis, UTS, UAS) beserta butir soal, periksa pengumpulan (termasuk siswa yang belum mengumpulkan), beri nilai, lihat daftar nilai satu mata pelajaran dari tugas pertama sampai UAS, buka forum diskusi, lihat raport sementara per kelas, lihat jadwal mengajar, buka dan tutup presensi kehadiran beserta rekapnya |
 | **Siswa** | Login, lihat kartu mata pelajaran di kelasnya, ikuti pembelajaran per pertemuan, unduh berkas & tonton video, kerjakan tugas/kuis dengan penanda sisa waktu, lihat rekap nilai per mata pelajaran dan riwayat antar-periode, lihat raport sementara dirinya dalam satu halaman, lihat jadwal pelajaran kelasnya, menyatakan kehadiran pada presensi yang dibuka guru beserta rekapnya, balas forum diskusi |
 
 ## Prasyarat
@@ -114,8 +119,8 @@ Skrip pembangkitnya ada di `scripts/`:
 | Skrip | Kegunaan |
 |---|---|
 | `scripts/impor-data-sekolah.py` | Membaca berkas resmi sekolah (SK pembagian tugas, SK wali kelas, daftar hadir siswa) menjadi `sekolah.json` |
-| `scripts/blackbox.js` | Menjalankan 122 skenario pengujian Black Box terhadap REST API sekaligus mengisi data pengumpulan tugas & nilai |
-| `scripts/screenshots.py` | Mengambil 60 tangkapan layar seluruh halaman sistem secara otomatis (Playwright) |
+| `scripts/blackbox.js` | Menjalankan 123 skenario pengujian Black Box terhadap REST API sekaligus mengisi data pengumpulan tugas & nilai |
+| `scripts/screenshots.py` | Mengambil 61 tangkapan layar seluruh halaman sistem secara otomatis (Playwright) |
 | `scripts/data-bab4.js` | Mengambil struktur tabel basis data dan statistik data dari MySQL |
 | `scripts/buat-dokumen-bab4.py` | Menyusun `docs-bab4/Lampiran-BAB-IV-Sistem-E-Learning.docx` |
 | `scripts/buat-dump-sql.py` | Membuat dump SQL `docs-bab4/database/elearning_smakk_bab4.sql` |

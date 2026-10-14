@@ -385,16 +385,6 @@ def main():
                "Setelah mata pelajaran dipilih, tugas dan kuisnya ditampilkan berurutan menurut "
                "pertemuan beserta jumlah pekerjaan yang sudah terkumpul.", full=True)
 
-        page.click('button:has-text("Daftar Nilai")')
-        page.wait_for_timeout(1400)
-        simpan(page, "guru-daftar-nilai", "Daftar Nilai Satu Mata Pelajaran",
-               "Daftar nilai menampilkan seluruh penilaian sepanjang semester secara berurutan "
-               "menurut pertemuan, mulai dari tugas paling awal, kuis, Ujian Tengah Semester, "
-               "sampai Ujian Akhir Semester, beserta nilai tiap siswa, rata-rata masing-masing "
-               "siswa, dan rata-rata kelas pada setiap penilaian.", full=True)
-        page.click('button:has-text("Periksa Pekerjaan")')
-        page.wait_for_timeout(900)
-
         page.locator('.kartu-tugas:has-text("Latihan Persamaan Linear") button:has-text("Periksa & Nilai")').first.click()
         page.wait_for_selector('.modal:has-text("Pengumpulan:")')
         simpan(page, "guru-daftar-pengumpulan", "Daftar Pengumpulan Tugas Siswa",
@@ -441,20 +431,25 @@ def main():
         page.wait_for_timeout(400)
         page.click('.modal button:has-text("Tutup")')
 
+        # Raport sementara disusun per mata pelajaran. Guru Matematika
+        # dipakai karena mata pelajarannya memuat rangkaian penilaian
+        # lengkap sampai Ujian Akhir Semester.
+        login(page, "halifah@smakk.sch.id", "guru123")
         buka(page, "/guru/raport")
-        simpan(page, "guru-raport-daftar", "Daftar Kelas pada Menu Raport Sementara",
-               "Menu Raport Sementara menampilkan kelas yang diajar guru tersebut beserta kelas "
-               "yang diwalikannya. Kelas yang diwalikan ditandai dengan label Wali Kelas.",
-               full=True)
+        simpan(page, "guru-raport-daftar", "Daftar Mata Pelajaran pada Menu Raport Sementara",
+               "Menu Raport Sementara menampilkan mata pelajaran yang diampu guru beserta "
+               "kelasnya. Guru memilih salah satunya untuk melihat nilai seluruh siswa pada "
+               "mata pelajaran tersebut.", full=True)
 
-        page.locator('.kartu-ringkas:has-text("Wali Kelas") '
-                     'button:has-text("Lihat Raport Sementara")').first.click()
+        page.locator('.kartu-ringkas:has-text("MATEMATIKA UMUM"):has-text("X A") '
+                     'button:has-text("Lihat Nilai Siswa")').first.click()
         page.wait_for_timeout(1600)
-        simpan(page, "guru-raport-kelas", "Raport Sementara Satu Kelas (Guru)",
-               "Raport sementara seluruh siswa pada satu kelas. Nilai setiap mata pelajaran "
-               "merupakan rata-rata tugas dan kuis yang sudah dinilai, dilengkapi rata-rata "
-               "keseluruhan, predikat, dan peringkat kelas. Nilai yang belum mencapai KKM "
-               "ditandai dengan warna berbeda.", full=True)
+        simpan(page, "guru-raport-nilai", "Nilai Siswa Satu Mata Pelajaran (Guru)",
+               "Nilai seluruh siswa pada satu mata pelajaran. Penilaian tersusun berurutan "
+               "menurut pertemuan, mulai dari tugas paling awal, kuis, Ujian Tengah Semester, "
+               "sampai Ujian Akhir Semester, dilengkapi rata-rata tiap siswa dan rata-rata "
+               "kelas pada setiap penilaian. Nilai yang belum mencapai KKM ditandai dengan "
+               "warna berbeda.", full=True)
 
         buka(page, "/guru/jadwal")
         simpan(page, "guru-jadwal-mengajar", "Jadwal Mengajar Guru",

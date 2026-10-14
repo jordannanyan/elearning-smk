@@ -1,86 +1,94 @@
 import { useEffect, useState } from 'react';
 import api from '../../api/client';
-import type { KelasRaport, RaportKelas } from '../../api/types';
+import DaftarNilaiMapel from '../../components/DaftarNilaiMapel';
+import type { KelasMapel, Periode } from '../../api/types';
 
 // ---------------------------------------------------------------------
-// Raport sementara per kelas.
+// Raport sementara guru, disusun per mata pelajaran.
 //
-// Disebut sementara karena nilainya dihitung dari tugas dan kuis yang
-// sudah dinilai sampai saat halaman dibuka, bukan nilai akhir semester.
-// Guru dapat membuka kelas yang diajarnya maupun kelas yang diwalikannya,
-// sehingga wali kelas dapat memantau seluruh mata pelajaran kelasnya.
+// Guru memilih salah satu mata pelajaran yang diampunya, lalu melihat
+// nilai seluruh siswa pada mata pelajaran tersebut. Penilaiannya tampil
+// berurutan menurut pertemuan, mulai dari tugas paling awal, kuis,
+// Ujian Tengah Semester, sampai Ujian Akhir Semester.
+//
+// Disebut sementara karena nilainya dihitung dari penilaian yang sudah
+// masuk sampai saat halaman dibuka, bukan nilai akhir semester.
 // ---------------------------------------------------------------------
 export default function RaportGuru() {
-  const [kelas, setKelas] = useState<KelasRaport[]>([]);
-  const [pilih, setPilih] = useState<number | null>(null);
-  const [data, setData] = useState<RaportKelas | null>(null);
+  const [periode, setPeriode] = useState<Periode[]>([]);
+  const [pilihPeriode, setPilihPeriode] = useState('');
+  const [daftar, setDaftar] = useState<KelasMapel[]>([]);
+  const [pilih, setPilih] = useState<KelasMapel | null>(null);
   const [muat, setMuat] = useState(true);
-  const [muatRaport, setMuatRaport] = useState(false);
 
   useEffect(() => {
-    api.get('/raport/kelas').then((r) => {
-      setKelas(r.data);
-      setMuat(false);
+    api.get('/periode').then((r) => {
+      setPeriode(r.data);
+      const aktif = r.data.find((p: Periode) => p.status === 'aktif') || r.data[0];
+      if (aktif) setPilihPeriode(String(aktif.id));
     });
   }, []);
 
   useEffect(() => {
-    if (!pilih) return;
-    setMuatRaport(true);
-    api.get(`/raport/kelas/${pilih}`)
-      .then((r) => setData(r.data))
-      .finally(() => setMuatRaport(false));
-  }, [pilih]);
+    if (!pilihPeriode) return;
+    setMuat(true);
+    setPilih(null);
+    api.get('/kelas-mapel', { params: { id_periode: pilihPeriode, semua: 1 } })
+      .then((r) => setDaftar(r.data))
+      .finally(() => setMuat(false));
+  }, [pilihPeriode]);
 
-  function warnaNilai(n: number | null, kkm: number) {
-    if (n == null) return 'muted';
-    return n >= kkm ? 'tuntas' : 'belum';
-  }
-
-  // ----- Daftar kelas -----
+  // ----- Daftar mata pelajaran yang diampu -----
   if (!pilih) {
     return (
       <div>
         <div className="page-head">
           <h2>Raport Sementara</h2>
+          <div className="pilih-periode">
+            <select value={pilihPeriode} onChange={(e) => setPilihPeriode(e.target.value)}>
+              {periode.map((p) => (
+                <option key={p.id} value={p.id}>
+                  {p.kode} — {p.tahun_ajaran} {p.nama_semester}
+                  {p.status === 'terkunci' ? ' (arsip)' : ''}
+                </option>
+              ))}
+            </select>
+          </div>
         </div>
 
         <div className="notice info">
           <span className="ikon">📋</span>
           <div>
-            Raport sementara merangkum nilai <strong>seluruh tugas dan kuis yang sudah dinilai</strong>
-            {' '}sampai saat ini menjadi nilai rata-rata per mata pelajaran. Nilai ini bersifat
-            sementara dan akan terus berubah selama periode pembelajaran masih berjalan. Pilih kelas
-            untuk melihat raport seluruh siswanya.
+            Pilih mata pelajaran untuk melihat <strong>nilai seluruh siswa</strong> pada mata
+            pelajaran tersebut. Penilaian ditampilkan berurutan menurut pertemuan, mulai dari
+            tugas paling awal, kuis, <strong>Ujian Tengah Semester</strong>, sampai{' '}
+            <strong>Ujian Akhir Semester</strong>. Nilai bersifat sementara dan masih berubah
+            selama periode pembelajaran berjalan.
           </div>
         </div>
 
         {muat ? <p className="center-msg">Memuat...</p>
-          : kelas.length === 0
-            ? <p className="center-msg">Anda belum ditugaskan mengajar atau menjadi wali kelas.</p>
+          : daftar.length === 0
+            ? <p className="center-msg">Anda belum mengampu mata pelajaran pada periode ini.</p>
             : (
               <div className="kartu-grid">
-                {kelas.map((k) => (
-                  <article className="kartu-ringkas" key={k.id}>
+                {daftar.map((km) => (
+                  <article className="kartu-ringkas" key={km.id}>
                     <div>
-                      <span className={`badge ${k.status_periode === 'aktif' ? 'green' : 'gray'}`}>
-                        {k.kode} · {k.nama_semester}
+                      <span className="badge gray">{km.kode_mapel || '-'}</span>{' '}
+                      <span className={`badge ${km.status_periode === 'aktif' ? 'green' : 'gray'}`}>
+                        {km.kode_periode}
                       </span>
-                      {k.wali_kelas && <span className="badge biru" style={{ marginLeft: 6 }}>👤 Wali Kelas</span>}
                     </div>
-                    <h3>Kelas {k.nama_kelas}</h3>
-                    <div className="sub">
-                      {k.mapel_diajar
-                        ? <>Anda mengajar: {k.mapel_diajar}</>
-                        : <>Anda wali kelas ini</>}
-                    </div>
+                    <h3>{km.nama_mapel}</h3>
+                    <div className="sub">🏫 Kelas {km.nama_kelas} · Tingkat {km.tingkat}</div>
                     <div className="angka-baris">
-                      <div><strong>{k.jumlah_siswa}</strong>Siswa</div>
-                      <div><strong>{k.jumlah_mapel}</strong>Mata Pelajaran</div>
+                      <div><strong>{km.jumlah_siswa ?? '-'}</strong>Siswa</div>
+                      <div><strong>{km.jumlah_pertemuan ?? '-'}</strong>Pertemuan</div>
                     </div>
                     <div className="kaki">
-                      <button className="btn small" onClick={() => setPilih(k.id)}>
-                        Lihat Raport Sementara
+                      <button className="btn small" onClick={() => setPilih(km)}>
+                        Lihat Nilai Siswa
                       </button>
                     </div>
                   </article>
@@ -91,116 +99,20 @@ export default function RaportGuru() {
     );
   }
 
-  // ----- Raport satu kelas -----
+  // ----- Nilai siswa pada satu mata pelajaran -----
   return (
     <div>
       <div className="page-head tanpa-cetak">
         <h2>Raport Sementara</h2>
         <div style={{ display: 'flex', gap: 10 }}>
-          <button className="btn secondary" onClick={() => { setPilih(null); setData(null); }}>
-            ← Pilih Kelas Lain
+          <button className="btn secondary" onClick={() => setPilih(null)}>
+            ← Pilih Mata Pelajaran Lain
           </button>
-          <button className="btn" onClick={() => window.print()} disabled={!data}>🖨️ Cetak</button>
+          <button className="btn" onClick={() => window.print()}>🖨️ Cetak</button>
         </div>
       </div>
 
-      {muatRaport || !data ? <p className="center-msg">Memuat raport...</p> : (
-        <div className="lembar-raport">
-          <div className="kepala-raport">
-            <h3>RAPORT SEMENTARA</h3>
-            <p>SMA Negeri 1 Karau Kuala</p>
-            <table className="identitas-raport">
-              <tbody>
-                <tr>
-                  <td>Kelas</td><td>: {data.kelas.nama_kelas} (Tingkat {data.kelas.tingkat})</td>
-                  <td>Tahun Ajaran</td><td>: {data.kelas.tahun_ajaran}</td>
-                </tr>
-                <tr>
-                  <td>Wali Kelas</td><td>: {data.kelas.wali_kelas || '-'}</td>
-                  <td>Semester</td>
-                  <td>: {data.kelas.nama_semester} ({data.kelas.kode})</td>
-                </tr>
-                <tr>
-                  <td>Jumlah Siswa</td><td>: {data.siswa.length} siswa</td>
-                  <td>KKM</td><td>: {data.kkm}</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-
-          <div className="table-wrap">
-            <table className="tabel-raport">
-              <thead>
-                <tr>
-                  <th className="lekat">No</th>
-                  <th className="lekat nama">Nama Siswa</th>
-                  <th>NIS</th>
-                  {data.mapel.map((m) => (
-                    <th key={m.id_kelas_mapel} className="tegak" title={`${m.nama_mapel} — ${m.nama_guru || 'belum ada guru'}`}>
-                      {m.kode_mapel || m.nama_mapel}
-                    </th>
-                  ))}
-                  <th>Rata-rata</th><th>Predikat</th><th>Peringkat</th>
-                </tr>
-              </thead>
-              <tbody>
-                {data.siswa.map((s, i) => (
-                  <tr key={s.id_siswa}>
-                    <td className="lekat">{i + 1}</td>
-                    <td className="lekat nama">{s.nama}</td>
-                    <td className="muted">{s.nis || '-'}</td>
-                    {data.mapel.map((m) => {
-                      const n = s.nilai[m.id_kelas_mapel];
-                      const v = n ? n.rata_rata : null;
-                      return (
-                        <td key={m.id_kelas_mapel} className={`angka-nilai ${warnaNilai(v, data.kkm)}`}>
-                          {v ?? '-'}
-                        </td>
-                      );
-                    })}
-                    <td className={`angka-nilai tebal ${warnaNilai(s.rata_rata, data.kkm)}`}>
-                      {s.rata_rata ?? '-'}
-                    </td>
-                    <td className="tengah">
-                      <span className={`badge ${s.predikat.huruf === '-' ? 'gray' : 'green'}`}>
-                        {s.predikat.huruf}
-                      </span>
-                    </td>
-                    <td className="tengah">{s.peringkat ?? '-'}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-
-          <div className="keterangan-raport">
-            <div>
-              <strong>Keterangan kode mata pelajaran</strong>
-              <ul>
-                {data.mapel.map((m) => (
-                  <li key={m.id_kelas_mapel}>
-                    <span className="badge gray">{m.kode_mapel || '-'}</span> {m.nama_mapel}
-                    <span className="muted"> — {m.nama_guru || 'belum ada guru'}
-                      {' '}({m.jumlah_tugas} tugas)</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-            <div>
-              <strong>Predikat</strong>
-              <ul>
-                <li>A — Sangat Baik (90–100)</li>
-                <li>B — Baik (80–89)</li>
-                <li>C — Cukup (70–79)</li>
-                <li>D — Perlu Bimbingan (di bawah 70)</li>
-              </ul>
-              <p className="muted" style={{ marginTop: 8 }}>
-                Tanda “-” berarti belum ada tugas yang dinilai pada mata pelajaran tersebut.
-              </p>
-            </div>
-          </div>
-        </div>
-      )}
+      <DaftarNilaiMapel idKelasMapel={pilih.id} />
     </div>
   );
 }

@@ -1360,47 +1360,44 @@ async function main() {
       && rProfil.data.statistik.total_siswa > 0,
   });
 
-  const rKelasRaport = await get('/api/raport/kelas', TG);
-  const kelasWali = rKelasRaport.data.find((k) => k.wali_kelas && k.status_periode === 'aktif');
+  const rMapelRaport = await get('/api/kelas-mapel', TG);
   catat({
-    modul: 'Raport Sementara', skenario: 'Guru melihat daftar kelas yang dapat dibuka raportnya',
+    modul: 'Raport Sementara', skenario: 'Guru melihat daftar mata pelajaran pada menu Raport Sementara',
     input: 'Membuka menu Raport Sementara',
-    harapan: 'Sistem menampilkan kelas yang diajar guru tersebut beserta kelas yang diwalikannya',
-    aktual: `HTTP ${rKelasRaport.status}, ${rKelasRaport.data.length} kelas; `
-      + `sebagai wali kelas: ${kelasWali ? kelasWali.nama_kelas : '-'}`,
-    sesuai: rKelasRaport.status === 200 && rKelasRaport.data.length > 0 && !!kelasWali,
+    harapan: 'Sistem menampilkan mata pelajaran yang diampu guru tersebut pada periode berjalan '
+      + 'sebagai pilihan untuk melihat nilai siswa',
+    aktual: `HTTP ${rMapelRaport.status}, ${rMapelRaport.data.length} mata pelajaran: `
+      + rMapelRaport.data.slice(0, 3).map((k) => `${k.nama_mapel} (${k.nama_kelas})`).join(', '),
+    sesuai: rMapelRaport.status === 200 && rMapelRaport.data.length > 0,
   });
 
-  const rRaportKelas = await get(`/api/raport/kelas/${kelasWali.id}`, TG);
-  const siswaBernilai = rRaportKelas.data.siswa.filter((s) => s.rata_rata != null);
-  const peringkatSatu = siswaBernilai.find((s) => s.peringkat === 1);
+  const kmRaport = rMapelRaport.data
+    .find((k) => k.nama_mapel === 'MATEMATIKA UMUM' && k.nama_kelas === 'X A');
+  const rNilaiMapel = await get(`/api/nilai/kelas-mapel/${kmRaport.id}`, TG);
+  const urutan = rNilaiMapel.data.tugas.map((t) => t.tipe);
+  const siswaPertama = rNilaiMapel.data.siswa[0];
   catat({
-    modul: 'Raport Sementara', skenario: 'Wali kelas membuka raport sementara seluruh siswa di kelasnya',
-    input: `Membuka raport sementara kelas ${kelasWali.nama_kelas}`,
-    harapan: 'Sistem menampilkan nilai rata-rata tiap siswa pada setiap mata pelajaran beserta '
-      + 'predikat dan peringkat kelasnya',
-    aktual: `HTTP ${rRaportKelas.status}: ${rRaportKelas.data.siswa.length} siswa, `
-      + `${rRaportKelas.data.mapel.length} mata pelajaran, KKM ${rRaportKelas.data.kkm}; `
-      + `peringkat 1 = ${peringkatSatu ? `${peringkatSatu.nama} (${peringkatSatu.rata_rata}, `
-        + `predikat ${peringkatSatu.predikat.huruf})` : '-'}`,
-    sesuai: rRaportKelas.status === 200 && rRaportKelas.data.siswa.length > 0
-      && rRaportKelas.data.mapel.length > 0 && !!peringkatSatu,
+    modul: 'Raport Sementara',
+    skenario: 'Guru melihat nilai siswa satu mata pelajaran dari tugas pertama sampai ujian akhir',
+    input: `Membuka nilai ${kmRaport.nama_mapel} kelas ${kmRaport.nama_kelas}`,
+    harapan: 'Sistem menampilkan seluruh penilaian berurutan menurut pertemuan, mulai dari tugas '
+      + 'paling awal, kuis, Ujian Tengah Semester, sampai Ujian Akhir Semester, beserta nilai '
+      + 'tiap siswa dan rata-ratanya',
+    aktual: `HTTP ${rNilaiMapel.status}: ${rNilaiMapel.data.siswa.length} siswa, `
+      + `${rNilaiMapel.data.tugas.length} penilaian berurutan [${urutan.join(' -> ')}]; `
+      + `contoh: ${siswaPertama?.nama} rata-rata ${siswaPertama?.rata_rata}`,
+    sesuai: rNilaiMapel.status === 200 && rNilaiMapel.data.siswa.length > 0
+      && urutan.includes('uts') && urutan.includes('uas')
+      && urutan.indexOf('uts') < urutan.indexOf('uas'),
   });
 
-  // Guru Bahasa Inggris tidak mengajar maupun menjadi wali pada kelas tersebut
-  const kelasBukanMilikLaily = (await get('/api/raport/kelas', TG_LAILY)).data
-    .map((k) => k.id);
-  const kelasTerlarang = rKelasRaport.data
-    .find((k) => !kelasBukanMilikLaily.includes(k.id));
-  const rRaportTerlarang = kelasTerlarang
-    ? await get(`/api/raport/kelas/${kelasTerlarang.id}`, TG_LAILY)
-    : { status: 403, data: { message: 'tidak ada kelas pembanding' } };
+  const rNilaiMapelTerlarang = await get(`/api/nilai/kelas-mapel/${kmRaport.id}`, TG_LAILY);
   catat({
-    modul: 'Raport Sementara', skenario: 'Guru mencoba membuka raport kelas yang bukan kelasnya',
-    input: `Guru Laily Mustika membuka raport kelas ${kelasTerlarang ? kelasTerlarang.nama_kelas : '-'}`,
-    harapan: 'Sistem menolak karena guru tersebut tidak mengajar maupun menjadi wali kelas di sana',
-    aktual: `HTTP ${rRaportTerlarang.status}, pesan: "${rRaportTerlarang.data?.message}"`,
-    sesuai: rRaportTerlarang.status === 403,
+    modul: 'Raport Sementara', skenario: 'Guru mencoba melihat nilai mata pelajaran yang bukan diampunya',
+    input: `Guru Laily Mustika membuka nilai ${kmRaport.nama_mapel} kelas ${kmRaport.nama_kelas}`,
+    harapan: 'Sistem menolak karena guru tersebut tidak mengampu mata pelajaran itu',
+    aktual: `HTTP ${rNilaiMapelTerlarang.status}, pesan: "${rNilaiMapelTerlarang.data?.message}"`,
+    sesuai: rNilaiMapelTerlarang.status === 403,
   });
 
   const rRaportSaya = await get('/api/raport/saya', tokenSiswa.ahmad);

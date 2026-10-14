@@ -102,56 +102,6 @@ async function nilaiKelas(idKelas) {
   return { kelas, mapel, siswa, kkm: KKM };
 }
 
-// GET /api/raport/kelas  (guru) -> daftar kelas yang boleh dibuka raportnya
-exports.kelasGuru = asyncHandler(async (req, res) => {
-  const gid = await guruIdOf(req.user.id);
-  if (!gid) return res.json([]);
-
-  const [rows] = await pool.query(`
-    SELECT k.id, k.nama_kelas, k.tingkat,
-           p.kode, p.tahun_ajaran, p.semester, p.status AS status_periode,
-           (k.id_wali = ?) AS wali_kelas,
-           (SELECT COUNT(*) FROM siswa_kelas sk WHERE sk.id_kelas = k.id) AS jumlah_siswa,
-           (SELECT COUNT(*) FROM kelas_mapel km2 WHERE km2.id_kelas = k.id) AS jumlah_mapel,
-           (SELECT GROUP_CONCAT(DISTINCT mp.nama ORDER BY mp.nama SEPARATOR ', ')
-              FROM kelas_mapel km3 JOIN mata_pelajaran mp ON mp.id = km3.id_mapel
-             WHERE km3.id_kelas = k.id AND km3.id_guru = ?) AS mapel_diajar
-    FROM kelas k
-    JOIN periode p ON p.id = k.id_periode
-    WHERE k.id_wali = ?
-       OR EXISTS (SELECT 1 FROM kelas_mapel km WHERE km.id_kelas = k.id AND km.id_guru = ?)
-    ORDER BY p.tahun_ajaran DESC, p.semester DESC, k.nama_kelas`,
-  [gid, gid, gid, gid]);
-
-  res.json(rows.map((r) => ({
-    ...r,
-    wali_kelas: !!r.wali_kelas,
-    nama_semester: r.semester === 1 ? 'Ganjil' : 'Genap',
-  })));
-});
-
-// GET /api/raport/kelas/:id  (guru & admin) -> raport sementara satu kelas
-exports.raportKelas = asyncHandler(async (req, res) => {
-  const idKelas = req.params.id;
-
-  // Guru hanya boleh membuka kelas yang diajarnya atau yang diwalikannya.
-  if (req.user.role === 'guru') {
-    const gid = await guruIdOf(req.user.id);
-    const [[boleh]] = await pool.query(`
-      SELECT 1 AS ok FROM kelas k
-      WHERE k.id = ? AND (k.id_wali = ?
-        OR EXISTS (SELECT 1 FROM kelas_mapel km WHERE km.id_kelas = k.id AND km.id_guru = ?))`,
-    [idKelas, gid, gid]);
-    if (!boleh) {
-      return res.status(403).json({ message: 'Bukan kelas yang Anda ajar maupun Anda walikan' });
-    }
-  }
-
-  const data = await nilaiKelas(idKelas);
-  if (!data) return res.status(404).json({ message: 'Kelas tidak ditemukan' });
-  res.json(data);
-});
-
 // GET /api/raport/saya?id_periode=..  (siswa) -> raport dirinya sendiri
 exports.raportSiswa = asyncHandler(async (req, res) => {
   const sid = await siswaIdOf(req.user.id);

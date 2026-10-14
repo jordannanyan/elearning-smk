@@ -4,6 +4,7 @@ import api from '../../api/client';
 import KerjakanTugas from '../../components/KerjakanTugas';
 import Paginasi from '../../components/Paginasi';
 import type { KelasMapel, StatusTugasSiswa, Tugas } from '../../api/types';
+import { labelTipe, warnaTipe } from '../../utils/tugas';
 
 // ---------------------------------------------------------------------
 // Tugas disajikan sebagai kartu, bukan tabel, agar mudah dibaca sekilas.
@@ -114,7 +115,7 @@ export default function SiswaTugas() {
                     <div className="utama">
                       <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap', alignItems: 'center' }}>
                         <span className="badge green">{t.nama_mapel}</span>
-                        <span className={`badge ${t.tipe === 'kuis' ? 'orange' : 'gray'}`}>{t.tipe}</span>
+                        <span className={`badge ${warnaTipe(t.tipe)}`}>{labelTipe(t.tipe)}</span>
                         {!!t.jumlah_soal && <span className="badge gray">{t.jumlah_soal} soal</span>}
                       </div>
                       <div className="judul">{t.judul}</div>

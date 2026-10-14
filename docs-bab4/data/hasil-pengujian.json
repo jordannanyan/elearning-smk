@@ -1,5 +1,5 @@
 {
-  "tanggal": "2026-10-14T13:52:44.006Z",
+  "tanggal": "2026-10-14T14:10:11.358Z",
   "total": 123,
   "valid": 123,
   "tidak_valid": 0,
@@ -281,7 +281,7 @@
       "skenario": "Administrator menghapus siswa yang sudah terdaftar pada kelas",
       "input": "Menghapus akun Ahmad Hanapi",
       "harapan": "Sistem menolak dan menyarankan penonaktifan agar riwayat nilai siswa tetap tersimpan",
-      "aktual": "HTTP 409, pesan: \"Siswa ini terdaftar pada 2 kelas dan memiliki 9 pengumpulan tugas sehingga tidak dapat dihapus. Nonaktifkan akunnya (misalnya karena sudah lulus atau pindah) agar riwayat nilainya tetap tersimpan.\"",
+      "aktual": "HTTP 409, pesan: \"Siswa ini terdaftar pada 2 kelas dan memiliki 4 pengumpulan tugas sehingga tidak dapat dihapus. Nonaktifkan akunnya (misalnya karena sudah lulus atau pindah) agar riwayat nilainya tetap tersimpan.\"",
       "status": "Valid"
     },
     {
@@ -506,7 +506,7 @@
       "skenario": "Siswa membuka satu pertemuan untuk mengikuti pembelajaran",
       "input": "Membuka Pertemuan 1",
       "harapan": "Sistem menampilkan materi, tugas, dan forum diskusi pertemuan tersebut secara berurutan",
-      "aktual": "HTTP 200, 3 materi, 1 tugas, 2 topik diskusi",
+      "aktual": "HTTP 200, 3 materi, 1 tugas, 1 topik diskusi",
       "status": "Valid"
     },
     {
@@ -551,7 +551,7 @@
       "skenario": "Sistem mengelompokkan tugas siswa berdasarkan status pengerjaan",
       "input": "Membuka menu Tugas & Kuis sebagai siswa",
       "harapan": "Tugas terpisah menjadi belum dikerjakan, menunggu penilaian, sudah dinilai, dan terlewat",
-      "aktual": "Status yang terbentuk: dinilai, terlewat, belum_dikerjakan, menunggu_penilaian",
+      "aktual": "Status yang terbentuk: dinilai, terlewat, belum_dikerjakan",
       "status": "Valid"
     },
     {
@@ -803,7 +803,7 @@
       "skenario": "Pengguna menampilkan forum diskusi yang menyatu dalam materi pertemuan",
       "input": "Membuka Pertemuan 1 lalu melihat bagian forum diskusi",
       "harapan": "Forum diskusi tampil di dalam pertemuan beserta seluruh balasannya secara berurutan",
-      "aktual": "HTTP 200, 3 topik dengan total 6 balasan",
+      "aktual": "HTTP 200, 2 topik dengan total 3 balasan",
       "status": "Valid"
     },
     {
@@ -872,28 +872,28 @@
     {
       "id": "BB-97",
       "modul": "Raport Sementara",
-      "skenario": "Guru melihat daftar kelas yang dapat dibuka raportnya",
+      "skenario": "Guru melihat daftar mata pelajaran pada menu Raport Sementara",
       "input": "Membuka menu Raport Sementara",
-      "harapan": "Sistem menampilkan kelas yang diajar guru tersebut beserta kelas yang diwalikannya",
-      "aktual": "HTTP 200, 10 kelas; sebagai wali kelas: X A",
+      "harapan": "Sistem menampilkan mata pelajaran yang diampu guru tersebut pada periode berjalan sebagai pilihan untuk melihat nilai siswa",
+      "aktual": "HTTP 200, 5 mata pelajaran: MATEMATIKA UMUM (X A), MATEMATIKA TK LANJUT (XI B), MATEMATIKA TK LANJUT (XII A)",
       "status": "Valid"
     },
     {
       "id": "BB-98",
       "modul": "Raport Sementara",
-      "skenario": "Wali kelas membuka raport sementara seluruh siswa di kelasnya",
-      "input": "Membuka raport sementara kelas X A",
-      "harapan": "Sistem menampilkan nilai rata-rata tiap siswa pada setiap mata pelajaran beserta predikat dan peringkat kelasnya",
-      "aktual": "HTTP 200: 29 siswa, 17 mata pelajaran, KKM 75; peringkat 1 = M. Hafi Ramadhani (96, predikat A)",
+      "skenario": "Guru melihat nilai siswa satu mata pelajaran dari tugas pertama sampai ujian akhir",
+      "input": "Membuka nilai MATEMATIKA UMUM kelas X A",
+      "harapan": "Sistem menampilkan seluruh penilaian berurutan menurut pertemuan, mulai dari tugas paling awal, kuis, Ujian Tengah Semester, sampai Ujian Akhir Semester, beserta nilai tiap siswa dan rata-ratanya",
+      "aktual": "HTTP 200: 29 siswa, 5 penilaian berurutan [tugas -> kuis -> tugas -> uts -> uas]; contoh: Ahmad Hanapi rata-rata 84.25",
       "status": "Valid"
     },
     {
       "id": "BB-99",
       "modul": "Raport Sementara",
-      "skenario": "Guru mencoba membuka raport kelas yang bukan kelasnya",
-      "input": "Guru Laily Mustika membuka raport kelas XI B",
-      "harapan": "Sistem menolak karena guru tersebut tidak mengajar maupun menjadi wali kelas di sana",
-      "aktual": "HTTP 403, pesan: \"Bukan kelas yang Anda ajar maupun Anda walikan\"",
+      "skenario": "Guru mencoba melihat nilai mata pelajaran yang bukan diampunya",
+      "input": "Guru Laily Mustika membuka nilai MATEMATIKA UMUM kelas X A",
+      "harapan": "Sistem menolak karena guru tersebut tidak mengampu mata pelajaran itu",
+      "aktual": "HTTP 403, pesan: \"Bukan kelas mata pelajaran yang Anda ampu\"",
       "status": "Valid"
     },
     {
@@ -1010,7 +1010,7 @@
       "skenario": "Guru membuka presensi pada sebuah pertemuan",
       "input": "Membuka presensi pertemuan 1: Struktur dan Kaidah Teks Deskripsi",
       "harapan": "Presensi terbuka sehingga siswa dapat menyatakan kehadirannya",
-      "aktual": "HTTP 200, pesan: \"Presensi dibuka kembali\"",
+      "aktual": "HTTP 201, pesan: \"Presensi berhasil dibuka\"",
       "status": "Valid"
     },
     {
@@ -1073,7 +1073,7 @@
       "skenario": "Guru menutup presensi dan siswa yang belum mengisi dicatat alpa",
       "input": "Menekan tombol Tutup Presensi",
       "harapan": "Presensi ditutup dan seluruh siswa yang belum menyatakan hadir tercatat alpa",
-      "aktual": "HTTP 200, pesan: \"Presensi ditutup.\" (2 siswa menyatakan hadir sendiri sebelum presensi ditutup)",
+      "aktual": "HTTP 200, pesan: \"Presensi ditutup. 1 siswa yang belum mengisi dicatat alpa.\" (25 siswa menyatakan hadir sendiri sebelum presensi ditutup)",
       "status": "Valid"
     },
     {

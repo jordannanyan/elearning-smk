@@ -6,6 +6,7 @@ import SoalManager from '../../components/SoalManager';
 import MateriIsi from '../../components/MateriIsi';
 import PanelPresensi from '../../components/PanelPresensi';
 import type { IsiPertemuan, Materi, TipeMateri, Tugas } from '../../api/types';
+import { labelTipe, warnaTipe } from '../../utils/tugas';
 
 function fmt(dt?: string | null) {
   if (!dt) return 'Tanpa batas';
@@ -203,7 +204,7 @@ export default function GuruPertemuanDetail() {
                     {data.tugas.map((t) => (
                       <tr key={t.id}>
                         <td>{t.judul}</td>
-                        <td><span className={`badge ${t.tipe === 'kuis' ? 'orange' : 'green'}`}>{t.tipe}</span></td>
+                        <td><span className={`badge ${warnaTipe(t.tipe)}`}>{labelTipe(t.tipe)}</span></td>
                         <td>{t.jumlah_soal ? <span className="badge gray">{t.jumlah_soal} soal</span>
                           : <span className="muted">—</span>}</td>
                         <td className="muted">{fmt(t.deadline)}</td>

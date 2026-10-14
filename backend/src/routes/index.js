@@ -169,9 +169,7 @@ router.put('/presensi/:id/siswa/:idSiswa', authenticate, authorize('guru'),
   kunci('presensi', dariParam), presensi.setStatus);
 
 // ---------- Raport sementara ----------
-router.get('/raport/kelas', authenticate, authorize('guru'), raport.kelasGuru);
 router.get('/raport/saya', authenticate, authorize('siswa'), raport.raportSiswa);
-router.get('/raport/kelas/:id', authenticate, authorize('guru', 'admin'), raport.raportKelas);
 
 // ---------- Forum diskusi ----------
 router.get('/forum', authenticate, forum.list);

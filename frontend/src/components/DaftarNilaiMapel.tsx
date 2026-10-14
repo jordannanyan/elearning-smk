@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import api from '../api/client';
-import type { DaftarNilaiKelasMapel, TipeTugas } from '../api/types';
+import type { DaftarNilaiKelasMapel } from '../api/types';
+import { labelTipe, warnaTipe } from '../utils/tugas';
 
 // ---------------------------------------------------------------------
 // Daftar nilai satu mata pelajaran.
@@ -10,12 +11,6 @@ import type { DaftarNilaiKelasMapel, TipeTugas } from '../api/types';
 // sampai Ujian Akhir Semester, beserta nilai tiap siswa pada masing
 // masing penilaian dan rata-ratanya.
 // ---------------------------------------------------------------------
-const LABEL_TIPE: Record<TipeTugas, string> = {
-  tugas: 'Tugas', kuis: 'Kuis', uts: 'UTS', uas: 'UAS',
-};
-const WARNA_TIPE: Record<TipeTugas, string> = {
-  tugas: 'green', kuis: 'orange', uts: 'biru', uas: 'red',
-};
 const KKM = 75;
 
 export default function DaftarNilaiMapel({ idKelasMapel }: { idKelasMapel: number }) {
@@ -71,7 +66,7 @@ export default function DaftarNilaiMapel({ idKelasMapel }: { idKelasMapel: numbe
               {tugas.map((t) => (
                 <th key={t.id} className="tegak"
                   title={`Pertemuan ${t.nomor_pertemuan} — ${t.judul}`}>
-                  {LABEL_TIPE[t.tipe]} {t.nomor_pertemuan}
+                  {labelTipe(t.tipe)} {t.nomor_pertemuan}
                 </th>
               ))}
               <th>Rata-rata</th>
@@ -117,7 +112,7 @@ export default function DaftarNilaiMapel({ idKelasMapel }: { idKelasMapel: numbe
           <ul>
             {tugas.map((t) => (
               <li key={t.id}>
-                <span className={`badge ${WARNA_TIPE[t.tipe]}`}>{LABEL_TIPE[t.tipe]}</span>{' '}
+                <span className={`badge ${warnaTipe(t.tipe)}`}>{labelTipe(t.tipe)}</span>{' '}
                 Pertemuan {t.nomor_pertemuan} — {t.judul}
                 <span className="muted"> ({t.jumlah_kumpul} terkumpul)</span>
               </li>
