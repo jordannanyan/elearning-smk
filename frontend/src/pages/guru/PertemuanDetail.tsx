@@ -33,7 +33,7 @@ export default function GuruPertemuanDetail() {
   // Form tugas
   const [showTugas, setShowTugas] = useState(false);
   const [editTugas, setEditTugas] = useState<Tugas | null>(null);
-  const [ft, setFt] = useState<any>({ judul: '', deskripsi: '', deadline: '', tipe: 'tugas' });
+  const [ft, setFt] = useState<any>({ judul: '', deskripsi: '', deadline: '', tipe: 'tugas', bobot: '' });
   const [errTugas, setErrTugas] = useState('');
   const [soalUntuk, setSoalUntuk] = useState<Tugas | null>(null);
 
@@ -85,13 +85,15 @@ export default function GuruPertemuanDetail() {
 
   /* ---------------- Tugas ---------------- */
   function openTugasAdd() {
-    setEditTugas(null); setFt({ judul: '', deskripsi: '', deadline: '', tipe: 'tugas' });
+    setEditTugas(null);
+    setFt({ judul: '', deskripsi: '', deadline: '', tipe: 'tugas', bobot: '' });
     setErrTugas(''); setShowTugas(true);
   }
   function openTugasEdit(t: Tugas) {
     setEditTugas(t);
     setFt({
       judul: t.judul, deskripsi: t.deskripsi || '', tipe: t.tipe,
+      bobot: t.bobot != null ? String(Number(t.bobot)) : '',
       deadline: t.deadline ? t.deadline.replace(' ', 'T').slice(0, 16) : '',
     });
     setErrTugas(''); setShowTugas(true);
@@ -371,6 +373,17 @@ export default function GuruPertemuanDetail() {
               <p className="muted" style={{ fontSize: 12, marginTop: 5 }}>
                 Sistem menampilkan sisa hari menuju batas waktu kepada siswa beserta penanda warna
                 apabila tenggatnya sudah dekat.
+              </p>
+            </div>
+            <div className="field"><label>Bobot Penilaian (%)</label>
+              <input type="number" min={0} max={100} step={0.5} value={ft.bobot}
+                placeholder="Contoh: 25"
+                onChange={(e) => setFt({ ...ft, bobot: e.target.value })} />
+              <p className="muted" style={{ fontSize: 12, marginTop: 5 }}>
+                Bobot menentukan andil penilaian ini terhadap <strong>nilai akhir</strong> mata
+                pelajaran. Seluruh penilaian pada satu mata pelajaran — tugas, kuis, UTS, dan
+                UAS — hendaknya berjumlah <strong>100%</strong>, misalnya tugas 15%, kuis 15%,
+                UTS 25%, dan UAS 30%. Nilai akhir dihitung menurut bobot ini, bukan rata-rata.
               </p>
             </div>
             <div className="modal-actions">

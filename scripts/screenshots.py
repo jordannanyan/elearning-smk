@@ -351,10 +351,12 @@ def main():
                   "Kuis pilihan ganda mengenai penyelesaian SPLDV dengan metode eliminasi "
                   "dan substitusi. Dinilai otomatis oleh sistem.")
         page.fill('.modal input[type="datetime-local"]', "2026-12-20T23:59")
-        simpan(page, "guru-form-tugas", "Form Buat Tugas dan Kuis",
-               "Form pembuatan tugas atau kuis pada sebuah pertemuan yang memuat tipe, judul, "
-               "instruksi pengerjaan, dan batas waktu pengumpulan. Sistem menghitung sisa hari "
-               "menuju batas waktu dan menampilkannya kepada siswa.", modal=True)
+        simpan(page, "guru-form-tugas", "Form Pembuatan Penilaian",
+               "Form pembuatan penilaian pada sebuah pertemuan yang memuat jenis penilaian "
+               "(tugas, kuis, UTS, atau UAS), judul, instruksi pengerjaan, batas waktu "
+               "pengumpulan, serta bobot penilaian dalam persen. Bobot inilah yang dipakai "
+               "sistem untuk menghitung nilai akhir mata pelajaran, dan seluruh penilaian pada "
+               "satu mata pelajaran hendaknya berjumlah 100%.", modal=True)
         page.click('.modal button:has-text("Batal")')
 
         # Kelola butir soal pada kuis
@@ -436,20 +438,20 @@ def main():
         # lengkap sampai Ujian Akhir Semester.
         login(page, "halifah@smakk.sch.id", "guru123")
         buka(page, "/guru/raport")
-        simpan(page, "guru-raport-daftar", "Daftar Mata Pelajaran pada Menu Raport Sementara",
-               "Menu Raport Sementara menampilkan mata pelajaran yang diampu guru beserta "
-               "kelasnya. Guru memilih salah satunya untuk melihat nilai seluruh siswa pada "
-               "mata pelajaran tersebut.", full=True)
+        simpan(page, "guru-raport-daftar", "Daftar Mata Pelajaran pada Menu Rekap Nilai",
+               "Menu Rekap Nilai menampilkan mata pelajaran yang diampu guru beserta kelasnya. "
+               "Guru memilih salah satunya untuk melihat nilai seluruh siswa pada mata "
+               "pelajaran tersebut.", full=True)
 
         page.locator('.kartu-ringkas:has-text("MATEMATIKA UMUM"):has-text("X A") '
                      'button:has-text("Lihat Nilai Siswa")').first.click()
         page.wait_for_timeout(1600)
-        simpan(page, "guru-raport-nilai", "Nilai Siswa Satu Mata Pelajaran (Guru)",
+        simpan(page, "guru-raport-nilai", "Rekap Nilai Satu Mata Pelajaran (Guru)",
                "Nilai seluruh siswa pada satu mata pelajaran. Penilaian tersusun berurutan "
                "menurut pertemuan, mulai dari tugas paling awal, kuis, Ujian Tengah Semester, "
-               "sampai Ujian Akhir Semester, dilengkapi rata-rata tiap siswa dan rata-rata "
-               "kelas pada setiap penilaian. Nilai yang belum mencapai KKM ditandai dengan "
-               "warna berbeda.", full=True)
+               "sampai Ujian Akhir Semester, masing-masing beserta bobotnya. Kolom Nilai Akhir "
+               "memuat jumlah nilai dikalikan bobotnya, bukan rata-rata, dan dilengkapi "
+               "predikat serta status ketuntasan terhadap KKM.", full=True)
 
         buka(page, "/guru/jadwal")
         simpan(page, "guru-jadwal-mengajar", "Jadwal Mengajar Guru",
@@ -458,7 +460,7 @@ def main():
                "sehingga isinya sama dengan jadwal yang berlaku di sekolah.", full=True)
 
         buka(page, "/guru/presensi")
-        page.locator('.kartu-ringkas:has-text("BAHASA INDONESIA"):has-text("X A") '
+        page.locator('.kartu-ringkas:has-text("MATEMATIKA UMUM"):has-text("X A") '
                      'button:has-text("Lihat Rekap Presensi")').first.click()
         page.wait_for_timeout(1500)
         simpan(page, "guru-rekap-presensi", "Rekap Presensi Satu Mata Pelajaran (Guru)",

@@ -1,6 +1,7 @@
 const pool = require('../config/db');
 const asyncHandler = require('../utils/asyncHandler');
 const { guruIdOf, siswaIdOf, kelasMapelDariTugas, kelasMapelMilikGuru } = require('../utils/akses');
+const { KKM, hitungNilaiAkhir } = require('../utils/penilaian');
 
 // POST /api/nilai  (guru) -> penilaian tugas biasa (tanpa butir soal)
 exports.beriNilai = asyncHandler(async (req, res) => {
@@ -160,7 +161,7 @@ exports.rekapKelasMapel = asyncHandler(async (req, res) => {
   // Urutan penilaian mengikuti urutan pertemuan, sehingga terbaca runut
   // dari tugas paling awal sampai ujian akhir semester.
   const [tugas] = await pool.query(`
-    SELECT t.id, t.judul, t.tipe, t.deadline, pt.nomor AS nomor_pertemuan,
+    SELECT t.id, t.judul, t.tipe, t.deadline, t.bobot, pt.nomor AS nomor_pertemuan,
            (SELECT COUNT(*) FROM pengumpulan_tugas pg WHERE pg.id_tugas = t.id) AS jumlah_kumpul
     FROM tugas t JOIN pertemuan pt ON pt.id = t.id_pertemuan
     WHERE pt.id_kelas_mapel = ? ORDER BY pt.nomor, t.id`, [idKm]);
@@ -192,11 +193,22 @@ exports.rekapKelasMapel = asyncHandler(async (req, res) => {
       const v = peta.get(`${s.id}|${t.id}`);
       s.nilai[t.id] = v === undefined ? null : v;
     }
-    const angka = Object.values(s.nilai).filter((v) => v != null).map(Number);
-    s.jumlah_dinilai = angka.length;
-    s.rata_rata = angka.length
-      ? Math.round((angka.reduce((a, b) => a + b, 0) / angka.length) * 100) / 100 : null;
+    // Nilai akhir dihitung menurut bobot tiap penilaian, bukan rata-rata
+    Object.assign(s, hitungNilaiAkhir(
+      tugas.map((t) => ({ skor: s.nilai[t.id], bobot: t.bobot }))));
   }
 
-  res.json({ kelas_mapel: km, tugas, siswa });
+  const totalBobot = tugas.reduce((a, t) => a + Number(t.bobot || 0), 0);
+
+  res.json({
+    kelas_mapel: km,
+    tugas,
+    siswa,
+    kkm: KKM,
+    bobot: {
+      total: Math.round(totalBobot * 100) / 100,
+      sisa: Math.round((100 - totalBobot) * 100) / 100,
+      lengkap: Math.abs(totalBobot - 100) < 0.01,
+    },
+  });
 });

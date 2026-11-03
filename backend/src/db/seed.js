@@ -281,10 +281,13 @@ async function seed() {
         'INSERT INTO materi (id_pertemuan, judul, konten, tipe, file, url) VALUES (?,?,?,?,?,?)',
         [idPertemuan, judul, konten, tipe, file || null, url || null]);
     }
-    async function buatTugas(idPertemuan, judul, deskripsi, deadline, tipe) {
+    // Bobot penilaian dalam persen terhadap nilai akhir mata pelajaran.
+    // Pada Matematika Umum X A bobotnya disusun genap 100% sebagai
+    // contoh mata pelajaran yang penilaiannya sudah lengkap.
+    async function buatTugas(idPertemuan, judul, deskripsi, deadline, tipe, bobot = 0) {
       const [r] = await conn.query(
-        'INSERT INTO tugas (id_pertemuan, judul, deskripsi, deadline, tipe) VALUES (?,?,?,?,?)',
-        [idPertemuan, judul, deskripsi, deadline, tipe]);
+        'INSERT INTO tugas (id_pertemuan, judul, deskripsi, deadline, tipe, bobot) VALUES (?,?,?,?,?,?)',
+        [idPertemuan, judul, deskripsi, deadline, tipe, bobot]);
       return r.insertId;
     }
     async function buatTopik(idPertemuan, emailGuru, judul, pesan) {
@@ -314,7 +317,7 @@ async function seed() {
       'video', salinAsetContoh('video_persamaan_linear.webm'));
     await buatTugas(p1, 'Latihan Persamaan Linear',
       'Kerjakan soal nomor 1-10 pada buku paket halaman 25. Tulis langkah penyelesaian secara '
-      + 'lengkap, lalu unggah dalam bentuk berkas atau tuliskan pada kolom jawaban.', hari(9), 'tugas');
+      + 'lengkap, lalu unggah dalam bentuk berkas atau tuliskan pada kolom jawaban.', hari(9), 'tugas', 15);
     await buatTopik(p1, SEKOLAH.kelas.find((k) => k.nama === 'X A').wali
       ? 'halifah@smakk.sch.id' : 'halifah@smakk.sch.id',
       'Diskusi Pertemuan 1: Persamaan Linear',
@@ -328,7 +331,7 @@ async function seed() {
       + 'berbalik arah.', 'teks');
     await buatTugas(p2, 'Kuis Persamaan dan Pertidaksamaan Linear',
       'Kuis pilihan ganda mengenai persamaan dan pertidaksamaan linear satu variabel. '
-      + 'Dinilai otomatis oleh sistem.', hari(5), 'kuis');
+      + 'Dinilai otomatis oleh sistem.', hari(5), 'kuis', 15);
     await buatTopik(p2, 'halifah@smakk.sch.id', 'Tanya Jawab Pertidaksamaan Linear',
       'Bagian mana dari sifat pertidaksamaan yang paling sering membuat kalian keliru? '
       + 'Silakan tanyakan di sini.');
@@ -342,7 +345,7 @@ async function seed() {
       'link', null, 'https://www.youtube.com/watch?v=kYB8IZa5AuE');
     await buatTugas(p3, 'Tugas Proyek SPLDV',
       'Susunlah satu soal cerita yang dapat diselesaikan dengan SPLDV beserta penyelesaiannya, '
-      + 'kemudian unggah dalam bentuk dokumen.', hari(2), 'tugas');
+      + 'kemudian unggah dalam bentuk dokumen.', hari(2), 'tugas', 15);
 
 
     // ---------- Ujian Tengah dan Akhir Semester Matematika X A ----------
@@ -357,14 +360,14 @@ async function seed() {
       + 'satu variabel, dan sistem persamaan linear dua variabel.', 'teks');
     const utsMtk = await buatTugas(p4, 'Ujian Tengah Semester Matematika Umum',
       'Kerjakan seluruh soal ujian tengah semester secara mandiri. Tuliskan langkah '
-      + 'penyelesaian dengan lengkap.', hari(-9), 'uts');
+      + 'penyelesaian dengan lengkap.', hari(-9), 'uts', 25);
 
     const p5 = await buatPertemuan(kmMtk, 5, 'Ujian Akhir Semester',
       'Ujian akhir semester yang mencakup seluruh materi matematika umum kelas X '
       + 'pada semester genap.', -3);
     const uasMtk = await buatTugas(p5, 'Ujian Akhir Semester Matematika Umum',
       'Ujian akhir semester meliputi seluruh capaian pembelajaran yang telah dipelajari '
-      + 'sepanjang semester ini.', hari(-2), 'uas');
+      + 'sepanjang semester ini.', hari(-2), 'uas', 30);
 
     // Hasil ujian diisikan langsung karena pelaksanaannya berlangsung di
     // kelas, bukan melalui pengumpulan berkas di dalam sistem.
@@ -403,7 +406,7 @@ async function seed() {
       'Modul lengkap teks deskripsi beserta contoh.', 'file', fileBind);
     await buatTugas(b1, 'Tugas Menulis Teks Deskripsi',
       'Buatlah sebuah teks deskripsi bertema "Lingkungan Sekolahku" minimal tiga paragraf '
-      + 'sesuai struktur yang telah dipelajari.', hari(7), 'tugas');
+      + 'sesuai struktur yang telah dipelajari.', hari(7), 'tugas', 20);
     await buatTopik(b1, 'asnin@smakk.sch.id', 'Tips Menulis Teks Deskripsi',
       'Anak-anak, dalam menulis teks deskripsi gunakan pancaindra kalian: apa yang dilihat, '
       + 'didengar, dan dirasakan. Silakan tanyakan di sini jika ada kesulitan.');
@@ -415,7 +418,7 @@ async function seed() {
       + 'lebih hidup.', 'teks');
     await buatTugas(b2, 'Kuis Teks Deskripsi',
       'Kuis singkat mengenai struktur teks deskripsi. Terdiri atas soal pilihan ganda dan satu '
-      + 'soal esai.', hari(4), 'kuis');
+      + 'soal esai.', hari(4), 'kuis', 20);
 
     // ---------- Fisika X A ----------
     const f1 = await buatPertemuan(kmFis, 1, 'Besaran dan Satuan',
@@ -427,7 +430,7 @@ async function seed() {
       'Modul besaran, satuan, dan angka penting.', 'file', fileFis);
     await buatTugas(f1, 'Latihan Soal Besaran dan Satuan',
       'Kerjakan latihan konversi satuan dan penulisan angka penting pada lembar kerja yang telah '
-      + 'dibagikan.', hari(-3), 'tugas');
+      + 'dibagikan.', hari(-3), 'tugas', 20);
     await buatTopik(f1, 'samjuhdi@smakk.sch.id', 'Pengumpulan Latihan Besaran dan Satuan',
       'Batas waktu pengumpulan latihan soal besaran dan satuan sudah berakhir. Bagi yang belum '
       + 'mengumpulkan, silakan hubungi Bapak dan tetap unggah pekerjaan kalian melalui sistem.');
@@ -448,7 +451,7 @@ async function seed() {
       + 'present tense.', 'teks');
     await buatTugas(e1, 'Kuis Descriptive Text',
       'Short quiz about the generic structure and language features of descriptive text.',
-      hari(6), 'kuis');
+      hari(6), 'kuis', 25);
 
     // ---------- Arsip periode ganjil (2026/1) ----------
     const kmMtkLama = km[P_GANJIL]['X A|MATEMATIKA UMUM'];
@@ -458,7 +461,7 @@ async function seed() {
     await buatMateri(lm1, 'Rumus Suku ke-n Barisan Aritmetika',
       'Suku ke-n barisan aritmetika dirumuskan Un = a + (n-1)b.', 'teks');
     const lmTugas = await buatTugas(lm1, 'Latihan Barisan Aritmetika',
-      'Kerjakan soal barisan dan deret aritmetika nomor 1 sampai 10.', hari(-160), 'tugas');
+      'Kerjakan soal barisan dan deret aritmetika nomor 1 sampai 10.', hari(-160), 'tugas', 40);
 
     const lb1 = await buatPertemuan(kmBindLama, 1, 'Teks Negosiasi',
       'Struktur dan kaidah teks negosiasi.', -178);
@@ -466,7 +469,7 @@ async function seed() {
       'Teks negosiasi terdiri atas orientasi, pengajuan, penawaran, dan persetujuan.', 'teks');
     const lbTugas = await buatTugas(lb1, 'Tugas Menyusun Teks Negosiasi',
       'Susunlah sebuah teks negosiasi jual beli sesuai struktur yang telah dipelajari.',
-      hari(-158), 'tugas');
+      hari(-158), 'tugas', 40);
 
     // Riwayat nilai pada periode terkunci. Data ini disisipkan langsung
     // karena periodenya sudah ditutup sehingga tidak dapat lagi diisi

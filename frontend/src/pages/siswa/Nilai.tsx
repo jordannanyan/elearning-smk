@@ -13,6 +13,9 @@ const STATUS: Record<string, { teks: string; warna: string }> = {
 export default function SiswaNilai() {
   const [data, setData] = useState<RekapNilai | null>(null);
   const [pilih, setPilih] = useState('');
+  // Penyaring mata pelajaran agar siswa tidak perlu menggulung daftar
+  // yang panjang ketika mata pelajarannya banyak.
+  const [filterMapel, setFilterMapel] = useState('');
   const [loading, setLoading] = useState(true);
 
   async function load(idPeriode?: string) {
@@ -51,12 +54,19 @@ export default function SiswaNilai() {
         </div>
         <div className="pilih-periode">
           <label style={{ fontWeight: 600, fontSize: 13 }}>Periode:</label>
-          <select value={pilih} onChange={(e) => gantiPeriode(e.target.value)}>
+          <select value={pilih} onChange={(e) => { gantiPeriode(e.target.value); setFilterMapel(''); }}>
             {data.daftar_periode.map((x) => (
               <option key={x.id} value={x.id}>
                 {x.kode} — {x.tahun_ajaran} {x.semester === 1 ? 'Ganjil' : 'Genap'} · Kelas {x.nama_kelas}
                 {x.status === 'terkunci' ? ' (arsip)' : ''}
               </option>
+            ))}
+          </select>
+          <select value={filterMapel} onChange={(e) => setFilterMapel(e.target.value)}
+            style={{ minWidth: 220 }}>
+            <option value="">Semua Mata Pelajaran ({data.mapel.length})</option>
+            {data.mapel.map((m) => (
+              <option key={m.id_kelas_mapel} value={m.id_kelas_mapel}>{m.nama_mapel}</option>
             ))}
           </select>
         </div>
@@ -100,7 +110,9 @@ export default function SiswaNilai() {
 
       {data.mapel.length === 0
         ? <div className="card center-msg">Belum ada tugas pada periode ini.</div>
-        : data.mapel.map((m) => (
+        : data.mapel
+          .filter((m) => !filterMapel || String(m.id_kelas_mapel) === filterMapel)
+          .map((m) => (
           <div className="nilai-mapel" key={m.id_kelas_mapel}>
             <div className="kepala">
               <div>

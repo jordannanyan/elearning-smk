@@ -171,6 +171,7 @@ export interface Tugas {
   urgensi?: Urgensi;
   pengumpulan?: PengumpulanSingkat | null;
   status?: StatusTugasSiswa;
+  bobot?: number | string | null;
 }
 
 export type TipeSoal = 'pilihan_ganda' | 'esai';
@@ -321,7 +322,7 @@ export interface KelasRaport {
 
 export interface MapelRaport {
   id_kelas_mapel: number; nama_mapel: string; kode_mapel: string | null;
-  kelompok: string | null; nama_guru: string | null; jumlah_tugas: number;
+  kelompok: string | null; nama_guru: string | null;
 }
 
 export interface RaportKelas {
@@ -350,13 +351,15 @@ export interface RaportSiswa {
   periode?: { id_periode: number };
   kelas: RaportKelas['kelas'] | null;
   mapel: (MapelRaport & {
-    jumlah_dinilai: number; rata_rata: number | null;
-    predikat: Predikat; tuntas: boolean | null;
+    jumlah_dinilai: number; jumlah_penilaian: number;
+    total_bobot: number; bobot_dinilai: number; berbobot: boolean;
+    nilai_akhir: number | null; predikat: Predikat; ketuntasan: Ketuntasan;
   })[];
   ringkasan: {
-    rata_rata: number | null; predikat: Predikat; peringkat: number | null;
-    jumlah_siswa: number; jumlah_mapel: number;
+    nilai_akhir: number | null; predikat: Predikat; ketuntasan: Ketuntasan;
+    peringkat: number | null; jumlah_siswa: number; jumlah_mapel: number;
     jumlah_mapel_dinilai: number; jumlah_mapel_tuntas: number;
+    jumlah_mapel_belum_tuntas: number;
   } | null;
   kkm: number;
 }
@@ -489,6 +492,8 @@ export interface ReferensiJadwal {
 }
 
 /* ---------- Daftar nilai satu mata pelajaran ---------- */
+export interface Ketuntasan { tuntas: boolean | null; label: string; }
+
 export interface DaftarNilaiKelasMapel {
   kelas_mapel: {
     id: number; nama_mapel: string; kode_mapel: string | null;
@@ -497,11 +502,15 @@ export interface DaftarNilaiKelasMapel {
   };
   tugas: {
     id: number; judul: string; tipe: TipeTugas; deadline: string | null;
-    nomor_pertemuan: number; jumlah_kumpul: number;
+    nomor_pertemuan: number; jumlah_kumpul: number; bobot: number | string;
   }[];
   siswa: {
     id: number; nama: string; nis: string | null;
     nilai: Record<number, string | number | null>;
-    jumlah_dinilai: number; rata_rata: number | null;
+    jumlah_dinilai: number; jumlah_penilaian: number;
+    total_bobot: number; bobot_dinilai: number; berbobot: boolean;
+    nilai_akhir: number | null; predikat: Predikat; ketuntasan: Ketuntasan;
   }[];
+  kkm: number;
+  bobot: { total: number; sisa: number; lengkap: boolean };
 }

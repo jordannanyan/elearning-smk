@@ -1391,6 +1391,68 @@ async function main() {
       && urutan.indexOf('uts') < urutan.indexOf('uas'),
   });
 
+
+  // -----------------------------------------------------------------
+  // Bobot penilaian dan nilai akhir
+  // -----------------------------------------------------------------
+  const nilaiMapel = (await get(`/api/nilai/kelas-mapel/${kmRaport.id}`, TG)).data;
+  catat({
+    modul: 'Rekap Nilai', skenario: 'Guru melihat bobot tiap penilaian beserta jumlah seluruhnya',
+    input: `Membuka rekap nilai ${kmRaport.nama_mapel} kelas ${kmRaport.nama_kelas}`,
+    harapan: 'Setiap penilaian menampilkan bobotnya dan sistem menghitung jumlah seluruh bobot '
+      + 'beserta sisanya terhadap 100%',
+    aktual: `HTTP 200: bobot ${nilaiMapel.tugas.map((t) => `${t.tipe} ${Number(t.bobot)}%`).join(', ')}; `
+      + `jumlah ${nilaiMapel.bobot.total}%, sisa ${nilaiMapel.bobot.sisa}%, `
+      + `lengkap: ${nilaiMapel.bobot.lengkap ? 'ya' : 'belum'}`,
+    sesuai: nilaiMapel.bobot.total === 100 && nilaiMapel.bobot.lengkap === true,
+  });
+
+  // Nilai akhir dibandingkan dengan perhitungan manual menurut bobot,
+  // sekaligus dipastikan berbeda dari rata-rata biasa.
+  const siswaUji = nilaiMapel.siswa.find((s) => s.nilai_akhir != null);
+  const terpakai = nilaiMapel.tugas
+    .map((t) => ({ skor: siswaUji.nilai[t.id], bobot: Number(t.bobot) }))
+    .filter((x) => x.skor != null);
+  const bobotTerpakai = terpakai.reduce((a, x) => a + x.bobot, 0);
+  const hitungManual = Math.round(
+    (terpakai.reduce((a, x) => a + Number(x.skor) * x.bobot, 0) / bobotTerpakai) * 100) / 100;
+  const rataBiasa = Math.round(
+    (terpakai.reduce((a, x) => a + Number(x.skor), 0) / terpakai.length) * 100) / 100;
+  catat({
+    modul: 'Rekap Nilai', skenario: 'Nilai akhir siswa dihitung menurut bobot penilaian, bukan rata-rata',
+    input: `${siswaUji.nama}: ` + terpakai.map((x) => `${Number(x.skor)} (bobot ${x.bobot}%)`).join(', '),
+    harapan: 'Nilai akhir sama dengan jumlah nilai dikalikan bobotnya dibagi jumlah bobot yang '
+      + 'sudah dinilai, dan berbeda dari rata-rata biasa',
+    aktual: `Nilai akhir sistem ${siswaUji.nilai_akhir}; perhitungan manual menurut bobot `
+      + `${hitungManual}; rata-rata biasa ${rataBiasa}`,
+    sesuai: Math.abs(siswaUji.nilai_akhir - hitungManual) < 0.02
+      && Math.abs(siswaUji.nilai_akhir - rataBiasa) > 0.01,
+  });
+
+  const ptBobot = (await get(`/api/kelas-mapel/${kmRaport.id}/pertemuan`, TG)).data[0];
+  const rBobotLebih = await post('/api/tugas', {
+    id_pertemuan: ptBobot.id, judul: 'Uji Bobot Melebihi Seratus Persen',
+    tipe: 'tugas', bobot: 40,
+  }, TG);
+  catat({
+    modul: 'Rekap Nilai', skenario: 'Guru memberi bobot penilaian melebihi sisa yang tersedia',
+    input: 'Menambah penilaian berbobot 40% padahal seluruh bobot sudah genap 100%',
+    harapan: 'Sistem menolak dan menyebutkan sisa bobot yang masih tersedia',
+    aktual: `HTTP ${rBobotLebih.status}, pesan: "${rBobotLebih.data?.message}"`,
+    sesuai: rBobotLebih.status === 400 && rBobotLebih.data?.sisa_bobot === 0,
+  });
+
+  const rBobotSalah = await post('/api/tugas', {
+    id_pertemuan: ptBobot.id, judul: 'Uji Bobot Tidak Wajar', tipe: 'tugas', bobot: 150,
+  }, TG);
+  catat({
+    modul: 'Rekap Nilai', skenario: 'Guru mengisi bobot penilaian dengan angka tidak wajar',
+    input: 'Bobot penilaian: 150 persen',
+    harapan: 'Sistem menolak karena bobot hanya boleh bernilai 0 sampai 100 persen',
+    aktual: `HTTP ${rBobotSalah.status}, pesan: "${rBobotSalah.data?.message}"`,
+    sesuai: rBobotSalah.status === 400,
+  });
+
   const rNilaiMapelTerlarang = await get(`/api/nilai/kelas-mapel/${kmRaport.id}`, TG_LAILY);
   catat({
     modul: 'Raport Sementara', skenario: 'Guru mencoba melihat nilai mata pelajaran yang bukan diampunya',
@@ -1405,14 +1467,16 @@ async function main() {
   catat({
     modul: 'Raport Sementara', skenario: 'Siswa melihat raport sementara dirinya dalam satu halaman',
     input: 'Membuka menu Raport Sementara',
-    harapan: 'Sistem menampilkan seluruh mata pelajaran di kelasnya beserta nilai rata-rata, '
-      + 'predikat, ketuntasan terhadap KKM, dan peringkat kelas',
+    harapan: 'Sistem menampilkan seluruh mata pelajaran di kelasnya beserta nilai akhir '
+      + 'menurut bobot penilaian, predikat, status ketuntasan terhadap KKM, dan peringkat kelas',
     aktual: `HTTP ${rRaportSaya.status}: ${rRaportSaya.data.identitas?.nama} kelas `
       + `${rRaportSaya.data.kelas?.nama_kelas}, ${rRaportSaya.data.mapel.length} mata pelajaran, `
-      + `rata-rata ${rk?.rata_rata} (predikat ${rk?.predikat?.huruf}), `
-      + `peringkat ${rk?.peringkat} dari ${rk?.jumlah_siswa} siswa`,
+      + `nilai akhir ${rk?.nilai_akhir} (predikat ${rk?.predikat?.huruf}, `
+      + `${rk?.ketuntasan?.label}), peringkat ${rk?.peringkat} dari ${rk?.jumlah_siswa} siswa; `
+      + `tuntas ${rk?.jumlah_mapel_tuntas} dan belum tuntas ${rk?.jumlah_mapel_belum_tuntas} `
+      + `dari ${rk?.jumlah_mapel_dinilai} mata pelajaran yang sudah dinilai`,
     sesuai: rRaportSaya.status === 200 && rRaportSaya.data.mapel.length > 0
-      && rk.rata_rata != null && rk.peringkat != null,
+      && rk.nilai_akhir != null && rk.peringkat != null && !!rk.ketuntasan?.label,
   });
 
   const periodeArsip = rRaportSaya.data.daftar_periode.find((p) => p.status === 'terkunci');

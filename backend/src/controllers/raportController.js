@@ -1,6 +1,7 @@
 const pool = require('../config/db');
 const asyncHandler = require('../utils/asyncHandler');
-const { guruIdOf, siswaIdOf } = require('../utils/akses');
+const { siswaIdOf } = require('../utils/akses');
+const { KKM, predikat, ketuntasan, hitungNilaiAkhir, bulat } = require('../utils/penilaian');
 
 // ---------------------------------------------------------------------
 // Raport sementara
@@ -15,21 +16,6 @@ const { guruIdOf, siswaIdOf } = require('../utils/akses');
 // pada setiap periode pembelajaran yang pernah diikutinya.
 // ---------------------------------------------------------------------
 
-const KKM = 75; // Kriteria Ketuntasan Minimal yang digunakan sekolah
-
-function predikat(nilai) {
-  if (nilai == null) return { huruf: '-', keterangan: 'Belum ada nilai' };
-  if (nilai >= 90) return { huruf: 'A', keterangan: 'Sangat Baik' };
-  if (nilai >= 80) return { huruf: 'B', keterangan: 'Baik' };
-  if (nilai >= 70) return { huruf: 'C', keterangan: 'Cukup' };
-  return { huruf: 'D', keterangan: 'Perlu Bimbingan' };
-}
-
-const bulat = (n) => (n == null ? null : Math.round(Number(n) * 100) / 100);
-
-// Menyusun nilai seluruh siswa pada sebuah kelas, dikelompokkan per mata
-// pelajaran. Dipakai bersama oleh raport guru maupun raport siswa agar
-// angka yang tampil pada keduanya dihitung dengan cara yang sama persis.
 async function nilaiKelas(idKelas) {
   const [[kelas]] = await pool.query(`
     SELECT k.id, k.nama_kelas, k.tingkat, k.id_periode,
@@ -47,7 +33,9 @@ async function nilaiKelas(idKelas) {
     SELECT km.id AS id_kelas_mapel, mp.nama AS nama_mapel, mp.kode AS kode_mapel,
            mp.kelompok, ug.nama AS nama_guru,
            (SELECT COUNT(*) FROM pertemuan pt JOIN tugas t ON t.id_pertemuan = pt.id
-             WHERE pt.id_kelas_mapel = km.id) AS jumlah_tugas
+             WHERE pt.id_kelas_mapel = km.id) AS jumlah_penilaian,
+           (SELECT COALESCE(SUM(t.bobot), 0) FROM pertemuan pt JOIN tugas t ON t.id_pertemuan = pt.id
+             WHERE pt.id_kelas_mapel = km.id) AS total_bobot
     FROM kelas_mapel km
     JOIN mata_pelajaran mp ON mp.id = km.id_mapel
     LEFT JOIN guru g ON g.id = km.id_guru
@@ -55,9 +43,11 @@ async function nilaiKelas(idKelas) {
     WHERE km.id_kelas = ?
     ORDER BY mp.kelompok, mp.nama`, [idKelas]);
 
+  // Rincian tiap penilaian diambil apa adanya, bukan dirata-ratakan di
+  // basis data, karena nilai akhir dihitung menurut bobot masing-masing.
   const [baris] = await pool.query(`
     SELECT s.id AS id_siswa, u.nama, s.nis, km.id AS id_kelas_mapel,
-           COUNT(n.id) AS jumlah_dinilai, AVG(n.skor) AS rata
+           t.id AS id_tugas, t.tipe, t.bobot, n.skor
     FROM siswa_kelas sk
     JOIN siswa s ON s.id = sk.id_siswa
     JOIN users u ON u.id = s.id_user
@@ -67,37 +57,49 @@ async function nilaiKelas(idKelas) {
     LEFT JOIN pengumpulan_tugas pg ON pg.id_tugas = t.id AND pg.id_siswa = s.id
     LEFT JOIN nilai n ON n.id_kumpul = pg.id
     WHERE sk.id_kelas = ?
-    GROUP BY s.id, km.id
     ORDER BY u.nama`, [idKelas]);
 
   const peta = new Map();
   for (const b of baris) {
     if (!peta.has(b.id_siswa)) {
-      peta.set(b.id_siswa, { id_siswa: b.id_siswa, nama: b.nama, nis: b.nis, nilai: {} });
+      peta.set(b.id_siswa, {
+        id_siswa: b.id_siswa, nama: b.nama, nis: b.nis, rincian: new Map(),
+      });
     }
-    peta.get(b.id_siswa).nilai[b.id_kelas_mapel] = {
-      rata_rata: bulat(b.rata),
-      jumlah_dinilai: Number(b.jumlah_dinilai),
-    };
+    const s = peta.get(b.id_siswa);
+    if (!s.rincian.has(b.id_kelas_mapel)) s.rincian.set(b.id_kelas_mapel, []);
+    if (b.id_tugas) {
+      s.rincian.get(b.id_kelas_mapel).push({ skor: b.skor, bobot: b.bobot, tipe: b.tipe });
+    }
   }
 
   const siswa = [...peta.values()].map((s) => {
-    const angka = Object.values(s.nilai).map((v) => v.rata_rata).filter((v) => v != null);
-    const rata = angka.length ? bulat(angka.reduce((a, b) => a + b, 0) / angka.length) : null;
+    const nilai = {};
+    for (const m of mapel) {
+      const daftar = s.rincian.get(m.id_kelas_mapel) || [];
+      nilai[m.id_kelas_mapel] = hitungNilaiAkhir(daftar);
+    }
+    // Nilai akhir seluruh mata pelajaran dirangkum menjadi satu angka
+    // dengan memberi bobot sama pada setiap mata pelajaran yang sudah
+    // memiliki nilai.
+    const angka = Object.values(nilai).map((v) => v.nilai_akhir).filter((v) => v != null);
+    const keseluruhan = angka.length
+      ? bulat(angka.reduce((a, b) => a + b, 0) / angka.length) : null;
     return {
-      ...s,
+      id_siswa: s.id_siswa, nama: s.nama, nis: s.nis, nilai,
       jumlah_mapel_dinilai: angka.length,
       jumlah_mapel_tuntas: angka.filter((v) => v >= KKM).length,
-      rata_rata: rata,
-      predikat: predikat(rata),
+      nilai_akhir: keseluruhan,
+      predikat: predikat(keseluruhan),
+      ketuntasan: ketuntasan(keseluruhan),
     };
   });
 
   // Peringkat hanya diberikan kepada siswa yang sudah memiliki nilai.
-  [...siswa].filter((s) => s.rata_rata != null)
-    .sort((a, b) => b.rata_rata - a.rata_rata)
+  [...siswa].filter((s) => s.nilai_akhir != null)
+    .sort((a, b) => b.nilai_akhir - a.nilai_akhir)
     .forEach((s, i) => { s.peringkat = i + 1; });
-  siswa.forEach((s) => { if (s.rata_rata == null) s.peringkat = null; });
+  siswa.forEach((s) => { if (s.nilai_akhir == null) s.peringkat = null; });
 
   return { kelas, mapel, siswa, kkm: KKM };
 }
@@ -139,15 +141,20 @@ exports.raportSiswa = asyncHandler(async (req, res) => {
 
   const mapel = data.mapel.map((m) => {
     const n = saya ? saya.nilai[m.id_kelas_mapel] : null;
-    const rata = n ? n.rata_rata : null;
     return {
       ...m,
       jumlah_dinilai: n ? n.jumlah_dinilai : 0,
-      rata_rata: rata,
-      predikat: predikat(rata),
-      tuntas: rata == null ? null : rata >= KKM,
+      jumlah_penilaian: Number(m.jumlah_penilaian || 0),
+      total_bobot: bulat(m.total_bobot),
+      bobot_dinilai: n ? n.bobot_dinilai : 0,
+      berbobot: n ? n.berbobot : false,
+      nilai_akhir: n ? n.nilai_akhir : null,
+      predikat: n ? n.predikat : predikat(null),
+      ketuntasan: n ? n.ketuntasan : ketuntasan(null),
     };
   });
+
+  const nilaiKeseluruhan = saya ? saya.nilai_akhir : null;
 
   res.json({
     identitas,
@@ -156,13 +163,15 @@ exports.raportSiswa = asyncHandler(async (req, res) => {
     kelas: data.kelas,
     mapel,
     ringkasan: {
-      rata_rata: saya ? saya.rata_rata : null,
-      predikat: predikat(saya ? saya.rata_rata : null),
+      nilai_akhir: nilaiKeseluruhan,
+      predikat: predikat(nilaiKeseluruhan),
+      ketuntasan: ketuntasan(nilaiKeseluruhan),
       peringkat: saya ? saya.peringkat : null,
       jumlah_siswa: data.siswa.length,
       jumlah_mapel: mapel.length,
-      jumlah_mapel_dinilai: mapel.filter((m) => m.rata_rata != null).length,
-      jumlah_mapel_tuntas: mapel.filter((m) => m.tuntas).length,
+      jumlah_mapel_dinilai: mapel.filter((m) => m.nilai_akhir != null).length,
+      jumlah_mapel_tuntas: mapel.filter((m) => m.ketuntasan.tuntas).length,
+      jumlah_mapel_belum_tuntas: mapel.filter((m) => m.ketuntasan.tuntas === false).length,
     },
     kkm: KKM,
   });

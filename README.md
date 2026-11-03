@@ -41,9 +41,13 @@ Periode Pembelajaran (2026/2)
   menandai siswa hadir dan sebatas mencatat keterangan sakit, izin, atau alpa, lalu
   menutup presensi. Siswa yang belum mengisi sampai presensi ditutup tercatat alpa.
 - **Penilaian satu semester** tersusun berurutan menurut pertemuan, mulai dari tugas
-  harian, kuis, Ujian Tengah Semester, sampai Ujian Akhir Semester. Guru dapat membuka
-  daftar nilai per mata pelajaran yang memuat seluruh penilaian tersebut beserta nilai
-  tiap siswa dan rata-rata kelasnya.
+  harian, kuis, Ujian Tengah Semester, sampai Ujian Akhir Semester. Setiap penilaian
+  memiliki **bobot dalam persen** yang ditentukan guru dan seluruhnya berjumlah 100%,
+  misalnya tugas 15%, kuis 15%, UTS 25%, dan UAS 30%.
+- **Nilai akhir bukan rata-rata**, melainkan jumlah nilai tiap penilaian dikalikan
+  bobotnya. Guru membukanya pada menu **Rekap Nilai** per mata pelajaran, lengkap dengan
+  predikat (A–D) dan status ketuntasan terhadap KKM 75. Predikat menerangkan mutu capaian,
+  status menerangkan tercapai atau tidaknya KKM, sehingga keduanya dapat berbeda.
 
 ## Fitur
 
@@ -51,7 +55,7 @@ Periode Pembelajaran (2026/2)
 |------|-------|
 | **Pengunjung** | Halaman depan sekolah tanpa login: profil dan identitas sekolah, rekapitulasi jumlah guru/siswa/kelas/mata pelajaran, fitur sistem, dan alur pembelajaran |
 | **Administrator** | Login, kelola periode pembelajaran (aktifkan/kunci/buka kunci), kelola data guru & siswa (aktif/nonaktif), kelola kelas beserta mata pelajaran, guru pengajar, dan siswa anggotanya, kelola katalog mata pelajaran, susun jadwal pelajaran tiap kelas, pantau statistik sistem |
-| **Guru** | Login, kelola mata pelajaran dan kelas yang diajar, susun pertemuan, unggah materi (teks/berkas/video/tautan YouTube), buat penilaian (tugas, kuis, UTS, UAS) beserta butir soal, periksa pengumpulan (termasuk siswa yang belum mengumpulkan), beri nilai, lihat daftar nilai satu mata pelajaran dari tugas pertama sampai UAS, buka forum diskusi, lihat raport sementara per kelas, lihat jadwal mengajar, buka dan tutup presensi kehadiran beserta rekapnya |
+| **Guru** | Login, kelola mata pelajaran dan kelas yang diajar, susun pertemuan, unggah materi (teks/berkas/video/tautan YouTube), buat penilaian (tugas, kuis, UTS, UAS) beserta butir soal, periksa pengumpulan (termasuk siswa yang belum mengumpulkan), beri nilai, tentukan bobot tiap penilaian, buka forum diskusi, lihat rekap nilai per mata pelajaran berisi nilai akhir seluruh siswa dari tugas pertama sampai UAS, lihat jadwal mengajar, buka dan tutup presensi kehadiran beserta rekapnya |
 | **Siswa** | Login, lihat kartu mata pelajaran di kelasnya, ikuti pembelajaran per pertemuan, unduh berkas & tonton video, kerjakan tugas/kuis dengan penanda sisa waktu, lihat rekap nilai per mata pelajaran dan riwayat antar-periode, lihat raport sementara dirinya dalam satu halaman, lihat jadwal pelajaran kelasnya, menyatakan kehadiran pada presensi yang dibuka guru beserta rekapnya, balas forum diskusi |
 
 ## Prasyarat
@@ -119,7 +123,7 @@ Skrip pembangkitnya ada di `scripts/`:
 | Skrip | Kegunaan |
 |---|---|
 | `scripts/impor-data-sekolah.py` | Membaca berkas resmi sekolah (SK pembagian tugas, SK wali kelas, daftar hadir siswa) menjadi `sekolah.json` |
-| `scripts/blackbox.js` | Menjalankan 123 skenario pengujian Black Box terhadap REST API sekaligus mengisi data pengumpulan tugas & nilai |
+| `scripts/blackbox.js` | Menjalankan 127 skenario pengujian Black Box terhadap REST API sekaligus mengisi data pengumpulan tugas & nilai |
 | `scripts/screenshots.py` | Mengambil 61 tangkapan layar seluruh halaman sistem secara otomatis (Playwright) |
 | `scripts/data-bab4.js` | Mengambil struktur tabel basis data dan statistik data dari MySQL |
 | `scripts/buat-dokumen-bab4.py` | Menyusun `docs-bab4/Lampiran-BAB-IV-Sistem-E-Learning.docx` |

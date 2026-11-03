@@ -1,16 +1,20 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import api from '../../api/client';
 import type { RaportSiswa } from '../../api/types';
 
 // ---------------------------------------------------------------------
 // Raport sementara siswa: seluruh mata pelajaran yang diikutinya pada
-// satu periode pembelajaran dirangkum menjadi satu lembar. Periode dapat
-// diganti sehingga siswa juga dapat melihat raport pada kelas yang
-// pernah diikutinya di periode sebelumnya.
+// satu periode pembelajaran dirangkum menjadi satu lembar.
+//
+// Angka pada kolom nilai adalah NILAI AKHIR, yaitu jumlah nilai tiap
+// penilaian (tugas, kuis, UTS, UAS) dikalikan bobotnya, bukan rata-rata.
+// Status menerangkan tercapai atau tidaknya KKM, sedangkan predikat
+// menerangkan mutu capaiannya.
 // ---------------------------------------------------------------------
 export default function RaportSiswaPage() {
   const [data, setData] = useState<RaportSiswa | null>(null);
   const [idPeriode, setIdPeriode] = useState('');
+  const [cariMapel, setCariMapel] = useState('');
   const [muat, setMuat] = useState(true);
 
   useEffect(() => {
@@ -23,6 +27,12 @@ export default function RaportSiswaPage() {
       .finally(() => setMuat(false));
   }, [idPeriode]);
 
+  const tampil = useMemo(
+    () => (data?.mapel || []).filter((m) => !cariMapel
+      || String(m.id_kelas_mapel) === cariMapel),
+    [data, cariMapel],
+  );
+
   if (muat && !data) return <p className="center-msg">Memuat raport...</p>;
   if (!data) return <p className="center-msg">Raport belum dapat ditampilkan.</p>;
 
@@ -33,12 +43,19 @@ export default function RaportSiswaPage() {
       <div className="page-head tanpa-cetak">
         <h2>Raport Sementara</h2>
         <div className="pilih-periode">
-          <select value={idPeriode} onChange={(e) => setIdPeriode(e.target.value)}>
+          <select value={idPeriode} onChange={(e) => { setIdPeriode(e.target.value); setCariMapel(''); }}>
             {data.daftar_periode.map((p) => (
               <option key={p.id_periode} value={p.id_periode}>
                 {p.tahun_ajaran} {p.nama_semester} — Kelas {p.nama_kelas}
                 {p.status === 'terkunci' ? ' (arsip)' : ''}
               </option>
+            ))}
+          </select>
+          <select value={cariMapel} onChange={(e) => setCariMapel(e.target.value)}
+            style={{ minWidth: 220 }}>
+            <option value="">Semua Mata Pelajaran ({data.mapel.length})</option>
+            {data.mapel.map((m) => (
+              <option key={m.id_kelas_mapel} value={m.id_kelas_mapel}>{m.nama_mapel}</option>
             ))}
           </select>
           <button className="btn" onClick={() => window.print()}>🖨️ Cetak</button>
@@ -48,10 +65,11 @@ export default function RaportSiswaPage() {
       <div className="notice info tanpa-cetak">
         <span className="ikon">📋</span>
         <div>
-          Nilai di bawah ini merupakan <strong>rata-rata seluruh tugas dan kuis yang sudah dinilai
-          guru</strong> pada tiap mata pelajaran, bukan nilai akhir semester. Nilai masih dapat
-          berubah selama periode pembelajaran berjalan. Batas ketuntasan (KKM) sekolah adalah
-          {' '}<strong>{data.kkm}</strong>.
+          <strong>Nilai akhir</strong> dihitung dari seluruh penilaian pada mata pelajaran
+          tersebut — tugas, kuis, Ujian Tengah Semester, dan Ujian Akhir Semester — yang
+          masing-masing dikalikan bobotnya, bukan dirata-ratakan. Nilai masih dapat berubah
+          selama periode pembelajaran berjalan. Batas ketuntasan (KKM) sekolah adalah{' '}
+          <strong>{data.kkm}</strong>.
         </div>
       </div>
 
@@ -81,8 +99,8 @@ export default function RaportSiswaPage() {
 
           <div className="stats ringkas-raport">
             <div className="stat">
-              <div className="num">{r?.rata_rata ?? '-'}</div>
-              <div className="lbl">Rata-rata Keseluruhan</div>
+              <div className="num">{r?.nilai_akhir ?? '-'}</div>
+              <div className="lbl">Nilai Akhir Keseluruhan</div>
             </div>
             <div className="stat">
               <div className="num">{r?.predikat.huruf}</div>
@@ -105,14 +123,14 @@ export default function RaportSiswaPage() {
                   <th style={{ width: 44 }}>No</th>
                   <th>Mata Pelajaran</th>
                   <th>Guru Pengajar</th>
-                  <th>Tugas Dinilai</th>
-                  <th>Nilai</th>
+                  <th>Penilaian Dinilai</th>
+                  <th>Nilai Akhir</th>
                   <th>Predikat</th>
-                  <th>Keterangan</th>
+                  <th>Status</th>
                 </tr>
               </thead>
               <tbody>
-                {data.mapel.map((m, i) => (
+                {tampil.map((m, i) => (
                   <tr key={m.id_kelas_mapel}>
                     <td>{i + 1}</td>
                     <td>
@@ -120,43 +138,72 @@ export default function RaportSiswaPage() {
                       {m.kode_mapel && <span className="badge gray" style={{ marginLeft: 6 }}>{m.kode_mapel}</span>}
                     </td>
                     <td className="muted">{m.nama_guru || '-'}</td>
-                    <td className="tengah muted">{m.jumlah_dinilai} dari {m.jumlah_tugas}</td>
-                    <td className={`angka-nilai tebal ${m.rata_rata == null ? 'muted'
-                      : m.rata_rata >= data.kkm ? 'tuntas' : 'belum'}`}>
-                      {m.rata_rata ?? '-'}
+                    <td className="tengah muted">
+                      {m.jumlah_dinilai} dari {m.jumlah_penilaian} penilaian
+                      {m.jumlah_penilaian > 0 && (
+                        <><br /><span style={{ fontSize: 11 }}>
+                          bobot terhitung {m.bobot_dinilai}% dari {m.total_bobot}%
+                        </span></>
+                      )}
+                    </td>
+                    <td className={`angka-nilai tebal ${m.nilai_akhir == null ? 'muted'
+                      : m.nilai_akhir >= data.kkm ? 'tuntas' : 'belum'}`}>
+                      {m.nilai_akhir ?? '-'}
                     </td>
                     <td className="tengah">
-                      <span className={`badge ${m.predikat.huruf === '-' ? 'gray' : 'green'}`}>
+                      <span className={`badge ${m.predikat.huruf === '-' ? 'gray' : 'green'}`}
+                        title={m.predikat.keterangan}>
                         {m.predikat.huruf}
                       </span>
                     </td>
-                    <td className="muted">
-                      {m.rata_rata == null ? 'Belum ada nilai'
-                        : m.tuntas ? `Tuntas — ${m.predikat.keterangan}`
-                          : 'Belum mencapai KKM'}
+                    <td className="tengah">
+                      <span className={`badge ${m.ketuntasan.tuntas === null ? 'gray'
+                        : m.ketuntasan.tuntas ? 'green' : 'orange'}`}>
+                        {m.ketuntasan.label}
+                      </span>
                     </td>
                   </tr>
                 ))}
+                {tampil.length === 0 && (
+                  <tr><td colSpan={7} className="center-msg">
+                    Tidak ada mata pelajaran yang dipilih.
+                  </td></tr>
+                )}
               </tbody>
             </table>
           </div>
 
           <div className="keterangan-raport">
             <div>
-              <strong>Predikat</strong>
+              <strong>Status ketuntasan</strong>
               <ul>
-                <li>A — Sangat Baik (90–100)</li>
-                <li>B — Baik (80–89)</li>
-                <li>C — Cukup (70–79)</li>
-                <li>D — Perlu Bimbingan (di bawah 70)</li>
+                <li><span className="badge green">Tuntas</span> nilai akhir ≥ {data.kkm} (KKM)</li>
+                <li><span className="badge orange">Belum Tuntas</span> nilai akhir &lt; {data.kkm}</li>
+                <li><span className="badge gray">Belum dinilai</span> belum ada penilaian yang
+                  dinilai guru pada mata pelajaran tersebut</li>
               </ul>
+              <p className="muted" style={{ marginTop: 8 }}>
+                Mata pelajaran yang Anda ikuti pada periode ini berjumlah{' '}
+                <strong>{r?.jumlah_mapel}</strong>; sudah dinilai{' '}
+                <strong>{r?.jumlah_mapel_dinilai}</strong>, di antaranya{' '}
+                <strong>{r?.jumlah_mapel_tuntas}</strong> tuntas dan{' '}
+                <strong>{r?.jumlah_mapel_belum_tuntas}</strong> belum tuntas.
+              </p>
             </div>
             <div>
-              <strong>Catatan</strong>
-              <p className="muted">
-                Mata pelajaran yang belum memiliki nilai berarti belum ada tugas atau kuis yang
-                dinilai oleh guru pada periode ini. Rincian nilai tiap tugas dapat dilihat pada
-                menu <strong>Nilai</strong>.
+              <strong>Predikat capaian</strong>
+              <ul>
+                <li><span className="badge green">A</span> Sangat Baik — nilai 90–100</li>
+                <li><span className="badge green">B</span> Baik — nilai 80–89</li>
+                <li><span className="badge green">C</span> Cukup — nilai 70–79</li>
+                <li><span className="badge green">D</span> Perlu Bimbingan — nilai di bawah 70</li>
+              </ul>
+              <p className="muted" style={{ marginTop: 8 }}>
+                Predikat menerangkan <strong>mutu capaian</strong>, status menerangkan{' '}
+                <strong>tercapai atau tidaknya KKM</strong>. Keduanya dapat berbeda: nilai 72
+                berpredikat C (Cukup) namun berstatus Belum Tuntas karena masih di bawah KKM{' '}
+                {data.kkm}. Rincian nilai tiap penilaian dapat dilihat pada menu{' '}
+                <strong>Nilai</strong>.
               </p>
             </div>
           </div>

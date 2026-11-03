@@ -22,7 +22,7 @@ const MENUS: Record<Role, MenuItem[]> = {
     { to: '/guru/jadwal', label: 'Jadwal Pelajaran', icon: '🗓️' },
     { to: '/guru/presensi', label: 'Presensi', icon: '📋' },
     { to: '/guru/penilaian', label: 'Penilaian', icon: '⭐' },
-    { to: '/guru/raport', label: 'Raport Sementara', icon: '📋' },
+    { to: '/guru/raport', label: 'Rekap Nilai', icon: '📋' },
   ],
   siswa: [
     { to: '/siswa', label: 'Dashboard', icon: '📊' },

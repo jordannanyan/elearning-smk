@@ -3,6 +3,30 @@ const pool = require('../config/db');
 // Jenis penilaian yang dikenal sistem, berurut sepanjang semester
 const TIPE_TUGAS = ['tugas', 'kuis', 'uts', 'uas'];
 const bakuTipe = (t) => (TIPE_TUGAS.includes(t) ? t : 'tugas');
+
+// ---------------------------------------------------------------------
+// Bobot penilaian
+// ---------------------------------------------------------------------
+// Setiap penilaian memiliki bobot dalam persen terhadap nilai akhir mata
+// pelajaran. Seluruh bobot pada satu mata pelajaran tidak boleh melebihi
+// 100%, sehingga nilai akhir siswa dapat dihitung menurut bobot tersebut.
+// ---------------------------------------------------------------------
+async function sisaBobot(idKelasMapel, kecualiIdTugas) {
+  const [[r]] = await pool.query(`
+    SELECT COALESCE(SUM(t.bobot), 0) AS terpakai
+    FROM tugas t JOIN pertemuan pt ON pt.id = t.id_pertemuan
+    WHERE pt.id_kelas_mapel = ? AND (? IS NULL OR t.id <> ?)`,
+  [idKelasMapel, kecualiIdTugas || null, kecualiIdTugas || null]);
+  return Math.round((100 - Number(r.terpakai)) * 100) / 100;
+}
+
+function periksaBobot(nilai) {
+  if (nilai === undefined || nilai === null || nilai === '') return { ok: true, bobot: 0 };
+  const angka = Number(nilai);
+  if (Number.isNaN(angka) || angka < 0 || angka > 100)
+    return { ok: false, pesan: 'Bobot penilaian harus berupa angka 0 sampai 100 persen' };
+  return { ok: true, bobot: Math.round(angka * 100) / 100 };
+}
 const asyncHandler = require('../utils/asyncHandler');
 const {
   guruIdOf, siswaIdOf, kelasMapelMilikGuru,
@@ -88,7 +112,7 @@ exports.list = asyncHandler(async (req, res) => {
 
 // POST /api/tugas  (guru)
 exports.create = asyncHandler(async (req, res) => {
-  const { id_pertemuan, judul, deskripsi, deadline, tipe } = req.body;
+  const { id_pertemuan, judul, deskripsi, deadline, tipe, bobot } = req.body;
   if (!id_pertemuan || !judul)
     return res.status(400).json({ message: 'Pertemuan dan judul tugas wajib diisi' });
 
@@ -97,24 +121,47 @@ exports.create = asyncHandler(async (req, res) => {
   if (!(await kelasMapelMilikGuru(req.user.id, idKm)))
     return res.status(403).json({ message: 'Pertemuan ini bukan pada kelas yang Anda ampu' });
 
+  const cek = periksaBobot(bobot);
+  if (!cek.ok) return res.status(400).json({ message: cek.pesan });
+  const sisa = await sisaBobot(idKm, null);
+  if (cek.bobot > sisa) {
+    return res.status(400).json({
+      message: `Bobot penilaian pada mata pelajaran ini tersisa ${sisa}%. `
+        + `Kurangi bobot penilaian ini atau sesuaikan bobot penilaian lainnya `
+        + `agar seluruhnya berjumlah 100%.`,
+      sisa_bobot: sisa,
+    });
+  }
+
   const [r] = await pool.query(
-    'INSERT INTO tugas (id_pertemuan, judul, deskripsi, deadline, tipe) VALUES (?,?,?,?,?)',
-    [id_pertemuan, judul, deskripsi || null, deadline || null, bakuTipe(tipe)]
+    'INSERT INTO tugas (id_pertemuan, judul, deskripsi, deadline, tipe, bobot) VALUES (?,?,?,?,?,?)',
+    [id_pertemuan, judul, deskripsi || null, deadline || null, bakuTipe(tipe), cek.bobot]
   );
   res.status(201).json({ id: r.insertId, message: 'Tugas berhasil dibuat' });
 });
 
 // PUT /api/tugas/:id  (guru)
 exports.update = asyncHandler(async (req, res) => {
-  const { judul, deskripsi, deadline, tipe } = req.body;
+  const { judul, deskripsi, deadline, tipe, bobot } = req.body;
   const idKm = await kelasMapelDariTugas(req.params.id);
   if (!idKm) return res.status(404).json({ message: 'Tugas tidak ditemukan' });
   if (!(await kelasMapelMilikGuru(req.user.id, idKm)))
     return res.status(403).json({ message: 'Bukan tugas pada kelas yang Anda ampu' });
 
+  const cek = periksaBobot(bobot);
+  if (!cek.ok) return res.status(400).json({ message: cek.pesan });
+  const sisa = await sisaBobot(idKm, req.params.id);
+  if (cek.bobot > sisa) {
+    return res.status(400).json({
+      message: `Bobot penilaian pada mata pelajaran ini tersisa ${sisa}% `
+        + `di luar penilaian ini. Sesuaikan bobotnya agar seluruhnya berjumlah 100%.`,
+      sisa_bobot: sisa,
+    });
+  }
+
   await pool.query(
-    'UPDATE tugas SET judul = ?, deskripsi = ?, deadline = ?, tipe = ? WHERE id = ?',
-    [judul, deskripsi || null, deadline || null, bakuTipe(tipe), req.params.id]
+    'UPDATE tugas SET judul = ?, deskripsi = ?, deadline = ?, tipe = ?, bobot = ? WHERE id = ?',
+    [judul, deskripsi || null, deadline || null, bakuTipe(tipe), cek.bobot, req.params.id]
   );
   res.json({ message: 'Tugas berhasil diperbarui' });
 });

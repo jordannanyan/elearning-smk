@@ -78,7 +78,7 @@
     {
       "tabel": "forum_diskusi",
       "deskripsi": "Menyimpan topik dan balasan forum diskusi pada sebuah pertemuan",
-      "jumlah_record": 12
+      "jumlah_record": 16
     },
     {
       "tabel": "jam_pelajaran",

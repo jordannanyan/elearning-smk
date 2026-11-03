@@ -209,6 +209,11 @@ CREATE TABLE tugas (
   -- Jenis penilaian berurut sepanjang semester: tugas harian, kuis,
   -- Ujian Tengah Semester, sampai Ujian Akhir Semester.
   tipe        ENUM('tugas','kuis','uts','uas') NOT NULL DEFAULT 'tugas',
+  -- Bobot penilaian dalam persen terhadap nilai akhir mata pelajaran.
+  -- Guru menentukannya sendiri, misalnya tugas 20%, kuis 15%, UTS 30%,
+  -- dan UAS 35%, sehingga seluruh penilaian berjumlah 100%. Nilai akhir
+  -- siswa dihitung menurut bobot ini, bukan rata-rata biasa.
+  bobot       DECIMAL(5,2) NOT NULL DEFAULT 0,
   created_at  TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   CONSTRAINT fk_tugas_pertemuan FOREIGN KEY (id_pertemuan) REFERENCES pertemuan(id) ON DELETE CASCADE
 ) ENGINE=InnoDB;

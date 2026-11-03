@@ -4,15 +4,15 @@ import DaftarNilaiMapel from '../../components/DaftarNilaiMapel';
 import type { KelasMapel, Periode } from '../../api/types';
 
 // ---------------------------------------------------------------------
-// Raport sementara guru, disusun per mata pelajaran.
+// Rekap nilai guru, disusun per mata pelajaran.
 //
 // Guru memilih salah satu mata pelajaran yang diampunya, lalu melihat
 // nilai seluruh siswa pada mata pelajaran tersebut. Penilaiannya tampil
 // berurutan menurut pertemuan, mulai dari tugas paling awal, kuis,
 // Ujian Tengah Semester, sampai Ujian Akhir Semester.
 //
-// Disebut sementara karena nilainya dihitung dari penilaian yang sudah
-// masuk sampai saat halaman dibuka, bukan nilai akhir semester.
+// Nilai akhirnya dihitung menurut bobot tiap penilaian, dan masih dapat
+// berubah selama penilaian pada semester berjalan belum lengkap.
 // ---------------------------------------------------------------------
 export default function RaportGuru() {
   const [periode, setPeriode] = useState<Periode[]>([]);
@@ -43,7 +43,7 @@ export default function RaportGuru() {
     return (
       <div>
         <div className="page-head">
-          <h2>Raport Sementara</h2>
+          <h2>Rekap Nilai</h2>
           <div className="pilih-periode">
             <select value={pilihPeriode} onChange={(e) => setPilihPeriode(e.target.value)}>
               {periode.map((p) => (
@@ -62,8 +62,8 @@ export default function RaportGuru() {
             Pilih mata pelajaran untuk melihat <strong>nilai seluruh siswa</strong> pada mata
             pelajaran tersebut. Penilaian ditampilkan berurutan menurut pertemuan, mulai dari
             tugas paling awal, kuis, <strong>Ujian Tengah Semester</strong>, sampai{' '}
-            <strong>Ujian Akhir Semester</strong>. Nilai bersifat sementara dan masih berubah
-            selama periode pembelajaran berjalan.
+            <strong>Ujian Akhir Semester</strong>, beserta bobot masing-masing.{' '}
+            <strong>Nilai akhir</strong> dihitung menurut bobot tersebut, bukan rata-rata.
           </div>
         </div>
 
@@ -103,7 +103,7 @@ export default function RaportGuru() {
   return (
     <div>
       <div className="page-head tanpa-cetak">
-        <h2>Raport Sementara</h2>
+        <h2>Rekap Nilai</h2>
         <div style={{ display: 'flex', gap: 10 }}>
           <button className="btn secondary" onClick={() => setPilih(null)}>
             ← Pilih Mata Pelajaran Lain

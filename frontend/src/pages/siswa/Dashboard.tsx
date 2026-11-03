@@ -50,9 +50,12 @@ export default function SiswaDashboard() {
             {d.tugas_mendesak.map((t: any) => (
               <div className="materi-item" key={t.id} style={{ display: 'flex', gap: 12, justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap' }}>
                 <div>
-                  <div className="judul">{t.judul}</div>
+                  {/* Mata pelajaran ditulis paling menonjol, karena itulah
+                      yang pertama dicari siswa; judul penilaiannya menyusul
+                      di bawahnya sebagai keterangan. */}
+                  <div className="judul">{t.nama_mapel}</div>
                   <div className="muted" style={{ fontSize: 12.5, marginTop: 3 }}>
-                    {t.nama_mapel} · Batas waktu{' '}
+                    {t.judul} · Batas waktu{' '}
                     {new Date(t.deadline.replace(' ', 'T')).toLocaleString('id-ID',
                       { dateStyle: 'medium', timeStyle: 'short' })}
                   </div>
