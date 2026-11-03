@@ -19,16 +19,32 @@ const angka = (v: string | number | null | undefined) =>
 export default function DaftarNilaiMapel({ idKelasMapel }: { idKelasMapel: number }) {
   const [data, setData] = useState<DaftarNilaiKelasMapel | null>(null);
   const [muat, setMuat] = useState(true);
+  const [galat, setGalat] = useState('');
+  const [muatUlang, setMuatUlang] = useState(0);
 
   useEffect(() => {
     setMuat(true);
+    setGalat('');
     api.get(`/nilai/kelas-mapel/${idKelasMapel}`)
       .then((r) => setData(r.data))
+      .catch((e) => setGalat(e.response?.data?.message
+        || 'Rekap nilai gagal dimuat. Periksa sambungan Anda, lalu coba lagi.'))
       .finally(() => setMuat(false));
-  }, [idKelasMapel]);
+  }, [idKelasMapel, muatUlang]);
 
   if (muat) return <p className="center-msg">Memuat rekap nilai...</p>;
-  if (!data) return <p className="center-msg">Rekap nilai belum dapat ditampilkan.</p>;
+
+  // Kegagalan memuat dibedakan dari keadaan "belum ada data", dan selalu
+  // disertai tombol coba lagi supaya halaman tidak tersangkut.
+  if (!data) {
+    return (
+      <div className="notice bahaya">
+        <span className="ikon">⚠️</span>
+        <div style={{ flex: 1 }}>{galat || 'Rekap nilai belum dapat ditampilkan.'}</div>
+        <button className="btn small" onClick={() => setMuatUlang((n) => n + 1)}>Coba Lagi</button>
+      </div>
+    );
+  }
 
   const { kelas_mapel: km, tugas, siswa, kkm, bobot } = data;
 

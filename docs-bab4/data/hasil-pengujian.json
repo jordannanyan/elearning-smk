@@ -1,5 +1,5 @@
 {
-  "tanggal": "2026-11-03T03:00:06.292Z",
+  "tanggal": "2026-11-03T03:37:38.099Z",
   "total": 127,
   "valid": 127,
   "tidak_valid": 0,
@@ -506,7 +506,7 @@
       "skenario": "Siswa membuka satu pertemuan untuk mengikuti pembelajaran",
       "input": "Membuka Pertemuan 1",
       "harapan": "Sistem menampilkan materi, tugas, dan forum diskusi pertemuan tersebut secara berurutan",
-      "aktual": "HTTP 200, 3 materi, 1 tugas, 3 topik diskusi",
+      "aktual": "HTTP 200, 3 materi, 1 tugas, 4 topik diskusi",
       "status": "Valid"
     },
     {
@@ -803,7 +803,7 @@
       "skenario": "Pengguna menampilkan forum diskusi yang menyatu dalam materi pertemuan",
       "input": "Membuka Pertemuan 1 lalu melihat bagian forum diskusi",
       "harapan": "Forum diskusi tampil di dalam pertemuan beserta seluruh balasannya secara berurutan",
-      "aktual": "HTTP 200, 4 topik dengan total 9 balasan",
+      "aktual": "HTTP 200, 5 topik dengan total 12 balasan",
       "status": "Valid"
     },
     {

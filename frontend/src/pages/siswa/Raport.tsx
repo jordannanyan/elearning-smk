@@ -16,16 +16,22 @@ export default function RaportSiswaPage() {
   const [idPeriode, setIdPeriode] = useState('');
   const [cariMapel, setCariMapel] = useState('');
   const [muat, setMuat] = useState(true);
+  const [galat, setGalat] = useState('');
+  // Dinaikkan untuk memuat ulang data tanpa menyegarkan seluruh halaman
+  const [muatUlang, setMuatUlang] = useState(0);
 
   useEffect(() => {
     setMuat(true);
+    setGalat('');
     api.get('/raport/saya', { params: idPeriode ? { id_periode: idPeriode } : {} })
       .then((r) => {
         setData(r.data);
         if (!idPeriode && r.data.periode) setIdPeriode(String(r.data.periode.id_periode));
       })
+      .catch((e) => setGalat(e.response?.data?.message
+        || 'Data raport gagal dimuat. Periksa sambungan Anda, lalu coba lagi.'))
       .finally(() => setMuat(false));
-  }, [idPeriode]);
+  }, [idPeriode, muatUlang]);
 
   const tampil = useMemo(
     () => (data?.mapel || []).filter((m) => !cariMapel
@@ -34,7 +40,24 @@ export default function RaportSiswaPage() {
   );
 
   if (muat && !data) return <p className="center-msg">Memuat raport...</p>;
-  if (!data) return <p className="center-msg">Raport belum dapat ditampilkan.</p>;
+
+  // Kegagalan memuat dibedakan dari keadaan "belum ada data", dan selalu
+  // disertai tombol coba lagi supaya halaman tidak tersangkut ketika
+  // sambungan ke server sempat terputus.
+  if (!data) {
+    return (
+      <div>
+        <div className="page-head"><h2>Raport Sementara</h2></div>
+        <div className="notice bahaya">
+          <span className="ikon">⚠️</span>
+          <div style={{ flex: 1 }}>{galat || 'Raport belum dapat ditampilkan.'}</div>
+          <button className="btn small" onClick={() => setMuatUlang((n) => n + 1)}>
+            Coba Lagi
+          </button>
+        </div>
+      </div>
+    );
+  }
 
   const r = data.ringkasan;
 
