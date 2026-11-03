@@ -130,12 +130,24 @@ export default function RaportSiswaPage() {
               <div className="lbl">Predikat — {r?.predikat.keterangan}</div>
             </div>
             <div className="stat">
+              <div className="num" style={{ fontSize: 19 }}>
+                <span className={`badge ${r?.ketuntasan.tuntas === null ? 'gray'
+                  : r?.ketuntasan.tuntas ? 'green' : 'orange'}`}>
+                  {r?.ketuntasan.label}
+                </span>
+              </div>
+              <div className="lbl">Status terhadap KKM {data.kkm}</div>
+            </div>
+            <div className="stat">
               <div className="num">{r?.peringkat ?? '-'}</div>
               <div className="lbl">Peringkat dari {r?.jumlah_siswa} siswa</div>
             </div>
             <div className="stat">
               <div className="num">{r?.jumlah_mapel_tuntas}/{r?.jumlah_mapel_dinilai}</div>
-              <div className="lbl">Mata Pelajaran Tuntas</div>
+              <div className="lbl">
+                Mata pelajaran tuntas, dari {r?.jumlah_mapel_dinilai} yang sudah dinilai
+                {' '}(seluruhnya {r?.jumlah_mapel} mata pelajaran)
+              </div>
             </div>
           </div>
 
@@ -206,6 +218,9 @@ export default function RaportSiswaPage() {
                   dinilai guru pada mata pelajaran tersebut</li>
               </ul>
               <p className="muted" style={{ marginTop: 8 }}>
+                <strong>Nilai Akhir Keseluruhan</strong> di atas dirata-ratakan dari nilai akhir
+                mata pelajaran yang <em>sudah dinilai</em> saja, sehingga angkanya masih akan
+                bergerak selama penilaian pada mata pelajaran lain belum masuk.{' '}
                 Mata pelajaran yang Anda ikuti pada periode ini berjumlah{' '}
                 <strong>{r?.jumlah_mapel}</strong>; sudah dinilai{' '}
                 <strong>{r?.jumlah_mapel_dinilai}</strong>, di antaranya{' '}

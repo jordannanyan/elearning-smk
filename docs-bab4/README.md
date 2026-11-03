@@ -147,7 +147,7 @@ Total **127 skenario**, **127 Valid**, **0 Tidak Valid**
 | 13 | `pengumpulan_tugas` | Menyimpan data pengumpulan jawaban tugas oleh siswa | 88 |
 | 14 | `jawaban_siswa` | Menyimpan jawaban siswa pada setiap butir soal kuis | 62 |
 | 15 | `nilai` | Menyimpan data nilai siswa hasil penilaian guru maupun koreksi otomatis | 82 |
-| 16 | `forum_diskusi` | Menyimpan topik dan balasan forum diskusi pada sebuah pertemuan | 16 |
+| 16 | `forum_diskusi` | Menyimpan topik dan balasan forum diskusi pada sebuah pertemuan | 20 |
 | 17 | `jam_pelajaran` | Menyimpan pembagian waktu jam pelajaran sekolah, termasuk jam istirahat | 23 |
 | 18 | `jadwal` | Menyimpan jadwal mata pelajaran tiap kelas pada sebuah periode, satu baris untuk setiap hari dan jam ke berapa | 504 |
 | 19 | `presensi` | Menyimpan daftar hadir sebuah pertemuan beserta status dibuka atau ditutupnya | 4 |
