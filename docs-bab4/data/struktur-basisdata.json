@@ -814,7 +814,7 @@
   {
     "tabel": "forum_diskusi",
     "deskripsi": "Menyimpan topik dan balasan forum diskusi pada sebuah pertemuan",
-    "jumlah_record": 16,
+    "jumlah_record": 24,
     "kolom": [
       {
         "nama": "id",

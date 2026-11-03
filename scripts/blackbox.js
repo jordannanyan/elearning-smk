@@ -1328,6 +1328,37 @@ async function main() {
     sesuai: dSiswa.status === 200 && !!dSiswa.data.kelas,
   });
 
+  // Jadwal per hari pada dashboard siswa
+  const jadwalDash = dSiswa.data.jadwal;
+  const jadwalKelas = (await get('/api/jadwal/saya', tokenSiswa.ahmad)).data;
+  const jamDashboard = jadwalDash
+    ? jadwalDash.hari.reduce((a, h) => a + h.jumlah_jam, 0) : 0;
+  catat({
+    modul: 'Dashboard',
+    skenario: 'Siswa melihat jadwal mata pelajaran setiap hari pada dashboard',
+    input: 'Membuka dashboard siswa',
+    harapan: 'Dashboard menampilkan mata pelajaran hari Senin sampai Jum\'at sesuai jadwal kelasnya',
+    aktual: jadwalDash
+      ? `HTTP 200: ${jadwalDash.hari.map((h) => `${h.nama_hari} ${h.jumlah_jam} jam`).join(', ')}; `
+        + `seluruhnya ${jamDashboard} jam, jadwal kelas ${jadwalKelas.slot.length} jam`
+      : 'Jadwal tidak dikembalikan',
+    sesuai: !!jadwalDash && jadwalDash.hari.length === 5
+      && jamDashboard === jadwalKelas.slot.length,
+  });
+
+  const hariSenin = jadwalDash ? jadwalDash.hari.find((h) => h.hari === 1) : null;
+  const seninSistem = hariSenin ? hariSenin.pelajaran.map((p) => p.nama).join(', ') : '-';
+  const seninJadwal = [...new Set(jadwalKelas.slot.filter((s) => s.hari === 1)
+    .map((s) => s.nama_mapel || s.kegiatan))].join(', ');
+  catat({
+    modul: 'Dashboard',
+    skenario: 'Mata pelajaran pada dashboard sama dengan jadwal resmi kelas',
+    input: 'Membandingkan daftar mata pelajaran hari Senin pada dashboard dengan menu Jadwal Pelajaran',
+    harapan: 'Mata pelajaran yang tampil sama persis, dan jam yang berurutan digabung menjadi satu baris',
+    aktual: `Dashboard: ${seninSistem}; jadwal kelas: ${seninJadwal}`,
+    sesuai: seninSistem === seninJadwal && seninSistem !== '-',
+  });
+
   const rGantiSandi = await put('/api/auth/password',
     { passwordLama: 'siswa123', passwordBaru: 'siswa456' }, tokenSiswa.bunga);
   const cekSandiBaru = await login('bunga@siswa.smakk.sch.id', 'siswa456');

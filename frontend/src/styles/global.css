@@ -534,6 +534,21 @@ a.polos { color: inherit; display: block; }
 .kartu-hari .nama { display: block; font-weight: 600; font-size: 12.5px; }
 .kartu-hari .ket { font-size: 11.5px; color: var(--gray); }
 .kartu-hari .kosong { font-size: 12.5px; padding: 6px 0; }
+.kartu-hari h3 { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+.kartu-hari.hari-ini { border-color: var(--primary); box-shadow: 0 0 0 1px var(--primary) inset; }
+.kartu-hari.hari-ini h3 { color: var(--primary); }
+
+/* Jadwal ringkas pada dashboard: kelima hari disejajarkan dalam satu baris */
+.jadwal-saya-grid.ringkas { grid-template-columns: repeat(auto-fit, minmax(205px, 1fr)); gap: 12px; }
+.jadwal-saya-grid.ringkas .kartu-hari { padding: 12px; }
+.jadwal-saya-grid.ringkas .jam { width: 52px; }
+.jadwal-saya-grid.ringkas .jam small { font-size: 9.5px; white-space: nowrap; }
+.jadwal-saya-grid.ringkas li { gap: 8px; }
+
+/* Sapaan pembuka dashboard siswa */
+.kartu-sapaan h3 { margin-bottom: 8px; }
+.kartu-sapaan p { line-height: 1.8; }
+.kartu-sapaan p + p { margin-top: 8px; }
 
 /* ---------- Presensi ---------- */
 .presensi-saya { display: flex; align-items: center; justify-content: space-between;

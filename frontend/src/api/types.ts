@@ -418,6 +418,30 @@ export interface JadwalSaya {
   slot: SlotJadwal[];
 }
 
+/* Jadwal per hari pada dashboard siswa: jam pelajaran yang berurutan
+   dengan mata pelajaran yang sama sudah digabung oleh server. */
+export interface PelajaranHarian {
+  nama: string | null;
+  kegiatan: string | null;
+  kode: string | null;
+  nama_guru: string | null;
+  guru_bergantian: boolean;
+  jam_dari: number;
+  jam_sampai: number;
+  mulai: string | null;
+  selesai: string | null;
+}
+
+export interface JadwalDashboardSiswa {
+  hari_ini: number | null;
+  hari: {
+    hari: number;
+    nama_hari: string;
+    jumlah_jam: number;
+    pelajaran: PelajaranHarian[];
+  }[];
+}
+
 /* ---------- Presensi (daftar hadir) ---------- */
 export type StatusKehadiran = 'hadir' | 'sakit' | 'izin' | 'alpa';
 

@@ -2,7 +2,17 @@ import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import api from '../../api/client';
 import { useAuth } from '../../context/AuthContext';
+import type { JadwalDashboardSiswa } from '../../api/types';
 
+// ---------------------------------------------------------------------
+// Dashboard siswa.
+//
+// Susunannya mengikuti urutan kebutuhan siswa ketika membuka sistem:
+// sapaan beserta keterangan kelas lebih dahulu, lalu jadwal pelajaran
+// hari Senin sampai Jum'at sehingga siswa langsung mengetahui mata
+// pelajaran apa saja yang ditempuhnya pada setiap hari, kemudian
+// ringkasan angka, dan terakhir tugas yang tenggatnya segera berakhir.
+// ---------------------------------------------------------------------
 export default function SiswaDashboard() {
   const { user } = useAuth();
   const [d, setD] = useState<any>(null);
@@ -16,20 +26,82 @@ export default function SiswaDashboard() {
     ['Sudah Dinilai', d.sudah_dinilai],
   ];
 
+  const jadwal: JadwalDashboardSiswa | null = d.jadwal || null;
+
   return (
     <div>
       <div className="page-head"><h2>Dashboard Siswa</h2></div>
 
-      {d.periode && (
-        <div className="notice info">
-          <span className="ikon">🗓️</span>
-          <div>
+      {/* Sapaan diletakkan paling atas sebagai pembuka halaman */}
+      <div className="card kartu-sapaan">
+        <h3>Halo, {user?.nama} 👋</h3>
+        {d.periode ? (
+          <p className="muted">
             {d.kelas && <>Anda terdaftar di kelas <strong>{d.kelas.nama_kelas}</strong> pada </>}
-            periode <strong>{d.periode.kode}</strong> — Tahun Ajaran {d.periode.tahun_ajaran} semester{' '}
-            {d.periode.semester === 1 ? 'ganjil' : 'genap'}.
-          </div>
+            periode <strong>{d.periode.kode}</strong> — Tahun Ajaran {d.periode.tahun_ajaran}{' '}
+            semester {d.periode.semester === 1 ? 'ganjil' : 'genap'}.
+          </p>
+        ) : (
+          <p className="muted">Belum ada periode pembelajaran yang aktif.</p>
+        )}
+        <p className="muted">
+          Buka menu <strong>Kelas Saya</strong> untuk mempelajari materi setiap mata pelajaran.
+          Materi tersusun per pertemuan sehingga Anda dapat belajar secara runut: membaca uraian
+          materi, mengunduh berkas, menonton video, mengerjakan tugas, lalu berdiskusi bersama
+          guru dan teman pada forum pertemuan tersebut.
+        </p>
+      </div>
+
+      {/* Jadwal pelajaran per hari */}
+      <div className="blok">
+        <div className="kepala">
+          <span>🗓️ Jadwal Pelajaran Saya</span>
+          <Link className="btn small" to="/siswa/jadwal">Lihat Jadwal Lengkap</Link>
         </div>
-      )}
+        <div className="badan">
+          {!jadwal || jadwal.hari.every((h) => h.pelajaran.length === 0) ? (
+            <p className="muted center-msg" style={{ padding: '10px 0' }}>
+              Jadwal pelajaran belum tersedia pada periode pembelajaran ini.
+            </p>
+          ) : (
+            <div className="jadwal-saya-grid ringkas">
+              {jadwal.hari.map((h) => (
+                <section className={`kartu-hari${jadwal.hari_ini === h.hari ? ' hari-ini' : ''}`}
+                  key={h.hari}>
+                  <h3>
+                    {h.nama_hari}
+                    {jadwal.hari_ini === h.hari && <span className="badge green">Hari ini</span>}
+                  </h3>
+                  {h.pelajaran.length === 0 ? (
+                    <p className="muted kosong">Tidak ada jadwal</p>
+                  ) : (
+                    <ul>
+                      {h.pelajaran.map((p, i) => (
+                        <li key={i} className={p.kegiatan ? 'kegiatan' : ''}>
+                          <span className="jam">
+                            <strong>
+                              {p.jam_dari}{p.jam_sampai > p.jam_dari && `–${p.jam_sampai}`}
+                            </strong>
+                            {p.mulai && <small>{p.mulai}–{p.selesai}</small>}
+                          </span>
+                          <span className="isi">
+                            <span className="nama">{p.nama}</span>
+                            <span className="ket">
+                              {p.nama_guru
+                                || (p.guru_bergantian ? 'Guru pendamping bergantian'
+                                  : p.kegiatan ? 'Kegiatan sekolah' : '-')}
+                            </span>
+                          </span>
+                        </li>
+                      ))}
+                    </ul>
+                  )}
+                </section>
+              ))}
+            </div>
+          )}
+        </div>
+      </div>
 
       <div className="stats">
         {kartu.map(([lbl, num]) => (
@@ -40,6 +112,7 @@ export default function SiswaDashboard() {
         ))}
       </div>
 
+      {/* Tugas yang segera berakhir diletakkan paling bawah */}
       {d.tugas_mendesak?.length > 0 && (
         <div className="blok">
           <div className="kepala">
@@ -68,16 +141,6 @@ export default function SiswaDashboard() {
           </div>
         </div>
       )}
-
-      <div className="card">
-        <h3 style={{ marginBottom: 10 }}>Halo, {user?.nama} 👋</h3>
-        <p className="muted" style={{ lineHeight: 1.8 }}>
-          Buka menu <strong>Kelas Saya</strong> untuk melihat seluruh mata pelajaran di kelas Anda. Pada
-          setiap mata pelajaran, materi tersusun per pertemuan sehingga Anda dapat belajar secara runut:
-          membaca uraian materi, mengunduh berkas, menonton video, mengerjakan tugas, lalu berdiskusi
-          bersama guru dan teman pada forum pertemuan tersebut.
-        </p>
-      </div>
     </div>
   );
 }

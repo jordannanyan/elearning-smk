@@ -8,6 +8,8 @@ const { guruIdOf, siswaIdOf } = require('../utils/akses');
 // ditampilkan selalu sama dengan isi menu terkait.
 // ---------------------------------------------------------------------
 
+const NAMA_HARI = ['', 'Senin', 'Selasa', 'Rabu', 'Kamis', "Jum'at"];
+
 // GET /api/dashboard
 exports.summary = asyncHandler(async (req, res) => {
   const role = req.user.role;
@@ -159,10 +161,77 @@ exports.summary = asyncHandler(async (req, res) => {
       AND DATEDIFF(t.deadline, NOW()) <= 3
     ORDER BY t.deadline`, [sid, sid, idPeriode]);
 
+  // Jadwal pelajaran kelas, disusun menurut hari supaya siswa langsung
+  // melihat mata pelajaran apa saja yang ditempuhnya pada hari Senin,
+  // Selasa, dan seterusnya. Jam pelajaran yang berurutan dengan mata
+  // pelajaran yang sama digabung menjadi satu baris, misalnya jam 1-2,
+  // sebagaimana tertulis pada jadwal resmi sekolah.
+  let jadwal = null;
+  if (kelas) {
+    const [slot] = await pool.query(`
+      SELECT j.hari, j.jam_ke, j.kode, j.nama_mapel, j.kegiatan, u.nama AS nama_guru
+      FROM jadwal j
+      LEFT JOIN guru g ON g.id = j.id_guru
+      LEFT JOIN users u ON u.id = g.id_user
+      WHERE j.id_kelas = ?
+      ORDER BY j.hari, j.jam_ke`, [kelas.id]);
+
+    const [jam] = await pool.query(
+      "SELECT kelompok, jam_ke, mulai, selesai FROM jam_pelajaran WHERE jenis = 'pelajaran'");
+    const waktu = new Map(jam.map((j) => [`${j.kelompok}-${j.jam_ke}`, j]));
+
+    const hariSekarang = new Date().getDay();   // 1 Senin sampai 5 Jum'at
+    jadwal = {
+      hari_ini: hariSekarang >= 1 && hariSekarang <= 5 ? hariSekarang : null,
+      hari: NAMA_HARI.slice(1).map((nama, i) => {
+        const hari = i + 1;
+        const kelompok = hari === 5 ? 'jumat' : 'umum';
+        const pelajaran = [];
+        for (const s of slot.filter((x) => x.hari === hari)) {
+          const namaIsi = s.nama_mapel || s.kegiatan;
+          const akhir = pelajaran[pelajaran.length - 1];
+          // Jam berikutnya dengan isi yang sama disambung ke baris
+          // sebelumnya. Bila gurunya berganti, seperti pada jam P5 yang
+          // guru pendampingnya bergantian setiap jam, barisnya tetap
+          // disambung namun namanya tidak lagi mewakili satu guru.
+          if (akhir && akhir.nama === namaIsi && akhir.jam_sampai === s.jam_ke - 1) {
+            akhir.jam_sampai = s.jam_ke;
+            const w = waktu.get(`${kelompok}-${s.jam_ke}`);
+            if (w) akhir.selesai = w.selesai;
+            if (akhir.nama_guru !== s.nama_guru) {
+              akhir.guru_bergantian = true;
+              akhir.nama_guru = null;
+            }
+            continue;
+          }
+          const w = waktu.get(`${kelompok}-${s.jam_ke}`);
+          pelajaran.push({
+            nama: namaIsi,
+            kegiatan: s.nama_mapel ? null : s.kegiatan,
+            kode: s.kode,
+            nama_guru: s.nama_guru,
+            guru_bergantian: false,
+            jam_dari: s.jam_ke,
+            jam_sampai: s.jam_ke,
+            mulai: w ? w.mulai : null,
+            selesai: w ? w.selesai : null,
+          });
+        }
+        return {
+          hari,
+          nama_hari: nama,
+          jumlah_jam: slot.filter((x) => x.hari === hari).length,
+          pelajaran,
+        };
+      }),
+    };
+  }
+
   res.json({
     role, periode: infoPeriode, kelas: kelas || null,
     total_mapel, total_tugas, sudah_kumpul,
     belum_kumpul: total_tugas - sudah_kumpul, sudah_dinilai,
     tugas_mendesak: mendesak,
+    jadwal,
   });
 });
