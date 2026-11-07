@@ -11,7 +11,9 @@ import type { DaftarNilaiKelasMapel } from '../api/types';
 // sampai Ujian Akhir Semester, beserta bobot masing-masing.
 //
 // Angka pada kolom terakhir adalah NILAI AKHIR, yaitu jumlah nilai tiap
-// penilaian dikalikan bobotnya, bukan rata-rata biasa.
+// penilaian dikalikan bobotnya, bukan rata-rata biasa. Pembaginya adalah
+// seluruh bobot penilaian, sehingga penilaian yang belum dinilai tidak
+// menyumbang nilai sama sekali.
 // ---------------------------------------------------------------------
 const angka = (v: string | number | null | undefined) =>
   (v === null || v === undefined ? null : Number(v));
@@ -84,7 +86,10 @@ export default function DaftarNilaiMapel({ idKelasMapel }: { idKelasMapel: numbe
             <>Bobot seluruh penilaian baru berjumlah <strong>{bobot.total}%</strong>, masih
               kurang <strong>{bobot.sisa}%</strong> dari 100%. Lengkapi bobot tiap penilaian
               melalui menu pertemuan agar nilai akhir terhitung utuh.</>
-          )}
+          )}{' '}
+          Penilaian yang <strong>belum dinilai dihitung nol</strong> pada nilai akhir, sehingga
+          nilai akhir siswa baru mencapai angka sebenarnya setelah seluruh penilaiannya selesai
+          dinilai.
         </div>
       </div>
 
@@ -122,8 +127,13 @@ export default function DaftarNilaiMapel({ idKelasMapel }: { idKelasMapel: numbe
                   );
                 })}
                 <td className={`angka-nilai tebal ${s.nilai_akhir == null ? 'muted'
-                  : s.nilai_akhir >= kkm ? 'tuntas' : 'belum'}`}>
+                  : s.nilai_akhir >= kkm ? 'tuntas' : 'belum'}`}
+                title={s.nilai_akhir == null ? 'Belum ada penilaian yang dinilai'
+                  : `${s.bobot_dinilai}% dari ${s.total_bobot}% bobot sudah dinilai`}>
                   {s.nilai_akhir ?? '-'}
+                  {s.nilai_akhir != null && !s.lengkap && (
+                    <small className="sisa-bobot">{s.bobot_dinilai}% dinilai</small>
+                  )}
                 </td>
                 <td className="tengah">
                   <span className={`badge ${s.predikat.huruf === '-' ? 'gray' : 'green'}`}
@@ -174,7 +184,13 @@ export default function DaftarNilaiMapel({ idKelasMapel }: { idKelasMapel: numbe
           <strong>Keterangan nilai</strong>
           <ul>
             <li><strong>Nilai akhir</strong> = jumlah nilai tiap penilaian dikalikan bobotnya,
-              bukan rata-rata.</li>
+              dibagi seluruh bobot penilaian, bukan rata-rata.</li>
+            <li>Penilaian yang <strong>belum dinilai dihitung nol</strong>. Siswa yang hanya
+              mengikuti sebagian penilaian karena itu belum dapat memperoleh nilai akhir tinggi,
+              meskipun nilai pada penilaian yang diikutinya besar.</li>
+            <li>Angka kecil di bawah nilai akhir menunjukkan berapa persen bobot yang sudah
+              dinilai. Nilai akhir menjadi final setelah angka tersebut mencapai
+              {' '}<strong>{bobot.total}%</strong>.</li>
             <li><span className="badge green">Tuntas</span> nilai akhir ≥ {kkm} (KKM)</li>
             <li><span className="badge orange">Belum Tuntas</span> nilai akhir &lt; {kkm}</li>
             <li><span className="badge gray">Belum dinilai</span> belum ada penilaian yang dinilai</li>

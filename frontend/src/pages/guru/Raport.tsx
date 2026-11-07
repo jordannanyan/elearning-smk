@@ -63,7 +63,8 @@ export default function RaportGuru() {
             pelajaran tersebut. Penilaian ditampilkan berurutan menurut pertemuan, mulai dari
             tugas paling awal, kuis, <strong>Ujian Tengah Semester</strong>, sampai{' '}
             <strong>Ujian Akhir Semester</strong>, beserta bobot masing-masing.{' '}
-            <strong>Nilai akhir</strong> dihitung menurut bobot tersebut, bukan rata-rata.
+            <strong>Nilai akhir</strong> dihitung menurut bobot tersebut, bukan rata-rata,
+            dan penilaian yang belum dinilai dihitung nol.
           </div>
         </div>
 

@@ -2,6 +2,8 @@ import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import api from '../api/client';
 import { useAuth } from '../context/AuthContext';
+import logoSekolah from '../assets/logo-sekolah.jpg';
+import gedungSekolah from '../assets/gedung-sekolah.jpg';
 
 // ---------------------------------------------------------------------
 // Halaman depan sekolah. Halaman ini dapat dibuka tanpa login dan hanya
@@ -35,6 +37,9 @@ const FITUR = [
   },
 ];
 
+// Akun Instagram resmi SMA Negeri 1 Karau Kuala
+const INSTAGRAM = 'https://www.instagram.com/smansa_karaukuala';
+
 const ALUR = [
   { nomor: 1, judul: 'Periode Pembelajaran', isi: 'Tahun ajaran dan semester, misalnya 2026/2.' },
   { nomor: 2, judul: 'Kelas', isi: 'Rombongan belajar beserta wali kelas dan siswa anggotanya.' },
@@ -58,7 +63,8 @@ export default function Landing() {
       <header className="landing-bar">
         <div className="landing-isi bar-isi">
           <div className="identitas">
-            <div className="lambang">🏫</div>
+            <img className="lambang" src={logoSekolah}
+              alt="Logo SMA Negeri 1 Karau Kuala" />
             <div>
               <strong>SMA Negeri 1 Karau Kuala</strong>
               <span>Sistem E-Learning Berbasis Web</span>
@@ -76,6 +82,9 @@ export default function Landing() {
       </header>
 
       <section className="landing-hero">
+        {/* Foto gedung SMA Negeri 1 Karau Kuala sebagai latar, diberi
+            lapisan gelap agar tulisan di atasnya tetap terbaca. */}
+        <img className="latar-hero" src={gedungSekolah} alt="" aria-hidden="true" />
         <div className="landing-isi">
           {profil?.periode && (
             <span className="tanda">
@@ -176,6 +185,12 @@ export default function Landing() {
           <span className="muted">
             Sistem E-Learning Berbasis Web — Kabupaten Barito Selatan, Kalimantan Tengah
           </span>
+          {/* Tautan media sosial resmi sekolah, dibuka pada tab baru */}
+          <a className="tautan-sosial" href={INSTAGRAM}
+            target="_blank" rel="noreferrer noopener">
+            <span className="ikon-ig" aria-hidden="true" />
+            @smansa_karaukuala
+          </a>
         </div>
       </footer>
     </div>

@@ -383,7 +383,8 @@ export default function GuruPertemuanDetail() {
                 Bobot menentukan andil penilaian ini terhadap <strong>nilai akhir</strong> mata
                 pelajaran. Seluruh penilaian pada satu mata pelajaran — tugas, kuis, UTS, dan
                 UAS — hendaknya berjumlah <strong>100%</strong>, misalnya tugas 15%, kuis 15%,
-                UTS 25%, dan UAS 30%. Nilai akhir dihitung menurut bobot ini, bukan rata-rata.
+                UTS 25%, dan UAS 30%. Nilai akhir dihitung menurut bobot ini, bukan
+                rata-rata, dan penilaian yang belum dinilai dihitung nol.
               </p>
             </div>
             <div className="modal-actions">

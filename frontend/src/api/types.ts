@@ -352,14 +352,17 @@ export interface RaportSiswa {
   kelas: RaportKelas['kelas'] | null;
   mapel: (MapelRaport & {
     jumlah_dinilai: number; jumlah_penilaian: number;
-    total_bobot: number; bobot_dinilai: number; berbobot: boolean;
-    nilai_akhir: number | null; predikat: Predikat; ketuntasan: Ketuntasan;
+    total_bobot: number; bobot_dinilai: number; bobot_belum_dinilai: number;
+    berbobot: boolean; lengkap: boolean;
+    nilai_akhir: number | null; nilai_sementara: number | null;
+    predikat: Predikat; ketuntasan: Ketuntasan;
   })[];
   ringkasan: {
     nilai_akhir: number | null; predikat: Predikat; ketuntasan: Ketuntasan;
     peringkat: number | null; jumlah_siswa: number; jumlah_mapel: number;
     jumlah_mapel_dinilai: number; jumlah_mapel_tuntas: number;
-    jumlah_mapel_belum_tuntas: number;
+    jumlah_mapel_belum_tuntas: number; jumlah_mapel_lengkap: number;
+    lengkap: boolean;
   } | null;
   kkm: number;
 }
@@ -532,8 +535,10 @@ export interface DaftarNilaiKelasMapel {
     id: number; nama: string; nis: string | null;
     nilai: Record<number, string | number | null>;
     jumlah_dinilai: number; jumlah_penilaian: number;
-    total_bobot: number; bobot_dinilai: number; berbobot: boolean;
-    nilai_akhir: number | null; predikat: Predikat; ketuntasan: Ketuntasan;
+    total_bobot: number; bobot_dinilai: number; bobot_belum_dinilai: number;
+    berbobot: boolean; lengkap: boolean;
+    nilai_akhir: number | null; nilai_sementara: number | null;
+    predikat: Predikat; ketuntasan: Ketuntasan;
   }[];
   kkm: number;
   bobot: { total: number; sisa: number; lengkap: boolean };

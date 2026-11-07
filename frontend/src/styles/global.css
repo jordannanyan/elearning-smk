@@ -339,8 +339,8 @@ a.polos { color: inherit; display: block; }
 .landing-bar .bar-isi { display: flex; align-items: center; justify-content: space-between;
   gap: 16px; padding-top: 12px; padding-bottom: 12px; }
 .landing-bar .identitas { display: flex; align-items: center; gap: 10px; }
-.landing-bar .lambang { width: 38px; height: 38px; border-radius: 9px; background: var(--primary-light);
-  display: flex; align-items: center; justify-content: center; font-size: 19px; }
+.landing-bar .lambang { width: 42px; height: 42px; border-radius: 9px; object-fit: contain;
+  background: #fff; flex-shrink: 0; }
 .landing-bar .identitas strong { display: block; font-size: 14.5px; color: var(--primary-dark); }
 .landing-bar .identitas span { font-size: 11.5px; color: var(--gray); }
 .landing-bar nav { display: flex; align-items: center; gap: 20px; }
@@ -348,8 +348,17 @@ a.polos { color: inherit; display: block; }
 .landing-bar nav a:hover { color: var(--primary); }
 .landing-bar nav a.btn { color: #fff; }
 
-.landing-hero { background: linear-gradient(135deg, #1e40af 0%, #2563eb 55%, #3b82f6 100%);
+/* Hero memakai foto gedung sekolah sebagai latar. Gambarnya ditumpuk
+   gradasi biru pekat supaya seluruh tulisan di atasnya tetap terbaca. */
+.landing-hero { position: relative; isolation: isolate; overflow: hidden;
+  background: linear-gradient(135deg, #1e40af 0%, #2563eb 55%, #3b82f6 100%);
   color: #fff; padding: 64px 0 72px; }
+.landing-hero .latar-hero { position: absolute; inset: 0; width: 100%; height: 100%;
+  object-fit: cover; object-position: center 38%; z-index: -2; }
+.landing-hero::before { content: ''; position: absolute; inset: 0; z-index: -1;
+  background: linear-gradient(135deg, rgba(20,41,109,.90) 0%, rgba(30,64,175,.80) 45%,
+    rgba(37,99,235,.68) 100%); }
+.landing-hero .landing-isi { position: relative; }
 .landing-hero .tanda { display: inline-block; background: rgba(255,255,255,.16);
   border: 1px solid rgba(255,255,255,.3); border-radius: 999px; padding: 5px 14px;
   font-size: 12.5px; margin-bottom: 18px; }
@@ -411,6 +420,20 @@ a.polos { color: inherit; display: block; }
 .landing-kaki strong { display: block; color: #fff; margin-bottom: 5px; }
 .landing-kaki span { display: block; font-size: 12.5px; line-height: 1.7; }
 .landing-kaki .muted { color: #9ca3af; margin-top: 6px; }
+.landing-kaki .tautan-sosial { display: inline-flex; align-items: center; gap: 8px;
+  margin-top: 12px; padding: 7px 14px 7px 10px; border-radius: 999px;
+  border: 1px solid #374151; background: #1f2937; color: #e5e7eb;
+  font-size: 12.5px; font-weight: 500; }
+.landing-kaki .tautan-sosial:hover { background: #374151; color: #fff;
+  border-color: #4b5563; }
+/* Lambang Instagram digambar dengan CSS agar tidak menambah berkas gambar */
+.landing-kaki .ikon-ig { width: 16px; height: 16px; border-radius: 5px; flex-shrink: 0;
+  background: linear-gradient(45deg, #f9ce34 0%, #ee2a7b 50%, #6228d7 100%);
+  position: relative; }
+.landing-kaki .ikon-ig::before { content: ''; position: absolute; inset: 3.5px;
+  border: 1.5px solid #fff; border-radius: 50%; }
+.landing-kaki .ikon-ig::after { content: ''; position: absolute; top: 2.5px; right: 2.5px;
+  width: 2px; height: 2px; border-radius: 50%; background: #fff; }
 
 @media (max-width: 760px) {
   .landing-hero h1 { font-size: 27px; }
@@ -581,3 +604,7 @@ a.polos { color: inherit; display: block; }
 
 /* Baris rata-rata kelas pada daftar nilai */
 .tabel-raport .baris-rata td { background: #f8fafc; border-top: 2px solid var(--border); }
+
+/* Persen bobot yang sudah dinilai, di bawah angka nilai akhir */
+.tabel-raport .sisa-bobot { display: block; font-size: 9.5px; font-weight: 500;
+  color: var(--gray); line-height: 1.3; margin-top: 1px; }

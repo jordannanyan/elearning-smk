@@ -7,9 +7,11 @@ import type { RaportSiswa } from '../../api/types';
 // satu periode pembelajaran dirangkum menjadi satu lembar.
 //
 // Angka pada kolom nilai adalah NILAI AKHIR, yaitu jumlah nilai tiap
-// penilaian (tugas, kuis, UTS, UAS) dikalikan bobotnya, bukan rata-rata.
-// Status menerangkan tercapai atau tidaknya KKM, sedangkan predikat
-// menerangkan mutu capaiannya.
+// penilaian (tugas, kuis, UTS, UAS) dikalikan bobotnya dibagi seluruh
+// bobot penilaian, bukan rata-rata. Penilaian yang belum dinilai
+// dihitung nol sehingga nilai akhir baru mencapai angka sebenarnya
+// setelah seluruh penilaian selesai. Status menerangkan tercapai atau
+// tidaknya KKM, sedangkan predikat menerangkan mutu capaiannya.
 // ---------------------------------------------------------------------
 export default function RaportSiswaPage() {
   const [data, setData] = useState<RaportSiswa | null>(null);
@@ -90,8 +92,9 @@ export default function RaportSiswaPage() {
         <div>
           <strong>Nilai akhir</strong> dihitung dari seluruh penilaian pada mata pelajaran
           tersebut — tugas, kuis, Ujian Tengah Semester, dan Ujian Akhir Semester — yang
-          masing-masing dikalikan bobotnya, bukan dirata-ratakan. Nilai masih dapat berubah
-          selama periode pembelajaran berjalan. Batas ketuntasan (KKM) sekolah adalah{' '}
+          masing-masing dikalikan bobotnya, bukan dirata-ratakan. Penilaian yang{' '}
+          <strong>belum dinilai dihitung nol</strong>, sehingga nilai akhir akan naik seiring
+          bertambahnya penilaian yang Anda selesaikan. Batas ketuntasan (KKM) sekolah adalah{' '}
           <strong>{data.kkm}</strong>.
         </div>
       </div>
@@ -159,6 +162,7 @@ export default function RaportSiswaPage() {
                   <th>Mata Pelajaran</th>
                   <th>Guru Pengajar</th>
                   <th>Penilaian Dinilai</th>
+                  <th>Capaian Dinilai</th>
                   <th>Nilai Akhir</th>
                   <th>Predikat</th>
                   <th>Status</th>
@@ -181,6 +185,11 @@ export default function RaportSiswaPage() {
                         </span></>
                       )}
                     </td>
+                    <td className="angka-nilai muted"
+                      title="Mutu pekerjaan yang sudah dinilai saja, tanpa memperhitungkan
+                        penilaian yang belum ada">
+                      {m.nilai_sementara ?? '-'}
+                    </td>
                     <td className={`angka-nilai tebal ${m.nilai_akhir == null ? 'muted'
                       : m.nilai_akhir >= data.kkm ? 'tuntas' : 'belum'}`}>
                       {m.nilai_akhir ?? '-'}
@@ -200,7 +209,7 @@ export default function RaportSiswaPage() {
                   </tr>
                 ))}
                 {tampil.length === 0 && (
-                  <tr><td colSpan={7} className="center-msg">
+                  <tr><td colSpan={8} className="center-msg">
                     Tidak ada mata pelajaran yang dipilih.
                   </td></tr>
                 )}
@@ -225,7 +234,28 @@ export default function RaportSiswaPage() {
                 <strong>{r?.jumlah_mapel}</strong>; sudah dinilai{' '}
                 <strong>{r?.jumlah_mapel_dinilai}</strong>, di antaranya{' '}
                 <strong>{r?.jumlah_mapel_tuntas}</strong> tuntas dan{' '}
-                <strong>{r?.jumlah_mapel_belum_tuntas}</strong> belum tuntas.
+                <strong>{r?.jumlah_mapel_belum_tuntas}</strong> belum tuntas. Penilaiannya sudah
+                lengkap pada <strong>{r?.jumlah_mapel_lengkap}</strong> mata pelajaran.
+              </p>
+              <strong style={{ display: 'block', marginTop: 10 }}>Cara nilai akhir dihitung</strong>
+              <p className="muted">
+                Nilai setiap penilaian dikalikan bobotnya, lalu seluruhnya dijumlahkan dan dibagi
+                jumlah bobot penilaian pada mata pelajaran tersebut. <strong>Penilaian yang belum
+                dinilai dihitung nol.</strong> Contohnya, bila Anda baru mengikuti UTS berbobot
+                25% dengan nilai 90 dan UAS berbobot 30% dengan nilai 80, sedangkan tugas-tugas
+                berbobot 45% belum dinilai, maka nilai akhirnya adalah (90&times;25 +
+                80&times;30) &divide; 100 = <strong>46,5</strong>, bukan 84,5. Nilai akhir akan
+                naik dengan sendirinya setiap kali ada penilaian baru yang dinilai guru.
+              </p>
+              <p className="muted" style={{ marginTop: 8 }}>
+                Pembaginya adalah jumlah bobot penilaian yang <em>sudah dibuat guru</em> pada mata
+                pelajaran tersebut, sebagaimana tertulis pada kolom Penilaian Dinilai. Angka itu
+                menjadi 100% setelah guru selesai menyusun seluruh penilaian satu semester.
+              </p>
+              <p className="muted" style={{ marginTop: 8 }}>
+                Kolom <strong>Capaian Dinilai</strong> menunjukkan mutu pekerjaan pada penilaian
+                yang <em>sudah dinilai</em> saja. Angka itu hanya gambaran kemampuan, bukan nilai
+                raport. Ketika seluruh penilaian selesai dinilai, keduanya bernilai sama.
               </p>
             </div>
             <div>

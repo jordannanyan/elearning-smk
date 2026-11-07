@@ -147,8 +147,11 @@ exports.raportSiswa = asyncHandler(async (req, res) => {
       jumlah_penilaian: Number(m.jumlah_penilaian || 0),
       total_bobot: bulat(m.total_bobot),
       bobot_dinilai: n ? n.bobot_dinilai : 0,
+      bobot_belum_dinilai: n ? n.bobot_belum_dinilai : bulat(m.total_bobot),
       berbobot: n ? n.berbobot : false,
+      lengkap: n ? n.lengkap : false,
       nilai_akhir: n ? n.nilai_akhir : null,
+      nilai_sementara: n ? n.nilai_sementara : null,
       predikat: n ? n.predikat : predikat(null),
       ketuntasan: n ? n.ketuntasan : ketuntasan(null),
     };
@@ -172,6 +175,10 @@ exports.raportSiswa = asyncHandler(async (req, res) => {
       jumlah_mapel_dinilai: mapel.filter((m) => m.nilai_akhir != null).length,
       jumlah_mapel_tuntas: mapel.filter((m) => m.ketuntasan.tuntas).length,
       jumlah_mapel_belum_tuntas: mapel.filter((m) => m.ketuntasan.tuntas === false).length,
+      // Seluruh penilaian pada setiap mata pelajaran yang sudah dinilai
+      // telah lengkap, sehingga nilai akhirnya tidak akan berubah lagi
+      jumlah_mapel_lengkap: mapel.filter((m) => m.lengkap).length,
+      lengkap: mapel.length > 0 && mapel.every((m) => m.lengkap),
     },
     kkm: KKM,
   });

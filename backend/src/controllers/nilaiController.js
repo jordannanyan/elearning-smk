@@ -193,7 +193,8 @@ exports.rekapKelasMapel = asyncHandler(async (req, res) => {
       const v = peta.get(`${s.id}|${t.id}`);
       s.nilai[t.id] = v === undefined ? null : v;
     }
-    // Nilai akhir dihitung menurut bobot tiap penilaian, bukan rata-rata
+    // Nilai akhir dihitung menurut bobot tiap penilaian, bukan rata-rata.
+    // Penilaian yang belum dinilai menyumbang nol pada nilai akhir.
     Object.assign(s, hitungNilaiAkhir(
       tugas.map((t) => ({ skor: s.nilai[t.id], bobot: t.bobot }))));
   }

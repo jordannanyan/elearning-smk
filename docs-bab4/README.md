@@ -17,7 +17,7 @@ logika aplikasi yang sesungguhnya.
 | `database/elearning_smakk_bab4.sql` | Dump SQL struktur + seluruh data BAB IV, siap diimpor lewat phpMyAdmin. |
 | `database/query-bab4.sql` | 16 query SQL yang dipakai menghasilkan tabel-tabel data pada BAB IV. |
 | `data/daftar-gambar.json` | Daftar gambar beserta judul dan kalimat penjelasnya. |
-| `data/hasil-pengujian.json` | Hasil 129 skenario pengujian Black Box. |
+| `data/hasil-pengujian.json` | Hasil 131 skenario pengujian Black Box. |
 | `data/struktur-basisdata.json` | Struktur 16 tabel basis data hasil implementasi. |
 | `data/statistik-sistem.json` | Statistik data sistem dan rekapitulasi nilai siswa. |
 
@@ -99,7 +99,7 @@ materi/tugas/nilai dan siswa tidak dapat mengumpulkan tugas.
 
 ## Ringkasan hasil pengujian Black Box
 
-Total **129 skenario**, **129 Valid**, **0 Tidak Valid**
+Total **131 skenario**, **131 Valid**, **0 Tidak Valid**
 (**100.00%** keberhasilan).
 
 | Modul | Skenario | Valid | Tidak Valid |
@@ -120,7 +120,7 @@ Total **129 skenario**, **129 Valid**, **0 Tidak Valid**
 | Pengerjaan Kuis | 4 | 4 | 0 |
 | Pengumpulan Tugas | 2 | 2 | 0 |
 | Penilaian | 7 | 7 | 0 |
-| Rekap Nilai | 9 | 9 | 0 |
+| Rekap Nilai | 11 | 11 | 0 |
 | Forum Diskusi | 7 | 7 | 0 |
 | Dashboard | 5 | 5 | 0 |
 | Halaman Depan | 1 | 1 | 0 |
@@ -147,7 +147,7 @@ Total **129 skenario**, **129 Valid**, **0 Tidak Valid**
 | 13 | `pengumpulan_tugas` | Menyimpan data pengumpulan jawaban tugas oleh siswa | 88 |
 | 14 | `jawaban_siswa` | Menyimpan jawaban siswa pada setiap butir soal kuis | 62 |
 | 15 | `nilai` | Menyimpan data nilai siswa hasil penilaian guru maupun koreksi otomatis | 82 |
-| 16 | `forum_diskusi` | Menyimpan topik dan balasan forum diskusi pada sebuah pertemuan | 24 |
+| 16 | `forum_diskusi` | Menyimpan topik dan balasan forum diskusi pada sebuah pertemuan | 8 |
 | 17 | `jam_pelajaran` | Menyimpan pembagian waktu jam pelajaran sekolah, termasuk jam istirahat | 23 |
 | 18 | `jadwal` | Menyimpan jadwal mata pelajaran tiap kelas pada sebuah periode, satu baris untuk setiap hari dan jam ke berapa | 504 |
 | 19 | `presensi` | Menyimpan daftar hadir sebuah pertemuan beserta status dibuka atau ditutupnya | 4 |

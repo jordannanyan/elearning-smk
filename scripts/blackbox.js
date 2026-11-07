@@ -1444,20 +1444,60 @@ async function main() {
   const terpakai = nilaiMapel.tugas
     .map((t) => ({ skor: siswaUji.nilai[t.id], bobot: Number(t.bobot) }))
     .filter((x) => x.skor != null);
-  const bobotTerpakai = terpakai.reduce((a, x) => a + x.bobot, 0);
-  const hitungManual = Math.round(
-    (terpakai.reduce((a, x) => a + Number(x.skor) * x.bobot, 0) / bobotTerpakai) * 100) / 100;
+  const seluruhBobot = nilaiMapel.tugas.reduce((a, t) => a + Number(t.bobot), 0);
+  const jumlahBerbobot = terpakai.reduce((a, x) => a + Number(x.skor) * x.bobot, 0);
+  const hitungManual = Math.round((jumlahBerbobot / seluruhBobot) * 100) / 100;
   const rataBiasa = Math.round(
     (terpakai.reduce((a, x) => a + Number(x.skor), 0) / terpakai.length) * 100) / 100;
   catat({
     modul: 'Rekap Nilai', skenario: 'Nilai akhir siswa dihitung menurut bobot penilaian, bukan rata-rata',
     input: `${siswaUji.nama}: ` + terpakai.map((x) => `${Number(x.skor)} (bobot ${x.bobot}%)`).join(', '),
-    harapan: 'Nilai akhir sama dengan jumlah nilai dikalikan bobotnya dibagi jumlah bobot yang '
-      + 'sudah dinilai, dan berbeda dari rata-rata biasa',
+    harapan: 'Nilai akhir sama dengan jumlah nilai dikalikan bobotnya dibagi seluruh bobot '
+      + 'penilaian, dan berbeda dari rata-rata biasa',
     aktual: `Nilai akhir sistem ${siswaUji.nilai_akhir}; perhitungan manual menurut bobot `
       + `${hitungManual}; rata-rata biasa ${rataBiasa}`,
     sesuai: Math.abs(siswaUji.nilai_akhir - hitungManual) < 0.02
       && Math.abs(siswaUji.nilai_akhir - rataBiasa) > 0.01,
+  });
+
+  // Penilaian yang belum dinilai tidak boleh ikut mengangkat nilai akhir.
+  const siswaBelumLengkap = nilaiMapel.siswa.find((s) => s.nilai_akhir != null && !s.lengkap);
+  catat({
+    modul: 'Rekap Nilai',
+    skenario: 'Penilaian yang belum dinilai dihitung nol pada nilai akhir siswa',
+    input: siswaBelumLengkap
+      ? `${siswaBelumLengkap.nama}: baru ${siswaBelumLengkap.bobot_dinilai}% dari `
+        + `${siswaBelumLengkap.total_bobot}% bobot yang sudah dinilai`
+      : 'Seluruh siswa sudah dinilai lengkap',
+    harapan: 'Nilai akhir lebih kecil daripada capaian atas penilaian yang sudah dinilai saja, '
+      + 'sehingga siswa yang tugasnya masih kosong tidak memperoleh nilai akhir tinggi',
+    aktual: siswaBelumLengkap
+      ? `Nilai akhir ${siswaBelumLengkap.nilai_akhir}, capaian atas penilaian yang sudah `
+        + `dinilai ${siswaBelumLengkap.nilai_sementara}`
+      : 'Tidak ada siswa dengan penilaian yang belum lengkap',
+    sesuai: !!siswaBelumLengkap
+      && siswaBelumLengkap.nilai_akhir < siswaBelumLengkap.nilai_sementara,
+  });
+
+  // Perhitungan dipastikan memakai seluruh bobot sebagai pembagi
+  const bagiSeluruh = siswaBelumLengkap
+    ? Math.round((siswaBelumLengkap.nilai_sementara * siswaBelumLengkap.bobot_dinilai)
+      / siswaBelumLengkap.total_bobot * 100) / 100
+    : null;
+  catat({
+    modul: 'Rekap Nilai',
+    skenario: 'Pembagi nilai akhir adalah seluruh bobot penilaian, bukan bobot yang sudah dinilai',
+    input: siswaBelumLengkap
+      ? `${siswaBelumLengkap.nama}: capaian ${siswaBelumLengkap.nilai_sementara} atas `
+        + `${siswaBelumLengkap.bobot_dinilai}% bobot, seluruhnya ${siswaBelumLengkap.total_bobot}%`
+      : '-',
+    harapan: 'Nilai akhir sama dengan capaian dikalikan bobot yang sudah dinilai dibagi '
+      + 'seluruh bobot penilaian',
+    aktual: siswaBelumLengkap
+      ? `Nilai akhir sistem ${siswaBelumLengkap.nilai_akhir}; perhitungan manual ${bagiSeluruh}`
+      : '-',
+    sesuai: !!siswaBelumLengkap
+      && Math.abs(siswaBelumLengkap.nilai_akhir - bagiSeluruh) < 0.02,
   });
 
   const ptBobot = (await get(`/api/kelas-mapel/${kmRaport.id}/pertemuan`, TG)).data[0];
