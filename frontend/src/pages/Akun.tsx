@@ -94,13 +94,14 @@ export default function Akun() {
             <label>Kata Sandi Lama</label>
             <input type={tampak ? 'text' : 'password'} value={lama}
               onChange={(e) => setLama(e.target.value)}
-              autoComplete="current-password" placeholder="••••••••" required />
+              autoComplete="current-password"
+              placeholder="Kata sandi yang dipakai sekarang" required />
           </div>
           <div className="field">
             <label>Kata Sandi Baru</label>
             <input type={tampak ? 'text' : 'password'} value={baru}
               onChange={(e) => setBaru(e.target.value)}
-              autoComplete="new-password" placeholder="••••••••"
+              autoComplete="new-password" placeholder={`Minimal ${PANJANG_MINIMAL} karakter`}
               minLength={PANJANG_MINIMAL} required />
             <small className="muted">Minimal {PANJANG_MINIMAL} karakter.</small>
           </div>
@@ -108,7 +109,7 @@ export default function Akun() {
             <label>Ulangi Kata Sandi Baru</label>
             <input type={tampak ? 'text' : 'password'} value={ulangi}
               onChange={(e) => setUlangi(e.target.value)}
-              autoComplete="new-password" placeholder="••••••••"
+              autoComplete="new-password" placeholder="Ketik ulang kata sandi baru"
               minLength={PANJANG_MINIMAL} required />
           </div>
 
