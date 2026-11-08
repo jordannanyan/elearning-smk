@@ -8,8 +8,8 @@ import type { JadwalDashboardSiswa } from '../../api/types';
 // Dashboard siswa.
 //
 // Susunannya mengikuti urutan kebutuhan siswa ketika membuka sistem:
-// sapaan beserta keterangan kelas lebih dahulu, lalu ringkasan angka
-// mata pelajaran dan tugas, kemudian jadwal pelajaran hari Senin sampai
+// ringkasan angka mata pelajaran dan tugas lebih dahulu, lalu sapaan
+// beserta keterangan kelas, kemudian jadwal pelajaran hari Senin sampai
 // Jum'at sehingga siswa mengetahui mata pelajaran apa saja yang
 // ditempuhnya pada setiap hari, dan terakhir tugas yang tenggatnya
 // segera berakhir.
@@ -33,7 +33,15 @@ export default function SiswaDashboard() {
     <div>
       <div className="page-head"><h2>Dashboard Siswa</h2></div>
 
-      {/* Sapaan diletakkan paling atas sebagai pembuka halaman */}
+      <div className="stats">
+        {kartu.map(([lbl, num]) => (
+          <div className="stat" key={lbl as string}>
+            <div className="num">{num ?? 0}</div>
+            <div className="lbl">{lbl}</div>
+          </div>
+        ))}
+      </div>
+
       <div className="card kartu-sapaan">
         <h3>Halo, {user?.nama} 👋</h3>
         {d.periode ? (
@@ -51,15 +59,6 @@ export default function SiswaDashboard() {
           materi, mengunduh berkas, menonton video, mengerjakan tugas, lalu berdiskusi bersama
           guru dan teman pada forum pertemuan tersebut.
         </p>
-      </div>
-
-      <div className="stats">
-        {kartu.map(([lbl, num]) => (
-          <div className="stat" key={lbl as string}>
-            <div className="num">{num ?? 0}</div>
-            <div className="lbl">{lbl}</div>
-          </div>
-        ))}
       </div>
 
       {/* Jadwal pelajaran per hari */}

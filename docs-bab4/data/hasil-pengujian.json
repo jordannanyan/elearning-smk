@@ -1,7 +1,7 @@
 {
-  "tanggal": "2026-11-07T11:36:18.063Z",
-  "total": 131,
-  "valid": 131,
+  "tanggal": "2026-11-08T17:12:25.464Z",
+  "total": 135,
+  "valid": 135,
   "tidak_valid": 0,
   "persentase": 100,
   "kasus": [
@@ -281,7 +281,7 @@
       "skenario": "Administrator menghapus siswa yang sudah terdaftar pada kelas",
       "input": "Menghapus akun Ahmad Hanapi",
       "harapan": "Sistem menolak dan menyarankan penonaktifan agar riwayat nilai siswa tetap tersimpan",
-      "aktual": "HTTP 409, pesan: \"Siswa ini terdaftar pada 2 kelas dan memiliki 4 pengumpulan tugas sehingga tidak dapat dihapus. Nonaktifkan akunnya (misalnya karena sudah lulus atau pindah) agar riwayat nilainya tetap tersimpan.\"",
+      "aktual": "HTTP 409, pesan: \"Siswa ini terdaftar pada 2 kelas dan memiliki 9 pengumpulan tugas sehingga tidak dapat dihapus. Nonaktifkan akunnya (misalnya karena sudah lulus atau pindah) agar riwayat nilainya tetap tersimpan.\"",
       "status": "Valid"
     },
     {
@@ -506,7 +506,7 @@
       "skenario": "Siswa membuka satu pertemuan untuk mengikuti pembelajaran",
       "input": "Membuka Pertemuan 1",
       "harapan": "Sistem menampilkan materi, tugas, dan forum diskusi pertemuan tersebut secara berurutan",
-      "aktual": "HTTP 200, 3 materi, 1 tugas, 1 topik diskusi",
+      "aktual": "HTTP 200, 3 materi, 1 tugas, 2 topik diskusi",
       "status": "Valid"
     },
     {
@@ -542,7 +542,7 @@
       "skenario": "Sistem menampilkan sisa hari menuju batas waktu pengumpulan",
       "input": "Membuka daftar tugas sebagai siswa",
       "harapan": "Setiap tugas menampilkan sisa hari beserta penanda tingkat kemendesakannya",
-      "aktual": "Contoh: \"Tugas Proyek SPLDV\" sisa 3 hari, penanda mendesak",
+      "aktual": "Contoh: \"Tugas Proyek SPLDV\" sisa 1 hari, penanda kritis",
       "status": "Valid"
     },
     {
@@ -551,7 +551,7 @@
       "skenario": "Sistem mengelompokkan tugas siswa berdasarkan status pengerjaan",
       "input": "Membuka menu Tugas & Kuis sebagai siswa",
       "harapan": "Tugas terpisah menjadi belum dikerjakan, menunggu penilaian, sudah dinilai, dan terlewat",
-      "aktual": "Status yang terbentuk: dinilai, terlewat, belum_dikerjakan",
+      "aktual": "Status yang terbentuk: dinilai, terlewat, belum_dikerjakan, menunggu_penilaian",
       "status": "Valid"
     },
     {
@@ -803,7 +803,7 @@
       "skenario": "Pengguna menampilkan forum diskusi yang menyatu dalam materi pertemuan",
       "input": "Membuka Pertemuan 1 lalu melihat bagian forum diskusi",
       "harapan": "Forum diskusi tampil di dalam pertemuan beserta seluruh balasannya secara berurutan",
-      "aktual": "HTTP 200, 2 topik dengan total 3 balasan",
+      "aktual": "HTTP 200, 3 topik dengan total 6 balasan",
       "status": "Valid"
     },
     {
@@ -880,6 +880,42 @@
     },
     {
       "id": "BB-98",
+      "modul": "Autentikasi",
+      "skenario": "Administrator dan guru mengubah kata sandi akunnya masing-masing",
+      "input": "Administrator dan guru mengganti kata sandi, lalu login dengan kata sandi baru",
+      "harapan": "Seluruh peran pengguna dapat mengubah kata sandinya sendiri",
+      "aktual": "Administrator HTTP 200 (login HTTP 200); guru HTTP 200 (login HTTP 200)",
+      "status": "Valid"
+    },
+    {
+      "id": "BB-99",
+      "modul": "Autentikasi",
+      "skenario": "Pengguna mengubah kata sandi dengan kata sandi lama yang salah",
+      "input": "Password lama: sandisalah; Password baru: siswa456",
+      "harapan": "Sistem menolak dan kata sandi lama tetap berlaku",
+      "aktual": "HTTP 400, pesan: \"Password lama salah\"; login dengan kata sandi lama: HTTP 200",
+      "status": "Valid"
+    },
+    {
+      "id": "BB-100",
+      "modul": "Autentikasi",
+      "skenario": "Pengguna mengisi kata sandi baru yang terlalu pendek",
+      "input": "Password baru: abc (3 karakter)",
+      "harapan": "Sistem menolak karena kata sandi baru minimal 6 karakter",
+      "aktual": "HTTP 400, pesan: \"Password baru minimal 6 karakter\"",
+      "status": "Valid"
+    },
+    {
+      "id": "BB-101",
+      "modul": "Autentikasi",
+      "skenario": "Mengubah kata sandi tanpa melakukan login terlebih dahulu",
+      "input": "Permintaan ubah kata sandi tanpa token",
+      "harapan": "Sistem menolak karena hanya pemilik akun yang sedang masuk yang boleh mengubahnya",
+      "aktual": "HTTP 401, pesan: \"Token tidak ditemukan\"",
+      "status": "Valid"
+    },
+    {
+      "id": "BB-102",
       "modul": "Halaman Depan",
       "skenario": "Pengunjung membuka halaman depan sekolah tanpa login",
       "input": "Membuka alamat sistem tanpa memasukkan akun",
@@ -888,7 +924,7 @@
       "status": "Valid"
     },
     {
-      "id": "BB-99",
+      "id": "BB-103",
       "modul": "Raport Sementara",
       "skenario": "Guru melihat daftar mata pelajaran pada menu Raport Sementara",
       "input": "Membuka menu Raport Sementara",
@@ -897,7 +933,7 @@
       "status": "Valid"
     },
     {
-      "id": "BB-100",
+      "id": "BB-104",
       "modul": "Raport Sementara",
       "skenario": "Guru melihat nilai siswa satu mata pelajaran dari tugas pertama sampai ujian akhir",
       "input": "Membuka nilai MATEMATIKA UMUM kelas X A",
@@ -906,7 +942,7 @@
       "status": "Valid"
     },
     {
-      "id": "BB-101",
+      "id": "BB-105",
       "modul": "Rekap Nilai",
       "skenario": "Guru melihat bobot tiap penilaian beserta jumlah seluruhnya",
       "input": "Membuka rekap nilai MATEMATIKA UMUM kelas X A",
@@ -915,7 +951,7 @@
       "status": "Valid"
     },
     {
-      "id": "BB-102",
+      "id": "BB-106",
       "modul": "Rekap Nilai",
       "skenario": "Nilai akhir siswa dihitung menurut bobot penilaian, bukan rata-rata",
       "input": "Ahmad Hanapi: 90 (bobot 15%), 80 (bobot 15%), 82 (bobot 25%), 85 (bobot 30%)",
@@ -924,7 +960,7 @@
       "status": "Valid"
     },
     {
-      "id": "BB-103",
+      "id": "BB-107",
       "modul": "Rekap Nilai",
       "skenario": "Penilaian yang belum dinilai dihitung nol pada nilai akhir siswa",
       "input": "Ahmad Hanapi: baru 85% dari 100% bobot yang sudah dinilai",
@@ -933,7 +969,7 @@
       "status": "Valid"
     },
     {
-      "id": "BB-104",
+      "id": "BB-108",
       "modul": "Rekap Nilai",
       "skenario": "Pembagi nilai akhir adalah seluruh bobot penilaian, bukan bobot yang sudah dinilai",
       "input": "Ahmad Hanapi: capaian 84.12 atas 85% bobot, seluruhnya 100%",
@@ -942,7 +978,7 @@
       "status": "Valid"
     },
     {
-      "id": "BB-105",
+      "id": "BB-109",
       "modul": "Rekap Nilai",
       "skenario": "Guru memberi bobot penilaian melebihi sisa yang tersedia",
       "input": "Menambah penilaian berbobot 40% padahal seluruh bobot sudah genap 100%",
@@ -951,7 +987,7 @@
       "status": "Valid"
     },
     {
-      "id": "BB-106",
+      "id": "BB-110",
       "modul": "Rekap Nilai",
       "skenario": "Guru mengisi bobot penilaian dengan angka tidak wajar",
       "input": "Bobot penilaian: 150 persen",
@@ -960,7 +996,7 @@
       "status": "Valid"
     },
     {
-      "id": "BB-107",
+      "id": "BB-111",
       "modul": "Raport Sementara",
       "skenario": "Guru mencoba melihat nilai mata pelajaran yang bukan diampunya",
       "input": "Guru Laily Mustika membuka nilai MATEMATIKA UMUM kelas X A",
@@ -969,7 +1005,7 @@
       "status": "Valid"
     },
     {
-      "id": "BB-108",
+      "id": "BB-112",
       "modul": "Raport Sementara",
       "skenario": "Siswa melihat raport sementara dirinya dalam satu halaman",
       "input": "Membuka menu Raport Sementara",
@@ -978,7 +1014,7 @@
       "status": "Valid"
     },
     {
-      "id": "BB-109",
+      "id": "BB-113",
       "modul": "Raport Sementara",
       "skenario": "Siswa melihat raport pada periode pembelajaran terdahulu",
       "input": "Memilih periode 2026/1 yang berstatus terkunci",
@@ -987,7 +1023,7 @@
       "status": "Valid"
     },
     {
-      "id": "BB-110",
+      "id": "BB-114",
       "modul": "Jadwal Pelajaran",
       "skenario": "Siswa melihat jadwal pelajaran kelasnya",
       "input": "Membuka menu Jadwal Pelajaran",
@@ -996,7 +1032,7 @@
       "status": "Valid"
     },
     {
-      "id": "BB-111",
+      "id": "BB-115",
       "modul": "Jadwal Pelajaran",
       "skenario": "Guru melihat jadwal mengajarnya sendiri",
       "input": "Membuka menu Jadwal Pelajaran sebagai guru",
@@ -1005,7 +1041,7 @@
       "status": "Valid"
     },
     {
-      "id": "BB-112",
+      "id": "BB-116",
       "modul": "Jadwal Pelajaran",
       "skenario": "Pengguna melihat jadwal seluruh sekolah beserta legendanya",
       "input": "Membuka tab Jadwal Sekolah",
@@ -1014,7 +1050,7 @@
       "status": "Valid"
     },
     {
-      "id": "BB-113",
+      "id": "BB-117",
       "modul": "Jadwal Pelajaran",
       "skenario": "Administrator membuka bahan penyusunan jadwal",
       "input": "Membuka menu Jadwal Pelajaran pada halaman administrator",
@@ -1023,7 +1059,7 @@
       "status": "Valid"
     },
     {
-      "id": "BB-114",
+      "id": "BB-118",
       "modul": "Jadwal Pelajaran",
       "skenario": "Administrator mengisi jam pelajaran yang masih kosong",
       "input": "Kelas X A, Jumat jam ke-6, MATEMATIKA [U] oleh Mahlian, S.Pd",
@@ -1032,7 +1068,7 @@
       "status": "Valid"
     },
     {
-      "id": "BB-115",
+      "id": "BB-119",
       "modul": "Jadwal Pelajaran",
       "skenario": "Administrator menjadwalkan guru pada dua kelas di jam yang sama",
       "input": "Menugaskan Andi Ilhami, S.Kom di kelas X A padahal sudah mengajar di kelas XI A pada Jumat jam ke-6",
@@ -1041,7 +1077,7 @@
       "status": "Valid"
     },
     {
-      "id": "BB-116",
+      "id": "BB-120",
       "modul": "Jadwal Pelajaran",
       "skenario": "Administrator menandai sebuah jam sebagai kegiatan sekolah",
       "input": "Kelas X A, Jumat jam ke-7, kegiatan PRAMUKA",
@@ -1050,7 +1086,7 @@
       "status": "Valid"
     },
     {
-      "id": "BB-117",
+      "id": "BB-121",
       "modul": "Jadwal Pelajaran",
       "skenario": "Administrator menyimpan jadwal tanpa mengisi apa pun",
       "input": "Mata pelajaran dan kegiatan sama-sama dikosongkan",
@@ -1059,7 +1095,7 @@
       "status": "Valid"
     },
     {
-      "id": "BB-118",
+      "id": "BB-122",
       "modul": "Penguncian Periode",
       "skenario": "Administrator mengubah jadwal pada periode yang telah dikunci",
       "input": "Mengisi jadwal kelas X A pada periode 2026/1",
@@ -1068,7 +1104,7 @@
       "status": "Valid"
     },
     {
-      "id": "BB-119",
+      "id": "BB-123",
       "modul": "Jadwal Pelajaran",
       "skenario": "Administrator mengosongkan kembali sebuah jam pelajaran",
       "input": "Mengosongkan jam pelajaran kelas X A pada Jumat",
@@ -1077,16 +1113,16 @@
       "status": "Valid"
     },
     {
-      "id": "BB-120",
+      "id": "BB-124",
       "modul": "Presensi",
       "skenario": "Guru membuka presensi pada sebuah pertemuan",
       "input": "Membuka presensi pertemuan 1: Struktur dan Kaidah Teks Deskripsi",
       "harapan": "Presensi terbuka sehingga siswa dapat menyatakan kehadirannya",
-      "aktual": "HTTP 201, pesan: \"Presensi berhasil dibuka\"",
+      "aktual": "HTTP 200, pesan: \"Presensi dibuka kembali\"",
       "status": "Valid"
     },
     {
-      "id": "BB-121",
+      "id": "BB-125",
       "modul": "Presensi",
       "skenario": "Guru membuka presensi yang sudah terbuka",
       "input": "Menekan tombol buka presensi untuk kedua kalinya",
@@ -1095,7 +1131,7 @@
       "status": "Valid"
     },
     {
-      "id": "BB-122",
+      "id": "BB-126",
       "modul": "Presensi",
       "skenario": "Siswa menyatakan kehadirannya pada pertemuan yang presensinya dibuka",
       "input": "Menekan tombol Saya Hadir",
@@ -1104,7 +1140,7 @@
       "status": "Valid"
     },
     {
-      "id": "BB-123",
+      "id": "BB-127",
       "modul": "Presensi",
       "skenario": "Siswa menyatakan hadir dua kali pada pertemuan yang sama",
       "input": "Menekan tombol Saya Hadir untuk kedua kalinya",
@@ -1113,7 +1149,7 @@
       "status": "Valid"
     },
     {
-      "id": "BB-124",
+      "id": "BB-128",
       "modul": "Presensi",
       "skenario": "Guru mencatat keterangan siswa yang berhalangan hadir",
       "input": "Menandai Audiyah sakit dengan keterangan surat dokter",
@@ -1122,7 +1158,7 @@
       "status": "Valid"
     },
     {
-      "id": "BB-125",
+      "id": "BB-129",
       "modul": "Presensi",
       "skenario": "Guru mengisi status kehadiran dengan nilai yang tidak dikenal",
       "input": "Status kehadiran: \"bolos\"",
@@ -1131,7 +1167,7 @@
       "status": "Valid"
     },
     {
-      "id": "BB-126",
+      "id": "BB-130",
       "modul": "Presensi",
       "skenario": "Guru mencoba menandai siswa hadir",
       "input": "Guru menetapkan status hadir untuk Ahmad Hanapi",
@@ -1140,16 +1176,16 @@
       "status": "Valid"
     },
     {
-      "id": "BB-127",
+      "id": "BB-131",
       "modul": "Presensi",
       "skenario": "Guru menutup presensi dan siswa yang belum mengisi dicatat alpa",
       "input": "Menekan tombol Tutup Presensi",
       "harapan": "Presensi ditutup dan seluruh siswa yang belum menyatakan hadir tercatat alpa",
-      "aktual": "HTTP 200, pesan: \"Presensi ditutup. 1 siswa yang belum mengisi dicatat alpa.\" (25 siswa menyatakan hadir sendiri sebelum presensi ditutup)",
+      "aktual": "HTTP 200, pesan: \"Presensi ditutup.\" (2 siswa menyatakan hadir sendiri sebelum presensi ditutup)",
       "status": "Valid"
     },
     {
-      "id": "BB-128",
+      "id": "BB-132",
       "modul": "Presensi",
       "skenario": "Siswa mencoba mengisi presensi yang sudah ditutup guru",
       "input": "Menekan tombol Saya Hadir setelah presensi ditutup",
@@ -1158,7 +1194,7 @@
       "status": "Valid"
     },
     {
-      "id": "BB-129",
+      "id": "BB-133",
       "modul": "Presensi",
       "skenario": "Guru melihat rekap kehadiran seluruh siswa pada satu mata pelajaran",
       "input": "Membuka rekap presensi BAHASA INDONESIA kelas X A",
@@ -1167,7 +1203,7 @@
       "status": "Valid"
     },
     {
-      "id": "BB-130",
+      "id": "BB-134",
       "modul": "Presensi",
       "skenario": "Siswa melihat rekap kehadirannya sendiri per mata pelajaran",
       "input": "Membuka menu Presensi",
@@ -1176,7 +1212,7 @@
       "status": "Valid"
     },
     {
-      "id": "BB-131",
+      "id": "BB-135",
       "modul": "Presensi",
       "skenario": "Guru mencoba melihat presensi mata pelajaran yang bukan diampunya",
       "input": "Guru Fisika membuka rekap presensi Bahasa Indonesia",

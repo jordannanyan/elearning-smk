@@ -343,19 +343,25 @@
   },
   {
     "no": 58,
-    "berkas": "58-periode-terkunci-guru.png",
+    "berkas": "58-akun-ubah-sandi.png",
+    "judul": "Halaman Akun Saya dan Ubah Kata Sandi",
+    "keterangan": "Halaman Akun Saya yang dapat dibuka seluruh pengguna, baik administrator, guru, maupun siswa. Identitas akun ditampilkan di sebelah kiri, sedangkan formulir ubah kata sandi di sebelah kanan meminta kata sandi lama sebagai pemastian bahwa yang mengubah memang pemilik akun."
+  },
+  {
+    "no": 59,
+    "berkas": "59-periode-terkunci-guru.png",
     "judul": "Tampilan Periode yang Telah Dikunci",
     "keterangan": "Tampilan kelas pada periode pembelajaran yang telah dikunci administrator. Sistem memberi pemberitahuan bahwa seluruh data periode tersebut bersifat hanya-baca, dan kartu mata pelajaran ditandai sebagai arsip."
   },
   {
-    "no": 59,
-    "berkas": "59-periode-terkunci-pertemuan.png",
+    "no": 60,
+    "berkas": "60-periode-terkunci-pertemuan.png",
     "judul": "Isi Pertemuan pada Periode Terkunci",
     "keterangan": "Isi pertemuan pada periode yang telah dikunci. Seluruh materi dan tugas tetap dapat dibaca sebagai arsip, namun tombol untuk menambah, mengubah, maupun menghapus data dinonaktifkan sehingga data tidak dapat diubah lagi."
   },
   {
-    "no": 60,
-    "berkas": "60-tampilan-mobile.png",
+    "no": 61,
+    "berkas": "61-tampilan-mobile.png",
     "judul": "Tampilan Sistem pada Perangkat Mobile",
     "keterangan": "Tampilan sistem e-learning ketika diakses melalui browser pada perangkat smartphone. Antarmuka menyesuaikan lebar layar sesuai kebutuhan non-fungsional ketersediaan sistem."
   }

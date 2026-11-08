@@ -15,6 +15,7 @@ const MENUS: Record<Role, MenuItem[]> = {
     { to: '/admin/kelas', label: 'Data Kelas', icon: '🏫' },
     { to: '/admin/mapel', label: 'Mata Pelajaran', icon: '📚' },
     { to: '/admin/jadwal', label: 'Jadwal Pelajaran', icon: '🗓️' },
+    { to: '/admin/akun', label: 'Akun Saya', icon: '👤' },
   ],
   guru: [
     { to: '/guru', label: 'Dashboard', icon: '📊' },
@@ -23,6 +24,7 @@ const MENUS: Record<Role, MenuItem[]> = {
     { to: '/guru/presensi', label: 'Presensi', icon: '📋' },
     { to: '/guru/penilaian', label: 'Penilaian', icon: '⭐' },
     { to: '/guru/raport', label: 'Rekap Nilai', icon: '📋' },
+    { to: '/guru/akun', label: 'Akun Saya', icon: '👤' },
   ],
   siswa: [
     { to: '/siswa', label: 'Dashboard', icon: '📊' },
@@ -32,6 +34,7 @@ const MENUS: Record<Role, MenuItem[]> = {
     { to: '/siswa/tugas', label: 'Tugas & Kuis', icon: '📝' },
     { to: '/siswa/nilai', label: 'Nilai', icon: '⭐' },
     { to: '/siswa/raport', label: 'Raport Sementara', icon: '📋' },
+    { to: '/siswa/akun', label: 'Akun Saya', icon: '👤' },
   ],
 };
 
@@ -85,11 +88,15 @@ export default function Layout() {
             )}
           </div>
           <div className="user">
-            <div className="avatar">{namaPengguna.charAt(0).toUpperCase()}</div>
-            <div>
-              <div style={{ fontWeight: 600 }}>{namaPengguna}</div>
-              <div className="muted" style={{ fontSize: 11 }}>{ROLE_LABEL[user.role]}</div>
-            </div>
+            {/* Identitas pengguna sekaligus pintasan ke halaman akun */}
+            <NavLink className="tautan-akun" to={`/${user.role}/akun`}
+              title="Buka Akun Saya untuk mengubah kata sandi">
+              <div className="avatar">{namaPengguna.charAt(0).toUpperCase()}</div>
+              <div>
+                <div style={{ fontWeight: 600 }}>{namaPengguna}</div>
+                <div className="muted" style={{ fontSize: 11 }}>{ROLE_LABEL[user.role]}</div>
+              </div>
+            </NavLink>
             <button className="btn secondary small" onClick={handleLogout}>Logout</button>
           </div>
         </header>

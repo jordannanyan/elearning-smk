@@ -605,6 +605,26 @@ a.polos { color: inherit; display: block; }
 /* Baris rata-rata kelas pada daftar nilai */
 .tabel-raport .baris-rata td { background: #f8fafc; border-top: 2px solid var(--border); }
 
+/* ---------- Akun saya ---------- */
+.akun-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 16px; align-items: start; }
+.akun-grid .card + .card { margin-top: 0; }
+.daftar-identitas > div { display: grid; grid-template-columns: 110px 1fr; gap: 10px;
+  padding: 9px 0; font-size: 13.5px; }
+.daftar-identitas > div + div { border-top: 1px dashed var(--border); }
+.daftar-identitas dt { color: var(--gray); }
+.daftar-identitas dd { font-weight: 600; word-break: break-word; }
+.pilih-tampak { display: flex; align-items: center; gap: 8px; font-size: 12.5px;
+  color: var(--gray); cursor: pointer; }
+.pilih-tampak input { width: auto; margin: 0; }
+.field small { display: block; margin-top: 4px; font-size: 11.5px; }
+
+/* Identitas pada topbar yang menjadi tautan ke halaman akun */
+.tautan-akun { display: flex; align-items: center; gap: 10px; color: inherit;
+  padding: 4px 8px 4px 4px; border-radius: 999px; }
+.tautan-akun:hover { background: var(--bg); }
+.tautan-akun.active { background: var(--primary-light); }
+
 /* Persen bobot yang sudah dinilai, di bawah angka nilai akhir */
 .tabel-raport .sisa-bobot { display: block; font-size: 9.5px; font-weight: 500;
   color: var(--gray); line-height: 1.3; margin-top: 1px; }

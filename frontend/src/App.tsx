@@ -5,6 +5,7 @@ import Layout from './components/Layout';
 import Login from './pages/Login';
 import Landing from './pages/Landing';
 import Jadwal from './pages/Jadwal';
+import Akun from './pages/Akun';
 
 import AdminDashboard from './pages/admin/Dashboard';
 import AdminPeriode from './pages/admin/Periode';
@@ -59,6 +60,7 @@ export default function App() {
         <Route path="/admin/kelas" element={<DataKelas />} />
         <Route path="/admin/mapel" element={<DataMapel />} />
         <Route path="/admin/jadwal" element={<AdminJadwal />} />
+        <Route path="/admin/akun" element={<Akun />} />
       </Route>
 
       <Route element={<Protected role="guru"><Layout /></Protected>}>
@@ -70,6 +72,7 @@ export default function App() {
         <Route path="/guru/raport" element={<GuruRaport />} />
         <Route path="/guru/presensi" element={<GuruPresensi />} />
         <Route path="/guru/jadwal" element={<Jadwal />} />
+        <Route path="/guru/akun" element={<Akun />} />
       </Route>
 
       <Route element={<Protected role="siswa"><Layout /></Protected>}>
@@ -82,6 +85,7 @@ export default function App() {
         <Route path="/siswa/raport" element={<SiswaRaport />} />
         <Route path="/siswa/presensi" element={<SiswaPresensi />} />
         <Route path="/siswa/jadwal" element={<Jadwal />} />
+        <Route path="/siswa/akun" element={<Akun />} />
       </Route>
 
       <Route path="*" element={<Home />} />

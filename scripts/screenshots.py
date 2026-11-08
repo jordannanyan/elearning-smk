@@ -614,6 +614,16 @@ def main():
         page.click('.modal button:has-text("Tutup")')
 
         # =============================================================
+        # 4b. AKUN SAYA (seluruh pengguna)
+        # =============================================================
+        buka(page, "/siswa/akun")
+        simpan(page, "akun-ubah-sandi", "Halaman Akun Saya dan Ubah Kata Sandi",
+               "Halaman Akun Saya yang dapat dibuka seluruh pengguna, baik administrator, guru, "
+               "maupun siswa. Identitas akun ditampilkan di sebelah kiri, sedangkan formulir "
+               "ubah kata sandi di sebelah kanan meminta kata sandi lama sebagai pemastian "
+               "bahwa yang mengubah memang pemilik akun.")
+
+        # =============================================================
         # 5. PERIODE TERKUNCI
         # =============================================================
         login(page, "halifah@smakk.sch.id", "guru123")

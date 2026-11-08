@@ -13,11 +13,11 @@ logika aplikasi yang sesungguhnya.
 | Berkas | Keterangan |
 |---|---|
 | `Lampiran-BAB-IV-Sistem-E-Learning.docx` | **Dokumen utama.** Berisi seluruh gambar, tabel struktur basis data, tabel hasil pengujian Black Box, dan rekap nilai — siap disalin ke laporan skripsi. |
-| `screenshots/` | 60 tangkapan layar beresolusi tinggi (2880 px, siap cetak). |
+| `screenshots/` | 61 tangkapan layar beresolusi tinggi (2880 px, siap cetak). |
 | `database/elearning_smakk_bab4.sql` | Dump SQL struktur + seluruh data BAB IV, siap diimpor lewat phpMyAdmin. |
 | `database/query-bab4.sql` | 16 query SQL yang dipakai menghasilkan tabel-tabel data pada BAB IV. |
 | `data/daftar-gambar.json` | Daftar gambar beserta judul dan kalimat penjelasnya. |
-| `data/hasil-pengujian.json` | Hasil 131 skenario pengujian Black Box. |
+| `data/hasil-pengujian.json` | Hasil 135 skenario pengujian Black Box. |
 | `data/struktur-basisdata.json` | Struktur 16 tabel basis data hasil implementasi. |
 | `data/statistik-sistem.json` | Statistik data sistem dan rekapitulasi nilai siswa. |
 
@@ -93,18 +93,19 @@ materi/tugas/nilai dan siswa tidak dapat mengumpulkan tugas.
 | 55 | `55-siswa-rekap-presensi.png` | Rekap Kehadiran Siswa |
 | 56 | `56-siswa-kerjakan-kuis.png` | Halaman Pengerjaan Kuis oleh Siswa |
 | 57 | `57-siswa-kerjakan-tugas.png` | Halaman Pengerjaan dan Pengumpulan Tugas |
-| 58 | `58-periode-terkunci-guru.png` | Tampilan Periode yang Telah Dikunci |
-| 59 | `59-periode-terkunci-pertemuan.png` | Isi Pertemuan pada Periode Terkunci |
-| 60 | `60-tampilan-mobile.png` | Tampilan Sistem pada Perangkat Mobile |
+| 58 | `58-akun-ubah-sandi.png` | Halaman Akun Saya dan Ubah Kata Sandi |
+| 59 | `59-periode-terkunci-guru.png` | Tampilan Periode yang Telah Dikunci |
+| 60 | `60-periode-terkunci-pertemuan.png` | Isi Pertemuan pada Periode Terkunci |
+| 61 | `61-tampilan-mobile.png` | Tampilan Sistem pada Perangkat Mobile |
 
 ## Ringkasan hasil pengujian Black Box
 
-Total **131 skenario**, **131 Valid**, **0 Tidak Valid**
+Total **135 skenario**, **135 Valid**, **0 Tidak Valid**
 (**100.00%** keberhasilan).
 
 | Modul | Skenario | Valid | Tidak Valid |
 |---|---|---|---|
-| Autentikasi | 9 | 9 | 0 |
+| Autentikasi | 13 | 13 | 0 |
 | Periode Pembelajaran | 8 | 8 | 0 |
 | Penguncian Periode | 6 | 6 | 0 |
 | Manajemen Pengguna | 11 | 11 | 0 |
@@ -147,7 +148,7 @@ Total **131 skenario**, **131 Valid**, **0 Tidak Valid**
 | 13 | `pengumpulan_tugas` | Menyimpan data pengumpulan jawaban tugas oleh siswa | 88 |
 | 14 | `jawaban_siswa` | Menyimpan jawaban siswa pada setiap butir soal kuis | 62 |
 | 15 | `nilai` | Menyimpan data nilai siswa hasil penilaian guru maupun koreksi otomatis | 82 |
-| 16 | `forum_diskusi` | Menyimpan topik dan balasan forum diskusi pada sebuah pertemuan | 8 |
+| 16 | `forum_diskusi` | Menyimpan topik dan balasan forum diskusi pada sebuah pertemuan | 12 |
 | 17 | `jam_pelajaran` | Menyimpan pembagian waktu jam pelajaran sekolah, termasuk jam istirahat | 23 |
 | 18 | `jadwal` | Menyimpan jadwal mata pelajaran tiap kelas pada sebuah periode, satu baris untuk setiap hari dan jam ke berapa | 504 |
 | 19 | `presensi` | Menyimpan daftar hadir sebuah pertemuan beserta status dibuka atau ditutupnya | 4 |

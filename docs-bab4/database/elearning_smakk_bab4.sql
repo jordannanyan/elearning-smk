@@ -65,13 +65,13 @@ CREATE TABLE `users` (
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   PRIMARY KEY (`id`),
   UNIQUE KEY `email` (`email`)
-) ENGINE=InnoDB AUTO_INCREMENT=319 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (1,'Administrator','admin@smakk.sch.id','$2a$10$9Npt/lzgo30X9hls5YQEuuksOeGk7I2251ki3NWvBCf9H7XviVTo6','admin',NULL,1,'2026-11-07 11:35:56');
+) ENGINE=InnoDB AUTO_INCREMENT=321 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (1,'Administrator','admin@smakk.sch.id','$2a$10$sOxBXyIbGIOihv9N23YfLOWv39cYy0bslt6dUU2npvERxHIQhLrA.','admin',NULL,1,'2026-11-07 11:35:56');
 INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (2,'Yunita Pebrianti, S.Pd','yunita@smakk.sch.id','$2a$10$TeEbDccwHYfujok9S2i3heDZHBoarEiPjoJhcsZMi.DKwSaq0Pnz.','guru',NULL,1,'2026-11-07 11:35:56');
 INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (3,'Hermilawaty, S.Ag','hermilawaty@smakk.sch.id','$2a$10$TeEbDccwHYfujok9S2i3heDZHBoarEiPjoJhcsZMi.DKwSaq0Pnz.','guru',NULL,1,'2026-11-07 11:35:56');
 INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (4,'Mahlian, S.Pd','mahlian@smakk.sch.id','$2a$10$TeEbDccwHYfujok9S2i3heDZHBoarEiPjoJhcsZMi.DKwSaq0Pnz.','guru',NULL,1,'2026-11-07 11:35:56');
 INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (5,'Nurlaila, S.Pd','nurlaila@smakk.sch.id','$2a$10$TeEbDccwHYfujok9S2i3heDZHBoarEiPjoJhcsZMi.DKwSaq0Pnz.','guru',NULL,1,'2026-11-07 11:35:56');
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (6,'Halifah, S.P','halifah@smakk.sch.id','$2a$10$TeEbDccwHYfujok9S2i3heDZHBoarEiPjoJhcsZMi.DKwSaq0Pnz.','guru',NULL,1,'2026-11-07 11:35:56');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (6,'Halifah, S.P','halifah@smakk.sch.id','$2a$10$fJSKhyDDKrh5A3tNjNRC9eJ14pVXYwpnc71s4CX/dWg.b1VIYx0pW','guru',NULL,1,'2026-11-07 11:35:56');
 INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (7,'Samjuhdi, S.P','samjuhdi@smakk.sch.id','$2a$10$TeEbDccwHYfujok9S2i3heDZHBoarEiPjoJhcsZMi.DKwSaq0Pnz.','guru',NULL,1,'2026-11-07 11:35:56');
 INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (8,'Martaniah, S.Pd','martaniah@smakk.sch.id','$2a$10$TeEbDccwHYfujok9S2i3heDZHBoarEiPjoJhcsZMi.DKwSaq0Pnz.','guru',NULL,1,'2026-11-07 11:35:56');
 INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (9,'Ramayadi Jaya, S.Pd','ramayadi@smakk.sch.id','$2a$10$TeEbDccwHYfujok9S2i3heDZHBoarEiPjoJhcsZMi.DKwSaq0Pnz.','guru',NULL,1,'2026-11-07 11:35:56');
@@ -95,11 +95,11 @@ INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`,
 INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (27,'Laily Mustika, S.Pd.I','laily@smakk.sch.id','$2a$10$TeEbDccwHYfujok9S2i3heDZHBoarEiPjoJhcsZMi.DKwSaq0Pnz.','guru',NULL,1,'2026-11-07 11:35:56');
 INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (28,'Asnin Warianto, S.Pd.I','asnin@smakk.sch.id','$2a$10$TeEbDccwHYfujok9S2i3heDZHBoarEiPjoJhcsZMi.DKwSaq0Pnz.','guru',NULL,1,'2026-11-07 11:35:56');
 INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (29,'Rita Feronika, S.Pd','rita@smakk.sch.id','$2a$10$TeEbDccwHYfujok9S2i3heDZHBoarEiPjoJhcsZMi.DKwSaq0Pnz.','guru',NULL,1,'2026-11-07 11:35:56');
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (30,'Ahmad Hanapi','ahmad@siswa.smakk.sch.id','$2a$10$NPRgRABj5QWQYXGp/t9O8uUa/3Cs45P.cCYZZKEjb1n7XECctPB8e','siswa',NULL,1,'2026-11-07 11:35:56');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (30,'Ahmad Hanapi','ahmad@siswa.smakk.sch.id','$2a$10$3PPahikToXCV0kd1oinhG.I0JU9N3p9oHeLLSyIs8IuorwzSPwZUe','siswa',NULL,1,'2026-11-07 11:35:56');
 INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (31,'Ahmad Raviza','ahmad.raviza@siswa.smakk.sch.id','$2a$10$NPRgRABj5QWQYXGp/t9O8uUa/3Cs45P.cCYZZKEjb1n7XECctPB8e','siswa',NULL,1,'2026-11-07 11:35:56');
 INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (32,'Aminatul Najua','aminatul@siswa.smakk.sch.id','$2a$10$NPRgRABj5QWQYXGp/t9O8uUa/3Cs45P.cCYZZKEjb1n7XECctPB8e','siswa',NULL,1,'2026-11-07 11:35:56');
 INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (33,'Audiyah','audiyah@siswa.smakk.sch.id','$2a$10$NPRgRABj5QWQYXGp/t9O8uUa/3Cs45P.cCYZZKEjb1n7XECctPB8e','siswa',NULL,1,'2026-11-07 11:35:56');
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (34,'Bunga Citra','bunga@siswa.smakk.sch.id','$2a$10$n2hr5KDyESySh5cH6pDKvuPJWbzRwlIQo3o3A99wVEcZGGXX4Czbe','siswa',NULL,1,'2026-11-07 11:35:56');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (34,'Bunga Citra','bunga@siswa.smakk.sch.id','$2a$10$0vUCsjBCOZWXTJ9shsiI7.5F39Jp6AuoMJfqRKf2lejFeS2ZSubz.','siswa',NULL,1,'2026-11-07 11:35:56');
 INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (35,'Dhika Wahyu Ramadhan','dhika@siswa.smakk.sch.id','$2a$10$NPRgRABj5QWQYXGp/t9O8uUa/3Cs45P.cCYZZKEjb1n7XECctPB8e','siswa',NULL,1,'2026-11-07 11:35:56');
 INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (36,'Dira Permata Sari','dira@siswa.smakk.sch.id','$2a$10$NPRgRABj5QWQYXGp/t9O8uUa/3Cs45P.cCYZZKEjb1n7XECctPB8e','siswa',NULL,1,'2026-11-07 11:35:56');
 INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`, `aktif`, `created_at`) VALUES (37,'Eka Purnama Sari','eka@siswa.smakk.sch.id','$2a$10$NPRgRABj5QWQYXGp/t9O8uUa/3Cs45P.cCYZZKEjb1n7XECctPB8e','siswa',NULL,1,'2026-11-07 11:35:56');
@@ -406,7 +406,7 @@ CREATE TABLE `periode` (
   UNIQUE KEY `kode` (`kode`),
   KEY `fk_periode_admin` (`dikunci_oleh`),
   CONSTRAINT `fk_periode_admin` FOREIGN KEY (`dikunci_oleh`) REFERENCES `users` (`id`) ON DELETE SET NULL
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 INSERT INTO `periode` (`id`, `kode`, `tahun_ajaran`, `semester`, `tgl_mulai`, `tgl_selesai`, `status`, `dikunci_oleh`, `tgl_dikunci`, `created_at`) VALUES (1,'2026/1','2025/2026',1,'2025-07-14','2025-12-19','terkunci',1,'2025-12-22 10:00:00','2026-11-07 11:35:56');
 INSERT INTO `periode` (`id`, `kode`, `tahun_ajaran`, `semester`, `tgl_mulai`, `tgl_selesai`, `status`, `dikunci_oleh`, `tgl_dikunci`, `created_at`) VALUES (2,'2026/2','2025/2026',2,'2026-01-05','2026-06-19','aktif',NULL,NULL,'2026-11-07 11:35:56');
 
@@ -428,7 +428,7 @@ CREATE TABLE `guru` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `id_user` (`id_user`),
   CONSTRAINT `fk_guru_user` FOREIGN KEY (`id_user`) REFERENCES `users` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=30 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 INSERT INTO `guru` (`id`, `id_user`, `nip`, `tgl_lahir`, `alamat`, `kode_jadwal`) VALUES (1,2,'19920222 201503 0 002',NULL,'KEPALA SEKOLAH',1);
 INSERT INTO `guru` (`id`, `id_user`, `nip`, `tgl_lahir`, `alamat`, `kode_jadwal`) VALUES (2,3,'19741215 200701 2 011',NULL,'GURU TETAP',2);
 INSERT INTO `guru` (`id`, `id_user`, `nip`, `tgl_lahir`, `alamat`, `kode_jadwal`) VALUES (3,4,'19670209 199403 1 014',NULL,'GURU TETAP · KEPALA PERPUST',3);
@@ -475,7 +475,7 @@ CREATE TABLE `siswa` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `id_user` (`id_user`),
   CONSTRAINT `fk_siswa_user` FOREIGN KEY (`id_user`) REFERENCES `users` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=289 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=290 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 INSERT INTO `siswa` (`id`, `id_user`, `nis`, `tgl_lahir`, `alamat`) VALUES (1,30,'3001',NULL,'Kecamatan Karau Kuala, Barito Selatan');
 INSERT INTO `siswa` (`id`, `id_user`, `nis`, `tgl_lahir`, `alamat`) VALUES (2,31,'3002',NULL,'Kecamatan Karau Kuala, Barito Selatan');
 INSERT INTO `siswa` (`id`, `id_user`, `nis`, `tgl_lahir`, `alamat`) VALUES (3,32,'3005',NULL,'Kecamatan Karau Kuala, Barito Selatan');
@@ -783,7 +783,7 @@ CREATE TABLE `kelas` (
   KEY `fk_kelas_wali` (`id_wali`),
   CONSTRAINT `fk_kelas_periode` FOREIGN KEY (`id_periode`) REFERENCES `periode` (`id`) ON DELETE CASCADE,
   CONSTRAINT `fk_kelas_wali` FOREIGN KEY (`id_wali`) REFERENCES `guru` (`id`) ON DELETE SET NULL
-) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 INSERT INTO `kelas` (`id`, `id_periode`, `nama_kelas`, `tingkat`, `id_wali`) VALUES (1,1,'X A','X',5);
 INSERT INTO `kelas` (`id`, `id_periode`, `nama_kelas`, `tingkat`, `id_wali`) VALUES (2,1,'X B','X',27);
 INSERT INTO `kelas` (`id`, `id_periode`, `nama_kelas`, `tingkat`, `id_wali`) VALUES (3,1,'X C','X',4);
@@ -822,7 +822,7 @@ CREATE TABLE `siswa_kelas` (
   KEY `fk_sk_kelas` (`id_kelas`),
   CONSTRAINT `fk_sk_kelas` FOREIGN KEY (`id_kelas`) REFERENCES `kelas` (`id`) ON DELETE CASCADE,
   CONSTRAINT `fk_sk_siswa` FOREIGN KEY (`id_siswa`) REFERENCES `siswa` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=576 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=577 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 INSERT INTO `siswa_kelas` (`id`, `id_siswa`, `id_kelas`) VALUES (1,1,1);
 INSERT INTO `siswa_kelas` (`id`, `id_siswa`, `id_kelas`) VALUES (2,1,11);
 INSERT INTO `siswa_kelas` (`id`, `id_siswa`, `id_kelas`) VALUES (3,2,1);
@@ -1415,7 +1415,7 @@ CREATE TABLE `mata_pelajaran` (
   `aktif` tinyint(1) NOT NULL DEFAULT 1,
   PRIMARY KEY (`id`),
   UNIQUE KEY `kode` (`kode`)
-) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=30 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 INSERT INTO `mata_pelajaran` (`id`, `nama`, `kode`, `kelompok`, `deskripsi`, `aktif`) VALUES (1,'BAHASA INDONESIA','BIND','Wajib','Mata pelajaran BAHASA INDONESIA kelompok Wajib pada SMA Negeri 1 Karau Kuala',1);
 INSERT INTO `mata_pelajaran` (`id`, `nama`, `kode`, `kelompok`, `deskripsi`, `aktif`) VALUES (2,'BAHASA INGGRIS','BING','Wajib','Mata pelajaran BAHASA INGGRIS kelompok Wajib pada SMA Negeri 1 Karau Kuala',1);
 INSERT INTO `mata_pelajaran` (`id`, `nama`, `kode`, `kelompok`, `deskripsi`, `aktif`) VALUES (3,'BAHASA INGGRIS TK LANJT','BING-L','Peminatan','Mata pelajaran BAHASA INGGRIS TK LANJT kelompok Peminatan pada SMA Negeri 1 Karau Kuala',1);
@@ -1795,7 +1795,7 @@ CREATE TABLE `pertemuan` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `uq_pertemuan_nomor` (`id_kelas_mapel`,`nomor`),
   CONSTRAINT `fk_pertemuan_km` FOREIGN KEY (`id_kelas_mapel`) REFERENCES `kelas_mapel` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 INSERT INTO `pertemuan` (`id`, `id_kelas_mapel`, `nomor`, `judul`, `deskripsi`, `tanggal`, `created_at`) VALUES (1,50,1,'Konsep Persamaan Linear Satu Variabel','Pengenalan bentuk umum persamaan linear satu variabel serta cara menentukan penyelesaiannya.','2026-10-17','2026-11-07 11:36:00');
 INSERT INTO `pertemuan` (`id`, `id_kelas_mapel`, `nomor`, `judul`, `deskripsi`, `tanggal`, `created_at`) VALUES (2,50,2,'Pertidaksamaan Linear Satu Variabel','Sifat-sifat pertidaksamaan linear dan penyajian himpunan penyelesaian pada garis bilangan.','2026-10-24','2026-11-07 11:36:00');
 INSERT INTO `pertemuan` (`id`, `id_kelas_mapel`, `nomor`, `judul`, `deskripsi`, `tanggal`, `created_at`) VALUES (3,50,3,'Sistem Persamaan Linear Dua Variabel','Penyelesaian SPLDV dengan metode substitusi, eliminasi, dan campuran.','2026-10-31','2026-11-07 11:36:00');
@@ -1829,7 +1829,7 @@ CREATE TABLE `materi` (
   PRIMARY KEY (`id`),
   KEY `fk_materi_pertemuan` (`id_pertemuan`),
   CONSTRAINT `fk_materi_pertemuan` FOREIGN KEY (`id_pertemuan`) REFERENCES `pertemuan` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 INSERT INTO `materi` (`id`, `id_pertemuan`, `judul`, `konten`, `tipe`, `file`, `url`, `tgl_upload`) VALUES (1,1,'Pengantar Persamaan Linear Satu Variabel','Persamaan linear satu variabel adalah persamaan yang memuat tepat satu variabel berpangkat satu. Bentuk umumnya ax + b = 0 dengan a tidak sama dengan nol.','teks',NULL,NULL,'2026-11-07 11:36:00');
 INSERT INTO `materi` (`id`, `id_pertemuan`, `judul`, `konten`, `tipe`, `file`, `url`, `tgl_upload`) VALUES (2,1,'Modul Persamaan Linear Satu Variabel (PDF)','Modul lengkap beserta contoh soal dan pembahasan.','file','modul_persamaan_linear.pdf',NULL,'2026-11-07 11:36:00');
 INSERT INTO `materi` (`id`, `id_pertemuan`, `judul`, `konten`, `tipe`, `file`, `url`, `tgl_upload`) VALUES (3,1,'Video Pembelajaran Persamaan Linear Satu Variabel','Rekaman penjelasan langkah penyelesaian persamaan linear satu variabel beserta contohnya.','video','video_persamaan_linear.webm',NULL,'2026-11-07 11:36:00');
@@ -1868,7 +1868,7 @@ CREATE TABLE `tugas` (
   PRIMARY KEY (`id`),
   KEY `fk_tugas_pertemuan` (`id_pertemuan`),
   CONSTRAINT `fk_tugas_pertemuan` FOREIGN KEY (`id_pertemuan`) REFERENCES `pertemuan` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 INSERT INTO `tugas` (`id`, `id_pertemuan`, `judul`, `deskripsi`, `deadline`, `tipe`, `bobot`, `created_at`) VALUES (1,1,'Latihan Persamaan Linear','Kerjakan soal nomor 1-10 pada buku paket halaman 25. Tulis langkah penyelesaian secara lengkap, lalu unggah dalam bentuk berkas atau tuliskan pada kolom jawaban.','2026-11-16 23:59:00','tugas',15.00,'2026-11-07 11:36:00');
 INSERT INTO `tugas` (`id`, `id_pertemuan`, `judul`, `deskripsi`, `deadline`, `tipe`, `bobot`, `created_at`) VALUES (2,2,'Kuis Persamaan dan Pertidaksamaan Linear','Kuis pilihan ganda mengenai persamaan dan pertidaksamaan linear satu variabel. Dinilai otomatis oleh sistem.','2026-11-12 23:59:00','kuis',15.00,'2026-11-07 11:36:00');
 INSERT INTO `tugas` (`id`, `id_pertemuan`, `judul`, `deskripsi`, `deadline`, `tipe`, `bobot`, `created_at`) VALUES (3,3,'Tugas Proyek SPLDV','Susunlah satu soal cerita yang dapat diselesaikan dengan SPLDV beserta penyelesaiannya, kemudian unggah dalam bentuk dokumen.','2026-11-09 23:59:00','tugas',15.00,'2026-11-07 11:36:00');
@@ -1904,7 +1904,7 @@ CREATE TABLE `soal` (
   PRIMARY KEY (`id`),
   KEY `fk_soal_tugas` (`id_tugas`),
   CONSTRAINT `fk_soal_tugas` FOREIGN KEY (`id_tugas`) REFERENCES `tugas` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 INSERT INTO `soal` (`id`, `id_tugas`, `pertanyaan`, `tipe`, `pilihan_a`, `pilihan_b`, `pilihan_c`, `pilihan_d`, `jawaban_benar`, `bobot`, `urutan`) VALUES (1,2,'Nilai x yang memenuhi persamaan 2x + 6 = 14 adalah ...','pilihan_ganda','2','4','6','8','B',20,1);
 INSERT INTO `soal` (`id`, `id_tugas`, `pertanyaan`, `tipe`, `pilihan_a`, `pilihan_b`, `pilihan_c`, `pilihan_d`, `jawaban_benar`, `bobot`, `urutan`) VALUES (2,2,'Himpunan penyelesaian dari 3x - 9 = 0 adalah ...','pilihan_ganda','{2}','{3}','{4}','{9}','B',20,2);
 INSERT INTO `soal` (`id`, `id_tugas`, `pertanyaan`, `tipe`, `pilihan_a`, `pilihan_b`, `pilihan_c`, `pilihan_d`, `jawaban_benar`, `bobot`, `urutan`) VALUES (3,2,'Bentuk umum persamaan linear satu variabel adalah ...','pilihan_ganda','ax + b = 0','ax2 + bx + c = 0','ax + by = c','a/x = b','A',20,3);
@@ -1940,7 +1940,7 @@ CREATE TABLE `pengumpulan_tugas` (
   KEY `fk_kumpul_siswa` (`id_siswa`),
   CONSTRAINT `fk_kumpul_siswa` FOREIGN KEY (`id_siswa`) REFERENCES `siswa` (`id`) ON DELETE CASCADE,
   CONSTRAINT `fk_kumpul_tugas` FOREIGN KEY (`id_tugas`) REFERENCES `tugas` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=89 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=115 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 INSERT INTO `pengumpulan_tugas` (`id`, `id_tugas`, `id_siswa`, `file`, `jawaban`, `tgl_kumpul`, `terlambat`) VALUES (1,4,1,NULL,'Lembar jawaban ujian dikumpulkan di kelas.','2026-10-29 02:30:00',0);
 INSERT INTO `pengumpulan_tugas` (`id`, `id_tugas`, `id_siswa`, `file`, `jawaban`, `tgl_kumpul`, `terlambat`) VALUES (2,5,1,NULL,'Lembar jawaban ujian dikumpulkan di kelas.','2026-11-05 02:30:00',0);
 INSERT INTO `pengumpulan_tugas` (`id`, `id_tugas`, `id_siswa`, `file`, `jawaban`, `tgl_kumpul`, `terlambat`) VALUES (3,4,2,NULL,'Lembar jawaban ujian dikumpulkan di kelas.','2026-10-29 02:30:00',0);
@@ -2003,32 +2003,32 @@ INSERT INTO `pengumpulan_tugas` (`id`, `id_tugas`, `id_siswa`, `file`, `jawaban`
 INSERT INTO `pengumpulan_tugas` (`id`, `id_tugas`, `id_siswa`, `file`, `jawaban`, `tgl_kumpul`, `terlambat`) VALUES (60,11,1,NULL,'Pekerjaan dikumpulkan pada semester ganjil tahun ajaran 2025/2026.','2026-05-26 03:00:00',0);
 INSERT INTO `pengumpulan_tugas` (`id`, `id_tugas`, `id_siswa`, `file`, `jawaban`, `tgl_kumpul`, `terlambat`) VALUES (61,11,2,NULL,'Pekerjaan dikumpulkan pada semester ganjil tahun ajaran 2025/2026.','2026-05-26 03:00:00',0);
 INSERT INTO `pengumpulan_tugas` (`id`, `id_tugas`, `id_siswa`, `file`, `jawaban`, `tgl_kumpul`, `terlambat`) VALUES (62,11,3,NULL,'Pekerjaan dikumpulkan pada semester ganjil tahun ajaran 2025/2026.','2026-05-26 03:00:00',0);
-INSERT INTO `pengumpulan_tugas` (`id`, `id_tugas`, `id_siswa`, `file`, `jawaban`, `tgl_kumpul`, `terlambat`) VALUES (63,2,1,NULL,NULL,'2026-11-07 11:36:11',0);
-INSERT INTO `pengumpulan_tugas` (`id`, `id_tugas`, `id_siswa`, `file`, `jawaban`, `tgl_kumpul`, `terlambat`) VALUES (64,2,2,NULL,NULL,'2026-11-07 11:36:11',0);
-INSERT INTO `pengumpulan_tugas` (`id`, `id_tugas`, `id_siswa`, `file`, `jawaban`, `tgl_kumpul`, `terlambat`) VALUES (65,2,3,NULL,NULL,'2026-11-07 11:36:11',0);
-INSERT INTO `pengumpulan_tugas` (`id`, `id_tugas`, `id_siswa`, `file`, `jawaban`, `tgl_kumpul`, `terlambat`) VALUES (66,2,4,NULL,NULL,'2026-11-07 11:36:11',0);
-INSERT INTO `pengumpulan_tugas` (`id`, `id_tugas`, `id_siswa`, `file`, `jawaban`, `tgl_kumpul`, `terlambat`) VALUES (67,2,5,NULL,NULL,'2026-11-07 11:36:11',0);
-INSERT INTO `pengumpulan_tugas` (`id`, `id_tugas`, `id_siswa`, `file`, `jawaban`, `tgl_kumpul`, `terlambat`) VALUES (68,2,6,NULL,NULL,'2026-11-07 11:36:11',0);
-INSERT INTO `pengumpulan_tugas` (`id`, `id_tugas`, `id_siswa`, `file`, `jawaban`, `tgl_kumpul`, `terlambat`) VALUES (69,7,1,NULL,NULL,'2026-11-07 11:36:11',0);
-INSERT INTO `pengumpulan_tugas` (`id`, `id_tugas`, `id_siswa`, `file`, `jawaban`, `tgl_kumpul`, `terlambat`) VALUES (70,7,2,NULL,NULL,'2026-11-07 11:36:11',0);
-INSERT INTO `pengumpulan_tugas` (`id`, `id_tugas`, `id_siswa`, `file`, `jawaban`, `tgl_kumpul`, `terlambat`) VALUES (71,7,5,NULL,NULL,'2026-11-07 11:36:11',0);
-INSERT INTO `pengumpulan_tugas` (`id`, `id_tugas`, `id_siswa`, `file`, `jawaban`, `tgl_kumpul`, `terlambat`) VALUES (72,7,4,NULL,NULL,'2026-11-07 11:36:11',0);
-INSERT INTO `pengumpulan_tugas` (`id`, `id_tugas`, `id_siswa`, `file`, `jawaban`, `tgl_kumpul`, `terlambat`) VALUES (73,7,6,NULL,NULL,'2026-11-07 11:36:11',0);
-INSERT INTO `pengumpulan_tugas` (`id`, `id_tugas`, `id_siswa`, `file`, `jawaban`, `tgl_kumpul`, `terlambat`) VALUES (74,1,1,'1794051371359_jawaban_ahmad.txt','Nomor 1: 2x + 6 = 14 -> 2x = 8 -> x = 4.\r\nNomor 2: 3x - 9 = 0 -> 3x = 9 -> x = 3.\r\nNomor 3: 5x = 3x + 12 -> 2x = 12 -> x = 6.\r\nLangkah selengkapnya saya lampirkan pada berkas.','2026-11-07 11:36:11',0);
-INSERT INTO `pengumpulan_tugas` (`id`, `id_tugas`, `id_siswa`, `file`, `jawaban`, `tgl_kumpul`, `terlambat`) VALUES (75,1,2,'1794051371377_jawaban_ahmad_raviza.txt','Seluruh soal nomor 1 sampai 10 telah saya kerjakan. Hasil pekerjaan saya tulis tangan lalu saya pindai dan lampirkan pada berkas terlampir.','2026-11-07 11:36:11',0);
-INSERT INTO `pengumpulan_tugas` (`id`, `id_tugas`, `id_siswa`, `file`, `jawaban`, `tgl_kumpul`, `terlambat`) VALUES (76,1,3,'1794051371392_jawaban_aminatul.txt','Nomor 1 sampai 8 sudah saya kerjakan, nomor 9 dan 10 masih saya ragu pada langkah pemindahan ruas. Mohon koreksinya, Pak.','2026-11-07 11:36:11',0);
-INSERT INTO `pengumpulan_tugas` (`id`, `id_tugas`, `id_siswa`, `file`, `jawaban`, `tgl_kumpul`, `terlambat`) VALUES (77,1,4,'1794051371409_jawaban_audiyah.txt','Jawaban lengkap nomor 1-10 terlampir pada berkas. Setiap nomor saya sertakan langkah pengerjaannya.','2026-11-07 11:36:11',0);
-INSERT INTO `pengumpulan_tugas` (`id`, `id_tugas`, `id_siswa`, `file`, `jawaban`, `tgl_kumpul`, `terlambat`) VALUES (78,1,5,'1794051371424_jawaban_bunga.txt','Semua soal telah saya kerjakan beserta langkah-langkahnya, terlampir pada berkas jawaban.','2026-11-07 11:36:11',0);
-INSERT INTO `pengumpulan_tugas` (`id`, `id_tugas`, `id_siswa`, `file`, `jawaban`, `tgl_kumpul`, `terlambat`) VALUES (79,6,2,NULL,'Lingkungan Sekolahku\r\n\r\nSMA Negeri 1 Karau Kuala berdiri di tepi jalan utama Kecamatan Karau Kuala. Bangunannya bercat putih dengan lis biru yang tampak bersih setiap pagi.\r\n\r\nHalaman sekolah cukup luas dan ditumbuhi rumput hijau. Di tengahnya berdiri tiang bendera, sementara di sisi kiri berjajar pohon ketapang yang rindang.\r\n\r\nSuasana sekolahku sangat nyaman untuk belajar. Angin sejuk dari arah sungai membuat udara di ruang kelas tidak pernah terasa panas.','2026-11-07 11:36:11',0);
-INSERT INTO `pengumpulan_tugas` (`id`, `id_tugas`, `id_siswa`, `file`, `jawaban`, `tgl_kumpul`, `terlambat`) VALUES (80,6,5,NULL,'Lingkungan Sekolahku\r\n\r\nSekolahku terletak tidak jauh dari permukiman warga sehingga mudah dijangkau dengan sepeda.\r\n\r\nDi dalam kompleks sekolah terdapat dua belas ruang kelas, satu perpustakaan, dan sebuah laboratorium IPA. Lorong penghubungnya beratap seng sehingga siswa tetap terlindung ketika hujan.\r\n\r\nSetiap sudut sekolah dijaga kebersihannya oleh seluruh warga sekolah sehingga suasananya selalu asri.','2026-11-07 11:36:11',0);
-INSERT INTO `pengumpulan_tugas` (`id`, `id_tugas`, `id_siswa`, `file`, `jawaban`, `tgl_kumpul`, `terlambat`) VALUES (81,6,4,NULL,'Lingkungan Sekolahku\r\n\r\nGerbang sekolahku bercat hijau tua dan selalu terbuka sejak pukul enam pagi.\r\n\r\nDi sebelah kanan gerbang terdapat taman kecil dengan bunga kertas berwarna merah muda. Lapangan upacara berada tepat di tengah kompleks sekolah.\r\n\r\nAku sangat menyukai suasana sekolahku, terutama pada pagi hari ketika embun masih menempel di rumput lapangan.','2026-11-07 11:36:11',0);
-INSERT INTO `pengumpulan_tugas` (`id`, `id_tugas`, `id_siswa`, `file`, `jawaban`, `tgl_kumpul`, `terlambat`) VALUES (82,6,1,NULL,'Lingkungan Sekolahku\r\n\r\nSMA Negeri 1 Karau Kuala memiliki halaman depan yang luas dengan pagar besi berwarna hijau.\r\n\r\nRuang kelas berjajar rapi menghadap lapangan. Setiap kelas memiliki jendela besar sehingga cahaya matahari masuk dengan leluasa.\r\n\r\nKarena lingkungannya rindang dan bersih, aku merasa betah berlama-lama di sekolah.','2026-11-07 11:36:11',0);
-INSERT INTO `pengumpulan_tugas` (`id`, `id_tugas`, `id_siswa`, `file`, `jawaban`, `tgl_kumpul`, `terlambat`) VALUES (83,3,2,NULL,'Soal cerita: Harga 2 buku dan 3 pensil Rp 21.000, sedangkan 1 buku dan 2 pensil Rp 12.000. Dengan metode eliminasi diperoleh harga buku Rp 6.000 dan pensil Rp 3.000.','2026-11-07 11:36:11',0);
-INSERT INTO `pengumpulan_tugas` (`id`, `id_tugas`, `id_siswa`, `file`, `jawaban`, `tgl_kumpul`, `terlambat`) VALUES (84,3,4,NULL,'Soal cerita: Harga 2 buku dan 3 pensil Rp 21.000, sedangkan 1 buku dan 2 pensil Rp 12.000. Dengan metode eliminasi diperoleh harga buku Rp 6.000 dan pensil Rp 3.000.','2026-11-07 11:36:11',0);
-INSERT INTO `pengumpulan_tugas` (`id`, `id_tugas`, `id_siswa`, `file`, `jawaban`, `tgl_kumpul`, `terlambat`) VALUES (85,8,6,NULL,'Mohon maaf Pak, saya terlambat mengumpulkan karena jaringan internet di rumah bermasalah. Latihan konversi satuan nomor 1-10 sudah saya kerjakan seluruhnya.','2026-11-07 11:36:11',1);
-INSERT INTO `pengumpulan_tugas` (`id`, `id_tugas`, `id_siswa`, `file`, `jawaban`, `tgl_kumpul`, `terlambat`) VALUES (86,9,1,NULL,NULL,'2026-11-07 11:36:11',0);
-INSERT INTO `pengumpulan_tugas` (`id`, `id_tugas`, `id_siswa`, `file`, `jawaban`, `tgl_kumpul`, `terlambat`) VALUES (87,9,2,NULL,NULL,'2026-11-07 11:36:11',0);
-INSERT INTO `pengumpulan_tugas` (`id`, `id_tugas`, `id_siswa`, `file`, `jawaban`, `tgl_kumpul`, `terlambat`) VALUES (88,9,3,NULL,NULL,'2026-11-07 11:36:11',0);
+INSERT INTO `pengumpulan_tugas` (`id`, `id_tugas`, `id_siswa`, `file`, `jawaban`, `tgl_kumpul`, `terlambat`) VALUES (63,2,1,NULL,NULL,'2026-11-08 17:12:19',0);
+INSERT INTO `pengumpulan_tugas` (`id`, `id_tugas`, `id_siswa`, `file`, `jawaban`, `tgl_kumpul`, `terlambat`) VALUES (64,2,2,NULL,NULL,'2026-11-08 17:12:19',0);
+INSERT INTO `pengumpulan_tugas` (`id`, `id_tugas`, `id_siswa`, `file`, `jawaban`, `tgl_kumpul`, `terlambat`) VALUES (65,2,3,NULL,NULL,'2026-11-08 17:12:19',0);
+INSERT INTO `pengumpulan_tugas` (`id`, `id_tugas`, `id_siswa`, `file`, `jawaban`, `tgl_kumpul`, `terlambat`) VALUES (66,2,4,NULL,NULL,'2026-11-08 17:12:19',0);
+INSERT INTO `pengumpulan_tugas` (`id`, `id_tugas`, `id_siswa`, `file`, `jawaban`, `tgl_kumpul`, `terlambat`) VALUES (67,2,5,NULL,NULL,'2026-11-08 17:12:19',0);
+INSERT INTO `pengumpulan_tugas` (`id`, `id_tugas`, `id_siswa`, `file`, `jawaban`, `tgl_kumpul`, `terlambat`) VALUES (68,2,6,NULL,NULL,'2026-11-08 17:12:19',0);
+INSERT INTO `pengumpulan_tugas` (`id`, `id_tugas`, `id_siswa`, `file`, `jawaban`, `tgl_kumpul`, `terlambat`) VALUES (69,7,1,NULL,NULL,'2026-11-08 17:12:19',0);
+INSERT INTO `pengumpulan_tugas` (`id`, `id_tugas`, `id_siswa`, `file`, `jawaban`, `tgl_kumpul`, `terlambat`) VALUES (70,7,2,NULL,NULL,'2026-11-08 17:12:19',0);
+INSERT INTO `pengumpulan_tugas` (`id`, `id_tugas`, `id_siswa`, `file`, `jawaban`, `tgl_kumpul`, `terlambat`) VALUES (71,7,5,NULL,NULL,'2026-11-08 17:12:20',0);
+INSERT INTO `pengumpulan_tugas` (`id`, `id_tugas`, `id_siswa`, `file`, `jawaban`, `tgl_kumpul`, `terlambat`) VALUES (72,7,4,NULL,NULL,'2026-11-08 17:12:20',0);
+INSERT INTO `pengumpulan_tugas` (`id`, `id_tugas`, `id_siswa`, `file`, `jawaban`, `tgl_kumpul`, `terlambat`) VALUES (73,7,6,NULL,NULL,'2026-11-08 17:12:20',0);
+INSERT INTO `pengumpulan_tugas` (`id`, `id_tugas`, `id_siswa`, `file`, `jawaban`, `tgl_kumpul`, `terlambat`) VALUES (74,1,1,'1794157940037_jawaban_ahmad.txt','Nomor 1: 2x + 6 = 14 -> 2x = 8 -> x = 4.\r\nNomor 2: 3x - 9 = 0 -> 3x = 9 -> x = 3.\r\nNomor 3: 5x = 3x + 12 -> 2x = 12 -> x = 6.\r\nLangkah selengkapnya saya lampirkan pada berkas.','2026-11-08 17:12:20',0);
+INSERT INTO `pengumpulan_tugas` (`id`, `id_tugas`, `id_siswa`, `file`, `jawaban`, `tgl_kumpul`, `terlambat`) VALUES (75,1,2,'1794157940051_jawaban_ahmad_raviza.txt','Seluruh soal nomor 1 sampai 10 telah saya kerjakan. Hasil pekerjaan saya tulis tangan lalu saya pindai dan lampirkan pada berkas terlampir.','2026-11-08 17:12:20',0);
+INSERT INTO `pengumpulan_tugas` (`id`, `id_tugas`, `id_siswa`, `file`, `jawaban`, `tgl_kumpul`, `terlambat`) VALUES (76,1,3,'1794157940072_jawaban_aminatul.txt','Nomor 1 sampai 8 sudah saya kerjakan, nomor 9 dan 10 masih saya ragu pada langkah pemindahan ruas. Mohon koreksinya, Pak.','2026-11-08 17:12:20',0);
+INSERT INTO `pengumpulan_tugas` (`id`, `id_tugas`, `id_siswa`, `file`, `jawaban`, `tgl_kumpul`, `terlambat`) VALUES (77,1,4,'1794157940102_jawaban_audiyah.txt','Jawaban lengkap nomor 1-10 terlampir pada berkas. Setiap nomor saya sertakan langkah pengerjaannya.','2026-11-08 17:12:20',0);
+INSERT INTO `pengumpulan_tugas` (`id`, `id_tugas`, `id_siswa`, `file`, `jawaban`, `tgl_kumpul`, `terlambat`) VALUES (78,1,5,'1794157940113_jawaban_bunga.txt','Semua soal telah saya kerjakan beserta langkah-langkahnya, terlampir pada berkas jawaban.','2026-11-08 17:12:20',0);
+INSERT INTO `pengumpulan_tugas` (`id`, `id_tugas`, `id_siswa`, `file`, `jawaban`, `tgl_kumpul`, `terlambat`) VALUES (79,6,2,NULL,'Lingkungan Sekolahku\r\n\r\nSMA Negeri 1 Karau Kuala berdiri di tepi jalan utama Kecamatan Karau Kuala. Bangunannya bercat putih dengan lis biru yang tampak bersih setiap pagi.\r\n\r\nHalaman sekolah cukup luas dan ditumbuhi rumput hijau. Di tengahnya berdiri tiang bendera, sementara di sisi kiri berjajar pohon ketapang yang rindang.\r\n\r\nSuasana sekolahku sangat nyaman untuk belajar. Angin sejuk dari arah sungai membuat udara di ruang kelas tidak pernah terasa panas.','2026-11-08 17:12:20',0);
+INSERT INTO `pengumpulan_tugas` (`id`, `id_tugas`, `id_siswa`, `file`, `jawaban`, `tgl_kumpul`, `terlambat`) VALUES (80,6,5,NULL,'Lingkungan Sekolahku\r\n\r\nSekolahku terletak tidak jauh dari permukiman warga sehingga mudah dijangkau dengan sepeda.\r\n\r\nDi dalam kompleks sekolah terdapat dua belas ruang kelas, satu perpustakaan, dan sebuah laboratorium IPA. Lorong penghubungnya beratap seng sehingga siswa tetap terlindung ketika hujan.\r\n\r\nSetiap sudut sekolah dijaga kebersihannya oleh seluruh warga sekolah sehingga suasananya selalu asri.','2026-11-08 17:12:20',0);
+INSERT INTO `pengumpulan_tugas` (`id`, `id_tugas`, `id_siswa`, `file`, `jawaban`, `tgl_kumpul`, `terlambat`) VALUES (81,6,4,NULL,'Lingkungan Sekolahku\r\n\r\nGerbang sekolahku bercat hijau tua dan selalu terbuka sejak pukul enam pagi.\r\n\r\nDi sebelah kanan gerbang terdapat taman kecil dengan bunga kertas berwarna merah muda. Lapangan upacara berada tepat di tengah kompleks sekolah.\r\n\r\nAku sangat menyukai suasana sekolahku, terutama pada pagi hari ketika embun masih menempel di rumput lapangan.','2026-11-08 17:12:20',0);
+INSERT INTO `pengumpulan_tugas` (`id`, `id_tugas`, `id_siswa`, `file`, `jawaban`, `tgl_kumpul`, `terlambat`) VALUES (82,6,1,NULL,'Lingkungan Sekolahku\r\n\r\nSMA Negeri 1 Karau Kuala memiliki halaman depan yang luas dengan pagar besi berwarna hijau.\r\n\r\nRuang kelas berjajar rapi menghadap lapangan. Setiap kelas memiliki jendela besar sehingga cahaya matahari masuk dengan leluasa.\r\n\r\nKarena lingkungannya rindang dan bersih, aku merasa betah berlama-lama di sekolah.','2026-11-08 17:12:20',0);
+INSERT INTO `pengumpulan_tugas` (`id`, `id_tugas`, `id_siswa`, `file`, `jawaban`, `tgl_kumpul`, `terlambat`) VALUES (83,3,2,NULL,'Soal cerita: Harga 2 buku dan 3 pensil Rp 21.000, sedangkan 1 buku dan 2 pensil Rp 12.000. Dengan metode eliminasi diperoleh harga buku Rp 6.000 dan pensil Rp 3.000.','2026-11-08 17:12:20',0);
+INSERT INTO `pengumpulan_tugas` (`id`, `id_tugas`, `id_siswa`, `file`, `jawaban`, `tgl_kumpul`, `terlambat`) VALUES (84,3,4,NULL,'Soal cerita: Harga 2 buku dan 3 pensil Rp 21.000, sedangkan 1 buku dan 2 pensil Rp 12.000. Dengan metode eliminasi diperoleh harga buku Rp 6.000 dan pensil Rp 3.000.','2026-11-08 17:12:20',0);
+INSERT INTO `pengumpulan_tugas` (`id`, `id_tugas`, `id_siswa`, `file`, `jawaban`, `tgl_kumpul`, `terlambat`) VALUES (85,8,6,NULL,'Mohon maaf Pak, saya terlambat mengumpulkan karena jaringan internet di rumah bermasalah. Latihan konversi satuan nomor 1-10 sudah saya kerjakan seluruhnya.','2026-11-08 17:12:20',1);
+INSERT INTO `pengumpulan_tugas` (`id`, `id_tugas`, `id_siswa`, `file`, `jawaban`, `tgl_kumpul`, `terlambat`) VALUES (86,9,1,NULL,NULL,'2026-11-08 17:12:20',0);
+INSERT INTO `pengumpulan_tugas` (`id`, `id_tugas`, `id_siswa`, `file`, `jawaban`, `tgl_kumpul`, `terlambat`) VALUES (87,9,2,NULL,NULL,'2026-11-08 17:12:20',0);
+INSERT INTO `pengumpulan_tugas` (`id`, `id_tugas`, `id_siswa`, `file`, `jawaban`, `tgl_kumpul`, `terlambat`) VALUES (88,9,3,NULL,NULL,'2026-11-08 17:12:20',0);
 
 
 -- ===========================================================================
@@ -2051,69 +2051,69 @@ CREATE TABLE `jawaban_siswa` (
   KEY `fk_jwb_soal` (`id_soal`),
   CONSTRAINT `fk_jwb_pengumpulan` FOREIGN KEY (`id_pengumpulan`) REFERENCES `pengumpulan_tugas` (`id`) ON DELETE CASCADE,
   CONSTRAINT `fk_jwb_soal` FOREIGN KEY (`id_soal`) REFERENCES `soal` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=63 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-INSERT INTO `jawaban_siswa` (`id`, `id_pengumpulan`, `id_soal`, `pilihan`, `jawaban_teks`, `benar`, `skor`) VALUES (1,63,1,'B',NULL,1,20.00);
-INSERT INTO `jawaban_siswa` (`id`, `id_pengumpulan`, `id_soal`, `pilihan`, `jawaban_teks`, `benar`, `skor`) VALUES (2,63,2,'B',NULL,1,20.00);
-INSERT INTO `jawaban_siswa` (`id`, `id_pengumpulan`, `id_soal`, `pilihan`, `jawaban_teks`, `benar`, `skor`) VALUES (3,63,3,'A',NULL,1,20.00);
-INSERT INTO `jawaban_siswa` (`id`, `id_pengumpulan`, `id_soal`, `pilihan`, `jawaban_teks`, `benar`, `skor`) VALUES (4,63,4,'A',NULL,0,0.00);
-INSERT INTO `jawaban_siswa` (`id`, `id_pengumpulan`, `id_soal`, `pilihan`, `jawaban_teks`, `benar`, `skor`) VALUES (5,63,5,'C',NULL,1,20.00);
-INSERT INTO `jawaban_siswa` (`id`, `id_pengumpulan`, `id_soal`, `pilihan`, `jawaban_teks`, `benar`, `skor`) VALUES (6,64,1,'B',NULL,1,20.00);
-INSERT INTO `jawaban_siswa` (`id`, `id_pengumpulan`, `id_soal`, `pilihan`, `jawaban_teks`, `benar`, `skor`) VALUES (7,64,2,'B',NULL,1,20.00);
-INSERT INTO `jawaban_siswa` (`id`, `id_pengumpulan`, `id_soal`, `pilihan`, `jawaban_teks`, `benar`, `skor`) VALUES (8,64,3,'A',NULL,1,20.00);
-INSERT INTO `jawaban_siswa` (`id`, `id_pengumpulan`, `id_soal`, `pilihan`, `jawaban_teks`, `benar`, `skor`) VALUES (9,64,4,'B',NULL,1,20.00);
-INSERT INTO `jawaban_siswa` (`id`, `id_pengumpulan`, `id_soal`, `pilihan`, `jawaban_teks`, `benar`, `skor`) VALUES (10,64,5,'C',NULL,1,20.00);
-INSERT INTO `jawaban_siswa` (`id`, `id_pengumpulan`, `id_soal`, `pilihan`, `jawaban_teks`, `benar`, `skor`) VALUES (11,65,1,'B',NULL,1,20.00);
-INSERT INTO `jawaban_siswa` (`id`, `id_pengumpulan`, `id_soal`, `pilihan`, `jawaban_teks`, `benar`, `skor`) VALUES (12,65,2,'A',NULL,0,0.00);
-INSERT INTO `jawaban_siswa` (`id`, `id_pengumpulan`, `id_soal`, `pilihan`, `jawaban_teks`, `benar`, `skor`) VALUES (13,65,3,'A',NULL,1,20.00);
-INSERT INTO `jawaban_siswa` (`id`, `id_pengumpulan`, `id_soal`, `pilihan`, `jawaban_teks`, `benar`, `skor`) VALUES (14,65,4,'B',NULL,1,20.00);
-INSERT INTO `jawaban_siswa` (`id`, `id_pengumpulan`, `id_soal`, `pilihan`, `jawaban_teks`, `benar`, `skor`) VALUES (15,65,5,'A',NULL,0,0.00);
-INSERT INTO `jawaban_siswa` (`id`, `id_pengumpulan`, `id_soal`, `pilihan`, `jawaban_teks`, `benar`, `skor`) VALUES (16,66,1,'B',NULL,1,20.00);
-INSERT INTO `jawaban_siswa` (`id`, `id_pengumpulan`, `id_soal`, `pilihan`, `jawaban_teks`, `benar`, `skor`) VALUES (17,66,2,'B',NULL,1,20.00);
-INSERT INTO `jawaban_siswa` (`id`, `id_pengumpulan`, `id_soal`, `pilihan`, `jawaban_teks`, `benar`, `skor`) VALUES (18,66,3,'A',NULL,1,20.00);
-INSERT INTO `jawaban_siswa` (`id`, `id_pengumpulan`, `id_soal`, `pilihan`, `jawaban_teks`, `benar`, `skor`) VALUES (19,66,4,'B',NULL,1,20.00);
-INSERT INTO `jawaban_siswa` (`id`, `id_pengumpulan`, `id_soal`, `pilihan`, `jawaban_teks`, `benar`, `skor`) VALUES (20,66,5,'C',NULL,1,20.00);
-INSERT INTO `jawaban_siswa` (`id`, `id_pengumpulan`, `id_soal`, `pilihan`, `jawaban_teks`, `benar`, `skor`) VALUES (21,67,1,'A',NULL,0,0.00);
-INSERT INTO `jawaban_siswa` (`id`, `id_pengumpulan`, `id_soal`, `pilihan`, `jawaban_teks`, `benar`, `skor`) VALUES (22,67,2,'B',NULL,1,20.00);
-INSERT INTO `jawaban_siswa` (`id`, `id_pengumpulan`, `id_soal`, `pilihan`, `jawaban_teks`, `benar`, `skor`) VALUES (23,67,3,'B',NULL,0,0.00);
-INSERT INTO `jawaban_siswa` (`id`, `id_pengumpulan`, `id_soal`, `pilihan`, `jawaban_teks`, `benar`, `skor`) VALUES (24,67,4,'A',NULL,0,0.00);
-INSERT INTO `jawaban_siswa` (`id`, `id_pengumpulan`, `id_soal`, `pilihan`, `jawaban_teks`, `benar`, `skor`) VALUES (25,67,5,'C',NULL,1,20.00);
-INSERT INTO `jawaban_siswa` (`id`, `id_pengumpulan`, `id_soal`, `pilihan`, `jawaban_teks`, `benar`, `skor`) VALUES (26,68,1,'B',NULL,1,20.00);
-INSERT INTO `jawaban_siswa` (`id`, `id_pengumpulan`, `id_soal`, `pilihan`, `jawaban_teks`, `benar`, `skor`) VALUES (27,68,2,'B',NULL,1,20.00);
-INSERT INTO `jawaban_siswa` (`id`, `id_pengumpulan`, `id_soal`, `pilihan`, `jawaban_teks`, `benar`, `skor`) VALUES (28,68,3,'B',NULL,0,0.00);
-INSERT INTO `jawaban_siswa` (`id`, `id_pengumpulan`, `id_soal`, `pilihan`, `jawaban_teks`, `benar`, `skor`) VALUES (29,68,4,'B',NULL,1,20.00);
-INSERT INTO `jawaban_siswa` (`id`, `id_pengumpulan`, `id_soal`, `pilihan`, `jawaban_teks`, `benar`, `skor`) VALUES (30,68,5,'C',NULL,1,20.00);
-INSERT INTO `jawaban_siswa` (`id`, `id_pengumpulan`, `id_soal`, `pilihan`, `jawaban_teks`, `benar`, `skor`) VALUES (31,69,6,'B',NULL,1,25.00);
-INSERT INTO `jawaban_siswa` (`id`, `id_pengumpulan`, `id_soal`, `pilihan`, `jawaban_teks`, `benar`, `skor`) VALUES (32,69,7,'A',NULL,1,25.00);
-INSERT INTO `jawaban_siswa` (`id`, `id_pengumpulan`, `id_soal`, `pilihan`, `jawaban_teks`, `benar`, `skor`) VALUES (33,69,8,'B',NULL,1,20.00);
-INSERT INTO `jawaban_siswa` (`id`, `id_pengumpulan`, `id_soal`, `pilihan`, `jawaban_teks`, `benar`, `skor`) VALUES (34,69,9,NULL,'Sekolahku berada di tepi jalan utama Bangkuang. Halamannya luas dengan rumput hijau yang selalu terpangkas rapi. Di depan ruang guru berdiri tiang bendera yang menjulang, dan di sampingnya berjajar pohon ketapang yang meneduhkan.',NULL,30.00);
-INSERT INTO `jawaban_siswa` (`id`, `id_pengumpulan`, `id_soal`, `pilihan`, `jawaban_teks`, `benar`, `skor`) VALUES (35,70,6,'B',NULL,1,25.00);
-INSERT INTO `jawaban_siswa` (`id`, `id_pengumpulan`, `id_soal`, `pilihan`, `jawaban_teks`, `benar`, `skor`) VALUES (36,70,7,'B',NULL,0,0.00);
-INSERT INTO `jawaban_siswa` (`id`, `id_pengumpulan`, `id_soal`, `pilihan`, `jawaban_teks`, `benar`, `skor`) VALUES (37,70,8,'B',NULL,1,20.00);
-INSERT INTO `jawaban_siswa` (`id`, `id_pengumpulan`, `id_soal`, `pilihan`, `jawaban_teks`, `benar`, `skor`) VALUES (38,70,9,NULL,'SMA Negeri 1 Karau Kuala memiliki bangunan bercat putih kebiruan. Setiap pagi koridor kelas dipenuhi suara siswa yang bersiap belajar. Taman kecil di tengah sekolah ditanami bunga kertas berwarna-warni.',NULL,28.00);
-INSERT INTO `jawaban_siswa` (`id`, `id_pengumpulan`, `id_soal`, `pilihan`, `jawaban_teks`, `benar`, `skor`) VALUES (39,71,6,'B',NULL,1,25.00);
-INSERT INTO `jawaban_siswa` (`id`, `id_pengumpulan`, `id_soal`, `pilihan`, `jawaban_teks`, `benar`, `skor`) VALUES (40,71,7,'A',NULL,1,25.00);
-INSERT INTO `jawaban_siswa` (`id`, `id_pengumpulan`, `id_soal`, `pilihan`, `jawaban_teks`, `benar`, `skor`) VALUES (41,71,8,'B',NULL,1,20.00);
-INSERT INTO `jawaban_siswa` (`id`, `id_pengumpulan`, `id_soal`, `pilihan`, `jawaban_teks`, `benar`, `skor`) VALUES (42,71,9,NULL,'Ruang kelasku cukup luas dan terang karena memiliki empat jendela besar. Di dinding depan terpasang papan tulis putih dan foto pahlawan. Udara di dalam kelas terasa sejuk saat pagi hari.',NULL,26.00);
-INSERT INTO `jawaban_siswa` (`id`, `id_pengumpulan`, `id_soal`, `pilihan`, `jawaban_teks`, `benar`, `skor`) VALUES (43,72,6,'B',NULL,1,25.00);
-INSERT INTO `jawaban_siswa` (`id`, `id_pengumpulan`, `id_soal`, `pilihan`, `jawaban_teks`, `benar`, `skor`) VALUES (44,72,7,'A',NULL,1,25.00);
-INSERT INTO `jawaban_siswa` (`id`, `id_pengumpulan`, `id_soal`, `pilihan`, `jawaban_teks`, `benar`, `skor`) VALUES (45,72,8,'B',NULL,1,20.00);
-INSERT INTO `jawaban_siswa` (`id`, `id_pengumpulan`, `id_soal`, `pilihan`, `jawaban_teks`, `benar`, `skor`) VALUES (46,72,9,NULL,'Kantin sekolah berada di samping lapangan basket. Setiap istirahat aromanya harum oleh gorengan hangat. Meja-meja panjangnya selalu penuh oleh siswa yang bercengkerama.',NULL,NULL);
-INSERT INTO `jawaban_siswa` (`id`, `id_pengumpulan`, `id_soal`, `pilihan`, `jawaban_teks`, `benar`, `skor`) VALUES (47,73,6,'A',NULL,0,0.00);
-INSERT INTO `jawaban_siswa` (`id`, `id_pengumpulan`, `id_soal`, `pilihan`, `jawaban_teks`, `benar`, `skor`) VALUES (48,73,7,'A',NULL,1,25.00);
-INSERT INTO `jawaban_siswa` (`id`, `id_pengumpulan`, `id_soal`, `pilihan`, `jawaban_teks`, `benar`, `skor`) VALUES (49,73,8,'A',NULL,0,0.00);
-INSERT INTO `jawaban_siswa` (`id`, `id_pengumpulan`, `id_soal`, `pilihan`, `jawaban_teks`, `benar`, `skor`) VALUES (50,73,9,NULL,'Sekolahku bersih dan nyaman. Ada lapangan upacara di tengah.',NULL,NULL);
-INSERT INTO `jawaban_siswa` (`id`, `id_pengumpulan`, `id_soal`, `pilihan`, `jawaban_teks`, `benar`, `skor`) VALUES (51,86,10,'B',NULL,1,25.00);
-INSERT INTO `jawaban_siswa` (`id`, `id_pengumpulan`, `id_soal`, `pilihan`, `jawaban_teks`, `benar`, `skor`) VALUES (52,86,11,'B',NULL,1,25.00);
-INSERT INTO `jawaban_siswa` (`id`, `id_pengumpulan`, `id_soal`, `pilihan`, `jawaban_teks`, `benar`, `skor`) VALUES (53,86,12,'A',NULL,1,25.00);
-INSERT INTO `jawaban_siswa` (`id`, `id_pengumpulan`, `id_soal`, `pilihan`, `jawaban_teks`, `benar`, `skor`) VALUES (54,86,13,NULL,'My classroom is on the second floor of the school building. It has four large windows, so the room is always bright. There are thirty-two desks and a white board in front of the class.',NULL,23.00);
-INSERT INTO `jawaban_siswa` (`id`, `id_pengumpulan`, `id_soal`, `pilihan`, `jawaban_teks`, `benar`, `skor`) VALUES (55,87,10,'B',NULL,1,25.00);
-INSERT INTO `jawaban_siswa` (`id`, `id_pengumpulan`, `id_soal`, `pilihan`, `jawaban_teks`, `benar`, `skor`) VALUES (56,87,11,'B',NULL,1,25.00);
-INSERT INTO `jawaban_siswa` (`id`, `id_pengumpulan`, `id_soal`, `pilihan`, `jawaban_teks`, `benar`, `skor`) VALUES (57,87,12,'B',NULL,0,0.00);
-INSERT INTO `jawaban_siswa` (`id`, `id_pengumpulan`, `id_soal`, `pilihan`, `jawaban_teks`, `benar`, `skor`) VALUES (58,87,13,NULL,'My classroom is clean and comfortable. The walls are painted light blue and there are some pictures of Indonesian heroes on them. I like studying there with my classmates.',NULL,22.00);
-INSERT INTO `jawaban_siswa` (`id`, `id_pengumpulan`, `id_soal`, `pilihan`, `jawaban_teks`, `benar`, `skor`) VALUES (59,88,10,'A',NULL,0,0.00);
-INSERT INTO `jawaban_siswa` (`id`, `id_pengumpulan`, `id_soal`, `pilihan`, `jawaban_teks`, `benar`, `skor`) VALUES (60,88,11,'A',NULL,0,0.00);
-INSERT INTO `jawaban_siswa` (`id`, `id_pengumpulan`, `id_soal`, `pilihan`, `jawaban_teks`, `benar`, `skor`) VALUES (61,88,12,'A',NULL,1,25.00);
-INSERT INTO `jawaban_siswa` (`id`, `id_pengumpulan`, `id_soal`, `pilihan`, `jawaban_teks`, `benar`, `skor`) VALUES (62,88,13,NULL,'My classroom is big. There is a white board and many chairs.',NULL,NULL);
+) ENGINE=InnoDB AUTO_INCREMENT=125 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+INSERT INTO `jawaban_siswa` (`id`, `id_pengumpulan`, `id_soal`, `pilihan`, `jawaban_teks`, `benar`, `skor`) VALUES (63,63,1,'B',NULL,1,20.00);
+INSERT INTO `jawaban_siswa` (`id`, `id_pengumpulan`, `id_soal`, `pilihan`, `jawaban_teks`, `benar`, `skor`) VALUES (64,63,2,'B',NULL,1,20.00);
+INSERT INTO `jawaban_siswa` (`id`, `id_pengumpulan`, `id_soal`, `pilihan`, `jawaban_teks`, `benar`, `skor`) VALUES (65,63,3,'A',NULL,1,20.00);
+INSERT INTO `jawaban_siswa` (`id`, `id_pengumpulan`, `id_soal`, `pilihan`, `jawaban_teks`, `benar`, `skor`) VALUES (66,63,4,'A',NULL,0,0.00);
+INSERT INTO `jawaban_siswa` (`id`, `id_pengumpulan`, `id_soal`, `pilihan`, `jawaban_teks`, `benar`, `skor`) VALUES (67,63,5,'C',NULL,1,20.00);
+INSERT INTO `jawaban_siswa` (`id`, `id_pengumpulan`, `id_soal`, `pilihan`, `jawaban_teks`, `benar`, `skor`) VALUES (68,64,1,'B',NULL,1,20.00);
+INSERT INTO `jawaban_siswa` (`id`, `id_pengumpulan`, `id_soal`, `pilihan`, `jawaban_teks`, `benar`, `skor`) VALUES (69,64,2,'B',NULL,1,20.00);
+INSERT INTO `jawaban_siswa` (`id`, `id_pengumpulan`, `id_soal`, `pilihan`, `jawaban_teks`, `benar`, `skor`) VALUES (70,64,3,'A',NULL,1,20.00);
+INSERT INTO `jawaban_siswa` (`id`, `id_pengumpulan`, `id_soal`, `pilihan`, `jawaban_teks`, `benar`, `skor`) VALUES (71,64,4,'B',NULL,1,20.00);
+INSERT INTO `jawaban_siswa` (`id`, `id_pengumpulan`, `id_soal`, `pilihan`, `jawaban_teks`, `benar`, `skor`) VALUES (72,64,5,'C',NULL,1,20.00);
+INSERT INTO `jawaban_siswa` (`id`, `id_pengumpulan`, `id_soal`, `pilihan`, `jawaban_teks`, `benar`, `skor`) VALUES (73,65,1,'B',NULL,1,20.00);
+INSERT INTO `jawaban_siswa` (`id`, `id_pengumpulan`, `id_soal`, `pilihan`, `jawaban_teks`, `benar`, `skor`) VALUES (74,65,2,'A',NULL,0,0.00);
+INSERT INTO `jawaban_siswa` (`id`, `id_pengumpulan`, `id_soal`, `pilihan`, `jawaban_teks`, `benar`, `skor`) VALUES (75,65,3,'A',NULL,1,20.00);
+INSERT INTO `jawaban_siswa` (`id`, `id_pengumpulan`, `id_soal`, `pilihan`, `jawaban_teks`, `benar`, `skor`) VALUES (76,65,4,'B',NULL,1,20.00);
+INSERT INTO `jawaban_siswa` (`id`, `id_pengumpulan`, `id_soal`, `pilihan`, `jawaban_teks`, `benar`, `skor`) VALUES (77,65,5,'A',NULL,0,0.00);
+INSERT INTO `jawaban_siswa` (`id`, `id_pengumpulan`, `id_soal`, `pilihan`, `jawaban_teks`, `benar`, `skor`) VALUES (78,66,1,'B',NULL,1,20.00);
+INSERT INTO `jawaban_siswa` (`id`, `id_pengumpulan`, `id_soal`, `pilihan`, `jawaban_teks`, `benar`, `skor`) VALUES (79,66,2,'B',NULL,1,20.00);
+INSERT INTO `jawaban_siswa` (`id`, `id_pengumpulan`, `id_soal`, `pilihan`, `jawaban_teks`, `benar`, `skor`) VALUES (80,66,3,'A',NULL,1,20.00);
+INSERT INTO `jawaban_siswa` (`id`, `id_pengumpulan`, `id_soal`, `pilihan`, `jawaban_teks`, `benar`, `skor`) VALUES (81,66,4,'B',NULL,1,20.00);
+INSERT INTO `jawaban_siswa` (`id`, `id_pengumpulan`, `id_soal`, `pilihan`, `jawaban_teks`, `benar`, `skor`) VALUES (82,66,5,'C',NULL,1,20.00);
+INSERT INTO `jawaban_siswa` (`id`, `id_pengumpulan`, `id_soal`, `pilihan`, `jawaban_teks`, `benar`, `skor`) VALUES (83,67,1,'A',NULL,0,0.00);
+INSERT INTO `jawaban_siswa` (`id`, `id_pengumpulan`, `id_soal`, `pilihan`, `jawaban_teks`, `benar`, `skor`) VALUES (84,67,2,'B',NULL,1,20.00);
+INSERT INTO `jawaban_siswa` (`id`, `id_pengumpulan`, `id_soal`, `pilihan`, `jawaban_teks`, `benar`, `skor`) VALUES (85,67,3,'B',NULL,0,0.00);
+INSERT INTO `jawaban_siswa` (`id`, `id_pengumpulan`, `id_soal`, `pilihan`, `jawaban_teks`, `benar`, `skor`) VALUES (86,67,4,'A',NULL,0,0.00);
+INSERT INTO `jawaban_siswa` (`id`, `id_pengumpulan`, `id_soal`, `pilihan`, `jawaban_teks`, `benar`, `skor`) VALUES (87,67,5,'C',NULL,1,20.00);
+INSERT INTO `jawaban_siswa` (`id`, `id_pengumpulan`, `id_soal`, `pilihan`, `jawaban_teks`, `benar`, `skor`) VALUES (88,68,1,'B',NULL,1,20.00);
+INSERT INTO `jawaban_siswa` (`id`, `id_pengumpulan`, `id_soal`, `pilihan`, `jawaban_teks`, `benar`, `skor`) VALUES (89,68,2,'B',NULL,1,20.00);
+INSERT INTO `jawaban_siswa` (`id`, `id_pengumpulan`, `id_soal`, `pilihan`, `jawaban_teks`, `benar`, `skor`) VALUES (90,68,3,'B',NULL,0,0.00);
+INSERT INTO `jawaban_siswa` (`id`, `id_pengumpulan`, `id_soal`, `pilihan`, `jawaban_teks`, `benar`, `skor`) VALUES (91,68,4,'B',NULL,1,20.00);
+INSERT INTO `jawaban_siswa` (`id`, `id_pengumpulan`, `id_soal`, `pilihan`, `jawaban_teks`, `benar`, `skor`) VALUES (92,68,5,'C',NULL,1,20.00);
+INSERT INTO `jawaban_siswa` (`id`, `id_pengumpulan`, `id_soal`, `pilihan`, `jawaban_teks`, `benar`, `skor`) VALUES (93,69,6,'B',NULL,1,25.00);
+INSERT INTO `jawaban_siswa` (`id`, `id_pengumpulan`, `id_soal`, `pilihan`, `jawaban_teks`, `benar`, `skor`) VALUES (94,69,7,'A',NULL,1,25.00);
+INSERT INTO `jawaban_siswa` (`id`, `id_pengumpulan`, `id_soal`, `pilihan`, `jawaban_teks`, `benar`, `skor`) VALUES (95,69,8,'B',NULL,1,20.00);
+INSERT INTO `jawaban_siswa` (`id`, `id_pengumpulan`, `id_soal`, `pilihan`, `jawaban_teks`, `benar`, `skor`) VALUES (96,69,9,NULL,'Sekolahku berada di tepi jalan utama Bangkuang. Halamannya luas dengan rumput hijau yang selalu terpangkas rapi. Di depan ruang guru berdiri tiang bendera yang menjulang, dan di sampingnya berjajar pohon ketapang yang meneduhkan.',NULL,30.00);
+INSERT INTO `jawaban_siswa` (`id`, `id_pengumpulan`, `id_soal`, `pilihan`, `jawaban_teks`, `benar`, `skor`) VALUES (97,70,6,'B',NULL,1,25.00);
+INSERT INTO `jawaban_siswa` (`id`, `id_pengumpulan`, `id_soal`, `pilihan`, `jawaban_teks`, `benar`, `skor`) VALUES (98,70,7,'B',NULL,0,0.00);
+INSERT INTO `jawaban_siswa` (`id`, `id_pengumpulan`, `id_soal`, `pilihan`, `jawaban_teks`, `benar`, `skor`) VALUES (99,70,8,'B',NULL,1,20.00);
+INSERT INTO `jawaban_siswa` (`id`, `id_pengumpulan`, `id_soal`, `pilihan`, `jawaban_teks`, `benar`, `skor`) VALUES (100,70,9,NULL,'SMA Negeri 1 Karau Kuala memiliki bangunan bercat putih kebiruan. Setiap pagi koridor kelas dipenuhi suara siswa yang bersiap belajar. Taman kecil di tengah sekolah ditanami bunga kertas berwarna-warni.',NULL,28.00);
+INSERT INTO `jawaban_siswa` (`id`, `id_pengumpulan`, `id_soal`, `pilihan`, `jawaban_teks`, `benar`, `skor`) VALUES (101,71,6,'B',NULL,1,25.00);
+INSERT INTO `jawaban_siswa` (`id`, `id_pengumpulan`, `id_soal`, `pilihan`, `jawaban_teks`, `benar`, `skor`) VALUES (102,71,7,'A',NULL,1,25.00);
+INSERT INTO `jawaban_siswa` (`id`, `id_pengumpulan`, `id_soal`, `pilihan`, `jawaban_teks`, `benar`, `skor`) VALUES (103,71,8,'B',NULL,1,20.00);
+INSERT INTO `jawaban_siswa` (`id`, `id_pengumpulan`, `id_soal`, `pilihan`, `jawaban_teks`, `benar`, `skor`) VALUES (104,71,9,NULL,'Ruang kelasku cukup luas dan terang karena memiliki empat jendela besar. Di dinding depan terpasang papan tulis putih dan foto pahlawan. Udara di dalam kelas terasa sejuk saat pagi hari.',NULL,26.00);
+INSERT INTO `jawaban_siswa` (`id`, `id_pengumpulan`, `id_soal`, `pilihan`, `jawaban_teks`, `benar`, `skor`) VALUES (105,72,6,'B',NULL,1,25.00);
+INSERT INTO `jawaban_siswa` (`id`, `id_pengumpulan`, `id_soal`, `pilihan`, `jawaban_teks`, `benar`, `skor`) VALUES (106,72,7,'A',NULL,1,25.00);
+INSERT INTO `jawaban_siswa` (`id`, `id_pengumpulan`, `id_soal`, `pilihan`, `jawaban_teks`, `benar`, `skor`) VALUES (107,72,8,'B',NULL,1,20.00);
+INSERT INTO `jawaban_siswa` (`id`, `id_pengumpulan`, `id_soal`, `pilihan`, `jawaban_teks`, `benar`, `skor`) VALUES (108,72,9,NULL,'Kantin sekolah berada di samping lapangan basket. Setiap istirahat aromanya harum oleh gorengan hangat. Meja-meja panjangnya selalu penuh oleh siswa yang bercengkerama.',NULL,NULL);
+INSERT INTO `jawaban_siswa` (`id`, `id_pengumpulan`, `id_soal`, `pilihan`, `jawaban_teks`, `benar`, `skor`) VALUES (109,73,6,'A',NULL,0,0.00);
+INSERT INTO `jawaban_siswa` (`id`, `id_pengumpulan`, `id_soal`, `pilihan`, `jawaban_teks`, `benar`, `skor`) VALUES (110,73,7,'A',NULL,1,25.00);
+INSERT INTO `jawaban_siswa` (`id`, `id_pengumpulan`, `id_soal`, `pilihan`, `jawaban_teks`, `benar`, `skor`) VALUES (111,73,8,'A',NULL,0,0.00);
+INSERT INTO `jawaban_siswa` (`id`, `id_pengumpulan`, `id_soal`, `pilihan`, `jawaban_teks`, `benar`, `skor`) VALUES (112,73,9,NULL,'Sekolahku bersih dan nyaman. Ada lapangan upacara di tengah.',NULL,NULL);
+INSERT INTO `jawaban_siswa` (`id`, `id_pengumpulan`, `id_soal`, `pilihan`, `jawaban_teks`, `benar`, `skor`) VALUES (113,86,10,'B',NULL,1,25.00);
+INSERT INTO `jawaban_siswa` (`id`, `id_pengumpulan`, `id_soal`, `pilihan`, `jawaban_teks`, `benar`, `skor`) VALUES (114,86,11,'B',NULL,1,25.00);
+INSERT INTO `jawaban_siswa` (`id`, `id_pengumpulan`, `id_soal`, `pilihan`, `jawaban_teks`, `benar`, `skor`) VALUES (115,86,12,'A',NULL,1,25.00);
+INSERT INTO `jawaban_siswa` (`id`, `id_pengumpulan`, `id_soal`, `pilihan`, `jawaban_teks`, `benar`, `skor`) VALUES (116,86,13,NULL,'My classroom is on the second floor of the school building. It has four large windows, so the room is always bright. There are thirty-two desks and a white board in front of the class.',NULL,23.00);
+INSERT INTO `jawaban_siswa` (`id`, `id_pengumpulan`, `id_soal`, `pilihan`, `jawaban_teks`, `benar`, `skor`) VALUES (117,87,10,'B',NULL,1,25.00);
+INSERT INTO `jawaban_siswa` (`id`, `id_pengumpulan`, `id_soal`, `pilihan`, `jawaban_teks`, `benar`, `skor`) VALUES (118,87,11,'B',NULL,1,25.00);
+INSERT INTO `jawaban_siswa` (`id`, `id_pengumpulan`, `id_soal`, `pilihan`, `jawaban_teks`, `benar`, `skor`) VALUES (119,87,12,'B',NULL,0,0.00);
+INSERT INTO `jawaban_siswa` (`id`, `id_pengumpulan`, `id_soal`, `pilihan`, `jawaban_teks`, `benar`, `skor`) VALUES (120,87,13,NULL,'My classroom is clean and comfortable. The walls are painted light blue and there are some pictures of Indonesian heroes on them. I like studying there with my classmates.',NULL,22.00);
+INSERT INTO `jawaban_siswa` (`id`, `id_pengumpulan`, `id_soal`, `pilihan`, `jawaban_teks`, `benar`, `skor`) VALUES (121,88,10,'A',NULL,0,0.00);
+INSERT INTO `jawaban_siswa` (`id`, `id_pengumpulan`, `id_soal`, `pilihan`, `jawaban_teks`, `benar`, `skor`) VALUES (122,88,11,'A',NULL,0,0.00);
+INSERT INTO `jawaban_siswa` (`id`, `id_pengumpulan`, `id_soal`, `pilihan`, `jawaban_teks`, `benar`, `skor`) VALUES (123,88,12,'A',NULL,1,25.00);
+INSERT INTO `jawaban_siswa` (`id`, `id_pengumpulan`, `id_soal`, `pilihan`, `jawaban_teks`, `benar`, `skor`) VALUES (124,88,13,NULL,'My classroom is big. There is a white board and many chairs.',NULL,NULL);
 
 
 -- ===========================================================================
@@ -2135,7 +2135,7 @@ CREATE TABLE `nilai` (
   KEY `fk_nilai_guru` (`id_guru`),
   CONSTRAINT `fk_nilai_guru` FOREIGN KEY (`id_guru`) REFERENCES `guru` (`id`) ON DELETE SET NULL,
   CONSTRAINT `fk_nilai_kumpul` FOREIGN KEY (`id_kumpul`) REFERENCES `pengumpulan_tugas` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=83 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=103 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 INSERT INTO `nilai` (`id`, `id_kumpul`, `id_guru`, `skor`, `catatan`, `tgl_penilaian`) VALUES (1,1,5,82.00,'Hasil ujian sudah mencapai ketuntasan.','2026-10-30 07:00:00');
 INSERT INTO `nilai` (`id`, `id_kumpul`, `id_guru`, `skor`, `catatan`, `tgl_penilaian`) VALUES (2,2,5,85.00,'Hasil ujian sangat baik.','2026-11-06 07:00:00');
 INSERT INTO `nilai` (`id`, `id_kumpul`, `id_guru`, `skor`, `catatan`, `tgl_penilaian`) VALUES (3,3,5,90.00,'Hasil ujian sangat baik.','2026-10-30 07:00:00');
@@ -2198,32 +2198,32 @@ INSERT INTO `nilai` (`id`, `id_kumpul`, `id_guru`, `skor`, `catatan`, `tgl_penil
 INSERT INTO `nilai` (`id`, `id_kumpul`, `id_guru`, `skor`, `catatan`, `tgl_penilaian`) VALUES (60,60,27,85.00,'Struktur teks negosiasi sudah lengkap.','2026-05-31 02:00:00');
 INSERT INTO `nilai` (`id`, `id_kumpul`, `id_guru`, `skor`, `catatan`, `tgl_penilaian`) VALUES (61,61,27,80.00,'Bagian penawaran dapat dikembangkan lagi.','2026-05-31 02:00:00');
 INSERT INTO `nilai` (`id`, `id_kumpul`, `id_guru`, `skor`, `catatan`, `tgl_penilaian`) VALUES (62,62,27,90.00,'Dialog negosiasi tersusun sangat runtut.','2026-05-31 02:00:00');
-INSERT INTO `nilai` (`id`, `id_kumpul`, `id_guru`, `skor`, `catatan`, `tgl_penilaian`) VALUES (63,63,NULL,80.00,NULL,'2026-11-07 11:36:11');
-INSERT INTO `nilai` (`id`, `id_kumpul`, `id_guru`, `skor`, `catatan`, `tgl_penilaian`) VALUES (64,64,NULL,100.00,NULL,'2026-11-07 11:36:11');
-INSERT INTO `nilai` (`id`, `id_kumpul`, `id_guru`, `skor`, `catatan`, `tgl_penilaian`) VALUES (65,65,NULL,60.00,NULL,'2026-11-07 11:36:11');
-INSERT INTO `nilai` (`id`, `id_kumpul`, `id_guru`, `skor`, `catatan`, `tgl_penilaian`) VALUES (66,66,NULL,100.00,NULL,'2026-11-07 11:36:11');
-INSERT INTO `nilai` (`id`, `id_kumpul`, `id_guru`, `skor`, `catatan`, `tgl_penilaian`) VALUES (67,67,NULL,40.00,NULL,'2026-11-07 11:36:11');
-INSERT INTO `nilai` (`id`, `id_kumpul`, `id_guru`, `skor`, `catatan`, `tgl_penilaian`) VALUES (68,68,NULL,80.00,NULL,'2026-11-07 11:36:11');
-INSERT INTO `nilai` (`id`, `id_kumpul`, `id_guru`, `skor`, `catatan`, `tgl_penilaian`) VALUES (69,74,5,90.00,'Langkah pengerjaan sudah runtut dan benar. Pertahankan.','2026-11-07 11:36:11');
-INSERT INTO `nilai` (`id`, `id_kumpul`, `id_guru`, `skor`, `catatan`, `tgl_penilaian`) VALUES (70,75,5,85.00,'Jawaban benar, tulisan pada lampiran agar diperjelas lagi.','2026-11-07 11:36:11');
-INSERT INTO `nilai` (`id`, `id_kumpul`, `id_guru`, `skor`, `catatan`, `tgl_penilaian`) VALUES (71,76,5,75.00,'Nomor 9 dan 10 masih keliru pada pemindahan ruas. Pelajari kembali.','2026-11-07 11:36:11');
-INSERT INTO `nilai` (`id`, `id_kumpul`, `id_guru`, `skor`, `catatan`, `tgl_penilaian`) VALUES (72,77,5,95.00,'Sangat baik, seluruh langkah penyelesaian lengkap.','2026-11-07 11:36:11');
-INSERT INTO `nilai` (`id`, `id_kumpul`, `id_guru`, `skor`, `catatan`, `tgl_penilaian`) VALUES (73,78,5,88.00,'Pekerjaan rapi dan jawaban tepat.','2026-11-07 11:36:11');
-INSERT INTO `nilai` (`id`, `id_kumpul`, `id_guru`, `skor`, `catatan`, `tgl_penilaian`) VALUES (74,69,27,100.00,'Deskripsi sangat hidup dan struktur sudah tepat.','2026-11-07 11:36:11');
-INSERT INTO `nilai` (`id`, `id_kumpul`, `id_guru`, `skor`, `catatan`, `tgl_penilaian`) VALUES (75,70,27,73.00,'Deskripsi baik, tambahkan lagi penggunaan pancaindra.','2026-11-07 11:36:11');
-INSERT INTO `nilai` (`id`, `id_kumpul`, `id_guru`, `skor`, `catatan`, `tgl_penilaian`) VALUES (76,71,27,96.00,'Sudah sesuai struktur, kembangkan lagi deskripsi bagiannya.','2026-11-07 11:36:11');
-INSERT INTO `nilai` (`id`, `id_kumpul`, `id_guru`, `skor`, `catatan`, `tgl_penilaian`) VALUES (77,86,26,98.00,'Good description with clear details.','2026-11-07 11:36:11');
-INSERT INTO `nilai` (`id`, `id_kumpul`, `id_guru`, `skor`, `catatan`, `tgl_penilaian`) VALUES (78,87,26,72.00,'Good description with clear details.','2026-11-07 11:36:11');
-INSERT INTO `nilai` (`id`, `id_kumpul`, `id_guru`, `skor`, `catatan`, `tgl_penilaian`) VALUES (79,79,27,92.00,'Struktur lengkap dan deskripsi sangat hidup.','2026-11-07 11:36:11');
-INSERT INTO `nilai` (`id`, `id_kumpul`, `id_guru`, `skor`, `catatan`, `tgl_penilaian`) VALUES (80,81,27,90.00,'Pemilihan diksi sangat baik dan runtut.','2026-11-07 11:36:11');
-INSERT INTO `nilai` (`id`, `id_kumpul`, `id_guru`, `skor`, `catatan`, `tgl_penilaian`) VALUES (81,80,27,87.00,'Sudah baik, penutup dapat dipertegas lagi.','2026-11-07 11:36:11');
-INSERT INTO `nilai` (`id`, `id_kumpul`, `id_guru`, `skor`, `catatan`, `tgl_penilaian`) VALUES (82,85,6,78.00,'Jawaban benar, namun dikumpulkan melewati batas waktu.','2026-11-07 11:36:11');
+INSERT INTO `nilai` (`id`, `id_kumpul`, `id_guru`, `skor`, `catatan`, `tgl_penilaian`) VALUES (63,63,NULL,80.00,NULL,'2026-11-08 17:12:19');
+INSERT INTO `nilai` (`id`, `id_kumpul`, `id_guru`, `skor`, `catatan`, `tgl_penilaian`) VALUES (64,64,NULL,100.00,NULL,'2026-11-08 17:12:19');
+INSERT INTO `nilai` (`id`, `id_kumpul`, `id_guru`, `skor`, `catatan`, `tgl_penilaian`) VALUES (65,65,NULL,60.00,NULL,'2026-11-08 17:12:19');
+INSERT INTO `nilai` (`id`, `id_kumpul`, `id_guru`, `skor`, `catatan`, `tgl_penilaian`) VALUES (66,66,NULL,100.00,NULL,'2026-11-08 17:12:19');
+INSERT INTO `nilai` (`id`, `id_kumpul`, `id_guru`, `skor`, `catatan`, `tgl_penilaian`) VALUES (67,67,NULL,40.00,NULL,'2026-11-08 17:12:19');
+INSERT INTO `nilai` (`id`, `id_kumpul`, `id_guru`, `skor`, `catatan`, `tgl_penilaian`) VALUES (68,68,NULL,80.00,NULL,'2026-11-08 17:12:19');
+INSERT INTO `nilai` (`id`, `id_kumpul`, `id_guru`, `skor`, `catatan`, `tgl_penilaian`) VALUES (69,74,5,90.00,'Langkah pengerjaan sudah runtut dan benar. Pertahankan.','2026-11-08 17:12:20');
+INSERT INTO `nilai` (`id`, `id_kumpul`, `id_guru`, `skor`, `catatan`, `tgl_penilaian`) VALUES (70,75,5,85.00,'Jawaban benar, tulisan pada lampiran agar diperjelas lagi.','2026-11-08 17:12:20');
+INSERT INTO `nilai` (`id`, `id_kumpul`, `id_guru`, `skor`, `catatan`, `tgl_penilaian`) VALUES (71,76,5,75.00,'Nomor 9 dan 10 masih keliru pada pemindahan ruas. Pelajari kembali.','2026-11-08 17:12:20');
+INSERT INTO `nilai` (`id`, `id_kumpul`, `id_guru`, `skor`, `catatan`, `tgl_penilaian`) VALUES (72,77,5,95.00,'Sangat baik, seluruh langkah penyelesaian lengkap.','2026-11-08 17:12:20');
+INSERT INTO `nilai` (`id`, `id_kumpul`, `id_guru`, `skor`, `catatan`, `tgl_penilaian`) VALUES (73,78,5,88.00,'Pekerjaan rapi dan jawaban tepat.','2026-11-08 17:12:20');
+INSERT INTO `nilai` (`id`, `id_kumpul`, `id_guru`, `skor`, `catatan`, `tgl_penilaian`) VALUES (79,79,27,92.00,'Struktur lengkap dan deskripsi sangat hidup.','2026-11-08 17:12:20');
+INSERT INTO `nilai` (`id`, `id_kumpul`, `id_guru`, `skor`, `catatan`, `tgl_penilaian`) VALUES (80,81,27,90.00,'Pemilihan diksi sangat baik dan runtut.','2026-11-08 17:12:20');
+INSERT INTO `nilai` (`id`, `id_kumpul`, `id_guru`, `skor`, `catatan`, `tgl_penilaian`) VALUES (81,80,27,87.00,'Sudah baik, penutup dapat dipertegas lagi.','2026-11-08 17:12:20');
+INSERT INTO `nilai` (`id`, `id_kumpul`, `id_guru`, `skor`, `catatan`, `tgl_penilaian`) VALUES (82,85,6,78.00,'Jawaban benar, namun dikumpulkan melewati batas waktu.','2026-11-08 17:12:20');
+INSERT INTO `nilai` (`id`, `id_kumpul`, `id_guru`, `skor`, `catatan`, `tgl_penilaian`) VALUES (94,69,27,100.00,'Deskripsi sangat hidup dan struktur sudah tepat.','2026-11-08 17:12:20');
+INSERT INTO `nilai` (`id`, `id_kumpul`, `id_guru`, `skor`, `catatan`, `tgl_penilaian`) VALUES (95,70,27,73.00,'Deskripsi baik, tambahkan lagi penggunaan pancaindra.','2026-11-08 17:12:20');
+INSERT INTO `nilai` (`id`, `id_kumpul`, `id_guru`, `skor`, `catatan`, `tgl_penilaian`) VALUES (96,71,27,96.00,'Sudah sesuai struktur, kembangkan lagi deskripsi bagiannya.','2026-11-08 17:12:20');
+INSERT INTO `nilai` (`id`, `id_kumpul`, `id_guru`, `skor`, `catatan`, `tgl_penilaian`) VALUES (97,86,26,98.00,'Good description with clear details.','2026-11-08 17:12:20');
+INSERT INTO `nilai` (`id`, `id_kumpul`, `id_guru`, `skor`, `catatan`, `tgl_penilaian`) VALUES (98,87,26,72.00,'Good description with clear details.','2026-11-08 17:12:20');
 
 
 -- ===========================================================================
 -- 16. Tabel `forum_diskusi`
 --    Topik dan balasan forum diskusi pada sebuah pertemuan
---    Jumlah data: 8 baris
+--    Jumlah data: 12 baris
 -- ===========================================================================
 
 DROP TABLE IF EXISTS `forum_diskusi`;
@@ -2242,7 +2242,7 @@ CREATE TABLE `forum_diskusi` (
   CONSTRAINT `fk_forum_parent` FOREIGN KEY (`id_parent`) REFERENCES `forum_diskusi` (`id`) ON DELETE CASCADE,
   CONSTRAINT `fk_forum_pertemuan` FOREIGN KEY (`id_pertemuan`) REFERENCES `pertemuan` (`id`) ON DELETE CASCADE,
   CONSTRAINT `fk_forum_user` FOREIGN KEY (`id_user`) REFERENCES `users` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 INSERT INTO `forum_diskusi` (`id`, `id_pertemuan`, `id_user`, `judul`, `pesan`, `id_parent`, `tgl_post`) VALUES (1,1,6,'Diskusi Pertemuan 1: Persamaan Linear','Selamat pagi anak-anak. Silakan tuliskan di forum ini bagian materi persamaan linear satu variabel yang masih sulit dipahami, nanti Ibu bahas ulang pada pertemuan berikutnya.',NULL,'2026-11-07 11:36:00');
 INSERT INTO `forum_diskusi` (`id`, `id_pertemuan`, `id_user`, `judul`, `pesan`, `id_parent`, `tgl_post`) VALUES (2,2,6,'Tanya Jawab Pertidaksamaan Linear','Bagian mana dari sifat pertidaksamaan yang paling sering membuat kalian keliru? Silakan tanyakan di sini.',NULL,'2026-11-07 11:36:00');
 INSERT INTO `forum_diskusi` (`id`, `id_pertemuan`, `id_user`, `judul`, `pesan`, `id_parent`, `tgl_post`) VALUES (3,6,28,'Tips Menulis Teks Deskripsi','Anak-anak, dalam menulis teks deskripsi gunakan pancaindra kalian: apa yang dilihat, didengar, dan dirasakan. Silakan tanyakan di sini jika ada kesulitan.',NULL,'2026-11-07 11:36:00');
@@ -2251,6 +2251,10 @@ INSERT INTO `forum_diskusi` (`id`, `id_pertemuan`, `id_user`, `judul`, `pesan`, 
 INSERT INTO `forum_diskusi` (`id`, `id_pertemuan`, `id_user`, `judul`, `pesan`, `id_parent`, `tgl_post`) VALUES (6,1,30,NULL,'Saya masih bingung ketika variabel berada di kedua ruas, contohnya 5x = 3x + 12, Pak.',5,'2026-11-07 11:36:12');
 INSERT INTO `forum_diskusi` (`id`, `id_pertemuan`, `id_user`, `judul`, `pesan`, `id_parent`, `tgl_post`) VALUES (7,1,6,NULL,'Pertanyaan bagus, Ahmad. Pindahkan semua suku yang memuat variabel ke ruas kiri sehingga menjadi 5x - 3x = 12, lalu 2x = 12 dan x = 6.',5,'2026-11-07 11:36:12');
 INSERT INTO `forum_diskusi` (`id`, `id_pertemuan`, `id_user`, `judul`, `pesan`, `id_parent`, `tgl_post`) VALUES (8,1,31,NULL,'Terima kasih Pak, penjelasannya sudah jelas. Berarti tandanya berubah saat pindah ruas ya, Pak.',5,'2026-11-07 11:36:12');
+INSERT INTO `forum_diskusi` (`id`, `id_pertemuan`, `id_user`, `judul`, `pesan`, `id_parent`, `tgl_post`) VALUES (10,1,6,'Kesulitan pada Latihan Persamaan Linear','Anak-anak, bagian mana dari latihan persamaan linear yang masih terasa sulit? Tuliskan di sini agar Bapak bahas kembali pada pertemuan berikutnya.',NULL,'2026-11-08 17:12:20');
+INSERT INTO `forum_diskusi` (`id`, `id_pertemuan`, `id_user`, `judul`, `pesan`, `id_parent`, `tgl_post`) VALUES (11,1,30,NULL,'Saya masih bingung ketika variabel berada di kedua ruas, contohnya 5x = 3x + 12, Pak.',10,'2026-11-08 17:12:20');
+INSERT INTO `forum_diskusi` (`id`, `id_pertemuan`, `id_user`, `judul`, `pesan`, `id_parent`, `tgl_post`) VALUES (12,1,6,NULL,'Pertanyaan bagus, Ahmad. Pindahkan semua suku yang memuat variabel ke ruas kiri sehingga menjadi 5x - 3x = 12, lalu 2x = 12 dan x = 6.',10,'2026-11-08 17:12:20');
+INSERT INTO `forum_diskusi` (`id`, `id_pertemuan`, `id_user`, `judul`, `pesan`, `id_parent`, `tgl_post`) VALUES (13,1,31,NULL,'Terima kasih Pak, penjelasannya sudah jelas. Berarti tandanya berubah saat pindah ruas ya, Pak.',10,'2026-11-08 17:12:20');
 
 
 -- ===========================================================================
@@ -2320,7 +2324,7 @@ CREATE TABLE `jadwal` (
   CONSTRAINT `fk_jadwal_guru` FOREIGN KEY (`id_guru`) REFERENCES `guru` (`id`) ON DELETE SET NULL,
   CONSTRAINT `fk_jadwal_kelas` FOREIGN KEY (`id_kelas`) REFERENCES `kelas` (`id`) ON DELETE CASCADE,
   CONSTRAINT `fk_jadwal_periode` FOREIGN KEY (`id_periode`) REFERENCES `periode` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=507 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=509 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 INSERT INTO `jadwal` (`id`, `id_periode`, `id_kelas`, `hari`, `jam_ke`, `kode`, `nama_mapel`, `id_guru`, `kegiatan`) VALUES (1,2,11,1,1,NULL,NULL,NULL,'UPACARA BENDERA');
 INSERT INTO `jadwal` (`id`, `id_periode`, `id_kelas`, `hari`, `jam_ke`, `kode`, `nama_mapel`, `id_guru`, `kegiatan`) VALUES (2,2,12,1,1,NULL,NULL,NULL,'UPACARA BENDERA');
 INSERT INTO `jadwal` (`id`, `id_periode`, `id_kelas`, `hari`, `jam_ke`, `kode`, `nama_mapel`, `id_guru`, `kegiatan`) VALUES (3,2,13,1,1,NULL,NULL,NULL,'UPACARA BENDERA');
@@ -2852,7 +2856,7 @@ CREATE TABLE `presensi` (
 INSERT INTO `presensi` (`id`, `id_pertemuan`, `id_guru`, `tanggal`, `status`, `catatan`, `tgl_buka`, `tgl_tutup`) VALUES (1,1,5,'2026-10-17','ditutup','Pembelajaran berjalan lancar, seluruh siswa mengikuti dengan baik.','2026-11-07 11:36:01','2026-10-17 09:30:00');
 INSERT INTO `presensi` (`id`, `id_pertemuan`, `id_guru`, `tanggal`, `status`, `catatan`, `tgl_buka`, `tgl_tutup`) VALUES (2,2,5,'2026-10-24','ditutup','Dua siswa tidak hadir tanpa keterangan dan akan ditindaklanjuti wali kelas.','2026-11-07 11:36:01','2026-10-24 09:30:00');
 INSERT INTO `presensi` (`id`, `id_pertemuan`, `id_guru`, `tanggal`, `status`, `catatan`, `tgl_buka`, `tgl_tutup`) VALUES (3,3,5,'2026-10-31','dibuka',NULL,'2026-11-07 11:36:01',NULL);
-INSERT INTO `presensi` (`id`, `id_pertemuan`, `id_guru`, `tanggal`, `status`, `catatan`, `tgl_buka`, `tgl_tutup`) VALUES (4,6,27,'2026-11-07','ditutup',NULL,'2026-11-07 11:36:13','2026-11-07 18:36:17');
+INSERT INTO `presensi` (`id`, `id_pertemuan`, `id_guru`, `tanggal`, `status`, `catatan`, `tgl_buka`, `tgl_tutup`) VALUES (4,6,27,'2026-11-08','ditutup',NULL,'2026-11-07 11:36:13','2026-11-09 00:12:25');
 
 
 -- ===========================================================================
@@ -2875,7 +2879,7 @@ CREATE TABLE `presensi_siswa` (
   KEY `fk_ps_siswa` (`id_siswa`),
   CONSTRAINT `fk_ps_presensi` FOREIGN KEY (`id_presensi`) REFERENCES `presensi` (`id`) ON DELETE CASCADE,
   CONSTRAINT `fk_ps_siswa` FOREIGN KEY (`id_siswa`) REFERENCES `siswa` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=98 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=106 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 INSERT INTO `presensi_siswa` (`id`, `id_presensi`, `id_siswa`, `status`, `keterangan`, `dicatat_oleh`, `waktu`) VALUES (1,1,1,'hadir',NULL,'siswa','2026-10-17 00:05:00');
 INSERT INTO `presensi_siswa` (`id`, `id_presensi`, `id_siswa`, `status`, `keterangan`, `dicatat_oleh`, `waktu`) VALUES (2,1,2,'hadir',NULL,'siswa','2026-10-17 00:05:00');
 INSERT INTO `presensi_siswa` (`id`, `id_presensi`, `id_siswa`, `status`, `keterangan`, `dicatat_oleh`, `waktu`) VALUES (3,1,3,'hadir',NULL,'siswa','2026-10-17 00:05:00');
@@ -2941,9 +2945,9 @@ INSERT INTO `presensi_siswa` (`id`, `id_presensi`, `id_siswa`, `status`, `ketera
 INSERT INTO `presensi_siswa` (`id`, `id_presensi`, `id_siswa`, `status`, `keterangan`, `dicatat_oleh`, `waktu`) VALUES (63,3,7,'hadir',NULL,'siswa','2026-10-31 00:03:00');
 INSERT INTO `presensi_siswa` (`id`, `id_presensi`, `id_siswa`, `status`, `keterangan`, `dicatat_oleh`, `waktu`) VALUES (64,3,8,'hadir',NULL,'siswa','2026-10-31 00:03:00');
 INSERT INTO `presensi_siswa` (`id`, `id_presensi`, `id_siswa`, `status`, `keterangan`, `dicatat_oleh`, `waktu`) VALUES (65,3,9,'hadir',NULL,'siswa','2026-10-31 00:03:00');
-INSERT INTO `presensi_siswa` (`id`, `id_presensi`, `id_siswa`, `status`, `keterangan`, `dicatat_oleh`, `waktu`) VALUES (66,4,1,'hadir',NULL,'siswa','2026-11-07 11:36:13');
-INSERT INTO `presensi_siswa` (`id`, `id_presensi`, `id_siswa`, `status`, `keterangan`, `dicatat_oleh`, `waktu`) VALUES (68,4,4,'hadir','Surat keterangan dokter','siswa','2026-11-07 11:36:14');
-INSERT INTO `presensi_siswa` (`id`, `id_presensi`, `id_siswa`, `status`, `keterangan`, `dicatat_oleh`, `waktu`) VALUES (69,4,6,'izin','Mengikuti kegiatan sekolah','guru','2026-11-07 11:36:17');
+INSERT INTO `presensi_siswa` (`id`, `id_presensi`, `id_siswa`, `status`, `keterangan`, `dicatat_oleh`, `waktu`) VALUES (66,4,1,'hadir',NULL,'siswa','2026-11-08 17:12:22');
+INSERT INTO `presensi_siswa` (`id`, `id_presensi`, `id_siswa`, `status`, `keterangan`, `dicatat_oleh`, `waktu`) VALUES (68,4,4,'hadir','Surat keterangan dokter','siswa','2026-11-08 17:12:23');
+INSERT INTO `presensi_siswa` (`id`, `id_presensi`, `id_siswa`, `status`, `keterangan`, `dicatat_oleh`, `waktu`) VALUES (69,4,6,'izin','Mengikuti kegiatan sekolah','guru','2026-11-08 17:12:25');
 INSERT INTO `presensi_siswa` (`id`, `id_presensi`, `id_siswa`, `status`, `keterangan`, `dicatat_oleh`, `waktu`) VALUES (70,4,2,'hadir',NULL,'siswa','2026-11-07 11:36:13');
 INSERT INTO `presensi_siswa` (`id`, `id_presensi`, `id_siswa`, `status`, `keterangan`, `dicatat_oleh`, `waktu`) VALUES (71,4,3,'hadir',NULL,'siswa','2026-11-07 11:36:13');
 INSERT INTO `presensi_siswa` (`id`, `id_presensi`, `id_siswa`, `status`, `keterangan`, `dicatat_oleh`, `waktu`) VALUES (73,4,5,'hadir',NULL,'siswa','2026-11-07 11:36:14');
@@ -2967,12 +2971,12 @@ INSERT INTO `presensi_siswa` (`id`, `id_presensi`, `id_siswa`, `status`, `ketera
 INSERT INTO `presensi_siswa` (`id`, `id_presensi`, `id_siswa`, `status`, `keterangan`, `dicatat_oleh`, `waktu`) VALUES (91,4,26,'hadir',NULL,'siswa','2026-11-07 11:36:17');
 INSERT INTO `presensi_siswa` (`id`, `id_presensi`, `id_siswa`, `status`, `keterangan`, `dicatat_oleh`, `waktu`) VALUES (92,4,27,'hadir',NULL,'siswa','2026-11-07 11:36:17');
 INSERT INTO `presensi_siswa` (`id`, `id_presensi`, `id_siswa`, `status`, `keterangan`, `dicatat_oleh`, `waktu`) VALUES (94,4,28,'hadir',NULL,'siswa','2026-11-07 11:36:17');
-INSERT INTO `presensi_siswa` (`id`, `id_presensi`, `id_siswa`, `status`, `keterangan`, `dicatat_oleh`, `waktu`) VALUES (96,4,19,'izin','Mengikuti kegiatan sekolah','guru','2026-11-07 11:36:17');
+INSERT INTO `presensi_siswa` (`id`, `id_presensi`, `id_siswa`, `status`, `keterangan`, `dicatat_oleh`, `waktu`) VALUES (96,4,19,'izin','Mengikuti kegiatan sekolah','guru','2026-11-08 17:12:25');
 INSERT INTO `presensi_siswa` (`id`, `id_presensi`, `id_siswa`, `status`, `keterangan`, `dicatat_oleh`, `waktu`) VALUES (97,4,8,'alpa',NULL,'guru','2026-11-07 11:36:17');
 
 
 -- ===========================================================================
--- Selesai. Total 2481 baris data pada 20 tabel.
+-- Selesai. Total 2485 baris data pada 20 tabel.
 -- ===========================================================================
 
 SET FOREIGN_KEY_CHECKS = 1;

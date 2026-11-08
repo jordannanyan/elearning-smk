@@ -1372,6 +1372,61 @@ async function main() {
     sesuai: rGantiSandi.status === 200 && cekSandiBaru.status === 200,
   });
 
+  // Mengubah kata sandi juga harus dapat dilakukan administrator dan
+  // guru, bukan siswa saja, sesuai kebutuhan pengguna U-02.
+  const rSandiAdmin = await put('/api/auth/password',
+    { passwordLama: 'admin123', passwordBaru: 'admin456' }, TA);
+  const cekAdminBaru = await login('admin@smakk.sch.id', 'admin456');
+  await put('/api/auth/password',
+    { passwordLama: 'admin456', passwordBaru: 'admin123' }, cekAdminBaru.data.token);
+  const rSandiGuru = await put('/api/auth/password',
+    { passwordLama: 'guru123', passwordBaru: 'guru456' }, TG);
+  const cekGuruBaru = await login('halifah@smakk.sch.id', 'guru456');
+  await put('/api/auth/password',
+    { passwordLama: 'guru456', passwordBaru: 'guru123' }, cekGuruBaru.data.token);
+  catat({
+    modul: 'Autentikasi',
+    skenario: 'Administrator dan guru mengubah kata sandi akunnya masing-masing',
+    input: 'Administrator dan guru mengganti kata sandi, lalu login dengan kata sandi baru',
+    harapan: 'Seluruh peran pengguna dapat mengubah kata sandinya sendiri',
+    aktual: `Administrator HTTP ${rSandiAdmin.status} (login HTTP ${cekAdminBaru.status}); `
+      + `guru HTTP ${rSandiGuru.status} (login HTTP ${cekGuruBaru.status})`,
+    sesuai: rSandiAdmin.status === 200 && cekAdminBaru.status === 200
+      && rSandiGuru.status === 200 && cekGuruBaru.status === 200,
+  });
+
+  const rSandiLamaSalah = await put('/api/auth/password',
+    { passwordLama: 'sandisalah', passwordBaru: 'siswa456' }, tokenSiswa.bunga);
+  const cekMasihLama = await login('bunga@siswa.smakk.sch.id', 'siswa123');
+  catat({
+    modul: 'Autentikasi', skenario: 'Pengguna mengubah kata sandi dengan kata sandi lama yang salah',
+    input: 'Password lama: sandisalah; Password baru: siswa456',
+    harapan: 'Sistem menolak dan kata sandi lama tetap berlaku',
+    aktual: `HTTP ${rSandiLamaSalah.status}, pesan: "${rSandiLamaSalah.data?.message}"; `
+      + `login dengan kata sandi lama: HTTP ${cekMasihLama.status}`,
+    sesuai: rSandiLamaSalah.status === 400 && cekMasihLama.status === 200,
+  });
+
+  const rSandiBaruPendek = await put('/api/auth/password',
+    { passwordLama: 'siswa123', passwordBaru: 'abc' }, tokenSiswa.bunga);
+  catat({
+    modul: 'Autentikasi', skenario: 'Pengguna mengisi kata sandi baru yang terlalu pendek',
+    input: 'Password baru: abc (3 karakter)',
+    harapan: 'Sistem menolak karena kata sandi baru minimal 6 karakter',
+    aktual: `HTTP ${rSandiBaruPendek.status}, pesan: "${rSandiBaruPendek.data?.message}"`,
+    sesuai: rSandiBaruPendek.status === 400,
+  });
+
+  const rSandiTanpaToken = await put('/api/auth/password',
+    { passwordLama: 'siswa123', passwordBaru: 'siswa456' }, null);
+  catat({
+    modul: 'Autentikasi', skenario: 'Mengubah kata sandi tanpa melakukan login terlebih dahulu',
+    input: 'Permintaan ubah kata sandi tanpa token',
+    harapan: 'Sistem menolak karena hanya pemilik akun yang sedang masuk yang boleh mengubahnya',
+    aktual: `HTTP ${rSandiTanpaToken.status}, pesan: "${rSandiTanpaToken.data?.message}"`,
+    sesuai: rSandiTanpaToken.status === 401,
+  });
+
   const kmBindXA = (await get('/api/kelas-mapel', TG_ASNIN)).data
     .find((k) => k.nama_mapel === 'BAHASA INDONESIA' && k.nama_kelas === 'X A').id;
 
