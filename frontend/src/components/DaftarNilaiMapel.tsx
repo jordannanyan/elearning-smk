@@ -36,6 +36,16 @@ export default function DaftarNilaiMapel({ idKelasMapel }: { idKelasMapel: numbe
       .finally(() => setMuat(false));
   }, [idKelasMapel, muatUlang]);
 
+  // Daftar siswa hasil pencarian. Dihitung sebelum seluruh keadaan
+  // berhenti awal di bawah, karena hook tidak boleh dipanggil bersyarat.
+  const tampil = useMemo(() => {
+    const semua = data?.siswa || [];
+    const kunci = cari.trim().toLowerCase();
+    if (!kunci) return semua;
+    return semua.filter((x) => x.nama.toLowerCase().includes(kunci)
+      || (x.nis || '').toLowerCase().includes(kunci));
+  }, [data, cari]);
+
   if (muat) return <p className="center-msg">Memuat rekap nilai...</p>;
 
   // Kegagalan memuat dibedakan dari keadaan "belum ada data", dan selalu
@@ -60,13 +70,6 @@ export default function DaftarNilaiMapel({ idKelasMapel }: { idKelasMapel: numbe
       </div>
     );
   }
-
-  const tampil = useMemo(() => {
-    const kunci = cari.trim().toLowerCase();
-    if (!kunci) return siswa;
-    return siswa.filter((x) => x.nama.toLowerCase().includes(kunci)
-      || (x.nis || '').toLowerCase().includes(kunci));
-  }, [siswa, cari]);
 
   // Rata-rata kelas tetap dihitung dari seluruh siswa, bukan hanya yang
   // sedang tampil, supaya pembandingnya tidak berubah saat mencari.
