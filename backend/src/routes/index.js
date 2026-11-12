@@ -120,8 +120,10 @@ router.delete('/tugas/:id', authenticate, authorize('guru'),
   kunci('tugas', dariParam), tugas.remove);
 
 router.get('/tugas/:id/kerjakan', authenticate, authorize('siswa'), tugas.kerjakan);
+// Memakai upload.any karena nama ruas lampiran jawaban esai mengikuti
+// id soalnya (lampiran_<id_soal>) sehingga tidak dapat didaftarkan di muka
 router.post('/tugas/:id/submit', authenticate, authorize('siswa'),
-  upload.single('file'), batasiUkuran,
+  upload.any(), batasiUkuran,
   kunci('tugas', dariParam), tugas.submit);
 
 router.get('/tugas/:id/pengumpulan', authenticate, authorize('guru'), tugas.listPengumpulan);
@@ -131,9 +133,17 @@ router.post('/pengumpulan/:id/nilai', authenticate, authorize('guru'),
 
 // ---------- Butir soal ----------
 router.get('/tugas/:id/soal', authenticate, authorize('guru'), soal.list);
+// Pertanyaan dan setiap pilihan jawaban dapat disertai satu gambar/PDF
+const LAMPIRAN_SOAL = [
+  { name: 'lampiran', maxCount: 1 },
+  { name: 'lampiran_a', maxCount: 1 }, { name: 'lampiran_b', maxCount: 1 },
+  { name: 'lampiran_c', maxCount: 1 }, { name: 'lampiran_d', maxCount: 1 },
+];
 router.post('/tugas/:id/soal', authenticate, authorize('guru'),
+  upload.fields(LAMPIRAN_SOAL), batasiUkuran,
   kunci('tugas', dariParam), soal.create);
 router.put('/soal/:id', authenticate, authorize('guru'),
+  upload.fields(LAMPIRAN_SOAL), batasiUkuran,
   kunci('soal', dariParam), soal.update);
 router.delete('/soal/:id', authenticate, authorize('guru'),
   kunci('soal', dariParam), soal.remove);

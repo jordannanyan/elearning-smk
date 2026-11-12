@@ -1,5 +1,5 @@
 {
-  "tanggal": "2026-11-08T17:12:25.464Z",
+  "tanggal": "2026-11-12T14:56:46.278Z",
   "total": 135,
   "valid": 135,
   "tidak_valid": 0,
@@ -281,7 +281,7 @@
       "skenario": "Administrator menghapus siswa yang sudah terdaftar pada kelas",
       "input": "Menghapus akun Ahmad Hanapi",
       "harapan": "Sistem menolak dan menyarankan penonaktifan agar riwayat nilai siswa tetap tersimpan",
-      "aktual": "HTTP 409, pesan: \"Siswa ini terdaftar pada 2 kelas dan memiliki 9 pengumpulan tugas sehingga tidak dapat dihapus. Nonaktifkan akunnya (misalnya karena sudah lulus atau pindah) agar riwayat nilainya tetap tersimpan.\"",
+      "aktual": "HTTP 409, pesan: \"Siswa ini terdaftar pada 2 kelas dan memiliki 4 pengumpulan tugas sehingga tidak dapat dihapus. Nonaktifkan akunnya (misalnya karena sudah lulus atau pindah) agar riwayat nilainya tetap tersimpan.\"",
       "status": "Valid"
     },
     {
@@ -506,7 +506,7 @@
       "skenario": "Siswa membuka satu pertemuan untuk mengikuti pembelajaran",
       "input": "Membuka Pertemuan 1",
       "harapan": "Sistem menampilkan materi, tugas, dan forum diskusi pertemuan tersebut secara berurutan",
-      "aktual": "HTTP 200, 3 materi, 1 tugas, 2 topik diskusi",
+      "aktual": "HTTP 200, 3 materi, 1 tugas, 1 topik diskusi",
       "status": "Valid"
     },
     {
@@ -542,7 +542,7 @@
       "skenario": "Sistem menampilkan sisa hari menuju batas waktu pengumpulan",
       "input": "Membuka daftar tugas sebagai siswa",
       "harapan": "Setiap tugas menampilkan sisa hari beserta penanda tingkat kemendesakannya",
-      "aktual": "Contoh: \"Tugas Proyek SPLDV\" sisa 1 hari, penanda kritis",
+      "aktual": "Contoh: \"Tugas Proyek SPLDV\" sisa 3 hari, penanda mendesak",
       "status": "Valid"
     },
     {
@@ -551,7 +551,7 @@
       "skenario": "Sistem mengelompokkan tugas siswa berdasarkan status pengerjaan",
       "input": "Membuka menu Tugas & Kuis sebagai siswa",
       "harapan": "Tugas terpisah menjadi belum dikerjakan, menunggu penilaian, sudah dinilai, dan terlewat",
-      "aktual": "Status yang terbentuk: dinilai, terlewat, belum_dikerjakan, menunggu_penilaian",
+      "aktual": "Status yang terbentuk: dinilai, terlewat, belum_dikerjakan",
       "status": "Valid"
     },
     {
@@ -587,7 +587,7 @@
       "skenario": "Guru menambah soal pilihan ganda tanpa mengisi pilihan jawaban",
       "input": "Pilihan A dan B dikosongkan",
       "harapan": "Sistem menolak dan menampilkan pesan bahwa pilihan jawaban wajib diisi",
-      "aktual": "HTTP 400, pesan: \"Minimal pilihan A dan B diisi\"",
+      "aktual": "HTTP 400, pesan: \"Pilihan A dan B wajib diisi, berupa teks maupun lampiran\"",
       "status": "Valid"
     },
     {
@@ -803,7 +803,7 @@
       "skenario": "Pengguna menampilkan forum diskusi yang menyatu dalam materi pertemuan",
       "input": "Membuka Pertemuan 1 lalu melihat bagian forum diskusi",
       "harapan": "Forum diskusi tampil di dalam pertemuan beserta seluruh balasannya secara berurutan",
-      "aktual": "HTTP 200, 3 topik dengan total 6 balasan",
+      "aktual": "HTTP 200, 2 topik dengan total 3 balasan",
       "status": "Valid"
     },
     {
@@ -1118,7 +1118,7 @@
       "skenario": "Guru membuka presensi pada sebuah pertemuan",
       "input": "Membuka presensi pertemuan 1: Struktur dan Kaidah Teks Deskripsi",
       "harapan": "Presensi terbuka sehingga siswa dapat menyatakan kehadirannya",
-      "aktual": "HTTP 200, pesan: \"Presensi dibuka kembali\"",
+      "aktual": "HTTP 201, pesan: \"Presensi berhasil dibuka\"",
       "status": "Valid"
     },
     {
@@ -1181,7 +1181,7 @@
       "skenario": "Guru menutup presensi dan siswa yang belum mengisi dicatat alpa",
       "input": "Menekan tombol Tutup Presensi",
       "harapan": "Presensi ditutup dan seluruh siswa yang belum menyatakan hadir tercatat alpa",
-      "aktual": "HTTP 200, pesan: \"Presensi ditutup.\" (2 siswa menyatakan hadir sendiri sebelum presensi ditutup)",
+      "aktual": "HTTP 200, pesan: \"Presensi ditutup. 1 siswa yang belum mengisi dicatat alpa.\" (25 siswa menyatakan hadir sendiri sebelum presensi ditutup)",
       "status": "Valid"
     },
     {

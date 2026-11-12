@@ -185,6 +185,12 @@ export interface Soal {
   pilihan_b?: string | null;
   pilihan_c?: string | null;
   pilihan_d?: string | null;
+  /* Berkas gambar/PDF pendukung, untuk soal yang tidak berupa teks */
+  lampiran?: string | null;
+  lampiran_a?: string | null;
+  lampiran_b?: string | null;
+  lampiran_c?: string | null;
+  lampiran_d?: string | null;
   jawaban_benar?: string | null;
   bobot: number;
   urutan: number;
@@ -199,8 +205,16 @@ export interface SoalKerjakan {
   pilihan_b?: string | null;
   pilihan_c?: string | null;
   pilihan_d?: string | null;
+  lampiran?: string | null;
+  lampiran_a?: string | null;
+  lampiran_b?: string | null;
+  lampiran_c?: string | null;
+  lampiran_d?: string | null;
   jawaban_benar?: string;
-  jawaban?: { pilihan?: string | null; jawaban_teks?: string | null; benar?: number; skor?: number } | null;
+  jawaban?: {
+    pilihan?: string | null; jawaban_teks?: string | null;
+    lampiran?: string | null; benar?: number; skor?: number;
+  } | null;
 }
 
 export interface KerjakanResponse {
@@ -236,6 +250,8 @@ export interface PengumpulanRow {
 export interface SoalPenilaian extends Soal {
   pilihan?: string | null;
   jawaban_teks?: string | null;
+  /* Lampiran jawaban esai yang diunggah siswa */
+  lampiran_jawaban?: string | null;
   benar?: number | null;
   skor_didapat?: number | null;
 }

@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import api from '../api/client';
 import { labelTipe, warnaTipe } from '../utils/tugas';
 import type { DaftarNilaiKelasMapel } from '../api/types';
@@ -23,6 +23,8 @@ export default function DaftarNilaiMapel({ idKelasMapel }: { idKelasMapel: numbe
   const [muat, setMuat] = useState(true);
   const [galat, setGalat] = useState('');
   const [muatUlang, setMuatUlang] = useState(0);
+  // Pencarian siswa menurut nama atau NIS, diletakkan di bawah rekap
+  const [cari, setCari] = useState('');
 
   useEffect(() => {
     setMuat(true);
@@ -59,7 +61,15 @@ export default function DaftarNilaiMapel({ idKelasMapel }: { idKelasMapel: numbe
     );
   }
 
-  // Rata-rata kelas tiap penilaian, sebagai pembanding capaian siswa
+  const tampil = useMemo(() => {
+    const kunci = cari.trim().toLowerCase();
+    if (!kunci) return siswa;
+    return siswa.filter((x) => x.nama.toLowerCase().includes(kunci)
+      || (x.nis || '').toLowerCase().includes(kunci));
+  }, [siswa, cari]);
+
+  // Rata-rata kelas tetap dihitung dari seluruh siswa, bukan hanya yang
+  // sedang tampil, supaya pembandingnya tidak berubah saat mencari.
   function rataKelas(idTugas: number) {
     const nilai = siswa.map((s) => angka(s.nilai[idTugas])).filter((v): v is number => v != null);
     return nilai.length
@@ -93,6 +103,19 @@ export default function DaftarNilaiMapel({ idKelasMapel }: { idKelasMapel: numbe
         </div>
       </div>
 
+      <div className="cari-siswa tanpa-cetak">
+        <input type="search" value={cari} onChange={(e) => setCari(e.target.value)}
+          placeholder="Cari siswa menurut nama atau NIS..." aria-label="Cari siswa" />
+        <span className="muted">
+          {cari.trim()
+            ? `${tampil.length} dari ${siswa.length} siswa`
+            : `${siswa.length} siswa`}
+        </span>
+        {cari.trim() && (
+          <button className="btn secondary small" onClick={() => setCari('')}>Bersihkan</button>
+        )}
+      </div>
+
       <div className="table-wrap">
         <table className="tabel-raport">
           <thead>
@@ -112,9 +135,9 @@ export default function DaftarNilaiMapel({ idKelasMapel }: { idKelasMapel: numbe
             </tr>
           </thead>
           <tbody>
-            {siswa.map((s, i) => (
+            {tampil.map((s) => (
               <tr key={s.id}>
-                <td className="lekat">{i + 1}</td>
+                <td className="lekat">{siswa.indexOf(s) + 1}</td>
                 <td className="lekat nama">{s.nama}</td>
                 <td className="muted">{s.nis || '-'}</td>
                 {tugas.map((t) => {
@@ -149,6 +172,15 @@ export default function DaftarNilaiMapel({ idKelasMapel }: { idKelasMapel: numbe
                 </td>
               </tr>
             ))}
+            {tampil.length === 0 && (
+              <tr>
+                <td className="lekat" />
+                <td className="lekat nama" colSpan={2}>
+                  <span className="muted">Tidak ada siswa yang cocok.</span>
+                </td>
+                <td colSpan={tugas.length + 3} />
+              </tr>
+            )}
             <tr className="baris-rata">
               <td className="lekat" />
               <td className="lekat nama"><strong>Rata-rata kelas</strong></td>

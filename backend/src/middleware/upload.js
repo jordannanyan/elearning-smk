@@ -43,22 +43,44 @@ function fileFilter(req, file, cb) {
 
 const upload = multer({ storage, fileFilter, limits: { fileSize: BATAS_VIDEO } });
 
-// Memeriksa ukuran berkas non-video setelah diunggah (batas lebih kecil)
+// Mengumpulkan seluruh berkas pada satu permintaan, baik yang diunggah
+// melalui upload.single, upload.fields, maupun upload.any.
+function semuaBerkas(req) {
+  if (req.file) return [req.file];
+  if (Array.isArray(req.files)) return req.files;
+  if (req.files && typeof req.files === 'object') return Object.values(req.files).flat();
+  return [];
+}
+
+// Memeriksa ukuran setiap berkas non-video (batasnya lebih kecil). Bila
+// ada satu saja yang melebihi batas, seluruh berkas pada permintaan itu
+// dihapus kembali supaya tidak ada berkas yatim yang tertinggal.
 function batasiUkuran(req, res, next) {
-  if (!req.file) return next();
-  const ext = path.extname(req.file.originalname).toLowerCase();
-  const isVideo = EKSTENSI_VIDEO.includes(ext);
-  const batas = isVideo ? BATAS_VIDEO : BATAS_UMUM;
-  if (req.file.size > batas) {
-    fs.unlink(req.file.path, () => {});
-    return res.status(413).json({
-      message: `Ukuran berkas melebihi batas ${Math.round(batas / 1024 / 1024)} MB ` +
-        `untuk jenis berkas ${ext}.` });
+  const berkas = semuaBerkas(req);
+  if (berkas.length === 0) return next();
+
+  for (const f of berkas) {
+    const ext = path.extname(f.originalname).toLowerCase();
+    const batas = EKSTENSI_VIDEO.includes(ext) ? BATAS_VIDEO : BATAS_UMUM;
+    if (f.size > batas) {
+      berkas.forEach((x) => fs.unlink(x.path, () => {}));
+      return res.status(413).json({
+        message: `Ukuran berkas melebihi batas ${Math.round(batas / 1024 / 1024)} MB ` +
+          `untuk jenis berkas ${ext}.` });
+    }
   }
   next();
 }
 
+// Menghapus berkas unggahan lama dari cakram ketika diganti atau dihapus
+function hapusBerkas(namaBerkas) {
+  if (!namaBerkas) return;
+  fs.unlink(path.join(uploadDir, namaBerkas), () => {});
+}
+
 module.exports = upload;
 module.exports.batasiUkuran = batasiUkuran;
+module.exports.semuaBerkas = semuaBerkas;
+module.exports.hapusBerkas = hapusBerkas;
 module.exports.EKSTENSI = { EKSTENSI_DOKUMEN, EKSTENSI_GAMBAR, EKSTENSI_VIDEO };
 module.exports.BATAS = { BATAS_UMUM, BATAS_VIDEO };

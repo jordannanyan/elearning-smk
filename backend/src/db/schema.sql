@@ -232,6 +232,14 @@ CREATE TABLE soal (
   pilihan_b     VARCHAR(500) DEFAULT NULL,
   pilihan_c     VARCHAR(500) DEFAULT NULL,
   pilihan_d     VARCHAR(500) DEFAULT NULL,
+  -- Berkas pendukung soal, berupa gambar atau PDF. Diperlukan untuk soal
+  -- yang tidak dapat dituliskan sebagai teks, misalnya struktur kimia,
+  -- grafik, atau potongan bacaan yang dipindai.
+  lampiran      VARCHAR(255) DEFAULT NULL,
+  lampiran_a    VARCHAR(255) DEFAULT NULL,
+  lampiran_b    VARCHAR(255) DEFAULT NULL,
+  lampiran_c    VARCHAR(255) DEFAULT NULL,
+  lampiran_d    VARCHAR(255) DEFAULT NULL,
   jawaban_benar CHAR(1) DEFAULT NULL,
   bobot         INT NOT NULL DEFAULT 10,
   urutan        INT NOT NULL DEFAULT 0,
@@ -278,6 +286,9 @@ CREATE TABLE jawaban_siswa (
   id_soal        INT NOT NULL,
   pilihan        CHAR(1) DEFAULT NULL,
   jawaban_teks   TEXT DEFAULT NULL,
+  -- Lampiran jawaban esai, misalnya foto pekerjaan pada kertas atau PDF
+  -- hasil pemindaian, untuk jawaban yang tidak berupa teks.
+  lampiran       VARCHAR(255) DEFAULT NULL,
   benar          TINYINT DEFAULT NULL,
   skor           DECIMAL(6,2) DEFAULT NULL,
   UNIQUE KEY uq_pengumpulan_soal (id_pengumpulan, id_soal),

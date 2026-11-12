@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import api from '../api/client';
 import Modal from './Modal';
+import Lampiran from './Lampiran';
 import type { SoalPenilaian } from '../api/types';
 
 export default function PenilaianModal({ pengumpulanId, namaSiswa, onClose, onSaved }:
@@ -52,7 +53,10 @@ export default function PenilaianModal({ pengumpulanId, namaSiswa, onClose, onSa
                 <span className={`badge ${s.tipe === 'esai' ? 'orange' : 'green'}`}>{s.tipe === 'esai' ? 'Esai' : 'PG'}</span>
                 <span className="badge gray">bobot {s.bobot}</span>
               </div>
-              <div style={{ fontWeight: 600 }}>{i + 1}. {s.pertanyaan}</div>
+              <div style={{ fontWeight: 600 }}>
+                {i + 1}. {s.pertanyaan || <span className="muted">(soal berupa lampiran)</span>}
+              </div>
+              <Lampiran berkas={s.lampiran} label={`Lampiran soal ${i + 1}`} />
 
               {s.tipe === 'pilihan_ganda' ? (
                 <div style={{ marginTop: 6, fontSize: 13 }}>
@@ -62,6 +66,10 @@ export default function PenilaianModal({ pengumpulanId, namaSiswa, onClose, onSa
                       : <span className="badge red" style={{ marginLeft: 8 }}>Salah 0</span>}
                   </div>
                   <div className="muted">Kunci: {s.jawaban_benar}</div>
+                  {(['a', 'b', 'c', 'd'] as const).map((k) => (
+                    <Lampiran key={k} berkas={(s as any)[`lampiran_${k}`]}
+                      label={`Pilihan ${k.toUpperCase()}`} />
+                  ))}
                 </div>
               ) : (
                 <div style={{ marginTop: 6 }}>
@@ -69,6 +77,12 @@ export default function PenilaianModal({ pengumpulanId, namaSiswa, onClose, onSa
                   <div style={{ background: '#f9fafb', borderRadius: 6, padding: 8, margin: '4px 0', fontSize: 13, whiteSpace: 'pre-wrap' }}>
                     {s.jawaban_teks || <span className="muted">(kosong)</span>}
                   </div>
+                  {s.lampiran_jawaban && (
+                    <div style={{ margin: '4px 0 8px' }}>
+                      <div className="muted" style={{ fontSize: 12 }}>Lampiran jawaban siswa:</div>
+                      <Lampiran berkas={s.lampiran_jawaban} label="Lampiran jawaban siswa" />
+                    </div>
+                  )}
                   <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
                     <label style={{ fontSize: 13 }}>Skor:</label>
                     <input type="number" min={0} max={s.bobot} style={{ width: 90 }}

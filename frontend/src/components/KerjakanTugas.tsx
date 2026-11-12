@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import api, { API_BASE } from '../api/client';
 import Modal from './Modal';
+import Lampiran from './Lampiran';
 import type { KerjakanResponse, SoalKerjakan, Tugas } from '../api/types';
 
 function fmt(dt?: string | null) {
@@ -11,7 +12,9 @@ function fmt(dt?: string | null) {
 
 // ---------------------------------------------------------------------
 // Dialog pengerjaan tugas maupun kuis oleh siswa.
-//   - Kuis berbasis soal  : pilihan ganda dikoreksi otomatis sistem
+//   - Kuis berbasis soal  : pilihan ganda dikoreksi otomatis sistem,
+//                           jawaban esai boleh disertai lampiran gambar
+//                           atau PDF untuk pekerjaan pada kertas
 //   - Tugas biasa         : jawaban teks dan/atau berkas lampiran
 // Setelah dinilai, kunci jawaban dan hasil koreksi ikut ditampilkan.
 // ---------------------------------------------------------------------
@@ -21,6 +24,8 @@ export default function KerjakanTugas({ tugas, onClose, onSelesai }:
   const [ans, setAns] = useState<Record<number, { pilihan?: string; jawaban_teks?: string }>>({});
   const [teks, setTeks] = useState('');
   const [file, setFile] = useState<File | null>(null);
+  // Lampiran jawaban esai, satu berkas untuk setiap soal
+  const [lampiran, setLampiran] = useState<Record<number, File | null>>({});
   const [err, setErr] = useState('');
   const [saving, setSaving] = useState(false);
 
@@ -47,7 +52,14 @@ export default function KerjakanTugas({ tugas, onClose, onSelesai }:
           pilihan: ans[s.id]?.pilihan || null,
           jawaban_teks: ans[s.id]?.jawaban_teks || null,
         }));
-        await api.post(`/tugas/${tugas.id}/submit`, { jawaban });
+        // Dikirim sebagai FormData karena jawaban esai dapat disertai
+        // lampiran; daftar jawabannya ikut sebagai teks JSON.
+        const fd = new FormData();
+        fd.append('jawaban', JSON.stringify(jawaban));
+        Object.entries(lampiran).forEach(([idSoal, f]) => {
+          if (f) fd.append(`lampiran_${idSoal}`, f);
+        });
+        await api.post(`/tugas/${tugas.id}/submit`, fd);
       } else {
         const fd = new FormData();
         fd.append('jawaban', teks);
@@ -116,13 +128,17 @@ export default function KerjakanTugas({ tugas, onClose, onSelesai }:
                   {graded && s.tipe === 'esai' &&
                     <span className="badge gray">skor {jw?.skor ?? 0}/{s.bobot}</span>}
                 </div>
-                <div style={{ fontWeight: 600, marginBottom: 8 }}>{i + 1}. {s.pertanyaan}</div>
+                <div style={{ fontWeight: 600, marginBottom: 8 }}>
+                  {i + 1}. {s.pertanyaan || <span className="muted">(soal berupa lampiran)</span>}
+                </div>
+                <Lampiran berkas={s.lampiran} label={`Lampiran soal ${i + 1}`} />
 
                 {s.tipe === 'pilihan_ganda' ? (
                   <div style={{ display: 'grid', gap: 6 }}>
                     {(['A', 'B', 'C', 'D'] as const).map((k) => {
                       const val = (s as any)[`pilihan_${k.toLowerCase()}`];
-                      if (!val) return null;
+                      const lampPilihan = (s as any)[`lampiran_${k.toLowerCase()}`];
+                      if (!val && !lampPilihan) return null;
                       const isKunci = graded && s.jawaban_benar === k;
                       const dipilih = a.pilihan === k;
                       return (
@@ -135,7 +151,10 @@ export default function KerjakanTugas({ tugas, onClose, onSelesai }:
                           <input type="radio" name={`s${s.id}`} style={{ width: 'auto' }}
                             checked={dipilih} disabled={!bolehKirim}
                             onChange={() => setAns({ ...ans, [s.id]: { ...a, pilihan: k } })} />
-                          <span><strong>{k}.</strong> {val}</span>
+                          <span style={{ flex: 1, minWidth: 0 }}>
+                            <strong>{k}.</strong> {val}
+                            <Lampiran berkas={lampPilihan} label={`Pilihan ${k}`} />
+                          </span>
                           {isKunci && <span className="badge green" style={{ marginLeft: 'auto' }}>Kunci</span>}
                         </label>
                       );
@@ -143,13 +162,39 @@ export default function KerjakanTugas({ tugas, onClose, onSelesai }:
                   </div>
                 ) : (
                   bolehKirim ? (
-                    <textarea placeholder="Tulis jawaban esai Anda..." value={a.jawaban_teks || ''}
-                      onChange={(e) => setAns({ ...ans, [s.id]: { ...a, jawaban_teks: e.target.value } })} />
+                    <>
+                      <textarea placeholder="Tulis jawaban esai Anda..." value={a.jawaban_teks || ''}
+                        onChange={(e) => setAns({ ...ans, [s.id]: { ...a, jawaban_teks: e.target.value } })} />
+                      <div className="isian-lampiran">
+                        <label className="muted">
+                          Lampiran jawaban (opsional) — foto pekerjaan di kertas atau PDF
+                        </label>
+                        {jw?.lampiran && !lampiran[s.id] && (
+                          <div className="lampiran-tersimpan">
+                            <Lampiran berkas={jw.lampiran} label="Lampiran jawaban" />
+                            <span className="muted" style={{ fontSize: 11.5 }}>
+                              Sudah terkirim. Pilih berkas baru untuk menggantinya.
+                            </span>
+                          </div>
+                        )}
+                        <input type="file" accept="image/*,.pdf"
+                          onChange={(e) => setLampiran({
+                            ...lampiran, [s.id]: e.target.files?.[0] || null })} />
+                        {lampiran[s.id] && (
+                          <div className="muted" style={{ fontSize: 11.5 }}>
+                            Berkas baru: {lampiran[s.id]!.name}
+                          </div>
+                        )}
+                      </div>
+                    </>
                   ) : (
-                    <div style={{
-                      background: '#f9fafb', borderRadius: 6, padding: 8,
-                      fontSize: 13, whiteSpace: 'pre-wrap',
-                    }}>{jw?.jawaban_teks || <span className="muted">(belum dijawab)</span>}</div>
+                    <>
+                      <div style={{
+                        background: '#f9fafb', borderRadius: 6, padding: 8,
+                        fontSize: 13, whiteSpace: 'pre-wrap',
+                      }}>{jw?.jawaban_teks || <span className="muted">(belum dijawab)</span>}</div>
+                      <Lampiran berkas={jw?.lampiran} label="Lampiran jawaban" />
+                    </>
                   )
                 )}
               </div>

@@ -1,4 +1,5 @@
 const pool = require('../config/db');
+const { semuaBerkas, hapusBerkas } = require('../middleware/upload');
 
 // Jenis penilaian yang dikenal sistem, berurut sepanjang semester
 const TIPE_TUGAS = ['tugas', 'kuis', 'uts', 'uas'];
@@ -222,9 +223,16 @@ exports.submit = asyncHandler(async (req, res) => {
   const [soal] = await pool.query('SELECT * FROM soal WHERE id_tugas = ?', [req.params.id]);
   const terlambat = t[0].deadline && new Date() > new Date(t[0].deadline) ? 1 : 0;
 
+  // Berkas pada permintaan ini dikelompokkan menurut nama ruasnya.
+  // Tugas biasa memakai ruas `file`, sedangkan jawaban esai pada kuis
+  // memakai `lampiran_<id_soal>` sehingga satu pengumpulan dapat memuat
+  // beberapa lampiran sekaligus.
+  const berkas = {};
+  for (const f of semuaBerkas(req)) berkas[f.fieldname] = f.filename;
+
   // ---- Tugas biasa (tanpa soal) ----
   if (soal.length === 0) {
-    const file = req.file ? req.file.filename : null;
+    const file = berkas.file || null;
     await pool.query(
       `INSERT INTO pengumpulan_tugas (id_tugas, id_siswa, file, jawaban, terlambat)
        VALUES (?,?,?,?,?)
@@ -250,6 +258,12 @@ exports.submit = asyncHandler(async (req, res) => {
       [req.params.id, sid, terlambat]);
     const pid = pRes.insertId;
 
+    // Lampiran yang sudah ada dipertahankan apabila siswa mengumpulkan
+    // ulang tanpa mengunggah berkas baru pada soal tersebut.
+    const [jwbLama] = await conn.query(
+      'SELECT id_soal, lampiran FROM jawaban_siswa WHERE id_pengumpulan = ?', [pid]);
+    const lampiranLama = new Map(jwbLama.map((j) => [j.id_soal, j.lampiran]));
+
     await conn.query('DELETE FROM jawaban_siswa WHERE id_pengumpulan = ?', [pid]);
 
     for (const s of soal) {
@@ -261,9 +275,15 @@ exports.submit = asyncHandler(async (req, res) => {
           'INSERT INTO jawaban_siswa (id_pengumpulan, id_soal, pilihan, benar, skor) VALUES (?,?,?,?,?)',
           [pid, s.id, pilihan, benar, benar ? s.bobot : 0]);
       } else {
+        const baru = berkas[`lampiran_${s.id}`] || null;
+        const sebelumnya = lampiranLama.get(s.id) || null;
+        let lampiran = baru || sebelumnya;
+        if (baru && sebelumnya && baru !== sebelumnya) hapusBerkas(sebelumnya);
+        if (!baru && a.hapus_lampiran) { hapusBerkas(sebelumnya); lampiran = null; }
         await conn.query(
-          'INSERT INTO jawaban_siswa (id_pengumpulan, id_soal, jawaban_teks, skor) VALUES (?,?,?,NULL)',
-          [pid, s.id, a.jawaban_teks || null]);
+          `INSERT INTO jawaban_siswa (id_pengumpulan, id_soal, jawaban_teks, lampiran, skor)
+           VALUES (?,?,?,?,NULL)`,
+          [pid, s.id, a.jawaban_teks || null, lampiran]);
       }
     }
 
@@ -318,9 +338,12 @@ exports.kerjakan = asyncHandler(async (req, res) => {
     return {
       id: s.id, pertanyaan: s.pertanyaan, tipe: s.tipe, bobot: s.bobot,
       pilihan_a: s.pilihan_a, pilihan_b: s.pilihan_b, pilihan_c: s.pilihan_c, pilihan_d: s.pilihan_d,
+      lampiran: s.lampiran,
+      lampiran_a: s.lampiran_a, lampiran_b: s.lampiran_b,
+      lampiran_c: s.lampiran_c, lampiran_d: s.lampiran_d,
       jawaban_benar: graded ? s.jawaban_benar : undefined,
       jawaban: j ? {
-        pilihan: j.pilihan, jawaban_teks: j.jawaban_teks,
+        pilihan: j.pilihan, jawaban_teks: j.jawaban_teks, lampiran: j.lampiran,
         benar: graded ? j.benar : undefined,
         skor: graded ? j.skor : undefined,
       } : null,
@@ -394,7 +417,8 @@ exports.detailPengumpulan = asyncHandler(async (req, res) => {
     return res.status(403).json({ message: 'Bukan pengumpulan pada kelas yang Anda ampu' });
 
   const [soal] = await pool.query(`
-    SELECT s.*, j.pilihan, j.jawaban_teks, j.benar, j.skor AS skor_didapat
+    SELECT s.*, j.pilihan, j.jawaban_teks, j.lampiran AS lampiran_jawaban,
+           j.benar, j.skor AS skor_didapat
     FROM soal s
     LEFT JOIN jawaban_siswa j ON j.id_soal = s.id AND j.id_pengumpulan = ?
     WHERE s.id_tugas = ? ORDER BY s.urutan, s.id`, [pg.id, pg.id_tugas]);
