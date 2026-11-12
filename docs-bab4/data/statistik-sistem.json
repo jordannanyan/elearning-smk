@@ -53,22 +53,22 @@
     {
       "tabel": "tugas",
       "deskripsi": "Menyimpan data tugas dan kuis beserta tipe dan batas waktunya",
-      "jumlah_record": 11
+      "jumlah_record": 12
     },
     {
       "tabel": "soal",
       "deskripsi": "Menyimpan butir soal pilihan ganda maupun esai pada sebuah kuis",
-      "jumlah_record": 13
+      "jumlah_record": 16
     },
     {
       "tabel": "pengumpulan_tugas",
       "deskripsi": "Menyimpan data pengumpulan jawaban tugas oleh siswa",
-      "jumlah_record": 88
+      "jumlah_record": 89
     },
     {
       "tabel": "jawaban_siswa",
       "deskripsi": "Menyimpan jawaban siswa pada setiap butir soal kuis",
-      "jumlah_record": 62
+      "jumlah_record": 65
     },
     {
       "tabel": "nilai",
@@ -78,7 +78,7 @@
     {
       "tabel": "forum_diskusi",
       "deskripsi": "Menyimpan topik dan balasan forum diskusi pada sebuah pertemuan",
-      "jumlah_record": 12
+      "jumlah_record": 8
     },
     {
       "tabel": "jam_pelajaran",
@@ -179,6 +179,17 @@
       "tugas": "Kuis Persamaan dan Pertidaksamaan Linear",
       "tipe": "kuis",
       "skor": "80.00",
+      "terlambat": 0
+    },
+    {
+      "siswa": "Ahmad Hanapi",
+      "kelas": "X A",
+      "periode": "2026/2",
+      "mapel": "MATEMATIKA UMUM",
+      "pertemuan": 3,
+      "tugas": "Kuis Grafik Fungsi Kuadrat",
+      "tipe": "kuis",
+      "skor": null,
       "terlambat": 0
     },
     {
@@ -1182,6 +1193,19 @@
       "tugas": "Tugas Proyek SPLDV",
       "tipe": "tugas",
       "jumlah_kumpul": 2,
+      "sudah_dinilai": "0",
+      "rata_rata": null,
+      "nilai_terendah": null,
+      "nilai_tertinggi": null
+    },
+    {
+      "periode": "2026/2",
+      "mapel": "MATEMATIKA UMUM",
+      "kelas": "X A",
+      "pertemuan": 3,
+      "tugas": "Kuis Grafik Fungsi Kuadrat",
+      "tipe": "kuis",
+      "jumlah_kumpul": 1,
       "sudah_dinilai": "0",
       "rata_rata": null,
       "nilai_terendah": null,

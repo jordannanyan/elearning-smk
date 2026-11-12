@@ -506,7 +506,7 @@
   {
     "tabel": "tugas",
     "deskripsi": "Menyimpan data tugas dan kuis beserta tipe dan batas waktunya",
-    "jumlah_record": 11,
+    "jumlah_record": 12,
     "kolom": [
       {
         "nama": "id",
@@ -569,7 +569,7 @@
   {
     "tabel": "soal",
     "deskripsi": "Menyimpan butir soal pilihan ganda maupun esai pada sebuah kuis",
-    "jumlah_record": 13,
+    "jumlah_record": 16,
     "kolom": [
       {
         "nama": "id",
@@ -628,6 +628,41 @@
         "keterangan": "Teks pilihan jawaban D"
       },
       {
+        "nama": "lampiran",
+        "tipe": "varchar(255)",
+        "null": "Ya",
+        "kunci": "-",
+        "keterangan": "-"
+      },
+      {
+        "nama": "lampiran_a",
+        "tipe": "varchar(255)",
+        "null": "Ya",
+        "kunci": "-",
+        "keterangan": "-"
+      },
+      {
+        "nama": "lampiran_b",
+        "tipe": "varchar(255)",
+        "null": "Ya",
+        "kunci": "-",
+        "keterangan": "-"
+      },
+      {
+        "nama": "lampiran_c",
+        "tipe": "varchar(255)",
+        "null": "Ya",
+        "kunci": "-",
+        "keterangan": "-"
+      },
+      {
+        "nama": "lampiran_d",
+        "tipe": "varchar(255)",
+        "null": "Ya",
+        "kunci": "-",
+        "keterangan": "-"
+      },
+      {
         "nama": "jawaban_benar",
         "tipe": "char(1)",
         "null": "Ya",
@@ -653,7 +688,7 @@
   {
     "tabel": "pengumpulan_tugas",
     "deskripsi": "Menyimpan data pengumpulan jawaban tugas oleh siswa",
-    "jumlah_record": 88,
+    "jumlah_record": 89,
     "kolom": [
       {
         "nama": "id",
@@ -709,7 +744,7 @@
   {
     "tabel": "jawaban_siswa",
     "deskripsi": "Menyimpan jawaban siswa pada setiap butir soal kuis",
-    "jumlah_record": 62,
+    "jumlah_record": 65,
     "kolom": [
       {
         "nama": "id",
@@ -745,6 +780,13 @@
         "null": "Ya",
         "kunci": "-",
         "keterangan": "Jawaban esai siswa"
+      },
+      {
+        "nama": "lampiran",
+        "tipe": "varchar(255)",
+        "null": "Ya",
+        "kunci": "-",
+        "keterangan": "-"
       },
       {
         "nama": "benar",
@@ -814,7 +856,7 @@
   {
     "tabel": "forum_diskusi",
     "deskripsi": "Menyimpan topik dan balasan forum diskusi pada sebuah pertemuan",
-    "jumlah_record": 12,
+    "jumlah_record": 8,
     "kolom": [
       {
         "nama": "id",

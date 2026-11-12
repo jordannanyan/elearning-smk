@@ -187,181 +187,211 @@
   },
   {
     "no": 32,
-    "berkas": "32-guru-penilaian.png",
+    "berkas": "32-guru-soal-berlampiran.png",
+    "judul": "Butir Soal yang Disertai Gambar",
+    "keterangan": "Pertanyaan dapat disertai berkas gambar maupun PDF, sehingga soal yang tidak dapat dituliskan sebagai teks — seperti grafik fungsi, struktur kimia, atau potongan bacaan hasil pindaian — tetap dapat disusun di dalam sistem. Gambarnya ditampilkan langsung di bawah pertanyaan."
+  },
+  {
+    "no": 33,
+    "berkas": "33-guru-form-soal-lampiran.png",
+    "judul": "Formulir Penyusunan Soal Berlampiran",
+    "keterangan": "Formulir penyusunan soal menyediakan isian berkas pada pertanyaan dan pada setiap pilihan jawaban. Teks pertanyaan boleh dikosongkan apabila soalnya seluruhnya berupa gambar, dan pilihan jawaban dianggap terisi apabila memiliki lampiran."
+  },
+  {
+    "no": 34,
+    "berkas": "34-guru-penilaian.png",
     "judul": "Halaman Penilaian (Guru)",
     "keterangan": "Penilaian dikelompokkan per mata pelajaran, tidak dicampur menjadi satu daftar panjang. Setiap kartu menampilkan jumlah tugas, pekerjaan yang terkumpul, dan jumlah siswa pada kelas tersebut."
   },
   {
-    "no": 33,
-    "berkas": "33-guru-penilaian-mapel.png",
+    "no": 35,
+    "berkas": "35-guru-penilaian-mapel.png",
     "judul": "Daftar Tugas pada Satu Mata Pelajaran",
     "keterangan": "Setelah mata pelajaran dipilih, tugas dan kuisnya ditampilkan berurutan menurut pertemuan beserta jumlah pekerjaan yang sudah terkumpul."
   },
   {
-    "no": 34,
-    "berkas": "34-guru-daftar-pengumpulan.png",
+    "no": 36,
+    "berkas": "36-guru-daftar-pengumpulan.png",
     "judul": "Daftar Pengumpulan Tugas Siswa",
     "keterangan": "Daftar pengumpulan menampilkan seluruh siswa kelas, termasuk siswa yang belum mengumpulkan, sehingga tugas yang tidak dikumpulkan ikut terpantau guru."
   },
   {
-    "no": 35,
-    "berkas": "35-guru-form-nilai.png",
+    "no": 37,
+    "berkas": "37-guru-form-nilai.png",
     "judul": "Form Penilaian Tugas oleh Guru",
     "keterangan": "Form penilaian menampilkan jawaban siswa beserta berkas lampirannya, kolom nilai 0 sampai 100, dan kolom catatan umpan balik untuk siswa."
   },
   {
-    "no": 36,
-    "berkas": "36-guru-pengumpulan-kuis.png",
+    "no": 38,
+    "berkas": "38-guru-nilai-lampiran-jawaban.png",
+    "judul": "Penilaian Jawaban Esai yang Disertai Foto Pekerjaan",
+    "keterangan": "Jawaban esai siswa dapat disertai foto pekerjaan pada kertas maupun berkas PDF. Foto tersebut ditampilkan langsung pada form penilaian, tepat di atas kolom skor, sehingga guru dapat memeriksa langkah pengerjaan siswa tanpa berpindah halaman. Soal yang bergambar juga ditampilkan kembali agar guru menilai dengan acuan yang sama seperti yang dilihat siswa."
+  },
+  {
+    "no": 39,
+    "berkas": "39-guru-pengumpulan-kuis.png",
     "judul": "Daftar Pengumpulan Kuis Siswa",
     "keterangan": "Daftar pengumpulan kuis beserta status penilaian tiap siswa, yaitu sudah dinilai, masih memerlukan penilaian jawaban esai, atau belum mengumpulkan sama sekali."
   },
   {
-    "no": 37,
-    "berkas": "37-guru-penilaian-esai.png",
+    "no": 40,
+    "berkas": "40-guru-penilaian-esai.png",
     "judul": "Halaman Pemeriksaan dan Penilaian Jawaban Kuis",
     "keterangan": "Halaman pemeriksaan jawaban kuis siswa. Jawaban pilihan ganda telah dikoreksi otomatis oleh sistem beserta perolehan skornya, sedangkan jawaban esai dinilai manual oleh guru dengan mengisi skor dan catatan."
   },
   {
-    "no": 38,
-    "berkas": "38-guru-raport-daftar.png",
+    "no": 41,
+    "berkas": "41-guru-raport-daftar.png",
     "judul": "Daftar Mata Pelajaran pada Menu Rekap Nilai",
     "keterangan": "Menu Rekap Nilai menampilkan mata pelajaran yang diampu guru beserta kelasnya. Guru memilih salah satunya untuk melihat nilai seluruh siswa pada mata pelajaran tersebut."
   },
   {
-    "no": 39,
-    "berkas": "39-guru-raport-nilai.png",
+    "no": 42,
+    "berkas": "42-guru-raport-nilai.png",
     "judul": "Rekap Nilai Satu Mata Pelajaran (Guru)",
     "keterangan": "Nilai seluruh siswa pada satu mata pelajaran. Penilaian tersusun berurutan menurut pertemuan, mulai dari tugas paling awal, kuis, Ujian Tengah Semester, sampai Ujian Akhir Semester, masing-masing beserta bobotnya. Kolom Nilai Akhir memuat jumlah nilai dikalikan bobotnya, bukan rata-rata, dan dilengkapi predikat serta status ketuntasan terhadap KKM."
   },
   {
-    "no": 40,
-    "berkas": "40-guru-jadwal-mengajar.png",
+    "no": 43,
+    "berkas": "43-guru-cari-siswa.png",
+    "judul": "Pencarian Siswa pada Rekap Nilai",
+    "keterangan": "Rekap nilai dilengkapi pencarian siswa menurut nama maupun NIS, sehingga guru tidak perlu menelusuri seluruh daftar pada kelas yang jumlah siswanya banyak. Rata-rata kelas tetap dihitung dari seluruh siswa agar pembandingnya tidak berubah ketika daftar sedang disaring."
+  },
+  {
+    "no": 44,
+    "berkas": "44-guru-jadwal-mengajar.png",
     "judul": "Jadwal Mengajar Guru",
     "keterangan": "Jadwal mengajar guru yang bersangkutan disusun per hari beserta jam pelajaran, mata pelajaran, dan kelas yang diajar. Jadwal dimuat dari jadwal resmi sekolah sehingga isinya sama dengan jadwal yang berlaku di sekolah."
   },
   {
-    "no": 41,
-    "berkas": "41-guru-rekap-presensi.png",
+    "no": 45,
+    "berkas": "45-guru-rekap-presensi.png",
     "judul": "Rekap Presensi Satu Mata Pelajaran (Guru)",
     "keterangan": "Rekap kehadiran seluruh siswa pada setiap pertemuan yang presensinya sudah dibuka, dilengkapi jumlah hadir, sakit, izin, alpa, dan persentase kehadiran masing-masing siswa."
   },
   {
-    "no": 42,
-    "berkas": "42-siswa-dashboard.png",
+    "no": 46,
+    "berkas": "46-siswa-dashboard.png",
     "judul": "Halaman Dashboard Siswa",
     "keterangan": "Dashboard siswa menampilkan kelas yang diikuti pada periode berjalan, ringkasan tugas, serta daftar tugas yang batas waktunya tinggal tiga hari atau kurang beserta penanda warna kemendesakannya."
   },
   {
-    "no": 43,
-    "berkas": "43-siswa-kelas-saya.png",
+    "no": 47,
+    "berkas": "47-siswa-kelas-saya.png",
     "judul": "Halaman Kelas Saya (Siswa)",
     "keterangan": "Halaman Kelas Saya menampilkan kartu setiap mata pelajaran di kelas siswa beserta guru pengampu, jumlah pertemuan, materi, tugas, dan sisa waktu tugas terdekat. Dengan tampilan ini materi tidak lagi bertumpuk menjadi satu daftar panjang."
   },
   {
-    "no": 44,
-    "berkas": "44-siswa-daftar-pertemuan.png",
+    "no": 48,
+    "berkas": "48-siswa-daftar-pertemuan.png",
     "judul": "Daftar Pertemuan Mata Pelajaran (Siswa)",
     "keterangan": "Daftar pertemuan pada sebuah mata pelajaran yang tersusun berurutan mulai dari pertemuan pertama, sehingga siswa dapat mengikuti alur pembelajaran secara runut."
   },
   {
-    "no": 45,
-    "berkas": "45-siswa-presensi-pertemuan.png",
+    "no": 49,
+    "berkas": "49-siswa-presensi-pertemuan.png",
     "judul": "Pengisian Presensi oleh Siswa",
     "keterangan": "Ketika guru membuka presensi, siswa menyatakan kehadirannya sendiri melalui tombol Saya Hadir pada halaman pertemuan. Status kehadiran siswa beserta rekapitulasi kehadiran kelas ditampilkan pada panel yang sama."
   },
   {
-    "no": 46,
-    "berkas": "46-siswa-isi-pertemuan.png",
+    "no": 50,
+    "berkas": "50-siswa-isi-pertemuan.png",
     "judul": "Halaman Isi Pertemuan (Siswa)",
     "keterangan": "Tampilan satu pertemuan bagi siswa yang memuat materi berupa uraian teks, berkas yang dapat diunduh, dan video pembelajaran yang dapat langsung ditonton, dilanjutkan dengan tugas beserta sisa waktunya, kemudian forum diskusi pertemuan tersebut."
   },
   {
-    "no": 47,
-    "berkas": "47-siswa-tugas.png",
+    "no": 51,
+    "berkas": "51-siswa-tugas.png",
     "judul": "Halaman Tugas dan Kuis (Siswa)",
     "keterangan": "Tugas disajikan sebagai kartu, bukan tabel, sehingga lebih mudah dibaca sekilas. Setiap kartu hanya memuat mata pelajaran, judul, batas waktu, dan sisa hari beserta penanda warna kemendesakannya; keterangan lain disembunyikan pada bagian rincian. Status pengerjaan dipisahkan melalui tab tersendiri."
   },
   {
-    "no": 48,
-    "berkas": "48-siswa-tugas-rincian.png",
+    "no": 52,
+    "berkas": "52-siswa-tugas-rincian.png",
     "judul": "Rincian Tugas yang Disembunyikan",
     "keterangan": "Keterangan tambahan seperti guru pengajar, pertemuan asal, kelas, waktu pengumpulan, dan catatan guru hanya ditampilkan ketika rincian dibuka, agar tampilan utama tetap ringkas."
   },
   {
-    "no": 49,
-    "berkas": "49-siswa-hasil-kuis.png",
+    "no": 53,
+    "berkas": "53-siswa-hasil-kuis.png",
     "judul": "Halaman Hasil Pengerjaan Kuis Siswa",
     "keterangan": "Tampilan hasil pengerjaan kuis yang telah dinilai. Sistem menampilkan nilai akhir, jawaban yang dipilih siswa, keterangan benar atau salah, serta kunci jawaban setiap butir soal."
   },
   {
-    "no": 50,
-    "berkas": "50-siswa-nilai.png",
+    "no": 54,
+    "berkas": "54-siswa-nilai.png",
     "judul": "Halaman Rekap Nilai Siswa",
     "keterangan": "Rekap nilai siswa yang dikelompokkan per mata pelajaran beserta rata-rata masing masing, bukan digabung menjadi satu daftar. Siswa juga dapat memilih periode pembelajaran untuk menelusuri riwayat nilainya pada semester dan kelas sebelumnya, serta melihat tugas yang tidak dikumpulkan."
   },
   {
-    "no": 51,
-    "berkas": "51-siswa-nilai-arsip.png",
+    "no": 55,
+    "berkas": "55-siswa-nilai-arsip.png",
     "judul": "Riwayat Nilai pada Periode Sebelumnya",
     "keterangan": "Riwayat nilai siswa pada periode pembelajaran terdahulu yang telah dikunci administrator. Nilai pada periode tersebut bersifat final dan hanya dapat dilihat sebagai arsip riwayat belajar siswa."
   },
   {
-    "no": 52,
-    "berkas": "52-siswa-raport.png",
+    "no": 56,
+    "berkas": "56-siswa-raport.png",
     "judul": "Halaman Raport Sementara Siswa",
     "keterangan": "Raport sementara siswa yang merangkum seluruh mata pelajaran di kelasnya dalam satu halaman, memuat identitas siswa, nilai rata-rata tiap mata pelajaran, predikat, keterangan ketuntasan terhadap KKM, serta rata-rata keseluruhan dan peringkat kelas. Periode pembelajaran dapat diganti untuk melihat raport pada kelas yang diikuti sebelumnya."
   },
   {
-    "no": 53,
-    "berkas": "53-siswa-jadwal-kelas.png",
+    "no": 57,
+    "berkas": "57-siswa-jadwal-kelas.png",
     "judul": "Jadwal Pelajaran Kelas Siswa",
     "keterangan": "Jadwal pelajaran kelas siswa disusun per hari beserta jam pelajaran, mata pelajaran, kode jadwal, dan guru pengajarnya."
   },
   {
-    "no": 54,
-    "berkas": "54-jadwal-sekolah-format-sk.png",
+    "no": 58,
+    "berkas": "58-jadwal-sekolah-format-sk.png",
     "judul": "Jadwal Mata Pelajaran Seluruh Sekolah",
     "keterangan": "Jadwal seluruh kelas ditampilkan dengan susunan yang sama dengan jadwal resmi sekolah: baris jam ke- terhadap kolom kelas yang dikelompokkan menurut fase, isi sel berupa kode gabungan huruf mata pelajaran dan nomor guru, serta dilengkapi legenda kode guru, kode mata pelajaran, dan pembagian waktu sekolah. Kolom kelas siswa yang sedang masuk diberi penanda warna."
   },
   {
-    "no": 55,
-    "berkas": "55-siswa-rekap-presensi.png",
+    "no": 59,
+    "berkas": "59-siswa-rekap-presensi.png",
     "judul": "Rekap Kehadiran Siswa",
     "keterangan": "Rekap kehadiran siswa pada seluruh mata pelajaran di periode berjalan, memuat persentase kehadiran serta jumlah hadir, sakit, izin, dan alpa."
   },
   {
-    "no": 56,
-    "berkas": "56-siswa-kerjakan-kuis.png",
+    "no": 60,
+    "berkas": "60-siswa-kerjakan-kuis.png",
     "judul": "Halaman Pengerjaan Kuis oleh Siswa",
     "keterangan": "Halaman pengerjaan kuis yang menampilkan butir soal pilihan ganda beserta pilihan jawabannya dan soal esai yang dijawab pada kolom teks. Kunci jawaban belum ditampilkan selama kuis belum dinilai."
   },
   {
-    "no": 57,
-    "berkas": "57-siswa-kerjakan-tugas.png",
+    "no": 61,
+    "berkas": "61-siswa-kerjakan-tugas.png",
     "judul": "Halaman Pengerjaan dan Pengumpulan Tugas",
     "keterangan": "Halaman pengerjaan tugas yang memuat instruksi, batas waktu, kolom jawaban teks, serta pilihan mengunggah berkas lampiran jawaban beserta batasan formatnya."
   },
   {
-    "no": 58,
-    "berkas": "58-akun-ubah-sandi.png",
+    "no": 62,
+    "berkas": "62-siswa-kuis-bergambar.png",
+    "judul": "Pengerjaan Kuis dengan Soal dan Jawaban Bergambar",
+    "keterangan": "Soal yang disertai gambar ditampilkan langsung kepada siswa, sehingga grafik dapat dibaca tanpa diunduh lebih dahulu. Pada butir esai tersedia isian lampiran sehingga pekerjaan yang dikerjakan di kertas dapat difoto lalu diunggah, beserta lampiran yang sudah terkirim sebelumnya."
+  },
+  {
+    "no": 63,
+    "berkas": "63-akun-ubah-sandi.png",
     "judul": "Halaman Akun Saya dan Ubah Kata Sandi",
     "keterangan": "Halaman Akun Saya yang dapat dibuka seluruh pengguna, baik administrator, guru, maupun siswa. Identitas akun ditampilkan di sebelah kiri, sedangkan formulir ubah kata sandi di sebelah kanan meminta kata sandi lama sebagai pemastian bahwa yang mengubah memang pemilik akun."
   },
   {
-    "no": 59,
-    "berkas": "59-periode-terkunci-guru.png",
+    "no": 64,
+    "berkas": "64-periode-terkunci-guru.png",
     "judul": "Tampilan Periode yang Telah Dikunci",
     "keterangan": "Tampilan kelas pada periode pembelajaran yang telah dikunci administrator. Sistem memberi pemberitahuan bahwa seluruh data periode tersebut bersifat hanya-baca, dan kartu mata pelajaran ditandai sebagai arsip."
   },
   {
-    "no": 60,
-    "berkas": "60-periode-terkunci-pertemuan.png",
+    "no": 65,
+    "berkas": "65-periode-terkunci-pertemuan.png",
     "judul": "Isi Pertemuan pada Periode Terkunci",
     "keterangan": "Isi pertemuan pada periode yang telah dikunci. Seluruh materi dan tugas tetap dapat dibaca sebagai arsip, namun tombol untuk menambah, mengubah, maupun menghapus data dinonaktifkan sehingga data tidak dapat diubah lagi."
   },
   {
-    "no": 61,
-    "berkas": "61-tampilan-mobile.png",
+    "no": 66,
+    "berkas": "66-tampilan-mobile.png",
     "judul": "Tampilan Sistem pada Perangkat Mobile",
     "keterangan": "Tampilan sistem e-learning ketika diakses melalui browser pada perangkat smartphone. Antarmuka menyesuaikan lebar layar sesuai kebutuhan non-fungsional ketersediaan sistem."
   }

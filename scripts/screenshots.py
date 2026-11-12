@@ -375,6 +375,36 @@ def main():
                modal=True)
         page.click('.modal button:has-text("Tutup")')
 
+        # Soal berlampiran gambar beserta formulir pengisiannya
+        buka(page, "/guru/kelas")
+        page.locator('.kartu-mapel:has-text("MATEMATIKA UMUM"):has-text("X A")').first.click()
+        page.wait_for_url("**/guru/kelas/**", timeout=10000)
+        page.wait_for_timeout(1000)
+        page.locator('.pertemuan-item:has-text("Sistem Persamaan Linear") '
+                     'a:has-text("Kelola Isi")').first.click()
+        page.wait_for_url("**/guru/pertemuan/**", timeout=10000)
+        page.wait_for_timeout(1200)
+        page.locator('tr:has-text("Kuis Grafik Fungsi Kuadrat") button:has-text("Soal")').first.click()
+        page.wait_for_selector('.modal:has-text("Kelola Soal")')
+        page.wait_for_timeout(900)
+        simpan(page, "guru-soal-berlampiran", "Butir Soal yang Disertai Gambar",
+               "Pertanyaan dapat disertai berkas gambar maupun PDF, sehingga soal yang tidak "
+               "dapat dituliskan sebagai teks — seperti grafik fungsi, struktur kimia, atau "
+               "potongan bacaan hasil pindaian — tetap dapat disusun di dalam sistem. Gambarnya "
+               "ditampilkan langsung di bawah pertanyaan.",
+               modal=True)
+
+        page.click('.modal button:has-text("Tambah Soal")')
+        page.wait_for_timeout(900)
+        simpan(page, "guru-form-soal-lampiran", "Formulir Penyusunan Soal Berlampiran",
+               "Formulir penyusunan soal menyediakan isian berkas pada pertanyaan dan pada setiap "
+               "pilihan jawaban. Teks pertanyaan boleh dikosongkan apabila soalnya seluruhnya "
+               "berupa gambar, dan pilihan jawaban dianggap terisi apabila memiliki lampiran.",
+               modal=True)
+        page.click('.modal button:has-text("Batal")')
+        page.wait_for_timeout(500)
+        page.click('.modal button:has-text("Tutup")')
+
         buka(page, "/guru/penilaian")
         simpan(page, "guru-penilaian", "Halaman Penilaian (Guru)",
                "Penilaian dikelompokkan per mata pelajaran, tidak dicampur menjadi satu daftar "
@@ -403,6 +433,26 @@ def main():
         simpan(page, "guru-form-nilai", "Form Penilaian Tugas oleh Guru",
                "Form penilaian menampilkan jawaban siswa beserta berkas lampirannya, kolom nilai "
                "0 sampai 100, dan kolom catatan umpan balik untuk siswa.", modal=True)
+        page.click('.modal >> nth=-1 >> button:has-text("Batal")')
+        page.wait_for_timeout(400)
+        page.click('.modal button:has-text("Tutup")')
+
+        # Penilaian butir esai yang jawabannya berupa lampiran foto
+        page.locator('.kartu-tugas:has-text("Kuis Grafik Fungsi Kuadrat") '
+                     'button:has-text("Periksa & Nilai")').first.click()
+        page.wait_for_selector('.modal:has-text("Pengumpulan:")')
+        page.wait_for_timeout(800)
+        # Pada kuis berbasis soal tombolnya bernama "Periksa"
+        page.locator('.modal button:has-text("Periksa")').first.click()
+        page.wait_for_selector('.modal >> nth=1')
+        page.wait_for_timeout(900)
+        simpan(page, "guru-nilai-lampiran-jawaban",
+               "Penilaian Jawaban Esai yang Disertai Foto Pekerjaan",
+               "Jawaban esai siswa dapat disertai foto pekerjaan pada kertas maupun berkas PDF. "
+               "Foto tersebut ditampilkan langsung pada form penilaian, tepat di atas kolom skor, "
+               "sehingga guru dapat memeriksa langkah pengerjaan siswa tanpa berpindah halaman. "
+               "Soal yang bergambar juga ditampilkan kembali agar guru menilai dengan acuan yang "
+               "sama seperti yang dilihat siswa.", modal=True)
         page.click('.modal >> nth=-1 >> button:has-text("Batal")')
         page.wait_for_timeout(400)
         page.click('.modal button:has-text("Tutup")')
@@ -452,6 +502,16 @@ def main():
                "sampai Ujian Akhir Semester, masing-masing beserta bobotnya. Kolom Nilai Akhir "
                "memuat jumlah nilai dikalikan bobotnya, bukan rata-rata, dan dilengkapi "
                "predikat serta status ketuntasan terhadap KKM.", full=True)
+
+        page.fill('.cari-siswa input', 'ahmad')
+        page.wait_for_timeout(700)
+        simpan(page, "guru-cari-siswa", "Pencarian Siswa pada Rekap Nilai",
+               "Rekap nilai dilengkapi pencarian siswa menurut nama maupun NIS, sehingga guru "
+               "tidak perlu menelusuri seluruh daftar pada kelas yang jumlah siswanya banyak. "
+               "Rata-rata kelas tetap dihitung dari seluruh siswa agar pembandingnya tidak "
+               "berubah ketika daftar sedang disaring.", full=True)
+        page.fill('.cari-siswa input', '')
+        page.wait_for_timeout(400)
 
         buka(page, "/guru/jadwal")
         simpan(page, "guru-jadwal-mengajar", "Jadwal Mengajar Guru",
@@ -611,6 +671,29 @@ def main():
                "Halaman pengerjaan tugas yang memuat instruksi, batas waktu, kolom jawaban teks, "
                "serta pilihan mengunggah berkas lampiran jawaban beserta batasan formatnya.",
                modal=True)
+        page.click('.modal button:has-text("Tutup")')
+
+
+        # Kuis bergambar dibuka oleh siswa yang sudah mengumpulkan, agar
+        # lampiran soal dan lampiran jawabannya terlihat sekaligus.
+        login(page, "ahmad@siswa.smakk.sch.id", "siswa123")
+        # Kuis ini sudah dikumpulkan sehingga tidak lagi muncul pada daftar
+        # tugas; dibuka melalui halaman pertemuannya.
+        buka(page, "/siswa/kelas")
+        page.locator('.kartu-mapel:has-text("MATEMATIKA UMUM")').first.click()
+        page.wait_for_url("**/siswa/kelas/**", timeout=10000)
+        page.wait_for_timeout(1000)
+        page.locator('.pertemuan-item:has-text("Sistem Persamaan Linear Dua Variabel")').first.click()
+        page.wait_for_timeout(1400)
+        page.locator('.materi-item:has-text("Kuis Grafik Fungsi Kuadrat") '
+                     'button:has-text("Lihat")').first.click()
+        page.wait_for_selector(".modal")
+        page.wait_for_timeout(1500)
+        simpan(page, "siswa-kuis-bergambar", "Pengerjaan Kuis dengan Soal dan Jawaban Bergambar",
+               "Soal yang disertai gambar ditampilkan langsung kepada siswa, sehingga grafik "
+               "dapat dibaca tanpa diunduh lebih dahulu. Pada butir esai tersedia isian lampiran "
+               "sehingga pekerjaan yang dikerjakan di kertas dapat difoto lalu diunggah, beserta "
+               "lampiran yang sudah terkirim sebelumnya.", modal=True)
         page.click('.modal button:has-text("Tutup")')
 
         # =============================================================

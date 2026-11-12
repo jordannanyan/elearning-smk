@@ -554,6 +554,67 @@ async function seed() {
       }
     }
 
+    // =============================================================
+    // Kuis dengan soal dan jawaban berlampiran
+    // -------------------------------------------------------------
+    // Sebagian mata pelajaran memiliki soal yang tidak dapat
+    // dituliskan sebagai teks, misalnya grafik fungsi. Begitu pula
+    // jawabannya, yang sering dikerjakan pada kertas lalu difoto.
+    // Kuis berikut menjadi peragaannya: pertanyaannya disertai
+    // gambar grafik, dan jawaban esai seorang siswa disertai foto
+    // pekerjaannya.
+    // =============================================================
+    const BERKAS_GRAFIK = salinAsetContoh('grafik-fungsi-kuadrat.png');
+    const BERKAS_PEKERJAAN = salinAsetContoh('pekerjaan-siswa.png');
+
+    const idKuisGrafik = await buatTugas(
+      p3, 'Kuis Grafik Fungsi Kuadrat',
+      'Perhatikan gambar pada setiap soal, lalu jawablah. Jawaban esai boleh '
+      + 'dikerjakan pada kertas, difoto, dan diunggah sebagai lampiran.',
+      hari(5), 'kuis', 0);
+
+    const soalLampiran = [
+      ['pilihan_ganda', 'Perhatikan grafik berikut. Berapakah titik potong kurva terhadap sumbu X?',
+        BERKAS_GRAFIK, 'x = -1 dan x = 3', 'x = 1 dan x = -3', 'x = -4 dan x = 0',
+        'x = 0 dan x = 3', 'A', 30, 1],
+      ['pilihan_ganda', 'Berdasarkan grafik yang sama, titik baliknya berada pada koordinat ...',
+        null, '(1, -4)', '(-1, 0)', '(0, -3)', '(3, 0)', 'A', 30, 2],
+      ['esai', 'Tentukan himpunan penyelesaian dari sistem persamaan 2x + 3y = 12 dan '
+        + 'x - y = 1. Kerjakan langkahnya pada kertas, lalu unggah fotonya.',
+        null, null, null, null, null, null, 40, 3],
+    ];
+    for (const [tipe, q, lamp, a, b, c, d, benar, bobot, urut] of soalLampiran) {
+      await conn.query(
+        `INSERT INTO soal (id_tugas, pertanyaan, tipe, lampiran, pilihan_a, pilihan_b,
+                           pilihan_c, pilihan_d, jawaban_benar, bobot, urutan)
+         VALUES (?,?,?,?,?,?,?,?,?,?,?)`,
+        [idKuisGrafik, q, tipe, lamp, a, b, c, d, benar, bobot, urut]);
+      totalSoal += 1;
+    }
+
+    // Seorang siswa sudah mengumpulkan, jawaban esainya berupa foto
+    const [soalKuisGrafik] = await conn.query(
+      'SELECT id, tipe, bobot, jawaban_benar FROM soal WHERE id_tugas = ? ORDER BY urutan',
+      [idKuisGrafik]);
+    const idSiswaLampiran = siswaId['ahmad@siswa.smakk.sch.id'];
+    const [pgLampiran] = await conn.query(
+      `INSERT INTO pengumpulan_tugas (id_tugas, id_siswa, terlambat) VALUES (?,?,0)`,
+      [idKuisGrafik, idSiswaLampiran]);
+    for (const s of soalKuisGrafik) {
+      if (s.tipe === 'pilihan_ganda') {
+        await conn.query(
+          `INSERT INTO jawaban_siswa (id_pengumpulan, id_soal, pilihan, benar, skor)
+           VALUES (?,?,?,?,?)`,
+          [pgLampiran.insertId, s.id, 'A', 1, s.bobot]);
+      } else {
+        await conn.query(
+          `INSERT INTO jawaban_siswa (id_pengumpulan, id_soal, jawaban_teks, lampiran, skor)
+           VALUES (?,?,?,?,NULL)`,
+          [pgLampiran.insertId, s.id,
+            'Langkah pengerjaan saya ada pada lampiran foto.', BERKAS_PEKERJAAN]);
+      }
+    }
+
 
     // =============================================================
     // Presensi (daftar hadir) contoh pada pertemuan Matematika X A

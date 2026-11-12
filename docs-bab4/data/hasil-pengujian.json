@@ -1,5 +1,5 @@
 {
-  "tanggal": "2026-11-12T14:56:46.278Z",
+  "tanggal": "2026-11-12T15:21:27.431Z",
   "total": 135,
   "valid": 135,
   "tidak_valid": 0,
@@ -281,7 +281,7 @@
       "skenario": "Administrator menghapus siswa yang sudah terdaftar pada kelas",
       "input": "Menghapus akun Ahmad Hanapi",
       "harapan": "Sistem menolak dan menyarankan penonaktifan agar riwayat nilai siswa tetap tersimpan",
-      "aktual": "HTTP 409, pesan: \"Siswa ini terdaftar pada 2 kelas dan memiliki 4 pengumpulan tugas sehingga tidak dapat dihapus. Nonaktifkan akunnya (misalnya karena sudah lulus atau pindah) agar riwayat nilainya tetap tersimpan.\"",
+      "aktual": "HTTP 409, pesan: \"Siswa ini terdaftar pada 2 kelas dan memiliki 5 pengumpulan tugas sehingga tidak dapat dihapus. Nonaktifkan akunnya (misalnya karena sudah lulus atau pindah) agar riwayat nilainya tetap tersimpan.\"",
       "status": "Valid"
     },
     {
@@ -497,7 +497,7 @@
       "skenario": "Siswa membuka mata pelajaran lalu melihat daftar pertemuan",
       "input": "Membuka mata pelajaran MATEMATIKA UMUM",
       "harapan": "Materi tersusun per pertemuan secara berurutan mulai dari pertemuan pertama",
-      "aktual": "HTTP 200, 5 pertemuan: Pertemuan 1 (3 materi, 1 tugas); Pertemuan 2 (1 materi, 1 tugas); Pertemuan 3 (2 materi, 1 tugas); Pertemuan 4 (1 materi, 1 tugas); Pertemuan 5 (0 materi, 1 tugas)",
+      "aktual": "HTTP 200, 5 pertemuan: Pertemuan 1 (3 materi, 1 tugas); Pertemuan 2 (1 materi, 1 tugas); Pertemuan 3 (2 materi, 2 tugas); Pertemuan 4 (1 materi, 1 tugas); Pertemuan 5 (0 materi, 1 tugas)",
       "status": "Valid"
     },
     {
@@ -551,7 +551,7 @@
       "skenario": "Sistem mengelompokkan tugas siswa berdasarkan status pengerjaan",
       "input": "Membuka menu Tugas & Kuis sebagai siswa",
       "harapan": "Tugas terpisah menjadi belum dikerjakan, menunggu penilaian, sudah dinilai, dan terlewat",
-      "aktual": "Status yang terbentuk: dinilai, terlewat, belum_dikerjakan",
+      "aktual": "Status yang terbentuk: dinilai, terlewat, belum_dikerjakan, menunggu_penilaian",
       "status": "Valid"
     },
     {
@@ -731,7 +731,7 @@
       "skenario": "Sistem menandai tugas yang tidak dikumpulkan siswa hingga batas waktu",
       "input": "Membuka rekap nilai siswa",
       "harapan": "Tugas yang terlewat batas waktunya ditandai sebagai tidak dikumpulkan",
-      "aktual": "1 tugas ditandai tidak dikumpulkan dari total 9 tugas",
+      "aktual": "1 tugas ditandai tidak dikumpulkan dari total 10 tugas",
       "status": "Valid"
     },
     {
@@ -758,7 +758,7 @@
       "skenario": "Guru melihat rekap nilai seluruh siswa pada satu kelas mata pelajaran",
       "input": "Membuka rekap nilai MATEMATIKA UMUM kelas X A",
       "harapan": "Sistem menampilkan nilai seluruh siswa untuk setiap tugas beserta rata-ratanya",
-      "aktual": "HTTP 200, 29 siswa dan 5 tugas ditampilkan",
+      "aktual": "HTTP 200, 29 siswa dan 6 tugas ditampilkan",
       "status": "Valid"
     },
     {
@@ -839,7 +839,7 @@
       "skenario": "Guru melihat ringkasan aktivitas pembelajaran pada dashboard",
       "input": "Membuka dashboard guru",
       "harapan": "Sistem menampilkan jumlah kelas, pertemuan, materi, tugas, dan pekerjaan yang perlu dinilai",
-      "aktual": "HTTP 200: 5 kelas mapel, 5 pertemuan, 7 materi, 5 tugas, 2 perlu dinilai",
+      "aktual": "HTTP 200: 5 kelas mapel, 5 pertemuan, 7 materi, 6 tugas, 3 perlu dinilai",
       "status": "Valid"
     },
     {
@@ -848,7 +848,7 @@
       "skenario": "Siswa melihat ringkasan tugas dan pengingat batas waktu pada dashboard",
       "input": "Membuka dashboard siswa",
       "harapan": "Sistem menampilkan ringkasan tugas beserta daftar tugas yang tenggatnya sudah dekat",
-      "aktual": "HTTP 200: kelas X A, 9 tugas, 7 dikumpulkan, 1 tugas mendesak",
+      "aktual": "HTTP 200: kelas X A, 10 tugas, 8 dikumpulkan, 1 tugas mendesak",
       "status": "Valid"
     },
     {
@@ -938,7 +938,7 @@
       "skenario": "Guru melihat nilai siswa satu mata pelajaran dari tugas pertama sampai ujian akhir",
       "input": "Membuka nilai MATEMATIKA UMUM kelas X A",
       "harapan": "Sistem menampilkan seluruh penilaian berurutan menurut pertemuan, mulai dari tugas paling awal, kuis, Ujian Tengah Semester, sampai Ujian Akhir Semester, beserta nilai tiap siswa dan rata-ratanya",
-      "aktual": "HTTP 200: 29 siswa, 5 penilaian berurutan [tugas -> kuis -> tugas -> uts -> uas]; contoh: Ahmad Hanapi rata-rata undefined",
+      "aktual": "HTTP 200: 29 siswa, 6 penilaian berurutan [tugas -> kuis -> tugas -> kuis -> uts -> uas]; contoh: Ahmad Hanapi rata-rata undefined",
       "status": "Valid"
     },
     {
@@ -947,7 +947,7 @@
       "skenario": "Guru melihat bobot tiap penilaian beserta jumlah seluruhnya",
       "input": "Membuka rekap nilai MATEMATIKA UMUM kelas X A",
       "harapan": "Setiap penilaian menampilkan bobotnya dan sistem menghitung jumlah seluruh bobot beserta sisanya terhadap 100%",
-      "aktual": "HTTP 200: bobot tugas 15%, kuis 15%, tugas 15%, uts 25%, uas 30%; jumlah 100%, sisa 0%, lengkap: ya",
+      "aktual": "HTTP 200: bobot tugas 15%, kuis 15%, tugas 15%, kuis 0%, uts 25%, uas 30%; jumlah 100%, sisa 0%, lengkap: ya",
       "status": "Valid"
     },
     {
