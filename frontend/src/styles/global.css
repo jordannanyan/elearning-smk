@@ -396,6 +396,22 @@ a.polos { color: inherit; display: block; }
 .kartu-fitur h3 { font-size: 16px; margin-bottom: 8px; }
 .kartu-fitur p { font-size: 13.5px; color: var(--gray); line-height: 1.7; }
 
+/* Kartu unduh panduan penggunaan pada halaman depan */
+.kartu-panduan-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 18px; }
+.kartu-panduan { border: 1px solid var(--border); border-radius: 12px; padding: 22px;
+  background: #fff; display: flex; flex-direction: column; gap: 12px; }
+.kartu-panduan .kepala-panduan { display: flex; align-items: center; gap: 12px; }
+.kartu-panduan .kepala-panduan .ikon { font-size: 26px; line-height: 1; }
+.kartu-panduan h3 { font-size: 16px; margin-bottom: 3px; }
+.kartu-panduan .rincian-berkas { font-size: 12px; color: var(--gray); }
+.kartu-panduan p { font-size: 13.5px; color: var(--gray); line-height: 1.7; flex: 1; }
+.kartu-panduan .aksi-panduan { display: flex; flex-wrap: wrap; gap: 10px; }
+
+.panduan-kaki { display: flex; flex-wrap: wrap; gap: 8px 22px; margin: 12px 0 4px; }
+.panduan-kaki a { color: #d1d5db; font-size: 13px; text-decoration: none; }
+.panduan-kaki a:hover { color: #fff; text-decoration: underline; }
+
 .alur-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 16px; }
 .alur-item { display: flex; gap: 12px; background: var(--bg); border: 1px solid var(--border);
   border-radius: 10px; padding: 16px; }

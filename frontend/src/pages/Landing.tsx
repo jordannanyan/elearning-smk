@@ -40,6 +40,28 @@ const FITUR = [
 // Akun Instagram resmi SMA Negeri 1 Karau Kuala
 const INSTAGRAM = 'https://www.instagram.com/smansa_karaukuala';
 
+// Panduan penggunaan dalam bentuk PDF. Berkasnya diletakkan pada folder
+// public sehingga dapat diunduh langsung tanpa melalui API dan tanpa login,
+// baik oleh guru maupun siswa yang belum menerima akunnya.
+const PANDUAN = [
+  {
+    ikon: '👨‍🏫', peran: 'Guru',
+    berkas: '/panduan-penggunaan-guru.pdf',
+    rincian: '43 halaman · PDF 5,1 MB',
+    isi: 'Menyusun pertemuan dan materi, membuat tugas dan kuis beserta soal '
+      + 'bergambar, mengelola presensi, memeriksa dan menilai pekerjaan siswa, '
+      + 'serta membaca rekap nilai dan cara nilai akhir dihitung.',
+  },
+  {
+    ikon: '🎓', peran: 'Siswa',
+    berkas: '/panduan-penggunaan-siswa.pdf',
+    rincian: '31 halaman · PDF 3,6 MB',
+    isi: 'Membuka materi tiap pertemuan, mengisi presensi, mengerjakan tugas '
+      + 'dan kuis, melampirkan foto pekerjaan di kertas, serta melihat nilai '
+      + 'dan raport sementara.',
+  },
+];
+
 const ALUR = [
   { nomor: 1, judul: 'Periode Pembelajaran', isi: 'Tahun ajaran dan semester, misalnya 2026/2.' },
   { nomor: 2, judul: 'Kelas', isi: 'Rombongan belajar beserta wali kelas dan siswa anggotanya.' },
@@ -72,6 +94,7 @@ export default function Landing() {
           </div>
           <nav>
             <a href="#fitur">Fitur</a>
+            <a href="#panduan">Panduan</a>
             <a href="#alur">Alur Pembelajaran</a>
             <a href="#profil">Profil Sekolah</a>
             <Link className="btn" to={user ? `/${user.role}` : '/login'}>
@@ -134,6 +157,40 @@ export default function Landing() {
         </div>
       </section>
 
+      <section className="landing-isi blok-landing" id="panduan">
+        <h2>Panduan Penggunaan</h2>
+        <p className="penjelas">
+          Panduan langkah demi langkah beserta tangkapan layar setiap halaman sistem.
+          Dapat dibaca langsung di peramban maupun diunduh, dan tidak perlu masuk
+          terlebih dahulu untuk membukanya.
+        </p>
+        <div className="kartu-panduan-grid">
+          {PANDUAN.map((p) => (
+            <article className="kartu-panduan" key={p.peran}>
+              <div className="kepala-panduan">
+                <span className="ikon" aria-hidden="true">{p.ikon}</span>
+                <div>
+                  <h3>Panduan untuk {p.peran}</h3>
+                  <span className="rincian-berkas">{p.rincian}</span>
+                </div>
+              </div>
+              <p>{p.isi}</p>
+              <div className="aksi-panduan">
+                {/* Dibuka pada tab baru agar halaman depan tidak tertinggal,
+                    dan disediakan pula tautan unduh langsung. */}
+                <a className="btn" href={p.berkas}
+                  target="_blank" rel="noreferrer noopener">
+                  Baca Panduan
+                </a>
+                <a className="btn secondary" href={p.berkas} download>
+                  ⬇ Unduh PDF
+                </a>
+              </div>
+            </article>
+          ))}
+        </div>
+      </section>
+
       <section className="landing-isi blok-landing" id="alur">
         <h2>Alur Pembelajaran</h2>
         <p className="penjelas">
@@ -185,6 +242,16 @@ export default function Landing() {
           <span className="muted">
             Sistem E-Learning Berbasis Web — Kabupaten Barito Selatan, Kalimantan Tengah
           </span>
+          {/* Tautan unduh panduan, diulang di kaki halaman supaya tetap
+              terjangkau dari bagian mana pun halaman depan. */}
+          <div className="panduan-kaki">
+            {PANDUAN.map((p) => (
+              <a key={p.peran} href={p.berkas}
+                target="_blank" rel="noreferrer noopener">
+                📘 Panduan Penggunaan untuk {p.peran} (PDF)
+              </a>
+            ))}
+          </div>
           {/* Tautan media sosial resmi sekolah, dibuka pada tab baru */}
           <a className="tautan-sosial" href={INSTAGRAM}
             target="_blank" rel="noreferrer noopener">

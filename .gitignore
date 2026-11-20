@@ -27,3 +27,10 @@ Thumbs.db
 
 # TS build cache
 *.tsbuildinfo
+
+# Singgahan gambar panduan PDF (dibangun ulang oleh scripts/buat-panduan-pdf.py)
+docs-bab4/.singgah-panduan/
+
+# Singgahan bytecode Python
+__pycache__/
+*.pyc
