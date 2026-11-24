@@ -486,6 +486,14 @@ a.polos { color: inherit; display: block; }
 .tabel-raport th.lekat, .tabel-raport td.lekat { position: sticky; left: 0; background: #fff; z-index: 1; }
 .tabel-raport th.lekat { background: #f9fafb; }
 .tabel-raport th.nama, .tabel-raport td.nama { left: 44px; min-width: 190px; }
+/* Kolom gabungan per jenis penilaian pada tampilan ringkas rekap nilai */
+.tabel-raport th.kolom-kelompok { min-width: 96px; text-align: center; vertical-align: bottom;
+  padding-top: 10px; padding-bottom: 8px; }
+.tabel-raport th.kolom-kelompok .nama-kelompok { display: block; font-size: 13px; }
+.tabel-raport th.kolom-kelompok .rinci-kelompok { display: block; margin-top: 2px;
+  font-weight: 400; font-size: 10.5px; color: var(--gray); white-space: nowrap; }
+.cari-siswa .atur-kolom { margin-left: auto; white-space: nowrap; }
+
 .tabel-raport .angka-nilai { text-align: center; font-variant-numeric: tabular-nums; }
 .tabel-raport .angka-nilai.tuntas { color: #166534; }
 .tabel-raport .angka-nilai.belum { color: #b45309; }
