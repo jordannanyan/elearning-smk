@@ -1,0 +1,429 @@
+{
+  "_keterangan": "Isi pembelajaran Bahasa Indonesia kelas XI semester genap (periode 2026/2) untuk Martaniah, S.Pd. Berkas ini dipakai bersama oleh scripts/buat-materi-ajar.py (pembuat modul PDF dan video paparan) dan scripts/dataset-martaniah-genap.js (penyemai basis data). Pokok bahasan mengikuti Kurikulum Merdeka kelas XI: Bab 1 Teks Argumentasi, Bab 2 Teks Berita, dan unit Puisi. Seluruh tautan video sudah diperiksa satu per satu melalui oEmbed YouTube dan dipastikan hidup pada 25 November 2026.",
+  "mapel": "BAHASA INDONESIA",
+  "kelas": "XI A",
+  "periode": "2026/2",
+  "guru": "Martaniah",
+  "mulai": "2026-01-05",
+  "sumber": [
+    "Kemendikbudristek. Cerdas Cergas Berbahasa dan Bersastra Indonesia untuk SMA/SMK Kelas XI. Jakarta: Pusat Perbukuan.",
+    "Kanal YouTube kejarcita, Halo Edukasi, Tunas Pengetahuan, Kelas Bu Rima, Mudah Belajar Official, Ruangguru, dan AnggaraPM (tautan tercantum pada tiap pertemuan).",
+    "Pedoman Umum Ejaan Bahasa Indonesia (PUEBI) dan Kamus Besar Bahasa Indonesia daring, Badan Pengembangan dan Pembinaan Bahasa."
+  ],
+  "modul": [
+    {
+      "kode": "modul-1-teks-argumentasi",
+      "judul": "Teks Argumentasi",
+      "pertemuan": 1,
+      "ringkas": "Pengertian, tujuan, struktur, kaidah kebahasaan, dan cara menilai kekuatan sebuah argumen.",
+      "bagian": [
+        {
+          "judul": "Pengertian dan Tujuan",
+          "isi": [
+            "Teks argumentasi adalah teks yang berisi pendapat penulis beserta alasan dan bukti yang mendukungnya. Tujuannya meyakinkan pembaca bahwa pendapat tersebut benar atau layak diterima.",
+            "Berbeda dengan teks eksposisi yang sekadar memaparkan, teks argumentasi selalu mengandung sikap penulis terhadap suatu persoalan. Berbeda pula dengan teks persuasi yang menekankan ajakan bertindak, teks argumentasi menekankan penalaran."
+          ],
+          "poin": [
+            "Mengandung pendapat atau pendirian penulis",
+            "Disertai data, fakta, atau hasil penelitian sebagai bukti",
+            "Menggunakan penalaran yang runtut dan dapat diuji",
+            "Bersifat meyakinkan, bukan memaksa"
+          ]
+        },
+        {
+          "judul": "Struktur Teks Argumentasi",
+          "isi": [
+            "Teks argumentasi tersusun atas tiga bagian yang saling bertaut. Ketiganya harus hadir agar pendapat penulis dapat dipahami dan diterima pembaca."
+          ],
+          "poin": [
+            "Tesis — pernyataan pendapat atau pendirian penulis atas suatu persoalan",
+            "Rangkaian argumen — alasan beserta bukti pendukung, disusun dari yang paling kuat",
+            "Penegasan ulang — penguatan kembali tesis setelah seluruh argumen dipaparkan"
+          ]
+        },
+        {
+          "judul": "Kaidah Kebahasaan",
+          "isi": [
+            "Pilihan bahasa pada teks argumentasi mengarahkan pembaca mengikuti alur penalaran penulis."
+          ],
+          "poin": [
+            "Konjungsi kausalitas: karena, sebab, sehingga, oleh karena itu",
+            "Konjungsi perbandingan dan pertentangan: namun, sebaliknya, sedangkan",
+            "Kata rujukan: hal tersebut, keadaan itu, temuan ini",
+            "Kalimat fakta sebagai bukti, dibedakan tegas dari kalimat opini",
+            "Kata kerja mental: berpendapat, menilai, menyimpulkan, meyakini"
+          ]
+        },
+        {
+          "judul": "Menilai Kekuatan Argumen",
+          "isi": [
+            "Argumen yang kuat bersandar pada bukti yang relevan, mutakhir, dan dapat ditelusuri sumbernya. Argumen yang lemah biasanya mengandung kesesatan berpikir.",
+            "Beberapa kesesatan yang sering muncul dalam tulisan siswa perlu dikenali sejak awal agar tidak terulang."
+          ],
+          "poin": [
+            "Generalisasi tergesa — menyimpulkan dari contoh yang terlalu sedikit",
+            "Serangan pribadi — menyerang orangnya, bukan pendapatnya",
+            "Argumen otoritas semu — mengutip pihak yang tidak berkompeten di bidangnya",
+            "Sebab-akibat palsu — menganggap dua hal yang berurutan pasti berhubungan sebab-akibat"
+          ]
+        }
+      ]
+    },
+    {
+      "kode": "modul-2-argumentasi-pangan-lokal",
+      "judul": "Menulis Teks Argumentasi tentang Pangan Lokal",
+      "pertemuan": 5,
+      "ringkas": "Menerapkan teks argumentasi pada isu pangan lokal Indonesia, mulai dari pengumpulan data sampai penyajian.",
+      "bagian": [
+        {
+          "judul": "Pangan Lokal sebagai Isu Bersama",
+          "isi": [
+            "Indonesia memiliki keragaman pangan lokal yang luas, seperti sagu, sorgum, jagung, ubi, talas, dan sukun. Ketergantungan pada satu jenis pangan pokok membuat ketahanan pangan rapuh ketika pasokan terganggu.",
+            "Isu ini menjadi bahan yang baik untuk teks argumentasi karena datanya tersedia, menyentuh kehidupan sehari-hari, dan memungkinkan munculnya pendapat yang berbeda-beda."
+          ],
+          "poin": [
+            "Keragaman pangan lokal di tiap daerah, termasuk Kalimantan Tengah",
+            "Hubungan pangan lokal dengan ketahanan pangan keluarga",
+            "Tantangan: gengsi sosial, ketersediaan, dan cara pengolahan"
+          ]
+        },
+        {
+          "judul": "Mengumpulkan Data dan Fakta",
+          "isi": [
+            "Argumen tanpa data hanyalah pendapat. Data dapat diperoleh dari lembaga resmi, wawancara, maupun pengamatan langsung di lingkungan sekitar."
+          ],
+          "poin": [
+            "Data statistik dari Badan Pusat Statistik atau dinas terkait",
+            "Wawancara dengan petani, pedagang, atau orang tua di rumah",
+            "Pengamatan langsung terhadap menu harian keluarga",
+            "Catat selalu sumbernya agar dapat dicantumkan dalam tulisan"
+          ]
+        },
+        {
+          "judul": "Menyusun dan Menyunting",
+          "isi": [
+            "Penulisan dimulai dari kerangka: tesis, tiga sampai empat argumen beserta buktinya, lalu penegasan ulang. Setelah selesai, naskah disunting dengan membaca ulang secara perlahan.",
+            "Penyuntingan memeriksa tiga hal: ketepatan isi, keruntutan penalaran, dan kebakuan bahasa."
+          ],
+          "poin": [
+            "Apakah setiap argumen benar-benar mendukung tesis?",
+            "Apakah setiap argumen disertai bukti?",
+            "Apakah ejaan dan tanda baca sudah sesuai PUEBI?",
+            "Apakah ada kalimat yang bermakna ganda?"
+          ]
+        }
+      ]
+    },
+    {
+      "kode": "modul-3-teks-berita",
+      "judul": "Teks Berita",
+      "pertemuan": 9,
+      "ringkas": "Unsur ADIKSIMBA, struktur piramida terbalik, kaidah kebahasaan, serta cara mengenali berita palsu.",
+      "bagian": [
+        {
+          "judul": "Pengertian dan Unsur Berita",
+          "isi": [
+            "Teks berita adalah teks yang memberitakan peristiwa atau kejadian aktual kepada khalayak. Berita yang baik memenuhi enam unsur yang dikenal dengan singkatan ADIKSIMBA."
+          ],
+          "poin": [
+            "Apa — peristiwa yang terjadi",
+            "Di mana — tempat terjadinya peristiwa",
+            "Kapan — waktu terjadinya peristiwa",
+            "Siapa — pihak yang terlibat",
+            "Mengapa — sebab terjadinya peristiwa",
+            "Bagaimana — proses atau jalannya peristiwa"
+          ]
+        },
+        {
+          "judul": "Struktur Piramida Terbalik",
+          "isi": [
+            "Berita disusun dengan pola piramida terbalik: informasi terpenting diletakkan paling awal, menyusul keterangan pendukung, lalu informasi tambahan.",
+            "Pola ini memudahkan pembaca yang hanya sempat membaca bagian awal, sekaligus memudahkan penyunting memotong bagian akhir bila ruang terbatas."
+          ],
+          "poin": [
+            "Kepala berita (lead) — inti peristiwa, memuat unsur terpenting",
+            "Tubuh berita — penjelasan rinci, kutipan narasumber, data pendukung",
+            "Ekor berita — informasi tambahan yang sifatnya melengkapi"
+          ]
+        },
+        {
+          "judul": "Kaidah Kebahasaan",
+          "isi": [
+            "Bahasa berita lugas, baku, dan tidak memihak. Penulis berita menyampaikan peristiwa, bukan pendapatnya tentang peristiwa."
+          ],
+          "poin": [
+            "Kalimat langsung dan tidak langsung untuk mengutip narasumber",
+            "Konjungsi temporal: kemudian, setelah itu, sejak",
+            "Kata kerja mental pada kutipan: menyatakan, menjelaskan, menambahkan",
+            "Keterangan waktu dan tempat yang jelas",
+            "Bahasa baku, tanpa kata yang bermuatan perasaan"
+          ]
+        },
+        {
+          "judul": "Mengenali Berita Palsu",
+          "isi": [
+            "Kemampuan membedakan fakta dan opini merupakan bekal utama menghadapi berita palsu yang beredar di media sosial."
+          ],
+          "poin": [
+            "Periksa alamat situs dan nama medianya",
+            "Cari berita yang sama di media lain yang kredibel",
+            "Waspadai judul yang berlebihan dan membangkitkan amarah",
+            "Periksa tanggal terbit, berita lama sering diedarkan ulang",
+            "Telusuri gambar melalui pencarian gambar terbalik"
+          ]
+        }
+      ]
+    },
+    {
+      "kode": "modul-4-vlog-berita",
+      "judul": "Menyajikan Berita dalam Bentuk Vlog",
+      "pertemuan": 13,
+      "ringkas": "Mengalihwahanakan teks berita menjadi sajian audiovisual: naskah, papan cerita, pengambilan gambar, dan penyuntingan.",
+      "bagian": [
+        {
+          "judul": "Dari Teks ke Audiovisual",
+          "isi": [
+            "Vlog berita menyampaikan isi berita melalui gambar bergerak dan suara. Unsur ADIKSIMBA tetap wajib dipenuhi, hanya cara penyampaiannya yang berubah.",
+            "Keunggulan sajian audiovisual adalah kemampuannya menampilkan suasana peristiwa secara langsung, sehingga penonton lebih mudah memahami keadaan di lapangan."
+          ],
+          "poin": [
+            "Isi berita tetap faktual dan dapat dipertanggungjawabkan",
+            "Durasi ringkas, umumnya dua sampai lima menit",
+            "Bahasa lisan yang jelas dan tidak terburu-buru"
+          ]
+        },
+        {
+          "judul": "Naskah dan Papan Cerita",
+          "isi": [
+            "Papan cerita (storyboard) adalah rancangan gambar per adegan beserta narasinya. Papan cerita disusun sebelum pengambilan gambar agar proses perekaman terarah."
+          ],
+          "poin": [
+            "Kolom nomor adegan",
+            "Sketsa atau keterangan gambar yang akan diambil",
+            "Narasi atau dialog yang diucapkan",
+            "Perkiraan durasi tiap adegan"
+          ]
+        },
+        {
+          "judul": "Pengambilan Gambar dan Penyuntingan",
+          "isi": [
+            "Perekaman dapat dilakukan dengan telepon genggam. Yang terpenting bukan kecanggihan alat, melainkan kestabilan gambar dan kejernihan suara."
+          ],
+          "poin": [
+            "Rekam secara mendatar (landscape), bukan tegak",
+            "Pastikan sumber cahaya berada di depan objek, bukan di belakangnya",
+            "Dekatkan perekam suara ke narasumber, hindari tempat berangin",
+            "Ambil gambar pendukung (stok gambar) untuk menutupi sambungan",
+            "Sunting dengan memotong bagian yang tidak perlu, tambahkan teks judul"
+          ]
+        }
+      ]
+    },
+    {
+      "kode": "modul-5-puisi",
+      "judul": "Puisi: Diksi, Pengimajian, dan Majas",
+      "pertemuan": 17,
+      "ringkas": "Unsur pembangun puisi, pemilihan kata, pencitraan, gaya bahasa, dan cara membacakan puisi.",
+      "bagian": [
+        {
+          "judul": "Unsur Pembangun Puisi",
+          "isi": [
+            "Puisi dibangun oleh unsur batin dan unsur fisik. Unsur batin adalah isi yang tersirat, sedangkan unsur fisik adalah wujud yang tampak pada teksnya."
+          ],
+          "poin": [
+            "Unsur batin: tema, rasa, nada, dan amanat",
+            "Unsur fisik: diksi, pengimajian, kata konkret, majas, rima, dan tipografi",
+            "Tipografi adalah tata letak larik dan bait yang ikut membentuk makna"
+          ]
+        },
+        {
+          "judul": "Diksi dan Pengimajian",
+          "isi": [
+            "Diksi adalah pemilihan kata yang tepat untuk menyampaikan maksud sekaligus membangun keindahan. Satu kata dapat diganti kata lain yang bermakna hampir sama, namun rasa yang ditimbulkannya berbeda.",
+            "Pengimajian adalah penggunaan kata yang membangkitkan penginderaan pembaca, seolah-olah ia melihat, mendengar, atau merasakan sendiri."
+          ],
+          "poin": [
+            "Imaji penglihatan: gambaran yang dapat dilihat",
+            "Imaji pendengaran: bunyi yang dapat didengar",
+            "Imaji perabaan, penciuman, dan pengecapan",
+            "Imaji gerak: gambaran sesuatu yang bergerak"
+          ]
+        },
+        {
+          "judul": "Majas dan Rima",
+          "isi": [
+            "Majas atau gaya bahasa membuat ungkapan menjadi hidup dan bermakna lebih dalam. Rima adalah pengulangan bunyi yang menimbulkan kesan musikal."
+          ],
+          "poin": [
+            "Personifikasi — benda mati diberi sifat manusia",
+            "Metafora — perbandingan langsung tanpa kata pembanding",
+            "Simile — perbandingan dengan kata bagai, seperti, laksana",
+            "Hiperbola — pernyataan yang dilebih-lebihkan",
+            "Repetisi — pengulangan kata untuk menegaskan",
+            "Rima awal, rima tengah, dan rima akhir"
+          ]
+        },
+        {
+          "judul": "Membacakan Puisi",
+          "isi": [
+            "Pembacaan puisi menuntut penghayatan terhadap isi, bukan sekadar pelafalan yang nyaring."
+          ],
+          "poin": [
+            "Vokal: kejelasan pelafalan tiap kata",
+            "Intonasi: naik turun nada sesuai suasana",
+            "Jeda: perhentian yang tepat antarlarik",
+            "Ekspresi dan gerak tubuh yang wajar, tidak berlebihan"
+          ]
+        }
+      ]
+    }
+  ],
+  "video_berkas": [
+    {
+      "kode": "paparan-struktur-teks-argumentasi",
+      "pertemuan": 2,
+      "judul": "Paparan: Struktur Teks Argumentasi",
+      "slide": [
+        ["Struktur Teks Argumentasi", "Bahasa Indonesia Kelas XI", "SMA Negeri 1 Karau Kuala"],
+        ["1. Tesis", "Pernyataan pendapat penulis", "Diletakkan pada bagian awal", "Menjadi pokok yang akan dibuktikan"],
+        ["2. Rangkaian Argumen", "Alasan beserta bukti pendukung", "Disusun dari yang paling kuat", "Setiap argumen wajib berdata"],
+        ["3. Penegasan Ulang", "Menguatkan kembali tesis", "Diletakkan pada bagian akhir", "Bukan sekadar mengulang kalimat"],
+        ["Ingat", "Pendapat tanpa bukti", "hanyalah klaim.", "Bukti tanpa pendapat", "hanyalah data."]
+      ]
+    },
+    {
+      "kode": "paparan-unsur-puisi",
+      "pertemuan": 17,
+      "judul": "Paparan: Unsur Pembangun Puisi",
+      "slide": [
+        ["Unsur Pembangun Puisi", "Bahasa Indonesia Kelas XI", "SMA Negeri 1 Karau Kuala"],
+        ["Unsur Batin", "Tema — pokok persoalan", "Rasa — sikap penyair", "Nada — sikap kepada pembaca", "Amanat — pesan yang disampaikan"],
+        ["Unsur Fisik", "Diksi — pilihan kata", "Pengimajian — pencitraan", "Kata konkret", "Majas, rima, dan tipografi"],
+        ["Pengimajian", "Penglihatan dan pendengaran", "Perabaan dan penciuman", "Pengecapan dan gerak"],
+        ["Membaca Puisi", "Vokal yang jelas", "Intonasi sesuai suasana", "Jeda yang tepat", "Ekspresi yang wajar"]
+      ]
+    }
+  ],
+  "pertemuan": [
+    { "nomor": 1, "unit": "Teks Argumentasi",
+      "judul": "Mengenal Teks Argumentasi",
+      "uraian": "Teks argumentasi berisi pendapat penulis beserta alasan dan bukti yang mendukungnya, dengan tujuan meyakinkan pembaca. Ciri utamanya adalah adanya pendirian penulis yang disertai data, fakta, atau hasil penelitian. Teks ini berbeda dari eksposisi yang sekadar memaparkan, dan berbeda pula dari persuasi yang menekankan ajakan bertindak.",
+      "video": { "id": "Nop5TPNdwBg", "judul": "Teks Argumentasi | Bahasa Indonesia SMA", "kanal": "kejarcita" },
+      "latihan": { "judul": "Membedakan Argumentasi, Eksposisi, dan Persuasi",
+        "perintah": "Carilah satu contoh teks argumentasi dari surat kabar atau laman berita. Tuliskan pendapat penulisnya, lalu jelaskan apa yang membuat teks itu tergolong argumentasi dan bukan eksposisi." } },
+    { "nomor": 2, "unit": "Teks Argumentasi",
+      "judul": "Struktur Teks Argumentasi",
+      "uraian": "Teks argumentasi tersusun atas tesis, rangkaian argumen, dan penegasan ulang. Tesis memuat pendapat penulis, rangkaian argumen memuat alasan beserta buktinya yang disusun dari yang paling kuat, sedangkan penegasan ulang menguatkan kembali tesis setelah seluruh argumen dipaparkan.",
+      "video": { "id": "vc8Evl8w1qE", "judul": "Teks Argumentasi: Tujuan, Ciri, Struktur, dan Contohnya", "kanal": "Halo Edukasi" },
+      "latihan": { "judul": "Menandai Struktur Teks Argumentasi",
+        "perintah": "Ambil teks argumentasi yang Anda temukan pada pertemuan sebelumnya. Tandai bagian tesis, rangkaian argumen, dan penegasan ulangnya, lalu salin satu kalimat sebagai bukti untuk masing-masing bagian." } },
+    { "nomor": 3, "unit": "Teks Argumentasi",
+      "judul": "Kaidah Kebahasaan Teks Argumentasi",
+      "uraian": "Kaidah kebahasaan teks argumentasi meliputi konjungsi kausalitas seperti karena dan sehingga, konjungsi pertentangan seperti namun dan sebaliknya, kata rujukan, serta kata kerja mental seperti berpendapat dan menyimpulkan. Kalimat fakta dipakai sebagai bukti dan harus dibedakan dengan tegas dari kalimat opini.",
+      "video": { "id": "VXV9Gbti6XE", "judul": "Rangkuman Materi Bahasa Indonesia Kelas 11 Bab 1 Teks Argumentasi", "kanal": "Mudah Belajar Official" },
+      "latihan": { "judul": "Memilah Kalimat Fakta dan Opini",
+        "perintah": "Tuliskan sepuluh kalimat dari sebuah teks argumentasi, lalu golongkan masing-masing sebagai fakta atau opini. Jelaskan penanda yang Anda pakai untuk menggolongkannya." } },
+    { "nomor": 4, "unit": "Teks Argumentasi",
+      "judul": "Menilai Kekuatan Argumen dan Mengenali Kesesatan Berpikir",
+      "uraian": "Argumen yang kuat bersandar pada bukti yang relevan, mutakhir, dan dapat ditelusuri sumbernya. Beberapa kesesatan berpikir yang sering muncul adalah generalisasi tergesa, serangan pribadi, argumen otoritas semu, dan sebab-akibat palsu.",
+      "video": null,
+      "latihan": { "judul": "Menemukan Kesesatan Berpikir",
+        "perintah": "Carilah tiga contoh pernyataan di media sosial yang mengandung kesesatan berpikir. Sebutkan jenis kesesatannya dan tuliskan bagaimana pernyataan itu seharusnya disusun agar menjadi argumen yang sahih." } },
+    { "nomor": 5, "unit": "Argumentasi Pangan Lokal",
+      "judul": "Pangan Lokal Indonesia sebagai Isu Bersama",
+      "uraian": "Indonesia memiliki keragaman pangan lokal seperti sagu, sorgum, jagung, ubi, talas, dan sukun. Ketergantungan pada satu jenis pangan pokok membuat ketahanan pangan menjadi rapuh. Isu ini layak diangkat menjadi teks argumentasi karena datanya tersedia dan menyentuh kehidupan sehari-hari.",
+      "video": { "id": "Y_mKpw5WXMI", "judul": "BAB 1 Bahasa Indonesia Kelas 11 | Pangan Lokal Indonesia, Teks Argumentasi & Persuasi", "kanal": "AnggaraPM" },
+      "latihan": { "judul": "Mendata Pangan Lokal Daerah",
+        "perintah": "Daftarkan lima jenis pangan lokal yang ada di daerah Anda. Untuk setiap jenis, tuliskan cara pengolahannya dan seberapa sering keluarga Anda mengonsumsinya." } },
+    { "nomor": 6, "unit": "Argumentasi Pangan Lokal",
+      "judul": "Mengumpulkan Data dan Fakta Pendukung",
+      "uraian": "Argumen tanpa data hanyalah pendapat. Data dapat diperoleh dari lembaga resmi seperti Badan Pusat Statistik, dari wawancara dengan petani atau pedagang, maupun dari pengamatan langsung. Setiap data wajib dicatat sumbernya agar dapat dicantumkan dalam tulisan.",
+      "video": null,
+      "latihan": { "judul": "Wawancara Singkat tentang Pangan Lokal",
+        "perintah": "Wawancarai satu orang di lingkungan Anda mengenai kebiasaan mengonsumsi pangan lokal. Tuliskan lima pertanyaan beserta jawabannya, lalu simpulkan temuan Anda dalam satu paragraf." } },
+    { "nomor": 7, "unit": "Argumentasi Pangan Lokal",
+      "judul": "Menyusun Kerangka dan Mengembangkan Teks Argumentasi",
+      "uraian": "Penulisan dimulai dari kerangka berupa tesis, tiga sampai empat argumen beserta buktinya, lalu penegasan ulang. Kerangka kemudian dikembangkan menjadi paragraf yang padu dengan memperhatikan kaidah kebahasaan teks argumentasi.",
+      "video": { "id": "xCtVujb9Dwk", "judul": "Materi Bahasa Indonesia Kelas 11 BAB 1 (Kurikulum Merdeka)", "kanal": "AnggaraPM" },
+      "latihan": { "judul": "Menulis Teks Argumentasi Pangan Lokal",
+        "perintah": "Tulislah teks argumentasi mengenai pentingnya mengonsumsi pangan lokal, minimal empat paragraf, lengkap dengan tesis, tiga argumen berdata, dan penegasan ulang." } },
+    { "nomor": 8, "unit": "Argumentasi Pangan Lokal",
+      "judul": "Menyunting dan Mempresentasikan Teks Argumentasi",
+      "uraian": "Penyuntingan memeriksa tiga hal: ketepatan isi, keruntutan penalaran, dan kebakuan bahasa. Setelah disunting, teks dipresentasikan di depan kelas agar penulis terbiasa mempertahankan pendapatnya secara lisan.",
+      "video": null,
+      "latihan": { "judul": "Menyunting Karya Teman",
+        "perintah": "Tukarkan teks argumentasi Anda dengan teman sebangku. Berikan tiga catatan perbaikan: satu tentang isi, satu tentang penalaran, dan satu tentang kebahasaan." } },
+    { "nomor": 9, "unit": "Teks Berita",
+      "judul": "Mengenal Teks Berita dan Unsur ADIKSIMBA",
+      "uraian": "Teks berita memberitakan peristiwa aktual kepada khalayak. Berita yang baik memenuhi enam unsur ADIKSIMBA, yaitu apa, di mana, kapan, siapa, mengapa, dan bagaimana. Keenam unsur ini menjadi alat untuk memeriksa kelengkapan sebuah berita.",
+      "video": { "id": "H7Q2Jszgx80", "judul": "Materi Teks Berita SMA/SMK kelas 11", "kanal": "Tunas Pengetahuan" },
+      "latihan": { "judul": "Membedah Unsur ADIKSIMBA",
+        "perintah": "Pilih satu berita dari laman berita daring. Tuliskan keenam unsur ADIKSIMBA-nya beserta kutipan kalimat yang memuat unsur tersebut." } },
+    { "nomor": 10, "unit": "Teks Berita",
+      "judul": "Struktur Teks Berita: Piramida Terbalik",
+      "uraian": "Berita disusun dengan pola piramida terbalik: kepala berita memuat inti peristiwa, tubuh berita memuat penjelasan rinci dan kutipan narasumber, sedangkan ekor berita memuat informasi tambahan. Pola ini memudahkan pembaca yang hanya sempat membaca bagian awal.",
+      "video": { "id": "JtwuWq2iBkc", "judul": "STRUKTUR TEKS BERITA | BAHASA INDONESIA KELAS 11 BAB 2", "kanal": "Masyhur Riady" },
+      "latihan": { "judul": "Memetakan Piramida Terbalik",
+        "perintah": "Ambil satu berita, lalu tandai bagian kepala, tubuh, dan ekornya. Jelaskan apa yang hilang seandainya ekor berita tersebut dipotong." } },
+    { "nomor": 11, "unit": "Teks Berita",
+      "judul": "Kaidah Kebahasaan Teks Berita",
+      "uraian": "Bahasa berita lugas, baku, dan tidak memihak. Kaidahnya meliputi penggunaan kalimat langsung dan tidak langsung untuk mengutip narasumber, konjungsi temporal, kata kerja mental pada kutipan, serta keterangan waktu dan tempat yang jelas.",
+      "video": { "id": "PaWlgPIbcI0", "judul": "KAIDAH KEBAHASAAN TEKS BERITA", "kanal": "Kelas Bu Rima" },
+      "latihan": { "judul": "Mengubah Kalimat Langsung menjadi Tidak Langsung",
+        "perintah": "Kutip lima kalimat langsung dari sebuah berita, lalu ubahlah menjadi kalimat tidak langsung tanpa mengubah maknanya." } },
+    { "nomor": 12, "unit": "Teks Berita",
+      "judul": "Membedakan Fakta dan Opini serta Mengenali Berita Palsu",
+      "uraian": "Kemampuan membedakan fakta dan opini merupakan bekal menghadapi berita palsu. Langkah pemeriksaan meliputi memeriksa alamat situs, mencari berita serupa di media kredibel, mewaspadai judul berlebihan, memeriksa tanggal terbit, serta menelusuri gambar melalui pencarian gambar terbalik.",
+      "video": { "id": "jTnway3wE5c", "judul": "Mengenali Struktur dan Unsur Teks Berita #kelas11", "kanal": "Masyhur Riady" },
+      "latihan": { "judul": "Memeriksa Kebenaran Sebuah Berita",
+        "perintah": "Carilah satu berita yang Anda ragukan kebenarannya. Lakukan lima langkah pemeriksaan yang telah dipelajari, lalu tuliskan kesimpulan Anda beserta alasannya." } },
+    { "nomor": 13, "unit": "Vlog Berita",
+      "judul": "Dari Teks Berita ke Berita Audiovisual",
+      "uraian": "Vlog berita menyampaikan isi berita melalui gambar bergerak dan suara, namun unsur ADIKSIMBA tetap wajib dipenuhi. Keunggulannya adalah kemampuan menampilkan suasana peristiwa secara langsung, dengan durasi ringkas dua sampai lima menit.",
+      "video": { "id": "eJEOmMVM5Hw", "judul": "BAB 2 BAHASA INDONESIA KELAS 11! Teks Berita, Struktur, & Cara Bikin Vlog Berita", "kanal": "Masyhur Riady" },
+      "latihan": { "judul": "Membandingkan Berita Cetak dan Vlog Berita",
+        "perintah": "Tontonlah satu vlog berita, lalu bandingkan dengan berita tertulis bertema sama. Tuliskan tiga kelebihan dan tiga kekurangan masing-masing bentuk penyajian." } },
+    { "nomor": 14, "unit": "Vlog Berita",
+      "judul": "Menyusun Naskah dan Papan Cerita Vlog Berita",
+      "uraian": "Papan cerita adalah rancangan gambar per adegan beserta narasinya, disusun sebelum pengambilan gambar agar perekaman terarah. Papan cerita memuat nomor adegan, keterangan gambar, narasi yang diucapkan, dan perkiraan durasi.",
+      "video": { "id": "mm77WP_qaHg", "judul": "Memahami Penyajian Teks Berita dalam Bentuk Vlog #kelas11", "kanal": "Masyhur Riady" },
+      "latihan": { "judul": "Menyusun Papan Cerita",
+        "perintah": "Buatlah papan cerita vlog berita bertema kegiatan sekolah, minimal enam adegan, lengkap dengan keterangan gambar, narasi, dan durasinya." } },
+    { "nomor": 15, "unit": "Vlog Berita",
+      "judul": "Teknik Pengambilan Gambar dan Penyuntingan Sederhana",
+      "uraian": "Perekaman dapat dilakukan dengan telepon genggam. Yang terpenting adalah kestabilan gambar dan kejernihan suara: rekam secara mendatar, pastikan cahaya berada di depan objek, dekatkan perekam suara ke narasumber, dan ambil gambar pendukung untuk menutupi sambungan.",
+      "video": { "id": "4snM2Wmav8g", "judul": "Teks Berita: Pengertian Vlog dan Ciri-ciri Vlog yang Baik", "kanal": "Tunas Pengetahuan" },
+      "latihan": { "judul": "Merekam Adegan Pembuka",
+        "perintah": "Rekamlah adegan pembuka vlog berita Anda, berdurasi paling lama tiga puluh detik. Unggah berkasnya, atau unggah tangkapan layar beserta keterangan apabila berkasnya terlalu besar." } },
+    { "nomor": 16, "unit": "Vlog Berita",
+      "judul": "Menyajikan dan Menilai Vlog Berita",
+      "uraian": "Penyajian vlog berita dinilai dari kelengkapan unsur ADIKSIMBA, kejelasan penyampaian, kualitas gambar dan suara, serta ketepatan durasi. Penilaian antarteman melatih siswa memberi masukan yang membangun.",
+      "video": { "id": "ng7t2lsc1Oo", "judul": "Rangkuman Materi dan Kumpulan Soal Bahasa Indonesia Kelas 11 Bab 2 Teks Berita", "kanal": "Mudah Belajar Official" },
+      "latihan": { "judul": "Menilai Vlog Berita Kelompok Lain",
+        "perintah": "Tontonlah vlog berita kelompok lain, lalu berikan penilaian atas empat hal: kelengkapan ADIKSIMBA, kejelasan penyampaian, kualitas gambar dan suara, serta ketepatan durasi." } },
+    { "nomor": 17, "unit": "Puisi",
+      "judul": "Mengenal Puisi dan Unsur Pembangunnya",
+      "uraian": "Puisi dibangun oleh unsur batin berupa tema, rasa, nada, dan amanat, serta unsur fisik berupa diksi, pengimajian, kata konkret, majas, rima, dan tipografi. Tipografi atau tata letak larik dan bait ikut membentuk makna puisi.",
+      "video": { "id": "LaP6rysyTy4", "judul": "Mengenal Unsur-Unsur Puisi #kelas11", "kanal": "Masyhur Riady" },
+      "latihan": { "judul": "Mengidentifikasi Unsur Puisi",
+        "perintah": "Pilih satu puisi karya penyair Indonesia. Tentukan tema, rasa, nada, dan amanatnya, lalu tunjukkan dua unsur fisik yang paling menonjol disertai kutipan lariknya." } },
+    { "nomor": 18, "unit": "Puisi",
+      "judul": "Diksi dan Pengimajian dalam Puisi",
+      "uraian": "Diksi adalah pemilihan kata yang tepat untuk menyampaikan maksud sekaligus membangun keindahan. Pengimajian adalah penggunaan kata yang membangkitkan penginderaan pembaca, meliputi imaji penglihatan, pendengaran, perabaan, penciuman, pengecapan, dan gerak.",
+      "video": { "id": "Xhw6WaC890g", "judul": "Pengertian Diksi, Fungsi, Jenis-Jenis, dan Contoh Lengkap", "kanal": "Halo Edukasi" },
+      "latihan": { "judul": "Menelusuri Imaji dalam Puisi",
+        "perintah": "Dari puisi yang Anda pilih, temukan empat larik yang mengandung pengimajian berbeda. Sebutkan jenis imajinya dan jelaskan kesan yang ditimbulkannya." } },
+    { "nomor": 19, "unit": "Puisi",
+      "judul": "Majas dan Rima dalam Puisi",
+      "uraian": "Majas membuat ungkapan menjadi hidup dan bermakna lebih dalam, meliputi personifikasi, metafora, simile, hiperbola, dan repetisi. Rima adalah pengulangan bunyi yang menimbulkan kesan musikal, dapat berupa rima awal, tengah, maupun akhir.",
+      "video": { "id": "cIIqyoRnJ2g", "judul": "MAJAS YANG SERING TERDAPAT DALAM PUISI", "kanal": "Kelas Bu Rima" },
+      "latihan": { "judul": "Menemukan Majas dan Rima",
+        "perintah": "Temukan lima majas berbeda dalam puisi pilihan Anda. Sebutkan jenisnya, kutip lariknya, dan jelaskan maknanya. Tunjukkan pula pola rima pada satu baitnya." } },
+    { "nomor": 20, "unit": "Puisi",
+      "judul": "Menulis dan Membacakan Puisi",
+      "uraian": "Penulisan puisi dimulai dari menentukan tema dan suasana, lalu memilih diksi yang membangkitkan imaji. Pembacaan puisi menuntut penghayatan isi melalui vokal yang jelas, intonasi sesuai suasana, jeda yang tepat, serta ekspresi yang wajar.",
+      "video": { "id": "7C4qZIMfV2E", "judul": "Majas: Pengertian, Jenis, dan Contohnya | Ruangguru Update", "kanal": "Ruangguru" },
+      "latihan": { "judul": "Menulis dan Membacakan Puisi Sendiri",
+        "perintah": "Tulislah satu puisi karya sendiri, minimal tiga bait, dengan tema bebas. Sertakan penjelasan singkat mengenai diksi dan majas yang Anda pilih, lalu rekam pembacaannya bila memungkinkan." } }
+  ]
+}
