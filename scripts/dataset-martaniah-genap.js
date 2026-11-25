@@ -41,6 +41,7 @@ require(path.join(BACKEND_MODULES, 'dotenv'))
 const mysql = require(path.join(BACKEND_MODULES, 'mysql2', 'promise'));
 
 const DATA = path.join(__dirname, 'materi-bindo-xi-genap.json');
+const DATA_SOAL = path.join(__dirname, 'soal-latihan-genap.json');
 const DIR_MATERI = path.join(AKAR, 'materi-ajar');
 const DIR_UPLOAD = path.join(AKAR, 'backend', 'uploads');
 
@@ -101,14 +102,22 @@ const UTS_PG = [
   ['Bahasa yang digunakan dalam teks berita hendaknya ...',
     'lugas, baku, dan tidak memihak', 'puitis dan penuh kiasan',
     'santai seperti percakapan sehari-hari', 'berlebihan agar menarik', 'A'],
-];
-
-const UTS_ESAI = [
-  'Jelaskan perbedaan teks argumentasi, teks eksposisi, dan teks persuasi. '
-  + 'Sertakan satu contoh kalimat untuk masing-masing jenis teks tersebut.',
-  'Tuliskan sebuah tesis mengenai pentingnya mengonsumsi pangan lokal, lalu '
-  + 'susunlah dua argumen pendukung yang masing-masing disertai bukti berupa '
-  + 'fakta atau data.',
+  ['Rangkaian argumen pada teks argumentasi sebaiknya disusun ...',
+    'dari argumen yang paling kuat', 'secara acak',
+    'menurut panjang kalimatnya', 'menurut urutan abjad', 'A'],
+  ['Sumber data yang paling tepat untuk mendukung argumen tentang produksi '
+    + 'pangan adalah ...',
+    'Badan Pusat Statistik', 'komentar di media sosial',
+    'cerita teman sekelas', 'perasaan penulis sendiri', 'A'],
+  ['Berikut ini yang termasuk pangan lokal Indonesia adalah ...',
+    'sagu, sorgum, dan talas', 'gandum, kurma, dan zaitun',
+    'kentang, apel, dan anggur', 'kedelai, barley, dan quinoa', 'A'],
+  ['Unsur berita yang menjawab pertanyaan "bagaimana" menjelaskan ...',
+    'proses atau jalannya peristiwa', 'sebab terjadinya peristiwa',
+    'tempat terjadinya peristiwa', 'pihak yang terlibat', 'A'],
+  ['Bagian berita yang memuat kutipan narasumber dan penjelasan rinci '
+    + 'adalah ...',
+    'tubuh berita', 'kepala berita', 'ekor berita', 'judul berita', 'A'],
 ];
 
 const UAS_PG = [
@@ -197,30 +206,22 @@ const UAS_PG = [
     'personifikasi', 'hiperbola', 'simile', 'repetisi', 'A'],
 ];
 
-const UAS_ESAI = [
-  'Pilihlah satu isu di lingkungan sekolah Anda. Susunlah kerangka teks '
-  + 'argumentasi yang memuat tesis, tiga argumen beserta bukti pendukungnya, '
-  + 'dan penegasan ulang.',
-  'Ambillah satu puisi yang Anda kenal. Tentukan tema dan amanatnya, lalu '
-  + 'tunjukkan dua majas dan satu bentuk pengimajian yang terdapat di '
-  + 'dalamnya, masing-masing disertai kutipan larik.',
-];
-
+/* Ujian Tengah Semester dan Ulangan Akhir Semester seluruhnya berupa
+ * pilihan ganda, sehingga dinilai otomatis oleh sistem. Bobot tiap butir
+ * dipilih agar jumlahnya tepat 100: UTS 20 butir @5, UAS 25 butir @4. */
 const PENILAIAN_BESAR = [
   { pertemuan: 10, tipe: 'uts', bobot: BOBOT_UTS,
-    soal: UTS_PG, esai: UTS_ESAI, bobot_pg: 4, bobot_esai: 20,
+    soal: UTS_PG, esai: [], bobot_pg: 5, bobot_esai: 0,
     judul: 'Ujian Tengah Semester Bahasa Indonesia',
     deskripsi: 'Ujian Tengah Semester meliputi materi pertemuan 1 sampai 10, '
       + 'yaitu teks argumentasi, penerapannya pada isu pangan lokal, serta '
-      + 'pengenalan teks berita. Terdiri atas 15 soal pilihan ganda dan 2 '
-      + 'soal uraian.' },
+      + 'pengenalan teks berita. Terdiri atas 20 soal pilihan ganda.' },
   { pertemuan: 20, tipe: 'uas', bobot: BOBOT_ULANGAN,
-    soal: UAS_PG, esai: UAS_ESAI, bobot_pg: 2, bobot_esai: 25,
+    soal: UAS_PG, esai: [], bobot_pg: 4, bobot_esai: 0,
     judul: 'Ulangan Akhir Semester Bahasa Indonesia',
     deskripsi: 'Ulangan Akhir Semester meliputi seluruh materi pertemuan 1 '
       + 'sampai 20, yaitu teks argumentasi, pangan lokal, teks berita, vlog '
-      + 'berita, dan puisi. Terdiri atas 25 soal pilihan ganda dan 2 soal '
-      + 'uraian.' },
+      + 'berita, dan puisi. Terdiri atas 25 soal pilihan ganda.' },
 ];
 
 // ---------------------------------------------------------------------
@@ -265,6 +266,7 @@ function salinKeUnggahan(relatif) {
 // ---------------------------------------------------------------------
 async function main() {
   const d = JSON.parse(fs.readFileSync(DATA, 'utf8'));
+  const soalLatihan = JSON.parse(fs.readFileSync(DATA_SOAL, 'utf8'));
 
   const conn = await mysql.createConnection({
     host: process.env.DB_HOST || 'localhost',
@@ -327,6 +329,9 @@ async function main() {
     const idPertemuan = [];
     const penilaian = [];
     let jmlMateri = 0;
+    let jmlSoalLatihan = 0;
+    let nLatihanPg = 0;
+    let nLatihanEsai = 0;
 
     for (const p of d.pertemuan) {
       const tgl = tanggalKe(d.mulai, p.nomor - 1);
@@ -393,13 +398,54 @@ async function main() {
          VALUES (?,?,?,?, 'tugas', ?)`,
         [idp, `Latihan Pekan ${p.nomor}: ${p.latihan.judul}`,
           p.latihan.perintah, deadline, BOBOT_LATIHAN]);
+
+      // Butir soal latihan. Setiap latihan seragam jenisnya: pilihan ganda
+      // saja, sehingga dinilai otomatis sistem, atau esai saja, sehingga
+      // dinilai guru.
+      const sl = soalLatihan.latihan[String(p.nomor)];
+      if (!sl) throw new Error(`Soal latihan pertemuan ${p.nomor} belum ada.`);
+      const bobotButir = sl.tipe === 'pilihan_ganda'
+        ? soalLatihan.bobot_pg : soalLatihan.bobot_esai;
+      const jumlahButir = sl.butir.length * bobotButir;
+      if (jumlahButir !== 100) {
+        throw new Error(`Bobot butir latihan pertemuan ${p.nomor} berjumlah `
+          + `${jumlahButir}, seharusnya 100.`);
+      }
+
+      const butirLatihan = [];
+      let urutLatihan = 0;
+      for (const s of sl.butir) {
+        urutLatihan += 1;
+        if (sl.tipe === 'pilihan_ganda') {
+          const [rs] = await conn.query(
+            `INSERT INTO soal (id_tugas, pertanyaan, tipe, pilihan_a, pilihan_b,
+                               pilihan_c, pilihan_d, jawaban_benar, bobot, urutan)
+             VALUES (?,?,'pilihan_ganda',?,?,?,?,?,?,?)`,
+            [rt.insertId, s[0], s[1], s[2], s[3], s[4], s[5],
+              bobotButir, urutLatihan]);
+          butirLatihan.push({ id: rs.insertId, tipe: 'pilihan_ganda',
+            kunci: s[5], bobot: bobotButir });
+        } else {
+          const [rs] = await conn.query(
+            `INSERT INTO soal (id_tugas, pertanyaan, tipe, bobot, urutan)
+             VALUES (?,?,'esai',?,?)`,
+            [rt.insertId, s, bobotButir, urutLatihan]);
+          butirLatihan.push({ id: rs.insertId, tipe: 'esai',
+            bobot: bobotButir });
+        }
+        jmlSoalLatihan += 1;
+      }
+      if (sl.tipe === 'pilihan_ganda') nLatihanPg += 1; else nLatihanEsai += 1;
+
       penilaian.push({
         id: rt.insertId, judul: `Latihan Pekan ${p.nomor}`,
-        berbutir: false, tanggal: tgl,
+        berbutir: true, butir: butirLatihan, tanggal: tgl, latihan: true,
       });
     }
     console.log(`Dibuat  : ${d.pertemuan.length} pertemuan, ${jmlMateri} materi, `
       + `${d.pertemuan.length} latihan mingguan`);
+    console.log(`          latihan berbutir soal: ${nLatihanPg} pilihan ganda `
+      + `dan ${nLatihanEsai} esai, seluruhnya ${jmlSoalLatihan} butir`);
 
     for (const pb of PENILAIAN_BESAR) {
       const idp = idPertemuan[pb.pertemuan - 1];
@@ -451,12 +497,12 @@ async function main() {
       const taraf = 66 + Math.floor(rnd() * 29);
 
       for (const t of penilaian) {
+        // Latihan dikerjakan di rumah sehingga dikumpulkan beberapa hari
+        // setelah pertemuan, sedangkan UTS dan UAS dikerjakan di kelas pada
+        // hari pelaksanaannya.
         let tglKumpul;
         let terlambat = 0;
-        if (t.berbutir) {
-          tglKumpul = `${t.tanggal} ${8 + Math.floor(rnd() * 3)}:`
-            + `${String(10 + Math.floor(rnd() * 45)).padStart(2, '0')}:00`;
-        } else {
+        if (t.latihan) {
           const dd = new Date(`${t.tanggal}T00:00:00`);
           const selang = 1 + Math.floor(rnd() * 7);
           dd.setDate(dd.getDate() + selang);
@@ -465,24 +511,27 @@ async function main() {
             + `${String(jam).padStart(2, '0')}:`
             + `${String(Math.floor(rnd() * 60)).padStart(2, '0')}:00`;
           terlambat = selang > 6 ? 1 : 0;
+        } else {
+          tglKumpul = `${t.tanggal} ${8 + Math.floor(rnd() * 3)}:`
+            + `${String(10 + Math.floor(rnd() * 45)).padStart(2, '0')}:00`;
         }
-
-        const jawabanTeks = t.berbutir ? null
-          : `Jawaban ${s.nama} untuk ${t.judul}. Pekerjaan disusun `
-            + 'berdasarkan uraian materi, modul ajar, dan video pembelajaran '
-            + 'pada pertemuan tersebut.';
 
         const [rk] = await conn.query(
           `INSERT INTO pengumpulan_tugas (id_tugas, id_siswa, jawaban,
                                           tgl_kumpul, terlambat)
            VALUES (?,?,?,?,?)`,
-          [t.id, s.id, jawabanTeks, tglKumpul, terlambat]);
+          [t.id, s.id, null, tglKumpul, terlambat]);
         const idKumpul = rk.insertId;
         jmlKumpul += 1;
 
         let skorAkhir;
         if (t.berbutir) {
-          const peluang = batas(taraf / 100 + (rnd() - 0.5) * 0.12, 0.32, 0.97);
+          // Latihan dikerjakan di rumah dengan bantuan buku dan catatan,
+          // sehingga peluang menjawab benar sedikit lebih tinggi daripada
+          // saat ujian di kelas.
+          const bantuan = t.latihan ? 0.1 : 0;
+          const peluang = batas(taraf / 100 + bantuan + (rnd() - 0.5) * 0.12,
+            0.32, 0.98);
           let diperoleh = 0;
           let totalBobot = 0;
           for (const b of t.butir) {
@@ -502,7 +551,8 @@ async function main() {
                  VALUES (?,?,?,?,?)`,
                 [idKumpul, b.id, pilihan, benar ? 1 : 0, skor]);
             } else {
-              const mutu = batas(taraf / 100 + (rnd() - 0.5) * 0.18, 0.35, 1);
+              const mutu = batas(taraf / 100 + bantuan + (rnd() - 0.5) * 0.18,
+                0.35, 1);
               const skor = bulat2(b.bobot * mutu);
               diperoleh += skor;
               await conn.query(
@@ -517,6 +567,8 @@ async function main() {
           }
           skorAkhir = bulat2((diperoleh / totalBobot) * 100);
         } else {
+          // Seluruh penilaian pada semester ini berbutir soal; cabang ini
+          // hanya penjaga apabila kelak ada penilaian tanpa soal.
           skorAkhir = bulat2(batas(
             Math.round(taraf + 8 + (rnd() - 0.45) * 12), 60, 100));
         }

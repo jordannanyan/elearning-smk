@@ -1,0 +1,123 @@
+{
+  "_keterangan": "Butir soal latihan mingguan Bahasa Indonesia kelas XI A periode 2026/2. Setiap latihan seragam jenisnya: pilihan ganda saja, atau esai saja. Latihan yang menguji pemahaman konsep memakai pilihan ganda sehingga dinilai otomatis sistem, sedangkan latihan yang menuntut siswa menghasilkan tulisan memakai esai sehingga dinilai guru. Kunci berada pada unsur keenam tiap butir pilihan ganda. Jumlah bobot butir pada satu latihan selalu tepat 100: pilihan ganda 5 butir @20, esai 2 butir @50.",
+  "bobot_pg": 20,
+  "bobot_esai": 50,
+  "latihan": {
+    "1": { "tipe": "pilihan_ganda", "butir": [
+      ["Teks argumentasi bertujuan untuk ...", "meyakinkan pembaca atas pendapat penulis", "menggambarkan suatu objek secara terperinci", "menceritakan peristiwa secara berurutan", "memandu pembaca melakukan sesuatu", "A"],
+      ["Ciri yang membedakan teks argumentasi dari teks eksposisi adalah ...", "adanya pendirian penulis yang hendak dibuktikan", "penggunaan kalimat yang panjang", "jumlah paragrafnya yang banyak", "adanya gambar pendukung", "A"],
+      ["Teks argumentasi berbeda dari teks persuasi karena teks argumentasi menekankan ...", "penalaran", "ajakan bertindak", "keindahan bahasa", "urutan waktu", "A"],
+      ["Unsur yang wajib menyertai setiap pendapat dalam teks argumentasi adalah ...", "bukti berupa data atau fakta", "pantun pembuka", "daftar riwayat hidup penulis", "gambar ilustrasi", "A"],
+      ["Berikut ini yang merupakan judul teks argumentasi adalah ...", "Sudah Saatnya Sekolah Membatasi Penggunaan Gawai", "Cara Membuat Pupuk Kompos di Rumah", "Proses Terjadinya Gerhana Matahari", "Riwayat Hidup Ki Hajar Dewantara", "A"]
+    ]},
+    "2": { "tipe": "pilihan_ganda", "butir": [
+      ["Urutan struktur teks argumentasi yang benar adalah ...", "tesis, rangkaian argumen, penegasan ulang", "orientasi, komplikasi, resolusi", "kepala, tubuh, ekor", "pembuka, isi, penutup", "A"],
+      ["Bagian yang memuat pendapat penulis atas suatu persoalan disebut ...", "tesis", "argumen", "penegasan ulang", "simpulan", "A"],
+      ["Rangkaian argumen sebaiknya disusun ...", "dari argumen yang paling kuat", "secara acak agar tidak membosankan", "menurut panjang kalimatnya", "menurut abjad", "A"],
+      ["Penegasan ulang pada teks argumentasi berfungsi untuk ...", "menguatkan kembali tesis setelah seluruh argumen dipaparkan", "memperkenalkan topik kepada pembaca", "menambah jumlah halaman tulisan", "mencantumkan sumber rujukan", "A"],
+      ["Kalimat \"Oleh karena itu, pangan lokal perlu kembali dibiasakan di meja makan keluarga.\" paling tepat ditempatkan pada bagian ...", "penegasan ulang", "tesis", "rangkaian argumen", "judul", "A"]
+    ]},
+    "3": { "tipe": "pilihan_ganda", "butir": [
+      ["Konjungsi kausalitas yang lazim dipakai pada teks argumentasi adalah ...", "sehingga", "kemudian", "atau", "seperti", "A"],
+      ["Kalimat berikut yang merupakan opini adalah ...", "Menurut saya, sorgum lebih cocok ditanam di daerah kering.", "Produksi sorgum nasional tercatat 4.000 ton pada 2024.", "Sorgum termasuk tanaman serealia.", "Badan Pusat Statistik merilis data tersebut pada Maret.", "A"],
+      ["Kata kerja mental yang menunjukkan sikap penulis adalah ...", "berpendapat", "menanam", "memasak", "berjalan", "A"],
+      ["Kata rujukan pada teks argumentasi berguna untuk ...", "menautkan kalimat dengan gagasan yang telah disebutkan", "memperindah bunyi kalimat", "menambah jumlah kata", "mengganti tanda baca", "A"],
+      ["Konjungsi yang menyatakan pertentangan adalah ...", "namun", "karena", "sehingga", "lalu", "A"]
+    ]},
+    "4": { "tipe": "pilihan_ganda", "butir": [
+      ["Menyimpulkan sifat seluruh kelompok hanya dari dua contoh termasuk kesesatan ...", "generalisasi tergesa", "serangan pribadi", "argumen otoritas semu", "sebab-akibat palsu", "A"],
+      ["\"Pendapatnya tidak usah didengar, dia kan baru lulus sekolah.\" Pernyataan ini termasuk ...", "serangan pribadi", "generalisasi tergesa", "sebab-akibat palsu", "argumen otoritas semu", "A"],
+      ["Mengutip seorang artis untuk menguatkan argumen tentang gizi pangan termasuk ...", "argumen otoritas semu", "serangan pribadi", "sebab-akibat palsu", "generalisasi tergesa", "A"],
+      ["\"Sejak kantin menjual sorgum, nilai ujian siswa naik.\" Pernyataan ini mengandung kesesatan ...", "sebab-akibat palsu", "serangan pribadi", "argumen otoritas semu", "generalisasi tergesa", "A"],
+      ["Bukti dikatakan relevan apabila ...", "berkaitan langsung dengan pendapat yang hendak dibuktikan", "berasal dari sumber yang paling panjang", "ditulis dengan huruf tebal", "disebutkan paling akhir", "A"]
+    ]},
+    "5": { "tipe": "esai", "butir": [
+      "Daftarkan lima jenis pangan lokal yang ada di daerah Anda. Untuk setiap jenis, tuliskan cara pengolahannya dan seberapa sering keluarga Anda mengonsumsinya.",
+      "Jelaskan mengapa ketergantungan pada satu jenis pangan pokok dapat membuat ketahanan pangan menjadi rapuh. Sertakan satu contoh keadaan nyata yang Anda ketahui."
+    ]},
+    "6": { "tipe": "esai", "butir": [
+      "Susunlah lima pertanyaan wawancara mengenai kebiasaan mengonsumsi pangan lokal, lalu tuliskan jawaban narasumber yang Anda wawancarai.",
+      "Simpulkan temuan wawancara Anda dalam satu paragraf, dan sebutkan sumber data lain yang dapat memperkuat simpulan tersebut."
+    ]},
+    "7": { "tipe": "esai", "butir": [
+      "Tuliskan kerangka teks argumentasi Anda mengenai pangan lokal, memuat tesis, tiga argumen beserta buktinya, dan penegasan ulang.",
+      "Kembangkan kerangka tersebut menjadi teks argumentasi utuh minimal empat paragraf, dengan memperhatikan konjungsi kausalitas dan kata kerja mental."
+    ]},
+    "8": { "tipe": "esai", "butir": [
+      "Tukarkan teks argumentasi Anda dengan teman sebangku. Berikan tiga catatan perbaikan: satu tentang isi, satu tentang penalaran, dan satu tentang kebahasaan.",
+      "Tuliskan kembali satu paragraf karya Anda setelah diperbaiki berdasarkan catatan teman, lalu jelaskan apa yang Anda ubah dan alasannya."
+    ]},
+    "9": { "tipe": "pilihan_ganda", "butir": [
+      ["Singkatan ADIKSIMBA memuat unsur ...", "apa, di mana, kapan, siapa, mengapa, bagaimana", "awal, deskripsi, isi, simpulan, bagan, akhir", "ajakan, data, informasi, kesan, simbol, bukti", "analisis, diksi, kalimat, sintaksis, makna, bahasa", "A"],
+      ["Unsur berita yang menjawab \"mengapa\" berkaitan dengan ...", "sebab terjadinya peristiwa", "waktu terjadinya peristiwa", "tempat terjadinya peristiwa", "pihak yang terlibat", "A"],
+      ["Teks berita memberitakan peristiwa yang bersifat ...", "aktual dan faktual", "khayalan penulis", "ramalan masa depan", "pengalaman pribadi penulis", "A"],
+      ["Unsur \"bagaimana\" pada berita menjelaskan ...", "proses atau jalannya peristiwa", "jumlah korban saja", "nama wartawan", "nama media penerbit", "A"],
+      ["Berita yang tidak memuat unsur \"siapa\" menjadi kurang lengkap karena pembaca tidak mengetahui ...", "pihak yang terlibat dalam peristiwa", "tanggal terbit berita", "nama penyunting", "harga surat kabar", "A"]
+    ]},
+    "10": { "tipe": "pilihan_ganda", "butir": [
+      ["Pola penyusunan berita yang meletakkan informasi terpenting di awal disebut ...", "piramida terbalik", "piramida tegak", "alur mundur", "lingkaran", "A"],
+      ["Bagian berita yang memuat inti peristiwa disebut ...", "kepala berita", "tubuh berita", "ekor berita", "judul berita", "A"],
+      ["Kutipan narasumber dan penjelasan rinci terdapat pada bagian ...", "tubuh berita", "kepala berita", "ekor berita", "penegasan ulang", "A"],
+      ["Keuntungan pola piramida terbalik bagi penyunting adalah ...", "bagian akhir dapat dipotong tanpa menghilangkan inti", "berita menjadi lebih panjang", "narasumber tidak perlu disebutkan", "judul dapat diabaikan", "A"],
+      ["Informasi tambahan yang sifatnya melengkapi diletakkan pada bagian ...", "ekor berita", "kepala berita", "tubuh berita", "teras berita", "A"]
+    ]},
+    "11": { "tipe": "pilihan_ganda", "butir": [
+      ["Bahasa yang digunakan dalam teks berita hendaknya ...", "lugas, baku, dan tidak memihak", "puitis dan penuh kiasan", "santai seperti percakapan", "berlebihan agar menarik", "A"],
+      ["Kalimat \"Kepala sekolah mengatakan bahwa kegiatan berjalan lancar.\" merupakan kalimat ...", "tidak langsung", "langsung", "perintah", "seru", "A"],
+      ["Konjungsi temporal yang lazim pada teks berita adalah ...", "setelah itu", "meskipun", "andaikan", "bagaikan", "A"],
+      ["Kata kerja mental yang lazim mengawali kutipan narasumber adalah ...", "menjelaskan", "melompat", "menanam", "memasak", "A"],
+      ["Penulisan kalimat langsung yang benar adalah ...", "\"Kami bersyukur kegiatan ini lancar,\" ujar Rina.", "Kami bersyukur kegiatan ini lancar, ujar Rina.", "\"Kami bersyukur kegiatan ini lancar\" ujar Rina", "Kami bersyukur kegiatan ini lancar \"ujar Rina\".", "A"]
+    ]},
+    "12": { "tipe": "pilihan_ganda", "butir": [
+      ["Langkah yang tepat untuk memeriksa kebenaran berita adalah ...", "mencari berita serupa pada media lain yang kredibel", "membagikannya lebih dahulu agar cepat tersebar", "mempercayai judul yang paling menarik", "mengabaikan tanggal terbitnya", "A"],
+      ["Ciri berita palsu yang paling mudah dikenali adalah ...", "judul berlebihan yang membangkitkan amarah", "mencantumkan narasumber dengan jelas", "menyertakan data lembaga resmi", "menggunakan bahasa baku", "A"],
+      ["Menelusuri gambar melalui pencarian gambar terbalik berguna untuk ...", "mengetahui apakah gambar itu berasal dari peristiwa lain", "memperbesar ukuran gambar", "mengubah warna gambar", "menghapus gambar dari internet", "A"],
+      ["Pernyataan berikut yang merupakan fakta adalah ...", "Peristiwa itu terjadi pada Senin, 12 Januari 2026.", "Peristiwa itu sungguh sangat memilukan.", "Sebaiknya semua pihak lebih berhati-hati.", "Menurut saya kejadian itu dapat dicegah.", "A"],
+      ["Memeriksa tanggal terbit berita penting karena ...", "berita lama sering diedarkan ulang seolah peristiwa baru", "tanggal menentukan harga berita", "tanggal menunjukkan jumlah pembaca", "tanggal menentukan panjang berita", "A"]
+    ]},
+    "13": { "tipe": "esai", "butir": [
+      "Tontonlah satu vlog berita, lalu bandingkan dengan berita tertulis bertema sama. Tuliskan tiga kelebihan dan tiga kekurangan masing-masing bentuk penyajian.",
+      "Jelaskan mengapa unsur ADIKSIMBA tetap wajib dipenuhi pada vlog berita, meskipun penyajiannya berupa gambar dan suara."
+    ]},
+    "14": { "tipe": "esai", "butir": [
+      "Buatlah papan cerita vlog berita bertema kegiatan sekolah, minimal enam adegan, lengkap dengan nomor adegan, keterangan gambar, narasi, dan perkiraan durasinya.",
+      "Tuliskan naskah narasi untuk adegan pembuka vlog berita Anda, dan jelaskan unsur ADIKSIMBA mana saja yang sudah tercakup di dalamnya."
+    ]},
+    "15": { "tipe": "pilihan_ganda", "butir": [
+      ["Pengambilan gambar untuk vlog sebaiknya dilakukan secara ...", "mendatar (landscape)", "tegak (portrait)", "miring", "berputar", "A"],
+      ["Agar wajah narasumber tidak gelap, sumber cahaya sebaiknya berada ...", "di depan objek", "di belakang objek", "di bawah objek", "dimatikan", "A"],
+      ["Supaya suara narasumber jernih, perekam suara sebaiknya ...", "didekatkan ke narasumber dan dijauhkan dari angin", "diletakkan sejauh mungkin", "ditutup dengan kain tebal", "dimatikan saat wawancara", "A"],
+      ["Gambar pendukung atau stok gambar berguna untuk ...", "menutupi sambungan antaradegan", "memperpanjang durasi tanpa alasan", "mengganti narasumber", "menghapus suara asli", "A"],
+      ["Langkah penyuntingan yang paling dasar adalah ...", "memotong bagian yang tidak perlu", "menambahkan musik sekeras mungkin", "mempercepat seluruh adegan", "menghapus seluruh narasi", "A"]
+    ]},
+    "16": { "tipe": "esai", "butir": [
+      "Tontonlah vlog berita kelompok lain, lalu berikan penilaian atas empat hal: kelengkapan ADIKSIMBA, kejelasan penyampaian, kualitas gambar dan suara, serta ketepatan durasi.",
+      "Tuliskan dua saran perbaikan yang membangun untuk kelompok tersebut, disertai alasan mengapa saran itu akan memperbaiki hasilnya."
+    ]},
+    "17": { "tipe": "pilihan_ganda", "butir": [
+      ["Unsur batin puisi meliputi ...", "tema, rasa, nada, dan amanat", "diksi, rima, dan tipografi", "kepala, tubuh, dan ekor", "tesis, argumen, dan penegasan ulang", "A"],
+      ["Tata letak larik dan bait yang ikut membentuk makna puisi disebut ...", "tipografi", "rima", "diksi", "amanat", "A"],
+      ["Sikap penyair terhadap pokok persoalan dalam puisi disebut ...", "rasa", "nada", "tema", "amanat", "A"],
+      ["Sikap penyair terhadap pembaca dalam puisi disebut ...", "nada", "rasa", "tema", "tipografi", "A"],
+      ["Pesan yang hendak disampaikan penyair melalui puisinya disebut ...", "amanat", "rima", "diksi", "tipografi", "A"]
+    ]},
+    "18": { "tipe": "pilihan_ganda", "butir": [
+      ["Pemilihan kata yang tepat dalam puisi disebut ...", "diksi", "rima", "tipografi", "amanat", "A"],
+      ["Penggunaan kata yang membangkitkan penginderaan pembaca disebut ...", "pengimajian", "tipografi", "rima", "tema", "A"],
+      ["Larik \"Deru ombak memecah karang\" paling kuat membangkitkan imaji ...", "pendengaran", "pengecapan", "penciuman", "perabaan", "A"],
+      ["Larik \"Senja merah menyala di ufuk barat\" membangkitkan imaji ...", "penglihatan", "pendengaran", "perabaan", "pengecapan", "A"],
+      ["Kata konkret dalam puisi berfungsi untuk ...", "membuat gambaran menjadi lebih nyata bagi pembaca", "memperpanjang larik", "menambah jumlah bait", "mengganti tanda baca", "A"]
+    ]},
+    "19": { "tipe": "pilihan_ganda", "butir": [
+      ["Majas yang memberikan sifat manusia kepada benda mati disebut ...", "personifikasi", "hiperbola", "simile", "repetisi", "A"],
+      ["\"Wajahnya bagai rembulan purnama\" termasuk majas ...", "simile", "metafora", "personifikasi", "repetisi", "A"],
+      ["\"Dia adalah matahari bagi keluarganya\" termasuk majas ...", "metafora", "simile", "hiperbola", "repetisi", "A"],
+      ["\"Tangisnya membanjiri seluruh desa\" termasuk majas ...", "hiperbola", "metafora", "simile", "personifikasi", "A"],
+      ["Pengulangan bunyi pada akhir larik disebut ...", "rima akhir", "rima awal", "tipografi", "diksi", "A"]
+    ]},
+    "20": { "tipe": "esai", "butir": [
+      "Tulislah satu puisi karya sendiri minimal tiga bait dengan tema bebas, lalu jelaskan tema, rasa, nada, dan amanat yang Anda maksudkan.",
+      "Tunjukkan dua majas dan satu bentuk pengimajian yang Anda pakai dalam puisi tersebut, kutip lariknya, dan jelaskan kesan yang ingin Anda bangun."
+    ]}
+  }
+}
